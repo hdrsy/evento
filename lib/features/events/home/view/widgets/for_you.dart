@@ -36,7 +36,8 @@ class ForYou extends StatelessWidget {
                       justForYouController.pageId,
                       justForYouController.itemList,
                       ServerConstApis.getJustForYouList,
-                      "just_for_you"
+                      "just_for_you",
+                      "Just for you"
                     ]);
                   },
                 ),

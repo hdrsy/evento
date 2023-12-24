@@ -23,17 +23,23 @@ class FeaturedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => featuredListController.isLoading.value
-          ? ShimmerLoadingWidget(
+          ?ShimmerLoadingWidget(
               loadingShimmerWidget: featuredLoading(),
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 ColumnText(
+                ColumnText(
                   title: "Featured",
                   subTitle: " Enchanted Evening & Festive Lights",
-                  onTap: (){
-                    Get.toNamed('/seeAll',arguments: [featuredListController.pageId,featuredListController.itemList,ServerConstApis.getFeaturedList,"featured_event"]);
+                  onTap: () {
+                    Get.toNamed('/seeAll', arguments: [
+                      featuredListController.pageId,
+                      featuredListController.itemList,
+                      ServerConstApis.getFeaturedList,
+                      "featured_event",
+                      "Featured"
+                    ]);
                   },
                 ),
                 SizedBox(
@@ -47,15 +53,17 @@ class FeaturedList extends StatelessWidget {
                       child: Row(
                         children: [
                           ...List.generate(
-                          featuredListController.hasMoreData.value?   featuredListController.itemList.length + 1:featuredListController.itemList.length,
+                              featuredListController.hasMoreData.value
+                                  ? featuredListController.itemList.length + 1
+                                  : featuredListController.itemList.length,
                               (index) {
                             return index <
                                     featuredListController.itemList.length
                                 ? FeaturedWidget(
-                                    eventModel: featuredListController
-                                        .itemList[index],
-                                        modelIndex: index,
-                                        )
+                                    eventModel:
+                                        featuredListController.itemList[index],
+                                    modelIndex: index,
+                                  )
                                 : ShimmerLoadingWidget(loadingShimmerWidget:  Container(
                           width: 355,
                           height: 300,
@@ -67,9 +75,7 @@ class FeaturedList extends StatelessWidget {
                             ),
                             color: customColors.info
                           ),
-                        ))
-                                
-                                ;
+                        ));
                           })
                         ].divide(SizedBox(
                           width: scaleWidth(
@@ -87,82 +93,82 @@ class FeaturedList extends StatelessWidget {
 }
 
 class FeaturedWidget extends StatelessWidget {
-  const FeaturedWidget({super.key, required this.eventModel,required this.modelIndex});
-final  EventModel eventModel;
-final int modelIndex;
+  const FeaturedWidget(
+      {super.key, required this.eventModel, required this.modelIndex});
+  final EventModel eventModel;
+  final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return  GetBuilder<FeaturedListController>(
-                builder: (context) {
-        return Container(
-          width: screenSize == ScreenSize.small
-              ? 320
-              : (screenSize == ScreenSize.medium ? 355 : 370),
-          // height: 330 ,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: customColors.primaryBackground,
-            ),
+    return GetBuilder<FeaturedListController>(builder: (context) {
+      return Container(
+        width: screenSize == ScreenSize.small
+            ? 320
+            : (screenSize == ScreenSize.medium ? 355 : 370),
+        // height: 330 ,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: customColors.primaryBackground,
           ),
-          child: Align(
-            alignment: const AlignmentDirectional(0.00, -1.00),
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  imageStack(eventModel.images[0]),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/eventDetailes',arguments: eventModel.id);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            eventModel.title,
-                            style: customTextStyle.headlineSmall.override(
-                              fontFamily: 'BeerSerif',
-                              color: customColors.primaryText,
-                              fontSize: screenSize == ScreenSize.small
-                                  ? 16
-                                  : (screenSize == ScreenSize.medium ? 18 : 20),
-                              useGoogleFonts: false,
-                            ),
+        ),
+        child: Align(
+          alignment: const AlignmentDirectional(0.00, -1.00),
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              children: [
+                imageStack(eventModel.images[0]),
+                InkWell(
+                  onTap: () {
+                    Get.toNamed('/eventDetailes', arguments: eventModel.id);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          eventModel.title,
+                          style: customTextStyle.headlineSmall.override(
+                            fontFamily: 'BeerSerif',
+                            color: customColors.primaryText,
+                            fontSize: screenSize == ScreenSize.small
+                                ? 16
+                                : (screenSize == ScreenSize.medium ? 18 : 20),
+                            useGoogleFonts: false,
                           ),
-                          Text(
-                            DateFormatter.formatDate  (eventModel.startDate),
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'BeerSerif',
-                              color: customColors.primary,
-                              useGoogleFonts: false,
-                            ),
+                        ),
+                        Text(
+                          DateFormatter.formatDate(eventModel.startDate),
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'BeerSerif',
+                            color: customColors.primary,
+                            useGoogleFonts: false,
                           ),
-                          Text(
-                            DateFormatter.formatTime (eventModel.startDate),
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'BeerSerif',
-                              color: customColors.secondaryText,
-                              fontSize: 12,
-                              useGoogleFonts: false,
-                            ),
+                        ),
+                        Text(
+                          DateFormatter.formatTime(eventModel.startDate),
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'BeerSerif',
+                            color: customColors.secondaryText,
+                            fontSize: 12,
+                            useGoogleFonts: false,
                           ),
-                          priceIcons(eventModel.ticketPrice,eventModel.isFollowedByAuthUser,modelIndex),
-                        ].divide(const SizedBox(height: 3)),
-                      ),
+                        ),
+                        priceIcons(eventModel.ticketPrice,
+                            eventModel.isFollowedByAuthUser, modelIndex),
+                      ].divide(const SizedBox(height: 3)),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 
   Stack imageStack(String imageUrl) {
@@ -177,14 +183,16 @@ final int modelIndex;
             // context.pushNamed('Event-Details');
           },
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            child:getImageNetwork(url:"/storage/$imageUrl",width: double.infinity,height: 190)
-          ),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(0),
+                bottomRight: Radius.circular(0),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              child: getImageNetwork(
+                  url: "/storage/$imageUrl",
+                  width: double.infinity,
+                  height: 190)),
         ),
         Positioned(
             bottom: scaleWidth(0),
@@ -213,7 +221,7 @@ final int modelIndex;
     );
   }
 
-  Row priceIcons(ticketPrice,bool isFollowedByAuthUser,int modelIndex) {
+  Row priceIcons(ticketPrice, bool isFollowedByAuthUser, int modelIndex) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -256,26 +264,26 @@ final int modelIndex;
                   size: 20,
                 ),
               ),
-             
-                  ToggleIcon(
-                    onPressed: () async {
-                      final FeaturedListController featuredListController = Get.find();
-                      featuredListController.followOrUnFollowEvent(eventModel.id,modelIndex);
-                    },
-                    value: isFollowedByAuthUser,
-                    onIcon: Icon(
-                      Icons.favorite_sharp,
-                      color: customColors.error,
-                      size: 25,
-                    ),
-                    offIcon: Icon(
-                      Icons.favorite_border,
-                      color: customColors.secondaryText,
-                      size: 25,
-                    ),
-                  ).animateOnPageLoad(
-                      animationsMap['toggleIconOnPageLoadAnimation1']!)
-               
+              ToggleIcon(
+                onPressed: () async {
+                  final FeaturedListController featuredListController =
+                      Get.find();
+                  featuredListController.followOrUnFollowEvent(
+                      eventModel.id, modelIndex);
+                },
+                value: isFollowedByAuthUser,
+                onIcon: Icon(
+                  Icons.favorite_sharp,
+                  color: customColors.error,
+                  size: 25,
+                ),
+                offIcon: Icon(
+                  Icons.favorite_border,
+                  color: customColors.secondaryText,
+                  size: 25,
+                ),
+              ).animateOnPageLoad(
+                  animationsMap['toggleIconOnPageLoadAnimation1']!)
             ],
           ),
         ),

@@ -80,7 +80,7 @@ class CategoryWidget extends StatelessWidget {
                   targetKeyMap = 'Events';
               }
               Get.toNamed('/seeAll',
-                  arguments: [1, <EventModel>[].obs, targetRout, targetKeyMap]);
+                  arguments: [1, <EventModel>[].obs, targetRout, targetKeyMap,categoryModel.title]);
             },
             child: Container(
               width: imageSize,

@@ -65,6 +65,7 @@ class PaginationController<T> extends GetxController {
     
     Either<ErrorResponse, Map<String, dynamic>> response = await fetchDataCallback('your-api-url', pageId, {}); // Replace 'your-api-url' and {} with actual values
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
 // log("ddd");
 // print(handlingResponse);
 // log("ddd");

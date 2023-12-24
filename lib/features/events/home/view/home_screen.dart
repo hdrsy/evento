@@ -51,7 +51,7 @@ final HomeController homeController=Get.find();
          CategoryList(),
         const SearchAndNotification(),
          FeaturedList(),
-         TrendingNow(),
+        //  TrendingNow(),
          FromYourCity(),
         const Offers(),
          Orgnizers(),

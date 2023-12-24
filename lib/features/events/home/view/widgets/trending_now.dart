@@ -27,12 +27,17 @@ class TrendingNow extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               ColumnText(
+              ColumnText(
                 title: "Trending Now",
                 subTitle: " Lively Gatherings & Illuminated Nights",
-                onTap: (){
-                       Get.toNamed('/seeAll',arguments: [trendingListController.pageId,trendingListController.itemList,ServerConstApis.getTrendingList,"trending_event"]);
-               
+                onTap: () {
+                  Get.toNamed('/seeAll', arguments: [
+                    trendingListController.pageId,
+                    trendingListController.itemList,
+                    ServerConstApis.getTrendingList,
+                    "trending_event",
+                    "Trending Now"
+                  ]);
                 },
               ),
               SizedBox(
@@ -85,11 +90,11 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to create each event card
-  Widget buildEventCard({required EventModel eventModel,required int modelIndex}) {
+  Widget buildEventCard(
+      {required EventModel eventModel, required int modelIndex}) {
     return InkWell(
-      onTap: (){
-          Get.toNamed('/eventDetailes',arguments: eventModel.id);
-                    
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: eventModel.id);
       },
       child: Container(
         width: screenSize == ScreenSize.small
@@ -110,8 +115,13 @@ class TrendingNow extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildImageSection(eventModel.images[0], eventModel.ticketPrice.toString()),
-              buildEventDetails(eventModel.title,DateFormatter.formatDate(eventModel.startDate),DateFormatter.formatTime(eventModel.startDate),modelIndex),
+              buildImageSection(
+                  eventModel.images[0], eventModel.ticketPrice.toString()),
+              buildEventDetails(
+                  eventModel.title,
+                  DateFormatter.formatDate(eventModel.startDate),
+                  DateFormatter.formatTime(eventModel.startDate),
+                  modelIndex),
             ],
           ),
         ),
@@ -141,9 +151,9 @@ class TrendingNow extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: getImageNetwork(url: "/storage/$imagePath", width: double.infinity, height: 240)
-      ),
+          borderRadius: BorderRadius.circular(16),
+          child: getImageNetwork(
+              url: "/storage/$imagePath", width: double.infinity, height: 240)),
     );
   }
 
@@ -197,7 +207,7 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the event details section
   Widget buildEventDetails(
-      String eventName, String eventDate, String eventTime,int modelIndex) {
+      String eventName, String eventDate, String eventTime, int modelIndex) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       child: Column(
@@ -205,16 +215,18 @@ class TrendingNow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildEventTitle(eventName,modelIndex),
+          buildEventTitle(eventName, modelIndex),
           buildEventDate(eventDate),
-          buildEventTimeAndArrow(eventTime,),
+          buildEventTimeAndArrow(
+            eventTime,
+          ),
         ],
       ),
     );
   }
 
 // Function to build the event title
-  Widget buildEventTitle(String eventName,int modelIndex) {
+  Widget buildEventTitle(String eventName, int modelIndex) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -288,20 +300,18 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the favorite toggle button
   Widget buildFavoriteToggleButton(int modelIndex) {
-
-    return GetBuilder<TrendingListController>(
-      builder: (context) {
-        return ToggleIcon(
-          onPressed: () {
-            trendingListController.followOrUnFollowEvent(trendingListController.itemList[modelIndex].id, modelIndex);
-          },
-          value: trendingListController.itemList[modelIndex].isFollowedByAuthUser,
-          onIcon: Icon(Icons.favorite_sharp,
-              color: customColors.error, size: responsiveIcon(25, 2)),
-          offIcon: Icon(Icons.favorite_border,
-              color: customColors.secondaryText, size: responsiveIcon(25, 2)),
-        );
-      }
-    );
+    return GetBuilder<TrendingListController>(builder: (context) {
+      return ToggleIcon(
+        onPressed: () {
+          trendingListController.followOrUnFollowEvent(
+              trendingListController.itemList[modelIndex].id, modelIndex);
+        },
+        value: trendingListController.itemList[modelIndex].isFollowedByAuthUser,
+        onIcon: Icon(Icons.favorite_sharp,
+            color: customColors.error, size: responsiveIcon(25, 2)),
+        offIcon: Icon(Icons.favorite_border,
+            color: customColors.secondaryText, size: responsiveIcon(25, 2)),
+      );
+    });
   }
 }

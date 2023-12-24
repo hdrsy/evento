@@ -40,7 +40,7 @@ late String pageTitle;
     itemList =Get.arguments[1]?? <EventModel>[].obs;
     targetRout=Get.arguments[2];
     mapKey=Get.arguments[3];
-    pageTitle=Get.arguments[4];
+    pageTitle=Get.arguments[4]??"";
     log(pageId.toString());
     scrollController = ScrollController();
     itemList.isEmpty?fetchData():null;

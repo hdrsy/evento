@@ -247,7 +247,9 @@ class TrendingListController extends PaginationController<EventModel> {
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
+    
     List<dynamic> categoryListJson = handlingResponse['trending_event']['data'];
+    print(categoryListJson);
     lastPageId = handlingResponse['trending_event']['last_page'];
 
     itemList.addAll(categoryListJson
@@ -303,6 +305,8 @@ class JustForYouController extends PaginationController<EventModel> {
   handleDataSuccess(dynamic handlingResponse) {
     
     List<dynamic> categoryListJson = handlingResponse['just_for_you']['data'];
+    log("message");
+    print(categoryListJson);
     lastPageId = handlingResponse['just_for_you']['last_page'];
 
     itemList.addAll(categoryListJson

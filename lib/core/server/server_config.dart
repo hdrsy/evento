@@ -1,6 +1,6 @@
 class ServerConstApis {
-  // static String baseAPI = 'http://94.141.219.16';
-  static String baseAPI = 'http://10.0.2.2:8000';
+  static String baseAPI = 'http://94.141.219.16';
+  // static String baseAPI = 'http://10.0.2.2:8000';
 
 ///// auth
   static String signUpStep1 = '$baseAPI/api/signup_step1';

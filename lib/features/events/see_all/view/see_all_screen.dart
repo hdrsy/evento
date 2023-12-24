@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SeeAllScreen extends StatelessWidget {
-  const SeeAllScreen({super.key});
-
+   SeeAllScreen({super.key});
+ final SeeAllController seeAllController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Featured",
+        title: Text(seeAllController.pageTitle,
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

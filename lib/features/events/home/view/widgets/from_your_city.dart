@@ -22,29 +22,34 @@ class FromYourCity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      ()=>eventInYourCityListController.isLoading.value? 
-      ShimmerLoadingWidget(
+      () => eventInYourCityListController.isLoading.value
+          ? ShimmerLoadingWidget(
               loadingShimmerWidget: inYourCityLoading(),
             )
-      :Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-           ColumnText(
-            title: "Events in your city",
-            subTitle: " Local Celebrations & Urban Vibes",
-            onTap: (){
-                Get.toNamed('/seeAll',arguments: [eventInYourCityListController.pageId,eventInYourCityListController.itemList,ServerConstApis.getInyourCityList,"events_in_your_city"]);
-               
-            },
-          ),
-          SizedBox(
-            height: scaleHeight(10),
-          ),
-          SizedBox(
-              // height: scaleHeight(350),
-              child: buildHorizontalListView())
-        ],
-      ),
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ColumnText(
+                  title: "Events in your city",
+                  subTitle: " Local Celebrations & Urban Vibes",
+                  onTap: () {
+                    Get.toNamed('/seeAll', arguments: [
+                      eventInYourCityListController.pageId,
+                      eventInYourCityListController.itemList,
+                      ServerConstApis.getInyourCityList,
+                      "events_in_your_city",
+                      "Events in your city"
+                    ]);
+                  },
+                ),
+                SizedBox(
+                  height: scaleHeight(10),
+                ),
+                SizedBox(
+                    // height: scaleHeight(350),
+                    child: buildHorizontalListView())
+              ],
+            ),
     );
   }
 }
@@ -64,7 +69,8 @@ Widget buildHorizontalListView() {
                   ? eventInYourCityListController.itemList.length + 1
                   : eventInYourCityListController.itemList.length, (index) {
             return index < eventInYourCityListController.itemList.length
-                ? buildEventCard(eventInYourCityListController.itemList[index],index)
+                ? buildEventCard(
+                    eventInYourCityListController.itemList[index], index)
                 : ShimmerLoadingWidget(
                     loadingShimmerWidget: Container(
                     width: 150,
@@ -84,35 +90,36 @@ Widget buildHorizontalListView() {
 }
 
 // Function to create each event card
-Widget buildEventCard(EventModel eventModel,int modelId) {
-  return GetBuilder<EventInYourCityListController>(
-    builder: (context) {
-      return InkWell(
-        onTap: (){
-            Get.toNamed('/eventDetailes',arguments: eventModel.id);
-                    
-        },
-        child: Container(
-          width: 150,
-          height: 215,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: customColors.secondaryBackground,
-              width: 2,
-            ),
-          ),
-          child: Stack(
-            children: [
-              buildEventImage(eventModel.images[0]),
-              buildFavoriteIcon(eventModel.isFollowedByAuthUser,modelId,eventModel.id),
-              buildEventText(eventModel.title, DateFormatter.formatDate  (eventModel.startDate)+DateFormatter.formatTime  (eventModel.startDate)),
-            ],
+Widget buildEventCard(EventModel eventModel, int modelId) {
+  return GetBuilder<EventInYourCityListController>(builder: (context) {
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: eventModel.id);
+      },
+      child: Container(
+        width: 150,
+        height: 215,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: customColors.secondaryBackground,
+            width: 2,
           ),
         ),
-      );
-    }
-  );
+        child: Stack(
+          children: [
+            buildEventImage(eventModel.images[0]),
+            buildFavoriteIcon(
+                eventModel.isFollowedByAuthUser, modelId, eventModel.id),
+            buildEventText(
+                eventModel.title,
+                DateFormatter.formatDate(eventModel.startDate) +
+                    DateFormatter.formatTime(eventModel.startDate)),
+          ],
+        ),
+      ),
+    );
+  });
 }
 
 // Function to build the image section of the card
@@ -120,14 +127,17 @@ Widget buildEventImage(String imageUrl) {
   return InkWell(
     onTap: () {},
     child: ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: getImageNetwork(url:"/storage/$imageUrl",width: double.infinity,height: double.infinity)
-    ),
+        borderRadius: BorderRadius.circular(12),
+        child: getImageNetwork(
+            url: "/storage/$imageUrl",
+            width: double.infinity,
+            height: double.infinity)),
   );
 }
 
 // Function to build the favorite icon
-Widget buildFavoriteIcon(bool isFollowedByAuthUser,int modelIndex,int eventId ) {
+Widget buildFavoriteIcon(
+    bool isFollowedByAuthUser, int modelIndex, int eventId) {
   return Positioned(
     top: 0,
     right: 0,
@@ -135,9 +145,10 @@ Widget buildFavoriteIcon(bool isFollowedByAuthUser,int modelIndex,int eventId ) 
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
       child: ToggleIcon(
         onPressed: () {
-           final EventInYourCityListController eventInYourCityListController =
-      Get.find();
-      eventInYourCityListController.followOrUnFollowEvent(eventId, modelIndex);
+          final EventInYourCityListController eventInYourCityListController =
+              Get.find();
+          eventInYourCityListController.followOrUnFollowEvent(
+              eventId, modelIndex);
         },
         value: isFollowedByAuthUser,
         onIcon: Icon(Icons.favorite_sharp, color: customColors.error, size: 18),
