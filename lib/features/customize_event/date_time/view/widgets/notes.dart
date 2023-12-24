@@ -1,0 +1,71 @@
+import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/main.dart';
+import 'package:flutter/material.dart';
+
+class NotesLabel extends StatelessWidget {
+  const NotesLabel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return // Generated code for this Container Widget...
+Padding(
+  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+  child: Container(
+    width: 360,
+    height: 70,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(
+        color: customColors.primaryBackground,
+      ),
+    ),
+    child: Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+             "Description:",
+            textAlign: TextAlign.center,
+            style: customTextStyle.labelLarge,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+              child: TextFormField(
+                // controller: _model.textController4,
+                // focusNode: _model.textFieldFocusNode4,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: "Label here...",
+                  labelStyle:
+                      customTextStyle.labelMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.secondaryText,
+                            useGoogleFonts: true,
+                          ),
+                  hintStyle: customTextStyle.labelMedium,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
+                ),
+                style: customTextStyle.bodyMedium.override(
+                      fontFamily: 'Nunito',
+                      fontSize: 16,
+                      useGoogleFonts: true,
+                    ),
+                
+                   
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+)
+;
+  }
+}
