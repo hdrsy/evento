@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 class EventDetailesController extends GetxController {
  @override
   void onClose() {
-    positionStream!.cancel();
+    LocationService().stopTracking();
     super.onClose();
   }  
   late EventDetailsModel eventDetailsModel;
