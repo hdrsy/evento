@@ -1,11 +1,12 @@
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceAccordingCard extends StatelessWidget {
-  const ServiceAccordingCard({super.key});
-
+  const ServiceAccordingCard({super.key,required this.serviceProvider});
+final ServiceProvider serviceProvider;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -15,7 +16,7 @@ class ServiceAccordingCard extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () async {
         
-        Get.toNamed('/ServiceAccordingDetailesScreen');
+        Get.toNamed('/ServiceAccordingDetailesScreen',arguments: serviceProvider);
       },
       child: Container(
         width: double.infinity,

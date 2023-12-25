@@ -1,16 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
-
+import 'package:evento/core/cache_config/cache_config.dart';
 import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/controllers/tween_animation_controller.dart';
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/reels/controller/reels_controller.dart';
-import 'package:evento/features/reels/controller/video_controller.dart';
 import 'package:evento/features/reels/model/reels_model.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/comment_like_share.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/follow_button.dart';
@@ -18,39 +14,31 @@ import 'package:evento/features/reels/view/widgets/reel_component/number_of_show
 import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/user_name.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/user_photo.dart';
+import 'package:evento/features/reels/view/widgets/video_widget.dart';
 import 'package:evento/main.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-// ignore: must_be_immutable
-class ReelWidget extends StatelessWidget {
-  ReelWidget({
-    super.key,
-    required this.model,
-  });
-  final RR model;
+class ReelsWidget extends StatelessWidget {
+  ReelsWidget({super.key, required this.model});
+  
+  final ReelModel model;
+
   final ReelsController reelsController = Get.find();
-  final TweenAnimationController tweenAnimationController =
-      Get.put(TweenAnimationController());
-  VideoController videoController = Get.find();
-  // bool showHeartIcon = false;
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<VideoController>(builder: (ccontext) {
-      if (videoController.playerController == null) {
-        return const ReelsShimmer(); // or any other placeholder
-      }
-      return GestureDetector(
-        onDoubleTap: onDoubleTap,
-        onTapUp: (details) {
-          // Implement the logic to play/pause video based on tap position
-          handleVideoTap(details, videoController);
-        },
-        child: SizedBox(
-          width: screenWidth,
-          height: MediaQuery.of(context).size.height * 0.9,
-          child: Column(
+    return GestureDetector(
+      child: SizedBox(
+        width: screenWidth,
+        height: MediaQuery.of(context).size.height * 0.9,
+        child: 
+        Obx(
+          ()=> reelsController.isLoading.value? const ReelsShimmer(): 
+          
+          Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              buildProgressIndecator(),
               Expanded(
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
@@ -69,27 +57,9 @@ class ReelWidget extends StatelessWidget {
                       Expanded(
                         child: Stack(
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [reelsVideoPlayer()],
+                            VideoWidget(
+                              currentVideoUrl:"${ServerConstApis.baseAPI}/storage/${ model.videos[0]}",
                             ),
-                            //to show pause icon when it the video puased.
-                            if (!videoController
-                                .playerController!.value.isPlaying)
-                              const Center(
-                                  child: Icon(Icons.play_arrow,
-                                      size: 50.0, color: Colors.white)),
-
-                            //to make the heart appear in the midle of the screen when I double tap on it.
-                            tweenAnimationController.aSize.value! > 30
-                                ? Align(
-                                    alignment: const AlignmentDirectional(0, 0),
-                                    child: Icon(Icons.favorite,
-                                        size: tweenAnimationController
-                                            .aSize.value,
-                                        color: Colors.red),
-                                  )
-                                : const SizedBox(),
                             videoInfo(),
                             commentShareLike(),
                           ],
@@ -102,27 +72,8 @@ class ReelWidget extends StatelessWidget {
             ],
           ),
         ),
-      );
-    });
-  }
-
-  SizedBox buildProgressIndecator() {
-    return SizedBox(
-              height: 50,
-              child: Row(
-                children: model.videos
-                    .asMap()
-                    .entries
-                    .map((entry) {
-                      return Expanded(
-                          child: videoProgressIndicator(entry.key));
-                    })
-                    .toList()
-                    .divide(const SizedBox(
-                      width: 5,
-                    )),
-              ),
-            );
+      ),
+    );
   }
 
   Column videoInfo() {
@@ -154,94 +105,54 @@ class ReelWidget extends StatelessWidget {
                   ].divide(const SizedBox(width: 10)),
                 ),
               ),
-              description(),
-              videInfoDataAndNumberViews(),
+              description(model.description),
+              videInfoDataAndNumberViews(model),
             ],
           ),
         ),
       ],
     );
   }
+}
 
-  Visibility reelsVideoPlayer() {
-    return Visibility(
-      visible: videoController.videoInitialized,
-      replacement: Center(
-          child: CircularProgressIndicator(color: customColors.primaryText)),
-      child: AspectRatio(
-        aspectRatio: videoController.playerController!.value.aspectRatio,
-        child: VideoPlayer(videoController.playerController!),
-      ),
-    );
-  }
+Row videInfoDataAndNumberViews(ReelModel model) {
+  return Row(
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      numberOfShowing(),
+      reelDate(DateFormatter.formatDate(model.createdAt)),
+    ].divide(const SizedBox(width: 10)),
+  );
+}
 
-  Row videInfoDataAndNumberViews() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        numberOfShowing(),
-        reelDate(),
-      ].divide(const SizedBox(width: 10)),
-    );
-  }
-
-  Align description() {
-    return Align(
-      alignment: const AlignmentDirectional(-1.00, 1.00),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
-        child: Text(
-          "Festival of Arts",
-          style: customTextStyle.bodyMedium.override(
-            fontFamily: 'Nunito',
-            color: Colors.white,
-            fontSize: 16,
-            useGoogleFonts: true,
-          ),
+Align description(String description) {
+  return Align(
+    alignment: const AlignmentDirectional(-1.00, 1.00),
+    child: Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+      child: Text(
+        description,
+        style: customTextStyle.bodyMedium.override(
+          fontFamily: 'Nunito',
+          color: Colors.white,
+          fontSize: 16,
+          useGoogleFonts: true,
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget videoProgressIndicator(int index) {
-    return GetBuilder<VideoController>(
-      builder: (controller) {
-        double progress = (controller.currentVideoIndex == index)
-            ? controller.currentProgress
-            : 0.0;
-        return LinearProgressIndicator(
-          value: progress,
-          semanticsLabel: progress.toString(),
-          backgroundColor: Colors.grey, // Background color of the progress bar
-          valueColor:
-              AlwaysStoppedAnimation<Color>(customColors.primary), // Fill color
-        );
-      },
-    );
-  }
-
-  Text reelDate() {
-    return Text(
-      "30-10-2023",
-      style: customTextStyle.bodyMedium.override(
-        fontFamily: 'Nunito',
-        color: customColors.primaryText,
-        fontSize: 12,
-        useGoogleFonts: true,
-      ),
-    );
-  }
-
-  void onDoubleTap() {
-    if (tweenAnimationController.aColor.value == Colors.red) {
-      tweenAnimationController.aController.reverse();
-    } else {
-      tweenAnimationController.aController.forward();
-    }
-
-    reelsController.videoList[reelsController.currentUserIndex]
-        .videos[reelsController.currentVideoIndex].isLiked = true;
-  }
+Text reelDate(String reelDate) {
+  return Text(
+    reelDate,
+    style: customTextStyle.bodyMedium.override(
+      fontFamily: 'Nunito',
+      color: customColors.primaryText,
+      fontSize: 12,
+      useGoogleFonts: true,
+    ),
+  );
 }
 
 // ignore: camel_case_types
@@ -251,7 +162,7 @@ class userPhotoAndName extends StatelessWidget {
     required this.model,
   }) : super(key: key);
 
-  final RR model;
+  final ReelModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -261,32 +172,35 @@ class userPhotoAndName extends StatelessWidget {
         userPhoto(),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-          child: userName(model.userName),
+          child: userName(model.user!=null?model.user!.firstName:"Evento"),
         ),
       ],
     );
   }
 }
 
-void handleVideoTap(TapUpDetails details, VideoController videoController) {
-  double localscreenWidth = screenWidth;
-  double tappedPosition = details.globalPosition.dx;
-  if (videoController.playerController == null) {
-    return; // Exit if playerController is not initialized
-  }
-  if (tappedPosition > localscreenWidth * 0.75) {
-    log("right tap");
-    // Right side tapped
-    videoController.nextVideo();
-  } else if (tappedPosition < localscreenWidth * 0.25) {
-    // Left side tapped
-    videoController.previousVideo();
-  } else {
-    // Center tapped, toggle play/pause
-    if (videoController.playerController!.value.isPlaying) {
-      videoController.pauseVideo();
-    } else {
-      videoController.playVideo();
-    }
-  }
-}
+// void handleVideoTap(
+//     TapUpDetails details, VideoPlayerController videoPlayerController) {
+//   double localscreenWidth = screenWidth;
+//   double tappedPosition = details.globalPosition.dx;
+//   ReelsController reelsController = Get.find();
+
+//   if (videoPlayerController == null) {
+//     return; // Exit if playerController is not initialized
+//   }
+//   if (tappedPosition > localscreenWidth * 0.75) {
+//     log("right tap");
+//     // Right side tapped
+//     reelsController.nextVideo();
+//   } else if (tappedPosition < localscreenWidth * 0.25) {
+//     // Left side tapped
+//     reelsController.previousVideo();
+//   } else {
+//     // Center tapped, toggle play/pause
+//     if (videoPlayerController.value.isPlaying) {
+//       videoPlayerController.pause();
+//     } else {
+//       videoPlayerController.play();
+//     }
+//   }
+// }

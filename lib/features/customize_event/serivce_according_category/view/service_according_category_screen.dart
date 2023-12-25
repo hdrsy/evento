@@ -1,13 +1,15 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/serivce_according_category/controller/service_according_category_controller.dart';
 import 'package:evento/features/customize_event/serivce_according_category/view/widgets/service_according_card.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceAccordingCategoryScreen extends StatelessWidget {
-  const ServiceAccordingCategoryScreen({super.key});
-
+  ServiceAccordingCategoryScreen({super.key});
+  final ServiceAccordingCategoryController serviceAccordingCategoryController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,24 +29,31 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
         ),
         body: SizedBox(
           width: double.infinity,
-          child: SingleChildScrollView(
-              padding: padding(16, 20, 16, 20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Venue",
-                      style: customTextStyle.bodyMedium.override(
-                        fontFamily: 'Nunito',
-                        color: customColors.primaryText,
-                        fontSize: 25,
-                        useGoogleFonts: true,
+          child: Obx(
+            ()=> SingleChildScrollView(
+                padding: padding(16, 20, 16, 20),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        serviceAccordingCategoryController.serviceCategoryType,
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.primaryText,
+                          fontSize: 25,
+                          useGoogleFonts: true,
+                        ),
                       ),
-                    ),
-                    const ServiceAccordingCard(),
-                    const ServiceAccordingCard(),
-                    const ServiceAccordingCard(),
-                  ])),
+                      ...List.generate(
+                          serviceAccordingCategoryController
+                              .serviceProviderList.length,
+                          (index) => ServiceAccordingCard(
+                                serviceProvider:
+                                    serviceAccordingCategoryController
+                                        .serviceProviderList[index],
+                              ))
+                    ])),
+          ),
         ));
   }
 }

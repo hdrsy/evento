@@ -19,16 +19,16 @@ class ReelsScreen extends StatelessWidget {
                 onPageChanged: (index) {
                   if (index > reelsController.currentUserIndex) {
                     // Swipe Up - Load the next video
-                    reelsController.nextVideo();
+                    reelsController.nextUser();
                   } else {
                     // Swipe Down - Go back to the previous video
-                    reelsController.previousVideo();
+                    reelsController.previousUser();
                   }
                 },
-                itemCount: reelsController.videoList.length,
+                itemCount: reelsController.itemList.length,
                 itemBuilder: (context, index) {
-                  return ReelWidget(
-                    model: reelsController.videoList[index],
+                  return ReelsWidget(
+                    model: reelsController.itemList[index],
                   );
                 });
           })),

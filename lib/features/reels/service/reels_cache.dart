@@ -12,21 +12,21 @@ class CacheReels {
     ),
   );
 
-  Future<void> cacheRRObjects(List<RR> rrObjects) async {
-    for (var rr in rrObjects) {
-      await _cacheManager.putFile(
-  'RR-${rr.id}', // Unique key for each RR object
-  Uint8List.fromList(utf8.encode(jsonEncode(rr.toJson()))), // Convert RR object to JSON, then to bytes, and then to Uint8List
-  eTag: rr.id.toString(), // Use the RR's id as eTag for simplicity
-);
+//   Future<void> cacheRRObjects(List<ReelModel> rrObjects) async {
+//     for (var rr in rrObjects) {
+//       await _cacheManager.putFile(
+//   'RR-${rr.id}', // Unique key for each RR object
+//   Uint8List.fromList(utf8.encode(jsonEncode(rr.toJson()))), // Convert RR object to JSON, then to bytes, and then to Uint8List
+//   eTag: rr.id.toString(), // Use the RR's id as eTag for simplicity
+// );
 
 
-      // Cache videos for each RR object
-      for (var videoDetail in rr.videos) {
-        await cacheVideo(videoDetail.url);
-      }
-    }
-  }
+    //   // Cache videos for each RR object
+    //   for (var videoDetail in rr.videos) {
+    //     await cacheVideo(videoDetail.url);
+    //   }
+    // }
+  // }
 
   Future<void> cacheVideo(String videoUrl) async {
     FileInfo? fileInfo = await _cacheManager.getFileFromCache(videoUrl);
@@ -35,12 +35,12 @@ class CacheReels {
     }
   }
 
-  Future<RR?> getRRObject(int id) async {
-    FileInfo? fileInfo = await _cacheManager.getFileFromCache('RR-$id');
-    if (fileInfo != null) {
-      String rrJson = utf8.decode(await fileInfo.file.readAsBytes());
-      return RR.fromJson(jsonDecode(rrJson)); // Deserialize JSON to RR object
-    }
-    return null;
-  }
+  // Future<RR?> getRRObject(int id) async {
+  //   FileInfo? fileInfo = await _cacheManager.getFileFromCache('RR-$id');
+  //   if (fileInfo != null) {
+  //     String rrJson = utf8.decode(await fileInfo.file.readAsBytes());
+  //     return RR.fromJson(jsonDecode(rrJson)); // Deserialize JSON to RR object
+  //   }
+  //   return null;
+  // }
 }

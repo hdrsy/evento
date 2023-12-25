@@ -1,13 +1,16 @@
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotesLabel extends StatelessWidget {
-  const NotesLabel({super.key});
-
+   NotesLabel({super.key});
+final DateTimeController dateTimeController=Get.find();
+  
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this Container Widget...
+    return 
 Padding(
   padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
   child: Container(
@@ -34,6 +37,7 @@ Padding(
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
               child: TextFormField(
+                controller: dateTimeController.description,
                 // controller: _model.textController4,
                 // focusNode: _model.textFieldFocusNode4,
                 obscureText: false,

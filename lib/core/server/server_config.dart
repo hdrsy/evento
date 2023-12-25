@@ -1,6 +1,6 @@
 class ServerConstApis {
-  static String baseAPI = 'http://94.141.219.16';
-  // static String baseAPI = 'http://10.0.2.2:8000';
+  // static String baseAPI = 'http://94.141.219.16';
+  static String baseAPI = 'http://10.0.2.2:8000';
 
 ///// auth
   static String signUpStep1 = '$baseAPI/api/signup_step1';
@@ -41,5 +41,17 @@ class ServerConstApis {
   //// follow 
   static String followEvent = '$baseAPI/api/event_follow';
   static String unFollowEvent = '$baseAPI/api/event_unfollow';
-  
+  //// reels
+  static String getReels = '$baseAPI/api/reels';
+
+
+  //// profile
+  static String getprofile = '$baseAPI/api/profile';
+  static String changePassword= '$baseAPI/api/user/reset-password';
+  static String updateProfile= '$baseAPI/api/user/update';
+
+
+  //// customiz event
+  static String serviceCategory= '$baseAPI/api/service_category';
+  static String serviceAccordingCategory= '$baseAPI/api/serviceAccordingCategory';
 }

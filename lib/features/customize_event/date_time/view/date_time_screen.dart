@@ -42,8 +42,8 @@ class DateTimeScreen extends StatelessWidget {
               const LinearPercentIndicatorWidget(),
               ContactInformationForm(),
               const SelectPeopleDateTime(),
-              const UploadMedia(),
-              const NotesLabel(),
+               UploadMedia(),
+               NotesLabel(),
               const NextStepButton()
         ].divide(SizedBox(height: scaleHeight(10),)),
       ),

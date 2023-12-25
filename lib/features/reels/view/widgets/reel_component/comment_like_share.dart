@@ -25,11 +25,12 @@ Widget commentShareLike() {
                   children: [
                     ToggleIcon(
                       onPressed: () async {
-                        bool isVedioliked= reelsController.videoList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked;
-                        reelsController.videoList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked=! isVedioliked;
-                        reelsController.update();
+                        // bool isVedioliked= reelsController.itemList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked;
+                        // reelsController.videoList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked=! isVedioliked;
+                        // reelsController.update();
                       },
-                      value: reelsController.videoList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked,
+                      // value: reelsController.itemList[reelsController.currentUserIndex].videos[0].isLiked,
+                      value: false,
                       onIcon: Icon(
                         Icons.favorite_rounded,
                         color: customColors.error,
@@ -37,7 +38,7 @@ Widget commentShareLike() {
                       ),
                       offIcon:  Icon(
                         Icons.favorite_border_sharp,
-                        color: customColors.primaryText,
+                        color: customColors.info,
                         size: 30,
                       ),
                     ),
@@ -45,7 +46,7 @@ Widget commentShareLike() {
                       "2.6k",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
-                        color: customColors.primaryText,
+                        color: customColors.info,
                         useGoogleFonts: true,
                         fontSize: 16
                       ),
@@ -61,14 +62,15 @@ Widget commentShareLike() {
                   children: [
                      Icon(
                       Icons.insert_comment_outlined,
-                      color: customColors.primaryText,
+                      color: customColors.info
+                      ,
                       size: 30,
                     ),
                     Text(
                       "200",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
-                        color: customColors.primaryText,
+                        color: customColors.info,
                         useGoogleFonts: true,
                         fontSize: 16
                       ),
@@ -84,14 +86,14 @@ Widget commentShareLike() {
                   children: [
                      Icon(
                       Icons.reply_outlined,
-                      color: customColors.primaryText,
+                      color: customColors.info,
                       size: 30,
                     ),
                     Text(
                       "12",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
-                        color: customColors.primaryText,
+                        color: customColors.info,
                         useGoogleFonts: true,
                         fontSize: 16
                       ),

@@ -287,7 +287,7 @@ class Venue {
 
 class Amenity {
   final int id;
-  final String title;
+  final String title; 
   final String icon;
 
   Amenity({

@@ -1,5 +1,6 @@
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/features/customize_event/serice_according_detailes/controller/service_according_detailes_controller.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/name_check_box.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/serives_card.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/top_image_network.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceAccordingDetailesScreen extends StatelessWidget {
-  const ServiceAccordingDetailesScreen({super.key});
-
+  ServiceAccordingDetailesScreen({super.key});
+  final ServiceAccordingDetailesController serviceAccordingDetailesController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,20 +62,21 @@ class ServiceAccordingDetailesScreen extends StatelessWidget {
                   topRight: Radius.circular(16),
                 ),
               ),
-              child:  Padding(
+              child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       const NameCheckBox(),
-                     const ServicesCard(),
-                     const ServicesCard(),
-                     const ServicesCard(),
-                     const ServicesCard(),
-                     const ServicesCard(),
-                     
-                    ].divide(const SizedBox(height: 20,)),
+                      ...List.generate(
+                          serviceAccordingDetailesController
+                              .serviceProvider.albums.length,
+                          (index) => ServicesCard(album: serviceAccordingDetailesController
+                              .serviceProvider.albums[index],))
+                    ].divide(const SizedBox(
+                      height: 20,
+                    )),
                   ),
                 ),
               ),

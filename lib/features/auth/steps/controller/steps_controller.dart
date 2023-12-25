@@ -25,11 +25,11 @@ class StepsController extends GetxController {
     isMale = true.obs;
     // day = DateTime.now();
     avatarList = <dynamic>[
-      'assets/images/Rectangle.png',
-      'assets/images/Rectangle-2.png',
-      'assets/images/Rectangle-1.png',
-      'assets/images/Rectangle.png',
-      'assets/images/Rectangle-2.png',
+      'assets/images/0.png',
+      'assets/images/1.png',
+      'assets/images/2.png',
+      'assets/images/3.png',
+      'assets/images/4.png',
     ].obs;
     interestList = [];
       int initialPage = avatarList.length ~/ 2;

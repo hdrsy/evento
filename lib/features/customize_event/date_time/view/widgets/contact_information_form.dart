@@ -1,18 +1,18 @@
 import 'package:evento/core/shared/functions/validation/name_validation.dart';
+import 'package:evento/core/shared/functions/validation/phone_validation.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
 import 'package:evento/features/customize_event/date_time/view/widgets/text_field_contact_information.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ContactInformationForm extends StatelessWidget {
   // Assuming controllers, focusNodes, and validators are defined elsewhere
-  final TextEditingController _controller1 = TextEditingController();
-  final TextEditingController _controller2 = TextEditingController();
-  final TextEditingController _controller3 = TextEditingController();
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
   final FocusNode _focusNode3 = FocusNode();
-  
+  final DateTimeController dateTimeController=Get.find();
   ContactInformationForm({super.key});
 
   @override
@@ -54,9 +54,9 @@ class ContactInformationForm extends StatelessWidget {
                 TextFieldContactInformation(
                   labelKey: "First name",
                   hintTextKey: 'Label here...',
-                  controller: _controller1,
+                  controller: dateTimeController.firstName,
                   focusNode: _focusNode1,
-                  validator: nameValidation(_controller1.text),
+                  validator: nameValidation(dateTimeController.firstName.text),
                 ),
                 Divider(
                   thickness: 1,
@@ -65,9 +65,9 @@ class ContactInformationForm extends StatelessWidget {
                 TextFieldContactInformation(
                   labelKey: " Last name",
                   hintTextKey: 'Label here...',
-                  controller: _controller2,
+                  controller: dateTimeController.lastName,
                   focusNode: _focusNode2,
-                  validator: nameValidation(_controller2.text),
+                  validator: nameValidation(dateTimeController.lastName.text),
                 ),
                  Divider(
                   thickness: 1,
@@ -76,9 +76,9 @@ class ContactInformationForm extends StatelessWidget {
                 TextFieldContactInformation(
                   labelKey: "Phone Number",
                   hintTextKey: 'Label here...',
-                  controller: _controller3,
+                  controller: dateTimeController.phoneNumber,
                   focusNode: _focusNode3,
-                  validator: nameValidation(_controller3.text),
+                  validator: phoneValidation(dateTimeController.phoneNumber.text),
                 ),
                 
               ],

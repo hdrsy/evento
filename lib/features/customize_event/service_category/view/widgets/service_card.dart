@@ -1,16 +1,18 @@
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/service_category/model/service_category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceCard extends StatelessWidget {
-  const ServiceCard({super.key});
-
+  const ServiceCard({super.key, required this.serviceCategoryModel});
+final ServiceCategoryModel serviceCategoryModel;
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this Stack Widget...
+    return 
 Stack(
   alignment: const AlignmentDirectional(0, 1),
   children: [
@@ -21,9 +23,7 @@ Stack(
         image: DecorationImage(
           fit: BoxFit.cover,
           alignment: const AlignmentDirectional(0.00, 0.20),
-          image: Image.asset(
-            'assets/images/pexels-asad-photo-maldives-169189.jpg',
-          ).image,
+          image: getImageNetwork(url: serviceCategoryModel.icon, width: null, height:null)  .image,
         ),
         boxShadow:const [
            BoxShadow(
@@ -60,7 +60,7 @@ Stack(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                     "Venue",
+                    serviceCategoryModel.title ,
                     style: customTextStyle.bodyMedium.override(
                           fontFamily: 'Montserrat',
                           color: customColors.info,
@@ -96,7 +96,7 @@ Stack(
                   
                   onTap: () async {
                     // context.pushNamed('Venuelist');
-                    Get.toNamed('/ServiceAccordingCategoryScreen');
+                    Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title] );
                   },
                 ),
               ].addToEnd(const SizedBox(height: 30)),

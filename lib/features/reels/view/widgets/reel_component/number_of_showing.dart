@@ -3,6 +3,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
 Row numberOfShowing() {
+  
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
