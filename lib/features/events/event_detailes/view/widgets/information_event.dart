@@ -44,7 +44,7 @@ final EventDetailsModel eventDetailsModel;
                   Divider(thickness: 1, color: customColors.secondary),
                   buildEventDetails(context),
                   Divider(thickness: 1, color: customColors.secondary),
-                  buildOrganizerSection(context,eventDetailsModel.organizer!),
+                  buildOrganizerSection(context,eventDetailsModel.organizer),
                   buildAboutEventSection(context),
                   buildGallerySection(context),
                   buildLocationSection(context),

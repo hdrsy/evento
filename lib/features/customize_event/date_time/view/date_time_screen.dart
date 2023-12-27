@@ -44,7 +44,7 @@ class DateTimeScreen extends StatelessWidget {
               const SelectPeopleDateTime(),
                UploadMedia(),
                NotesLabel(),
-              const NextStepButton()
+               NextStepButton()
         ].divide(SizedBox(height: scaleHeight(10),)),
       ),
       

@@ -71,8 +71,8 @@ class EventDetailsModel {
           ? Organizer.fromJson(json['organizer'])
           : null,
       categoriesEvents: List<CategoryEvent>.from(
-          json['categories_events'].map((x) => CategoryEvent.fromJson(x))),
-      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
+          json['categories_events'].map((x) => CategoryEvent.fromJson(x)))??[],
+      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x)))??[],
       organizerId: json['organizer_id'] ?? 0,
     );
   }

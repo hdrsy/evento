@@ -39,7 +39,7 @@ getOtp();
     } else {
       pin.text = extractOtpFromMessage(handlingResponse['message']);
       Get.snackbar(handlingResponse['message'], "",
-          duration: Duration(minutes: 1),
+          // duration: Duration(minutes: 1),
           snackPosition: SnackPosition.TOP,
           backgroundColor: customColors.primaryBackground);
     }

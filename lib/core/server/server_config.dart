@@ -10,7 +10,11 @@ class ServerConstApis {
   /////Otp
   static String verifyotp = '$baseAPI/api/checkOTP';
   static String sendOtp = '$baseAPI/api/sendOTP';
-
+    ///// forgetPassword
+  static String sendCode = '$baseAPI/api/sendCode';
+  static String checkCode = '$baseAPI/api/checkCode';
+  static String changePasswordForgetten = '$baseAPI/api/changePassword';
+    
 
   ///// interest
   static String getInterest = '$baseAPI/api/interest';
@@ -34,6 +38,7 @@ class ServerConstApis {
   static String getAccordingCategoryList = '$baseAPI/api/eventAccordingCategory';
   //// event detailes
   static String getEventDetailes = '$baseAPI/api/event';
+  static String showGoing = '$baseAPI/api/showGoing';
 
 /////
   static String bookNow = '$baseAPI/api/book';
@@ -54,4 +59,6 @@ class ServerConstApis {
   //// customiz event
   static String serviceCategory= '$baseAPI/api/service_category';
   static String serviceAccordingCategory= '$baseAPI/api/serviceAccordingCategory';
+  static String getAllvenue= '$baseAPI/api/venue';
+  static String sendRequest= '$baseAPI/api/sendRequest';
 }

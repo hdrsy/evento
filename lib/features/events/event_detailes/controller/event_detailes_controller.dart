@@ -55,6 +55,7 @@ class EventDetailesController extends GetxController {
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
+    print(eventDetailsModel.id);
   }
 
   void createAndAddReminderEvents() async {

@@ -39,7 +39,7 @@ class SearchFieldWithFiltering extends StatelessWidget {
                       color: Color(0xFF8B9BA8),
                       size: 24,
                     ),
-                  ),
+                  ),  
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),

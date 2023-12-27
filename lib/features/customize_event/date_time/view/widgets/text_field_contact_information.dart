@@ -7,14 +7,16 @@ class TextFieldContactInformation extends StatelessWidget {
   final String labelKey;
   final String hintTextKey;
   final TextEditingController controller;
-  final FocusNode focusNode;
-  final String? validator;
+  
+  final String? Function(String?)? validator;
+  Function(String)? onChanged; 
 
-  const TextFieldContactInformation({super.key, 
+   TextFieldContactInformation({super.key, 
     required this.labelKey,
     required this.hintTextKey,
     required this.controller,
-    required this.focusNode,
+    
+    this.onChanged,
     required this.validator,
   });
 
@@ -38,8 +40,9 @@ class TextFieldContactInformation extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
             child: TextFormField(
               controller: controller,
-              focusNode: focusNode,
+              
               obscureText: false,
+             onChanged: onChanged,
               decoration: InputDecoration(
                 labelText: hintTextKey,
                 labelStyle:customTextStyle.labelMedium.override(
@@ -57,9 +60,7 @@ class TextFieldContactInformation extends StatelessWidget {
                     color: customColors.primary,
                     useGoogleFonts: true,
                   ),
-              validator: (value){
-                return validator;
-                },
+              validator:validator,
             ),
           ),
         ),

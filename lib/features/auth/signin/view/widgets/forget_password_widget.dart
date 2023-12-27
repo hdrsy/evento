@@ -1,12 +1,13 @@
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FogetPasswordWidget extends StatelessWidget {
   const FogetPasswordWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this RichText Widget...
+    return 
         InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -14,6 +15,7 @@ class FogetPasswordWidget extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () async {
         // context.pushNamed('Forgetpassword');
+        Get.toNamed('/EnterNumberScreen');
       },
       child: RichText(
         textScaleFactor: MediaQuery.of(context).textScaleFactor,

@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 
 class ServiceAccordingDetailesController extends GetxController{
   late ServiceProvider serviceProvider;
+  late int serviceCategoryIndex;
 @override
   void onInit() {
-    serviceProvider=Get.arguments;
+    serviceProvider=Get.arguments[0];
+    serviceCategoryIndex=Get.arguments[1];
     super.onInit();
   }
 }

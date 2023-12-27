@@ -1,3 +1,4 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceCard extends StatelessWidget {
-  const ServiceCard({super.key, required this.serviceCategoryModel});
+  const ServiceCard({super.key, required this.serviceCategoryModel,required this.serviceCategoryIndex});
 final ServiceCategoryModel serviceCategoryModel;
+final int serviceCategoryIndex;
   @override
   Widget build(BuildContext context) {
     return 
@@ -18,7 +20,7 @@ Stack(
   children: [
     Container(
       
-      height: 138,
+      height: screenHeight*0.17,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -37,7 +39,7 @@ Stack(
     ),
     Container(
       
-      height: 138,
+      height: screenHeight*0.17,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF050606), Color(0x00EE8B60)],
@@ -70,7 +72,7 @@ Stack(
                         ),
                   ),
                   Text(
-                    "Select a picturesque setting for your special day",
+                    serviceCategoryModel.description,
                     style: customTextStyle.bodyMedium.override(
                           fontFamily: 'Nunito',
                           color: customColors.info,
@@ -96,7 +98,7 @@ Stack(
                   
                   onTap: () async {
                     // context.pushNamed('Venuelist');
-                    Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title] );
+                    Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title,serviceCategoryIndex] );
                   },
                 ),
               ].addToEnd(const SizedBox(height: 30)),

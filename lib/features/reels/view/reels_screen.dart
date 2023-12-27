@@ -12,7 +12,7 @@ class ReelsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: customColors.secondaryBackground,
+          backgroundColor: Colors.black,
           body: GetBuilder<ReelsController>(builder: (ccontext) {
             return PageView.builder(
                 scrollDirection: Axis.vertical,

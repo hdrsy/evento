@@ -7,7 +7,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget buildOrganizerSection(BuildContext context,Organizer organizer) {
+Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
   EventDetailesController eventDetailesController=Get.find();
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -51,7 +51,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer organizer) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${organizer.firstName} ${organizer.lastName}",
+                   organizer!=null?   "${organizer.firstName} ${organizer.lastName}":"Evento",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'BeerSerif',
                         color:customColors.primaryText,
@@ -61,7 +61,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer organizer) {
                       ),
                     ),
                     Text(
-                       "${organizer.firstName} ${organizer.lastName}",
+                       organizer!=null?   "${organizer.firstName} ${organizer.lastName}":"Evento",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'BeerSerif',
                         fontSize: 12,

@@ -67,7 +67,7 @@ class PaginationController<T> extends GetxController {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     print(handlingResponse);
 // log("ddd");
-// print(handlingResponse);
+print(handlingResponse);
 // log("ddd");
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();

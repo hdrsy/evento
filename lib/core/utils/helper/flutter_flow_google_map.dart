@@ -54,6 +54,8 @@ class FlutterFlowGoogleMap extends StatefulWidget {
     this.showMapToolbar = false,
     this.showTraffic = false,
     this.centerMapOnMarkerTap = false,
+    
+    this.polylines,
     Key? key,
   }) : super(key: key);
 
@@ -73,7 +75,7 @@ class FlutterFlowGoogleMap extends StatefulWidget {
   final bool showMapToolbar;
   final bool showTraffic;
   final bool centerMapOnMarkerTap;
-
+  final Set<Polyline>? polylines;
   @override
   State<StatefulWidget> createState() => _FlutterFlowGoogleMapState();
 }
@@ -99,6 +101,8 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
   Widget build(BuildContext context) => AbsorbPointer(
         absorbing: !widget.allowInteraction,
         child: GoogleMap(
+        
+          polylines:widget.polylines ?? {},
           onMapCreated: (controller) async {
             _controller.complete(controller);
             await controller.setMapStyle(googleMapStyleStrings[widget.style]);

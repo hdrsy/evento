@@ -8,19 +8,73 @@ import 'package:evento/features/customize_event/service_category/model/service_c
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
-class ServiceCategoryController extends GetxController{
- late  RxList<ServiceCategoryModel> serviceCategoryList;
+class ServiceCategoryController extends GetxController {
+  late RxList<ServiceCategoryModel> serviceCategoryList;
   late RxBool isLoading;
-
+  late List<RxInt> selectedServiceProviders;
   late RxList<String> errorMessage;
-@override
-  void onInit() {
-     isLoading = false.obs;
-       errorMessage = <String>[].obs;
-       serviceCategoryList=<ServiceCategoryModel>[].obs;
-       fetchCategoryData();
+  late RxInt selectedVenue;
+  Map selected={};
+  @override
+  void onInit() async {
+    isLoading = false.obs;
+    errorMessage = <String>[].obs;
+    serviceCategoryList = <ServiceCategoryModel>[].obs;
+    selectedServiceProviders = [];
+    selectedVenue=0.obs;
+    await fetchCategoryData();
+    selectedServiceProviders = List.generate(
+        serviceCategoryList.length,
+        (index) => 0
+            .obs); //// each service categry have index so i store in the id the serivce provider selected
+
     super.onInit();
   }
+
+  bool isSelectedServiceProvider(int id, int serviceCategoryIndex) {
+    return selectedServiceProviders[serviceCategoryIndex].value == id;
+  }
+
+  changeSelectedServiceProviderInEachCategory(
+      int serviceProviderId, int serviceCategoryIndex,String serviceProviderName) {
+    ////to select new service provider and unselected one
+    if(selectedServiceProviders[serviceCategoryIndex].value == serviceProviderId){
+        selectedServiceProviders[serviceCategoryIndex].value = 0;
+        selected.remove(serviceCategoryList[serviceCategoryIndex].title);
+
+    }else{
+
+        selectedServiceProviders[serviceCategoryIndex].value =
+            serviceProviderId;
+            selected[serviceCategoryList[serviceCategoryIndex].title]=serviceProviderName;
+    }
+    update();
+  }
+  changeSelectedVenue(
+      int venueIndex,String venueName) {
+    ////to select new service provider and unselected one
+   if (selectedVenue.value == venueIndex){
+         selectedVenue.value = 0;
+         selected.remove("Venue Name");
+
+   }else{
+
+        selectedVenue.value =
+            venueIndex;
+            selected["Venue Name"]=venueName;
+   }
+    update();
+  }
+
+  int selectedServiceProvidersNumbers() {
+    int number = 0;
+    for (var i = 0; i < selectedServiceProviders.length; i++) {
+      selectedServiceProviders[i].value != 0 ? number++ : null;
+    }
+    selectedVenue.value==0?null:number++;
+    return number;
+  }
+
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
@@ -29,12 +83,10 @@ class ServiceCategoryController extends GetxController{
         targetRout: ServerConstApis.serviceCategory,
         method: "GEt",
         token: token);
-    print(response);  
+
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-
-
     } else {
       whenGetDataSuccess(handlingResponse);
     }
@@ -44,10 +96,10 @@ class ServiceCategoryController extends GetxController{
   whenGetDataSuccess(handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['category'];
 
-    serviceCategoryList.addAll(
-        categoryListJson.map((jsonItem) => ServiceCategoryModel.fromJson(jsonItem)));
-log(serviceCategoryList.length.toString());
+    serviceCategoryList.addAll(categoryListJson
+        .map((jsonItem) => ServiceCategoryModel.fromJson(jsonItem)));
+    log(serviceCategoryList.length.toString());
+    log(selectedServiceProviders.length.toString());
     // isLoading.value = false;
   }
 }
-

@@ -1,5 +1,6 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/features/customize_event/review/controller/event_review_controller.dart';
 import 'package:evento/features/customize_event/review/view/widgets/additional_note.dart';
 import 'package:evento/features/customize_event/review/view/widgets/proccess_to_payment_button.dart';
 import 'package:evento/features/customize_event/review/view/widgets/review_card.dart';
@@ -10,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EventReviewScreen extends StatelessWidget {
-  const EventReviewScreen({super.key});
-
+  EventReviewScreen({super.key});
+  final EventReviewController eventReviewController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,39 +37,53 @@ class EventReviewScreen extends StatelessWidget {
           children: [
             const StepText4(),
             const LinearPercentIndicatorWidget4(),
-            const ReviewCard(
+            ReviewCard(
               title: "Contact Detailes",
-              leftColumnData: [
+              leftColumnData: const [
                 "Name",
                 "Phone Number",
-                "Total Number of Guests"
+                "Number of Adults",
+                "Number of Children",
               ],
-              rightColumnData: ["Mohammad Ahmad", "0900000000", "7 people"],
+              rightColumnData: [
+                eventReviewController.contactInfoModel.firstName+eventReviewController.contactInfoModel.lastName,
+                eventReviewController.contactInfoModel.phoneNumber,
+                "${eventReviewController.contactInfoModel.adultNumber} people",
+                "${eventReviewController.contactInfoModel.childrenNumber} people"
+              ],
             ),
-            const ReviewCard(
+            ReviewCard(
               title: "Event Overview",
-              leftColumnData: [
+              leftColumnData: const [
                 "Event Title",
                 "Start Time",
                 "End Time",
                 "Date"
               ],
-              rightColumnData: ["La Rose", "5:00 pm", "10:00 pm","20/10/2023"],
-            ),
-            const ReviewCard(
-              title: "Event Crew",
-              leftColumnData: [
-                "Venue Name",
-                "Dress Shop",
-                "Decoration",
-                
+              rightColumnData: [
+                "La Rose",
+                eventReviewController.eventOverView.startTime,
+                eventReviewController.eventOverView.endTime,
+                eventReviewController.eventOverView.date
               ],
-              rightColumnData: ["La Rose", "Laura", "La Rose"],
             ),
-            AdditionalNote(controller: TextEditingController(),onChange: (value){},),
-            const SizedBox(height: 10,),
-            const ProccessToPaymentButton()
-
+            ReviewCard(
+              title: "Event Crew",
+              leftColumnData: eventReviewController.selected.values
+                  .map((value) => value.toString())
+                  .toList(),
+              rightColumnData: eventReviewController.selected.keys
+                  .map((value) => value.toString())
+                  .toList(),
+            ),
+            AdditionalNote(
+              controller: eventReviewController.notes,
+              onChange: (value) {},
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+             ProccessToPaymentButton()
           ].divide(SizedBox(
             height: scaleHeight(10),
           )),

@@ -1,12 +1,19 @@
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
+import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceAccordingCard extends StatelessWidget {
-  const ServiceAccordingCard({super.key,required this.serviceProvider});
-final ServiceProvider serviceProvider;
+  ServiceAccordingCard(
+      {super.key,
+      required this.serviceProvider,
+      required this.serviceCategoryIndex});
+  final ServiceProvider serviceProvider;
+  final int serviceCategoryIndex;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -15,8 +22,8 @@ final ServiceProvider serviceProvider;
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        
-        Get.toNamed('/ServiceAccordingDetailesScreen',arguments: serviceProvider);
+        Get.toNamed('/ServiceAccordingDetailesScreen',
+            arguments: [serviceProvider, serviceCategoryIndex]);
       },
       child: Container(
         width: double.infinity,
@@ -30,21 +37,19 @@ final ServiceProvider serviceProvider;
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    'assets/images/images.jpg',
-                    width: double.infinity,
-                    height: 230,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(16),
+                    child: getImageNetwork(
+                        url: serviceProvider.profile,
+                        width: double.infinity,
+                        height: 230)),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Maidstone, San Anto...",
+                    serviceProvider.user.firstName +
+                        serviceProvider.user.lastName,
                     style: customTextStyle.headlineSmall,
                   ),
                   Row(
@@ -60,25 +65,35 @@ final ServiceProvider serviceProvider;
                           useGoogleFonts: true,
                         ),
                       ),
-                      Theme(
-                        data: ThemeData(
-                          checkboxTheme: CheckboxThemeData(
-                            visualDensity: VisualDensity.compact,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                      //// to update selected service provier in serviceCategoryController
+                      GetBuilder<ServiceCategoryController>(
+                          builder: (serviceCategoryController) {
+                        return Theme(
+                          data: ThemeData(
+                            checkboxTheme: CheckboxThemeData(
+                              visualDensity: VisualDensity.compact,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                             ),
+                            unselectedWidgetColor: customColors.secondaryText,
                           ),
-                          unselectedWidgetColor: customColors.secondaryText,
-                        ),
-                        child: Checkbox(
-                          value: false,
-                          onChanged: (newValue) async {},
-                          activeColor: customColors.success,
-                          checkColor: customColors.info,
-                        ),
-                      ),
+                          child: Checkbox(
+                            value: serviceCategoryController
+                                .isSelectedServiceProvider(
+                                    serviceProvider.id, serviceCategoryIndex),
+                            onChanged: (newValue) async {
+                              serviceCategoryController
+                                  .changeSelectedServiceProviderInEachCategory(
+                                      serviceProvider.id, serviceCategoryIndex,serviceProvider.user.firstName+serviceProvider.user.lastName);
+                            },
+                            activeColor: customColors.success,
+                            checkColor: customColors.info,
+                          ),
+                        );
+                      }),
                     ],
                   ),
                 ],
@@ -91,8 +106,12 @@ final ServiceProvider serviceProvider;
                   children: [
                     Expanded(
                       child: Text(
-                        "Location: Dmascus , Mazzeh",
-                        style: customTextStyle.labelMedium,
+                        "Location: ${serviceProvider.address}",
+                        style: customTextStyle.labelMedium.override(
+                            fontFamily: secondaryFontFamily,
+                            useGoogleFonts: true,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                     Text(

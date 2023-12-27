@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
@@ -12,13 +14,20 @@ class ServiceAccordingCategoryController extends GetxController{
   late RxBool isLoading;
 late String serviceCategoryType;
   late RxList<String> errorMessage;
+  late int serviceCategoryIndex;
+  
 @override
   void onInit() async{
          isLoading = false.obs;
        errorMessage = <String>[].obs;
        serviceProviderList=<ServiceProvider>[].obs;
-    serviceAccordingCategoryIndex=Get.arguments[0];
+       
+serviceAccordingCategoryIndex=Get.arguments[0];
     serviceCategoryType=Get.arguments[1];
+    serviceCategoryIndex=Get.arguments[2];
+    
+       
+    log(serviceCategoryIndex.toString());
   await  fetchData();
     super.onInit();
   }

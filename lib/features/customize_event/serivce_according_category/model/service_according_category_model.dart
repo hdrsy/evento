@@ -8,6 +8,11 @@ class ServiceProvider {
   final String address;
   final String startWork;
   final String endWork;
+  final String profile;
+  final String description;
+  final double latitude;
+  final double longitude;
+  final User user;
   final List<Album> albums;
 
   ServiceProvider({
@@ -18,6 +23,11 @@ class ServiceProvider {
     required this.address,
     required this.startWork,
     required this.endWork,
+    required this.profile,
+    required this.description,
+    required this.latitude,
+    required this.longitude,
+    required this.user,
     required this.albums,
   });
 
@@ -33,7 +43,35 @@ class ServiceProvider {
       address: json['address'],
       startWork: json['start_work'],
       endWork: json['end_work'],
+      profile: json['profile'],
+      description: json['description'],
+      latitude: json['latitude'].toDouble(),
+      longitude: json['longitude'].toDouble(),
+      user: User.fromJson(json['user']),
       albums: albums,
+    );
+  }
+}
+
+class User {
+  final int id;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+
+  User({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.phoneNumber,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      phoneNumber: json['phone_number'],
     );
   }
 }
@@ -42,8 +80,8 @@ class Album {
   final int id;
   final int serviceProviderId;
   final String name;
-  final List<String> images; // Assuming images are stored as a JSON string
-  final dynamic videos; // Same assumption as images
+  final List<String> images;
+  final dynamic videos; // Can be further defined based on actual data structure
   final String createdAt;
   final String updatedAt;
 
@@ -57,28 +95,27 @@ class Album {
     required this.updatedAt,
   });
 
-factory Album.fromJson(Map<String, dynamic> json) {
-  List<String> parseImages(String imagesJson) {
-    if (imagesJson == null || imagesJson.isEmpty) {
-      return [];
+  factory Album.fromJson(Map<String, dynamic> json) {
+    List<String> parseImages(String imagesJson) {
+      if (imagesJson.isEmpty) {
+        return [];
+      }
+      try {
+        return List<String>.from(jsonDecode(imagesJson));
+      } catch (e) {
+        print('Error decoding images JSON: $e');
+        return [];
+      }
     }
-    try {
-      return List<String>.from(jsonDecode(imagesJson));
-    } catch (e) {
-      // Handle or log error if the JSON decoding fails
-      print('Error decoding images JSON: $e');
-      return [];
-    }
+
+    return Album(
+      id: json['id'],
+      serviceProviderId: json['service_provider_id'],
+      name: json['name'],
+      images: parseImages(json['images'] as String),
+      videos: json['videos'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
+    );
   }
-
-  return Album(
-    id: json['id'],
-    serviceProviderId: json['service_provider_id'],
-    name: json['name'],
-    images: parseImages(json['images'] as String),
-    videos: json['videos'],
-    createdAt: json['created_at'],
-    updatedAt: json['updated_at'],
-  );
-}}
-
+}

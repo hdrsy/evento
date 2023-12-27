@@ -12,7 +12,7 @@ class ContactInformationForm extends StatelessWidget {
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
   final FocusNode _focusNode3 = FocusNode();
-  final DateTimeController dateTimeController=Get.find();
+  final DateTimeController dateTimeController = Get.find();
   ContactInformationForm({super.key});
 
   @override
@@ -20,7 +20,6 @@ class ContactInformationForm extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-       
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 10),
           child: Row(
@@ -30,10 +29,10 @@ class ContactInformationForm extends StatelessWidget {
               Text(
                 "Contact Information",
                 style: customTextStyle.bodyMedium.override(
-                      fontFamily: 'Roboto',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  fontFamily: 'Roboto',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
@@ -48,44 +47,54 @@ class ContactInformationForm extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(10, 00, 10, 0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                TextFieldContactInformation(
-                  labelKey: "First name",
-                  hintTextKey: 'Label here...',
-                  controller: dateTimeController.firstName,
-                  focusNode: _focusNode1,
-                  validator: nameValidation(dateTimeController.firstName.text),
-                ),
-                Divider(
-                  thickness: 1,
-                  color: customColors.secondaryBackground,
-                ),
-                TextFieldContactInformation(
-                  labelKey: " Last name",
-                  hintTextKey: 'Label here...',
-                  controller: dateTimeController.lastName,
-                  focusNode: _focusNode2,
-                  validator: nameValidation(dateTimeController.lastName.text),
-                ),
-                 Divider(
-                  thickness: 1,
-                  color: customColors.secondaryBackground,
-                ),
-                TextFieldContactInformation(
-                  labelKey: "Phone Number",
-                  hintTextKey: 'Label here...',
-                  controller: dateTimeController.phoneNumber,
-                  focusNode: _focusNode3,
-                  validator: phoneValidation(dateTimeController.phoneNumber.text),
-                ),
-                
-              ],
+            child: Form(
+              key: dateTimeController.formstate,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  TextFieldContactInformation(
+                      labelKey: "First name",
+                      hintTextKey: 'Label here...',
+                      controller: dateTimeController.firstName,
+                      onChanged: (value) {
+                        dateTimeController.firstName.text = value;
+                      },
+                      validator: (value) {
+                        return nameValidation(value);
+                      }),
+                  Divider(
+                    thickness: 1,
+                    color: customColors.secondaryBackground,
+                  ),
+                  TextFieldContactInformation(
+                      labelKey: " Last name",
+                      hintTextKey: 'Label here...',
+                      controller: dateTimeController.lastName,
+                      onChanged: (value) {
+                        dateTimeController.lastName.text = value;
+                      },
+                      validator: (value) {
+                        return nameValidation(value);
+                      }),
+                  Divider(
+                    thickness: 1,
+                    color: customColors.secondaryBackground,
+                  ),
+                  TextFieldContactInformation(
+                      labelKey: "Phone Number",
+                      hintTextKey: 'Label here...',
+                      controller: dateTimeController.phoneNumber,
+                      onChanged: (value) {
+                        dateTimeController.phoneNumber.text = value;
+                      },
+                      validator: (value) {
+                        return nameValidation(value);
+                      }),
+                ],
+              ),
             ),
           ),
         ),
-        
       ],
     );
   }

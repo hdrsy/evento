@@ -39,6 +39,7 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
           highlightColor: Colors.transparent,
           onTap: () async {
             // context.pushNamed('Going');
+            Get.toNamed('/GoingScreen');
           },
           child: Container(
             decoration: const BoxDecoration(),

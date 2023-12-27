@@ -8,7 +8,7 @@ class StepText4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this RichText Widget...
+    return 
 RichText(
   textScaleFactor: MediaQuery.of(context).textScaleFactor,
   text: TextSpan(

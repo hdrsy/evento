@@ -1,7 +1,7 @@
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/help_center/freinds/view/widgets/freinds_list.dart';
-import 'package:evento/features/profile_pages/help_center/freinds/view/widgets/requests_list.dart';
-import 'package:evento/features/profile_pages/help_center/freinds/view/widgets/sent_list.dart';
+import 'package:evento/features/profile_pages/freinds/view/widgets/freinds_list.dart';
+import 'package:evento/features/profile_pages/freinds/view/widgets/requests_list.dart';
+import 'package:evento/features/profile_pages/freinds/view/widgets/sent_list.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

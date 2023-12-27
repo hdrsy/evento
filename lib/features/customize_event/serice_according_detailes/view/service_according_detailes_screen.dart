@@ -1,6 +1,10 @@
+import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+
+import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/controller/service_according_detailes_controller.dart';
+import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/detailes_card.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/name_check_box.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/serives_card.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/top_image_network.dart';
@@ -12,15 +16,16 @@ class ServiceAccordingDetailesScreen extends StatelessWidget {
   ServiceAccordingDetailesScreen({super.key});
   final ServiceAccordingDetailesController serviceAccordingDetailesController =
       Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       body: SafeArea(
         child: Stack(children: [
-          const TopImageWidget(
-            imageUrl:
-                'https://images.unsplash.com/photo-1632932197818-6b131c21a961?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjIyfHx1c2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
+           TopImageWidget(
+            imageUrl:ServerConstApis.baseAPI+serviceAccordingDetailesController.serviceProvider.profile
+                ,
           ),
           Align(
             alignment: const AlignmentDirectional(-0.95, -0.95),
@@ -44,45 +49,113 @@ class ServiceAccordingDetailesScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
-            child: Container(
-              // width: double.infinity,
-              decoration: BoxDecoration(
-                color: customColors.secondaryBackground,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: Color(0x320E151B),
-                    offset: Offset(0, -2),
-                  )
-                ],
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+            child: Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: customColors.secondaryBackground,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x320E151B),
+                      offset: Offset(0, -2),
+                    )
+                  ],
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
-                child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      const NameCheckBox(),
-                      ...List.generate(
-                          serviceAccordingDetailesController
-                              .serviceProvider.albums.length,
-                          (index) => ServicesCard(album: serviceAccordingDetailesController
-                              .serviceProvider.albums[index],))
-                    ].divide(const SizedBox(
-                      height: 20,
-                    )),
+                      NameCheckBox(
+                          serviceProvider: serviceAccordingDetailesController
+                              .serviceProvider,
+                          serviceCategoryIndex:
+                              serviceAccordingDetailesController
+                                  .serviceCategoryIndex),
+                      const SizedBox(height: 20),
+                      Expanded(child: TabBarGalleryAndDetailes())
+                    ],
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ]),
+      ),
+    );
+  }
+}
+
+class TabBarGalleryAndDetailes extends StatelessWidget {
+  TabBarGalleryAndDetailes({super.key});
+  final ServiceAccordingDetailesController serviceAccordingDetailesController =
+      Get.find();
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          Align(
+            alignment: const Alignment(0, 0),
+            child: TabBar(
+              labelColor: customColors.primary,
+              unselectedLabelColor: customColors.grayIcon,
+              labelStyle: customTextStyle.titleSmall.override(
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w500,
+                useGoogleFonts: true,
+              ),
+              unselectedLabelStyle: const TextStyle(),
+              indicatorColor: customColors.primary,
+              indicatorWeight: 4,
+              tabs: const [
+                Tab(text: "Details"),
+                Tab(text: "Gallery"),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                 Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: DetailesCard()
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        ...List.generate(
+                            serviceAccordingDetailesController
+                                .serviceProvider.albums.length,
+                            (index) => ServicesCard(
+                                  album: serviceAccordingDetailesController
+                                      .serviceProvider.albums[index],
+                                ))
+                      ]
+                          .divide(const SizedBox(
+                            height: 16,
+                          ))
+                          .addToStart(const SizedBox(
+                            height: 16,
+                          )),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,18 +1,19 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NextStepButton extends StatelessWidget {
-  const NextStepButton({super.key});
-
+   NextStepButton({super.key});
+final DateTimeController dateTimeController=Get.find();
+  
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this Button Widget...
-ButtonWidget(
+    return ButtonWidget(
   onPressed: () async {
-Get.toNamed('/ServiceCategoryScreen');
+   dateTimeController.onPressedNext();
   },
   text: "Next Step",
   options: ButtonOptions(

@@ -1,3 +1,11 @@
+import 'package:evento/features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
+import 'package:evento/features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
+import 'package:evento/features/auth/forget_password_pages/verify_forget_password/view/verify_forget_password.dart';
+import 'package:evento/features/customize_event/venue/controller/binding/venue_binding.dart';
+import 'package:evento/features/customize_event/venue/view/venue_screen.dart';
+import 'package:evento/features/customize_event/venue_detailes/controller/binding/venue_detailes_binding.dart';
+import 'package:evento/features/customize_event/venue_detailes/view/venue_detailes_screen.dart';
+import 'package:evento/features/going/view/going_screen.dart';
 import 'package:evento/features/profile_pages/account_type/controller/binding/account_type_binding.dart';
 import 'package:evento/features/profile_pages/account_type/view/account_type_screen.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/account_privacy/view/account_privacy_screen.dart';
@@ -33,8 +41,8 @@ import 'package:evento/features/events/time_line/controller/binding/time_line_bi
 import 'package:evento/features/events/time_line/view/time_line_screen.dart';
 import 'package:evento/features/profile_pages/favorite/controller/binding/favorite_binding.dart';
 import 'package:evento/features/profile_pages/favorite/view/favorite_screen.dart';
-import 'package:evento/features/profile_pages/help_center/freinds/controller/binding/freinds_binding.dart';
-import 'package:evento/features/profile_pages/help_center/freinds/view/freinds_screen.dart';
+import 'package:evento/features/profile_pages/freinds/controller/binding/freinds_binding.dart';
+import 'package:evento/features/profile_pages/freinds/view/freinds_screen.dart';
 import 'package:evento/features/gallery/controller/binding/gallery_binding.dart';
 import 'package:evento/features/gallery/view/gallery_screen.dart';
 import 'package:evento/features/profile_pages/help_center/view/help_center_screen.dart';
@@ -55,6 +63,8 @@ import 'package:evento/features/organizer/create_profile/controller/binding/orga
 import 'package:evento/features/organizer/create_profile/view/oganizer_create_profile_screen.dart';
 import 'package:evento/features/profile_pages/request_status/controller/binding/request_status_binding.dart';
 import 'package:evento/features/profile_pages/request_status/view/request_status_screen.dart';
+import 'package:evento/features/see_location_and_dirction/dirction/view/dirction_screen.dart';
+import 'package:evento/features/see_location_and_dirction/see_location/view/see_location_screen.dart';
 import 'package:get/get.dart';
 
 appRoutes() => [
@@ -69,7 +79,7 @@ appRoutes() => [
     GetPage(name: '/ServiceAccordingCategoryScreen', page:()=>  ServiceAccordingCategoryScreen(),binding:ServiceAccordingCategoryBinding() ) , 
     GetPage(name: '/ServiceAccordingDetailesScreen', page:()=>  ServiceAccordingDetailesScreen(),binding:ServiceAccordingDetailesBinding() ) , 
     GetPage(name: '/GalleryScreen', page:()=> GalleryScreen(),binding:GalleryBinding() ) , 
-    GetPage(name: '/EventReviewScreen', page:()=> const EventReviewScreen(),binding:EventReviewBinding() ) , 
+    GetPage(name: '/EventReviewScreen', page:()=>    EventReviewScreen(),binding:EventReviewBinding() ) , 
     GetPage(name: '/MyBookingScreen', page:()=> const MyBookingScreen(),binding:MyBookingBinding() ) , 
     GetPage(name: '/MyRequestScreen', page:()=> const MyrequestScreen(),binding:MyRequestBinding() ) , 
     GetPage(name: '/RequestStatusScreen', page:()=> const RequestStatusScreen(),binding:RequestStatusBinding() ) , 
@@ -83,10 +93,18 @@ appRoutes() => [
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
     GetPage(name: '/AccountTypeScreen', page:()=> const AccountTypeScreen(),binding:AccountTypeBinding() ) , 
     GetPage(name: '/ChangePasswordScreen', page:()=>  ChangePasswordScreen(),binding:ChangePasswordBinding() ) , 
+    GetPage(name: '/VenueScreen', page:()=>  VenueScreen(),binding:VenueBinding() ) , 
+    GetPage(name: '/VenueDetailesScreen', page:()=>  VenueDetailesScreen(),binding:VenueDetailesBinding() ) , 
     GetPage(name: '/SwithcToServiceProviderScreen', page:()=>  SwithcToServiceProviderScreen()) , 
     GetPage(name: '/HelpCenterScreen', page:()=> const HelpCenterScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
     GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
+    GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 
+    GetPage(name: '/SeeLocation', page:()=>  SeeLocation()) , 
+    GetPage(name: '/GoingScreen', page:()=>  GoingScreen()) , 
+    GetPage(name: '/DirctionScreen', page:()=>  DirctionScreen()) , 
+    GetPage(name: '/EnterNumberScreen', page:()=>  EnterNumberScreen()) , 
+    GetPage(name: '/VerifyForgetPasswordScreen', page:()=>  VerifyForgetPasswordScreen()) , 
     GetPage(name: '/AccountOrganizerScreen', page:()=>  AccountOrganizerScreen()) , 
     GetPage(name: '/ChoiceOrganizerCategoryScreen', page:()=>  ChoiceOrganizerCategoryScreen()) , 
     GetPage(name: '/AddMediaInFolderScreen', page:()=>  AddMediaInFolderScreen()) , 

@@ -1,3 +1,4 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -15,7 +16,7 @@ Stack(
   children: [
     Container(
       
-      height: 138,
+      height: screenHeight*0.17,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -36,7 +37,7 @@ Stack(
     ),
     Container(
       
-      height: 138,
+      height: screenHeight*0.17,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF050606), Color(0x00EE8B60)],
@@ -95,7 +96,7 @@ Stack(
                   
                   onTap: () async {
                     // context.pushNamed('Venuelist');
-                    Get.toNamed('/ServiceAccordingCategoryScreen');
+                    Get.toNamed('/VenueScreen');
                   },
                 ),
               ].addToEnd(const SizedBox(height: 30)),

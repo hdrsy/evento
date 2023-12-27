@@ -30,13 +30,13 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
         body: SizedBox(
           width: double.infinity,
           child: Obx(
-            ()=> SingleChildScrollView(
+            () => SingleChildScrollView(
                 padding: padding(16, 20, 16, 20),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        serviceAccordingCategoryController.serviceCategoryType,
+                        serviceAccordingCategoryController.serviceCategoryType!,
                         style: customTextStyle.bodyMedium.override(
                           fontFamily: 'Nunito',
                           color: customColors.primaryText,
@@ -51,6 +51,9 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
                                 serviceProvider:
                                     serviceAccordingCategoryController
                                         .serviceProviderList[index],
+                                serviceCategoryIndex:
+                                    serviceAccordingCategoryController
+                                        .serviceCategoryIndex!,
                               ))
                     ])),
           ),
