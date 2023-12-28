@@ -54,13 +54,11 @@ class ThemeToggleSwitch extends StatelessWidget {
             height: 40,
             spacing: 0,
             onChanged: (isDarkMode) async {
-              MainBottomNavigationController mainBottomNavigationController =
-                  Get.find();
-              await themeController.changeTheme(); // Trigger the theme change
-              mainBottomNavigationController.changePage(0);
 
-              Future.delayed(const Duration(milliseconds: 15)).then((value) {
-                mainBottomNavigationController.changePage(4);
+              await themeController.changeTheme(); // Trigger the theme change
+            
+              Future.delayed(const Duration(milliseconds: 500)).then((value) {
+                Get.offAllNamed('/home');
               });
             },
             style: ToggleStyle(indicatorColor: customColors.primary),

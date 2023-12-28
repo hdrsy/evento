@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
  getImageNetwork(
-    {required String url, required double? width, required double? height}) {
+    {required String url, required double? width, required double? height,AlignmentGeometry? alignmentGeometry}) {
       
   return Image.network(
     ServerConstApis.baseAPI + url,
     width: width,
+    alignment: alignmentGeometry??Alignment.center,
     height: height,
     fit: BoxFit.cover,
     loadingBuilder:

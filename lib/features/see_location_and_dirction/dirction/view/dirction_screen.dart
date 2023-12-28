@@ -45,7 +45,7 @@ markers: [
     dirctionController.myMarker,
   ],
     markerColor: GoogleMarkerColor.red,
-    mapType: MapType.normal,
+    mapType: MapType.hybrid,
     style: GoogleMapStyle.standard,
     initialZoom: 18,
     allowInteraction: true,

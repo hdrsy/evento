@@ -1,13 +1,10 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ServicesCard extends StatelessWidget {
-  const ServicesCard({super.key, required this.album});
-  final Album album;
+class OrganizerFolderCard extends StatelessWidget {
+  const OrganizerFolderCard({super.key, });
+  // final Album album;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,7 +13,7 @@ class ServicesCard extends StatelessWidget {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.toNamed('/GalleryScreen', arguments: album.images);
+        // Get.toNamed('/GalleryScreen', arguments: album.images);
       },
       child: SizedBox(
         width: double.infinity,
@@ -25,10 +22,12 @@ class ServicesCard extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: getImageNetwork(
-                    url: "/storage/${album.images[0]}",
-                    width: 340,
-                    height: 200)),
+                child:  Image.asset(
+                  'assets/images/images_(13).jpg',
+                  width: 340,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),),
             Opacity(
               opacity: 0.4,
               child: Align(
@@ -46,7 +45,7 @@ class ServicesCard extends StatelessWidget {
             Align(
               alignment: const AlignmentDirectional(0.01, -0.04),
               child: Text(
-                album.name,
+                "Wedding",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.primaryText,

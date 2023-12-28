@@ -1,4 +1,7 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/widget/invite_friends.dart';
 import 'package:evento/core/utils/animation/animation_def.dart';
 import 'package:evento/core/utils/animation/animation_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -71,21 +74,7 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
         ),
         ButtonWidget(
           onPressed: () async {
-            // await showModalBottomSheet(
-            //   isScrollControlled: true,
-            //   backgroundColor: Colors.transparent,
-            //   enableDrag: false,
-            //   context: context,
-            //   builder: (context) {
-            //     return Padding(
-            //       padding: MediaQuery.viewInsetsOf(context),
-            //       child: Container(
-            //         height: 140,
-            //         child: InvitefriendsWidget(),
-            //       ),
-            //     );
-            //   },
-            // ).then((value) => safeSetState(() {}));
+            showButtonSheet(context: context, widget: InviteFreinds(), height: screenHeight*0.2);
           },
           text: "Invite Friend",
           options: ButtonOptions(

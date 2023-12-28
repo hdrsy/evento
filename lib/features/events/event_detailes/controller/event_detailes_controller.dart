@@ -8,6 +8,7 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/services/location_service.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import 'package:evento/features/events/event_detailes/model/related_event_model.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,6 +24,8 @@ class EventDetailesController extends GetxController {
   late int eventId;
   RxString distance = "0 km".obs;
   late RxList<String> errorMessage;
+  late List<RelatedEventModel>relatedEvents;
+late bool isOffer;
   
   @override
   void onInit() async {
@@ -55,7 +58,13 @@ class EventDetailesController extends GetxController {
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
-    print(eventDetailsModel.id);
+print(handlingResponse['relatedEvents']);
+ relatedEvents = List<RelatedEventModel>.from(
+    handlingResponse['relatedEvents'].map(
+      (x) => RelatedEventModel.fromJson(x)
+    )
+  ); 
+    
   }
 
   void createAndAddReminderEvents() async {

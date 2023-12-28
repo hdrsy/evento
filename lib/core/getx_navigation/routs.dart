@@ -5,7 +5,13 @@ import 'package:evento/features/customize_event/venue/controller/binding/venue_b
 import 'package:evento/features/customize_event/venue/view/venue_screen.dart';
 import 'package:evento/features/customize_event/venue_detailes/controller/binding/venue_detailes_binding.dart';
 import 'package:evento/features/customize_event/venue_detailes/view/venue_detailes_screen.dart';
+import 'package:evento/features/events/event_detailes/view/widgets/see_all_amenitires_screen.dart';
+import 'package:evento/features/events/see_all_offers/view/see_all_offers_screen.dart';
+import 'package:evento/features/events/see_all_organizers/view/see_all_organizers_screen.dart';
 import 'package:evento/features/going/view/going_screen.dart';
+import 'package:evento/features/invite_friends_to_event/view/invite_freinde_to_event_screen.dart';
+import 'package:evento/features/organizer/organizer_profile/controller/binding/ofganizer_profile_binding.dart';
+import 'package:evento/features/organizer/organizer_profile/view/organizer_profile_screen.dart';
 import 'package:evento/features/profile_pages/account_type/controller/binding/account_type_binding.dart';
 import 'package:evento/features/profile_pages/account_type/view/account_type_screen.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/account_privacy/view/account_privacy_screen.dart';
@@ -93,13 +99,18 @@ appRoutes() => [
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
     GetPage(name: '/AccountTypeScreen', page:()=> const AccountTypeScreen(),binding:AccountTypeBinding() ) , 
     GetPage(name: '/ChangePasswordScreen', page:()=>  ChangePasswordScreen(),binding:ChangePasswordBinding() ) , 
+    GetPage(name: '/OrganizerProfileScreen', page:()=>  OrganizerProfileScreen(),binding:OrganizerProfileBinding() ) , 
     GetPage(name: '/VenueScreen', page:()=>  VenueScreen(),binding:VenueBinding() ) , 
     GetPage(name: '/VenueDetailesScreen', page:()=>  VenueDetailesScreen(),binding:VenueDetailesBinding() ) , 
     GetPage(name: '/SwithcToServiceProviderScreen', page:()=>  SwithcToServiceProviderScreen()) , 
     GetPage(name: '/HelpCenterScreen', page:()=> const HelpCenterScreen()) , 
+    GetPage(name: '/InviteFreindsToEventScreen', page:()=> const InviteFreindsToEventScreen()) , 
+    GetPage(name: '/SeeAllOrganizersScreen', page:()=> const SeeAllOrganizersScreen()) , 
+    GetPage(name: '/SeeAllOffersScreen', page:()=> const SeeAllOffersScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
     GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
     GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 
+    GetPage(name: '/SeeAllAmenities', page:()=>  SeeAllAmenities()) , 
     GetPage(name: '/SeeLocation', page:()=>  SeeLocation()) , 
     GetPage(name: '/GoingScreen', page:()=>  GoingScreen()) , 
     GetPage(name: '/DirctionScreen', page:()=>  DirctionScreen()) , 

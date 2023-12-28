@@ -27,6 +27,15 @@ final Set<Polyline> polylines = {};
     myMarker = FlutterFlowMarker(
       'markerId1',
       googleMapsCenter,
+      (controller) async {
+        controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(latitude, longitude),
+            zoom: 14.0,
+          ),
+        ));
+      },
+    
     );
 
     // Start tracking user location
@@ -40,7 +49,29 @@ final Set<Polyline> polylines = {};
     locationService.stopTracking();
     super.onClose();
   }
-
+  void updateMapView() async {
+    final GoogleMapController controller = await googleMapsController.future;
+    
+    if (userMarker != null && myMarker != null) {
+      LatLngBounds bounds = _boundsFromLatLngList([userMarker!.location, myMarker.location]);
+      controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+    }
+  }
+  LatLngBounds _boundsFromLatLngList(List<LatLng> list) {
+    double? x0, x1, y0, y1;
+    for (LatLng latLng in list) {
+      if (x0 == null) {
+        x0 = x1 = latLng.latitude;
+        y0 = y1 = latLng.longitude;
+      } else {
+        if (latLng.latitude > x1!) x1 = latLng.latitude;
+        if (latLng.latitude < x0) x0 = latLng.latitude;
+        if (latLng.longitude > y1!) y1 = latLng.longitude;
+        if (latLng.longitude < y0!) y0 = latLng.longitude;
+      }
+    }
+    return LatLngBounds(southwest: LatLng(x0!, y0!), northeast: LatLng(x1!, y1!));
+  }
    getUserLocation() async {
     // Start tracking user location
     locationService.startTracking();
@@ -61,7 +92,7 @@ void drawRoute() async {
 
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-"AIzaSyDcrPKoj_FUdONJKoZ617uewYFkzWMnJR4", // Your API Key
+"AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs", // Your API Key
       PointLatLng(startLocation.latitude, startLocation.longitude),
       PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
       travelMode: TravelMode.driving,
@@ -90,8 +121,17 @@ void drawRoute() async {
     userMarker = FlutterFlowMarker(
       'markerId2', // Unique ID for the user location marker
       LatLng(latitude, longitude),
+      (controller) async {
+        controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(latitude, longitude),
+            zoom: 14.0,
+          ),
+        ));
+      },
+    
     );
-
+ updateMapView(); 
     update(); // Update GetX state to refresh the UI
   }
 }

@@ -30,10 +30,10 @@ enum GoogleMarkerColor {
 }
 
 class FlutterFlowMarker {
-  const FlutterFlowMarker(this.markerId, this.location, [this.onTap]);
+  const FlutterFlowMarker(this.markerId, this.location, this.onTap);
   final String markerId;
   final LatLng location;
-  final Future Function()? onTap;
+  final Future Function(GoogleMapController)? onTap;
 }
 
 class FlutterFlowGoogleMap extends StatefulWidget {
@@ -128,15 +128,16 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       googleMarkerColorMap[widget.markerColor]!),
                   onTap: () async {
-                    await m.onTap?.call();
-                    if (widget.centerMapOnMarkerTap) {
-                      final controller = await _controller.future;
-                      await controller.animateCamera(
-                        CameraUpdate.newLatLng(m.location.toGoogleMaps()),
-                      );
-                      currentMapCenter = m.location.toGoogleMaps();
-                      onCameraIdle();
-                    }
+ final controller = await _controller.future; // Get the GoogleMapController
+  await m.onTap?.call(controller); // Pass the controller to onTap
+
+  if (widget.centerMapOnMarkerTap) {
+    await controller.animateCamera(
+      CameraUpdate.newLatLng(m.location.toGoogleMaps()),
+    );
+    currentMapCenter = m.location.toGoogleMaps();
+    onCameraIdle();
+  }
                   },
                 ),
               )

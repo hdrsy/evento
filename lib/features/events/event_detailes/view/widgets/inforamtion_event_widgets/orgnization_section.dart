@@ -18,6 +18,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
       highlightColor: Colors.transparent,
       onTap: () async {
         // context.pushNamed('Organizer-Profile');
+        Get.toNamed('/OrganizerProfileScreen');
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,

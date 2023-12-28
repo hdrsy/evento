@@ -55,12 +55,26 @@ static CarouselOptions featuredOptions= CarouselOptions(
   static  CarouselOptions seeMoreEvents= CarouselOptions(
 
 
-      initialPage: 1,
+      initialPage: 0,
       viewportFraction: 0.8,
-      disableCenter: true,
+      disableCenter: false,
       enlargeCenterPage: true,
       enlargeFactor: 0.01,
-      enableInfiniteScroll: true,
+      enableInfiniteScroll: false,
+      scrollDirection: Axis.horizontal,
+      autoPlay: false,
+      onPageChanged: (index, _){},
+    
+    );
+  static  CarouselOptions seeMoreEventsJustOne= CarouselOptions(
+
+
+      initialPage: 0,
+      viewportFraction: 1,
+      disableCenter: false,
+      enlargeCenterPage: true,
+      enlargeFactor: 0.01,
+      enableInfiniteScroll: false,
       scrollDirection: Axis.horizontal,
       autoPlay: false,
       onPageChanged: (index, _){},

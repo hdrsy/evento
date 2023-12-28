@@ -6,7 +6,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/controller/service_according_detailes_controller.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/detailes_card.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/name_check_box.dart';
-import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/serives_card.dart';
+import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/folder_card.dart';
 import 'package:evento/features/customize_event/serice_according_detailes/view/widgets/top_image_network.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +138,7 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
                         ...List.generate(
                             serviceAccordingDetailesController
                                 .serviceProvider.albums.length,
-                            (index) => ServicesCard(
+                            (index) => FolderCard(
                                   album: serviceAccordingDetailesController
                                       .serviceProvider.albums[index],
                                 ))

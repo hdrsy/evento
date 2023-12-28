@@ -1,3 +1,4 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/animation/animation_def.dart';
@@ -49,7 +50,7 @@ class BuildLogoButtons extends StatelessWidget {
                         showLoadingIndicator: false,
                         onPressed: () async {
                           Get.lazyPut(()=>SignupController());
-                             await showButtonSheet(context: context, widget:  SignupScreen(), height: 600).then((value) => 
+                             await showButtonSheet(context: context, widget:  SignupScreen(), height: screenHeight*0.8).then((value) => 
                              Get.delete<SignupController>()
                              );
                        
@@ -83,7 +84,7 @@ class BuildLogoButtons extends StatelessWidget {
                         onPressed: () async {
                           Get.lazyPut(()=>SigninController());
                           
-                          await showButtonSheet(context: context, widget: SignInScreen(), height: 700).then((value) => Get.delete<SigninController>());
+                          await showButtonSheet(context: context, widget: SignInScreen(), height: screenHeight*0.8).then((value) => Get.delete<SigninController>());
                          
                         },
                         text: "Sign in",

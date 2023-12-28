@@ -3,6 +3,7 @@ import 'package:evento/core/shared/functions/lists/carouse_options_functions.dar
 import 'package:evento/core/shared/widgets/lists/carousel_slider.dart';
 import 'package:evento/features/events/home/view/widgets/column_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Offers extends StatelessWidget {
   const Offers({super.key});
@@ -15,7 +16,9 @@ class Offers extends StatelessWidget {
          ColumnText(
           title: "Offers",
           subTitle: " Local Celebrations & Urban Vibes",
-          onTap: (){},
+          onTap: (){
+            Get.toNamed('/SeeAllOffersScreen');
+          },
         ),
        SizedBox(height: scaleHeight(10),),
         SizedBox(

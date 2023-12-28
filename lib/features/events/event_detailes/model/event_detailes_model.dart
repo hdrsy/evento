@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/features/events/event_detailes/model/related_event_model.dart';
+
 class EventDetailsModel {
   final int id;
   final int organizerId;
@@ -21,7 +23,7 @@ class EventDetailsModel {
   final List<Class> classes;
   final int capacity;
   final List<Booking> bookings;
-
+  
   EventDetailsModel({
     required this.bookings,
     required this.id,
@@ -43,6 +45,7 @@ class EventDetailsModel {
     required this.eventTrips,
     required this.venue,
     required this.amenities,
+    
     // Initialize other fields...
   });
 

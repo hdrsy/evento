@@ -28,7 +28,7 @@ final EventDetailsModel eventDetailsModel;
            Container(
             height: screenHeight*0.7,
             width: screenWidth*0.9 ,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             padding:
              EdgeInsets.symmetric(vertical: screenHeight*0.05,horizontal: screenWidth*0.05),
             // padding(16,26,16,26),

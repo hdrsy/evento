@@ -19,7 +19,7 @@ class Orgnizers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => organizerController.isLoading.value
-          ? ShimmerLoadingWidget(
+          ? const ShimmerLoadingWidget(
               loadingShimmerWidget: GridViewBuilderExample(),
             )
           : Column(
@@ -28,7 +28,9 @@ class Orgnizers extends StatelessWidget {
                 ColumnText(
                   title: "Organizer",
                   subTitle: " Top Choices &  Highly Rated",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/SeeAllOrganizersScreen');
+                  },
                 ),
                 SizedBox(
                   height: scaleHeight(10),
@@ -78,14 +80,18 @@ Widget buildEventColumn() {
 
 // Function to create each event item
 Widget buildEventItem({required OrganizerEvent organizerEvent,required int modelIndex}) {
-  return Column(
-    mainAxisSize: MainAxisSize.max,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      buildEventImage('/storage/${organizerEvent.images[0]}'),
-      buildEventTitle(organizerEvent.title),
-      buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
-    ],
+  return InkWell(onTap: (){
+    Get.toNamed('/OrganizerProfileScreen');
+  },
+    child: Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildEventImage('/storage/${organizerEvent.images[0]}'),
+        buildEventTitle(organizerEvent.title),
+        buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
+      ],
+    ),
   );
 }
 

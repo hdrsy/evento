@@ -35,6 +35,7 @@ Widget buildAmenitiesSection(BuildContext context) {
               highlightColor: Colors.transparent,
               onTap: () async {
                 // context.pushNamed('Amenities');
+                Get.toNamed('/SeeAllAmenities');
               },
               child: Text(
                 "See All",
