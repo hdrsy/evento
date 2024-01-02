@@ -83,12 +83,13 @@ class ServiceCategoryScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const VenueCard(),
+           
             Obx(
               () => Expanded(
                   child: SingleChildScrollView(
                 child: Column(
                   children: [
+                     const VenueCard(),
                     ...List.generate(
                       serviceCategoryController.serviceCategoryList.length,
                       (index) => ServiceCard(

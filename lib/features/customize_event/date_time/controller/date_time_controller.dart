@@ -14,8 +14,8 @@ class DateTimeController extends GetxController {
   late RxInt childrenNumber;
   late DateTime date;
   late RxList<File> media;
-  late String startTime;
-  late String endTime;
+  late DateTime startTime;
+  late DateTime endTime;
   late GlobalKey<FormState> formstate;
   bool isUserEnterDateInfo = false;
   late RxList<String> errorMessage;
@@ -30,8 +30,8 @@ class DateTimeController extends GetxController {
     media = <File>[].obs;
     adultNumber = 0.obs;
     childrenNumber = 0.obs;
-    startTime = "00:00 Am";
-    endTime = "00:00 Am";
+    startTime = DateTime.now();
+    endTime = DateTime.now();
     date = DateTime.now();
 
     errorMessage = <String>[].obs;
@@ -50,16 +50,16 @@ class DateTimeController extends GetxController {
   }
 
   onPressedNext() {
-    FormState? formdata = formstate.currentState;
-    if (formdata!.validate() && isUserEnterDateInfo) {
-      formdata.save();
+    // FormState? formdata = formstate.currentState;
+    // if (formdata!.validate() && isUserEnterDateInfo) {
+    //   formdata.save();
       Get.toNamed('/ServiceCategoryScreen');
-    } else {
-      Get.snackbar("Uncomplete data", "Please fill all the required data",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: customColors.primaryBackground,
-           colorText: customColors.primaryText
-          );
-    }
+    // } else {
+    //   Get.snackbar("Uncomplete data", "Please fill all the required data",
+    //       snackPosition: SnackPosition.TOP,
+    //       backgroundColor: customColors.primaryBackground,
+    //        colorText: customColors.primaryText
+    //       );
+    // }
   }
 }

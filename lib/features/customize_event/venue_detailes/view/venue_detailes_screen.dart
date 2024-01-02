@@ -24,8 +24,7 @@ class VenueDetailesScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(children: [
            TopImageWidget(
-            imageUrl:ServerConstApis.baseAPI+  "/storage/ServiceProviderProfileImages/cdEJcxInSvmH6KxthPbVCOBRb1bJ7D3DeSGcvZYK.png",
-                        
+            imageUrl:venueDetailesController.venue.profile   
                 
           ),
           Align(

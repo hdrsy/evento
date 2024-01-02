@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
@@ -6,15 +5,22 @@ import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/going/model/going_model.dart';
 import 'package:evento/main.dart';
+import 'package:get/get.dart';
 
 class GoingController extends PaginationController<GoingModel> {
   GoingController() : super(fetchDataCallback: _fetchData);
-
+static int? eventId;
+@override
+  void onInit() {
+    super.onInit();
+    eventId = Get.arguments as int; // Cast to the appropriate type
+    // Now you can use eventId in your fetchData or anywhere in the controller
+  }
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ?? "";
-    String apiUrl = "${ServerConstApis.showGoing}/$page";
+    String apiUrl = "${ServerConstApis.showGoing}/$eventId?page=$page";
 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
@@ -42,5 +48,36 @@ class GoingController extends PaginationController<GoingModel> {
     isLoadingMoreData.value = false;
   }
 
-  
+  onPressAddFreind(int userId, int modelId) async {
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token") ?? "";
+    response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.freindRequest}/$userId",
+        method: "GEt",
+        token: token);
+
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      itemList[modelId].friendRequestStatus = 'pending';
+      update();
+    }
+  }
+  onPressCancelReques(int userId, int modelId) async {
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token") ?? "";
+    response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.denyRequest}/$userId",
+        method: "GEt",
+        token: token);
+
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      itemList[modelId].friendRequestStatus = null;
+      update();
+    }
+  }
 }

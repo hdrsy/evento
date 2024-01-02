@@ -1,6 +1,6 @@
 class ServerConstApis {
-  // static String baseAPI = 'http://94.141.219.16';
-  static String baseAPI = 'http://10.0.2.2:8000';
+  static String baseAPI = 'http://94.141.219.16:8000';
+  // static String baseAPI = 'http://10.0.2.2:8000';
 
 ///// auth
   static String signUpStep1 = '$baseAPI/api/signup_step1';
@@ -60,5 +60,15 @@ class ServerConstApis {
   static String serviceCategory= '$baseAPI/api/service_category';
   static String serviceAccordingCategory= '$baseAPI/api/serviceAccordingCategory';
   static String getAllvenue= '$baseAPI/api/venue';
-  static String sendRequest= '$baseAPI/api/sendRequest';
+  static String sendEventRequest= '$baseAPI/api/sendEventRequest';
+
+
+
+  ///// freinds
+  static String freindRequest= '$baseAPI/api/friend-request';
+  static String denyRequest= '$baseAPI/api/friend-request/deny';
+  static String approveRequest= '$baseAPI/api/friend-request/approve';
+  static String myFreinds= '$baseAPI/api/my-friends';
+  static String mySentRequests= '$baseAPI/api/my-sent-requests';
+  static String myReciviedRequests= '$baseAPI/api/my-received-requests';
 }

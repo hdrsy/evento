@@ -11,7 +11,7 @@ class TypetoSetEventController extends GetxController{
   
     late RxBool isLoading;
   late RxList<CategoryModel> categoryList;
-  late RxList<CategoryModel> selectedCategory;
+  late RxInt selectedCategory;
   
    late RxList<String> errorMessage;
 @override
@@ -19,18 +19,18 @@ class TypetoSetEventController extends GetxController{
    isLoading=false.obs;
    errorMessage = <String>[].obs;
    categoryList=<CategoryModel>[].obs;
-   selectedCategory=<CategoryModel>[].obs;
+   selectedCategory=0.obs;
 
    await fetchCategoryData();
     
     super.onInit();
   } 
-  choiceCategoryItem(CategoryModel categoryModel){
-    selectedCategory.contains(categoryModel)?selectedCategory.remove(categoryModel):selectedCategory.add(categoryModel);
-  }
-  bool isSelected(CategoryModel categoryModel){
-   return selectedCategory.contains(categoryModel);
-  }
+  // choiceCategoryItem(CategoryModel categoryModel){
+  //   selectedCategory.contains(categoryModel)?selectedCategory.remove(categoryModel):selectedCategory.add(categoryModel);
+  // }
+  // bool isSelected(CategoryModel categoryModel){
+  //  return selectedCategory.contains(categoryModel);
+  // }
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;

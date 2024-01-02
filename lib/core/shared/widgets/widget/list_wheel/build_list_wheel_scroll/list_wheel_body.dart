@@ -73,12 +73,24 @@ class _ListWheelBodyState extends State<ListWheelBody> {
               child: build_body_wheels(itemHeight, context)),
               buildButtons(context: context,onPressedSubmit: () {
            final DateTimeController dateTimeController=Get.find();
-            String selectedTime =
-                  "${_hoursController.selectedItem + 1}:${_minutesController.selectedItem} ${_ampmController.selectedItem==0?"Am":"Pm"} ";
+            // String selectedTime =
+            //       "${_hoursController.selectedItem + 1}:${_minutesController.selectedItem} ${_ampmController.selectedItem==0?"Am":"Pm"} ";
+            int selectedHour = _hoursController.selectedItem + 1; // Hours are 1-12
+int selectedMinute = _minutesController.selectedItem; // Minutes are 0-59
+bool isAm = _ampmController.selectedItem == 0;
+DateTime now = DateTime.now();
+DateTime selectedDateTime = DateTime(now.year, now.month, now.day, selectedHour, selectedMinute);
+
+if (!isAm && selectedHour != 12) { // PM and not 12 PM
+  selectedHour += 12;
+} else if (isAm && selectedHour == 12) { // 12 AM
+  selectedHour = 0;
+}
+
               if (widget.isStartTime) {
-                dateTimeController.startTime = selectedTime;
+                dateTimeController.startTime = selectedDateTime;
               } else {
-                dateTimeController.endTime = selectedTime;
+                dateTimeController.endTime = selectedDateTime;
               }
               dateTimeController.update();
               Get.back();

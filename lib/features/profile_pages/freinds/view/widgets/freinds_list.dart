@@ -1,75 +1,84 @@
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
+import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FreindsList extends StatelessWidget {
-  const FreindsList({super.key});
+   FreindsList({super.key});
+final FreindsController  freindsController=Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "200",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primary,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: true,
-                        ),
+    return GetBuilder<FreindsController>(
+      builder: (ccontext) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: freindsController.myFreinds.length.toString(),
+                            style: customTextStyle.bodyMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.primary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: true,
+                            ),
+                          ),
+                          TextSpan(
+                            text: " Friends",
+                            style: TextStyle(
+                              color: customColors.primaryText,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                        style: customTextStyle.bodyMedium,
                       ),
-                      TextSpan(
-                        text: "Friends",
-                        style: TextStyle(
-                          color: customColors.primaryText,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      )
-                    ],
-                    style: customTextStyle.bodyMedium,
-                  ),
+                    ),
+                    // Text(
+                    //   "Manage",
+                    //   style: customTextStyle.bodyMedium.override(
+                    //     fontFamily: 'Nunito',
+                    //     color: customColors.primary,
+                    //     fontSize: 12,
+                    //     useGoogleFonts: false,
+                    //   ),
+                    // ),
+                  ],
                 ),
-                Text(
-                  "Manage",
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: 'Nunito',
-                    color: customColors.primary,
-                    fontSize: 12,
-                    useGoogleFonts: false,
-                  ),
-                ),
-              ],
-            ),
+              ),
+
+              ...List.generate(freindsController.myFreinds.length, (index) =>  FreindsCard(freindsModel:freindsController.myFreinds[index] ,))
+            ].divide(const SizedBox(
+              height: 10,
+            )),
           ),
-          ...List.generate(6, (index) => const FreindsCard())
-        ].divide(const SizedBox(
-          height: 10,
-        )),
-      ),
+        );
+      }
     );
   }
 }
 
 class FreindsCard extends StatelessWidget {
-  const FreindsCard({super.key});
-
+  const FreindsCard({super.key,required this.freindsModel});
+final FreindsModel freindsModel;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

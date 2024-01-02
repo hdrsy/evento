@@ -1,6 +1,7 @@
 import 'package:evento/features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/verify_forget_password/view/verify_forget_password.dart';
+import 'package:evento/features/customize_event/payment/view/payment_screen.dart';
 import 'package:evento/features/customize_event/venue/controller/binding/venue_binding.dart';
 import 'package:evento/features/customize_event/venue/view/venue_screen.dart';
 import 'package:evento/features/customize_event/venue_detailes/controller/binding/venue_detailes_binding.dart';
@@ -91,11 +92,11 @@ appRoutes() => [
     GetPage(name: '/RequestStatusScreen', page:()=> const RequestStatusScreen(),binding:RequestStatusBinding() ) , 
     GetPage(name: '/FavoriteScreen', page:()=> const FavoriteScreen(),binding:FavoriteBinding() ) , 
     GetPage(name: '/NotificationScreen', page:()=> const NotificationScreen(),binding:NotificationBinding() ) , 
-    GetPage(name: '/FreindsScreen', page:()=> const FreindsScreen(),binding:FreindsBinding() ) , 
+    GetPage(name: '/FreindsScreen', page:()=>  FreindsScreen(),binding:FreindsBinding() ) , 
     GetPage(name: '/InviteFreindsScreen', page:()=> const InviteFriendsScreen(),binding:InviteFriendsBinding() ) , 
     GetPage(name: '/EditProfileScreen', page:()=> EditProfileScreen(),binding:EditProfileBinding() ) , 
     GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
-    GetPage(name: '/BookingDetailesScreen', page:()=> const BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
+    GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
     GetPage(name: '/AccountTypeScreen', page:()=> const AccountTypeScreen(),binding:AccountTypeBinding() ) , 
     GetPage(name: '/ChangePasswordScreen', page:()=>  ChangePasswordScreen(),binding:ChangePasswordBinding() ) , 
@@ -107,6 +108,7 @@ appRoutes() => [
     GetPage(name: '/InviteFreindsToEventScreen', page:()=> const InviteFreindsToEventScreen()) , 
     GetPage(name: '/SeeAllOrganizersScreen', page:()=> const SeeAllOrganizersScreen()) , 
     GetPage(name: '/SeeAllOffersScreen', page:()=> const SeeAllOffersScreen()) , 
+    GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
     GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
     GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 

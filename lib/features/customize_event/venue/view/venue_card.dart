@@ -35,9 +35,8 @@ class VenueCard extends StatelessWidget {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: getImageNetwork(
-                        url:
-                            "storage/ServiceProviderProfileImages/cdEJcxInSvmH6KxthPbVCOBRb1bJ7D3DeSGcvZYK.png",
-                        width: double.infinity,
+                        url: venue.profile,
+                              width: double.infinity,
                         height: 230)),
               ),
               Row(

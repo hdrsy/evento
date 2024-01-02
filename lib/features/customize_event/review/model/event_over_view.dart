@@ -1,7 +1,7 @@
 class EventOverView{
-  final String startTime;
-  final String endTime;
-  final String date;
+  final DateTime startTime;
+  final DateTime endTime;
+  final DateTime date;
 
   EventOverView({required this.startTime, required this.endTime, required this.date});
 }

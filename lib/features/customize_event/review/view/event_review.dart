@@ -1,4 +1,5 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/features/customize_event/review/controller/event_review_controller.dart';
 import 'package:evento/features/customize_event/review/view/widgets/additional_note.dart';
@@ -46,7 +47,8 @@ class EventReviewScreen extends StatelessWidget {
                 "Number of Children",
               ],
               rightColumnData: [
-                eventReviewController.contactInfoModel.firstName+eventReviewController.contactInfoModel.lastName,
+                eventReviewController.contactInfoModel.firstName +
+                    eventReviewController.contactInfoModel.lastName,
                 eventReviewController.contactInfoModel.phoneNumber,
                 "${eventReviewController.contactInfoModel.adultNumber} people",
                 "${eventReviewController.contactInfoModel.childrenNumber} people"
@@ -62,9 +64,12 @@ class EventReviewScreen extends StatelessWidget {
               ],
               rightColumnData: [
                 "La Rose",
-                eventReviewController.eventOverView.startTime,
-                eventReviewController.eventOverView.endTime,
-                eventReviewController.eventOverView.date
+                DateFormatter.formatTime(
+                    eventReviewController.eventOverView.startTime),
+                DateFormatter.formatTime(
+                    eventReviewController.eventOverView.endTime),
+                DateFormatter.formatDate(
+                    eventReviewController.eventOverView.date),
               ],
             ),
             ReviewCard(
@@ -83,7 +88,7 @@ class EventReviewScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-             ProccessToPaymentButton()
+            ProccessToPaymentButton()
           ].divide(SizedBox(
             height: scaleHeight(10),
           )),

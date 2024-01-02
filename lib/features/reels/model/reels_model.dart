@@ -6,9 +6,9 @@ class ReelModel {
     final int id;
     final int? eventId;
     final int? userId;
-    final int venueId;
+    final int? venueId;
     final List<String> videos;
-    final List<String> images;
+    final List<String?>? images;
     final String description;
     final DateTime createdAt;
     final DateTime updatedAt;
@@ -16,7 +16,7 @@ class ReelModel {
     final int commentsCount;
     final bool likedByUser;
     final Venue? event;
-    final Venue venue;
+    final Venue? venue;
     final User? user;
 
     ReelModel({
@@ -37,13 +37,16 @@ class ReelModel {
         this.user,
     });
 
-    factory ReelModel.fromJson(Map<String, dynamic> json) => ReelModel(
+    factory ReelModel.fromJson(Map<String, dynamic> json)  {
+      json['images'];
+      return
+      ReelModel(
         id: json['id'],
         eventId: json['event_id'],
         userId: json['user_id'],
         venueId: json['venue_id'],
         videos: List<String>.from(jsonDecode(json['videos'])),
-        images: List<String>.from(jsonDecode(json['images'])),
+        images: List<String>.from(jsonDecode(json['images']))??[],
         description: json['description'],
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
@@ -53,7 +56,7 @@ class ReelModel {
         event: json['event'] != null ? Venue.fromJson(json['event']) : null,
         venue: Venue.fromJson(json['venue']),
         user: json['user'] != null ? User.fromJson(json['user']) : null,
-    );
+    );}
 }
 // class User {
 //     // Define fields for the User class

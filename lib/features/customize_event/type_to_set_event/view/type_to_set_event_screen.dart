@@ -37,7 +37,7 @@ final TypetoSetEventController typetoSetEventController=Get.find();
             children: [
               const StepText(),
               const LinearPercentIndicatorWidget(),
-               Expanded(child: EventTypesWidget()),
+               EventTypesWidget(),
               SizedBox(height: scaleHeight(15),),
               
               const CustomizeEventButton()

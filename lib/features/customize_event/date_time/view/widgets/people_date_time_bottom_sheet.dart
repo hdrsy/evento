@@ -2,6 +2,7 @@ import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/list_wheel_body.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -433,7 +434,7 @@ Widget pickTime(BuildContext context) {
                   width: scaleWidth(10),
                 ),
                 Text(
-                  dateTimeController.startTime,
+               DateFormatter.formatTime(   dateTimeController.startTime),
                   style: customTextStyle.bodySmall.override(
                     fontFamily: 'Readex Pro',
                     color: customColors.secondaryText,
@@ -474,7 +475,7 @@ Widget pickTime(BuildContext context) {
                   width: scaleWidth(10),
                 ),
                 Text(
-                  dateTimeController.endTime,
+                DateFormatter.formatTime(  dateTimeController.endTime) ,
                   style: customTextStyle.bodySmall.override(
                     fontFamily: 'Readex Pro',
                     color: customColors.secondaryText,

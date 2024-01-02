@@ -12,52 +12,69 @@ class EventTypesWidget extends StatelessWidget {
   final TypetoSetEventController typetoSetEventController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 8),
-          child: Align(
-            alignment: const AlignmentDirectional(-1.00, -1.00),
-            child: Text(
-              "Choose type to set your event",
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: 'Nunito',
-                color: customColors.secondaryText,
-                fontSize: 14,
-                useGoogleFonts: false,
+    return SizedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 8),
+            child: Align(
+              alignment: const AlignmentDirectional(-1.00, -1.00),
+              child: Text(
+                "Choose type to set your event",
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  color: customColors.secondaryText,
+                  fontSize: 14,
+                  useGoogleFonts: false,
+                ),
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-          child: SingleChildScrollView(
-            child: Obx(
-              ()=> Wrap(
-                spacing: scaleWidth(50),
-                runSpacing: scaleHeight(16),
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                children: [
-                  ...List.generate(
-                    typetoSetEventController.categoryList.length,
-                    (index) => IconContainerWidget(
-                      categoryModel: typetoSetEventController.categoryList[index],
-                    ),
-                  )
-                ],
+          SizedBox(
+            height: screenHeight*0.6,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+              child:GridView.count(
+                crossAxisCount: 3, // Number of items per row
+                crossAxisSpacing: scaleWidth(50), // Horizontal spacing between items
+                mainAxisSpacing: scaleHeight(16), // Vertical spacing between items
+                childAspectRatio: 1, // Aspect ratio of each child
+                children: List.generate(
+                typetoSetEventController.categoryList.length,
+                (index) => IconContainerWidget(
+                  categoryModel: typetoSetEventController.categoryList[index],
+                ),
+                ),
               ),
+              
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
-
+//  SingleChildScrollView(
+//             child: Obx(
+//               ()=> Wrap(
+//                 spacing: scaleWidth(50),
+//                 runSpacing: scaleHeight(16),
+//                 alignment: WrapAlignment.start,
+//                 crossAxisAlignment: WrapCrossAlignment.start,
+//                 children: [
+//                   ...List.generate(
+//                     typetoSetEventController.categoryList.length,
+//                     (index) => IconContainerWidget(
+//                       categoryModel: typetoSetEventController.categoryList[index],
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
 class IconContainerWidget extends StatelessWidget {
   final CategoryModel categoryModel;
 
@@ -68,7 +85,7 @@ class IconContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        typetoSetEventController.choiceCategoryItem(categoryModel);
+        typetoSetEventController.selectedCategory.value=categoryModel.id;
       },
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -77,7 +94,7 @@ class IconContainerWidget extends StatelessWidget {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-                color: typetoSetEventController.isSelected(categoryModel)? customColors.primary:customColors.primaryBackground,
+                color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground,
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.cover,

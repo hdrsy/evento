@@ -1,4 +1,5 @@
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
 import 'package:evento/features/profile_pages/freinds/view/widgets/freinds_list.dart';
 import 'package:evento/features/profile_pages/freinds/view/widgets/requests_list.dart';
 import 'package:evento/features/profile_pages/freinds/view/widgets/sent_list.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FreindsScreen extends StatelessWidget {
-  const FreindsScreen({super.key});
-
+   FreindsScreen({super.key});
+final FreindsController  freindsController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +67,7 @@ class FreindsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                   const Expanded(
+                    Expanded(
                         child: TabBarView(
                       children: [
                         FreindsList(),

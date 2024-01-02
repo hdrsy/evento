@@ -9,23 +9,21 @@ class Venue {
   final String description;
   final double latitude;
   final double longitude;
+   final String profile;
   final String contactNumber;
-  final dynamic images; // Can be further defined based on actual data structure
-  final dynamic videos; // Can be further defined based on actual data structure
   final List<VenueAlbum> venueAlbums;
 
   Venue({
     required this.id,
     required this.name,
     required this.capacity,
+    required this.profile,
     required this.governorate,
     required this.locationDescription,
     required this.description,
     required this.latitude,
     required this.longitude,
     required this.contactNumber,
-    this.images,
-    this.videos,
     required this.venueAlbums,
   });
 
@@ -37,14 +35,13 @@ class Venue {
       id: json['id'],
       name: json['name'],
       capacity: json['capacity'],
+      profile: json['profile'],
       governorate: json['governorate'],
       locationDescription: json['location_description'],
       description: json['description'],
       latitude: json['latitude'].toDouble(),
       longitude: json['longitude'].toDouble(),
       contactNumber: json['contact_number'],
-      images: json['images'],
-      videos: json['videos'],
       venueAlbums: albums,
     );
   }
@@ -56,8 +53,6 @@ class VenueAlbum {
   final String name;
   final List<String> images;
   final dynamic videos;
-  final String createdAt;
-  final String updatedAt;
 
   VenueAlbum({
     required this.id,
@@ -65,31 +60,31 @@ class VenueAlbum {
     required this.name,
     required this.images,
     this.videos,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
-  factory VenueAlbum.fromJson(Map<String, dynamic> json) {
-    List<String> parseImages(String imagesJson) {
-      if (imagesJson.isEmpty) {
-        return [];
-      }
-      try {
-        return List<String>.from(jsonDecode(imagesJson));
-      } catch (e) {
-        print('Error decoding images JSON: $e');
-        return [];
-      }
+ factory VenueAlbum.fromJson(Map<String, dynamic> json) {
+  List<String> parseImages(String? imagesJson) {
+    if (imagesJson == null || imagesJson.isEmpty) {
+      return [];
     }
-
-    return VenueAlbum(
-      id: json['id'],
-      venueId: json['venue_id'],
-      name: json['name'],
-      images: parseImages(json['images'] as String),
-      videos: json['videos'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
+    try {
+      // Decode the string to a List<dynamic>, then cast each element to String
+      var decodedList = jsonDecode(imagesJson) as List;
+      return decodedList.map((item) => item.toString()).toList();
+    } catch (e) {
+      print('Error decoding images JSON: $e');
+      return [];
+    }
   }
+
+
+
+  return VenueAlbum(
+    id: json['id'],
+    venueId: json['venue_id'],
+    name: json['name'],
+    images: parseImages(json['images']),
+    videos: json['videos'] ?? [], // Ensure this handles null correctly
+  );
+}
 }
