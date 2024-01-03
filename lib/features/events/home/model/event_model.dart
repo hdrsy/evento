@@ -21,6 +21,7 @@ class EventModel {
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
+    print(json['videos'] );
     return EventModel(
       id: json['id'],
       title: json['title'],

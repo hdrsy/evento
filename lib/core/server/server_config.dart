@@ -46,6 +46,7 @@ class ServerConstApis {
   //// follow 
   static String followEvent = '$baseAPI/api/event_follow';
   static String unFollowEvent = '$baseAPI/api/event_unfollow';
+  static String myFavoriteEvents='$baseAPI/api/my_favorite';
   //// reels
   static String getReels = '$baseAPI/api/reels';
 
@@ -61,12 +62,14 @@ class ServerConstApis {
   static String serviceAccordingCategory= '$baseAPI/api/serviceAccordingCategory';
   static String getAllvenue= '$baseAPI/api/venue';
   static String sendEventRequest= '$baseAPI/api/sendEventRequest';
+  static String myEventRequest= '$baseAPI/api/my_request';
 
 
 
   ///// freinds
   static String freindRequest= '$baseAPI/api/friend-request';
   static String denyRequest= '$baseAPI/api/friend-request/deny';
+  static String cancelRequest= '$baseAPI/api/friend-request/cancel';
   static String approveRequest= '$baseAPI/api/friend-request/approve';
   static String myFreinds= '$baseAPI/api/my-friends';
   static String mySentRequests= '$baseAPI/api/my-sent-requests';

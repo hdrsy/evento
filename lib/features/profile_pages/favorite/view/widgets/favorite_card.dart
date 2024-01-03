@@ -1,43 +1,60 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/favorite/controller/favorite_controller.dart';
+import 'package:evento/features/profile_pages/favorite/model/favorite_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FavoriteCard extends StatelessWidget {
-  const FavoriteCard({super.key});
-
+  const FavoriteCard({super.key, required this.eventWrapper,required this.modelId});
+final EventWrapper eventWrapper;
+final int modelId;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: customColors.secondaryBackground,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: const [
-            BoxShadow(
-                color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)),
-          ]),
-      child: Column(
-        children: [
-          _buildImage(),
-          _dateWithPlayVedio(),
-          // Generated code for this Divider Widget...
-          Divider(
-            thickness: 1,
-            indent: 12,
-            endIndent: 12,
-            color: customColors.secondary,
-          ),
-          _locationWithDistance()
-        ],
+    return InkWell(
+        splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+               Get.toNamed('/eventDetailes', arguments: eventWrapper.event.id);
+                  
+               },
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: customColors.secondaryBackground,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            boxShadow: const [
+              BoxShadow(
+                  color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)),
+            ]),
+        child: Column(
+          children: [
+            _buildImage(eventWrapper.event),
+            _dateWithPlayVedio(eventWrapper.event,modelId),
+            // Generated code for this Divider Widget...
+            Divider(
+              thickness: 1,
+              indent: 12,
+              endIndent: 12,
+              color: customColors.secondary,
+            ),
+            _locationWithDistance()
+          ],
+        ),
       ),
     );
   }
 
   Widget _locationWithDistance() {
+   final FavoriteController favoriteController=Get.find();
     return 
         Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
@@ -73,21 +90,12 @@ class FavoriteCard extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              // context.pushNamed('Going');
-            },
-            child: Text(
-              "3.7 Km",
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: breeSerif,
-                color: customColors.primary,
-                useGoogleFonts: true,
-              ),
+          Text(
+            "3.7 Km",
+            style: customTextStyle.bodyMedium.override(
+              fontFamily: breeSerif,
+              color: customColors.primary,
+              useGoogleFonts: true,
             ),
           ),
         ],
@@ -95,7 +103,7 @@ class FavoriteCard extends StatelessWidget {
     );
   }
 
-  Widget _dateWithPlayVedio() {
+  Widget _dateWithPlayVedio(FavoriteEventModel favoriteEventModel,int modelIndex) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
       child: Row(
@@ -110,7 +118,7 @@ class FavoriteCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    "Wed 18 Aug",
+                    DateFormatter.formatDate(favoriteEventModel.startDate),
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: breeSerif,
                       color: customColors.primary,
@@ -122,7 +130,7 @@ class FavoriteCard extends StatelessWidget {
                 ],
               ),
               Text(
-                "22:00 PM ",
+                DateFormatter.formatTime(favoriteEventModel.startDate),
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: breeSerif,
                   fontSize: 12,
@@ -145,19 +153,27 @@ class FavoriteCard extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  ToggleIcon(
-                    onPressed: () async {},
-                    value: false,
-                    onIcon: Icon(
-                      Icons.favorite_sharp,
-                      color: customColors.error,
-                      size: 25,
-                    ),
-                    offIcon: Icon(
-                      Icons.favorite_border,
-                      color: customColors.secondaryText,
-                      size: 20,
-                    ),
+                  GetBuilder<FavoriteController>(
+                    builder: (controller) {
+                      return ToggleIcon(
+                        onPressed: ()  {
+
+                  controller.followOrUnFollowEvent(
+                      favoriteEventModel.id, modelIndex);
+                        },
+                        value: favoriteEventModel.isFollowedByAuthUser,
+                        onIcon: Icon(
+                          Icons.favorite_sharp,
+                          color: customColors.error,
+                          size: 25,
+                        ),
+                        offIcon: Icon(
+                          Icons.favorite_border,
+                          color: customColors.secondaryText,
+                          size: 20,
+                        ),
+                      );
+                    }
                   ),
                 ],
               ),
@@ -168,7 +184,7 @@ class FavoriteCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(FavoriteEventModel favoriteEventModel) {
     return Stack(alignment: const AlignmentDirectional(0, 1), children: [
       ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -177,13 +193,15 @@ class FavoriteCard extends StatelessWidget {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        child: Image.asset(
+        child:favoriteEventModel.images.isEmpty?
+         Image.asset(
           'assets/images/alumni2.webp',
           width: double.infinity,
           height: scaleHeight(200),
           fit: BoxFit.cover,
           alignment: const Alignment(0.00, 1.00),
-        ),
+        ):getImageNetwork(url: "/storage/${favoriteEventModel.images[0]}", width: double.infinity,
+          height: scaleHeight(200),alignmentGeometry:const Alignment(0.00, 1.00)),
       ),
       InkWell(
         splashColor: Colors.transparent,
@@ -220,7 +238,7 @@ class FavoriteCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Marshmallow",
+              favoriteEventModel.title,
               style: customTextStyle.headlineSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.info,
@@ -238,7 +256,7 @@ class FavoriteCard extends StatelessWidget {
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
                 child: Text(
-                  "300,000 s.p",
+                  "${favoriteEventModel.ticketPrice} s.p",
                   textAlign: TextAlign.center,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,

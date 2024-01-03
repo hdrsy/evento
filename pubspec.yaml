@@ -79,6 +79,7 @@ dependencies:
   
   pdf: ^3.10.7
   external_path: ^1.0.3
+  flutter_advanced_switch: ^3.0.1
   
 
 dev_dependencies:

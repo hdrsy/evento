@@ -87,15 +87,21 @@ String formattedEndTime = DateFormat('HH:mm:ss').format(dateTimeController.endTi
       "additional_notes": notes.text,
       "category_id": typetoSetEventController.selectedCategory.value,
       "start_time": formattedStartTime,
-      "end_time": formattedEndTime
+      "end_time": formattedEndTime,
+      "title":dateTimeController.eventTitle.text
     };
 List<int> serviceProviderIds = serviceCategoryController.selectedServiceProviders.map((rxInt) => rxInt.value).toList();
-dataRequest['service_provider_id'] = serviceProviderIds;
+
+for (int i = 0; i < serviceProviderIds.length; i++) {
+  dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
+}
 
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];
     }
+    print(dataRequest['service_provider_id'] is List);
+
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.sendEventRequest,
         method: "POST",

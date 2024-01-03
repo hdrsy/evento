@@ -79,6 +79,7 @@ class ApiHelper {
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
      print(responseBody);
+     print(response.statusCode);
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {

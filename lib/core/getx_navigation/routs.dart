@@ -26,6 +26,7 @@ import 'package:evento/features/auth/welcome/binding/welcome_binding.dart';
 import 'package:evento/features/auth/welcome/view/welcome_screen.dart';
 import 'package:evento/features/booking_detailes/controller/binding/booking_detailes_binding.dart';
 import 'package:evento/features/booking_detailes/view/booking_detailes_screen.dart';
+import 'package:evento/features/profile_pages/add_friends/view/add_friends_screen.dart';
 import 'package:evento/features/profile_pages/change_password/controller/binding/change_password_binding.dart';
 import 'package:evento/features/profile_pages/change_password/view/change_password_screen.dart';
 import 'package:evento/features/customize_event/date_time/controller/binding/date_time_binding.dart';
@@ -87,8 +88,8 @@ appRoutes() => [
     GetPage(name: '/ServiceAccordingDetailesScreen', page:()=>  ServiceAccordingDetailesScreen(),binding:ServiceAccordingDetailesBinding() ) , 
     GetPage(name: '/GalleryScreen', page:()=> GalleryScreen(),binding:GalleryBinding() ) , 
     GetPage(name: '/EventReviewScreen', page:()=>    EventReviewScreen(),binding:EventReviewBinding() ) , 
-    GetPage(name: '/MyBookingScreen', page:()=> const MyBookingScreen(),binding:MyBookingBinding() ) , 
-    GetPage(name: '/MyRequestScreen', page:()=> const MyrequestScreen(),binding:MyRequestBinding() ) , 
+    GetPage(name: '/MyBookingScreen', page:()=>  MyBookingScreen(),binding:MyBookingBinding() ) , 
+    GetPage(name: '/MyRequestScreen', page:()=>  MyrequestScreen(),binding:MyRequestBinding() ) , 
     GetPage(name: '/RequestStatusScreen', page:()=> const RequestStatusScreen(),binding:RequestStatusBinding() ) , 
     GetPage(name: '/FavoriteScreen', page:()=> const FavoriteScreen(),binding:FavoriteBinding() ) , 
     GetPage(name: '/NotificationScreen', page:()=> const NotificationScreen(),binding:NotificationBinding() ) , 
@@ -111,6 +112,7 @@ appRoutes() => [
     GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
     GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
+    GetPage(name: '/AddFriendsScreen', page:()=>  AddFriendsScreen()) , 
     GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 
     GetPage(name: '/SeeAllAmenities', page:()=>  SeeAllAmenities()) , 
     GetPage(name: '/SeeLocation', page:()=>  SeeLocation()) , 

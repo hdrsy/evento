@@ -77,7 +77,7 @@ class CategoryListController extends GetxController {
 
     categoryList.addAll(
         categoryListJson.map((jsonItem) => CategoryModel.fromJson(jsonItem)));
-
+log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     isLoading.value = false;
   }
 }

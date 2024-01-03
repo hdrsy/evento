@@ -1,6 +1,7 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
 import 'package:evento/main.dart';
@@ -40,11 +41,13 @@ class EditImageWidget extends StatelessWidget {
                       fit: BoxFit.cover,
                       alignment: const Alignment(0.00, 0.00),
                     )
-                  : Image.asset(
-                      'assets/images/Asset_6.png',
-                      fit: BoxFit.contain,
-                      alignment: const Alignment(0.00, 0.00),
-                    )),
+                  :  editProfileController.profileModel.image.length > 6
+                ? getImageNetwork(
+                    url: "/storage/${editProfileController.profileModel.image}",
+                    width: null,
+                    height: null)
+                : Image.asset(
+                    'assets/images/${editProfileController.profileModel.image}.png')),
             ),
           ),
         ),

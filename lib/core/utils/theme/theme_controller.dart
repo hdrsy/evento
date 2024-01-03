@@ -23,6 +23,9 @@ class ThemeController extends GetxController {
       theThemeIsDark.value = true;
       Get.changeTheme(AppTheme.dark);
     }
+              Future.delayed(const Duration(milliseconds: 200)).then((value) {
+      Get.offAllNamed('/home');
+    });
     update();
   }
 }

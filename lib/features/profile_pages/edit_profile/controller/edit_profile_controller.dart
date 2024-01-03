@@ -18,11 +18,13 @@ class EditProfileController extends GetxController {
   late TextEditingController lastName;
   late TextEditingController date;
   late TextEditingController phone;
-  late TextEditingController location;
+  // late TextEditingController location;
+  late String selectedState;
   late TextEditingController gender;
   late ProfileModel profileModel;
   late RxList<String> errorMessage;
   late GlobalKey<FormState> formstate;
+  late List<String> states;
   late RxBool isLoading;
   @override
   void onInit() {
@@ -33,11 +35,29 @@ class EditProfileController extends GetxController {
     date = TextEditingController(
         text: DateFormatter.formatDate(profileModel.birthDate));
     phone = TextEditingController(text: profileModel.phoneNumber);
-    location = TextEditingController(text: profileModel.state);
+    // location = TextEditingController(text: profileModel.state);
     gender = TextEditingController(text: profileModel.gender);
+    selectedState = profileModel.state;
     isLoading = false.obs;
     formstate = GlobalKey<FormState>();
     errorMessage = <String>[].obs;
+    states = [
+      'Aleppo',
+      'Al-Ḥasakah',
+      'Al-Qamishli',
+      'Al-Qunayṭirah',
+      'Al-Raqqah',
+      'Al-Suwayda',
+      'Damascus',
+      'Daraa',
+      'Dayr al-Zawr',
+      'Ḥamah',
+      'Homs',
+      'Idlib',
+      'Latakia',
+      'Rif Dimashq'
+    ];
+
     super.onInit();
   }
 
@@ -65,15 +85,17 @@ class EditProfileController extends GetxController {
           method: "post",
           token: token,
           data: {
-            "gender": gender.text,
-            "birth_date": date.text,
             "first_name": firstName.text,
             "last_name": lastName.text,
             "phone_number": phone.text,
-            "state": location.text
-          });
+            // "gender": firstName.text,
+            // "birth_date": date.text,
+            "state": selectedState
+          },
+          files: isImageSelected.value ? {"image": customImage} : null);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {

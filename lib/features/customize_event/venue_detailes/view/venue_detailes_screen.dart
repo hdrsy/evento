@@ -14,8 +14,7 @@ import 'package:get/get.dart';
 
 class VenueDetailesScreen extends StatelessWidget {
   VenueDetailesScreen({super.key});
-  final VenueDetailesController venueDetailesController =
-      Get.find();
+  final VenueDetailesController venueDetailesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +22,7 @@ class VenueDetailesScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       body: SafeArea(
         child: Stack(children: [
-           TopImageWidget(
-            imageUrl:venueDetailesController.venue.profile   
-                
-          ),
+          TopImageWidget(imageUrl: venueDetailesController.venue.profile),
           Align(
             alignment: const AlignmentDirectional(-0.95, -0.95),
             child: Card(
@@ -49,37 +45,34 @@ class VenueDetailesScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
-            child: Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: customColors.secondaryBackground,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 4,
-                      color: Color(0x320E151B),
-                      offset: Offset(0, -2),
-                    )
-                  ],
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: customColors.secondaryBackground,
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 4,
+                    color: Color(0x320E151B),
+                    offset: Offset(0, -2),
+                  )
+                ],
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      NameCheckBox(
-                          venue: venueDetailesController
-                              .venue,
-),
-                      const SizedBox(height: 20),
-                      Expanded(child: TabBarGalleryAndDetailes())
-                    ],
-                  ),
+              ),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    NameCheckBox(
+                      venue: venueDetailesController.venue,
+                    ),
+                    const SizedBox(height: 20),
+                    Expanded(child: TabBarGalleryAndDetailes())
+                  ],
                 ),
               ),
             ),
@@ -92,8 +85,7 @@ class VenueDetailesScreen extends StatelessWidget {
 
 class TabBarGalleryAndDetailes extends StatelessWidget {
   TabBarGalleryAndDetailes({super.key});
-  final VenueDetailesController venueDetailesController =
-      Get.find();
+  final VenueDetailesController venueDetailesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -122,22 +114,20 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                  child: VenueDetailesCard()
-                ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    child: VenueDetailesCard()),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         ...List.generate(
-                            venueDetailesController
-                                .venue.venueAlbums.length,
+                            venueDetailesController.venue.venueAlbums.length,
                             (index) => VenueServicesCard(
-                                  album: venueDetailesController.venue.venueAlbums[index],
+                                  album: venueDetailesController
+                                      .venue.venueAlbums[index],
                                 ))
                       ]
                           .divide(const SizedBox(

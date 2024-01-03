@@ -5,6 +5,7 @@ import 'package:evento/core/utils/theme/theme_controller.dart';
 import 'package:evento/features/main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
 
 class ThemeSwicth extends StatelessWidget {
@@ -28,10 +29,69 @@ class ThemeSwicth extends StatelessWidget {
             ),
           ),
         ),
-        const ThemeToggleSwitch()
+        // const ThemeToggleSwitch()
+        themeSwitcher()
       ],
     );
   }
+}
+
+Widget themeSwitcher() {
+  ThemeController themeController = Get.find();
+  final switchController =
+      ValueNotifier<bool>(themeController.theThemeIsDark.value);
+
+  // Listen to changes and toggle theme
+  switchController.addListener(() {
+      themeController.changeTheme();
+       
+   
+  });
+  return Obx(
+    ()=> AdvancedSwitch(
+      borderRadius: const BorderRadius.vertical(
+          top: Radius.elliptical(30, 30), bottom: Radius.elliptical(30, 30)),
+      thumb: Container(
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        decoration:
+            BoxDecoration(color: customColors.primary, shape: BoxShape.circle),
+      ),
+      height: 45,
+      width: 70,
+      controller: switchController,
+  
+      activeChild: activeChild(themeController.theThemeIsDark.value),
+      inactiveChild: inactiveChild(themeController.theThemeIsDark.value),
+      activeColor: customColors.primaryBackground, //the background color of the moon
+      inactiveColor:customColors.primaryBackground, //the background color of the sun
+    ),
+  );
+}
+
+Widget inactiveChild(bool isDarkMode) {
+  return !isDarkMode
+      ? Padding(
+          padding: const EdgeInsets.only(right: 5),
+          child: Icon(
+            color: customColors.secondaryText,
+            Icons.wb_sunny_rounded,
+            size: 20,
+          ),
+        )
+      : const SizedBox();
+}
+
+Widget activeChild(bool isDarkMode) {
+  return isDarkMode
+      ? Padding(
+          padding: const EdgeInsets.only(left: 5),
+          child: Icon(
+            color: customColors.secondaryText,
+            Icons.nightlight_round_outlined,
+            size: 20,
+          ),
+        )
+      : const SizedBox();
 }
 
 class ThemeToggleSwitch extends StatelessWidget {
@@ -54,9 +114,8 @@ class ThemeToggleSwitch extends StatelessWidget {
             height: 40,
             spacing: 0,
             onChanged: (isDarkMode) async {
-
               await themeController.changeTheme(); // Trigger the theme change
-            
+
               Future.delayed(const Duration(milliseconds: 500)).then((value) {
                 Get.offAllNamed('/home');
               });

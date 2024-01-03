@@ -1,4 +1,4 @@
-class GoingModel {
+class AddFriendsModel {
   final int id;
   final String firstName;
   final String lastName;
@@ -6,7 +6,7 @@ class GoingModel {
   final String type;
    String? friendRequestStatus;
 
-  GoingModel({
+  AddFriendsModel({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -16,8 +16,8 @@ class GoingModel {
   });
 
 
-  factory GoingModel.fromJson(Map<String, dynamic> json) {
-    return GoingModel(
+  factory AddFriendsModel.fromJson(Map<String, dynamic> json) {
+    return AddFriendsModel(
       id: json['id'],
       friendRequestStatus: json['friend_request_status_with_auth_user'],
       firstName: json['first_name'],

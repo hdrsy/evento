@@ -7,8 +7,6 @@ class VenueDetailesController extends GetxController{
  @override
   void onInit() {
     venue=Get.arguments;
-    print(venue.venueAlbums.length);
-    print(venue.venueAlbums[0].images.length);
     super.onInit();
   }
 }
