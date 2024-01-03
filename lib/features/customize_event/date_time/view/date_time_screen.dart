@@ -1,6 +1,7 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/features/customize_event/date_time/view/widgets/contact_information_form.dart';
+import 'package:evento/features/customize_event/date_time/view/widgets/event_title.dart';
 import 'package:evento/features/customize_event/date_time/view/widgets/next_step_button.dart';
 import 'package:evento/features/customize_event/date_time/view/widgets/notes.dart';
 import 'package:evento/features/customize_event/date_time/view/widgets/select_people_date_time.dart';
@@ -40,6 +41,7 @@ class DateTimeScreen extends StatelessWidget {
         children: [
            const StepText2(),
               const LinearPercentIndicatorWidget(),
+              EventTitle(),
               ContactInformationForm(),
               const SelectPeopleDateTime(),
                UploadMedia(),

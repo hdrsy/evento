@@ -19,7 +19,7 @@ class BuildButton extends StatelessWidget {
         ButtonWidget(
           onPressed: () {
       final BookingDetailesController bookingDetailesController=Get.find();
-      print("ddddddd");
+      
       bookingDetailesController.openPdf();
           },
           text: "Download Ticket",

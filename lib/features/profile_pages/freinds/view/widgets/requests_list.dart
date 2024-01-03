@@ -125,7 +125,7 @@ class RequestsCard extends StatelessWidget {
                               ButtonWidget(
                                 onPressed: () {
                                  final FreindsController freindsController=Get.find();
-                                 freindsController.confirmRecivedRequest(receiveRequest.senderId, modelId);
+                                 freindsController.confirmRecivedRequest(receiveRequest.id, modelId);
                                 },
                                 text: "Confirm",
                                 options: ButtonOptions(

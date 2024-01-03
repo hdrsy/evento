@@ -1,19 +1,16 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:evento/core/utils/services/ticket_pdf_layout.dart';
 import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'dart:ui' as ui;
 
-Future<Uint8List> _readImageData(String name) async {
-  final data = await rootBundle.load('assets/images/$name');
-  return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-}
+import 'package:external_path/external_path.dart';
+
+import 'package:pdf/widgets.dart' as pw;
 
 Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
   final path = (await getExternalStorageDirectory())!.path;
@@ -22,93 +19,52 @@ Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
   OpenFile.open('$path/$fileName');
 }
 
-
-
-Future<void> createTicketPDF(TicketModel ticketModel, int modelIndex) async {
+Future<void> createTicketPDF(
+    List<TicketModel> tickets, String eventTitle) async {
   final pdf = pw.Document();
-  // final qrImageBytes = await generateQRCodeImage('Your QR Code Data');
 
-  pdf.addPage(pw.Page(
-    build: (pw.Context context) {
-      return 
-        pw.Container(
-          height: 900, // Adjust the height as needed
-          width: 500,
-          child:pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          pw.Text("Ticket ${modelIndex + 1}"),
-          pw.Padding(
-            padding: const pw.EdgeInsets.all(8),
-            child: pw.Container(
-                 padding: const pw.EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-       
-              decoration: pw.BoxDecoration(
-                borderRadius: pw.BorderRadius.circular(16),
-                border: pw.Border.all(),
-              ),
-              child: pw.Column(
-                
-                children: [
-                  pw.BarcodeWidget(
-                    barcode: pw.Barcode.qrCode(),
-                    data: 'Your QR Code Data',
-                    width: 200,
-                    height: 200,
-                  ),
-                  pw.Text("Attendee Information"),
-                  pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    children: [
-                      pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Text("Full Name"),
-                          pw.Text("Age"),
-                          pw.Text("Phone Number"),
-                        ],
-                      ),
-                      pw.Column(
-                         crossAxisAlignment: pw.CrossAxisAlignment.end,
-                       
-                        children: [
-                          pw.Text(
-                              "${ticketModel.fisrtName.text} ${ticketModel.lastName.text}"),
-                          pw.Text(ticketModel.age.text),
-                          pw.Text(ticketModel.phoneNumber.text),
-                        ],
-                      ),
-                    ],
-                  ),
-                  pw.Divider(),
-                  pw.Text("Payment Summary"),
-                  // Payment summary details
-                  _buildPaymentSummaryRow("Coupon code", "EventoR7"),
-                  _buildPaymentSummaryRow("Ticket", "100,000 sp"),
-                  _buildPaymentSummaryRow("Tax", "20,000 sp"),
-                  _buildPaymentSummaryRow("Discount", "20%"),
-                  pw.Divider(),
-                  _buildPaymentSummaryRow("Total", "120,000 sp"),
-                  // More details based on your layout
-                ],
-              ),
-            ),
-          ),
-        ],
-      ));
-    },
-  ));
+  for (int i = 0; i < tickets.length; i++) {
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return buildTicketCard(tickets[i], i);
+        },
+      ),
+    );
+  }
+
   List<int> bytes = await pdf.save();
 
-  saveAndLaunchFile(bytes, 'Output.pdf');
+  // saveAndLaunchFile(bytes, 'Output.pdf');
+  saveAndOpenFile(bytes, "$eventTitle tickets.pdf");
 }
 
-pw.Widget _buildPaymentSummaryRow(String title, String value) {
-  return pw.Row(
-    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-    children: [
-      pw.Text(title),
-      pw.Text(value),
-    ],
-  );
+Future<void> saveAndOpenFile(List<int> bytes, String filename) async {
+  String path;
+
+  if (Platform.isAndroid) {
+    var status = await Permission.manageExternalStorage.request();
+    print(status);
+    if (status.isGranted) {
+      path = await ExternalPath.getExternalStoragePublicDirectory(
+          ExternalPath.DIRECTORY_DOWNLOADS);
+          
+    } else {
+          
+      // Handle permission denied
+      return;
+    }
+  } else if (Platform.isIOS) {
+    final directory = await getApplicationDocumentsDirectory();
+    path = directory.path;
+  } else {
+    // Handle other platforms (optional)
+    return;
+  }
+  print(path);
+
+  final file = File('$path/$filename');
+  await file.writeAsBytes(bytes, flush: true);
+  OpenFile.open(file.path);
 }
+

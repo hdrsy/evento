@@ -78,6 +78,7 @@ dependencies:
   open_file: ^3.3.2
   
   pdf: ^3.10.7
+  external_path: ^1.0.3
   
 
 dev_dependencies:

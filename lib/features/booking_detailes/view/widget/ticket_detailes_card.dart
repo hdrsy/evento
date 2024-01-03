@@ -8,43 +8,40 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
 class TicketDetailesCard extends StatelessWidget {
-  const TicketDetailesCard({super.key, required this.ticketModel, required this.modelIndex});
-final TicketModel ticketModel;
-final int modelIndex;
+  const TicketDetailesCard(
+      {super.key, required this.ticketModel, required this.modelIndex});
+  final TicketModel ticketModel;
+  final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return 
-        Column(
-          children: [
-          
-Padding(
-  padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-  child: Row(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Align(
-        alignment: AlignmentDirectional(-1, -1),
-        child: Text(
-          "Ticket ${modelIndex+1}",
-          style: customTextStyle.headlineMedium.override(
-            color: customColors.primary,
-            fontFamily: secondaryFontFamily,
-            useGoogleFonts: true
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: AlignmentDirectional(-1, -1),
+                child: Text(
+                  "Ticket ${modelIndex + 1}",
+                  style: customTextStyle.headlineMedium.override(
+                      color: customColors.primary,
+                      fontFamily: secondaryFontFamily,
+                      useGoogleFonts: true),
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-    ],
-  ),
-)
-,
-            Padding(
-      padding: const EdgeInsets.all(8),
-      child: Container(
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Container(
             decoration: BoxDecoration(
               color: customColors.secondaryBackground,
-              boxShadow:const [
-                 BoxShadow(
+              boxShadow: const [
+                BoxShadow(
                   blurRadius: 4,
                   color: Color(0x33000000),
                   offset: Offset(0, 2),
@@ -82,39 +79,12 @@ Padding(
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                     child: Text(
-                       "Attendee Information",
+                      "Attendee Information",
                       style: customTextStyle.headlineMedium,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const AttendeeInfoLeftColumn(title: "Full Name"),
-                          const AttendeeInfoLeftColumn(title: "Age"),
-                          const AttendeeInfoLeftColumn(title: "Phone Number"),
-                        ].divide(const SizedBox(height: 8)),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                           AttendeeInfoRightColumn(title: "${ticketModel.fisrtName.text} ${ticketModel.lastName.text}"),
-                           AttendeeInfoRightColumn(title: ticketModel.age.text),
-                           AttendeeInfoRightColumn(title: ticketModel.phoneNumber.text),
-                        ].divide(const SizedBox(height: 8)),
-                      ),
-                    ].divide(const SizedBox(width: 8)),
-                  ),
-                ),
-                Divider(
+               Divider(
                   thickness: 1,
                   color: customColors.secondary,
                 ),
@@ -139,14 +109,13 @@ Padding(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                             "Coupon code",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      useGoogleFonts: false,
-                                    ),
+                            "Coupon code",
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
                             " EventoR7",
@@ -166,16 +135,15 @@ Padding(
                         children: [
                           Text(
                             " Ticket",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      useGoogleFonts: false,
-                                    ),
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
-                             "100,000 sp",
+                            "100,000 sp",
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,
@@ -191,18 +159,17 @@ Padding(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                             "Tax",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                            "Tax",
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
-                             "20,000 sp",
+                            "20,000 sp",
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,
@@ -218,18 +185,17 @@ Padding(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                             "Discount",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                            "Discount",
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
-                             "20%",
+                            "20%",
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,
@@ -252,17 +218,16 @@ Padding(
                         children: [
                           Text(
                             " Total",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
-                             "120,000 sp",
+                            "120,000 sp",
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,
@@ -301,25 +266,23 @@ Padding(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                             "Payment Methods",
-                            style:
- customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      useGoogleFonts: false,
-                                    ),
+                            "Payment Methods",
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
                             "Order ID",
-                            style:
-                                customTextStyle.labelMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.secondaryText,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                            style: customTextStyle.labelMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.secondaryText,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
                           ),
                           Text(
                             "Status",
@@ -364,9 +327,10 @@ Padding(
                             text: "Paid",
                             options: ButtonOptions(
                               height: 22,
-                              padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                              iconPadding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10, 0, 10, 0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 0, 0, 0),
                               color: customColors.secondaryBackground,
                               textStyle: customTextStyle.titleSmall.override(
                                 fontFamily: 'Nunito',
@@ -388,23 +352,20 @@ Padding(
                 ),
               ],
             ),
-      ),
-    ),
-          ],
-        );
+          ),
+        ),
+      ],
+    );
   }
 }
 
 class AttendeeInfoRightColumn extends StatelessWidget {
-  const AttendeeInfoRightColumn({
-    super.key,
-    required this.title
-  });
-final String title;
+  const AttendeeInfoRightColumn({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Text(
-       title,
+      title,
       style: customTextStyle.bodyMedium.override(
         fontFamily: 'Nunito',
         color: customColors.primaryText,
@@ -418,21 +379,21 @@ final String title;
 
 class AttendeeInfoLeftColumn extends StatelessWidget {
   const AttendeeInfoLeftColumn({
-    super.key, required this.title,
+    super.key,
+    required this.title,
   });
   final String title;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-       title,
-      style:
-          customTextStyle.labelMedium.override(
-                fontFamily: 'Nunito',
-                color: customColors.secondaryText,
-                fontSize: 14,
-                useGoogleFonts: false,
-              ),
+      title,
+      style: customTextStyle.labelMedium.override(
+        fontFamily: 'Nunito',
+        color: customColors.secondaryText,
+        fontSize: 14,
+        useGoogleFonts: false,
+      ),
     );
   }
 }

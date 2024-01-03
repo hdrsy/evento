@@ -10,6 +10,7 @@ class DateTimeController extends GetxController {
   late TextEditingController lastName;
   late TextEditingController phoneNumber;
   late TextEditingController description;
+  late TextEditingController eventTitle;
   late RxInt adultNumber;
   late RxInt childrenNumber;
   late DateTime date;
@@ -27,6 +28,7 @@ class DateTimeController extends GetxController {
     lastName = TextEditingController();
     description = TextEditingController();
     phoneNumber = TextEditingController();
+    eventTitle = TextEditingController();
     media = <File>[].obs;
     adultNumber = 0.obs;
     childrenNumber = 0.obs;
