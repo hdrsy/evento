@@ -74,6 +74,7 @@ Container amentitesIcon(String imgUrl) {
         border: Border.all(color: customColors.secondaryText, width: 2),
         color: customColors.primaryBackground,
         shape: BoxShape.circle,
+        image: DecorationImage(image: getImageNetwork(url: "/$imgUrl", width: null, height: null).image)
       ),
-      child: getImageNetwork(url: "/$imgUrl", width: null, height: null));
+       );
 }
