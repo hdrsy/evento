@@ -132,7 +132,7 @@ class RequestsCard extends StatelessWidget {
                               ButtonWidget(
                                 onPressed: () {
                                  final FreindsController freindsController=Get.find();
-                                 freindsController.confirmRecivedRequest(receiveRequest.id, modelId);
+                                 freindsController.confirmRecivedRequest(receiveRequest.senderId, modelId);
                                 },
                                 text: "Confirm",
                                 options: ButtonOptions(
@@ -159,7 +159,11 @@ class RequestsCard extends StatelessWidget {
                                 ),
                               ),
                               ButtonWidget(
-                                onPressed: () {},
+                                onPressed: () {
+                                                                   final FreindsController freindsController=Get.find();
+                                 freindsController.deleteRecivedRequest(receiveRequest.senderId, modelId);
+                               
+                                },
                                 text: "Delete",
                                 options: ButtonOptions(
                                   width: 120,

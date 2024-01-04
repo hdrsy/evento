@@ -1,6 +1,4 @@
-import 'dart:developer';
 
-import 'package:evento/core/cache_config/cache_config.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
@@ -14,7 +12,7 @@ import 'package:evento/features/reels/view/widgets/reel_component/number_of_show
 import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/user_name.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/user_photo.dart';
-import 'package:evento/features/reels/view/widgets/video_widget.dart';
+import 'package:evento/core/shared/widgets/video/reels_video_widget.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,7 +55,7 @@ class ReelsWidget extends StatelessWidget {
                       Expanded(
                         child: Stack(
                           children: [
-                            VideoWidget(
+                            ReelsVideoWidget(
                               currentVideoUrl:"${ServerConstApis.baseAPI}/storage/${ model.videos[0]}",
                             ),
                             videoInfo(),

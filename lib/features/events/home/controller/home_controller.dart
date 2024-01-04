@@ -22,12 +22,16 @@ class HomeController extends GetxController {
     super.onInit();
   }
   Future onrefresh()async{
-    CategoryListController().onInit();
-    FeaturedListController().onInit();
-    EventInYourCityListController().onInit();
-    OrganizerController().onInit();
-    JustForYouController().onInit();
-    TrendingListController().onInit();
+    // CategoryListController().onInit();
+    // FeaturedListController featuredListController=Get.find();
+    // featuredListController.pageId=1;
+    // featuredListController.onInit();
+    // featuredListController.update();
+
+    // EventInYourCityListController().onInit();
+    // OrganizerController().onInit();
+    // JustForYouController().onInit();
+    // TrendingListController().onInit();
     
 
   }
@@ -103,7 +107,7 @@ class FeaturedListController extends PaginationController<EventModel> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['featured_event']['data'];
     lastPageId = handlingResponse['featured_event']['last_page'];
-
+   
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());

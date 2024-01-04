@@ -66,6 +66,25 @@ print(handlingResponse['relatedEvents']);
   ); 
     
   }
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (relatedEvents[modelIndex].isFollowedByAuthUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.unFollowEvent}/$eventId");
+    } else {
+      isDoneSuccefully =
+          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+    }
+    if (isDoneSuccefully == "followed successfully") {
+      relatedEvents[modelIndex].isFollowedByAuthUser = true;
+      update();
+    } else if (isDoneSuccefully == "removed successfully") {
+      relatedEvents[modelIndex].isFollowedByAuthUser = false;
+
+      update();
+    }
+    log(relatedEvents[modelIndex].isFollowedByAuthUser.toString());
+  }
 
   void createAndAddReminderEvents() async {
     // Reminder 24 hours before the main event

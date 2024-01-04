@@ -26,6 +26,7 @@ import 'package:evento/features/auth/welcome/binding/welcome_binding.dart';
 import 'package:evento/features/auth/welcome/view/welcome_screen.dart';
 import 'package:evento/features/booking_detailes/controller/binding/booking_detailes_binding.dart';
 import 'package:evento/features/booking_detailes/view/booking_detailes_screen.dart';
+import 'package:evento/features/profile_pages/achivment/view/achivment_screen.dart';
 import 'package:evento/features/profile_pages/add_friends/view/add_friends_screen.dart';
 import 'package:evento/features/profile_pages/change_password/controller/binding/change_password_binding.dart';
 import 'package:evento/features/profile_pages/change_password/view/change_password_screen.dart';
@@ -111,6 +112,7 @@ appRoutes() => [
     GetPage(name: '/SeeAllOffersScreen', page:()=> const SeeAllOffersScreen()) , 
     GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
+    GetPage(name: '/AchivmentScreen', page:()=>  AchivmentScreen()) , 
     GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
     GetPage(name: '/AddFriendsScreen', page:()=>  AddFriendsScreen()) , 
     GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 

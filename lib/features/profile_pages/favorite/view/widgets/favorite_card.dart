@@ -5,6 +5,7 @@ import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/features/profile_pages/favorite/controller/favorite_controller.dart';
 import 'package:evento/features/profile_pages/favorite/model/favorite_model.dart';
 import 'package:evento/main.dart';
@@ -46,15 +47,16 @@ final int modelId;
               endIndent: 12,
               color: customColors.secondary,
             ),
-            _locationWithDistance()
+            _locationWithDistance(eventWrapper.event.venue,modelId)
           ],
         ),
       ),
     );
   }
 
-  Widget _locationWithDistance() {
+  Widget _locationWithDistance(Venue venue,int index) {
    final FavoriteController favoriteController=Get.find();
+           
     return 
         Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
@@ -79,7 +81,7 @@ final int modelId;
                   size: 18,
                 ),
                 Text(
-                  "Damascus , Bab Sharqi , La Cap...",
+                  venue.governorate,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,
                     color: customColors.primaryText,
@@ -90,12 +92,14 @@ final int modelId;
               ],
             ),
           ),
-          Text(
-            "3.7 Km",
-            style: customTextStyle.bodyMedium.override(
-              fontFamily: breeSerif,
-              color: customColors.primary,
-              useGoogleFonts: true,
+          Obx(
+            ()=> Text(
+              favoriteController.distances[index].value,
+              style: customTextStyle.bodyMedium.override(
+                fontFamily: breeSerif,
+                color: customColors.primary,
+                useGoogleFonts: true,
+              ),
             ),
           ),
         ],

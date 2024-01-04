@@ -2,6 +2,8 @@ import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
+import 'package:evento/core/shared/widgets/video/reels_video_widget.dart';
 import 'package:evento/core/utils/animation/animation_def.dart';
 import 'package:evento/core/utils/animation/animation_util.dart';
 import 'package:evento/core/utils/animation/shimmer_animation.dart';
@@ -15,6 +17,7 @@ import 'package:evento/features/events/home/view/widgets/home_loading_widget.dar
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class FeaturedList extends StatelessWidget {
   FeaturedList({super.key});
@@ -117,8 +120,7 @@ class FeaturedWidget extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                imageStack(eventModel.images[0]),
-                InkWell(
+                    mediaStack(eventModel),InkWell(
                   onTap: () {
                     Get.toNamed('/eventDetailes', arguments: eventModel.id);
                   },
@@ -171,7 +173,7 @@ class FeaturedWidget extends StatelessWidget {
     });
   }
 
-  Stack imageStack(String imageUrl) {
+  Stack mediaStack(EventModel eventModel) {
     return Stack(
       children: [
         InkWell(
@@ -189,10 +191,18 @@ class FeaturedWidget extends StatelessWidget {
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
               ),
-              child: getImageNetwork(
-                  url: "/storage/$imageUrl",
+              child:
+              eventModel.videos.isEmpty?
+              
+               getImageNetwork(
+                  url: "/storage/${eventModel.images[0]}",
                   width: double.infinity,
-                  height: 190)),
+                  height: 190)
+                  :
+                     CardsVideoWidget(currentVideoUrl: "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",videoHgiht: 190,videoWidth: double.infinity,),
+                
+                  
+                  ),
         ),
         Positioned(
             bottom: scaleWidth(0),
@@ -257,7 +267,11 @@ class FeaturedWidget extends StatelessWidget {
                 focusColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onTap: () async {},
+                onTap: () async {
+                   await Share  .share(
+                              'Check out this event in Evento',
+                            );
+                },
                 child: Icon(
                   Icons.share_rounded,
                   color: customColors.primaryText,

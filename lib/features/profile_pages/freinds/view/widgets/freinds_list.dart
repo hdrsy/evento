@@ -17,8 +17,14 @@ final FreindsController  freindsController=Get.find();
     return GetBuilder<FreindsController>(
       builder: (ccontext) {
         return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 0,horizontal: 5 ),
-          child:  freindsController.isMyFriendsLoading.value? ShimmerFriendCard():
+          padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 5 ),
+          child:  freindsController.isMyFriendsLoading.value? Column(
+            children: [
+              const ShimmerFriendCard(),
+              const ShimmerFriendCard(),
+              const ShimmerFriendCard(),
+            ].divide(const SizedBox(height: 5,)),
+          ):
         
           
           

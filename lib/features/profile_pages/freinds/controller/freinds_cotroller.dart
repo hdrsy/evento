@@ -52,7 +52,7 @@ class FreindsController extends GetxController {
       print(myFreinds.length);
     }
       update();
-    isMyFriendsLoading.value=false;
+    // isMyFriendsLoading.value=false;
   }
 
   getSendRequest() async {
@@ -102,11 +102,11 @@ class FreindsController extends GetxController {
     // isRecivedFreindsLoading.value=false;
   }
 
-  cancelSentRequest(int userId, int modelId) async {
+  cancelSentRequest(int requestId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.denyRequest}/$userId",
+        targetRout: "${ServerConstApis.cancelRequest}/$requestId",
         method: "GEt",
         token: token);
 
@@ -119,11 +119,11 @@ class FreindsController extends GetxController {
     }
   }
 
-  confirmRecivedRequest(int userId, int modelId) async {
+  confirmRecivedRequest(int senderId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.approveRequest}/$userId",
+        targetRout: "${ServerConstApis.approveRequest}/$senderId",
         method: "GEt",
         token: token);
 
@@ -136,11 +136,11 @@ class FreindsController extends GetxController {
     }
   }
 
-  deleteRecivedRequest(int userId, int modelId) async {
+  deleteRecivedRequest(int senderId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.denyRequest}/$userId",
+        targetRout: "${ServerConstApis.denyRequest}/$senderId",
         method: "GEt",
         token: token);
 

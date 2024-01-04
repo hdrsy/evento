@@ -64,11 +64,11 @@ static int? eventId;
       update();
     }
   }
-  onPressCancelReques(int userId, int modelId) async {
+  onPressCancelReques(int requestId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.denyRequest}/$userId",
+        targetRout: "${ServerConstApis.denyRequest}/$requestId",
         method: "GEt",
         token: token);
 

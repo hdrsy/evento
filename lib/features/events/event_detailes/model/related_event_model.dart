@@ -13,8 +13,8 @@ class RelatedEventModel {
   final String type;
   final List<String>? videos;
   final List<String> images;
-  final bool isFollowedByAuthUser;
-  final bool organizerIsFollowedByAuthUser;
+   bool isFollowedByAuthUser;
+   bool organizerIsFollowedByAuthUser;
 
   RelatedEventModel({
     required this.id,
@@ -45,7 +45,7 @@ class RelatedEventModel {
       ticketPrice: json['ticket_price'].toDouble(),
       description: json['description'],
       type: json['type'],
-      videos: json['videos'] != null ? List<String>.from(json['videos']) : null,
+      videos: json['videos'] != null ? List<String>.from(jsonDecode(json['videos']).cast<String>().map((image) => image.toString())) : null,
       images: List<String>.from(jsonDecode(json['images']).cast<String>().map((image) => image.toString())),
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
       organizerIsFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],

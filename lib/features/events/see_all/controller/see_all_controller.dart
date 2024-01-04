@@ -35,7 +35,7 @@ late String pageTitle;
     isLoadingMoreData = false.obs;
     dataLimit = 4;
     pageId = Get.arguments[0]??1;
-    hasMoreData = true.obs;
+    hasMoreData = false.obs;
     errorMessage = <String>[].obs;
     itemList =Get.arguments[1]?? <EventModel>[].obs;
     targetRout=Get.arguments[2];
@@ -79,12 +79,10 @@ late String pageTitle;
   }
 
   handleDataSuccess(dynamic handlingResponse) {
-    log("dddddddddddddddddddddddddddddddddddddd");
-    print(handlingResponse);
-    log("dddddddddddddddddddddddddddddddddddddd");
+  
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
-log("message");
+
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());

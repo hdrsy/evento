@@ -3,6 +3,7 @@ import 'package:evento/core/shared/functions/lists/carouse_options_functions.dar
 import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/shared/widgets/lists/carousel_slider.dart';
+import 'package:evento/core/utils/animation/animation_text.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
@@ -12,6 +13,7 @@ import 'package:evento/features/events/event_detailes/model/related_event_model.
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marquee/marquee.dart';
 
 Widget buildMoreEventsSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
@@ -62,6 +64,7 @@ Widget buildMoreEventsSection(BuildContext context) {
                       (index) => MoreEventsCard(
                             relatedEventModel:
                                 eventDetailesController.relatedEvents[index],
+                            modelId: index,
                           )),
                   carouselOptions:
                       eventDetailesController.relatedEvents.length == 1
@@ -72,22 +75,22 @@ Widget buildMoreEventsSection(BuildContext context) {
 }
 
 class MoreEventsCard extends StatelessWidget {
-  const MoreEventsCard({super.key, required this.relatedEventModel});
+  const MoreEventsCard(
+      {super.key, required this.relatedEventModel, required this.modelId});
   final RelatedEventModel relatedEventModel;
+  final int modelId;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
       child: InkWell(
         splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                        
+        focusColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: () async {
-         Get.toNamed('/eventDetailes', arguments: relatedEventModel.id);
-                   
-                            },
+          Get.toNamed('/eventDetailes', arguments: relatedEventModel.id);
+        },
         child: Container(
           width: screenWidth * 0.8,
           height: screenHeight * 0.2,
@@ -121,14 +124,15 @@ class MoreEventsCard extends StatelessWidget {
                                 topRight: Radius.circular(10),
                               ),
                               child: getImageNetwork(
-                                  url: "/storage/${relatedEventModel.images[0]}",
+                                  url:
+                                      "/storage/${relatedEventModel.images[0]}",
                                   width: double.infinity,
                                   height: null,
                                   alignmentGeometry:
                                       const Alignment(0.00, 1.00))),
                           Container(
-                            width: 344,
-                            height: 140,
+                            width: screenWidth * 0.8,
+                            height:    screenHeight*0.08,
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [Color(0x9A2E4052), Color(0x0089CFF0)],
@@ -145,30 +149,38 @@ class MoreEventsCard extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                5, 5, 5, 5),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 5, 0),
-                                  child: ToggleIcon(
-                                    onPressed: () async {},
-                                    value: false,
-                                    onIcon: Icon(
-                                      Icons.favorite_rounded,
-                                      color: customColors.rejected,
-                                      size: 25,
+                                GetBuilder<EventDetailesController>(
+                                    builder: (controller) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 5, 0),
+                                    child: ToggleIcon(
+                                      onPressed: () async {
+                                        controller.followOrUnFollowEvent(
+                                            relatedEventModel.id, modelId);
+                                      },
+                                      value: relatedEventModel
+                                          .isFollowedByAuthUser,
+                                      onIcon: Icon(
+                                        Icons.favorite_rounded,
+                                        color: customColors.rejected,
+                                        size: 25,
+                                      ),
+                                      offIcon: Icon(
+                                        Icons.favorite_border,
+                                        color: customColors.info,
+                                        size: 25,
+                                      ),
                                     ),
-                                    offIcon: Icon(
-                                      Icons.favorite_border,
-                                      color: customColors.info,
-                                      size: 25,
-                                    ),
-                                  ),
-                                ),
+                                  );
+                                }),
                               ],
                             ),
                           ),
@@ -177,7 +189,8 @@ class MoreEventsCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -203,43 +216,43 @@ class MoreEventsCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                relatedEventModel.description,
-                                style: customTextStyle.headlineSmall.override(
-                                  fontFamily: breeSerif,
-                                  fontSize: 16,
-                                  useGoogleFonts: false,
+                        SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 20, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  // width: 50,
+                                  height: 20,
+                                  child: marqueeTitle(relatedEventModel.title),
                                 ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      // context.pushNamed('Reels');
-                                    },
-                                    child: Icon(
-                                      Icons.play_arrow_outlined,
-                                      color: customColors.primaryText,
-                                      size: 25,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        // context.pushNamed('Reels');
+                                      },
+                                      child: Icon(
+                                        Icons.play_arrow_outlined,
+                                        color: customColors.primaryText,
+                                        size: 25,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Row(

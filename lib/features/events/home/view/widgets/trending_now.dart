@@ -14,6 +14,7 @@ import 'package:evento/features/events/home/view/widgets/home_loading_widget.dar
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class TrendingNow extends StatelessWidget {
   TrendingNow({super.key});
@@ -290,10 +291,17 @@ class TrendingNow extends StatelessWidget {
   Widget buildShareIcon() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-      child: Icon(
-        Icons.share_rounded,
-        color: customColors.secondaryText,
-        size: responsiveIcon(25, 2),
+      child: InkWell(
+        onTap: ()async{
+           await Share.share(
+                              'Check out this event in Evento',
+                            );
+        },
+        child: Icon(
+          Icons.share_rounded,
+          color: customColors.secondaryText,
+          size: responsiveIcon(25, 2),
+        ),
       ),
     );
   }

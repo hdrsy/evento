@@ -12,7 +12,8 @@ class FreindsScreen extends StatelessWidget {
 final FreindsController  freindsController=Get.find();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    Scaffold(
       floatingActionButton: FloatingActionButton(
          backgroundColor: customColors.primary,
   elevation: 8,

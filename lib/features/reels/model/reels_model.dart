@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import 'package:evento/features/events/home/model/event_model.dart';
 
 class ReelModel {
     final int id;
@@ -15,7 +16,7 @@ class ReelModel {
     final int likesCount;
     final int commentsCount;
     final bool likedByUser;
-    final Venue? event;
+    final EventModel? event;
     final Venue? venue;
     final User? user;
 
@@ -53,8 +54,8 @@ class ReelModel {
         likesCount: json['likes_count'],
         commentsCount: json['comments_count'],
         likedByUser: json['liked_by_user'],
-        event: json['event'] != null ? Venue.fromJson(json['event']) : null,
-        venue: Venue.fromJson(json['venue']),
+        event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
+        venue:json['venue']!=null? Venue.fromJson(json['venue']):null,
         user: json['user'] != null ? User.fromJson(json['user']) : null,
     );}
 }

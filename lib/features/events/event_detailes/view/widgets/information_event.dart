@@ -52,7 +52,7 @@ final EventDetailsModel eventDetailsModel;
                   buildEventTimelineButton(context,eventDetailsModel),
                   LinksSection(),
                   buildMoreEventsSection(context),
-                ].divide(const SizedBox(height: 20)).addToStart(const SizedBox(height: 10)).addToEnd(const SizedBox(height: 0)),
+                ].divide(const SizedBox(height: 20)).addToStart(const SizedBox(height: 10)).addToEnd(const SizedBox(height: 40)),
               ),
                  
                ),

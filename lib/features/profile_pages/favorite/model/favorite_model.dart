@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+
 class EventWrapper {
   int id;
   int eventId;
@@ -42,6 +44,7 @@ class FavoriteEventModel {
   List<String> images;
   bool isFollowedByAuthUser;
   bool organizerIsFollowedByAuthUser;
+  Venue venue;
 
   FavoriteEventModel({
     required this.id,
@@ -57,6 +60,7 @@ class FavoriteEventModel {
     required this.images,
     required this.isFollowedByAuthUser,
     required this.organizerIsFollowedByAuthUser,
+    required this.venue
   });
 
   factory FavoriteEventModel.fromJson(Map<String, dynamic> json) {
@@ -71,6 +75,7 @@ class FavoriteEventModel {
       ticketPrice: json['ticket_price'],
       description: json['description'],
       type: json['type'],
+      venue: Venue.fromJson( json["venue"]),
       images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
       organizerIsFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],

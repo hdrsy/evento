@@ -121,8 +121,8 @@ class GoingCard extends StatelessWidget {
                               "${goingModel.firstName} ${goingModel.lastName}",
                               style: customTextStyle.bodyLarge,
                             ),
-                            userState(goingModel.friendRequestStatus,
-                                goingModel.id, modelId)
+                            userState(
+                                goingModel, modelId)
                           ].divide(const SizedBox(height: 10)),
                         ),
                       ),
@@ -135,15 +135,15 @@ class GoingCard extends StatelessWidget {
     });
   }
 
-  Widget userState(String? state, int userId, int modelId) {
-    if (state == null) {
+  Widget userState( GoingModel goingModel, int modelId) {
+    if (goingModel.friendRequestStatus == null) {
       return AddFriendButton(
-        userId: userId,
+        userId: goingModel.id,
         modelId: modelId,
       );
     } else {
-      return state == "pending"
-          ? CancelButton(userId: userId, modelId: modelId)
+      return goingModel.friendRequestStatus == "pending"
+          ? CancelButton(requestId: goingModel.id, modelId: modelId)
           : const SizedBox();
     }
   }
@@ -185,15 +185,15 @@ class AddFriendButton extends StatelessWidget {
 }
 
 class CancelButton extends StatelessWidget {
-  const CancelButton({super.key, required this.userId, required this.modelId});
-  final int userId;
+  const CancelButton({super.key, required this.requestId, required this.modelId});
+  final int requestId;
   final int modelId;
   @override
   Widget build(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
         GoingController goingController = Get.find();
-        goingController.onPressCancelReques(userId, modelId);
+        goingController.onPressCancelReques(requestId, modelId);
       },
       text: "Cancel",
       options: ButtonOptions(

@@ -14,6 +14,7 @@ class ShimmerFriendCard extends StatelessWidget {
         width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
            Shimmer.fromColors(
         baseColor: customColors.secondary,
@@ -21,7 +22,7 @@ class ShimmerFriendCard extends StatelessWidget {
         child:  Container(
               width: 64.0,
               height: 64.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
               color: Colors.white,
                 
                 shape: BoxShape.circle),
@@ -31,27 +32,33 @@ class ShimmerFriendCard extends StatelessWidget {
             ),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
+                  const SizedBox(height: 20,),
                   Shimmer.fromColors(
         baseColor: customColors.secondary,
         highlightColor: customColors.gray600,
         child: Container(
-                    width: 300,
+                    width: 150,
                     height: 8.0,
                     color: Colors.white,
                     
                   )),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2.0),
-                  ),
                 
+                  const SizedBox(height: 20,),
+                 Shimmer.fromColors(
+        baseColor: customColors.secondary,
+        highlightColor: customColors.gray600,
+        child:
                   Container(
-                    width: 40.0,
-                    height: 8.0,
+                    width: 100,
+                    height: 10.0,
+                    decoration: BoxDecoration(
                     color: Colors.white,
-                  ),
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                  )),
                 ],
               ),
             ),

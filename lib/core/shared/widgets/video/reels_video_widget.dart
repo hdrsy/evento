@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoWidget extends StatefulWidget {
-  VideoWidget({super.key, required this.currentVideoUrl});
+class ReelsVideoWidget extends StatefulWidget {
+  ReelsVideoWidget({super.key, required this.currentVideoUrl});
   final String currentVideoUrl;
   final ReelsController reelsController = Get.find();
   final TweenAnimationController tweenAnimationController =
       Get.put(TweenAnimationController());
   @override
-  State<VideoWidget> createState() => _VideoWidgetState();
+  State<ReelsVideoWidget> createState() => _VideoWidgetState();
 }
 
-class _VideoWidgetState extends State<VideoWidget> with WidgetsBindingObserver {
+class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObserver {
   bool videoInitialized = false;
   late VideoPlayerController videoPlayerController;
   @override
@@ -29,7 +29,7 @@ class _VideoWidgetState extends State<VideoWidget> with WidgetsBindingObserver {
   }
 
   @override
-  void didUpdateWidget(covariant VideoWidget oldWidget) {
+  void didUpdateWidget(covariant ReelsVideoWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.currentVideoUrl != videoPlayerController.dataSource) {
       // Update the video player if the video URL has changed
