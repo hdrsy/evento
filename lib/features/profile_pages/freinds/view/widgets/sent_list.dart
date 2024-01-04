@@ -106,8 +106,8 @@ class SentCard extends StatelessWidget {
                       child: sentRequest.receiver.image.length > 6
                           ? getImageNetwork(
                               url: "/storage/${sentRequest.receiver.image}",
-                              width: null,
-                              height: null)
+                              width: 90,
+                              height: 90)
                           : Image.asset(
                               'assets/images/${sentRequest.receiver.image}.png')),
                   Expanded(

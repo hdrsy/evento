@@ -59,6 +59,9 @@
 		<key>NSLocationAlwaysUsageDescription</key>
 		<string>This app needs access to location when in the background.</string> 
 		
+		<key>UIBackgroundModes</key>
+		<string>location</string> 
+		
 		<key>NSPhotoLibraryUsageDescription</key>
     	<string>This app needs access to your photo library to enable you to upload images and files, showcasing your projects and work. This feature allows you to share and display your work with the community, enhancing your experience and interaction within the app.</string>
     	<key>UIApplicationSupportsIndirectInputEvents</key>

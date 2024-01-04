@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/widget/users_shimmer_card.dart';
+import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
@@ -15,7 +17,12 @@ final FreindsController  freindsController=Get.find();
     return GetBuilder<FreindsController>(
       builder: (ccontext) {
         return SingleChildScrollView(
-          child: Column(
+          padding: EdgeInsets.symmetric(vertical: 0,horizontal: 5 ),
+          child:  freindsController.isMyFriendsLoading.value? ShimmerFriendCard():
+        
+          
+          
+          Column(
             children: [
               const SizedBox(
                 height: 10,

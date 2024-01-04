@@ -1,5 +1,8 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/shared/widgets/widget/users_shimmer_card.dart';
+import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
@@ -15,7 +18,10 @@ class RequestsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FreindsController>(builder: (controller) {
       return SingleChildScrollView(
-        child: Column(
+        child: controller.isRecivedFreindsLoading.value?ShimmerLoadingWidget(loadingShimmerWidget: ShimmerFriendCard()):
+        
+        
+        Column(
           children: [
             const SizedBox(
               height: 10,
@@ -64,6 +70,7 @@ class RequestsList extends StatelessWidget {
                 ],
               ),
             ),
+          
             ...List.generate(controller.recivedFreinds.length,
                 (index) =>  RequestsCard(receiveRequest:controller.recivedFreinds[index] ,modelId: index,))
           ].divide(const SizedBox(
@@ -101,8 +108,8 @@ class RequestsCard extends StatelessWidget {
                     child: receiveRequest.sender.image.length > 6
                           ?getImageNetwork(
                               url: "/storage/${receiveRequest.sender.image}",
-                              width: null,
-                              height: null)
+                              width: 90,
+                              height: 90)
                           : Image.asset(
                               'assets/images/${receiveRequest.sender.image}.png')
                   ),
@@ -183,6 +190,8 @@ class RequestsCard extends StatelessWidget {
                       ),
                     ),
                   ),
+              
+              
                 ],
               )),
         ),

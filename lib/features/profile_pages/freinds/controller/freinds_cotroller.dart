@@ -15,12 +15,18 @@ class FreindsController extends GetxController {
   late RxList<ReceiveRequest> recivedFreinds;
   late RxList<SentRequest> sentFreinds;
   late RxList<String> errorMessage;
+  late RxBool isMyFriendsLoading;
+  late RxBool isSentFreindsLoading;
+  late RxBool isRecivedFreindsLoading;
   @override
   void onInit() {
     myFreinds = <FreindsModel>[].obs;
     recivedFreinds = <ReceiveRequest>[].obs;
     sentFreinds = <SentRequest>[].obs;
     errorMessage = <String>[].obs;
+    isMyFriendsLoading=false.obs;
+    isRecivedFreindsLoading=false.obs;
+    isSentFreindsLoading=false.obs;
     getMyFreinds();
     getSendRequest();
     getRecivedRequest();
@@ -28,6 +34,7 @@ class FreindsController extends GetxController {
   }
 
   getMyFreinds() async {
+    isMyFriendsLoading.value=true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -42,9 +49,10 @@ class FreindsController extends GetxController {
       myFreinds.value = interestsJson
           .map((jsonItem) => FreindsModel.fromJson(jsonItem))
           .toList();
-      update();
       print(myFreinds.length);
     }
+      update();
+    isMyFriendsLoading.value=false;
   }
 
   getSendRequest() async {
@@ -70,6 +78,7 @@ class FreindsController extends GetxController {
   }
 
   getRecivedRequest() async {
+    // isRecivedFreindsLoading.value=true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -80,16 +89,17 @@ class FreindsController extends GetxController {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
       
+    } else {
       List<dynamic> interestsJson = handlingResponse['receive_request'];
 
       recivedFreinds.value = interestsJson
           .map((jsonItem) => ReceiveRequest.fromJson(jsonItem))
           .toList();
-      update();
       print(recivedFreinds.length);
+      update();
     }
+    // isRecivedFreindsLoading.value=false;
   }
 
   cancelSentRequest(int userId, int modelId) async {
@@ -108,7 +118,7 @@ class FreindsController extends GetxController {
       update();
     }
   }
-  
+
   confirmRecivedRequest(int userId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
@@ -125,6 +135,7 @@ class FreindsController extends GetxController {
       update();
     }
   }
+
   deleteRecivedRequest(int userId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
@@ -141,5 +152,4 @@ class FreindsController extends GetxController {
       update();
     }
   }
-
 }
