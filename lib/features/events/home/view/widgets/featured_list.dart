@@ -26,10 +26,13 @@ class FeaturedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => featuredListController.isLoading.value
-          ?ShimmerLoadingWidget(
+          ? ShimmerLoadingWidget(
               loadingShimmerWidget: featuredLoading(),
             )
-          : Column(
+          : featuredListController.itemList.isEmpty?const SizedBox():
+          
+          
+           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(
@@ -67,18 +70,18 @@ class FeaturedList extends StatelessWidget {
                                         featuredListController.itemList[index],
                                     modelIndex: index,
                                   )
-                                : ShimmerLoadingWidget(loadingShimmerWidget:  Container(
-                          width: 355,
-                          height: 300,
-                          // height: 330 ,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: customColors.info,
-                            ),
-                            color: customColors.info
-                          ),
-                        ));
+                                : ShimmerLoadingWidget(
+                                    loadingShimmerWidget: Container(
+                                    width: 355,
+                                    height: 300,
+                                    // height: 330 ,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: customColors.info,
+                                        ),
+                                        color: customColors.info),
+                                  ));
                           })
                         ].divide(SizedBox(
                           width: scaleWidth(
@@ -120,7 +123,8 @@ class FeaturedWidget extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                    mediaStack(eventModel),InkWell(
+                mediaStack(eventModel),
+                InkWell(
                   onTap: () {
                     Get.toNamed('/eventDetailes', arguments: eventModel.id);
                   },
@@ -185,24 +189,24 @@ class FeaturedWidget extends StatelessWidget {
             // context.pushNamed('Event-Details');
           },
           child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              child:
-              eventModel.videos.isEmpty?
-              
-               getImageNetwork(
-                  url: "/storage/${eventModel.images[0]}",
-                  width: double.infinity,
-                  height: 190)
-                  :
-                     CardsVideoWidget(currentVideoUrl: "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",videoHgiht: 190,videoWidth: double.infinity,),
-                
-                  
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+            child: eventModel.videos.isEmpty
+                ? getImageNetwork(
+                    url: "/storage/${eventModel.images[0]}",
+                    width: double.infinity,
+                    height: 190)
+                : CardsVideoWidget(
+                    currentVideoUrl:
+                        "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                    videoHgiht: 190,
+                    videoWidth: double.infinity,
                   ),
+          ),
         ),
         Positioned(
             bottom: scaleWidth(0),
@@ -268,9 +272,9 @@ class FeaturedWidget extends StatelessWidget {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                   await Share  .share(
-                              'Check out this event in Evento',
-                            );
+                  await Share.share(
+                    'Check out this event in Evento',
+                  );
                 },
                 child: Icon(
                   Icons.share_rounded,

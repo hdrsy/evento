@@ -6,7 +6,7 @@ class CameraIconCard extends StatelessWidget {
 final Function() onTap;
   @override
   Widget build(BuildContext context) {
-    return  InkWell(
+    return  GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.all(10),

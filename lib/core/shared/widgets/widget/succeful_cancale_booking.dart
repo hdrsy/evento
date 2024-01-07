@@ -1,8 +1,10 @@
 
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/my_booking/controller/cancel_booking_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SuccefulCancelBookingWidget extends StatelessWidget {
   const SuccefulCancelBookingWidget({
@@ -61,6 +63,9 @@ class SuccefulCancelBookingWidget extends StatelessWidget {
             ButtonWidget(
               onPressed: () async {
                 // context.pushNamed('My-bookings');
+               await Get.offAndToNamed('/MyBookingScreen') ;
+                 Get.delete<CancelBookingController>();
+                            
               },
               text: "Ok",
               options: ButtonOptions(

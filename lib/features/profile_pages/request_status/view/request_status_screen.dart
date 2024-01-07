@@ -1,12 +1,16 @@
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/my_request/model/my_request_model.dart';
+import 'package:evento/features/profile_pages/request_status/controller/request_status_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RequestStatusScreen extends StatelessWidget {
-  const RequestStatusScreen({super.key});
-
+  RequestStatusScreen({super.key});
+  final RequestStatusController requestStatusController =
+      Get.put(RequestStatusController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +36,10 @@ class RequestStatusScreen extends StatelessWidget {
   }
 
   _buildBody() {
-    return // Generated code for this Container Widget...
-        Container(
+    final RequestStatusController requestStatusController = Get.find();
+    final MyRequestModel myRequestModel =
+        requestStatusController.myRequestModel;
+    return Container(
       width: double.infinity,
       decoration: const BoxDecoration(),
       child: Padding(
@@ -43,7 +49,7 @@ class RequestStatusScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              statusElement(),
+              statusElement(myRequestModel.status),
               Container(
                 width: 350,
                 decoration: BoxDecoration(
@@ -61,18 +67,29 @@ class RequestStatusScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         singleRowInfo(
-                            "Full Name", "Ahmad Ahmad", Icons.person_outline),
-                        singleRowInfo("Phone Number", " +963  9000000",
-                            Icons.phone_outlined),
-                        singleRowInfo("Total Number of Guests", "6 people",
+                            "Full Name",
+                            "${myRequestModel.firstName} ${myRequestModel.lastName}",
+                            Icons.person_outline),
+                        singleRowInfo("Phone Number",
+                            myRequestModel.phoneNumber, Icons.phone_outlined),
+                        singleRowInfo(
+                            "Number of Adults",
+                            myRequestModel.adults.toString(),
                             Icons.people_outlined),
                         singleRowInfo(
-                            "Event Title ", "Jazz", Icons.celebration_outlined),
+                            "Number of Children",
+                            myRequestModel.child.toString(),
+                            Icons.people_outlined),
+                        singleRowInfo("Event Title ", myRequestModel.title,
+                            Icons.celebration_outlined),
+                        singleRowInfo("Start Time ", myRequestModel.startTime,
+                            Icons.timer_sharp),
+                        singleRowInfo("End Time", myRequestModel.endTime,
+                            Icons.timer_off_outlined),
                         singleRowInfo(
-                            "Start Time ", "23:00 PM ", Icons.timer_sharp),
-                        singleRowInfo(
-                            "End Time", "03:00 AM", Icons.timer_off_outlined),
-                        singleRowInfo("Date", "30/3/2023", Icons.date_range),
+                            "Date",
+                            DateFormatter.formatDate(myRequestModel.date),
+                            Icons.date_range),
                       ].divide(const SizedBox(height: 10)),
                     ),
                     Divider(
@@ -83,13 +100,20 @@ class RequestStatusScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        singleRowInfo(
-                            "Venue Name", "Em Sherif  ", Icons.place_outlined),
-                        singleRowInfo(
-                            "Dress Shop", "Mural", Icons.dry_cleaning_outlined),
-                        singleRowInfo("Decoration", "Elanor", Icons.date_range),
+                        singleRowInfo("Venue Name", myRequestModel.venue.name,
+                            Icons.place_outlined),
+                        ...List.generate(
+                            myRequestModel.serviceProviders.length,
+                            (index) => singleRowInfo(myRequestModel.serviceProviders[index].categoryTitle, "${myRequestModel.serviceProviders[index].firstName} ${myRequestModel.serviceProviders[index].lastName}",
+                                Icons.dry_cleaning_outlined))
                       ].divide(const SizedBox(height: 10)),
                     ),
+                    Divider(
+                      thickness: 1,
+                      color: customColors.secondary,
+                    ),
+                 myRequestModel.description!=null?   notesAndDescription(icon: Icons.description_outlined, title: "Description", subTitle: myRequestModel.description!):const SizedBox(),
+                 myRequestModel.additionalNotes!=null?   notesAndDescription(icon: Icons.speaker_notes_outlined, title: "Notes", subTitle: myRequestModel.additionalNotes!):const SizedBox(),
                   ].divide(const SizedBox(height: 20)),
                 ),
               ),
@@ -100,7 +124,45 @@ class RequestStatusScreen extends StatelessWidget {
     );
   }
 
-  Container statusElement() {
+  Widget notesAndDescription(
+      {required IconData icon,
+      required String title,
+      required String subTitle}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Icon(
+              icon,
+              color: customColors.secondaryText,
+              size: 24,
+            ),
+            Text(
+              title,
+              style: customTextStyle.bodyMedium.override(
+                fontFamily: 'Nunito',
+                fontSize: 16,
+                useGoogleFonts: true,
+              ),
+            ),
+          ].divide(const SizedBox(width: 5)),
+        ),
+        Text(
+          "- $subTitle",
+          style: customTextStyle.bodyMedium.override(
+            fontFamily: 'Nunito',
+            fontSize: 16,
+            color: customColors.primary,
+            useGoogleFonts: true,
+          ),
+        )
+      ],
+    );
+  }
+
+  Container statusElement(String status) {
     return Container(
       width: 370,
       decoration: const BoxDecoration(),
@@ -109,7 +171,9 @@ class RequestStatusScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           singleStatusWidget(
-              isinThisStatus: true, title: "Pending", icon: Icons.pending),
+              isinThisStatus: status == "Pending",
+              title: "Pending",
+              icon: Icons.pending),
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -123,7 +187,7 @@ class RequestStatusScreen extends StatelessWidget {
             ],
           ),
           singleStatusWidget(
-              isinThisStatus: false,
+              isinThisStatus: status == "In Progress",
               title: "In Review",
               icon: Icons.preview_outlined),
           Column(
@@ -139,7 +203,7 @@ class RequestStatusScreen extends StatelessWidget {
             ],
           ),
           singleStatusWidget(
-              isinThisStatus: false,
+              isinThisStatus: status == "Approved",
               title: "Contacted",
               icon: Icons.connect_without_contact_outlined),
         ],

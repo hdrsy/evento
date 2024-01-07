@@ -37,7 +37,7 @@ class _VideoWidgetState extends State<CardsVideoWidget>
     super.didUpdateWidget(oldWidget);
     if (widget.currentVideoUrl != videoPlayerController.dataSource) {
       // Update the video player if the video URL has changed
-      videoPlayerController.pause();
+      // videoPlayerController.pause();
       videoPlayerController.dispose();
       initializeController();
       setState(() {});
@@ -56,9 +56,10 @@ class _VideoWidgetState extends State<CardsVideoWidget>
         VideoPlayerController.networkUrl(Uri.parse(widget.currentVideoUrl))
           ..initialize().then((_) {
             setState(() {
-              videoPlayerController.setLooping(false); // Set video to loop
-              videoPlayerController.pause();
-              videoInitialized = true;
+ videoPlayerController.setLooping(false); // Enable looping
+          videoPlayerController.setVolume(0); // Mute the video
+          videoPlayerController.pause(); // Auto-play the video
+          videoInitialized = true;
             });
           }).catchError((error) {
             // Handle the error here
@@ -92,7 +93,8 @@ class _VideoWidgetState extends State<CardsVideoWidget>
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.resumed) {
       // App is in the foreground
-      videoPlayerController.play();
+       videoPlayerController.setVolume(0);
+    videoPlayerController.pause();
     } else if (state == AppLifecycleState.inactive) {
       // App is partially obscured
       videoPlayerController.pause();
@@ -124,8 +126,8 @@ class _VideoWidgetState extends State<CardsVideoWidget>
               }
             },
             child: Stack(
-               alignment: Alignment.center, // Align everything in the center
-             
+              alignment: Alignment.center, // Align everything in the center
+
               children: [
                 !videoInitialized
                     ? SizedBox(
@@ -133,27 +135,27 @@ class _VideoWidgetState extends State<CardsVideoWidget>
                         width: widget.videoWidth, // Set your width
                       )
                     : SizedBox(
-                      height: widget.videoHgiht, // Set your height
-                      width: widget.videoWidth, // Set your width
-                      child: FittedBox(
-                        fit: BoxFit
-                            .cover, // This will prevent the video from being clipped
-                        child: SizedBox(
-                          height: videoPlayerController.value.size.height,
-                          width: videoPlayerController.value.size.width,
-                          child: VideoPlayer(videoPlayerController),
+                        height: widget.videoHgiht, // Set your height
+                        width: widget.videoWidth, // Set your width
+                        child: FittedBox(
+                          fit: BoxFit
+                              .cover, // This will prevent the video from being clipped
+                          child: SizedBox(
+                            height: videoPlayerController.value.size.height,
+                            width: videoPlayerController.value.size.width,
+                            child: VideoPlayer(videoPlayerController),
+                          ),
                         ),
                       ),
-                    ),
-                if (!_isPlaying)
-Align(
-                    alignment: Alignment.center, // Center the icon
-                    child: Icon(
-                      Icons.play_arrow,
-                      size: 50.0,
-                      color: Colors.white,
-                    ),
-                  ),
+                // if (!_isPlaying)
+                //   Align(
+                //     alignment: Alignment.center, // Center the icon
+                //     child: Icon(
+                //       Icons.play_arrow,
+                //       size: 50.0,
+                //       color: Colors.white,
+                //     ),
+                //   ),
               ],
             ),
           );

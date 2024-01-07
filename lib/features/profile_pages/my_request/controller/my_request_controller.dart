@@ -6,35 +6,35 @@ import 'package:evento/features/profile_pages/my_request/model/my_request_model.
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
-class MyRequestController extends GetxController{
+class MyRequestController extends GetxController {
   late List<MyRequestModel> myRequestsList;
   late RxList<String> errorMessage;
-@override
+  @override
   void onInit() {
-    myRequestsList=[];
-    errorMessage=<String>[].obs;
+    myRequestsList = [];
+    errorMessage = <String>[].obs;
     getMyEventRequests();
     super.onInit();
-  } 
+  }
+
   getMyEventRequests() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myEventRequest, method: "GEt", token: token);
+        targetRout: ServerConstApis.myEventRequest,
+        method: "GEt",
+        token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      List<dynamic> interestsJson = handlingResponse['My_Request'];
+      List<dynamic> interestsJson = handlingResponse['data'];
 
       myRequestsList = interestsJson
           .map((jsonItem) => MyRequestModel.fromJson(jsonItem))
           .toList();
       update();
-
     }
   }
-
-  
 }

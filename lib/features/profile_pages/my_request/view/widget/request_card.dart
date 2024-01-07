@@ -91,7 +91,7 @@ final MyRequestModel myRequestModel;
                       Align(
                         alignment: const AlignmentDirectional(-1.00, 0.00),
                         child: Text(
-                          "Wedding / ${DateFormatter.formatDate(myRequestModel.date)}",
+                          "${myRequestModel.categoryTitle} / ${DateFormatter.formatDate(myRequestModel.date)}",
                           style: customTextStyle.bodyMedium.override(
                             fontFamily: 'Nunito',
                             color: customColors.info,
@@ -121,7 +121,7 @@ final MyRequestModel myRequestModel;
                       ButtonWidget(
                         onPressed: () async {
                           // context.pushNamed('Reque-ststatus');
-                          Get.toNamed('/RequestStatusScreen');
+                          Get.toNamed('/RequestStatusScreen',arguments: myRequestModel);
                         },
                         text: "See details",
                         options: ButtonOptions(

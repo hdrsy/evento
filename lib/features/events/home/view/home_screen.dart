@@ -53,7 +53,7 @@ final HomeController homeController=Get.find();
          FeaturedList(),
         TrendingNow(),
          FromYourCity(),
-        const Offers(),
+        // const Offers(),
          Orgnizers(),
          ForYou()
       ].divide( SizedBox(height:  screenSize == ScreenSize.small

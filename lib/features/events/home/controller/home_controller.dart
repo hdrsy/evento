@@ -8,6 +8,7 @@ import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:evento/features/events/home/model/home_oganizer.dart';
 import 'package:evento/features/events/home/model/organizer.dart';
 import 'package:evento/main.dart';
 
@@ -220,6 +221,41 @@ class OrganizerController extends PaginationController<OrganizerEvent> {
 log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizerEvent.fromJson(jsonItem))
+        .toList());
+    if (pageId == lastPageId) {
+      hasMoreData.value = false;
+    }
+    pageId++;
+    isLoading.value = false;
+    isLoading.value = false;
+    isLoadingMoreData.value = false;
+  }
+
+}
+class HomeOrganizerController extends PaginationController<OrganizerHome> {
+  HomeOrganizerController() : super(fetchDataCallback: _fetchData);
+
+  // Updated _fetchData to match the new signature
+  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
+      String url, int page, Map<String, dynamic> additionalParams) async {
+    String token = await prefService.readString("token") ?? "";
+    String apiUrl = "${ServerConstApis.getOrganizerHomeList}?page=$page";
+
+    // Returning the result of the API call
+    return ApiHelper.makeRequest(
+      targetRout: apiUrl,
+      method: "GET",
+      token: token,
+    );
+  }
+
+  @override
+  handleDataSuccess(dynamic handlingResponse) {
+    List<dynamic> categoryListJson = handlingResponse['organizers']['data'];
+    lastPageId = handlingResponse['organizers']['last_page'];
+log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+    itemList.addAll(categoryListJson
+        .map((jsonItem) => OrganizerHome.fromJson(jsonItem))
         .toList());
     if (pageId == lastPageId) {
       hasMoreData.value = false;

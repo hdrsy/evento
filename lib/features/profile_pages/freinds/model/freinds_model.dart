@@ -1,22 +1,25 @@
-class FreindsModel{
+class FreindsModel {
   final int id;
-  final int senderId;
-  final int receiverId;
+  final String firstName;
+  final String lastName;
+  final String image;
   final String status;
-  
+
   FreindsModel({
     required this.id,
-    required this.senderId,
-    required this.receiverId,
+    required this.firstName,
+    required this.lastName,
+    required this.image,
     required this.status,
-   });
+  });
 
   factory FreindsModel.fromJson(Map<String, dynamic> json) {
     return FreindsModel(
       id: json['id'],
-      senderId: json['sender_id'],
-      receiverId: json['receiver_id'],
-      status: json['status'],
+      lastName: json['last_name'],
+      image: json['image'],
+      status: json['friend_request_status_with_auth_user'],
+      firstName: json['first_name'],
     );
   }
 }

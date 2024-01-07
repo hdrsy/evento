@@ -25,6 +25,7 @@ class ServerConstApis {
 //// 
   static String followOrganizer = '$baseAPI/api/follow';
   static String unFollowOrganizer = '$baseAPI/api/unfollow';
+  static String becomeOrganizer = '$baseAPI/api/become_organizer';
 
   ///// home page
   static String getCategoryList = '$baseAPI/api/event_category';
@@ -35,6 +36,7 @@ class ServerConstApis {
   static String getToNightList = '$baseAPI/api/toNight';
   static String getThisWeekList = '$baseAPI/api/thisWeek';
   static String getOrganizerEventList = '$baseAPI/api/organizer_event';
+  static String getOrganizerHomeList = '$baseAPI/api/Home-Organizer';
   static String getAccordingCategoryList = '$baseAPI/api/eventAccordingCategory';
   //// event detailes
   static String getEventDetailes = '$baseAPI/api/event';
@@ -42,6 +44,12 @@ class ServerConstApis {
 
 /////
   static String bookNow = '$baseAPI/api/book';
+
+
+  /////my booking
+  static String myCancelledBookings = '$baseAPI/api/my-cancelled-bookings';
+  static String myBooking = '$baseAPI/api/my_booking';
+  static String cancellBooking = '$baseAPI/api/booking/cancel';
 
   //// follow 
   static String followEvent = '$baseAPI/api/event_follow';

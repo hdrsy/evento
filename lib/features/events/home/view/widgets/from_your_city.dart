@@ -26,7 +26,9 @@ class FromYourCity extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: inYourCityLoading(),
             )
-          : Column(
+          :  eventInYourCityListController.itemList.isEmpty?const SizedBox():
+          
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(

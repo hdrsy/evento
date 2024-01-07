@@ -38,9 +38,9 @@ Widget marqueeTitle(String title,
 
 Widget marqueeNormalText(String title, Color? textColor,
     {String? fontFamily = 'Readex Pro',
-    int titleMaxLength = 60,
+    int titleMaxLength = 20,
     double heigthFromTheScreen = 0.023,
-    double widthFromTheScreen = 0.3}) {
+    double widthFromTheScreen = 0.05}) {
   return title.length > titleMaxLength
       ? SizedBox(
           width: screenWidth * widthFromTheScreen,
@@ -54,7 +54,7 @@ Widget marqueeNormalText(String title, Color? textColor,
             style: customTextStyle.bodyMedium.copyWith(
                 color: textColor ?? customColors.secondaryText,
                 fontFamily: fontFamily,
-                fontSize: 16,
+                fontSize: 12,
                 fontWeight: FontWeight.w400),
           ),
         )

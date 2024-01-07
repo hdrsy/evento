@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
 import 'package:evento/features/organizer/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class AddMediaInFolderScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Obx(
-          ()=> Column(
+          () => Column(
             children: [
               Expanded(
                 child: MasonryGridView.builder(
@@ -46,12 +47,13 @@ class AddMediaInFolderScreen extends StatelessWidget {
                   ),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  itemCount: addMediaInFolderController.attachedMedia.length + 1,
+                  itemCount:
+                      addMediaInFolderController.attachedMedia.length + 1,
                   itemBuilder: (context, index) {
                     return index == 0
-                        ?  AddMediaCard()
-                        : Image.file(
-                            addMediaInFolderController.attachedMedia[index-1]);
+                        ? AddMediaCard()
+                        : Image.file(addMediaInFolderController
+                            .attachedMedia[index - 1]);
                   },
                 ),
               )
@@ -64,20 +66,24 @@ class AddMediaInFolderScreen extends StatelessWidget {
 }
 
 class AddMediaCard extends StatelessWidget {
-   AddMediaCard({super.key});
-  final AddMediaInFolderController addMediaInFolderController =Get.find();
+  AddMediaCard({super.key});
+  final AddMediaInFolderController addMediaInFolderController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showBottomSheetForImages(
-            context: context,onPressCamera: () {
-                    addMediaInFolderController.pickNewMedia(ImageSource.camera);
-                  },
-                  onPressGallery: () async {
-                    addMediaInFolderController.pickNewMedia(ImageSource.gallery);
-                  });
+        showBottomSheetForImagesAndVideos(
+            context: context,
+            onPressCamera: () {
+              addMediaInFolderController.pickNewMedia(ImageSource.camera);
+            },
+            onPressGallery: () async {
+              addMediaInFolderController.pickNewMedia(ImageSource.gallery);
+            },
+            onPressVideo: () async {
+              addMediaInFolderController.pickVideo();
+            });
       },
       child: Container(
         width: 50,

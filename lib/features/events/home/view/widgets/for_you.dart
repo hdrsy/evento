@@ -25,7 +25,10 @@ class ForYou extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: forYouLoading(),
             )
-          : Column(
+          :  justForYouController.itemList.isEmpty?const SizedBox():
+          
+          
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(

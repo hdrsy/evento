@@ -37,7 +37,7 @@ class RequestsList extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Friend requests",
+                          text: "Friend requests ",
                           style: TextStyle(
                             color: customColors.primaryText,
                             fontWeight: FontWeight.bold,
@@ -45,7 +45,7 @@ class RequestsList extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: "200",
+                          text: controller.recivedFreinds.length.toString(),
                           style: customTextStyle.bodyMedium.override(
                             fontFamily: 'Nunito',
                             color: customColors.primary,

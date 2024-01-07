@@ -42,7 +42,7 @@ class ApiHelper {
         var request = http.MultipartRequest(method, url);
         request.headers.addAll(headers);
 
-        // Add text fields to the request.
+        // Add text fields to the request.  
         data?.forEach((key, value) {
           request.fields[key] = value.toString();
         });

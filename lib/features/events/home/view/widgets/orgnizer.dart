@@ -5,6 +5,7 @@ import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
+import 'package:evento/features/events/home/model/home_oganizer.dart';
 import 'package:evento/features/events/home/model/organizer.dart';
 import 'package:evento/features/events/home/view/widgets/column_text.dart';
 import 'package:evento/features/events/home/view/widgets/home_loading_widget.dart';
@@ -14,15 +15,17 @@ import 'package:get/get.dart';
 
 class Orgnizers extends StatelessWidget {
   Orgnizers({super.key});
-  final OrganizerController organizerController = Get.find();
+  final HomeOrganizerController homeOrganizerController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => organizerController.isLoading.value
+      () => homeOrganizerController.isLoading.value
           ? const ShimmerLoadingWidget(
               loadingShimmerWidget: GridViewBuilderExample(),
             )
-          : Column(
+          : homeOrganizerController.itemList.isEmpty?const SizedBox():
+          
+           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(
@@ -46,7 +49,7 @@ class Orgnizers extends StatelessWidget {
 
 // Main widget function for Column
 Widget buildEventColumn() {
-  final OrganizerController organizerController = Get.find();
+  final HomeOrganizerController homeOrganizerController = Get.find();
 
   return SizedBox(
     width: double.infinity,
@@ -65,11 +68,11 @@ Widget buildEventColumn() {
               : (screenSize == ScreenSize.medium ? 32 : 34),
           children: [
             ...List.generate(
-                organizerController.itemList.length > 4
+                homeOrganizerController.itemList.length > 4
                     ? 4
-                    : organizerController.itemList.length,
-                (index) => buildEventItem(
-                     organizerEvent: organizerController.itemList[index],modelIndex: index
+                    : homeOrganizerController.itemList.length,
+                (index) => buildOrganizerItem(
+                     organizerHome: homeOrganizerController.itemList[index],modelIndex: index
                     ))
           ],
         ),
@@ -79,7 +82,7 @@ Widget buildEventColumn() {
 }
 
 // Function to create each event item
-Widget buildEventItem({required OrganizerEvent organizerEvent,required int modelIndex}) {
+Widget buildOrganizerItem({required OrganizerHome organizerHome,required int modelIndex}) {
   return InkWell(onTap: (){
     Get.toNamed('/OrganizerProfileScreen');
   },
@@ -87,9 +90,9 @@ Widget buildEventItem({required OrganizerEvent organizerEvent,required int model
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildEventImage('/storage/${organizerEvent.images[0]}'),
-        buildEventTitle(organizerEvent.title),
-        buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
+        buildEventImage('/storage/${organizerHome.imageUrl}'),
+        buildEventTitle("${organizerHome.firstName} ${organizerHome.lastName}"),
+        // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
       ],
     ),
   );
@@ -101,7 +104,16 @@ Widget buildEventImage(String imagePath) {
     onTap: () {},
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: getImageNetwork(url: imagePath, width: screenSize == ScreenSize.small
+      child:imagePath.length>6?Image.asset(
+                    'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
+            ? 120
+            : (screenSize == ScreenSize.medium ? 150 : 160),
+        height: screenSize == ScreenSize.small
+            ? 120
+            : (screenSize == ScreenSize.medium ? 150 : 160),):
+        
+      
+       getImageNetwork(url: imagePath, width: screenSize == ScreenSize.small
             ? 120
             : (screenSize == ScreenSize.medium ? 150 : 160),
         height: screenSize == ScreenSize.small

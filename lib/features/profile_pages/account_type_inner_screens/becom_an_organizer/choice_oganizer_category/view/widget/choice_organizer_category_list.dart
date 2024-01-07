@@ -1,4 +1,3 @@
-
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
@@ -9,7 +8,8 @@ import 'package:get/get.dart';
 
 class ChoiceOrganizerCategoryList extends StatelessWidget {
   ChoiceOrganizerCategoryList({super.key});
-  final ChoiceOrganizerCategoryController choiceOrganizerCategoryController = Get.find();
+  final ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,33 +28,59 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
             ),
           ),
         ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-        
-        ...List.generate(
-            choiceOrganizerCategoryController.choiceServiceList.length,
-            (index) => OrganizerCategoryCard(
-                  title: choiceOrganizerCategoryController.choiceServiceList[index].name,
-                )).divide(const SizedBox(height: 10,))
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ...List.generate(
+                choiceOrganizerCategoryController.choiceServiceList.length,
+                (index) => OrganizerCategoryCard(
+                      choiceOrganizerCategoryTypeModel:
+                          choiceOrganizerCategoryController
+                              .choiceServiceList[index],
+                    )).divide(const SizedBox(
+              height: 10,
+            )),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  "Other",
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: 'Nunito',
+                    color: customColors.primaryText,
+                    fontSize: 16,
+                    useGoogleFonts: true,
+                  ),
+                ),
+              ].divide(const SizedBox(width: 5)),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            OtherTextField()
+          ],
         )
-      ].divide(const SizedBox(height: 5,)),
+      ].divide(const SizedBox(
+        height: 5,
+      )),
     );
   }
 }
 
 class OrganizerCategoryCard extends StatelessWidget {
-  OrganizerCategoryCard({super.key, required this.title});
-  final String title;
-  final ChoiceOrganizerCategoryController choiceOrganizerCategoryController = Get.find();
+  OrganizerCategoryCard(
+      {super.key, required this.choiceOrganizerCategoryTypeModel});
+  final ChoiceOrganizerCategoryTypeModel choiceOrganizerCategoryTypeModel;
+  final ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChoiceOrganizerCategoryController>(
-      builder:(c)=> InkWell(
+      builder: (c) => InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
@@ -71,7 +97,7 @@ class OrganizerCategoryCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text(
-                  title,
+                  choiceOrganizerCategoryTypeModel.name,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: 'Nunito',
                     color: customColors.primaryText,
@@ -93,10 +119,11 @@ class OrganizerCategoryCard extends StatelessWidget {
                 unselectedWidgetColor: customColors.secondaryText,
               ),
               child: Checkbox(
-                value: choiceOrganizerCategoryController.sericeSelected == title,
+                value: choiceOrganizerCategoryController.selectedCategories
+                    .contains(choiceOrganizerCategoryTypeModel.categoryId),
                 onChanged: (value) {
-                  choiceOrganizerCategoryController.changeSelectedService(title);
-                  
+                  choiceOrganizerCategoryController.changeSelectedService(
+                      choiceOrganizerCategoryTypeModel.categoryId);
                 },
                 activeColor: customColors.primary,
                 checkColor: customColors.info,
@@ -105,6 +132,55 @@ class OrganizerCategoryCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class OtherTextField extends StatelessWidget {
+  const OtherTextField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      obscureText: false,
+      decoration: InputDecoration(
+        labelStyle: customTextStyle.labelMedium,
+        hintText: "Other specialties",
+        hintStyle: customTextStyle.labelMedium.override(
+          fontFamily: 'Nunito',
+          color: customColors.secondaryText,
+          useGoogleFonts: true,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: customColors.primaryBackground,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: customColors.primary,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: customColors.error,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: customColors.error,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      style: customTextStyle.bodyMedium,
     );
   }
 }

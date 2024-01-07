@@ -1,29 +1,29 @@
+
+
 import 'dart:convert';
 
 class MyRequestModel {
-  int id;
-  int userId;
-  String title;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  DateTime date;
-  String startTime;
-  String endTime;
-  int adults;
-  int child;
-  List<String> images; // Assuming it's a JSON string of an array
-  String? description;
-  int venueId;
-  List<int> serviceProviderId; // Assuming it's a JSON string of an array
-  String? additionalNotes;
-  String status;
-  int categoryId;
-  
+  final int id;
+  final String title;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final DateTime date;
+  final String startTime;
+  final String endTime;
+  final int adults;
+  final int child;
+  final List<String> images;
+  final String? description;
+  final String? additionalNotes;
+  final String status;
+  final int categoryId;
+  final String categoryTitle;
+  final List<MyRequestServiceProvider> serviceProviders;
+  final MyRequestVenue venue;
 
   MyRequestModel({
     required this.id,
-    required this.userId,
     required this.title,
     required this.firstName,
     required this.lastName,
@@ -33,32 +33,23 @@ class MyRequestModel {
     required this.endTime,
     required this.adults,
     required this.child,
-   required this.images ,
+    required this.images,
     this.description,
-    required this.venueId,
-    required this.serviceProviderId ,
     this.additionalNotes,
     required this.status,
     required this.categoryId,
-   
+    required this.categoryTitle,
+    required this.serviceProviders,
+    required this.venue,
   });
 
   factory MyRequestModel.fromJson(Map<String, dynamic> json) {
-    List<String> parseImages(String? imagesJson) {
-      if (imagesJson == null || imagesJson.isEmpty) return [];
-      return List<String>.from(jsonDecode(imagesJson));
-    }
-
-    List<int> parseServiceProviders(String? serviceProviderJson) {
-      if (serviceProviderJson == null || serviceProviderJson.isEmpty) return [];
-      // Decoding and parsing as a list of strings, then converting to int
-      var decodedList = jsonDecode(serviceProviderJson) as List;
-      return decodedList.map((item) => int.tryParse(item.toString()) ?? 0).toList();
-    }
-
+   var imageList = jsonDecode(json['images']) as List<dynamic>;
+List<String> images = imageList.map((e) => e as String).toList();
+    var serviceProvidersList = json['service_providers'] as List;
+    List<MyRequestServiceProvider> serviceProviders = serviceProvidersList.map((i) => MyRequestServiceProvider.fromJson(i)).toList();
     return MyRequestModel(
       id: json['id'],
-      userId: json['user_id'],
       title: json['title'],
       firstName: json['first_name'],
       lastName: json['last_name'],
@@ -68,15 +59,59 @@ class MyRequestModel {
       endTime: json['end_time'],
       adults: json['adults'],
       child: json['child'],
-       description: json['description'],
-      venueId: json['venue_id'],
-      images: parseImages(json['images'] ),
-    serviceProviderId: parseServiceProviders(json['service_provider_id'] ),
-     additionalNotes: json['additional_notes'],
+      images: images,
+      description: json['description'],
+      additionalNotes: json['additional_notes'],
       status: json['status'],
       categoryId: json['category_id'],
-     
+      categoryTitle: json['category']['title'],
+      serviceProviders: serviceProviders,
+      venue: MyRequestVenue  .fromJson(json['venue']),
     );
   }
+}
 
- }
+
+class MyRequestServiceProvider {
+  final int id;
+  final int categoryId;
+  final String  categoryTitle; 
+  final String  firstName; 
+  final String  lastName; 
+  
+
+ 
+  MyRequestServiceProvider({
+    required this.id,
+    required this.categoryId,
+    required this.categoryTitle,
+    required this.firstName,
+    required this.lastName,
+  });
+
+  factory MyRequestServiceProvider.fromJson(Map<String, dynamic> json) {
+    return MyRequestServiceProvider(
+      id: json['id'],
+      categoryId: json['category_id'],
+      categoryTitle: json['category']['title'],
+      firstName: json['user']['first_name'],
+      lastName: json['user']['last_name'],
+     );
+  }
+}
+class MyRequestVenue {
+  final int id;
+  final String name;
+  
+  MyRequestVenue({
+    required this.id,
+    required this.name,
+  });
+
+  factory MyRequestVenue.fromJson(Map<String, dynamic> json) {
+    return MyRequestVenue(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
+}

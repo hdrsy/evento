@@ -131,7 +131,7 @@ class SentCard extends StatelessWidget {
                                   final FreindsController freindsController =
                                       Get.find();
                                   freindsController.cancelSentRequest(
-                                      sentRequest.id, modelId);
+                                      sentRequest.receiverId, modelId);
                                 },
                                 text: "Cancel",
                                 options: ButtonOptions(

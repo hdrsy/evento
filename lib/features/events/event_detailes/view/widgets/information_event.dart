@@ -27,7 +27,7 @@ final EventDetailsModel eventDetailsModel;
          children: [
            Container(
             height: screenHeight*0.7,
-            width: screenWidth*0.9 ,
+            width: screenWidth*0.95 ,
             margin: const EdgeInsets.symmetric(horizontal: 10),
             padding:
              EdgeInsets.symmetric(vertical: screenHeight*0.05,horizontal: screenWidth*0.05),

@@ -48,75 +48,77 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // A text widget aligning at the center.
-            Align(
-              alignment: const AlignmentDirectional(0, -1),
-              child: Text(
-                "What best describes you?",
-                style: customTextStyle.bodyMedium.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.primaryText,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  useGoogleFonts: true,
-                ),
-              ),
-            ),
-            // Another text widget with center alignment and using animation.
-            Align(
-              alignment: const AlignmentDirectional(0, 0),
-              child: Text(
-                "With an organizer account, you get access to tools like insights about your followers and account performance, new contact options and more.",
-                style: customTextStyle.bodySmall.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.primaryText,
-                  useGoogleFonts: true,
-                ),
-              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-            ),
-            // A search text field.
-            searchTextField(onChanged: (value) {}),
-            // A custom widget to list organizer categories.
-            ChoiceOrganizerCategoryList(),
-            // Spacer to create space between widgets.
-            const Spacer(),
-            // Padding for the Done button.
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-              child: ButtonWidget(
-                onPressed: () async {
-                  // Showing a bottom sheet on button press.
-                  showButtonSheet(
-                    context: context,
-                    widget: const SwitchToOrganizerAccounWidget(),
-                    height: MediaQuery.of(context).size.height * 0.6
-                  );
-                },
-                text: "Done",
-                options: ButtonOptions(
-                  width: 200,
-                  height: 40,
-                  padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  color: customColors.primary,
-                  textStyle: customTextStyle.titleSmall.override(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // A text widget aligning at the center.
+              Align(
+                alignment: const AlignmentDirectional(0, -1),
+                child: Text(
+                  "What best describes you?",
+                  style: customTextStyle.bodyMedium.override(
                     fontFamily: 'Nunito',
-                    color: Colors.white,
+                    color: customColors.primaryText,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
                     useGoogleFonts: true,
                   ),
-                  elevation: 3,
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-            )
-          ].divide(const SizedBox(height: 10)), // Dividing widgets with spacing.
+              // Another text widget with center alignment and using animation.
+              Align(
+                alignment: const AlignmentDirectional(0, 0),
+                child: Text(
+                  "With an organizer account, you get access to tools like insights about your followers and account performance, new contact options and more.",
+                  style: customTextStyle.bodySmall.override(
+                    fontFamily: 'Nunito',
+                    color: customColors.primaryText,
+                    useGoogleFonts: true,
+                  ),
+                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+              ),
+              // A search text field.
+              searchTextField(onChanged: (value) {}),
+              // A custom widget to list organizer categories.
+              ChoiceOrganizerCategoryList(),
+              // Spacer to create space between widgets.
+              // const Spacer(),
+              // Padding for the Done button.
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                child: ButtonWidget(
+                  onPressed: () async {
+                    // Showing a bottom sheet on button press.
+                    showButtonSheet(
+                      context: context,
+                      widget: const SwitchToOrganizerAccounWidget(),
+                      height: MediaQuery.of(context).size.height * 0.6
+                    );
+                  },
+                  text: "Done",
+                  options: ButtonOptions(
+                    width: 200,
+                    height: 40,
+                    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    color: customColors.primary,
+                    textStyle: customTextStyle.titleSmall.override(
+                      fontFamily: 'Nunito',
+                      color: Colors.white,
+                      useGoogleFonts: true,
+                    ),
+                    elevation: 3,
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              )
+            ].divide(const SizedBox(height: 10)), // Dividing widgets with spacing.
+          ),
         ),
       ),
     );

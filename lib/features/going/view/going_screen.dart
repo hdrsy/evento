@@ -103,10 +103,10 @@ class GoingCard extends StatelessWidget {
                       child: goingModel.image.length > 6
                 ? getImageNetwork(
                     url: "/storage/${goingModel.image}",
-                    width: null,
-                    height: null)
+                    width: 90 ,
+                    height: 90)
                 : Image.asset(
-                    'assets/images/${goingModel.image}.png')),
+                    'assets/images/${goingModel.image}.png',width: 90,height: 90,)),
         
                     
                     Expanded(

@@ -24,9 +24,9 @@ class FreindsController extends GetxController {
     recivedFreinds = <ReceiveRequest>[].obs;
     sentFreinds = <SentRequest>[].obs;
     errorMessage = <String>[].obs;
-    isMyFriendsLoading=false.obs;
-    isRecivedFreindsLoading=false.obs;
-    isSentFreindsLoading=false.obs;
+    isMyFriendsLoading = false.obs;
+    isRecivedFreindsLoading = false.obs;
+    isSentFreindsLoading = false.obs;
     getMyFreinds();
     getSendRequest();
     getRecivedRequest();
@@ -34,7 +34,7 @@ class FreindsController extends GetxController {
   }
 
   getMyFreinds() async {
-    isMyFriendsLoading.value=true;
+    isMyFriendsLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -51,8 +51,8 @@ class FreindsController extends GetxController {
           .toList();
       print(myFreinds.length);
     }
-      update();
-    // isMyFriendsLoading.value=false;
+    update();
+    isMyFriendsLoading.value = false;
   }
 
   getSendRequest() async {
@@ -89,7 +89,6 @@ class FreindsController extends GetxController {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-      
     } else {
       List<dynamic> interestsJson = handlingResponse['receive_request'];
 
@@ -116,6 +115,30 @@ class FreindsController extends GetxController {
     } else {
       sentFreinds.removeAt(modelId);
       update();
+    }
+  }
+
+  unFreindRequest(int userId, int modelId) async {
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token") ?? "";
+    response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.cancelRequest}/$userId",
+        method: "GEt",
+        token: token);
+
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      myFreinds.removeAt(modelId);
+      update();
+      Get.back();
+
+      // If there is another bottom sheet underneath, close it as well
+      // You can call Get.back() again if needed, depending on your app's flow
+      Get.back();
+
+      Get.offAndToNamed('/FreindsScreen');
     }
   }
 

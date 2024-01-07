@@ -4,6 +4,7 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/going/model/going_model.dart';
+import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +40,7 @@ static int? eventId;
     itemList.addAll(categoryListJson
         .map((jsonItem) => GoingModel.fromJson(jsonItem))
         .toList());
+        updateFriendRequestStatus(itemList);
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }
@@ -47,6 +49,16 @@ static int? eventId;
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
+  void updateFriendRequestStatus(List<GoingModel> models) {
+   final ProfileController profileController=Get.find();
+  for (var model in models) {
+    // Assuming a match is defined as having the same id
+    if (model.id == profileController.profileModel.id) {
+      model.friendRequestStatus = 'me';
+    }
+  }
+}
+
 
   onPressAddFreind(int userId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
@@ -68,7 +80,7 @@ static int? eventId;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.denyRequest}/$requestId",
+        targetRout: "${ServerConstApis.cancelRequest}/$requestId",
         method: "GEt",
         token: token);
 

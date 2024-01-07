@@ -1,31 +1,43 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/utils/animation/animation_text.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
+import 'package:evento/features/profile_pages/my_booking/model/up_coming_booking.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:marquee/marquee.dart';
 
 class MyBookingCard extends StatelessWidget {
   const MyBookingCard(
       {super.key,
       required this.isCanceldSection,
+      required this.model,
       this.leftButtonOnTap,
+this.eventBooking,
       this.leftButtonTitle,
       required this.bookingStatus});
-
+final List<EventBooking>? eventBooking;
   final Function()? leftButtonOnTap;
   final String? leftButtonTitle;
   final bool isCanceldSection;
   final String bookingStatus;
+   final CancelledEvent model;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _buildImageSection(context),
+            _buildImageSection(context,model),
             Divider(
               thickness: 1,
               color: customColors.primaryBackground,
@@ -37,7 +49,7 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImageSection(BuildContext context) {
+  Widget _buildImageSection(BuildContext context,CancelledEvent model) {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(),
@@ -46,42 +58,45 @@ class MyBookingCard extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _buildImage(),
-            Expanded(child: _buildEventDetails(context)),
+            _buildImage(model.images),
+            Expanded(child: _buildEventDetails(context,model)),
           ].divide(const SizedBox(width: 10)),
         ),
       ),
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(List<String> img) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: Image.network(
+      child:img.isNotEmpty? getImageNetwork(url: "/storage/${img[0]}", width: 110, height: 110):Image.network(
         'https://picsum.photos/seed/886/600',
         width: 110,
         height: 110,
         fit: BoxFit.cover,
       ),
+      
+      
+       
     );
   }
 
-  Widget _buildEventDetails(BuildContext context) {
+  Widget _buildEventDetails(BuildContext context,CancelledEvent model) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildEventName(context),
-        _buildEventTime(context),
-        _buildLocationAndPrice(context),
+        _buildEventName(context, model.title),
+        _buildEventTime(context,model),
+        _buildLocationAndPrice(context,model),
       ].divide(const SizedBox(height: 8)),
     );
   }
 
-  Widget _buildEventName(BuildContext context) {
+  Widget _buildEventName(BuildContext context,String title) {
     return Text(
-      "DJ",
+      title,
       style: customTextStyle.bodyMedium.override(
         fontFamily: 'Nunito',
         color: customColors.primaryText,
@@ -92,9 +107,9 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildEventTime(BuildContext context) {
+  Widget _buildEventTime(BuildContext context,CancelledEvent model) {
     return Text(
-      "Sat, 20 Nov - 20:00 - 21:00",
+      "${DateFormatter.formatDate(model.startDate)} - ${DateFormatter.formatTime(model.startDate)} - ${DateFormatter.formatTime(model.endDate)}",
       style: customTextStyle.bodyMedium.override(
         fontFamily: 'Nunito',
         color: customColors.primary,
@@ -104,19 +119,20 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationAndPrice(BuildContext context) {
+  Widget _buildLocationAndPrice(BuildContext context,CancelledEvent model) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        _buildLocation(context),
+        _buildLocation(context,"${model.venue.governorate} / ${model.venue.locationDescription}"),
+        Spacer(),
         _buildPaidButton(context),
       ],
     );
   }
 
-  Widget _buildLocation(BuildContext context) {
+  Widget _buildLocation(BuildContext context,String location) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -125,10 +141,25 @@ class MyBookingCard extends StatelessWidget {
           color: customColors.primary,
           size: 15,
         ),
-        Text(
-          "Christmas",
-          style: customTextStyle.bodyMedium,
-        ),
+        SizedBox(
+          
+          width: screenWidth * 0.25,
+          height: screenHeight * 0.03,
+          child: Marquee(
+            text: location,
+            scrollAxis: Axis.horizontal,
+            blankSpace: 20.0,
+            velocity: 70.0,
+            pauseAfterRound: const Duration(seconds: 3),
+            style: customTextStyle.bodyMedium.override(
+              useGoogleFonts: false,
+                color: customColors.secondaryText,
+                fontFamily: secondaryFontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w400),
+          ),
+        )
+       
       ],
     );
   }
@@ -211,7 +242,8 @@ class MyBookingCard extends StatelessWidget {
   Widget _buildViewTicketButton(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
-       
+      //  Get.toNamed('/BookingDetailesScreen',arguments: [eventDetailsModel,ticketList])
+        
       },
       text: "View E-Ticket",
       options: ButtonOptions(
