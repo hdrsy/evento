@@ -50,10 +50,28 @@ class AddMediaInFolderScreen extends StatelessWidget {
                   itemCount:
                       addMediaInFolderController.attachedMedia.length + 1,
                   itemBuilder: (context, index) {
-                    return index == 0
-                        ? AddMediaCard()
-                        : Image.file(addMediaInFolderController
-                            .attachedMedia[index - 1]);
+                    if (index == 0) {
+                      return AddMediaCard();
+                    } else {
+                      var mediaItem =
+                          addMediaInFolderController.attachedMedia[index - 1];
+                      if (mediaItem.containsKey("image")) {
+                        return Image.file(mediaItem["image"]!);
+                      } else if (mediaItem.containsKey("video")) {
+                        // Placeholder for video, adjust as necessary for your video player
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.file(mediaItem["video"]!),
+                            Icon(Icons.play_circle_fill), // Placeholder icon
+                            // Implement your video player widget here
+                          ],
+                        );
+                      } else {
+                        return SizedBox
+                            .shrink(); // Fallback for unknown media type
+                      }
+                    }
                   },
                 ),
               )

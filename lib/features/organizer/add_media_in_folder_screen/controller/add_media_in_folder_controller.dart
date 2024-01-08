@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:evento/core/utils/services/compress_images.dart';
+import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,13 +10,14 @@ import 'package:image_picker/image_picker.dart';
 class AddMediaInFolderController extends GetxController {
   late String folderName;
   late int folderIndex;
-  late RxList<File> attachedMedia;
-  late RxList<File> attachedVideos;
+  // late RxList<File> attachedMedia;
+  // late RxList<File> attachedVideos;
+  late RxList<Map<String,File>> attachedMedia;
   @override
   void onInit() {
     folderName = Get.arguments[0];
     folderIndex = Get.arguments[1];
-    attachedMedia = <File>[].obs;
+    attachedMedia = <Map<String,File>>[].obs;
     super.onInit();
   }
 
@@ -31,7 +33,7 @@ class AddMediaInFolderController extends GetxController {
     if (pickedFile != null) {
       File videoFile = File(pickedFile.path);
       // Now you can use the video file for your needs
-      attachedVideos.add(videoFile);
+      attachedMedia.add({"video":await generateThumbnail(videoFile)});
       OrganizerCreateProfileController organizerCreateProfileController =
           Get.find();
 
@@ -47,32 +49,32 @@ class AddMediaInFolderController extends GetxController {
   void pickNewMedia(ImageSource imageSource) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-      attachedMedia.add(File(pickedImage.path));
+      attachedMedia.add({"image":File(pickedImage.path)});
       OrganizerCreateProfileController organizerCreateProfileController =
           Get.find();
-
-      File originalImage = File(pickedImage.path);
-
-
-      // Compress the image
-      XFile? compressedImageXFile = await compressImage(originalImage);
-      File? compressedImage;
-
-      if (compressedImageXFile != null) {
-        compressedImage = File(compressedImageXFile.path);
-      }
-
-      // Check if compression was successful
-      if (compressedImage != null) {
-        // Get compressed size
-        int compressedSize = await compressedImage.length();
-        print("Compressed Size: $compressedSize bytes");
-        organizerCreateProfileController.foldersModel[folderIndex].mediaList
+ organizerCreateProfileController.foldersModel[folderIndex].mediaList
             .add(MediaModel(
-                mediaType: "image", media: File(compressedImage.path)));
+                mediaType: "image", media: File(pickedImage.path)));
 
+      // File originalImage = File(pickedImage.path);
+
+
+      // // Compress the image
+      // XFile? compressedImageXFile = await compressImage(originalImage);
+      // File? compressedImage;
+
+      // if (compressedImageXFile != null) {
+      //   compressedImage = File(compressedImageXFile.path);
+      // }
+
+      // // Check if compression was successful
+      // if (compressedImage != null) {
+      //   // Get compressed size
+      //   int compressedSize = await compressedImage.length();
+      //   print("Compressed Size: $compressedSize bytes");
+       
         Get.back();
-      }
+      // }
     }
   }
 

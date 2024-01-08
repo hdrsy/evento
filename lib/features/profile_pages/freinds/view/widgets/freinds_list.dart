@@ -123,10 +123,10 @@ class FreindsCard extends StatelessWidget {
                   child:  freindsModel.image.length > 6
                 ? getImageNetwork(
                     url: "/storage/${freindsModel.image}",
-                    width: null,
-                    height: null)
+                    width: 90,
+                    height: 90)
                 : Image.asset(
-                    'assets/images/${freindsModel.image}.png'),
+                    'assets/images/${freindsModel.image}.png',width: 90,height: 90,),
        
                   
                  
