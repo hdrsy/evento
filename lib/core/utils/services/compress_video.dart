@@ -13,8 +13,8 @@ Future<File?> compressVideo(File videoFile) async {
     // Compress the video
     MediaInfo? mediaInfo = await VideoCompress.compressVideo(
       videoFile.path,
-      quality: VideoQuality.DefaultQuality, // Adjust quality as needed
-      deleteOrigin: false,
+        quality: VideoQuality.LowQuality, // Adjust quality as needed
+      deleteOrigin: true,
     );
 
     // Get the compressed file size

@@ -15,6 +15,7 @@ class ServiceAccordingCategoryController extends GetxController{
 late String serviceCategoryType;
   late RxList<String> errorMessage;
   late int serviceCategoryIndex;
+  late bool isInCustomuzEvent;
   
 @override
   void onInit() async{
@@ -25,7 +26,7 @@ late String serviceCategoryType;
 serviceAccordingCategoryIndex=Get.arguments[0];
     serviceCategoryType=Get.arguments[1];
     serviceCategoryIndex=Get.arguments[2];
-    
+    isInCustomuzEvent=Get.arguments[3];
        
     log(serviceCategoryIndex.toString());
   await  fetchData();

@@ -22,10 +22,11 @@ class ServerConstApis {
 /////////forImages
   static String loadImages = baseAPI;
 
-//// 
+////  organizer
   static String followOrganizer = '$baseAPI/api/follow';
   static String unFollowOrganizer = '$baseAPI/api/unfollow';
   static String becomeOrganizer = '$baseAPI/api/become_organizer';
+  static String organizerProfile = '$baseAPI/api/organizer_profile';
 
   ///// home page
   static String getCategoryList = '$baseAPI/api/event_category';

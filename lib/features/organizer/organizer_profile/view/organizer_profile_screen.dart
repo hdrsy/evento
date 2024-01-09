@@ -1,8 +1,10 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/utils/animation/animation_text.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/organizer/organizer_profile/controller/organizer_profile_controller.dart';
 import 'package:evento/features/organizer/organizer_profile/view/widgets/folder_card.dart';
 import 'package:evento/features/organizer/organizer_profile/view/widgets/organizer_followers_card.dart';
 import 'package:evento/features/organizer/organizer_profile/view/widgets/organzer_event_card.dart';
@@ -11,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrganizerProfileScreen extends StatelessWidget {
-  const OrganizerProfileScreen({super.key});
-
+  OrganizerProfileScreen({super.key});
+  final OrganizerProfileController organizerProfileController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,26 +32,32 @@ class OrganizerProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          _buildTopSection(context),
-          const NameAndFollow(),
-   
-          Divider(
-            height: 30,
-            thickness: 1,
-            color: customColors.secondary,
-          ),
-          const StaticSection(),
-          Divider(
-            height: 30,
-            thickness: 1,
-            color: customColors.secondary,
-          ),
-const MyTabBarWidget()
-
-        ],
+      body: Obx(
+        () => organizerProfileController.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ),
+              )
+            : Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  _buildTopSection(context),
+                  NameAndFollow(),
+                  Divider(
+                    height: 30,
+                    thickness: 1,
+                    color: customColors.secondary,
+                  ),
+                  StaticSection(),
+                  Divider(
+                    height: 30,
+                    thickness: 1,
+                    color: customColors.secondary,
+                  ),
+                  const MyTabBarWidget()
+                ],
+              ),
       ),
     );
   }
@@ -107,60 +115,74 @@ const MyTabBarWidget()
 }
 
 class NameAndFollow extends StatelessWidget {
-  const NameAndFollow({super.key});
+  NameAndFollow({super.key});
+  final OrganizerProfileController organizerProfileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Align(
-          alignment: const AlignmentDirectional(0, -1),
-          child: Text(
-            "Spark",
-            style: customTextStyle.headlineMedium.override(
-              fontFamily: 'Plus Jakarta Sans',
-              color: customColors.primaryText,
-              fontSize: 24,
-              useGoogleFonts: true,
-              fontWeight: FontWeight.w500,
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          marqueeTitle(
+            """ organizerProfileController
+                .organizerProfileModel.organizerInfo.namedddddddddddddddddddddddddddddddd""",
+            heigthFromTheScreen: 0.04,
+            widthFromTheScreen: 0.4,
+            fontFamily: 'Plus Jakarta Sans',
+            fontSize: 24,
           ),
-        ),
-        ButtonWidget(
-          onPressed: () async {},
-          text: "Following",
-          icon: const Icon(
-            Icons.person_add_outlined,
-            size: 20,
-          ),
-          options: ButtonOptions(
-            width: 150,
-            height: 35,
-            padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
-            iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-            color: customColors.primary,
-            textStyle: customTextStyle.titleSmall.override(
-              fontFamily: secondaryFontFamily,
-              color: customColors.info,
-              fontSize: 10,
-              fontWeight: FontWeight.normal,
-              useGoogleFonts: true,
-            ),
-            borderSide: BorderSide(
-              color: customColors.primary,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-      ].divide(const SizedBox(width: 90)),
+          GetBuilder<OrganizerProfileController>(builder: (context) {
+            return ButtonWidget(
+              onPressed: () async {
+                organizerProfileController.followOrUnFollowOrganizer(
+                    organizerProfileController.orgnizerId);
+              },
+              text: organizerProfileController
+                      .organizerProfileModel.organizerInfo.isFollowedByAuthUser
+                  ? "Following"
+                  : "Follow",
+              icon: const Icon(
+                Icons.person_add_outlined,
+                size: 20,
+              ),
+              options: ButtonOptions(
+                width: 150,
+                height: 35,
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                color: organizerProfileController.organizerProfileModel
+                        .organizerInfo.isFollowedByAuthUser
+                    ? customColors.secondaryBackground
+                    : customColors.primary,
+                textStyle: customTextStyle.titleSmall.override(
+                  fontFamily: secondaryFontFamily,
+                  color: organizerProfileController.organizerProfileModel
+                          .organizerInfo.isFollowedByAuthUser
+                      ? customColors.primary
+                      : customColors.info,
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  useGoogleFonts: true,
+                ),
+                borderSide: BorderSide(
+                  color: customColors.primary,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            );
+          }),
+        ],
+      ),
     );
   }
 }
 
 class StaticSection extends StatelessWidget {
-  const StaticSection({super.key});
+  StaticSection({super.key});
+  final OrganizerProfileController organizerProfileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +190,11 @@ class StaticSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const statisticSingleElement(count: "10", title: "Events"),
+        statisticSingleElement(
+            count: organizerProfileController
+                .organizerProfileModel.organizedEvents.length
+                .toString(),
+            title: "Events"),
         const statisticSingleElement(title: "Followers", count: "65 K"),
         const statisticSingleElement(title: "Following", count: "20"),
       ].divide(
@@ -225,8 +251,8 @@ class statisticSingleElement extends StatelessWidget {
     );
   }
 }
+
 class MyTabBarWidget extends StatelessWidget {
- 
   const MyTabBarWidget({super.key});
 
   @override
@@ -237,11 +263,11 @@ class MyTabBarWidget extends StatelessWidget {
         child: Column(
           children: [
             _buildTabBar(context),
-             Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
                   _buildBioTab(context),
-                 _buildEventsTab(context),
+                  _buildEventsTab(context),
                   _buildFollowersTab(context),
                   _buildGalleryTab(context),
                 ],
@@ -260,32 +286,33 @@ class MyTabBarWidget extends StatelessWidget {
         labelColor: customColors.primaryText,
         unselectedLabelColor: customColors.secondaryText,
         labelStyle: customTextStyle.bodyMedium.override(
-              fontFamily: 'Nunito',
-              fontSize: 12,
-              useGoogleFonts: true,
-            ),
+          fontFamily: 'Nunito',
+          fontSize: 12,
+          useGoogleFonts: true,
+        ),
         unselectedLabelStyle: const TextStyle(),
         indicatorColor: customColors.primary,
         padding: const EdgeInsets.all(4),
-        tabs:const [
-           Tab(text: 'Bio'),
-           Tab(text: 'Events'),
-           Tab(text: 'Followers'),
-           Tab(text: 'Gallery'),
+        tabs: const [
+          Tab(text: 'Bio'),
+          Tab(text: 'Events'),
+          Tab(text: 'Followers'),
+          Tab(text: 'Gallery'),
         ],
       ),
     );
   }
 
   Widget _buildBioTab(BuildContext context) {
+    final OrganizerProfileController organizerProfileController = Get.find();
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-    
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            """Event organizer specialize in turning your dreams into reality with stunning decorations, ambient lighting, and exquisite floral arrangements. Whether it's an intimate wedding, a milestone birthday, or a grand anniversary celebration, we are dedicated to creating unforgettable experiences that reflect your unique style and personal touch. With a keen eye for detail and a passion for perfection, our team ensures that each event is a masterpiece of beauty and elegance. Trust Spark to light up your special occasions with sophistication and joy.""",
+            organizerProfileController.organizerProfileModel.organizerInfo.bio,
             style: customTextStyle.bodyMedium,
           ),
           const SizedBox(height: 16),
@@ -295,34 +322,59 @@ class MyTabBarWidget extends StatelessWidget {
   }
 
   Widget _buildEventsTab(BuildContext context) {
+    final OrganizerProfileController organizerProfileController = Get.find();
+
     return SingleChildScrollView(
-       padding: const EdgeInsets.symmetric(horizontal: 24),
-    
-      child: Column(children: [
-        ...List.generate(3, (index) =>const OrganizerEventCard())
-      ].divide(const SizedBox(height: 10,)),),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          ...List.generate(
+              organizerProfileController
+                  .organizerProfileModel.organizedEvents.length,
+              (index) => OrganizerEventCard(
+                    modelIndex: index,
+                    organizerProfileEvent: organizerProfileController
+                        .organizerProfileModel.organizedEvents[index],
+                  ))
+        ].divide(const SizedBox(
+          height: 10,
+        )),
+      ),
     );
   }
 
   Widget _buildFollowersTab(BuildContext context) {
     return SingleChildScrollView(
-       padding: const EdgeInsets.symmetric(horizontal: 24),
-    
-      child: Column(children: [
-        ...List.generate(3, (index) =>const OrganizerFolloersCard())
-      ].divide(const SizedBox(height: 10,)),),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          ...List.generate(3, (index) => const OrganizerFolloersCard())
+        ].divide(const SizedBox(
+          height: 10,
+        )),
+      ),
     );
-  
   }
 
   Widget _buildGalleryTab(BuildContext context) {
+    final OrganizerProfileController organizerProfileController = Get.find();
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Column(children: [
-        ...List.generate(3, (index) =>const OrganizerFolderCard())
-      ].divide(const SizedBox(height: 10,)),),
+      child: Column(
+        children: [
+          ...List.generate(
+              organizerProfileController
+                  .organizerProfileModel.organizerInfo.albums.length,
+              (index) => OrganizerFolderCard(
+                    album: organizerProfileController
+                        .organizerProfileModel.organizerInfo.albums[index],
+                  ))
+        ].divide(const SizedBox(
+          height: 10,
+        )),
+      ),
     );
     // Your code for the Gallery tab
   }
-
 }

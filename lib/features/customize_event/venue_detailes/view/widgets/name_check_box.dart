@@ -2,14 +2,15 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
 import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
 import 'package:evento/features/customize_event/venue/model/venue_model.dart';
+import 'package:evento/features/customize_event/venue_detailes/controller/venue_detailes_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NameCheckBox extends StatelessWidget {
-  const NameCheckBox({super.key, required this.venue, });
+   NameCheckBox({super.key, required this.venue, });
 final Venue venue;
-
+final VenueDetailesController venueDetailesController=Get.find();
   @override
   Widget build(BuildContext context) {
     return 
@@ -33,7 +34,9 @@ Row(
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
         ),
-        child: Row(
+        child:
+ venueDetailesController.isInCustomuzEvent?
+         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
@@ -72,7 +75,15 @@ Row(
               }
             ),
           ],
-        ),
+        )
+    : Text( "Review Venue",
+              style: customTextStyle.bodyMedium.override(
+                    fontFamily: 'Nunito',
+                    color: customColors.primary,
+                    fontSize: 12,
+                    useGoogleFonts: true,
+                  ),)
+    
       ),
     ),
   ],

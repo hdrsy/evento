@@ -47,7 +47,7 @@ class BuildButton extends StatelessWidget {
           onPressed: () async {
             await showButtonSheet(
                 context: context,
-                widget: const ReviewEventWidget(),
+                widget:  ReviewEventWidget(ratingTarget: "Your Event"),
                 height: 450);
           },
           text: "Review Event",

@@ -1,24 +1,19 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/service_category/model/service_category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ServiceCard extends StatelessWidget {
-  const ServiceCard({super.key, required this.serviceCategoryModel,required this.serviceCategoryIndex});
-final ServiceCategoryModel serviceCategoryModel;
-final int serviceCategoryIndex;
+class SeeAllServiceVenueCard extends StatelessWidget {
+  const SeeAllServiceVenueCard({super.key});
   @override
   Widget build(BuildContext context) {
     return 
 InkWell(
   onTap: (){
-   Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title,serviceCategoryIndex,true] );
-  
+    Get.toNamed('/VenueScreen',arguments: false);
   },
   child:   Stack(
   
@@ -40,7 +35,11 @@ InkWell(
   
             alignment: const AlignmentDirectional(0.00, 0.20),
   
-            image: getImageNetwork(url: serviceCategoryModel.icon, width: null, height:null)  .image,
+            image: Image.asset(
+  
+              'assets/images/pexels-asad-photo-maldives-169189.jpg',
+  
+            ).image,
   
           ),
   
@@ -114,7 +113,7 @@ InkWell(
   
                     Text(
   
-                      serviceCategoryModel.title ,
+                       "Venue",
   
                       style: customTextStyle.bodyMedium.override(
   
@@ -134,7 +133,7 @@ InkWell(
   
                     Text(
   
-                      serviceCategoryModel.description,
+                      "Select a picturesque setting for your special day",
   
                       style: customTextStyle.bodyMedium.override(
   
@@ -186,7 +185,8 @@ InkWell(
   
                       // context.pushNamed('Venuelist');
   
-                   
+                  
+  
                     },
   
                   ),

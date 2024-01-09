@@ -10,11 +10,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReviewEventWidget extends StatelessWidget {
   const ReviewEventWidget({
-    Key? key,
+    Key? key, required this.ratingTarget,
    
   }) : super(key: key);
 
-  
+  final String ratingTarget;
   @override
   Widget build(BuildContext context) {
  
@@ -57,7 +57,7 @@ class ReviewEventWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                         "Rate Your Event",
+                         "Rate $ratingTarget",
                         textAlign: TextAlign.start,
                         style: customTextStyle.headlineSmall,
                       ),

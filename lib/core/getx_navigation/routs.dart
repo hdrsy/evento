@@ -1,3 +1,4 @@
+import 'package:evento/features/assign_friends/view/assign_friends_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/verify_forget_password/view/verify_forget_password.dart';
@@ -74,6 +75,7 @@ import 'package:evento/features/profile_pages/request_status/controller/binding/
 import 'package:evento/features/profile_pages/request_status/view/request_status_screen.dart';
 import 'package:evento/features/see_location_and_dirction/dirction/view/dirction_screen.dart';
 import 'package:evento/features/see_location_and_dirction/see_location/view/see_location_screen.dart';
+import 'package:evento/features/service_provider/see_all_service_category_profile_page/view/see_all_service_category_screen.dart';
 import 'package:get/get.dart';
 
 appRoutes() => [
@@ -108,7 +110,9 @@ appRoutes() => [
     GetPage(name: '/SwithcToServiceProviderScreen', page:()=>  SwithcToServiceProviderScreen()) , 
     GetPage(name: '/HelpCenterScreen', page:()=> const HelpCenterScreen()) , 
     GetPage(name: '/InviteFreindsToEventScreen', page:()=> const InviteFreindsToEventScreen()) , 
-    GetPage(name: '/SeeAllOrganizersScreen', page:()=> const SeeAllOrganizersScreen()) , 
+    GetPage(name: '/AssignFriendsScreen', page:()=>  AssignFriendsScreen()) , 
+    GetPage(name: '/SeeAllServiceCategoryScreen', page:()=>  SeeAllServiceCategoryScreen()) , 
+    GetPage(name: '/SeeAllOrganizersScreen', page:()=>  SeeAllOrganizersScreen()) , 
     GetPage(name: '/SeeAllOffersScreen', page:()=> const SeeAllOffersScreen()) , 
     GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 

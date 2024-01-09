@@ -41,7 +41,7 @@ class AddMediaInFolderController extends GetxController {
     return;
   }
 
-  if (videoDuration.inSeconds > 120) {
+  if (videoDuration.inSeconds/1000 > 120) {
     _showDurationExceededDialog();
     return;
   }
@@ -79,7 +79,7 @@ Future<void> _processSelectedVideo(File videoFile) async {
   OrganizerCreateProfileController organizerCreateProfileController = Get.find();
   organizerCreateProfileController.foldersModel[folderIndex].mediaList.add(MediaModel(mediaType: "video", media: videoFile));
   print("Video path: ${videoFile.path}");
-  Get.back();
+  
 }
 void pickNewMedia(ImageSource imageSource) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -90,7 +90,7 @@ void pickNewMedia(ImageSource imageSource) async {
       organizerCreateProfileController.foldersModel[folderIndex].mediaList
           .add(MediaModel(mediaType: "image", media: File(pickedImage.path)));
 
-      Get.back();
+      
       // }
     }
   }

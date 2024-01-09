@@ -13,6 +13,7 @@ class OrganizerHome {
   DateTime updatedAt;
   int followersCount;
   String? friendRequestStatusWithAuthUser;
+   bool isFollowedByAuthUser=false;
 
   OrganizerHome({
     required this.id,

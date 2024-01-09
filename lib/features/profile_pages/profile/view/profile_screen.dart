@@ -66,6 +66,11 @@ final ProfileController profileController=Get.find();
                     title: tr("Invite friends"),
                   ),
                    OptionsCard(
+                    targetRout: '/SeeAllServiceCategoryScreen',
+                    icon: Icons.miscellaneous_services_outlined,
+                    title: tr("Service Provider"),
+                  ),
+                   OptionsCard(
                     targetRout: '/AchivmentScreen',
                     icon: Icons.code_sharp,
                     title: tr("Achievements"),

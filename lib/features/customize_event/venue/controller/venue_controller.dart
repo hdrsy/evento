@@ -5,14 +5,16 @@ import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/customize_event/venue/model/venue_model.dart';
 import 'package:evento/main.dart';
+import 'package:get/get.dart';
 
 
 class VenueController  extends PaginationController<Venue> {
   VenueController() : super(fetchDataCallback: _fetchData);
-
+late bool isInCustomuzEvent;
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
+        
     String token = await prefService.readString("token") ?? "";
     String apiUrl = "${ServerConstApis.getAllvenue}?page=$page";
 
@@ -26,6 +28,8 @@ class VenueController  extends PaginationController<Venue> {
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
+    isInCustomuzEvent=Get.arguments;
+    
     List<dynamic> categoryListJson = handlingResponse['message']['data'];
     lastPageId = handlingResponse['message']['last_page'];
 

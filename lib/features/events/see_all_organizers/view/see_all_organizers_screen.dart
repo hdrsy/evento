@@ -1,16 +1,21 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
+import 'package:evento/core/shared/widgets/widget/users_shimmer_card.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/events/home/model/home_oganizer.dart';
+import 'package:evento/features/events/see_all_organizers/controller/see_all_organizers_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SeeAllOrganizersScreen extends StatelessWidget {
-  const SeeAllOrganizersScreen({super.key});
-
+  SeeAllOrganizersScreen({super.key});
+  final SeeAllOrganizersController seeAllOrganizersController =
+      Get.put(SeeAllOrganizersController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,12 +38,34 @@ class SeeAllOrganizersScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        controller: seeAllOrganizersController.scrollController,
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: Column(
-          children: [
-            searchTextField(onChanged: (c) {}),
-            ...List.generate(4, (index) =>OrganizerSeeAllCard())
-          ].divide(SizedBox(height: 10,)),
+        child: Obx(
+          () => Column(
+            children: [
+              searchTextField(onChanged: (c) {}),
+              ...List.generate(
+                  seeAllOrganizersController.hasMoreData.value
+                      ? seeAllOrganizersController.itemList.length + 1
+                      : seeAllOrganizersController.itemList.length,
+                  (index) => index < seeAllOrganizersController.itemList.length
+                      ? OrganizerSeeAllCard(
+                          modelId: index,
+                          organizerHome:
+                              seeAllOrganizersController.itemList[index],
+                        )
+                      : Column(
+                          children: [
+                            ...List.generate(
+                                3, (index) => const ShimmerFriendCard())
+                          ].divide(const SizedBox(
+                            height: 5,
+                          )),
+                        ))
+            ].divide(SizedBox(
+              height: 10,
+            )),
+          ),
         ),
       ),
     );
@@ -46,67 +73,81 @@ class SeeAllOrganizersScreen extends StatelessWidget {
 }
 
 class OrganizerSeeAllCard extends StatelessWidget {
-  const OrganizerSeeAllCard({super.key});
-
+  const OrganizerSeeAllCard(
+      {super.key, required this.organizerHome, required this.modelId});
+  final OrganizerHome organizerHome;
+  final int modelId;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 1),
-        child: Container(
-          width: screenHeight * 0.15,
-          decoration: BoxDecoration(
-            color: customColors.secondaryBackground,
+    return InkWell(
+      onTap: (){
+        Get.toNamed('/OrganizerProfileScreen',arguments: organizerHome.id);
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 1),
+          child: Container(
+            width: screenHeight * 0.15,
+            decoration: BoxDecoration(
+              color: customColors.secondaryBackground,
+            ),
+            child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: organizerHome.imageUrl.length > 6
+                            ? getImageNetwork(
+                                url: '/storage/${organizerHome.imageUrl}',
+                                width: 90,
+                                height: 90)
+                            : Image.asset(
+                                'assets/images/${organizerHome.imageUrl.substring(organizerHome.imageUrl.length - 1)}.png')),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      "${organizerHome.firstName} ${organizerHome.lastName}",
+                      style: customTextStyle.bodyLarge.override(
+                          fontSize: 16,
+                          fontFamily: secondaryFontFamily,
+                          useGoogleFonts: true),
+                    ),
+                    Spacer(),
+                    GetBuilder<SeeAllOrganizersController>(
+                      builder: (controller) {
+                        return ButtonWidget(
+                          onPressed: () {
+                          controller.followOrUnFollowOrganizer(organizerHome.id, modelId);
+                          },
+                          text:organizerHome.isFollowedByAuthUser? "Following":"Follow",
+                          options: ButtonOptions(
+                            width: 100,
+                            height: 21,
+                            iconPadding:
+                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color:organizerHome.isFollowedByAuthUser? customColors.secondaryBackground:customColors.primary,
+                            textStyle: customTextStyle.titleSmall.override(
+                              fontFamily: 'Nunito',
+                              color:organizerHome.isFollowedByAuthUser? customColors.primary:customColors.info,
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              useGoogleFonts: true,
+                            ),
+                            borderSide: BorderSide(
+                              color: customColors.primary,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        );
+                      }
+                    ),
+                  ],
+                )),
           ),
-          child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(width: 12,),
-                  Text(
-                    "Maysam ",
-                    style: customTextStyle.bodyLarge.override(
-                      fontSize: 16,
-                      fontFamily: secondaryFontFamily,
-                      useGoogleFonts: true
-                    ),
-                  ),
-                  Spacer(),
-                  ButtonWidget(
-                    onPressed: () {},
-                    text: "Follow",
-                    options: ButtonOptions(
-                      width: 100,
-                      height: 21,
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: customColors.primary,
-                      textStyle: customTextStyle.titleSmall.override(
-                        fontFamily: 'Nunito',
-                        color: customColors.info,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        useGoogleFonts: true,
-                      ),
-                      borderSide: BorderSide(
-                        color: customColors.primary,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ],
-              )),
         ),
       ),
     );

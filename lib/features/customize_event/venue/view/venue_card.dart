@@ -2,6 +2,7 @@ import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
+import 'package:evento/features/customize_event/venue/controller/venue_controller.dart';
 import 'package:evento/features/customize_event/venue/model/venue_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:get/get.dart';
 class VenueCard extends StatelessWidget {
   VenueCard({super.key, required this.venue});
   final Venue venue;
-
+final VenueController venueController=Get.find();
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -19,7 +20,7 @@ class VenueCard extends StatelessWidget {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.toNamed('/VenueDetailesScreen',arguments: venue);
+        Get.toNamed('/VenueDetailesScreen',arguments: [venue,venueController.isInCustomuzEvent]);
       },
       child: Container(
         width: double.infinity,
@@ -47,6 +48,7 @@ class VenueCard extends StatelessWidget {
                     venue.name,
                     style: customTextStyle.headlineSmall,
                   ),
+             venueController.isInCustomuzEvent?
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +91,9 @@ class VenueCard extends StatelessWidget {
                         );
                       }),
                     ],
-                  ),
+                  )
+              
+              :const SizedBox.shrink()
                 ],
               ),
               Padding(

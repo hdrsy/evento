@@ -1,6 +1,7 @@
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/customize_event/serivce_according_category/controller/service_according_category_controller.dart';
 import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
 import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
 import 'package:evento/main.dart';
@@ -14,6 +15,7 @@ class ServiceAccordingCard extends StatelessWidget {
       required this.serviceCategoryIndex});
   final ServiceProvider serviceProvider;
   final int serviceCategoryIndex;
+  final ServiceAccordingCategoryController serviceAccordingCategoryController=Get.find();
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,7 +25,7 @@ class ServiceAccordingCard extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () async {
         Get.toNamed('/ServiceAccordingDetailesScreen',
-            arguments: [serviceProvider, serviceCategoryIndex]);
+            arguments: [serviceProvider, serviceCategoryIndex,serviceAccordingCategoryController.isInCustomuzEvent]);
       },
       child: Container(
         width: double.infinity,
@@ -52,6 +54,7 @@ class ServiceAccordingCard extends StatelessWidget {
                         serviceProvider.user.lastName,
                     style: customTextStyle.headlineSmall,
                   ),
+    serviceAccordingCategoryController.isInCustomuzEvent?
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,7 +98,8 @@ class ServiceAccordingCard extends StatelessWidget {
                         );
                       }),
                     ],
-                  ),
+                  )
+               :const SizedBox.shrink()
                 ],
               ),
               Padding(

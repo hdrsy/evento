@@ -96,7 +96,7 @@ Stack(
                   
                   onTap: () async {
                     // context.pushNamed('Venuelist');
-                    Get.toNamed('/VenueScreen');
+                    Get.toNamed('/VenueScreen',arguments: true);
                   },
                 ),
               ].addToEnd(const SizedBox(height: 30)),

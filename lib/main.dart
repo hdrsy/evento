@@ -4,6 +4,7 @@ import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/extenstions/color_extenstions.dart';
 import 'package:evento/core/utils/extenstions/text_extenstions.dart';
 import 'package:evento/core/utils/services/pref_service.dart';
+import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,13 @@ late AppColorsExtension customColors;
 late TextExtension customTextStyle;
 late String? targetRout;
 late String? themeValue;
+late UserInfo? user;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
   themeValue = await prefService.readString('theme');
   targetRout=await prefService.isContainKey('token')?'/home':"/";
+  user=await UserInfo.getUserInfo();
   await EasyLocalization.ensureInitialized();
 
   runApp(

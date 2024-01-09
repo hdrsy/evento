@@ -2,9 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/features/book_now/model/ticket_model.dart';
 import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,8 @@ class BookNowController extends GetxController {
   late EventDetailsModel eventDetailsModel;
   late RxBool isLoading;
   late RxList<String> errorMessage;
+  late RxList<FreindsModel> myFreinds;
+  
   late RxList<TicketModel> ticketList;
   @override
   void onInit() {
@@ -20,8 +24,11 @@ class BookNowController extends GetxController {
     ticketList = <TicketModel>[
       TicketModel(selectedClass: eventDetailsModel.classes[0])
     ].obs;
+     myFreinds = <FreindsModel>[].obs;
+   
     isLoading = false.obs;
     errorMessage = <String>[].obs;
+    getMyFreinds();
     super.onInit();
   }
 
@@ -71,7 +78,8 @@ class BookNowController extends GetxController {
 
   whenBookingSuccefly(handlingResponse) {
     handlingResponse['message'] == "Booking successful"
-        ? Get.toNamed('/BookingDetailesScreen',arguments: [eventDetailsModel,ticketList])
+        ? Get.toNamed('/BookingDetailesScreen',
+            arguments: [eventDetailsModel, ticketList])
         : null;
   }
 
@@ -93,4 +101,32 @@ class BookNowController extends GetxController {
     Map<String, dynamic> jsonMap = {'bookings': bookingList};
     return jsonMap;
   }
+
+  onPressFillMyData(int ticketIndex) {
+    ticketList[ticketIndex].fisrtName.text = user!.firstName;
+    ticketList[ticketIndex].lastName.text = user!.lastName;
+    ticketList[ticketIndex].phoneNumber.text = user!.phoneNumber;
+    ticketList[ticketIndex].age.text =
+        calculateAge(DateTime.parse(user!.birthDate)).toString();
+    
+  }
+    getMyFreinds() async {
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token") ?? "";
+    response = await ApiHelper.makeRequest(
+        targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
+
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
+     } else {
+      List<dynamic> interestsJson = handlingResponse['friends'];
+
+      myFreinds.value = interestsJson
+          .map((jsonItem) => FreindsModel.fromJson(jsonItem))
+          .toList();
+      print(myFreinds.length);
+    }
+    update();
+    }
+
 }

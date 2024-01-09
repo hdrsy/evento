@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
@@ -18,12 +19,14 @@ Widget marqueeTitle(String title,
             scrollAxis: Axis.horizontal,
             blankSpace: 20.0,
             velocity: 70.0,
+            
             pauseAfterRound: const Duration(seconds: 3),
-            style: customTextStyle.bodyMedium.copyWith(
+            style: customTextStyle.bodyMedium.override(
                 color: customColors.primaryText,
                 fontFamily: fontFamily,
                 fontSize: fontSize,
-                fontWeight: FontWeight.w600),
+                useGoogleFonts: true,
+                fontWeight: FontWeight.w500),
           ),
         )
       : Text(

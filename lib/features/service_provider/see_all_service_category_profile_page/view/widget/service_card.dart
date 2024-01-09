@@ -8,8 +8,8 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ServiceCard extends StatelessWidget {
-  const ServiceCard({super.key, required this.serviceCategoryModel,required this.serviceCategoryIndex});
+class SeeAllServiceCard extends StatelessWidget {
+  const SeeAllServiceCard({super.key, required this.serviceCategoryModel,required this.serviceCategoryIndex});
 final ServiceCategoryModel serviceCategoryModel;
 final int serviceCategoryIndex;
   @override
@@ -17,7 +17,7 @@ final int serviceCategoryIndex;
     return 
 InkWell(
   onTap: (){
-   Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title,serviceCategoryIndex,true] );
+     Get.toNamed('/ServiceAccordingCategoryScreen',arguments:[serviceCategoryModel.id,serviceCategoryModel.title,serviceCategoryIndex,false] );
   
   },
   child:   Stack(
@@ -186,7 +186,7 @@ InkWell(
   
                       // context.pushNamed('Venuelist');
   
-                   
+                 
                     },
   
                   ),

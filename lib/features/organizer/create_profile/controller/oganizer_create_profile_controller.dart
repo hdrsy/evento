@@ -124,9 +124,8 @@ class OrganizerCreateProfileController extends GetxController {
     } else {
       isLoading.value=false;
       print(handlingResponse);
-
-      // Get.toNamed('/PaymentScreen');
-    }
+Get.offAllNamed('/home');
+}
   }
 
   }

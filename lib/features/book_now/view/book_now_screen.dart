@@ -67,6 +67,26 @@ class BookNowScreen extends StatelessWidget {
                       (index) => TicketCard(
                             index: index,
                           )),
+                               Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            InkWell(
+              onTap: (){
+                BookNowController bookNowController =Get.find();
+                bookNowController.ticketList.add(TicketModel(selectedClass: bookNowController.eventDetailsModel.classes[0]));
+              },
+              child: Text("Add Ticket",style: customTextStyle.bodyMedium.override(
+                fontFamily: primaryFontFamily,
+                useGoogleFonts: true,
+                fontSize: 14,
+                color: customColors.primary
+              ),
+              textAlign: TextAlign.end,
+              ),
+            ),
+          ],
+        )
+   ,
                   // const PaymontInformation(),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
@@ -129,44 +149,19 @@ class TicketCard extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: customColors.secondaryBackground,
-          child: Column(
-            children: [
-        FullTicketInfo(index: index),
+    return Container(
+      color: customColors.secondaryBackground,
+      child: Column(
+        children: [
+    FullTicketInfo(index: index),
 
-        PriceSummaryWidget(
-          index: index,
-        ),
+    PriceSummaryWidget(
+      index: index,
+    ),
 
-            ],
-          )
-          ,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            InkWell(
-              onTap: (){
-                BookNowController bookNowController =Get.find();
-                bookNowController.ticketList.add(TicketModel(selectedClass: bookNowController.eventDetailsModel.classes[0]));
-              },
-              child: Text("Add Ticket",style: customTextStyle.bodyMedium.override(
-                fontFamily: primaryFontFamily,
-                useGoogleFonts: true,
-                fontSize: 14,
-                color: customColors.primary
-              ),
-              textAlign: TextAlign.end,
-              ),
-            ),
-          ],
-        )
-      ].divide(const SizedBox(
-        height: 5,
-      )),
+        ],
+      )
+      ,
     );
   }
 }

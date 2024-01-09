@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/book_now/controller/book_now_controller.dart';
+import 'package:evento/features/book_now/view/widgets/fill_ticket_bottom_sheet.dart';
 import 'package:evento/features/book_now/view/widgets/full_ticket_field.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/main.dart';
@@ -33,7 +35,7 @@ class FullTicketInfo extends StatelessWidget {
           ),
         ),
          GetBuilder<BookNowController>(
-           builder: (context) {
+           builder: (ccontext) {
              return Container(
                 width: double.infinity,
                 padding: padding(8, 8, 8, 8),
@@ -75,10 +77,27 @@ class FullTicketInfo extends StatelessWidget {
                         );
                       }).toList(),
                     ),
-                     Text("Personal Information",style: customTextStyle.bodyMedium.override(
-                      fontFamily: primaryFontFamily,
-                      fontSize: 14
-                     )),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Text("Personal Information",style: customTextStyle.bodyMedium.override(
+                          fontFamily: primaryFontFamily,
+                          fontSize: 14
+                         )),
+                         InkWell(
+                          onTap: (){
+                         
+                            showButtonSheet(context: context, widget: FilldataWidget(ticketIndex: index), height: screenHeight*0.2);
+                          },
+                           child: Text("Fill profile / Friend list data",style: customTextStyle.bodyMedium.override(
+                            fontFamily: primaryFontFamily,
+                            fontSize: 12,
+                            color: customColors.primary
+                           )),
+                         ),
+
+                       ],
+                     ),
                     Row(
                       children: [
                         Expanded(

@@ -2,6 +2,7 @@ import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/view/widgets/category_list.dart';
+import 'package:evento/features/events/home/view/widgets/events_from_organizer.dart';
 import 'package:evento/features/events/home/view/widgets/featured_list.dart';
 import 'package:evento/features/events/home/view/widgets/for_you.dart';
 import 'package:evento/features/events/home/view/widgets/from_your_city.dart';
@@ -55,6 +56,7 @@ final HomeController homeController=Get.find();
          FromYourCity(),
         // const Offers(),
          Orgnizers(),
+         EventsFromOrganizer(),
          ForYou()
       ].divide( SizedBox(height:  screenSize == ScreenSize.small
         ? 20

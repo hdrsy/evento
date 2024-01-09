@@ -127,6 +127,7 @@ Wdding, Birthday ,anniversary......""",
                         },
                         text: "Done",
                         options: ButtonOptions(
+                          width: screenWidth*0.3,
                           height: 40,
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               32, 0, 32, 0),

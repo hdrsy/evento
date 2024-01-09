@@ -1,4 +1,5 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
@@ -32,7 +33,14 @@ class Orgnizers extends StatelessWidget {
                   title: "Organizer",
                   subTitle: " Top Choices &  Highly Rated",
                   onTap: () {
-                    Get.toNamed('/SeeAllOrganizersScreen');
+                    Get.toNamed('/SeeAllOrganizersScreen',arguments: [
+                      homeOrganizerController.pageId,
+                      homeOrganizerController.itemList,
+                      ServerConstApis.getOrganizerHomeList,
+                      "organizers",
+                      "Organizers",
+                      
+                    ]);
                   },
                 ),
                 SizedBox(
@@ -55,7 +63,7 @@ Widget buildEventColumn() {
     width: double.infinity,
     child: Column(
       mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Wrap(
@@ -84,13 +92,13 @@ Widget buildEventColumn() {
 // Function to create each event item
 Widget buildOrganizerItem({required OrganizerHome organizerHome,required int modelIndex}) {
   return InkWell(onTap: (){
-    Get.toNamed('/OrganizerProfileScreen');
-  },
+      Get.toNamed('/OrganizerProfileScreen',arguments: organizerHome.id);
+     },
     child: Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildEventImage('/storage/${organizerHome.imageUrl}'),
+        buildEventImage(organizerHome.imageUrl),
         buildEventTitle("${organizerHome.firstName} ${organizerHome.lastName}"),
         // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
       ],
@@ -107,7 +115,7 @@ Widget buildEventImage(String imagePath) {
       child:imagePath.length>6?
         
       
-       getImageNetwork(url: imagePath, width: screenSize == ScreenSize.small
+       getImageNetwork(url: '/storage/$imagePath', width: screenSize == ScreenSize.small
             ? 120
             : (screenSize == ScreenSize.medium ? 150 : 160),
         height: screenSize == ScreenSize.small
