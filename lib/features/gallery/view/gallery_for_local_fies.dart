@@ -94,6 +94,9 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.initState();
     _controller = VideoPlayerController.file(widget.video)
       ..initialize().then((_) {
+        _controller.setVolume(0);
+        _controller.play();
+
         setState(() {});
       });
   }

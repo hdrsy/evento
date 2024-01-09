@@ -39,126 +39,121 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: GetBuilder<OrganizerCreateProfileController>(
-        builder: (controller) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  decoration:  BoxDecoration(
-                      image: DecorationImage(
-                          ///// cover image
-                          image: controller.coverImage != null 
-    ? FileImage(controller.coverImage!) as ImageProvider<Object>
-    : const AssetImage('assets/images/image.jpg') as ImageProvider<Object>,
-fit: BoxFit.cover)),
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  child: Stack(children: [
-                    Align(
-                      //// camera icon to change the cover image
-                      alignment: const AlignmentDirectional(1, 1),
-                      child: CameraIconCard(
-                        onTap: () {
-                           showBottomSheetForImages(
-                  context: context,
-                  onPressCamera: () {
-                    controller.pickImageForDashbard(ImageSource.camera,false);
-                  },
-                  onPressGallery: () async {
-                    controller.pickImageForDashbard(ImageSource.gallery,false);
-                  });
-                        },
-                      ),
+      body: GetBuilder<OrganizerCreateProfileController>(builder: (controller) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        ///// cover image
+                        image: controller.coverImage != null
+                            ? FileImage(controller.coverImage!)
+                                as ImageProvider<Object>
+                            : const AssetImage('assets/images/image.jpg')
+                                as ImageProvider<Object>,
+                        fit: BoxFit.cover)),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Stack(children: [
+                  Align(
+                    //// camera icon to change the cover image
+                    alignment: const AlignmentDirectional(1, 1),
+                    child: CameraIconCard(
+                      onTap: () {
+                        showBottomSheetForImages(
+                            context: context,
+                            onPressCamera: () {
+                              controller.pickImageForDashbard(
+                                  ImageSource.camera, false);
+                            },
+                            onPressGallery: () async {
+                              controller.pickImageForDashbard(
+                                  ImageSource.gallery, false);
+                            });
+                      },
                     ),
-                    const Align(
-                        alignment: AlignmentDirectional(-0.8, 2),
-                        child: ProfileImage())
-                  ]),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.07,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-                  child: Column(
-                    children: [
-                      EditProfileField(
-                        controller: controller.organizerName,
-                        hintText: "Spark",
-                        labelText: "Organization/Name",
-                        onChanged: (value) {},
-                        validator: (value) {
-                          return null;
-                        },
-                        suffixIcon: Icons.reduce_capacity_outlined,
-                      ),
-                      EditProfileField(
-                        controller:controller.bio,
-                        hintText:
-                            """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......""",
-                        labelText: "Bio",
-                        onChanged: (value) {},
-                        validator: (value) {
-                          return null;
-                        },
-                        suffixIcon: Icons.description_outlined,
-                      ),
-
-                      SelectStates(
-                          organizerCreateProfileController:
-                              organizerCreateProfileController),
-                      OrganizerMediaCard(),
-                      const SizedBox(height: 50,),
-                      // Generated code for this Button Widget...
-ButtonWidget(
-  onPressed: () async {
-    organizerCreateProfileController.sendFormData();
-    // await showModalBottomSheet(
-    //   isScrollControlled: true,
-    //   backgroundColor: Colors.transparent,
-    //   enableDrag: false,
-    //   context: context,
-    //   builder: (context) {
-    //     return Padding(
-    //       padding: MediaQuery.viewInsetsOf(context),
-    //       child: Container(
-    //         height: MediaQuery.sizeOf(context).height * 0.6,
-    //         child: OrganizerAccountWidget(),
-    //       ),
-    //     );
-    //   },
-    // ).then((value) => safeSetState(() {}));
-  },
-  text: "Done",
-  options: ButtonOptions(
-    height: 40,
-    padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-    color: customColors.primary,
-    textStyle: customTextStyle.titleSmall.override(
-          fontFamily: 'Nunito',
-          color: Colors.white,
-          useGoogleFonts: true,
-        ),
-    elevation: 3,
-    borderSide: const BorderSide(
-      color: Colors.transparent,
-      width: 1,
-    ),
-    borderRadius: BorderRadius.circular(8),
-  ),
-)
-
-                    ],
                   ),
-                )
-              ],
-            ),
-          );
-        }
-      ),
+                  const Align(
+                      alignment: AlignmentDirectional(-0.8, 2),
+                      child: ProfileImage())
+                ]),
+              ),
+              SizedBox(
+                height: screenHeight * 0.07,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                child: Column(
+                  children: [
+                    EditProfileField(
+                      controller: controller.organizerName,
+                      hintText: "Spark",
+                      labelText: "Organization/Name",
+                      onChanged: (value) {},
+                      validator: (value) {
+                        return null;
+                      },
+                      suffixIcon: Icons.reduce_capacity_outlined,
+                    ),
+                    EditProfileField(
+                      controller: controller.bio,
+                      hintText:
+                          """Event organizer specialist in decoration ,lighting and flowers .
+Wdding, Birthday ,anniversary......""",
+                      labelText: "Bio",
+                      onChanged: (value) {},
+                      validator: (value) {
+                        return null;
+                      },
+                      suffixIcon: Icons.description_outlined,
+                    ),
+
+                    SelectStates(
+                        organizerCreateProfileController:
+                            organizerCreateProfileController),
+                    OrganizerMediaCard(),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    // Generated code for this Button Widget...
+                    Obx(
+                      () => ButtonWidget(
+                        showLoadingIndicator:
+                            organizerCreateProfileController.isLoading.value,
+                        onPressed: () async {
+                          organizerCreateProfileController.onPressDone();
+                        },
+                        text: "Done",
+                        options: ButtonOptions(
+                          height: 40,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              32, 0, 32, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: customColors.primary,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            useGoogleFonts: true,
+                          ),
+                          elevation: 3,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }
@@ -218,18 +213,21 @@ class OrganizerMediaCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...List.generate(//// for just show 3 item or less
+                ...List.generate(
+                    //// for just show 3 item or less
                     organizerCreateProfileController.foldersModel.length > 3
                         ? 3
                         : organizerCreateProfileController.foldersModel.length,
-                    (index) { 
-                      
-                      return 
-                      (index==2 && organizerCreateProfileController.foldersModel.length>3)?  SeeAllFoldersCard()
-                     : FolderCard(
+                    (index) {
+                  return (index == 2 &&
+                          organizerCreateProfileController.foldersModel.length >
+                              3)
+                      ? SeeAllFoldersCard()
+                      : FolderCard(
                           folder: organizerCreateProfileController
                               .foldersModel[index],
-                        );})
+                        );
+                })
               ].divide(const SizedBox(
                 width: 10,
               )),

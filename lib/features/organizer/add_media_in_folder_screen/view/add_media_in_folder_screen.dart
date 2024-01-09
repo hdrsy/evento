@@ -1,5 +1,7 @@
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
+import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
+import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/organizer/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +65,11 @@ class AddMediaInFolderScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             Image.file(mediaItem["video"]!),
-                            Icon(Icons.play_circle_fill), // Placeholder icon
+                            Icon(
+                              Icons.play_circle_fill,
+                              size: 50,
+                              color: customColors.info,
+                            ), // Placeholder icon
                             // Implement your video player widget here
                           ],
                         );
@@ -94,13 +100,43 @@ class AddMediaCard extends StatelessWidget {
         showBottomSheetForImagesAndVideos(
             context: context,
             onPressCamera: () {
+               Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.camera);
             },
             onPressGallery: () async {
+               Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.gallery);
             },
             onPressVideo: () async {
-              addMediaInFolderController.pickVideo();
+              await Get.dialog(
+                AlertDialog(
+                  title: Text("Select Video",style: customTextStyle.bodyMedium.override(
+                    fontFamily: secondaryFontFamily,
+                    useGoogleFonts: true,
+                    color: customColors.primaryText,
+                    fontSize: 16
+                  ),),
+                  content: Text(
+                      "Please select a video that is no longer than 2 minutes.",style: customTextStyle.bodyMedium.override(
+                    fontFamily: secondaryFontFamily,
+                    useGoogleFonts: true,
+                    color: customColors.secondaryText,
+                    fontSize: 14
+                  ),),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Get.back(); // Close the dialog
+                        addMediaInFolderController
+                            .pickVideo(); // Proceed to pick the video
+                      },
+                    ),
+                  ],
+                ),
+                barrierDismissible:
+                    false, // Set to true if you want the dialog to be dismissible
+              );
             });
       },
       child: Container(

@@ -104,16 +104,16 @@ Widget buildEventImage(String imagePath) {
     onTap: () {},
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child:imagePath.length>6?Image.asset(
-                    'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
+      child:imagePath.length>6?
+        
+      
+       getImageNetwork(url: imagePath, width: screenSize == ScreenSize.small
             ? 120
             : (screenSize == ScreenSize.medium ? 150 : 160),
         height: screenSize == ScreenSize.small
             ? 120
-            : (screenSize == ScreenSize.medium ? 150 : 160),):
-        
-      
-       getImageNetwork(url: imagePath, width: screenSize == ScreenSize.small
+            : (screenSize == ScreenSize.medium ? 150 : 160),):Image.asset(
+                    'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
             ? 120
             : (screenSize == ScreenSize.medium ? 150 : 160),
         height: screenSize == ScreenSize.small
