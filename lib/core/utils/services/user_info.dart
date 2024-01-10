@@ -54,19 +54,21 @@ class UserInfo {
       );
 
   static Future<void> storeUserInfo(UserInfo userInfo) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     String userInfoJson = jsonEncode(userInfo.toJson());
-    await prefs.setString('userInfo', userInfoJson);
+    await prefService.createString('userInfo', userInfoJson);
   }
 
   static Future<UserInfo?> getUserInfo() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userInfoJson = prefs.getString('userInfo');
-    if (userInfoJson != null) {
-      storeUserInfo(UserInfo.fromJson(jsonDecode(userInfoJson)));
-      return UserInfo.fromJson(jsonDecode(userInfoJson));
+     bool userInfoJson =await  prefService.isContainKey('userInfo');
+      print(userInfoJson);
+      print("userInfoJson");
+    if (userInfoJson ) {
+      final userInfo=jsonDecode( await prefService.readString('userInfo'));
+      print(userInfo);
+      return UserInfo.fromJson(userInfo);
     }
     else{
+      print("userInfoJson");
       return getUserInfoFromApi();
     }
    

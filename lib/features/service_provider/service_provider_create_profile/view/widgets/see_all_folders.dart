@@ -1,14 +1,10 @@
-import 'dart:developer';
 
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/gallery/view/gallery_for_local_fies.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
 import 'package:evento/main.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class SeeAllfolders extends StatelessWidget {

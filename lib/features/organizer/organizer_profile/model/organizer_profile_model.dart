@@ -2,17 +2,26 @@ import 'dart:convert';
 
 class OrganizerProfileModel {
   int id;
+  int followingCount;
+  int followersCount;
+  int organizedEventsCount;
   OrganizerInfo organizerInfo;
   List<OrganizerProfileEvent> organizedEvents;
 
   OrganizerProfileModel(
       {required this.id,
       required this.organizerInfo,
+      required this.followersCount,
+      required this.followingCount,
+      required this.organizedEventsCount,
       required this.organizedEvents});
 
   factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) =>
       OrganizerProfileModel(
         id: json['id'],
+        followersCount: json['followers_count'],
+        followingCount: json['following_count'],
+        organizedEventsCount: json['organized_events_count'],
         organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
         organizedEvents: List<OrganizerProfileEvent>.from(
             json['organized_events'].map((x) => OrganizerProfileEvent.fromJson(x))),

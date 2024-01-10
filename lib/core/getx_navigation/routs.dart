@@ -75,7 +75,10 @@ import 'package:evento/features/profile_pages/request_status/controller/binding/
 import 'package:evento/features/profile_pages/request_status/view/request_status_screen.dart';
 import 'package:evento/features/see_location_and_dirction/dirction/view/dirction_screen.dart';
 import 'package:evento/features/see_location_and_dirction/see_location/view/see_location_screen.dart';
+import 'package:evento/features/service_provider/add_media_in_folder_screen/view/add_media_in_folder_screen.dart';
 import 'package:evento/features/service_provider/see_all_service_category_profile_page/view/see_all_service_category_screen.dart';
+import 'package:evento/features/service_provider/service_provider_create_profile/controller/binding/service_provider_create_profile_binding.dart';
+import 'package:evento/features/service_provider/service_provider_create_profile/view/service_provider_create_profile_screen.dart';
 import 'package:get/get.dart';
 
 appRoutes() => [
@@ -102,6 +105,7 @@ appRoutes() => [
     GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
     GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
+    GetPage(name: '/ServiceProviderCreateProfileScreen', page:()=>  ServiceProviderCreateProfileScreen(),binding:ServiceProviderCreateProfileBinding() ) , 
     GetPage(name: '/AccountTypeScreen', page:()=> const AccountTypeScreen(),binding:AccountTypeBinding() ) , 
     GetPage(name: '/ChangePasswordScreen', page:()=>  ChangePasswordScreen(),binding:ChangePasswordBinding() ) , 
     GetPage(name: '/OrganizerProfileScreen', page:()=>  OrganizerProfileScreen(),binding:OrganizerProfileBinding() ) , 
@@ -129,6 +133,7 @@ appRoutes() => [
     GetPage(name: '/AccountOrganizerScreen', page:()=>  AccountOrganizerScreen()) , 
     GetPage(name: '/ChoiceOrganizerCategoryScreen', page:()=>  ChoiceOrganizerCategoryScreen()) , 
     GetPage(name: '/AddMediaInFolderScreen', page:()=>  AddMediaInFolderScreen()) , 
+    GetPage(name: '/AddMediaInFolderserviceProviderScreen', page:()=>  AddMediaInFolderserviceProviderScreen()) , 
     // GetPage(name: '/vedioReels', page:()=> VedioReels()) , 
     
     

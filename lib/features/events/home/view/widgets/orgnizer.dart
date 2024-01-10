@@ -24,7 +24,7 @@ class Orgnizers extends StatelessWidget {
           ? const ShimmerLoadingWidget(
               loadingShimmerWidget: GridViewBuilderExample(),
             )
-          : homeOrganizerController.itemList.isEmpty?const SizedBox():
+          : homeOrganizerController.itemList.isEmpty?const SizedBox.shrink():
           
            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,11 +59,12 @@ class Orgnizers extends StatelessWidget {
 Widget buildEventColumn() {
   final HomeOrganizerController homeOrganizerController = Get.find();
 
-  return SizedBox(
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 40),
     width: double.infinity,
     child: Column(
       mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Wrap(
@@ -99,7 +100,7 @@ Widget buildOrganizerItem({required OrganizerHome organizerHome,required int mod
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildEventImage(organizerHome.imageUrl),
-        buildEventTitle("${organizerHome.firstName} ${organizerHome.lastName}"),
+        buildEventTitle(organizerHome.organizerHomeInfo.name),
         // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
       ],
     ),

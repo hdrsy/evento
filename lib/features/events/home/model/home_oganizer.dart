@@ -13,8 +13,8 @@ class OrganizerHome {
   DateTime updatedAt;
   int followersCount;
   String? friendRequestStatusWithAuthUser;
-   bool isFollowedByAuthUser=false;
-
+   
+OrganizerHomeInfo organizerHomeInfo;
   OrganizerHome({
     required this.id,
     required this.firstName,
@@ -30,6 +30,7 @@ class OrganizerHome {
     required this.updatedAt,
     required this.followersCount,
     required this.friendRequestStatusWithAuthUser,
+    required this.organizerHomeInfo,
   });
 
   factory OrganizerHome.fromJson(Map<String, dynamic> json) {
@@ -48,8 +49,28 @@ class OrganizerHome {
       updatedAt: DateTime.parse(json['updated_at']),
       followersCount: json['followers_count'],
       friendRequestStatusWithAuthUser: json['friend_request_status_with_auth_user'],
+      organizerHomeInfo:OrganizerHomeInfo.fromJson( json['organizer_info']),
     );
   }
 
  
+}
+class OrganizerHomeInfo {
+  final int id;
+  final String name;
+   bool isFollowedByAuthUser;
+
+  OrganizerHomeInfo({
+    required this.id,
+    required this.name,
+    required this.isFollowedByAuthUser,
+  });
+
+  factory OrganizerHomeInfo.fromJson(Map<String, dynamic> json) {
+    return OrganizerHomeInfo(
+      id: json['id'],
+      name: json['name'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+    );
+  }
 }

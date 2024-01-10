@@ -2,8 +2,8 @@ import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/gallery/view/gallery_for_local_fies.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
 import 'package:evento/features/organizer/create_profile/view/widgets/see_all_folders.dart';
+import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,7 +50,7 @@ Column(
 
 class SeeAllFoldersCard extends StatelessWidget {
    SeeAllFoldersCard({super.key});
-final OrganizerCreateProfileController organizerCreateProfileController =
+final ServiceProviderCreateProfileController serviceProviderCreateProfileController =
       Get.find();
 
   @override
@@ -61,7 +61,7 @@ final OrganizerCreateProfileController organizerCreateProfileController =
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.to(SeeAllfolders(allFolders: organizerCreateProfileController.foldersModel,));
+        Get.to(SeeAllfolders(allFolders: serviceProviderCreateProfileController.foldersModel,));
       },
       child: Stack(
         children: [
@@ -90,7 +90,7 @@ final OrganizerCreateProfileController organizerCreateProfileController =
             child: Align(
               alignment: const AlignmentDirectional(0, 0),
               child: Text(
-                "+${organizerCreateProfileController.foldersModel.length-2}",
+                "+${serviceProviderCreateProfileController.foldersModel.length-2}",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.info,

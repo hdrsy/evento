@@ -1,10 +1,11 @@
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChoiceOrganizerCategoryController extends GetxController{
   late List<ChoiceOrganizerCategoryTypeModel> choiceServiceList;
-  String sericeSelected='';
+  TextEditingController sericeSelected=TextEditingController();
   late RxList<int> selectedCategories;
  @override
   void onInit() {

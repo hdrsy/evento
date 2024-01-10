@@ -6,7 +6,7 @@ class PrefService {
     pref.setString(key, value);
   }
 
-  Future<String?> readString(String key) async {
+  Future<String> readString(String key) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String cache = pref.getString(key) ?? '';
     return cache;

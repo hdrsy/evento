@@ -137,11 +137,12 @@ class OrganizerCategoryCard extends StatelessWidget {
 }
 
 class OtherTextField extends StatelessWidget {
-  const OtherTextField({super.key});
-
+   OtherTextField({super.key});
+final ChoiceOrganizerCategoryController  choiceOrganizerCategoryController=Get.find();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: choiceOrganizerCategoryController.sericeSelected,
       obscureText: false,
       decoration: InputDecoration(
         labelStyle: customTextStyle.labelMedium,

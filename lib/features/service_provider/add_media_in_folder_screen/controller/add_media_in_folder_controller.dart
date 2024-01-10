@@ -7,13 +7,14 @@ import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
+import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_compress_plus/video_compress_plus.dart';
 
-class AddMediaInFolderController extends GetxController {
+class AddMediaInFolderServiseProviderController extends GetxController {
   late String folderName;
   late int folderIndex;
   // late RxList<File> attachedMedia;
@@ -77,8 +78,8 @@ void _showDurationExceededDialog() {
 
 Future<void> _processSelectedVideo(File videoFile) async {
   attachedMedia.add({"video": await generateThumbnail(videoFile)});
-  OrganizerCreateProfileController organizerCreateProfileController = Get.find();
-  organizerCreateProfileController.foldersModel[folderIndex].mediaList.add(MediaModel(mediaType: "video", media: videoFile));
+  ServiceProviderCreateProfileController serviceProviderCreateProfileController = Get.find();
+  serviceProviderCreateProfileController.foldersModel[folderIndex].mediaList.add(MediaModel(mediaType: "video", media: videoFile));
   print("Video path: ${videoFile.path}");
   
 }
@@ -86,9 +87,9 @@ void pickNewMedia(ImageSource imageSource) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
       attachedMedia.add({"image": File(pickedImage.path)});
-      OrganizerCreateProfileController organizerCreateProfileController =
+      ServiceProviderCreateProfileController serviceProviderCreateProfileController =
           Get.find();
-      organizerCreateProfileController.foldersModel[folderIndex].mediaList
+      serviceProviderCreateProfileController.foldersModel[folderIndex].mediaList
           .add(MediaModel(mediaType: "image", media: File(pickedImage.path)));
 
       
@@ -97,12 +98,12 @@ void pickNewMedia(ImageSource imageSource) async {
   }
 
   addAtatchedMediaToFolder() {
-    OrganizerCreateProfileController organizerCreateProfileController =
+    ServiceProviderCreateProfileController serviceProviderCreateProfileController =
         Get.find();
     if (attachedMedia.isEmpty) {
-      organizerCreateProfileController.foldersModel.removeAt(folderIndex);
+      serviceProviderCreateProfileController.foldersModel.removeAt(folderIndex);
     } else {
-      log(organizerCreateProfileController
+      log(serviceProviderCreateProfileController
           .foldersModel[folderIndex].mediaList.length
           .toString());
     }

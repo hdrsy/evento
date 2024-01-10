@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
+import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

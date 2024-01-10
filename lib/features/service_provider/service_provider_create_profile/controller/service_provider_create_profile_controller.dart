@@ -16,9 +16,10 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import 'package:evento/main.dart';
 
-class OrganizerCreateProfileController extends GetxController {
+class ServiceProviderCreateProfileController extends GetxController {
   late TextEditingController organizerName;
   late TextEditingController bio;
+  late TextEditingController description;
   late RxList<String> errorMessage;
   late RxBool isLoading;
 
@@ -32,6 +33,7 @@ class OrganizerCreateProfileController extends GetxController {
   void onInit() {
     organizerName = TextEditingController();
     bio = TextEditingController();
+    description = TextEditingController();
     createFolderName = TextEditingController();
     coverImage = null;
     profileImage = null;
@@ -70,12 +72,10 @@ class OrganizerCreateProfileController extends GetxController {
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-      print(isProfile);
-      isProfile 
+      isProfile == true
           ? profileImage = File(pickedImage.path)
           : coverImage = File(pickedImage.path);
       ///// for isart the custom image iside avatar list on selected position
-      print(coverImage!.path);
       update();
       Get.back();
     }
@@ -91,8 +91,8 @@ class OrganizerCreateProfileController extends GetxController {
       'name': organizerName.text,
       'bio': bio.text,
       'state': selectedState!,
-      'services': choiceOrganizerCategoryController.sericeSelected,
-      'category_id': choiceOrganizerCategoryController.selectedCategories
+      'services': "selectedState",
+      'category_id': "1"
     };
     Map<String, File> fileMap = {};
     for (var i = 0; i < foldersModel.length; i++) {

@@ -123,16 +123,16 @@ class OrganizerSeeAllCard extends StatelessWidget {
                           onPressed: () {
                           controller.followOrUnFollowOrganizer(organizerHome.id, modelId);
                           },
-                          text:organizerHome.isFollowedByAuthUser? "Following":"Follow",
+                          text:organizerHome.organizerHomeInfo.isFollowedByAuthUser? "Following":"Follow",
                           options: ButtonOptions(
                             width: 100,
                             height: 21,
                             iconPadding:
                                 const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            color:organizerHome.isFollowedByAuthUser? customColors.secondaryBackground:customColors.primary,
+                            color:organizerHome.organizerHomeInfo.isFollowedByAuthUser? customColors.secondaryBackground:customColors.primary,
                             textStyle: customTextStyle.titleSmall.override(
                               fontFamily: 'Nunito',
-                              color:organizerHome.isFollowedByAuthUser? customColors.primary:customColors.info,
+                              color:organizerHome.organizerHomeInfo.isFollowedByAuthUser? customColors.primary:customColors.info,
                               fontSize: 12,
                               fontWeight: FontWeight.normal,
                               useGoogleFonts: true,

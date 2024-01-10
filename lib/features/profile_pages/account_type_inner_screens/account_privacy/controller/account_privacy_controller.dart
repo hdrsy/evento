@@ -11,27 +11,25 @@ class AccountPrivacyController extends GetxController {
   @override
   void onInit() {
     
-    ProfileController profileController=Get.find();
-    profileController.profileModel.type=="normal"?isAccountPrivate = false.obs:isAccountPrivate = true.obs;
+    user!.type=="normal"?isAccountPrivate = false.obs:isAccountPrivate = true.obs;
     super.onInit();
   }
 
   changeAccoutPrivacy() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
-    
-    Map<String,String> data=isAccountPrivate.value?{'type': "noraml"}:{'type': "priavate"};
+    String token = await prefService.readString("token") ;
     
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.updateProfile,
-        method: "post",
-        data: data,
+        targetRout: ServerConstApis.userChangeType,
+        method: "get",
         token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
+      print(handlingResponse);
     } else {
       isAccountPrivate.value = !isAccountPrivate.value;
+      prefService.remove('userInfo');
       Get.offAllNamed('/home');
     }
   }

@@ -6,14 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OptionsCard extends StatelessWidget {
-  const OptionsCard(
+   OptionsCard(
       {super.key,
       required this.icon,
       required this.targetRout,
-      required this.title});
+      required this.title,
+       this.bottomSheetHeight
+      });
   final String title;
   final dynamic targetRout;
   final IconData icon;
+  final double? bottomSheetHeight;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,6 +30,8 @@ class OptionsCard extends StatelessWidget {
           if(targetRout is String && targetRout == '/'){
             Get.offAllNamed('/');
             prefService.remove('token');
+            prefService.remove('userInfo');
+            print(await prefService.isContainKey('userInfo'));
           }else{
 
           targetRout is String
@@ -34,7 +39,7 @@ class OptionsCard extends StatelessWidget {
               : showButtonSheet(
                   context: context,
                   widget: targetRout,
-                  height: screenHeight * 0.2);
+                  height:bottomSheetHeight?? screenHeight * 0.2);
           }
         },
         child: Container(

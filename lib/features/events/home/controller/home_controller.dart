@@ -69,6 +69,7 @@ class CategoryListController extends GetxController {
 
       if(errorMessage[0]=="Invalid Token"){
         prefService.remove('token');
+        prefService.remove('userInfo');
         Get.offAllNamed('/');
       }
     } else {

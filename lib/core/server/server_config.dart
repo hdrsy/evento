@@ -64,6 +64,7 @@ class ServerConstApis {
   static String getprofile = '$baseAPI/api/profile';
   static String changePassword= '$baseAPI/api/user/reset-password';
   static String updateProfile= '$baseAPI/api/user/update';
+  static String userChangeType= '$baseAPI/api/change_type';
 
 
   //// customiz event

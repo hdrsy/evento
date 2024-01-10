@@ -63,7 +63,7 @@ class ServiceProviderAccounWidget extends StatelessWidget {
                     ButtonWidget(
                       onPressed: () async {
                         Get.back();
-                      },
+                        },
                       text: " Cancel",
                       options: ButtonOptions(
                         width: 150,
@@ -90,6 +90,8 @@ class ServiceProviderAccounWidget extends StatelessWidget {
                     ButtonWidget(
                       onPressed: () async {
                     Get.back();
+                    Get.toNamed('/ServiceProviderCreateProfileScreen');
+                      
                       },
                       text:  "Ok",
                       options: ButtonOptions(

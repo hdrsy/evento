@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/utils/services/user_info.dart';
+import 'package:evento/features/profile_pages/account_type_inner_screens/evento_verification_bottom_sheet/view/evento_verification_conditions_bottom_sheet.dart';
 import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
 import 'package:evento/features/profile_pages/profile/view/widgets/build_image_with_name.dart';
 import 'package:evento/features/profile_pages/profile/view/widgets/options_card.dart';
@@ -30,7 +32,70 @@ final ProfileController profileController=Get.find();
                     height: scaleHeight(30),
                   ),
                   ThemeSwicth(),
+
+                 
+                  
+                  ...List.generate(_buildUserSpecificOptions().length,(index)=> _buildUserSpecificOptions()[index]),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: customColors.tertiary,
+                  ),
                    OptionsCard(
+                    targetRout: '/HelpCenterScreen',
+                    icon: Icons.support_agent,
+                    title: tr("Help Center"),
+                  ),
+                   OptionsCard(
+                    targetRout: '',
+                    icon: Icons.contact_support,
+                    title: tr("Terms of Use"),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: customColors.tertiary,
+                  ),
+                   OptionsCard(
+                    targetRout: '/',
+                    icon: Icons.logout,
+                    title: tr("Log Out"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+}
+ List<Widget> _buildUserSpecificOptions() {
+     switch (user!.type) {
+       case "normal"|| "private":
+         return getnormalUserOptionsCard();
+       case "organizer":
+  return  getOrganizerOptionsCard();
+         
+       case "guest":
+         return [
+           // Options specific to organizer
+         ];
+       case "service provider":
+         return [
+           // Options specific to guest
+         ];
+       default:
+         return [];
+     }
+   }
+
+
+
+   List<Widget> getnormalUserOptionsCard()=>    [
+             OptionsCard(
                     targetRout: '/MyBookingScreen',
                     icon: Icons.list,
                     title: tr("My Bookings"),
@@ -85,39 +150,76 @@ final ProfileController profileController=Get.find();
                     icon: Icons.account_circle,
                     title: tr("Account Type"),
                   ),
-                  const SizedBox(
-                    height: 12,
+                 
+         ];
+     
+   List<Widget> getOrganizerOptionsCard()=>    [
+             OptionsCard(
+                    targetRout: '/MyBookingScreen',
+                    icon: Icons.person_outline,
+                    title: tr("Organaizations Profile"),
                   ),
-                  Divider(
-                    thickness: 1,
-                    color: customColors.tertiary,
-                  ),
-                   OptionsCard(
-                    targetRout: '/HelpCenterScreen',
-                    icon: Icons.support_agent,
-                    title: tr("Help Center"),
-                  ),
-                   OptionsCard(
-                    targetRout: '',
-                    icon: Icons.contact_support,
-                    title: tr("Terms of Use"),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: customColors.tertiary,
+             OptionsCard(
+                    targetRout: '/MyBookingScreen',
+                    icon: Icons.list,
+                    title: tr("My Bookings"),
                   ),
                    OptionsCard(
-                    targetRout: '/',
-                    icon: Icons.logout,
-                    title: tr("Log Out"),
+                    targetRout: '/MyRequestScreen',
+                    icon: Icons.repeat,
+                    title: tr("My Requests"),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ));
-  }
-}
+                   OptionsCard(
+                    targetRout: '/MyRequestScreen',
+                    icon: Icons.celebration_outlined,
+                    title: tr("My Events"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/FavoriteScreen',
+                    icon: Icons.favorite_border,
+                    title: tr("Favorite"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/NotificationScreen',
+                    icon: Icons.notification_add_outlined,
+                    title: tr("Notifications"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/ChangePasswordScreen',
+                    icon: Icons.password_outlined,
+                    title: tr("Change Password"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/FreindsScreen',
+                    icon: Icons.group_outlined,
+                    title: tr("Friends"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/InviteFreindsScreen',
+                    icon: Icons.groups_2_outlined,
+                    title: tr("Invite friends"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/SeeAllServiceCategoryScreen',
+                    icon: Icons.miscellaneous_services_outlined,
+                    title: tr("Service Provider"),
+                  ),
+                   OptionsCard(
+                    targetRout: '/AchivmentScreen',
+                    icon: Icons.code_sharp,
+                    title: tr("Achievements"),
+                  ),
+                   OptionsCard(
+                    targetRout: LanguageSelector(),
+                    icon: Icons.language_outlined,
+                    title: tr("Language"),
+                  ),
+                   OptionsCard(
+                    targetRout: EventVerificationCondidtionsBottomSheet(),
+                    bottomSheetHeight: screenHeight * 0.8,
+                    icon: Icons.account_circle,
+                    title: tr("Become Evento Verified "),
+                  ),
+                 
+         ];
+     

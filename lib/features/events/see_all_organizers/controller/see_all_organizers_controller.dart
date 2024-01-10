@@ -100,7 +100,8 @@ class SeeAllOrganizersController extends GetxController {
   }
 followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
     late String isDoneSuccefully;
-    if (itemList[modelIndex].isFollowedByAuthUser) {
+    print(organizerId);
+    if (itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
@@ -108,14 +109,14 @@ followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
           await followUnFollowEvent("${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      itemList[modelIndex].isFollowedByAuthUser = true;
+      itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser = true;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      itemList[modelIndex].isFollowedByAuthUser = false;
+      itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser = false;
 
       update();
     }
-    log(itemList[modelIndex].isFollowedByAuthUser.toString());
+    log(itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser.toString());
   }
   @override
   void onClose() {

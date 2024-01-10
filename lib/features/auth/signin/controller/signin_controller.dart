@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,10 +59,12 @@ FormState? formdata = formstate.currentState;
     isLoading.value = false;
   
   }
-  whenSignInSuccess(handlingResponse){
+  whenSignInSuccess(handlingResponse)async{
      String token = handlingResponse['token'];
        print(handlingResponse);
     prefService.createString("token", token);
+     user=await UserInfo.getUserInfo();
+   
     Get.offAllNamed('/home');
   }
 }

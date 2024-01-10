@@ -1,31 +1,28 @@
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
 import 'package:evento/features/organizer/create_profile/view/widgets/camera_icon.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key});
+class ProfileImagesServiceProvider extends StatelessWidget {
+  const ProfileImagesServiceProvider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OrganizerCreateProfileController>(
+    return GetBuilder<ServiceProviderCreateProfileController>(
       builder: (controller) {
         return InkWell(
           onTap: (){
-            showBottomSheetForImages(
-                                context: context,
-                                onPressCamera: () {
-                                  controller.pickImageForDashbard(
-                                      ImageSource.camera, true);
-                                },
-                                onPressGallery: () async {
-                                  controller.pickImageForDashbard(
-                                      ImageSource.gallery, true);
-                                });
-                   
+              print("object");
+                     showBottomSheetForImages(
+                  context: context,
+                  onPressCamera: () {
+                    controller.pickImageForDashbard(ImageSource.camera,true);
+                  },
+                  onPressGallery: () async {
+                    controller.pickImageForDashbard(ImageSource.gallery,true);
+                  });
           },
           child: Stack(
             children: [
@@ -50,7 +47,7 @@ class ProfileImage extends StatelessWidget {
                bottom: -0.5,
                 child: CameraIconCard(
                   onTap: () {
-                   
+                  
                   },
                 ),  
               ),
