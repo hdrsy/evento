@@ -40,33 +40,37 @@ class SeeLocation extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: screenHeight * 0.75,
-            child:  FlutterFlowGoogleMap(
-    controller: seeLocationController.googleMapsController,
-    onCameraIdle: (latLng) => seeLocationController.googleMapsCenter = latLng,
-    initialLocation: seeLocationController.googleMapsCenter ??=
-        const LatLng(13.106061, -59.613158),
-        markers: [
-          seeLocationController.myMarker
-        ],
-    markerColor: GoogleMarkerColor.red,
-    mapType: MapType.hybrid,
-    style: GoogleMapStyle.standard,
-    initialZoom: 18,
-    allowInteraction: true,
-    allowZoom: true,
-    showZoomControls: true,
-    showLocation: true,
-    showCompass: true,
-    showMapToolbar: false,
-    showTraffic: false,
-    centerMapOnMarkerTap: true,
-  ),
+            child: FlutterFlowGoogleMap(
+              controller: seeLocationController.googleMapsController,
+              onCameraIdle: (latLng) =>
+                  seeLocationController.googleMapsCenter = latLng,
+              initialLocation: seeLocationController.googleMapsCenter ??=
+                  const LatLng(13.106061, -59.613158),
+              markers: [seeLocationController.myMarker],
+              markerColor: GoogleMarkerColor.red,
+              mapType: MapType.hybrid,
+              style: GoogleMapStyle.standard,
+              initialZoom: 18,
+              allowInteraction: true,
+              allowZoom: true,
+              showZoomControls: true,
+              showLocation: true,
+              showCompass: true,
+              showMapToolbar: false,
+              showTraffic: false,
+              centerMapOnMarkerTap: true,
+            ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           ButtonWidget(
             onPressed: () async {
-              Get.toNamed('/DirctionScreen',arguments: [seeLocationController.latitude,seeLocationController.longitude]);
-              },
+              Get.toNamed('/DirctionScreen', arguments: [
+                seeLocationController.latitude,
+                seeLocationController.longitude
+              ]);
+            },
             text: "Get Direction",
             options: ButtonOptions(
               height: 40,

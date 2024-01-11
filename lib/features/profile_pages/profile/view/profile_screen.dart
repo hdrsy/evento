@@ -35,7 +35,7 @@ final ProfileController profileController=Get.find();
 
                  
                   
-                  ...List.generate(_buildUserSpecificOptions().length,(index)=> _buildUserSpecificOptions()[index]),
+                  ...List.generate(getnormalUserOptionsCard().length,(index)=> _buildUserSpecificOptions()[index]),
                   const SizedBox(
                     height: 12,
                   ),

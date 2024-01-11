@@ -75,26 +75,42 @@ class OrganizerCreateProfileController extends GetxController {
           ? profileImage = File(pickedImage.path)
           : coverImage = File(pickedImage.path);
       ///// for isart the custom image iside avatar list on selected position
-      print(coverImage!.path);
+    !isProfile?  print("coverrrrrrrrr ${coverImage!.path}"):
+      print("profileeeeeeeeeeee${profileImage!.path}");
       update();
       Get.back();
     }
   }
 
   onPressDone() async {
+    try{
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
         Get.find();
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     Map<String, dynamic> dataRequest = {
       'name': organizerName.text,
       'bio': bio.text,
       'state': selectedState!,
-      'services': choiceOrganizerCategoryController.sericeSelected,
-      'category_id': choiceOrganizerCategoryController.selectedCategories
+      'services': 
+      choiceOrganizerCategoryController.sericeSelected.text,
+      // 'category_ids': choiceOrganizerCategoryController.selectedCategories
     };
+    
+    for(int i=0;i<choiceOrganizerCategoryController.selectedCategories.length;i++){
+      dataRequest["category_ids[$i]"]=choiceOrganizerCategoryController.selectedCategories[i];
+    }
+    print(dataRequest);
     Map<String, File> fileMap = {};
+    if(profileImage!=null){
+
+     fileMap['profile']=profileImage!;
+    }
+    if(coverImage!=null){
+
+     fileMap['cover']=coverImage!;
+    }
     for (var i = 0; i < foldersModel.length; i++) {
       dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
       for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
@@ -113,6 +129,8 @@ class OrganizerCreateProfileController extends GetxController {
       }
     }
     print(fileMap.length);
+    print(fileMap['cover']!.path);
+    print(fileMap['profile']!.path);
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.becomeOrganizer,
         method: "POST",
@@ -127,8 +145,12 @@ class OrganizerCreateProfileController extends GetxController {
     } else {
       isLoading.value=false;
       print(handlingResponse);
+      prefService.remove('userInfo');
 Get.offAllNamed('/home');
 }
+isLoading.value=false;
+  }catch(e){
+isLoading.value=false;
   }
-
+  }
   }

@@ -110,7 +110,7 @@ class OrganizerSeeAllCard extends StatelessWidget {
                       width: 12,
                     ),
                     Text(
-                      "${organizerHome.firstName} ${organizerHome.lastName}",
+                      "${organizerHome.organizerHomeInfo.name} ",
                       style: customTextStyle.bodyLarge.override(
                           fontSize: 16,
                           fontFamily: secondaryFontFamily,

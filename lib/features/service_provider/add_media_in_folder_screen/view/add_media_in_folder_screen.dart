@@ -92,7 +92,7 @@ class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
 
 class AddMediaCard extends StatelessWidget {
   AddMediaCard({super.key});
-  final AddMediaInFolderController addMediaInFolderController = Get.find();
+  final AddMediaInFolderServiseProviderController addMediaInFolderController = Get.find();
 
   @override
   Widget build(BuildContext context) {

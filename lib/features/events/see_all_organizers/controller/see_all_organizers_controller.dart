@@ -46,7 +46,9 @@ class SeeAllOrganizersController extends GetxController {
     log(pageId.toString());
     scrollController = ScrollController();
     itemList.isEmpty ? fetchData() :
-    pageId==2?fetchData():
+    pageId==2?(fetchData() ):
+    log(pageId.toString());
+
     
      null;
     scrollController.addListener(() {
@@ -62,7 +64,8 @@ class SeeAllOrganizersController extends GetxController {
 
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
-
+    hasMoreData.value=true;
+log("page id $pageId");
     String token = await prefService.readString("token") ?? "";
     String apiUrl = "$targetRout?page=$pageId";
 
@@ -90,6 +93,8 @@ class SeeAllOrganizersController extends GetxController {
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizerHome.fromJson(jsonItem))
         .toList());
+        print("curent page $pageId");
+        print("last pge $lastPageId");
     if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }

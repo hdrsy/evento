@@ -87,6 +87,62 @@ log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     isLoading.value = false;
   }
 }
+class EventsforOrganizerListController extends PaginationController<EventModel> {
+  EventsforOrganizerListController() : super(fetchDataCallback: _fetchData);
+
+  // Updated _fetchData to match the new signature
+  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
+      String url, int page, Map<String, dynamic> additionalParams) async {
+    String token = await prefService.readString("token") ;
+    String apiUrl = "${ServerConstApis.getOrganizerEventList}?page=$page";
+
+    // Returning the result of the API call
+    return ApiHelper.makeRequest(
+      targetRout: apiUrl,
+      method: "GET",
+      token: token,
+    );
+  }
+
+  @override
+  handleDataSuccess(dynamic handlingResponse) {
+    
+    List<dynamic> categoryListJson = handlingResponse['organizer_event']['data'];
+    print(categoryListJson);
+    lastPageId = handlingResponse['organizer_event']['last_page'];
+
+    itemList.addAll(categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList());
+    if (pageId == lastPageId) {
+      hasMoreData.value = false;
+    }
+    pageId++;
+    isLoading.value = false;
+    isLoading.value = false;
+    isLoadingMoreData.value = false;
+  }
+
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (itemList[modelIndex].isFollowedByAuthUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.unFollowEvent}/$eventId");
+    } else {
+      isDoneSuccefully =
+          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+    }
+    if (isDoneSuccefully == "followed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = true;
+      update();
+    } else if (isDoneSuccefully == "removed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = false;
+
+      update();
+    }
+    log(itemList[modelIndex].isFollowedByAuthUser.toString());
+  }
+}
 
 class FeaturedListController extends PaginationController<EventModel> {
   FeaturedListController() : super(fetchDataCallback: _fetchData);

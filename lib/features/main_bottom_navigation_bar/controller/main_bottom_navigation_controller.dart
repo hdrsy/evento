@@ -10,17 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainBottomNavigationController extends GetxController {
-  late List<Widget> screens;
-  @override
-  void onInit() async{
-  
-    screens = [
+   List<Widget> screens= [
       HomeScreen(),
-      const SearchScreen(),
+       SearchScreen(),
       ReelsScreen(),
        TypeToSetEventScreen(),
        ProfileScreen()
     ];
+   
+  @override
+  void onInit() async{
+  
    
     super.onInit();
   }

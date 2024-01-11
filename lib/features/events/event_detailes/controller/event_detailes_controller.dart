@@ -50,6 +50,7 @@ late bool isOffer;
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
+      print(errorMessage);
     } else {
       whenGetDataSuccess(handlingResponse);
     }

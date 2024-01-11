@@ -14,8 +14,7 @@ class RelatedEventModel {
   final List<String>? videos;
   final List<String> images;
    bool isFollowedByAuthUser;
-   bool organizerIsFollowedByAuthUser;
-
+   
   RelatedEventModel({
     required this.id,
     this.organizerId,
@@ -30,8 +29,7 @@ class RelatedEventModel {
     this.videos,
     required this.images,
     required this.isFollowedByAuthUser,
-    required this.organizerIsFollowedByAuthUser,
-  });
+   });
 
   factory RelatedEventModel.fromJson(Map<String, dynamic> json) {
     return RelatedEventModel(
@@ -48,7 +46,6 @@ class RelatedEventModel {
       videos: json['videos'] != null ? List<String>.from(jsonDecode(json['videos']).cast<String>().map((image) => image.toString())) : null,
       images: List<String>.from(jsonDecode(json['images']).cast<String>().map((image) => image.toString())),
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
-      organizerIsFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],
     );
   }
 }

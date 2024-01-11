@@ -16,8 +16,9 @@ class OrganizerProfileModel {
       required this.organizedEventsCount,
       required this.organizedEvents});
 
-  factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) =>
-      OrganizerProfileModel(
+  factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
+    print(json['followers_count']);
+   return    OrganizerProfileModel(
         id: json['id'],
         followersCount: json['followers_count'],
         followingCount: json['following_count'],
@@ -25,23 +26,26 @@ class OrganizerProfileModel {
         organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
         organizedEvents: List<OrganizerProfileEvent>.from(
             json['organized_events'].map((x) => OrganizerProfileEvent.fromJson(x))),
-      );
+      );}
 }
 
 class OrganizerInfo {
   int id;
-  int categoryId;
   String name;
   String bio;
   String services;
   String state;
+   String? profile;
+  String? cover;
   bool isFollowedByAuthUser;
   List<OrganizerProfileAlbum> albums;
-
+List<Category> categories;
   OrganizerInfo(
       {required this.id,
-      required this.categoryId,
       required this.name,
+      required this.profile,
+      required this.cover,
+      required this.categories,
       required this.bio,
       required this.services,
       required this.state,
@@ -50,12 +54,13 @@ class OrganizerInfo {
 
   factory OrganizerInfo.fromJson(Map<String, dynamic> json) => OrganizerInfo(
         id: json['id'],
-        categoryId: json['category_id'],
         name: json['name'],
         bio: json['bio'],
         services: json['services'],
         state: json['state'],
-
+  categories: List<Category>.from(json['categories'].map((x) => Category.fromJson(x))),
+     profile: json['profile'],
+      cover: json['cover'],
         isFollowedByAuthUser: json['is_followed_by_auth_user'],
         albums: List<OrganizerProfileAlbum>.from(json['albums'].map((x) => OrganizerProfileAlbum.fromJson(x))),
       );
@@ -105,6 +110,25 @@ class OrganizerProfileAlbum {
         videos:json['videos']!=null? parseVideos(json['videos']as String):[],
         );}
 }
+class Category {
+  int id;
+  String title;
+  String icon;
+  
+  Category({
+    required this.id,
+    required this.title,
+    required this.icon,
+   });
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'],
+      title: json['title'],
+      icon: json['icon'],
+     );
+  }
+}
+
 
 class OrganizerProfileEvent {
   int id;
@@ -120,9 +144,7 @@ class OrganizerProfileEvent {
   dynamic videos;
   List<dynamic> images;
   bool isFollowedByAuthUser;
-  bool organizerIsFollowedByAuthUser;
-
-  OrganizerProfileEvent(
+   OrganizerProfileEvent(
       {required this.id,
       required this.organizerId,
       required this.title,
@@ -136,7 +158,7 @@ class OrganizerProfileEvent {
       this.videos,
       required this.images,
       required this.isFollowedByAuthUser,
-      required this.organizerIsFollowedByAuthUser});
+      });
 
   factory OrganizerProfileEvent.fromJson(Map<String, dynamic> json) => OrganizerProfileEvent(
         id: json['id'],
@@ -152,7 +174,5 @@ class OrganizerProfileEvent {
         videos: json['videos'],
         images: jsonDecode(json['images']),
         isFollowedByAuthUser: json['is_followed_by_auth_user'],
-        organizerIsFollowedByAuthUser:
-            json['organizer_is_followed_by_auth_user'],
-      );
+       );
 }

@@ -76,6 +76,8 @@ import 'package:evento/features/profile_pages/request_status/view/request_status
 import 'package:evento/features/see_location_and_dirction/dirction/view/dirction_screen.dart';
 import 'package:evento/features/see_location_and_dirction/see_location/view/see_location_screen.dart';
 import 'package:evento/features/service_provider/add_media_in_folder_screen/view/add_media_in_folder_screen.dart';
+import 'package:evento/features/service_provider/edit_profile_service_provider.dart/controller/binding/edit_profile_binding.dart';
+import 'package:evento/features/service_provider/edit_profile_service_provider.dart/view/edit_profile_screen.dart';
 import 'package:evento/features/service_provider/see_all_service_category_profile_page/view/see_all_service_category_screen.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/controller/binding/service_provider_create_profile_binding.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/service_provider_create_profile_screen.dart';
@@ -102,6 +104,7 @@ appRoutes() => [
     GetPage(name: '/FreindsScreen', page:()=>  FreindsScreen(),binding:FreindsBinding() ) , 
     GetPage(name: '/InviteFreindsScreen', page:()=> const InviteFriendsScreen(),binding:InviteFriendsBinding() ) , 
     GetPage(name: '/EditProfileScreen', page:()=> EditProfileScreen(),binding:EditProfileBinding() ) , 
+    GetPage(name: '/EditProfileServiceProviderScreen', page:()=> EditProfileServiceProviderScreen(),binding:EditProfileServiceProviderBinding() ) , 
     GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
     GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 

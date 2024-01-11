@@ -60,11 +60,11 @@ Widget buildEventColumn() {
   final HomeOrganizerController homeOrganizerController = Get.find();
 
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 40),
+    padding: EdgeInsets.symmetric(horizontal: 0),
     width: double.infinity,
     child: Column(
       mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Wrap(
@@ -92,46 +92,44 @@ Widget buildEventColumn() {
 
 // Function to create each event item
 Widget buildOrganizerItem({required OrganizerHome organizerHome,required int modelIndex}) {
-  return InkWell(onTap: (){
+  return        GestureDetector(onTap: (){
+    print('ffffffffffffffffff');
       Get.toNamed('/OrganizerProfileScreen',arguments: organizerHome.id);
      },
     child: Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildEventImage(organizerHome.imageUrl),
+     buildEventImage(organizerHome.imageUrl),
         buildEventTitle(organizerHome.organizerHomeInfo.name),
         // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
       ],
-    ),
+    )
   );
 }
 
 // Function to build the event image
 Widget buildEventImage(String imagePath) {
-  return InkWell(
-    onTap: () {},
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child:imagePath.length>6?
-        
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child:imagePath.length>6?
       
-       getImageNetwork(url: '/storage/$imagePath', width: screenSize == ScreenSize.small
-            ? 120
-            : (screenSize == ScreenSize.medium ? 150 : 160),
-        height: screenSize == ScreenSize.small
-            ? 120
-            : (screenSize == ScreenSize.medium ? 150 : 160),):Image.asset(
-                    'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
-            ? 120
-            : (screenSize == ScreenSize.medium ? 150 : 160),
-        height: screenSize == ScreenSize.small
-            ? 120
-            : (screenSize == ScreenSize.medium ? 150 : 160),)
-      
-      
-     
-    ),
+    
+     getImageNetwork(url: '/storage/$imagePath', width: screenSize == ScreenSize.small
+          ? 120
+          : (screenSize == ScreenSize.medium ? 150 : 160),
+      height: screenSize == ScreenSize.small
+          ? 120
+          : (screenSize == ScreenSize.medium ? 150 : 160),):Image.asset(
+                  'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
+          ? 120
+          : (screenSize == ScreenSize.medium ? 150 : 160),
+      height: screenSize == ScreenSize.small
+          ? 120
+          : (screenSize == ScreenSize.medium ? 150 : 160),)
+    
+    
+   
   );
 }
 

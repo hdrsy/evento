@@ -62,8 +62,8 @@ class EventDetailsModel {
       description: json['description'],
       type: json['type'],
       images: jsonDecode(json['images']).cast<String>(),
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
-      isOrganizerFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user']??false,
+      isOrganizerFollowedByAuthUser: json['organizer_is_followed_by_auth_user']??false,
       eventTrips: List<EventTrip>.from(
           json['event_trips'].map((x) => EventTrip.fromJson(x))),
       venue: Venue.fromJson(json['venue']),
@@ -169,7 +169,7 @@ class OrganizerInfo {
     return OrganizerInfo(
       id: json['id'],
       mobileUserId: json['mobile_user_id'],
-      categoryId: json['category_id'],
+      categoryId: json['category_id']??1,
       name: json['name'],
       bio: json['bio'],
       services: json['services'],

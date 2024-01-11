@@ -1,62 +1,40 @@
+import 'package:evento/features/search/controller/search_controller.dart';
 import 'package:evento/features/search/view/widgets/search_event_card.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PopularWidget extends StatelessWidget {
-  const PopularWidget({super.key});
-
+   PopularWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return 
-        Column(
+        GetBuilder<SearchPageController>(
+          builder: (controller) {
+            return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Align(
-          alignment: const AlignmentDirectional(-1.00, 0.00),
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-            child: Text(
-              "Popular on Evanto",
-              textAlign: TextAlign.start,
-              style: customTextStyle.labelLarge,
+            Align(
+              alignment: const AlignmentDirectional(-1.00, 0.00),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                child: Text(
+                  "Popular on Evanto",
+                  textAlign: TextAlign.start,
+                  style: customTextStyle.labelLarge,
+                ),
+              ),
             ),
-          ),
-        ),
-     const   SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
-       const SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
-     const   SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
-       const SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
-     const   SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
-       const SearchEventCard(
-          imgUrl: 'assets/images/download_(1).jpg',
-          date: "Thu 17 August",
-          title: "Paradiso",
-        ),
+            ...List.generate(controller.itemList.length, (index) =>  SearchEventCard(
+             eventModel: controller.itemList[index],
+            )),
+
+                
               
             
-          
-        
       ],
     );
+          }
+        );
   }
 }

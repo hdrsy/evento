@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 Widget searchTextField(
     {
       required Function(String?)? onChanged,
+       TextEditingController? controller,
+
     }) {
   return Container(
   // width: 300,
@@ -30,7 +32,7 @@ Widget searchTextField(
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
             child: TextFormField(
-              // controller: _model.textController,
+              controller: controller,
               // focusNode: _model.textFieldFocusNode,
               onChanged: onChanged,
               obscureText: false,

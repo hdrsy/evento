@@ -18,14 +18,14 @@ import 'package:share_plus/share_plus.dart';
 
 class EventsFromOrganizer extends StatelessWidget {
   EventsFromOrganizer({super.key});
-  final TrendingListController trendingListController = Get.find();
+  final EventsforOrganizerListController eventsforOrganizerListController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(() => trendingListController.isLoading.value
+    return Obx(() => eventsforOrganizerListController.isLoading.value
         ? ShimmerLoadingWidget(
             loadingShimmerWidget: featuredLoading(),
           )
-        :  trendingListController.itemList.isEmpty?const SizedBox():
+        :  eventsforOrganizerListController.itemList.isEmpty?const SizedBox():
           
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,8 +35,8 @@ class EventsFromOrganizer extends StatelessWidget {
                 subTitle: "Curated Concerts & Exclusive Engagements",
                 onTap: () {
                   Get.toNamed('/seeAll', arguments: [
-                    trendingListController.pageId,
-                    trendingListController.itemList,
+                    eventsforOrganizerListController.pageId,
+                    eventsforOrganizerListController.itemList,
                     ServerConstApis.getTrendingList,
                     "trending_event",
                     "Organizer's Events"
@@ -56,18 +56,18 @@ class EventsFromOrganizer extends StatelessWidget {
 // Main widget function
   Widget buildEventRow() {
     return SingleChildScrollView(
-      controller: trendingListController.scrollController,
+      controller: eventsforOrganizerListController.scrollController,
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           ...List.generate(
-              trendingListController.hasMoreData.value
-                  ? trendingListController.itemList.length + 1
-                  : trendingListController.itemList.length, (index) {
-            return index < trendingListController.itemList.length
+              eventsforOrganizerListController.hasMoreData.value
+                  ? eventsforOrganizerListController.itemList.length + 1
+                  : eventsforOrganizerListController.itemList.length, (index) {
+            return index < eventsforOrganizerListController.itemList.length
                 ? buildEventCard(
-                    eventModel: trendingListController.itemList[index],
+                    eventModel: eventsforOrganizerListController.itemList[index],
                     modelIndex: index,
                   )
                 : ShimmerLoadingWidget(
@@ -310,13 +310,13 @@ class EventsFromOrganizer extends StatelessWidget {
 
 // Function to build the favorite toggle button
   Widget buildFavoriteToggleButton(int modelIndex) {
-    return GetBuilder<TrendingListController>(builder: (context) {
+    return GetBuilder<EventsforOrganizerListController>(builder: (context) {
       return ToggleIcon(
         onPressed: () {
-          trendingListController.followOrUnFollowEvent(
-              trendingListController.itemList[modelIndex].id, modelIndex);
+          eventsforOrganizerListController.followOrUnFollowEvent(
+              eventsforOrganizerListController.itemList[modelIndex].id, modelIndex);
         },
-        value: trendingListController.itemList[modelIndex].isFollowedByAuthUser,
+        value: eventsforOrganizerListController.itemList[modelIndex].isFollowedByAuthUser,
         onIcon: Icon(Icons.favorite_sharp,
             color: customColors.error, size: responsiveIcon(25, 2)),
         offIcon: Icon(Icons.favorite_border,

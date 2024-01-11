@@ -35,47 +35,45 @@ class MapScreen extends StatelessWidget {
         body: Stack(
           children: [
             MapWidget(),
-            const ElementWidget(),  
-
+            const ElementWidget(),
             Align(
-              alignment: const AlignmentDirectional(1,1),
-              child: EventsList()),
-
-Align(
-  alignment: const AlignmentDirectional(0.96, 0.34),
-  child: Padding(
-    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-    child: ButtonWidget(
-      onPressed: () async {
-        // context.pushNamed('Search');
-      },
-      text: '',
-      icon: const Icon(
-        Icons.list,
-        size: 30,
-      ),
-      options: ButtonOptions(
-        height: 40,
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: customColors.primary,
-        textStyle: customTextStyle.titleSmall.override(
-              fontFamily: 'Nunito',
-              color: Colors.white,
-              useGoogleFonts: true,
-            ),
-        elevation: 3,
-        borderSide: const BorderSide(
-          color: Colors.transparent,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    ),
-  ),
-)
-
-           ],
+                alignment: const AlignmentDirectional(1, 1),
+                child: EventsList()),
+            Align(
+              alignment: const AlignmentDirectional(0.96, 0.34),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: ButtonWidget(
+                  onPressed: () async {
+                    // context.pushNamed('Search');
+                  },
+                  text: '',
+                  icon: const Icon(
+                    Icons.list,
+                    size: 30,
+                  ),
+                  options: ButtonOptions(
+                    height: 40,
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    color: customColors.primary,
+                    textStyle: customTextStyle.titleSmall.override(
+                      fontFamily: 'Nunito',
+                      color: Colors.white,
+                      useGoogleFonts: true,
+                    ),
+                    elevation: 3,
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+            )
+          ],
         ));
   }
 }

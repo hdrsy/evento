@@ -9,8 +9,6 @@ class OrganizerHome {
   String state;
   String imageUrl;
   String type;
-  DateTime createdAt;
-  DateTime updatedAt;
   int followersCount;
   String? friendRequestStatusWithAuthUser;
    
@@ -26,8 +24,6 @@ OrganizerHomeInfo organizerHomeInfo;
     required this.state,
     required this.imageUrl,
     required this.type,
-    required this.createdAt,
-    required this.updatedAt,
     required this.followersCount,
     required this.friendRequestStatusWithAuthUser,
     required this.organizerHomeInfo,
@@ -45,8 +41,6 @@ OrganizerHomeInfo organizerHomeInfo;
       state: json['state'],
       imageUrl: json['image'],
       type: json['type'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
       followersCount: json['followers_count'],
       friendRequestStatusWithAuthUser: json['friend_request_status_with_auth_user'],
       organizerHomeInfo:OrganizerHomeInfo.fromJson( json['organizer_info']),

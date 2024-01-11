@@ -13,7 +13,7 @@ final MapController mapController=Get.find();
   width: double.infinity,
   child: CarouselSlider(
     items: [
-      ...List.generate(3, (index) => const EventCard())
+      ...List.generate(mapController.events.length, (index) =>  EventCard(eventModel: mapController.events[index],modelIndex: index,))
     ],
     carouselController: mapController.carouselController,
     options: CarouselOptions(
@@ -22,13 +22,13 @@ final MapController mapController=Get.find();
           disableCenter: true,
           enlargeCenterPage: true,
           enlargeFactor: 0.1,
-          enableInfiniteScroll: true,
+          enableInfiniteScroll: false,
           scrollDirection: Axis.horizontal,
           autoPlay: false,
           onPageChanged: (index, _) {
-            // setState(() {
-            //   _currentCarouselIndex = index;
-            // });
+print(index);
+           mapController.carouselCurrentIndex=index;
+           mapController.updateMarkerAndPosition(index);
           },
         ),
   ));

@@ -127,15 +127,18 @@ class NameAndFollow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           marqueeTitle(
-            """ organizerProfileController
-                .organizerProfileModel.organizerInfo.namedddddddddddddddddddddddddddddddd""",
+             organizerProfileController
+                .organizerProfileModel.organizerInfo.name,
             heigthFromTheScreen: 0.04,
             widthFromTheScreen: 0.4,
             fontFamily: 'Plus Jakarta Sans',
             fontSize: 24,
           ),
           GetBuilder<OrganizerProfileController>(builder: (context) {
-            return ButtonWidget(
+            return
+            
+            // !organizerProfileController.isorganizerEditProfile?
+             ButtonWidget(
               onPressed: () async {
                 organizerProfileController.followOrUnFollowOrganizer(
                     organizerProfileController.orgnizerId);
@@ -173,6 +176,41 @@ class NameAndFollow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             );
+        // :        ButtonWidget(
+        //       onPressed: () async {
+        //        Get.toNamed('/EditProfileOrganizerScreen');
+        //        },
+        //       text: "Edit Profile",
+        //       icon: const Icon(
+        //         Icons.edit,
+        //         size: 20,
+        //       ),
+        //       options: ButtonOptions(
+        //         width: 150,
+        //         height: 35,
+        //         padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
+        //         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        //         color: organizerProfileController.organizerProfileModel
+        //                 .organizerInfo.isFollowedByAuthUser
+        //             ? customColors.secondaryBackground
+        //             : customColors.primary,
+        //         textStyle: customTextStyle.titleSmall.override(
+        //           fontFamily: secondaryFontFamily,
+        //           color: organizerProfileController.organizerProfileModel
+        //                   .organizerInfo.isFollowedByAuthUser
+        //               ? customColors.primary
+        //               : customColors.info,
+        //           fontSize: 10,
+        //           fontWeight: FontWeight.normal,
+        //           useGoogleFonts: true,
+        //         ),
+        //         borderSide: BorderSide(
+        //           color: customColors.primary,
+        //         ),
+        //         borderRadius: BorderRadius.circular(20),
+        //       ),
+        //     );
+    
           }),
         ],
       ),
@@ -192,11 +230,23 @@ class StaticSection extends StatelessWidget {
       children: [
         statisticSingleElement(
             count: organizerProfileController
-                .organizerProfileModel.organizedEvents.length
+                .organizerProfileModel.organizedEventsCount
                 .toString(),
             title: "Events"),
-        const statisticSingleElement(title: "Followers", count: "65 K"),
-        const statisticSingleElement(title: "Following", count: "20"),
+        statisticSingleElement(
+            title: "Followers",
+            count: organizerProfileController
+                        .organizerProfileModel.followersCount >
+                    1000
+                ? """${organizerProfileController.organizerProfileModel.followersCount / 1000} K"""
+                : organizerProfileController
+                    .organizerProfileModel.organizedEventsCount
+                    .toString()),
+        statisticSingleElement(
+            title: "Following",
+            count: organizerProfileController
+                .organizerProfileModel.followingCount
+                .toString()),
       ].divide(
         SizedBox(
           height: 60,

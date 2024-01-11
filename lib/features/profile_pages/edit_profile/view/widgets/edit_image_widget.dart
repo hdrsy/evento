@@ -14,7 +14,9 @@ class EditImageWidget extends StatelessWidget {
   final EditProfileController editProfileController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return 
+    
+    Column(
       children: [
         Container(
           width: 100,

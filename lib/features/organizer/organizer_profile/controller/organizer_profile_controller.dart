@@ -12,11 +12,15 @@ class OrganizerProfileController extends GetxController {
   late RxList<String> errorMessage;
 late RxBool isLoading;
 late int orgnizerId;
+// late bool isorganizerEditProfile;
+  
   @override
   void onInit() {
     errorMessage = <String>[].obs;
     isLoading=false.obs;
     orgnizerId=Get.arguments;
+      // isorganizerEditProfile = Get.arguments[1]??false;
+  
     getOrganizerProfile();
     // TODO: implement onInit
     super.onInit();
@@ -25,7 +29,7 @@ late int orgnizerId;
   getOrganizerProfile() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     isLoading.value=true;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
         method: "GEt",
