@@ -3,7 +3,9 @@ import 'package:evento/core/getx_navigation/routs.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/extenstions/color_extenstions.dart';
 import 'package:evento/core/utils/extenstions/text_extenstions.dart';
+import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/pref_service.dart';
+import 'package:evento/core/utils/services/pusher.dart';
 import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,8 @@ void main() async {
   targetRout=await prefService.isContainKey('token')?'/home':"/";
   user=await UserInfo.getUserInfo();
   await EasyLocalization.ensureInitialized();
-
+ PusherService.initPusher();
+ await NotificationService().init();
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     initSizes(context);
     return GetMaterialApp(
-      
+
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

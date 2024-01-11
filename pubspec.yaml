@@ -84,7 +84,9 @@ dependencies:
   flutter_image_compress: ^2.1.0
   video_compress_plus: ^1.0.0
   flutter_local_notifications: ^16.3.0
-  pusher_client: ^2.0.0
+  # pusher_client: ^2.0.0
+  pusher_channels_flutter: ^2.2.0
+
   
   # video_compress: ^3.1.2
   

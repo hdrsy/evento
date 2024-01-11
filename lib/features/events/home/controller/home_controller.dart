@@ -72,7 +72,13 @@ class CategoryListController extends GetxController {
         prefService.remove('userInfo');
         Get.offAllNamed('/');
       }
-    } else {
+      if(errorMessage[0]=="please complete your info"){
+      
+        Get.offAllNamed('/');
+  
+      }
+      
+          } else {
       whenGetDataSuccess(handlingResponse);
     }
     isLoading.value = false;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:evento/core/utils/services/permission_service.dart';
 import 'package:evento/features/auth/step7/model/interst_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,19 +52,17 @@ class StepsController extends GetxController {
     }
   }
 
-  Future<void> requestNotificationPermission() async {
-  var status = await Permission.notification.status;
-  if (status.isDenied) {
-    // We didn't ask for permission yet or the permission has been denied before but not permanently.
-    
-    Permission.notification.request();
-
+  Future<bool> requestNotificationPermission() async {
+    print("requedst");
+//  return await PermissionService().requestNotificationPermission();
+ var status = await Permission.notification.status;
+  if (!status.isGranted) {
+    // Request permission
+    await Permission.notification.request();
   }
-
-  if (status.isPermanentlyDenied) {
-    // The user opted to never again see the permission request dialog for this app.
-    openAppSettings(); // This will open the app settings to let the user manually enable the permission.
-  }
-}
+  if(status.isGranted){
+    return true;
+  }else {return false;}
+ }
 
 }

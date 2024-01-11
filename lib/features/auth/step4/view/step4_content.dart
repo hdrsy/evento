@@ -49,11 +49,11 @@ buildButton()
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
-          stepsController.turnOnNotification=true;
-          // await stepsController
-          // .requestNotificationPermission();
           StepsPageController stepsPageController=Get.find();
-          stepsPageController.pageIdex.value=5;
+          // stepsController.turnOnNotification=true;
+          await stepsController
+          .requestNotificationPermission()?
+          stepsPageController.pageIdex.value=5:null;
         },
         text: "Activate",
         options: ButtonOptions(
