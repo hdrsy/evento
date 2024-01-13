@@ -6,8 +6,8 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
 class SearchFieldWithFiltering extends StatelessWidget {
-  const SearchFieldWithFiltering({super.key});
-
+  const SearchFieldWithFiltering({super.key, this.onChanged});
+final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +44,7 @@ class SearchFieldWithFiltering extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                       child: TextFormField(
+                        onChanged: onChanged,
                         obscureText: false,
                         decoration: InputDecoration(
                           hintText: "Search...",

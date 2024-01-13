@@ -27,17 +27,20 @@ class ChoiceTypeSuggestList extends StatelessWidget {
             ),
           ),
         ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-        
-        ...List.generate(
-            choiceTypeController.choiceServiceList.length,
-            (index) => SuggestServiceCard(
-                  title: choiceTypeController.choiceServiceList[index].name,
-                )).divide(const SizedBox(height: 10,))
-            ],
+        Obx(
+          ()=> SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+          
+          ...List.generate(
+              choiceTypeController.serviceCategoryList.length,
+              (index) => SuggestServiceCard(
+                    title: choiceTypeController.serviceCategoryList[index].title,
+                    id: choiceTypeController.serviceCategoryList[index].id,
+                  )).divide(const SizedBox(height: 10,))
+              ],
+            ),
           ),
         )
       ].divide(const SizedBox(height: 5,)),
@@ -46,63 +49,55 @@ class ChoiceTypeSuggestList extends StatelessWidget {
 }
 
 class SuggestServiceCard extends StatelessWidget {
-  SuggestServiceCard({super.key, required this.title});
+  SuggestServiceCard({super.key, required this.title, required this.id});
   final String title;
+  final int id;
   final ChoiceTypeController choiceTypeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChoiceTypeController>(
-      builder:(c)=> InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () async {
-          // context.pushNamed('Account-privacy');
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  title,
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: 'Nunito',
-                    color: customColors.primaryText,
-                    fontSize: 16,
-                    useGoogleFonts: true,
-                  ),
+      builder:(c)=> Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                title,
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  color: customColors.primaryText,
+                  fontSize: 16,
+                  useGoogleFonts: true,
                 ),
-              ].divide(const SizedBox(width: 5)),
-            ),
-            Theme(
-              data: ThemeData(
-                checkboxTheme: CheckboxThemeData(
-                  visualDensity: VisualDensity.compact,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+              ),
+            ].divide(const SizedBox(width: 5)),
+          ),
+          Theme(
+            data: ThemeData(
+              checkboxTheme: CheckboxThemeData(
+                visualDensity: VisualDensity.compact,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
                 ),
-                unselectedWidgetColor: customColors.secondaryText,
               ),
-              child: Checkbox(
-                value: choiceTypeController.sericeSelected == title,
-                onChanged: (value) {
-                  choiceTypeController.changeSelectedService(title);
-                  
-                },
-                activeColor: customColors.primary,
-                checkColor: customColors.info,
-              ),
+              unselectedWidgetColor: customColors.secondaryText,
             ),
-          ],
-        ),
+            child: Checkbox(
+              value: choiceTypeController.sericeSelected == id,
+              onChanged: (value) {
+                choiceTypeController.changeSelectedService(id);
+                
+              },
+              activeColor: customColors.primary,
+              checkColor: customColors.info,
+            ),
+          ),
+        ],
       ),
     );
   }

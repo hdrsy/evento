@@ -54,7 +54,7 @@ final HomeController homeController=Get.find();
          FeaturedList(),
         TrendingNow(),
          FromYourCity(),
-        // const Offers(),
+         Offers(),
          Orgnizers(),
          EventsFromOrganizer(),
          ForYou()

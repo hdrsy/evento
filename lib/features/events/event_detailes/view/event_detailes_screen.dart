@@ -33,10 +33,10 @@ class EventDetailesScreen extends StatelessWidget {
         MainImage(
             imgUrl:
                 "/storage/${eventDetailesController.eventDetailsModel.images[0]}"),
-        // Positioned(
+       eventDetailesController.isOffer? Positioned(
 
-        //     top: screenHeight * 0.25,
-        //     child: Offerprice()),
+            top: screenHeight * 0.25,
+            child: Offerprice()):SizedBox.shrink(),
         Positioned(
             top: screenHeight * 0.32,
             child: InformationEvent(
@@ -47,12 +47,13 @@ class EventDetailesScreen extends StatelessWidget {
 }
 
 class Offerprice extends StatelessWidget {
-  const Offerprice({super.key});
+   Offerprice({super.key});
+  final EventDetailesController eventDetailesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: screenWidth * 0.9,
+      width: screenWidth * 0.95,
       height: 60,
       decoration: const BoxDecoration(
         color: Color(0x95000000),
@@ -68,7 +69,7 @@ class Offerprice extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "300,000 sp",
+            "${eventDetailesController.eventDetailsModel.ticketPrice} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,
@@ -79,7 +80,7 @@ class Offerprice extends StatelessWidget {
             ),
           ),
           Text(
-            "200,000 sp",
+            "${(eventDetailesController.eventDetailsModel.ticketPrice)*eventDetailesController.offerPrecent/100} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,

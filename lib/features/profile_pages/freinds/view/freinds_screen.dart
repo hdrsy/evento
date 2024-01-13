@@ -14,18 +14,18 @@ final FreindsController  freindsController=Get.find();
   Widget build(BuildContext context) {
     return 
     Scaffold(
-      floatingActionButton: FloatingActionButton(
-         backgroundColor: customColors.primary,
-  elevation: 8,
-  child: Icon(
-    Icons.add,
-    color: customColors.info,
-    size: 24,
-  ),
-        onPressed: (){
+  //     floatingActionButton: FloatingActionButton(
+  //        backgroundColor: customColors.primary,
+  // elevation: 8,
+  // child: Icon(
+  //   Icons.add,
+  //   color: customColors.info,
+  //   size: 24,
+  // ),
+  //       onPressed: (){
 
-          Get.toNamed('/AddFriendsScreen');
-        }),
+  //         Get.toNamed('/AddFriendsScreen');
+  //       }),
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,

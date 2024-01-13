@@ -1,12 +1,15 @@
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
+import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
 import 'package:evento/core/shared/widgets/text_fields/search_filed_with_filtering.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/features/map/controller/map_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ElementWidget extends StatelessWidget {
-  const ElementWidget({super.key});
-
+   ElementWidget({super.key});
+final  MapController mapController=Get.find();
   @override
   Widget build(BuildContext context) {
     return // Generated code for this Column Widget...
@@ -30,9 +33,14 @@ Column(
                 color:customColors.primaryBackground,
               ),
             ),
-            child: const Padding(
+            child:  Padding(
               padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-              child:  SearchFieldWithFiltering(),
+              child:  searchTextField(onChanged: (value){
+ mapController.onPressSearch(value!);
+    
+              },
+              controller: mapController.searchController
+              ),
                  ),
           ),
           IconWithContainer(

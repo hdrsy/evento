@@ -2,6 +2,8 @@ import 'package:evento/features/assign_friends/view/assign_friends_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
 import 'package:evento/features/auth/forget_password_pages/verify_forget_password/view/verify_forget_password.dart';
+import 'package:evento/features/booking_detailes_for_my_booking_screen/controller/binding/booking_detailes_binding.dart';
+import 'package:evento/features/booking_detailes_for_my_booking_screen/view/booking_detailes_screen.dart';
 import 'package:evento/features/customize_event/payment/view/payment_screen.dart';
 import 'package:evento/features/customize_event/venue/controller/binding/venue_binding.dart';
 import 'package:evento/features/customize_event/venue/view/venue_screen.dart';
@@ -105,6 +107,7 @@ appRoutes() => [
     GetPage(name: '/InviteFreindsScreen', page:()=> const InviteFriendsScreen(),binding:InviteFriendsBinding() ) , 
     GetPage(name: '/EditProfileScreen', page:()=> EditProfileScreen(),binding:EditProfileBinding() ) , 
     GetPage(name: '/EditProfileServiceProviderScreen', page:()=> EditProfileServiceProviderScreen(),binding:EditProfileServiceProviderBinding() ) , 
+    GetPage(name: '/BookingDetailesForMyBookingScreen', page:()=> BookingDetailesForMyBookingScreen(),binding:BookingDetailesForMyBookingBinding() ) , 
     GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
     GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
@@ -116,11 +119,11 @@ appRoutes() => [
     GetPage(name: '/VenueDetailesScreen', page:()=>  VenueDetailesScreen(),binding:VenueDetailesBinding() ) , 
     GetPage(name: '/SwithcToServiceProviderScreen', page:()=>  SwithcToServiceProviderScreen()) , 
     GetPage(name: '/HelpCenterScreen', page:()=> const HelpCenterScreen()) , 
-    GetPage(name: '/InviteFreindsToEventScreen', page:()=> const InviteFreindsToEventScreen()) , 
+    GetPage(name: '/InviteFreindsToEventScreen', page:()=>  InviteFreindsToEventScreen()) , 
     GetPage(name: '/AssignFriendsScreen', page:()=>  AssignFriendsScreen()) , 
     GetPage(name: '/SeeAllServiceCategoryScreen', page:()=>  SeeAllServiceCategoryScreen()) , 
     GetPage(name: '/SeeAllOrganizersScreen', page:()=>  SeeAllOrganizersScreen()) , 
-    GetPage(name: '/SeeAllOffersScreen', page:()=> const SeeAllOffersScreen()) , 
+    GetPage(name: '/SeeAllOffersScreen', page:()=>  SeeAllOffersScreen()) , 
     GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
     GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
     GetPage(name: '/AchivmentScreen', page:()=>  AchivmentScreen()) , 

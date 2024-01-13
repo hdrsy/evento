@@ -11,26 +11,28 @@ final MapController mapController=Get.find();
   Widget build(BuildContext context) {
     return SizedBox(
   width: double.infinity,
-  child: CarouselSlider(
-    items: [
-      ...List.generate(mapController.events.length, (index) =>  EventCard(eventModel: mapController.events[index],modelIndex: index,))
-    ],
-    carouselController: mapController.carouselController,
-    options: CarouselOptions(
-          initialPage: 1,
-          viewportFraction: 0.8,
-          disableCenter: true,
-          enlargeCenterPage: true,
-          enlargeFactor: 0.1,
-          enableInfiniteScroll: false,
-          scrollDirection: Axis.horizontal,
-          autoPlay: false,
-          onPageChanged: (index, _) {
-print(index);
-           mapController.carouselCurrentIndex=index;
-           mapController.updateMarkerAndPosition(index);
-          },
-        ),
+  child: Obx(
+    ()=> CarouselSlider(
+      items: [
+     ...List.generate(mapController.isSearchActive.value?  mapController.searchResultSearch.length :mapController.events.length, (index) =>mapController.isSearchActive.value?  EventCard(eventModel: mapController.searchResultSearch[index],modelIndex: index,): EventCard(eventModel: mapController.events[index],modelIndex: index,))
+      ],
+      carouselController: mapController.carouselController,
+      options: CarouselOptions(
+            initialPage: 1,
+            viewportFraction: 0.8,
+            disableCenter: true,
+            enlargeCenterPage: true,
+            enlargeFactor: 0.1,
+            enableInfiniteScroll: false,
+            scrollDirection: Axis.horizontal,
+            autoPlay: false,
+            onPageChanged: (index, _) {
+  print(index);
+             mapController.carouselCurrentIndex=index;
+             mapController.updateMarkerAndPosition(index);
+            },
+          ),
+    ),
   ));
   }
 }

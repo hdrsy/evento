@@ -4,6 +4,7 @@ import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/booking_detailes/controller/booking_detailes_controller.dart';
+import 'package:evento/features/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import 'package:get/get.dart';
 class BuildButton extends StatelessWidget {
    BuildButton({super.key});
 
-      final BookingDetailesController bookingDetailesController=Get.find();
+      final BookingDetailesForMyBookingController bookingDetailesController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Row(

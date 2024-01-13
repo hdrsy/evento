@@ -10,9 +10,9 @@ import 'package:get/get.dart';
 
 class RateingFeedbackWidget extends StatelessWidget {
   const RateingFeedbackWidget({
-    Key? key,
+    Key? key, required this.userRatingl,
   }) : super(key: key);
-
+final double userRatingl;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -68,53 +68,12 @@ class RateingFeedbackWidget extends StatelessWidget {
                         color: customColors.primary,
                       ),
                       direction: Axis.horizontal,
-                      initialRating:  0,
+                      initialRating: userRatingl ,
                       unratedColor: customColors.primary,
                       itemCount: 5,
                       itemSize: 48,
                       glowColor: customColors.primary,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: TextFormField(
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        hintText:  "Please leave a description of ...",
-                        hintStyle: customTextStyle.bodyMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color:
-                                customColors.primaryBackground,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x00000000),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      style: customTextStyle.bodySmall,
-                      maxLines: 4,
-        ),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),

@@ -9,6 +9,7 @@ import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:evento/features/events/home/model/home_oganizer.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 import 'package:evento/features/events/home/model/organizer.dart';
 import 'package:evento/main.dart';
 
@@ -119,6 +120,62 @@ class EventsforOrganizerListController extends PaginationController<EventModel> 
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList());
+    if (pageId == lastPageId) {
+      hasMoreData.value = false;
+    }
+    pageId++;
+    isLoading.value = false;
+    isLoading.value = false;
+    isLoadingMoreData.value = false;
+  }
+
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (itemList[modelIndex].isFollowedByAuthUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.unFollowEvent}/$eventId");
+    } else {
+      isDoneSuccefully =
+          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+    }
+    if (isDoneSuccefully == "followed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = true;
+      update();
+    } else if (isDoneSuccefully == "removed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = false;
+
+      update();
+    }
+    log(itemList[modelIndex].isFollowedByAuthUser.toString());
+  }
+}
+class OffersController extends PaginationController<OfferEvent> {
+  OffersController() : super(fetchDataCallback: _fetchData);
+
+  // Updated _fetchData to match the new signature
+  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
+      String url, int page, Map<String, dynamic> additionalParams) async {
+    String token = await prefService.readString("token") ;
+    String apiUrl = "${ServerConstApis.getOfferList}?page=$page";
+
+    // Returning the result of the API call
+    return ApiHelper.makeRequest(
+      targetRout: apiUrl,
+      method: "GET",
+      token: token,
+    );
+  }
+
+  @override
+  handleDataSuccess(dynamic handlingResponse) {
+    
+    List<dynamic> categoryListJson = handlingResponse['OfferEvent']['data'];
+    print(categoryListJson);
+    lastPageId = handlingResponse['OfferEvent']['last_page'];
+
+    itemList.addAll(categoryListJson
+        .map((jsonItem) => OfferEvent.fromJson(jsonItem))
         .toList());
     if (pageId == lastPageId) {
       hasMoreData.value = false;

@@ -81,19 +81,17 @@ static CarouselOptions featuredOptions= CarouselOptions(
     
     );
  static   CarouselOptions newOpiningOptions=CarouselOptions(
-  height: scaleHeight(140),
-                initialPage: 0,
+  // height: 500,
                 viewportFraction: 1,
-                disableCenter: true,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.25,
-                enableInfiniteScroll: true,
-                scrollDirection: Axis.vertical,
-                autoPlay: true,
-                autoPlayAnimationDuration:const Duration(milliseconds: 800),
-                autoPlayInterval:const Duration(milliseconds: (800 + 4000)),
-                autoPlayCurve: Curves.linear,
-                pauseAutoPlayInFiniteScroll: true,
-                onPageChanged: (index, _) {}
+                  disableCenter: true,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.25,
+                  enableInfiniteScroll: true,
+                  scrollDirection: Axis.vertical,
+                  autoPlay: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayInterval: Duration(milliseconds: (800 + 4000)),
+                  autoPlayCurve: Curves.linear,
+                  pauseAutoPlayInFiniteScroll: true,  onPageChanged: (index, _) {}
               );
 }

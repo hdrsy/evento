@@ -93,7 +93,7 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                     EditProfileField(
                       controller: controller.organizerName,
                       hintText: "Spark",
-                      labelText: "Organization/Name",
+                      labelText: "ServiceProviderName",
                       onChanged: (value) {},
                       validator: (value) {
                         return null;

@@ -16,12 +16,13 @@ class MyBookingController extends GetxController{
   late List<UpComingBooking> completedBooking;
   late RxList<String> errorMessage;
 late RxBool isLoading;
+List<TicketModel> generatedTicketModel=[];
    @override
   void onInit() async{
     errorMessage = <String>[].obs;
     cancelledBooking=[];
     upComingBooking=[];
-    cancelledBooking=[];
+    completedBooking=[];
     isLoading=false.obs;
   await  getUpComingAndCompletedBooking();
     await getCalceledBooking();
@@ -76,26 +77,19 @@ late RxBool isLoading;
     }
   }
 
-//   List<TicketModel> createTicketModelsFromEventBookings(List<EventBooking> bookings) {
-//   return bookings.map((booking) {
-//     // Assuming you have a way to derive selectedClass and selectedAminiteds
-//     Class derivedClass = deriveClassFromBooking(booking);
-//     List<Amenity> derivedAmenities = [];
-
-//     return TicketModel(
-//       selectedClass: derivedClass,
-      
-
-//       // Initializing the TextEditingControllers with values from booking
-//       fisrtName: TextEditingController(text: booking.firstName),
-//       lastName: TextEditingController(text: booking.lastName),
-//       age: TextEditingController(text: booking.age.toString()),
-//       phoneNumber: TextEditingController(text: booking.phoneNumber),
-//       // Assuming couponNumber does not come from EventBooking
-//       couponNumber: TextEditingController(),
-//     );
-//   }).toList();
-// }
+  List<TicketModel> createTicketModelsFromEventBookings(List<EventBooking> bookings) {
+    generatedTicketModel.clear();
+  
+for (var i=0;i<bookings.length;i++) {
+  generatedTicketModel.add(TicketModel());
+  generatedTicketModel[i].age.text=bookings[i].age.toString();
+  generatedTicketModel[i].fisrtName.text=bookings[i].firstName.toString();
+  generatedTicketModel[i].lastName.text=bookings[i].lastName.toString();
+  generatedTicketModel[i].phoneNumber.text=bookings[i].phoneNumber.toString();
+}
+print(generatedTicketModel.length);
+  return generatedTicketModel;
+}
 
 
 }

@@ -65,7 +65,7 @@ class FullTicketInfo extends StatelessWidget {
                     Wrap(
                       spacing: 8.0, // gap between adjacent chips
                       runSpacing: 4.0, // gap between lines
-                      children: bookNowController.ticketList[index].selectedClass.interests .map(( label) {
+                      children: bookNowController.ticketList[index].selectedClass!.interests .map(( label) {
                         return ChoiceChip(
                           label: Text(label.title),
                           selected: bookNowController.ticketList[index].selectedAminiteds.contains(label),
@@ -174,7 +174,7 @@ class FullTicketInfo extends StatelessWidget {
             activeColor: customColors.primary,
             
             value: singleClass.code,
-            groupValue: bookNowController.ticketList[index].selectedClass.code,
+            groupValue: bookNowController.ticketList[index].selectedClass!.code,
             onChanged: (newValue) {
              bookNowController.changeSelectedCalss(singleClass,index);
             },

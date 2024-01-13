@@ -19,7 +19,7 @@ class SeeAllCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap:(){
-  Get.toNamed('/eventDetailes',arguments: eventModel.id);
+  Get.toNamed('/eventDetailes',arguments: [eventModel.id,false,0]);
                     
       },
       child: Container(

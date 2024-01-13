@@ -1,6 +1,7 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,8 +45,10 @@ class InviteFreinds extends StatelessWidget {
                     children: [
                       ButtonWidget(
                         onPressed: () async {
+                          final EventDetailesController eventDetailesController = Get.find();
+  
                           // context.pushNamed('Invite-friends-to-event');
-                          Get.toNamed('/InviteFreindsToEventScreen');
+                          Get.toNamed('/InviteFreindsToEventScreen',arguments: [eventDetailesController.eventId,eventDetailesController.eventDetailsModel.title]);
                         },
                         text: "From Friends list",
                         options: ButtonOptions(

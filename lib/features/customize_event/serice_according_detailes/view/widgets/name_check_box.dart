@@ -1,3 +1,4 @@
+import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -85,7 +86,7 @@ class NameCheckBox extends StatelessWidget {
                 onTap: ()async{
                   await showButtonSheet(
               context: context,
-              widget:  ReviewEventWidget(ratingTarget: "Service Provider"),
+              widget:  ReviewEventWidget(ratingTarget: "Service Provider",id:serviceProvider.id,idKey: "service_provider_id",url: ServerConstApis.reviewServiceProvider, ),
               height: 450);
               },
                 child: Text(

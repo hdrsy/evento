@@ -26,12 +26,16 @@ class EventDetailesController extends GetxController {
   late RxList<String> errorMessage;
   late List<RelatedEventModel>relatedEvents;
 late bool isOffer;
-  
+  late int offerPrecent;
   @override
   void onInit() async {
-    eventId = Get.arguments;
     errorMessage = <String>[].obs;
     isLoading = false.obs;
+    eventId = Get.arguments[0];
+    isOffer = Get.arguments[1]??false;
+    offerPrecent = Get.arguments[2]??0;
+
+    
     await getEventDetailesModel();
     await calculateDistance();
     

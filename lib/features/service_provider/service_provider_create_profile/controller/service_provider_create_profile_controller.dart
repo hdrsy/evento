@@ -6,14 +6,12 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
+import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:evento/core/server/server_config.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import 'package:evento/main.dart';
 
 class ServiceProviderCreateProfileController extends GetxController {
@@ -84,17 +82,26 @@ class ServiceProviderCreateProfileController extends GetxController {
   onPressDone() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
+    ChoiceTypeController choiceTypeController =
         Get.find();
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     Map<String, dynamic> dataRequest = {
       'name': organizerName.text,
       'bio': bio.text,
-      'state': selectedState!,
-      'services': "selectedState",
-      'category_id': "1"
+      'location_work_governorate': selectedState!,
+      'description': description.text,
+      'category_id': choiceTypeController.sericeSelected
     };
     Map<String, File> fileMap = {};
+     if(profileImage!=null){
+
+     fileMap['profile']=profileImage!;
+    }
+    if(coverImage!=null){
+
+     fileMap['cover']=coverImage!;
+    }
+   
     for (var i = 0; i < foldersModel.length; i++) {
       dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
       for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
@@ -114,7 +121,7 @@ class ServiceProviderCreateProfileController extends GetxController {
     }
     print(fileMap.length);
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.becomeOrganizer,
+        targetRout: ServerConstApis.becomeServiceProvider,
         method: "POST",
         token: token,
         data: dataRequest,

@@ -4,6 +4,7 @@ import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:evento/features/map/view/widgets/event_card.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchEventCard extends StatelessWidget {
   const SearchEventCard({super.key,
@@ -13,46 +14,52 @@ class SearchEventCard extends StatelessWidget {
 final EventModel eventModel;
   @override
   Widget build(BuildContext context) {
-    return    Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: 
-                 getImageNetwork(
-              url: "/storage/${eventModel.images[0]}", width: 45,
-                height: 45,),
+    return    InkWell(
+      onTap: (){
+             Get.toNamed('/eventDetailes', arguments: [eventModel.id,false]);
                
-                
+      },
+      child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: 
+                   getImageNetwork(
+                url: "/storage/${eventModel.images[0]}", width: 45,
+                  height: 45,),
+                 
+                  
+              ),
             ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                eventModel.title,
-                style: customTextStyle.bodyMedium,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                    child: Text(
-                      DateFormatter.formatDate(eventModel.startDate),
-                      style: customTextStyle.bodyMedium,
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  eventModel.title,
+                  style: customTextStyle.bodyMedium,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                      child: Text(
+                        DateFormatter.formatDate(eventModel.startDate),
+                        style: customTextStyle.bodyMedium,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+    );
   
 
   }

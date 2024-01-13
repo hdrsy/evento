@@ -73,7 +73,6 @@ class CancelledEvent {
   final DateTime endDate;
   final int venueId;
   final bool isFollowedByAuthUser;
-  final bool organizerIsFollowedByAuthUser;
   final CancelledVenue venue;
 final List<String> images;
   CancelledEvent({
@@ -84,8 +83,7 @@ final List<String> images;
     required this.venueId,
     required this.images,
     required this.isFollowedByAuthUser,
-    required this.organizerIsFollowedByAuthUser,
-    required this.venue,
+     required this.venue,
   });
 
   factory CancelledEvent.fromJson(Map<String, dynamic> json) {
@@ -98,7 +96,6 @@ final List<String> images;
       endDate: DateTime.parse(json['end_date']),
       venueId: json['venue_id'],
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
-      organizerIsFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],
       venue: CancelledVenue.fromJson(json['venue']),
     );
   }

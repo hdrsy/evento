@@ -88,7 +88,7 @@ class BookNowController extends GetxController {
 
     for (var booking in bookings) {
       bookingList.add({
-        'class_id': booking.selectedClass.id,
+        'class_id': booking.selectedClass!.id,
         'first_name': booking.fisrtName.text,
         'last_name': booking.lastName.text,
         'age': int.tryParse(booking.age.text) ?? 0,

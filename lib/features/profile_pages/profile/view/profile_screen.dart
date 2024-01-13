@@ -35,7 +35,7 @@ final ProfileController profileController=Get.find();
 
                  
                   
-                  ...List.generate(getnormalUserOptionsCard().length,(index)=> _buildUserSpecificOptions()[index]),
+                  ...List.generate(getnormalUserOptionsCard().length,(index)=> getnormalUserOptionsCard()[index]),
                   const SizedBox(
                     height: 12,
                   ),
@@ -135,11 +135,11 @@ final ProfileController profileController=Get.find();
                     icon: Icons.miscellaneous_services_outlined,
                     title: tr("Service Provider"),
                   ),
-                   OptionsCard(
-                    targetRout: '/AchivmentScreen',
-                    icon: Icons.code_sharp,
-                    title: tr("Achievements"),
-                  ),
+                  //  OptionsCard(
+                  //   targetRout: '/AchivmentScreen',
+                  //   icon: Icons.code_sharp,
+                  //   title: tr("Achievements"),
+                  // ),
                    OptionsCard(
                     targetRout: LanguageSelector(),
                     icon: Icons.language_outlined,

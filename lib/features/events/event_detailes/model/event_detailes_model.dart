@@ -21,6 +21,7 @@ class EventDetailsModel {
   final Organizer? organizer;
   final List<CategoryEvent> categoriesEvents;
   final List<Class> classes;
+  final List<ServiceProvider> serviceProvider;
   final int capacity;
   final List<Booking> bookings;
   
@@ -35,6 +36,7 @@ class EventDetailsModel {
     required this.title,
     required this.startDate,
     required this.endDate,
+    required this.serviceProvider,
     required this.ticketPrice,
     required this.description,
     required this.type,
@@ -76,6 +78,7 @@ class EventDetailsModel {
       categoriesEvents: List<CategoryEvent>.from(
           json['categories_events'].map((x) => CategoryEvent.fromJson(x)))??[],
       classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x)))??[],
+      serviceProvider: List<ServiceProvider>.from(json['service_providers'].map((x) => ServiceProvider.fromJson(x)))??[],
       organizerId: json['organizer_id'] ?? 0,
     );
   }
@@ -307,3 +310,57 @@ class Amenity {
     );
   }
 }
+class ServiceProvider {
+  int id;
+  int userId;
+  String name;
+  String bio;
+  dynamic services;
+  String locationWorkGovernorate;
+  String address;
+  int categoryId;
+  String description;
+  String profile;
+  String cover;
+  String startWork;
+  String endWork;
+  double latitude;
+  double longitude;
+  ServiceProvider({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.bio,
+    this.services,
+    required this.locationWorkGovernorate,
+    required this.address,
+    required this.categoryId,
+    required this.description,
+    required this.profile,
+    required this.cover,
+    required this.startWork,
+    required this.endWork,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory ServiceProvider.fromJson(Map<String, dynamic> json) => ServiceProvider(
+        id: json['id'],
+        userId: json['user_id'],
+        name: json['name'],
+        bio: json['bio'],
+        services: json['services'],
+        locationWorkGovernorate: json['location_work_governorate'],
+        address: json['address'],
+        categoryId: json['category_id'],
+        description: json['description'],
+        profile: json['profile'],
+        cover: json['cover'],
+        startWork: json['start_work'],
+        endWork: json['end_work'],
+        latitude: json['latitude'].toDouble(),
+        longitude: json['longitude'].toDouble(),
+       );
+
+}
+

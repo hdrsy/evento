@@ -59,7 +59,7 @@ child:Column(
                 ),
           ),
           Text(
-            "${bookNowController.ticketList[index].selectedClass.ticketPrice} sp",
+            "${bookNowController.ticketList[index].selectedClass!.ticketPrice} sp",
             style: customTextStyle.bodyLarge.override(
                   fontFamily: 'Nunito',
                   fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ child:Column(
             ],
           ),
           Text(
-             "${bookNowController.ticketList[index].selectedClass.ticketPrice} sp",
+             "${bookNowController.ticketList[index].selectedClass!.ticketPrice} sp",
             style: customTextStyle.displaySmall,
           ),
         ],

@@ -4,6 +4,7 @@ import 'package:evento/features/events/event_detailes/model/event_detailes_model
 import 'package:evento/features/events/event_detailes/view/widgets/book_now_button.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/about_event_section.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/amenities_section.dart';
+import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/build_service_provider_section.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/event_detailes.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/event_time_line_button.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/gallery_section.dart';
@@ -46,6 +47,7 @@ final EventDetailsModel eventDetailsModel;
                   Divider(thickness: 1, color: customColors.secondary),
                   buildOrganizerSection(context,eventDetailsModel.organizer),
                   buildAboutEventSection(context),
+                  BuildServiceProviderSection(),
                   buildGallerySection(context),
                   buildLocationSection(context),
                   buildAmenitiesSection(context),

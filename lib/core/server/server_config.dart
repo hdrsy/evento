@@ -1,6 +1,7 @@
 class ServerConstApis {
   static String baseAPI = 'http://94.141.219.16:8000';
   // static String baseAPI = 'http://10.0.2.2:8000';
+  // static String baseAPI = 'http://127.0.0.1:8000';
 
 ///// auth
   static String signUpStep1 = '$baseAPI/api/signup_step1';
@@ -27,7 +28,9 @@ class ServerConstApis {
   static String unFollowOrganizer = '$baseAPI/api/unfollow';
   static String becomeOrganizer = '$baseAPI/api/become_organizer';
   static String organizerProfile = '$baseAPI/api/organizer_profile';
-
+  ///// service provider
+  
+  static String becomeServiceProvider = '$baseAPI/api/become_service_provider';
   ///// home page
   static String getCategoryList = '$baseAPI/api/event_category';
   static String getFeaturedList = '$baseAPI/api/featured_event';
@@ -37,6 +40,7 @@ class ServerConstApis {
   static String getToNightList = '$baseAPI/api/toNight';
   static String getThisWeekList = '$baseAPI/api/thisWeek';
   static String getOrganizerEventList = '$baseAPI/api/organizer_event';
+  static String getOfferList = '$baseAPI/api/offer_event';
   static String getOrganizerHomeList = '$baseAPI/api/Home-Organizer';
   static String getAccordingCategoryList = '$baseAPI/api/eventAccordingCategory';
   //// event detailes
@@ -84,4 +88,10 @@ class ServerConstApis {
   static String myFreinds= '$baseAPI/api/my-friends';
   static String mySentRequests= '$baseAPI/api/my-sent-requests';
   static String myReciviedRequests= '$baseAPI/api/my-received-requests';
+
+  /// review 
+  static String reviewEvent= '$baseAPI/api/event-review';
+  static String reviewServiceProvider= '$baseAPI/api/service-provider-review';
+  static String reviewVenue= '$baseAPI/api/venue-review';
+  static String inviteEvent= '$baseAPI/api/Invite';
 }

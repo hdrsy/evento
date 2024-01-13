@@ -6,14 +6,18 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
   List<EventModel> events = [];
-
+TextEditingController searchController=TextEditingController();
   final googleMapsController = Completer<GoogleMapController>();
   late FlutterFlowMarker myMarker;
+  RxList<EventModel> searchResultSearch=<EventModel>[].obs;
+   RxBool isSearchActive=false.obs;
+  
 late LatLng currentPosition;
   @override
   void onInit() async {
@@ -34,7 +38,7 @@ late LatLng currentPosition;
   // PageController? paggooeViewController1;
   getSuggestModels() {
 // final TrendingListController trendingListController=Get.find();
-    final TrendingListController eventInYourCityListController = Get.find();
+    final TrendingListController eventInYourCityListController = Get.put(TrendingListController());
     events.assignAll(eventInYourCityListController.itemList);
     print(events.length);
      carouselCurrentIndex = 0;
@@ -108,5 +112,20 @@ followOrUnFollowEvent(int eventId, int modelIndex) async {
       update();
     }
    }
+
+    void onPressSearch(String query) {
+  if (query.isEmpty) {
+    isSearchActive.value = false;
+    searchResultSearch.clear();
+  } else {
+    isSearchActive.value = true;
+    searchResultSearch.assignAll(
+      events.where(
+        (event) => event.title.toLowerCase().contains(query.toLowerCase())
+      ).toList()
+    );
+  }
+}
+
 
 }

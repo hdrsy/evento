@@ -96,7 +96,7 @@ Widget buildHorizontalScrollEventCards() {
 Widget buildEventCard(EventModel eventModel, int modelIndex) {
   return GetBuilder<JustForYouController>(builder: (context) {
     return InkWell(
-      onTap: (){  Get.toNamed('/eventDetailes',arguments: eventModel.id);
+      onTap: (){  Get.toNamed('/eventDetailes',arguments: [eventModel.id,false,0]);
                     },
       child: Container(
         width: screenWidth * 0.45,

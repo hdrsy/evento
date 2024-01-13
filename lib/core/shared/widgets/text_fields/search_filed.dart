@@ -6,6 +6,7 @@ Widget searchTextField(
     {
       required Function(String?)? onChanged,
        TextEditingController? controller,
+       Function()? onTap,
 
     }) {
   return Container(
@@ -33,6 +34,7 @@ Widget searchTextField(
             padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
             child: TextFormField(
               controller: controller,
+              onTap: onTap,
               // focusNode: _model.textFieldFocusNode,
               onChanged: onChanged,
               obscureText: false,

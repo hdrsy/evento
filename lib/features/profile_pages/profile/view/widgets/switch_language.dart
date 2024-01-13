@@ -69,7 +69,8 @@ Widget dropDown(BuildContext context) {
     context.locale   = newValue!.languageCode == 'en' 
         ? Locale('en') 
         : Locale('ar');
-    Get.back();
+Get.back();
+    // Get.offAllNamed('/home');
   },
       items: languages.map<DropdownMenuItem<Language>>((Language language) {
         return DropdownMenuItem<Language>(

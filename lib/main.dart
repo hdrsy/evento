@@ -22,10 +22,12 @@ late UserInfo? user;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+  await EasyLocalization.ensureInitialized();
+  
   themeValue = await prefService.readString('theme');
+  // targetRout=await getTergetRout();
   targetRout=await prefService.isContainKey('token')?'/home':"/";
   user=await UserInfo.getUserInfo();
-  await EasyLocalization.ensureInitialized();
  PusherService.initPusher();
  await NotificationService().init();
   runApp(
@@ -57,4 +59,25 @@ class MyApp extends StatelessWidget {
       
     );
   }
+}
+
+
+Future<String> getTergetRout()async{
+ bool tokenState= await prefService.isContainKey('token');
+ if(tokenState){
+  user=await UserInfo.getUserInfo();
+if(user!=null){
+ PusherService.initPusher();
+ await NotificationService().init();
+return '/home';
+}else{
+  return '/';
+}
+ }
+ else{
+  return '/';
+ }
+
+
+  
 }

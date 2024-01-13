@@ -1,3 +1,4 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
@@ -24,8 +25,8 @@ final int modelIndex;
           child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 10),
               child: Container(
-          width: 300,
-          height: 200,
+          width: screenWidth*0.7,
+          height: screenHeight*0.2,
           decoration: BoxDecoration(
             color: customColors.secondaryBackground,
             borderRadius: BorderRadius.circular(20),
@@ -58,7 +59,7 @@ final int modelIndex;
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
+                    padding: const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,

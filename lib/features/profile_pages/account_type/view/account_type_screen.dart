@@ -49,7 +49,7 @@ class AccountTypeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Adding a search text field.
-            searchTextField(onChanged: (value) {}),
+            // searchTextField(onChanged: (value) {}),
             
             // Aligning the text to the start.
             Align(
@@ -77,11 +77,11 @@ class AccountTypeScreen extends StatelessWidget {
               route: 'SwithcToServiceProviderScreen',
               title: "Switch to service provider",
             ),
-            const AccountTypeCard(
-              icon: Icons.people_outlined,
-              route: EventVerificationCondidtionsBottomSheet(),
-              title: "Sign up for Evento Verified",
-            ),
+            // const AccountTypeCard(
+            //   icon: Icons.people_outlined,
+            //   route: EventVerificationCondidtionsBottomSheet(),
+            //   title: "Sign up for Evento Verified",
+            // ),
             const AccountTypeCard(
               icon: Icons.people_outlined,
               route: 'AccountOrganizerScreen',

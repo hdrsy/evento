@@ -84,11 +84,7 @@ class FeaturedList extends StatelessWidget {
                                   ));
                           })
                         ].divide(SizedBox(
-                          width: scaleWidth(
-                            screenSize == ScreenSize.small
-                                ? 8
-                                : (screenSize == ScreenSize.medium ? 10 : 12),
-                          ),
+                          width:10,
                         )),
                       )),
                 )
@@ -107,10 +103,7 @@ class FeaturedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FeaturedListController>(builder: (context) {
       return Container(
-        width: screenSize == ScreenSize.small
-            ? 320
-            : (screenSize == ScreenSize.medium ? 355 : 370),
-        // height: 330 ,
+        width: screenWidth*0.9,// height: 330 ,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
@@ -126,7 +119,7 @@ class FeaturedWidget extends StatelessWidget {
                 mediaStack(eventModel),
                 InkWell(
                   onTap: () {
-                    Get.toNamed('/eventDetailes', arguments: eventModel.id);
+                    Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
                   },
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),

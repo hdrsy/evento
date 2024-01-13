@@ -16,7 +16,7 @@ class ReelModel {
     final int likesCount;
     final int commentsCount;
     final bool likedByUser;
-    final EventModel? event;
+    // final EventModel? event;
     final Venue? venue;
     final User? user;
 
@@ -33,28 +33,29 @@ class ReelModel {
         required this.likesCount,
         required this.commentsCount,
         required this.likedByUser,
-        this.event,
+        // this.event,
         required this.venue,
         this.user,
     });
 
     factory ReelModel.fromJson(Map<String, dynamic> json)  {
       json['images'];
+      print("reeeeeeeeeeeeeeeeeeeeee ${json['event']}");
       return
       ReelModel(
         id: json['id'],
         eventId: json['event_id'],
         userId: json['user_id'],
         venueId: json['venue_id'],
-        videos: List<String>.from(jsonDecode(json['videos'])),
-        images: List<String>.from(jsonDecode(json['images']))??[],
+        videos: json['videos'] != null ? List<String>.from(jsonDecode(json['videos']) .map((x) => x)) : [],
+        images: json['images'] != null ? List<String>.from(jsonDecode(json['images']) .map((x) => x)) : [],
         description: json['description'],
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
         likesCount: json['likes_count'],
         commentsCount: json['comments_count'],
         likedByUser: json['liked_by_user'],
-        event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
+        // event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
         venue:json['venue']!=null? Venue.fromJson(json['venue']):null,
         user: json['user'] != null ? User.fromJson(json['user']) : null,
     );}

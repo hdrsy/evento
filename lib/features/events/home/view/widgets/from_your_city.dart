@@ -96,7 +96,7 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
   return GetBuilder<EventInYourCityListController>(builder: (context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: eventModel.id);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
       },
       child: Container(
         width: 150,

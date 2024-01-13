@@ -48,6 +48,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
     // }
     // if (mounted) {
       // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
+      print("Vedioooooooooo ${widget.currentVideoUrl}");
       videoPlayerController = VideoPlayerController.networkUrl(Uri.parse( widget.currentVideoUrl))
         ..initialize().then((_) {
           setState(() {

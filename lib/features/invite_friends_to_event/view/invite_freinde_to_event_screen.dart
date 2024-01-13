@@ -1,16 +1,19 @@
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/invite_friends_to_event/controller/invite_freind_to_event_controller.dart';
+import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InviteFreindsToEventScreen extends StatelessWidget {
-  const InviteFreindsToEventScreen({super.key});
-
+   InviteFreindsToEventScreen({super.key});
+final InviteFreindsToEventController inviteFreindsToEventController=Get.put(InviteFreindsToEventController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +35,15 @@ class InviteFreindsToEventScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: Column(
-          children: [
-            searchTextField(onChanged: (c) {}),
-            ...List.generate(4, (index) =>InviteFreindsCard())
-          ].divide(SizedBox(height: 10,)),
+      body: Obx(
+        ()=> SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Column(
+            children: [
+              // searchTextField(onChanged: (c) {}),
+              ...List.generate(inviteFreindsToEventController.myFreinds.length, (index) =>InviteFreindsCard(freindsModel:inviteFreindsToEventController.myFreinds[index] ,modelIndex: index,))
+            ].divide(SizedBox(height: 10,)),
+          ),
         ),
       ),
     );
@@ -46,8 +51,9 @@ class InviteFreindsToEventScreen extends StatelessWidget {
 }
 
 class InviteFreindsCard extends StatelessWidget {
-  const InviteFreindsCard({super.key});
-
+  const InviteFreindsCard({super.key, required this.freindsModel,required this.modelIndex});
+final FreindsModel freindsModel;
+final int modelIndex;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -66,16 +72,19 @@ class InviteFreindsCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.cover,
-                    ),
+                    child:  freindsModel.image.length > 6
+                ? getImageNetwork(
+                    url: "/storage/${freindsModel.image}",
+                    width: 90,
+                    height: 90)
+                : Image.asset(
+                    'assets/images/${freindsModel.image}.png',width: 90,height: 90,),
+       
+                  
                   ),
                   SizedBox(width: 12,),
                   Text(
-                    "Maysam ",
+                    "${freindsModel.firstName} ${freindsModel.lastName}",
                     style: customTextStyle.bodyLarge.override(
                       fontSize: 16,
                       fontFamily: secondaryFontFamily,
@@ -83,27 +92,33 @@ class InviteFreindsCard extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  ButtonWidget(
-                    onPressed: () {},
-                    text: "Invite",
-                    options: ButtonOptions(
-                      width: 100,
-                      height: 21,
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: customColors.primary,
-                      textStyle: customTextStyle.titleSmall.override(
-                        fontFamily: 'Nunito',
-                        color: customColors.info,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        useGoogleFonts: true,
-                      ),
-                      borderSide: BorderSide(
-                        color: customColors.primary,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                  GetBuilder<InviteFreindsToEventController>(
+                    builder: (controller) {
+                      return ButtonWidget(
+                        onPressed: () {
+                          controller.onPressInviteFriend(freindsModel.id, modelIndex);
+                        },
+                        text:controller.initedList[modelIndex]? "Invited":"Invite",
+                        options: ButtonOptions(
+                          width: 100,
+                          height: 21,
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color:controller.initedList[modelIndex]? customColors.secondaryBackground:customColors.primary,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color:controller.initedList[modelIndex]? customColors.primary:customColors.info,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            useGoogleFonts: true,
+                          ),
+                          borderSide: BorderSide(
+                            color: customColors.primary,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      );
+                    }
                   ),
                 ],
               )),

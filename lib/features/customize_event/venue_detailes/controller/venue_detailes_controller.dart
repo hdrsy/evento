@@ -12,4 +12,7 @@ class VenueDetailesController extends GetxController{
 
     super.onInit();
   }
+
+
+  
 }

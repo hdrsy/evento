@@ -1,3 +1,6 @@
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
 import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
@@ -76,13 +79,22 @@ Row(
             ),
           ],
         )
-    : Text( "Review Venue",
-              style: customTextStyle.bodyMedium.override(
-                    fontFamily: 'Nunito',
-                    color: customColors.primary,
-                    fontSize: 12,
-                    useGoogleFonts: true,
-                  ),)
+    : InkWell(
+      onTap: ()async{
+         await showButtonSheet(
+              context: context,
+              widget:  ReviewEventWidget(ratingTarget: "Venue",idKey: "venue_id",url: ServerConstApis.reviewVenue,id: venue.id),
+              height: 450);
+              
+      },
+      child: Text( "Review Venue",
+                style: customTextStyle.bodyMedium.override(
+                      fontFamily: 'Nunito',
+                      color: customColors.primary,
+                      fontSize: 12,
+                      useGoogleFonts: true,
+                    ),),
+    )
     
       ),
     ),

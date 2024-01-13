@@ -21,6 +21,7 @@ class MainBottomNavigationBinding implements Bindings {
     Get.lazyPut<OrganizerController>(() => OrganizerController());
     Get.lazyPut<HomeOrganizerController>(() => HomeOrganizerController());
     Get.lazyPut<EventsforOrganizerListController>(() => EventsforOrganizerListController());
+    Get.lazyPut<OffersController>(() => OffersController());
   
     Get.lazyPut<ReelsController>(() => ReelsController());
     Get.lazyPut<TypetoSetEventController>(() => TypetoSetEventController());

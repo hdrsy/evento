@@ -1,3 +1,5 @@
+import 'package:evento/core/server/review_api.dart';
+import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/rating_feedback_widget.dart';
@@ -7,16 +9,22 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 class ReviewEventWidget extends StatelessWidget {
   const ReviewEventWidget({
-    Key? key, required this.ratingTarget,
+    Key? key, required this.ratingTarget, required this.url, required this.id, required this.idKey,
    
   }) : super(key: key);
 
   final String ratingTarget;
+  final String url;
+  final int id;
+  final String idKey;
   @override
   Widget build(BuildContext context) {
+    double ratingValue=0;
+    TextEditingController comment=TextEditingController();
  
     return Container(
       width: double.infinity,
@@ -101,7 +109,9 @@ class ReviewEventWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: RatingBar.builder(
-                  onRatingUpdate: (value){},
+                  onRatingUpdate: (value){
+                    ratingValue=value;
+                  },
                   itemBuilder: (context, index) => Icon(
                     Icons.star_rounded,
                     color: customColors.primary,
@@ -117,6 +127,7 @@ class ReviewEventWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: TextFormField(
+                  controller: comment,
                   obscureText: false,
                   decoration: InputDecoration(
                     hintText: "Please leave a description of ...",
@@ -158,7 +169,11 @@ class ReviewEventWidget extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
                 child: ButtonWidget(
                   onPressed: () async {
-                    showButtonSheet(context: context, widget: const RateingFeedbackWidget(), height: MediaQuery.sizeOf(context).height * 0.8);
+
+                   bool state= await review(url: url, rating: ratingValue.toInt(), desc: comment.text, idKey: idKey, id: id) ;
+              state?  {
+                Get.back(),
+                    showButtonSheet(context: context, widget:  RateingFeedbackWidget(userRatingl: ratingValue), height: MediaQuery.sizeOf(context).height * 0.8)}:Get.back();
                     },
                   text:  "Submit Review",
                   options: ButtonOptions(

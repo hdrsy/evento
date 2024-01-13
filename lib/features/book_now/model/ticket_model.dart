@@ -3,7 +3,7 @@ import 'package:evento/features/events/event_detailes/model/event_detailes_model
 import 'package:flutter/material.dart';
 
 class TicketModel {
-  Class selectedClass;
+  Class? selectedClass;
    List<Amenity> selectedAminiteds=[];
    TextEditingController fisrtName=TextEditingController();
    TextEditingController lastName=TextEditingController();
@@ -11,6 +11,6 @@ class TicketModel {
    TextEditingController age=TextEditingController();
    TextEditingController phoneNumber=TextEditingController();
   TicketModel({
-    required this.selectedClass,
+     this.selectedClass,
      });
 }

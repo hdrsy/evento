@@ -97,12 +97,12 @@ class TrendingNow extends StatelessWidget {
       {required EventModel eventModel, required int modelIndex}) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: eventModel.id);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
       },
       child: Container(
-        width: screenSize == ScreenSize.small
-            ? 320
-            : (screenSize == ScreenSize.medium ? 355 : 370),
+        width: screenWidth*0.9,
+        
+        
         height: screenSize == ScreenSize.small
             ? 340
             : (screenSize == ScreenSize.medium ? 360 : 370),

@@ -242,7 +242,7 @@ final List<EventBooking>? eventBooking;
   Widget _buildViewTicketButton(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
-      //  Get.toNamed('/BookingDetailesScreen',arguments: [eventDetailsModel,ticketList])
+      //  Get.toNamed('/BookingDetailesForMyBookingScreen',arguments: []);
         
       },
       text: "View E-Ticket",
