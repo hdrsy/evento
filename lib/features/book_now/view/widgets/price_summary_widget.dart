@@ -1,10 +1,11 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/book_now_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PriceSummaryWidget extends StatelessWidget {
    PriceSummaryWidget({super.key,required this.index});
@@ -57,7 +58,7 @@ child:Column(
                   fontWeight: FontWeight.normal,
                   useGoogleFonts: true
                 ),
-          ),
+          ).tr(),
           Text(
             "${bookNowController.ticketList[index].selectedClass!.ticketPrice} sp",
             style: customTextStyle.bodyLarge.override(
@@ -84,7 +85,7 @@ child:Column(
                   fontWeight: FontWeight.normal,
                   useGoogleFonts: true
                 ),
-          ),
+          ).tr(),
           Text(
              "0 sp",
             style: customTextStyle.bodyLarge.override(
@@ -92,7 +93,7 @@ child:Column(
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: true,
                 ),
-          ),
+          ).tr(),
         ],
       ),
     ),
@@ -111,7 +112,7 @@ child:Column(
                   fontWeight: FontWeight.normal,
                   useGoogleFonts: true
                 ),
-          ),
+          ).tr(),
           Text(
              "0 sp",
             style: customTextStyle.titleSmall.override(
@@ -120,7 +121,7 @@ child:Column(
                   fontSize: 14,
                   useGoogleFonts: true,
                 ),
-          ),
+          ).tr(),
         ],
       ),
     ),
@@ -148,7 +149,7 @@ child:Column(
                       useGoogleFonts: true,
                       fontWeight: FontWeight.normal,
                     ),
-              ),
+              ).tr(),
               IconWithContainer(
                 borderRadius: 30,
                 backgroundColor: customColors.secondaryBackground,

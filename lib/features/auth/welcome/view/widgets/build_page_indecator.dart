@@ -1,4 +1,4 @@
-import 'package:evento/main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;

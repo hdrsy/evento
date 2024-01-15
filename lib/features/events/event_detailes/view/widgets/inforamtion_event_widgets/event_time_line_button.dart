@@ -1,17 +1,17 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../model/event_detailes_model.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildEventTimelineButton(BuildContext context,EventDetailsModel eventDetailsModel){
   return 
 ButtonWidget(
   onPressed: () async {
     Get.toNamed('/eventTimeLine',arguments: eventDetailsModel);
   },
-  text:  "Event Timeline",
+  text:tr(  "Event Timeline"),
   options: ButtonOptions(
     width: 250,
     height: 40,

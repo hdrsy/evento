@@ -1,9 +1,9 @@
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key,required this.isReaded});
   final bool isReaded;
@@ -51,7 +51,7 @@ class NotificationCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 useGoogleFonts: false,
                               ),
-                            ),
+                            ).tr(),
                           ],
                         ),
                         Row(
@@ -60,7 +60,7 @@ class NotificationCard extends StatelessWidget {
                             Text(
                               "11 Nov , 2023",
                               style: customTextStyle.bodyMedium,
-                            ),
+                            ).tr(),
                             SizedBox(
                               height: 20,
                               child: VerticalDivider(
@@ -71,7 +71,7 @@ class NotificationCard extends StatelessWidget {
                             Text(
                               "20:30 PM",
                               style: customTextStyle.bodyMedium,
-                            ),
+                            ).tr(),
                           ],
                         ),
                       ],
@@ -94,7 +94,7 @@ class NotificationCard extends StatelessWidget {
                         fontSize: 12,
                         useGoogleFonts: false,
                       ),
-                    ),
+                    ).tr(),
                   ),
                 ),
               ],
@@ -102,7 +102,7 @@ class NotificationCard extends StatelessWidget {
             Text(
               "You have successfully booked the Art Workshops.The event........",
               style: customTextStyle.bodyMedium,
-            ),
+            ).tr(),
           ].divide(const SizedBox(height: 15)),
         ),
       ),

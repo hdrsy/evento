@@ -1,14 +1,14 @@
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/serice_according_detailes/controller/service_according_detailes_controller.dart';
-import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
-import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/server/server_config.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/shared/widgets/widget/rate_event_widget.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/service_according_detailes_controller.dart';
+import '../../../serivce_according_category/model/service_according_category_model.dart';
+import '../../../service_category/controller/service_category_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NameCheckBox extends StatelessWidget {
   NameCheckBox(
       {super.key,
@@ -27,7 +27,7 @@ class NameCheckBox extends StatelessWidget {
         Text(
           "Abernathy Reynolds",
           style: customTextStyle.headlineSmall,
-        ),
+        ).tr(),
         Container(
           decoration: BoxDecoration(
             color: customColors.secondaryBackground,
@@ -44,7 +44,7 @@ class NameCheckBox extends StatelessWidget {
                         fontSize: 12,
                         useGoogleFonts: true,
                       ),
-                    ),
+                    ).tr(),
                     GetBuilder<ServiceCategoryController>(
                         builder: (serviceCategoryController) {
                       return Theme(
@@ -86,7 +86,7 @@ class NameCheckBox extends StatelessWidget {
                 onTap: ()async{
                   await showButtonSheet(
               context: context,
-              widget:  ReviewEventWidget(ratingTarget: "Service Provider",id:serviceProvider.id,idKey: "service_provider_id",url: ServerConstApis.reviewServiceProvider, ),
+              widget:  ReviewEventWidget(ratingTarget:tr( "Service Provider"),id:serviceProvider.id,idKey: "service_provider_id",url: ServerConstApis.reviewServiceProvider, ),
               height: 450);
               },
                 child: Text(
@@ -97,7 +97,7 @@ class NameCheckBox extends StatelessWidget {
                       fontSize: 12,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
               ),
         ),
       ],

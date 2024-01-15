@@ -1,4 +1,4 @@
-import 'package:evento/features/profile_pages/my_request/controller/my_request_controller.dart';
+import '../my_request_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

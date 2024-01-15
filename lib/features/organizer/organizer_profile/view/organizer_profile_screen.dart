@@ -1,17 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/animation/animation_text.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/organizer_profile/controller/organizer_profile_controller.dart';
-import 'package:evento/features/organizer/organizer_profile/view/widgets/folder_card.dart';
-import 'package:evento/features/organizer/organizer_profile/view/widgets/organizer_followers_card.dart';
-import 'package:evento/features/organizer/organizer_profile/view/widgets/organzer_event_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/animation/animation_text.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/organizer_profile_controller.dart';
+import 'widgets/folder_card.dart';
+import 'widgets/organizer_followers_card.dart';
+import 'widgets/organzer_event_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrganizerProfileScreen extends StatelessWidget {
   OrganizerProfileScreen({super.key});
   final OrganizerProfileController organizerProfileController = Get.find();
@@ -232,9 +232,9 @@ class StaticSection extends StatelessWidget {
             count: organizerProfileController
                 .organizerProfileModel.organizedEventsCount
                 .toString(),
-            title: "Events"),
+            title:tr( "Events")),
         statisticSingleElement(
-            title: "Followers",
+            title:tr( "Followers"),
             count: organizerProfileController
                         .organizerProfileModel.followersCount >
                     1000
@@ -243,7 +243,7 @@ class StaticSection extends StatelessWidget {
                     .organizerProfileModel.organizedEventsCount
                     .toString()),
         statisticSingleElement(
-            title: "Following",
+            title:tr( "Following"),
             count: organizerProfileController
                 .organizerProfileModel.followingCount
                 .toString()),
@@ -343,11 +343,11 @@ class MyTabBarWidget extends StatelessWidget {
         unselectedLabelStyle: const TextStyle(),
         indicatorColor: customColors.primary,
         padding: const EdgeInsets.all(4),
-        tabs: const [
-          Tab(text: 'Bio'),
-          Tab(text: 'Events'),
-          Tab(text: 'Followers'),
-          Tab(text: 'Gallery'),
+        tabs:  [
+          Tab(text:tr( 'Bio')),
+          Tab(text:tr( 'Events')),
+          Tab(text: tr('Followers')),
+          Tab(text:tr( 'Gallery')),
         ],
       ),
     );

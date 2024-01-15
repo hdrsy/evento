@@ -7,7 +7,7 @@ import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // ignore: must_be_immutable
 class FilterWidget extends StatelessWidget {
    FilterWidget({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class FilterWidget extends StatelessWidget {
                   child: Text(
                     "Filter",
                     style: customTextStyle.headlineSmall,
-                  ),
+                  ).tr(),
                 ),
               ),
               Align(
@@ -87,7 +87,7 @@ class FilterWidget extends StatelessWidget {
                                   color: customColors.primaryText,
                                   useGoogleFonts: true,
                                 ),
-                          ),
+                          ).tr(),
                         ),
                       ),
                       Padding(
@@ -99,22 +99,22 @@ class FilterWidget extends StatelessWidget {
                           child: Align(
                             alignment: const AlignmentDirectional(0.00, 0.00),
                             child: FlutterFlowChoiceChips(
-                              options:const [
-                                ChipData("All"),
+                              options: [
+                                ChipData(tr("All")),
                                 ChipData(
-                                    "Music",
+                                    tr("Music"),
                                     Icons.music_note_rounded),
                                 ChipData(
-                                     "Workshops",
+                                     tr("Workshops"),
                                     Icons.work),
                                 ChipData(
-                                    "Art",
+                                    tr("Art"),
                                     Icons.color_lens_sharp),
                                 ChipData(
-                                     "Food & Drink",
+                                     tr("Food & Drink"),
                                     Icons.fastfood_rounded),
                                 ChipData(
-                                     "Fashion",
+                                     tr("Fashion"),
                                     Icons.linked_camera)
                               ],
                               onChanged: (val) {}
@@ -189,7 +189,7 @@ class FilterWidget extends StatelessWidget {
                             color: customColors.primaryText,
                             useGoogleFonts: true,
                           ),
-                    ),
+                    ).tr(),
                   ),
                   FlutterFlowDropDown<String>(
                     controller: dropDownValueController ??=
@@ -204,7 +204,7 @@ class FilterWidget extends StatelessWidget {
                     width: 200,
                     height: 40,
                     textStyle: customTextStyle.bodyMedium,
-                    hintText: "Please select...",
+                    hintText:tr( "Please select..."),
                     icon: Icon(
                       Icons.keyboard_arrow_down_rounded,
                       color: customColors.secondaryText,
@@ -237,7 +237,7 @@ class FilterWidget extends StatelessWidget {
                           color: customColors.primaryText,
                           useGoogleFonts: true,
                         ),
-                  ),
+                  ).tr(),
                 ),
               ),
               SliderTheme(
@@ -272,7 +272,7 @@ class FilterWidget extends StatelessWidget {
                           color: customColors.primaryText,
                           useGoogleFonts: true,
                         ),
-                  ),
+                  ).tr(),
                 ),
               ),
               SliderTheme(
@@ -308,7 +308,7 @@ class FilterWidget extends StatelessWidget {
                       ButtonWidget(
                         onPressed: () {
                           },
-                        text: "Reset",
+                        text:tr( "Reset"),
                         options: ButtonOptions(
                           width: 120,
                           height: 35,
@@ -334,7 +334,7 @@ class FilterWidget extends StatelessWidget {
                         onPressed: () async {
                           // Navigator.pop(context);
                         },
-                        text: "Apply filters",
+                        text:tr( "Apply filters"),
                         options: ButtonOptions(
                           width: 120,
                           height: 35,

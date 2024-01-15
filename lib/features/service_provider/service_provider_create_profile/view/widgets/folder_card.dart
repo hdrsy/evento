@@ -1,10 +1,10 @@
-import 'package:evento/core/shared/models/media.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/gallery/view/gallery_for_local_fies.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/see_all_folders.dart';
-import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/models/media.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../gallery/view/gallery_for_local_fies.dart';
+import '../../../../organizer/create_profile/view/widgets/see_all_folders.dart';
+import '../../controller/service_provider_create_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

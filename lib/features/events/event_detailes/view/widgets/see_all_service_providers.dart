@@ -1,12 +1,12 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../model/event_detailes_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllServiceProviders extends StatelessWidget {
   const SeeAllServiceProviders({super.key, required this.allServiceProviders});
 final List<ServiceProvider> allServiceProviders;
@@ -17,7 +17,7 @@ final List<ServiceProvider> allServiceProviders;
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("My Freinds",
+        title: Text(tr("My Freinds"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

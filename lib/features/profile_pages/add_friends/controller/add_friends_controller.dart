@@ -1,4 +1,4 @@
-import 'package:evento/features/profile_pages/add_friends/model/add_friends_model.dart';
+import '../model/add_friends_model.dart';
 import 'package:get/get.dart';
 
 class AddFriendsController extends GetxController{

@@ -1,10 +1,11 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/book_now_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FilldataWidget extends StatelessWidget {
   const FilldataWidget({Key? key, required this.ticketIndex}) : super(key: key);
@@ -50,7 +51,7 @@ final int ticketIndex;
                         Get.back();
 
                       },
-                      text:  "My data",
+                      text:tr(  "My data"),
                       options: ButtonOptions(
                         width: 200,
                         height: 40,
@@ -77,7 +78,7 @@ final int ticketIndex;
                        
                         Get.toNamed('/AssignFriendsScreen',arguments: [bookNowController.myFreinds,ticketIndex]);
                       },
-                      text:  "Friends list",
+                      text:tr(  "Friends list"),
                       options: ButtonOptions(
                         width: 200,
                         height: 40,

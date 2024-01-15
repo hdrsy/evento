@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/invite_friends_to_event/controller/invite_freind_to_event_controller.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/main.dart';
+import '../../../core/responsive/responsive.dart';
+import '../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../core/shared/widgets/images/network_image.dart';
+import '../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../core/utils/theme/text_theme.dart';
+import '../controller/invite_freind_to_event_controller.dart';
+import '../../profile_pages/freinds/model/freinds_model.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class InviteFreindsToEventScreen extends StatelessWidget {
    InviteFreindsToEventScreen({super.key});
 final InviteFreindsToEventController inviteFreindsToEventController=Get.put(InviteFreindsToEventController());
@@ -20,7 +20,7 @@ final InviteFreindsToEventController inviteFreindsToEventController=Get.put(Invi
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Invite",
+        title: Text(tr("Invite"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

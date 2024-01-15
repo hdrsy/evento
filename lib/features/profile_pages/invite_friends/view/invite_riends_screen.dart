@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/invite_friends/view/widgets/accept_invit_list.dart';
-import 'package:evento/features/profile_pages/invite_friends/view/widgets/bar_code_widget.dart';
-import 'package:evento/features/profile_pages/invite_friends/view/widgets/invited_friends_text.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import 'widgets/accept_invit_list.dart';
+import 'widgets/bar_code_widget.dart';
+import 'widgets/invited_friends_text.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class InviteFriendsScreen extends StatelessWidget {
   const InviteFriendsScreen({super.key});
 
@@ -16,7 +16,7 @@ class InviteFriendsScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Freinds",
+        title: Text(tr("Freinds"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

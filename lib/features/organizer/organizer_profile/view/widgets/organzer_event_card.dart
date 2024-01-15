@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/organizer_profile/controller/organizer_profile_controller.dart';
-import 'package:evento/features/organizer/organizer_profile/model/organizer_profile_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/organizer_profile_controller.dart';
+import '../../model/organizer_profile_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrganizerEventCard extends StatelessWidget {
   const OrganizerEventCard(
       {super.key,
@@ -106,7 +106,7 @@ class OrganizerEventCard extends StatelessWidget {
                           fontSize: 14,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                     ],
                   ),
                 ],

@@ -1,4 +1,4 @@
-import 'package:evento/core/utils/error_handling/valdation_errors.dart';
+import 'valdation_errors.dart';
 
 /// ErrorResponse class models the error response returned from an API.
 /// It includes a status flag, a general message, and detailed validation errors.

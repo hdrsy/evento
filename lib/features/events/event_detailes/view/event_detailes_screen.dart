@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/information_event.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/main_image.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/event_detailes_controller.dart';
+import 'widgets/information_event.dart';
+import 'widgets/main_image.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

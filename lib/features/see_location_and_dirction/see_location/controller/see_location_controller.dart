@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
+import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

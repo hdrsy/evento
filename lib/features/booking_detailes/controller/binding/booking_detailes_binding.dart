@@ -1,4 +1,4 @@
-import 'package:evento/features/booking_detailes/controller/booking_detailes_controller.dart';
+import '../booking_detailes_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

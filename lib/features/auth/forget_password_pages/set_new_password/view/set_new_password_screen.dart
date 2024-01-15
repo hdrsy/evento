@@ -1,15 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/password_validation.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/text_field.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/auth/forget_password_pages/set_new_password/controller/set_new_password_controller.dart';
-import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/functions/validation/password_validation.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../../core/shared/widgets/text_fields/text_field.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../main.dart';
+import '../controller/set_new_password_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SetNewPasswordScreen extends StatelessWidget {
    SetNewPasswordScreen({super.key});
@@ -51,7 +53,7 @@ key: setNewPasswordController.formstate,
                   fontSize: 16,
                   color: customColors.primaryText,
                 ),
-              ),
+              ).tr(),
               SizedBox(
                 height: scaleHeight(12),
               ),
@@ -65,7 +67,7 @@ key: setNewPasswordController.formstate,
                   letterSpacing: 0.2,
                   fontWeight: FontWeight.normal,
                 ),
-              ),
+              ).tr(),
               SizedBox(
                 height: scaleHeight(50),
               ),
@@ -76,7 +78,7 @@ key: setNewPasswordController.formstate,
               ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationsteps']!),
               customTextField(
                   context: context,
-                  label: "New Password",
+                  label:tr( "New Password"),
                   keyboardType: TextInputType.visiblePassword,
                   onChanged: (value) {
                     setNewPasswordController.newPassword.text=value!;
@@ -88,7 +90,7 @@ key: setNewPasswordController.formstate,
               
               customTextField(
                   context: context,
-                  label: "Confirm Password",
+                  label:tr( "Confirm Password"),
                   keyboardType: TextInputType.visiblePassword,
                   onChanged: (value) {
                     setNewPasswordController.confPassword.text=value!;
@@ -118,7 +120,7 @@ key: setNewPasswordController.formstate,
               
               onPressed: () async {
 setNewPasswordController.onPressContinue();              },
-              text: "Continue",
+              text:tr( "Continue"),
               showLoadingIndicator: setNewPasswordController.isLoading.value,
               options: ButtonOptions(
                 width: scaleWidth(330),

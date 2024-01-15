@@ -1,15 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../home/model/event_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllCard extends StatelessWidget {
   const SeeAllCard(
       {super.key, required this.eventModel, required this.modelIndex});
@@ -81,7 +83,7 @@ class SeeAllCard extends StatelessWidget {
                     fontSize: 12,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -158,7 +160,11 @@ class SeeAllCard extends StatelessWidget {
                     ),
                   ),
                   ToggleIcon(
-                    onPressed: () async {},
+                    onPressed: () async {
+                       if(isGuset){
+                    Get.dialog( GuestPopupWidget());
+                  }else{}
+                    },
                     value: false,
                     onIcon: Icon(
                       Icons.favorite_sharp,

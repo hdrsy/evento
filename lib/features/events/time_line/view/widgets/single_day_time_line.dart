@@ -1,8 +1,8 @@
-import 'package:evento/core/utils/helper/styled_vertical_divider.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/time_line/model/single_day_time_line_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/helper/styled_vertical_divider.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../model/single_day_time_line_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
 import 'package:timelines/timelines.dart';

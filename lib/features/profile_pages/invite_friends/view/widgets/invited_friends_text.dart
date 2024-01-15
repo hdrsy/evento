@@ -1,8 +1,8 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class InvitedfriendsText extends StatelessWidget {
   const InvitedfriendsText({super.key});
 
@@ -16,7 +16,7 @@ Padding(
     text: TextSpan(
       children: [
         TextSpan(
-          text: "Invited friends",
+          text:tr( "Invited friends"),
           style: GoogleFonts.getFont(
             'Rubik',
             color:customColors.primaryText,

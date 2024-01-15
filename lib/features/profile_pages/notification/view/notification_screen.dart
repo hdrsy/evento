@@ -1,9 +1,9 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/notification/view/widget/notification_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import 'widget/notification_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
 
@@ -13,7 +13,7 @@ class NotificationScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Notifications",
+        title: Text(tr("Notifications"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

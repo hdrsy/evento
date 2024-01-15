@@ -1,11 +1,11 @@
 
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/choice_type_controller.dart';
+import '../../../../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChoiceTypeSuggestList extends StatelessWidget {
   ChoiceTypeSuggestList({super.key});
   final ChoiceTypeController choiceTypeController = Get.find();
@@ -25,7 +25,7 @@ class ChoiceTypeSuggestList extends StatelessWidget {
               fontWeight: FontWeight.bold,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
         Obx(
           ()=> SingleChildScrollView(

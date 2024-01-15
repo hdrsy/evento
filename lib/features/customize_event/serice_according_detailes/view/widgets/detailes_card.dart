@@ -1,12 +1,12 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/serice_according_detailes/controller/service_according_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/service_according_detailes_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class DetailesCard extends StatelessWidget {
    DetailesCard({super.key});
 final ServiceAccordingDetailesController serviceAccordingDetailesController =
@@ -65,7 +65,7 @@ final ServiceAccordingDetailesController serviceAccordingDetailesController =
         onPressed: () {
          Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
         },
-        text: "See Location on Maps",
+        text:tr( "See Location on Maps"),
         options: ButtonOptions(
           width: 170,
           height: 25,

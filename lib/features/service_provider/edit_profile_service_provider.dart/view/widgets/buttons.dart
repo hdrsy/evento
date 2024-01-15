@@ -1,11 +1,11 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import 'package:evento/features/service_provider/edit_profile_service_provider.dart/controller/edit_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
+import '../../controller/edit_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class Buttons extends StatelessWidget {
    Buttons({super.key});
 final EditProfileServiceProviderController editProfileServiceProviderController=Get.find();
@@ -24,7 +24,7 @@ Padding(
           onPressed: () async {
             Get.back();
           },
-          text:  "Cancel",
+          text:tr(  "Cancel"),
           options: ButtonOptions(
             height: 44,
             padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
@@ -58,7 +58,7 @@ Padding(
           onPressed: () async {
             editProfileServiceProviderController.onPressSaveChanging();
           },
-          text: "Save Changes",
+          text:tr( "Save Changes"),
           options: ButtonOptions(
             height: 44,
             padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

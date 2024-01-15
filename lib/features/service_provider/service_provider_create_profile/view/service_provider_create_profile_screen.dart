@@ -18,7 +18,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../controller/service_provider_create_profile_controller.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ServiceProviderCreateProfileScreen extends StatelessWidget {
   ServiceProviderCreateProfileScreen({super.key});
   final ServiceProviderCreateProfileController serviceProviderCreateProfileController =
@@ -92,8 +92,8 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                   children: [
                     EditProfileField(
                       controller: controller.organizerName,
-                      hintText: "Spark",
-                      labelText: "ServiceProviderName",
+                      hintText:tr( "Spark"),
+                      labelText:tr( "ServiceProviderName"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -103,9 +103,9 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                     EditProfileField(
                       controller: controller.bio,
                       hintText:
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......""",
-                      labelText: "Bio",
+                         tr ("""Event organizer specialist in decoration ,lighting and flowers .
+Wdding, Birthday ,anniversary......"""),
+                      labelText:tr( "Bio"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -115,9 +115,9 @@ Wdding, Birthday ,anniversary......""",
                     EditProfileField(
                       controller: controller.description,
                       hintText:
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......""",
-                      labelText: "Description",
+                        tr  ("""Event organizer specialist in decoration ,lighting and flowers .
+Wdding, Birthday ,anniversary......"""),
+                      labelText:tr( "Description"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -140,7 +140,7 @@ Wdding, Birthday ,anniversary......""",
                         onPressed: () async {
                           serviceProviderCreateProfileController.onPressDone();
                         },
-                        text: "Done",
+                        text:tr( "Done"),
                         options: ButtonOptions(
                           width: screenWidth*0.3,
                           height: 40,
@@ -201,7 +201,7 @@ class OrganizerMediaCard extends StatelessWidget {
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),
                   child: Text(
-                    "Create Profile",
+                    tr("Create Profile"),
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
                       color: customColors.primary,
@@ -297,7 +297,7 @@ class SelectStates extends StatelessWidget {
                   color: customColors.primary,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
               Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: customColors.secondaryText,

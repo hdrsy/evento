@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/my_request/controller/my_request_controller.dart';
-import 'package:evento/features/profile_pages/my_request/view/widget/request_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/my_request_controller.dart';
+import 'widget/request_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class MyrequestScreen extends StatelessWidget {
   MyrequestScreen({super.key});
   final MyRequestController myRequestController = Get.find();
@@ -16,7 +16,7 @@ class MyrequestScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("My Requests",
+        title: Text(tr("My Requests"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -52,7 +52,7 @@ class MyrequestScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(4, 12, 16, 0),
                     child: Text(
-                      "Event",
+                      tr("Event"),
                       style: customTextStyle.bodyMedium,
                     ),
                   ),

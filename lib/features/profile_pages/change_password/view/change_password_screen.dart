@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/edit_profile_field.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/change_password/controller/change_password_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/change_password_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
   final ChangePasswordController changePasswordController = Get.find();
@@ -48,7 +48,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
@@ -59,7 +59,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         color: customColors.secondaryText,
                         fontFamily: primaryFontFamily,
                         useGoogleFonts: true),
-                  ),
+                  ).tr(),
                 ),
                 const SizedBox(
                   height: 15,
@@ -67,7 +67,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 EditProfileField(
                     controller: changePasswordController.oldPassword,
                     hintText: "",
-                    labelText: "Current pssword",
+                    labelText:tr( "Current pssword"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
@@ -77,7 +77,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 EditProfileField(
                     controller: changePasswordController.newPassword,
                     hintText: "",
-                    labelText: "New pssword",
+                    labelText:tr( "New pssword"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
@@ -87,14 +87,14 @@ class ChangePasswordScreen extends StatelessWidget {
                 EditProfileField(
                     controller: changePasswordController.retypePassword,
                     hintText: "",
-                    labelText: "Re-type new password",
+                    labelText:tr( "Re-type new password"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
                     validator: (value) {
                       if (changePasswordController.newPassword.text !=
                           changePasswordController.retypePassword.text) {
-                        return "Not Matching the new password";
+                        return tr("Not Matching the new password");
                       }
                       return null;
                     }),
@@ -106,7 +106,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   onPressed: () async {
                     changePasswordController.onPressDone();
                   },
-                  text: "Save",
+                  text:tr( "Save"),
                   options: ButtonOptions(
                     width: 200,
                     height: 40,

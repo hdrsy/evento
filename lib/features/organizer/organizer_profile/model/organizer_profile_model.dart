@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 class OrganizerProfileModel {
   int id;
   int followingCount;
@@ -17,6 +19,7 @@ class OrganizerProfileModel {
       required this.organizedEvents});
 
   factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
+
     print(json['followers_count']);
    return    OrganizerProfileModel(
         id: json['id'],
@@ -52,7 +55,11 @@ List<Category> categories;
       required this.isFollowedByAuthUser,
       required this.albums});
 
-  factory OrganizerInfo.fromJson(Map<String, dynamic> json) => OrganizerInfo(
+  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
+    
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
+    return  OrganizerInfo(
         id: json['id'],
         name: json['name'],
         bio: json['bio'],
@@ -63,7 +70,7 @@ List<Category> categories;
       cover: json['cover'],
         isFollowedByAuthUser: json['is_followed_by_auth_user'],
         albums: List<OrganizerProfileAlbum>.from(json['albums'].map((x) => OrganizerProfileAlbum.fromJson(x))),
-      );
+      );}
 }
 
 class OrganizerProfileAlbum {
@@ -80,7 +87,9 @@ class OrganizerProfileAlbum {
       required this.videos,
      });
 
-  factory OrganizerProfileAlbum.fromJson(Map<String, dynamic> json) { 
+  factory OrganizerProfileAlbum.fromJson(Map<String, dynamic> oldJson) { 
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     List<String> parseImages(String imagesJson) {
       if (imagesJson.isEmpty) {
         return [];
@@ -120,7 +129,9 @@ class Category {
     required this.title,
     required this.icon,
    });
-  factory Category.fromJson(Map<String, dynamic> json) {
+  factory Category.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return Category(
       id: json['id'],
       title: json['title'],
@@ -160,7 +171,11 @@ class OrganizerProfileEvent {
       required this.isFollowedByAuthUser,
       });
 
-  factory OrganizerProfileEvent.fromJson(Map<String, dynamic> json) => OrganizerProfileEvent(
+  factory OrganizerProfileEvent.fromJson(Map<String, dynamic> oldJson) {
+    
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
+    return OrganizerProfileEvent(
         id: json['id'],
         organizerId: json['organizer_id'],
         title: json['title'],
@@ -174,5 +189,5 @@ class OrganizerProfileEvent {
         videos: json['videos'],
         images: jsonDecode(json['images']),
         isFollowedByAuthUser: json['is_followed_by_auth_user'],
-       );
+       );}
 }

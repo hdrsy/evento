@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/lists/carouse_options_functions.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/lists/carousel_slider.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/view/widgets/column_text.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/functions/lists/carouse_options_functions.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/shared/widgets/lists/carousel_slider.dart';
+import '../../controller/home_controller.dart';
+import 'column_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class Offers extends StatelessWidget {
    Offers({super.key});
 final  OffersController offersController=Get.find();
@@ -19,7 +19,7 @@ final  OffersController offersController=Get.find();
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
            ColumnText(
-            title: "Offers",
+            title:tr( "Offers"),
             subTitle: " Local Celebrations & Urban Vibes",
             onTap: (){
               Get.toNamed('/SeeAllOffersScreen',arguments: [

@@ -1,5 +1,5 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/main.dart';
+import '../../../responsive/responsive.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 

@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/my_booking/controller/my_booking_controller.dart';
-import 'package:evento/features/profile_pages/my_booking/view/widget/my_booking_card.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../controller/my_booking_controller.dart';
+import 'my_booking_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CompletedList extends StatelessWidget {
    CompletedList({super.key});
 final MyBookingController myBookingController =Get.find();
@@ -19,8 +19,8 @@ final MyBookingController myBookingController =Get.find();
          
             isCanceldSection: false,
             leftButtonOnTap: (){},
-            leftButtonTitle:"Leave a Review" ,
-            bookingStatus: "Completed",
+            leftButtonTitle:tr("Leave a Review") ,
+            bookingStatus:tr( "Completed"),
           ))
         ].divide(const SizedBox(height: 10,)),
       ),

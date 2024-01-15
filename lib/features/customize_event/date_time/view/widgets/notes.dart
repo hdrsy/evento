@@ -1,9 +1,9 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NotesLabel extends StatelessWidget {
    NotesLabel({super.key});
 final DateTimeController dateTimeController=Get.find();
@@ -32,7 +32,7 @@ Padding(
              "Description:",
             textAlign: TextAlign.center,
             style: customTextStyle.labelLarge,
-          ),
+          ).tr(),
           Expanded(
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
@@ -42,7 +42,7 @@ Padding(
                 // focusNode: _model.textFieldFocusNode4,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: "Label here...",
+                  labelText:tr( "Label here..."),
                   labelStyle:
                       customTextStyle.labelMedium.override(
                             fontFamily: 'Nunito',

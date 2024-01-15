@@ -1,3 +1,5 @@
+import 'package:evento/core/server/helper_api.dart';
+
 class OrganizerHome {
   int id;
   String firstName;
@@ -29,7 +31,9 @@ OrganizerHomeInfo organizerHomeInfo;
     required this.organizerHomeInfo,
   });
 
-  factory OrganizerHome.fromJson(Map<String, dynamic> json) {
+  factory OrganizerHome.fromJson(Map<String, dynamic> oldJson) {
+ Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+   
     return OrganizerHome(
       id: json['id'],
       firstName: json['first_name'],
@@ -60,7 +64,9 @@ class OrganizerHomeInfo {
     required this.isFollowedByAuthUser,
   });
 
-  factory OrganizerHomeInfo.fromJson(Map<String, dynamic> json) {
+  factory OrganizerHomeInfo.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return OrganizerHomeInfo(
       id: json['id'],
       name: json['name'],

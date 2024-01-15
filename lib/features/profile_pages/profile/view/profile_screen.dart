@@ -1,13 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/services/user_info.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/evento_verification_bottom_sheet/view/evento_verification_conditions_bottom_sheet.dart';
-import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
-import 'package:evento/features/profile_pages/profile/view/widgets/build_image_with_name.dart';
-import 'package:evento/features/profile_pages/profile/view/widgets/options_card.dart';
-import 'package:evento/features/profile_pages/profile/view/widgets/switch_language.dart';
-import 'package:evento/features/profile_pages/profile/view/widgets/theme_swicth.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/core/shared/widgets/widget/term_of_use.dart';
+import '../../../../core/responsive/responsive.dart';
+
+import '../../account_type_inner_screens/evento_verification_bottom_sheet/view/evento_verification_conditions_bottom_sheet.dart';
+import '../controller/profile_controller.dart';
+import 'widgets/build_image_with_name.dart';
+import 'widgets/options_card.dart';
+import 'widgets/switch_language.dart';
+import 'widgets/theme_swicth.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -49,7 +51,11 @@ final ProfileController profileController=Get.find();
                     title: tr("Help Center"),
                   ),
                    OptionsCard(
-                    targetRout: '',
+                    targetRout:  showButtonSheet(
+            context: context,
+            widget: const TermOfUse(),
+            height: MediaQuery.of(context).size.height * 0.8
+          ),
                     icon: Icons.contact_support,
                     title: tr("Terms of Use"),
                   ),
@@ -215,7 +221,7 @@ final ProfileController profileController=Get.find();
                     title: tr("Language"),
                   ),
                    OptionsCard(
-                    targetRout: EventVerificationCondidtionsBottomSheet(),
+                    targetRout: const EventVerificationCondidtionsBottomSheet(),
                     bottomSheetHeight: screenHeight * 0.8,
                     icon: Icons.account_circle,
                     title: tr("Become Evento Verified "),

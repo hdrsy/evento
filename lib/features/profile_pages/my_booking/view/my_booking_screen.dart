@@ -1,11 +1,11 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/my_booking/view/widget/canceld_list.dart';
-import 'package:evento/features/profile_pages/my_booking/view/widget/completed_list.dart';
-import 'package:evento/features/profile_pages/my_booking/view/widget/up_coming_list.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import 'widget/canceld_list.dart';
+import 'widget/completed_list.dart';
+import 'widget/up_coming_list.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class MyBookingScreen extends StatelessWidget {
   const MyBookingScreen({super.key});
 
@@ -53,15 +53,15 @@ class MyBookingScreen extends StatelessWidget {
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
-                        tabs: const [
+                        tabs:  [
                           Tab(
-                            text: "Upcoming",
+                            text: tr("Upcoming"),
                           ),
                           Tab(
-                            text: "Completed",
+                            text:tr( "Completed"),
                           ),
                           Tab(
-                            text: "Canceled",
+                            text:tr( "Canceled"),
                           ),
                         ],
                       ),

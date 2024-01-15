@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/core/utils/services/user_info.dart';
-import 'package:evento/features/profile_pages/profile/model/profile_model.dart';
-import 'package:evento/main.dart';
-import 'package:flutter/material.dart';
+import '../../../../core/server/helper_api.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/utils/error_handling/erroe_handling.dart';
+import '../../../../core/utils/services/user_info.dart';
+import '../model/profile_model.dart';
+import '../../../../main.dart';
+
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController{
@@ -19,6 +19,7 @@ class ProfileController extends GetxController{
   void onInit() async{
     isLoading=false.obs;
     errorMessage=<String>[].obs;
+    user = await UserInfo.getUserInfo();
     await  getProfileInfo();
     super.onInit();
   }

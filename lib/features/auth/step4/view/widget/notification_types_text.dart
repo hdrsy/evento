@@ -1,5 +1,6 @@
-import 'package:evento/main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NotificationTypesText extends StatelessWidget {
   const NotificationTypesText({super.key});
@@ -40,7 +41,7 @@ Padding(
                     fontWeight: FontWeight.normal,
                     
                   ),
-            ),
+            ).tr(),
           ),
         ],
       ),
@@ -73,7 +74,7 @@ Padding(
                       fontWeight: FontWeight.normal,
                       
                     ),
-              ),
+              ).tr(),
             ),
           ],
         ),
@@ -107,7 +108,7 @@ Padding(
                       fontWeight: FontWeight.normal,
                       
                     ),
-              ),
+              ).tr(),
             ),
           ],
         ),

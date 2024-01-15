@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/features/map/controller/map_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../core/utils/helper/date_formatter.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../../events/home/model/event_model.dart';
+import '../../controller/map_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

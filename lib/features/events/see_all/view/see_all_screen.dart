@@ -1,9 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/events/see_all/controller/see_all_controller.dart';
-import 'package:evento/features/events/see_all/view/widgets/see_all_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/see_all_controller.dart';
+import 'widgets/see_all_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

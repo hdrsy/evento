@@ -1,12 +1,14 @@
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../../core/utils/helper/flutter_flow_google_map.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildLocationSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   LatLng googleMapsCenter = LatLng(
@@ -15,10 +17,13 @@ Widget buildLocationSection(BuildContext context) {
   final googleMapsController = Completer<GoogleMapController>();
   return InkWell(
       onTap: () {
+         if(isGuset){
+                    Get.dialog( GuestPopupWidget());
+                  }else{
         Get.toNamed('/SeeLocation', arguments: [
           eventDetailesController.eventDetailsModel.venue.latitude,
           eventDetailesController.eventDetailsModel.venue.longitude
-        ]);
+        ]);}
       },
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -37,7 +42,7 @@ Widget buildLocationSection(BuildContext context) {
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                ).tr(),
               ],
             ),
           ),

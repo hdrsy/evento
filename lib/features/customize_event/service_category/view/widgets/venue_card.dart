@@ -1,11 +1,11 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VenueCard extends StatelessWidget {
   const VenueCard({super.key});
   @override
@@ -68,7 +68,7 @@ Stack(
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
                         ),
-                  ),
+                  ).tr(),
                   Text(
                     "Select a picturesque setting for your special day",
                     style: customTextStyle.bodyMedium.override(
@@ -77,7 +77,7 @@ Stack(
                           fontSize: 12,
                           useGoogleFonts: true,
                         ),
-                  ),
+                  ).tr(),
                 ].divide(const SizedBox(height: 5)),
               ),
             ),

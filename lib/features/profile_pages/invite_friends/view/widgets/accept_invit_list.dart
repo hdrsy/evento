@@ -1,7 +1,7 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AcceptInvitList extends StatelessWidget {
   const AcceptInvitList({super.key});
 
@@ -24,7 +24,7 @@ Align(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
-    ),
+    ).tr(),
   ),
 ),
 
@@ -56,7 +56,7 @@ Align(
             child: Text(
               "Randy Rudolph",
               style: customTextStyle.bodyLarge,
-            ),
+            ).tr(),
           ),
         ),
       ],

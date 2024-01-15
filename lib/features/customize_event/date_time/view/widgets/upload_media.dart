@@ -1,11 +1,11 @@
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class UploadMedia extends StatelessWidget {
    UploadMedia({super.key});
 final DateTimeController dateTimeController=Get.find();
@@ -43,7 +43,7 @@ Padding(
                         fontWeight: FontWeight.normal,
                         useGoogleFonts: true,
                       ),
-                ),
+                ).tr(),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                   child: InkWell(

@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:evento/core/utils/services/ticket_pdf_layout.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
+import 'ticket_pdf_layout.dart';
+import '../../../features/book_now/model/ticket_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:open_file/open_file.dart';

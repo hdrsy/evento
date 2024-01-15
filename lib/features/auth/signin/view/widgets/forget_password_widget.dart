@@ -1,4 +1,6 @@
-import 'package:evento/main.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +12,7 @@ class FogetPasswordWidget extends StatelessWidget {
     return 
         InkWell(
       splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
+      focusColor: Colors.transparent  ,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
@@ -22,7 +24,7 @@ class FogetPasswordWidget extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: "Forget Password?",
+              text:tr ( "Forget Password?"),
               style: customTextStyle.bodyMedium.copyWith(
                 fontFamily: 'Merriweather',
                 color: customColors.primary,
@@ -30,7 +32,7 @@ class FogetPasswordWidget extends StatelessWidget {
               ),
             ),
             TextSpan(
-              text: " send me code.",
+              text:tr( " send me code."),
               style: TextStyle(
                 color: customColors.secondaryText,
                 fontSize: 12,

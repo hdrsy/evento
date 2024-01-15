@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:evento/core/shared/models/media.dart';
-import 'package:evento/core/utils/services/compress_images.dart';
-import 'package:evento/core/utils/services/compress_video.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
+import '../../../../core/shared/models/media.dart';
+import '../../../../core/utils/services/compress_images.dart';
+import '../../../../core/utils/services/compress_video.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../create_profile/controller/oganizer_create_profile_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

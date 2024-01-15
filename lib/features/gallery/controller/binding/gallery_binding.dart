@@ -1,4 +1,4 @@
-import 'package:evento/features/gallery/controller/gallery_controller.dart';
+import '../gallery_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

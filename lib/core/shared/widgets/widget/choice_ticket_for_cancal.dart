@@ -9,6 +9,7 @@ import 'package:evento/features/profile_pages/my_booking/model/up_coming_booking
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ChoiceTicketForCancalWidget extends StatelessWidget {
    ChoiceTicketForCancalWidget({Key? key, required this.bookings}) : super(key: key);
@@ -52,7 +53,7 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
                     fontSize: 16,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
                 SizedBox(
                   height: screenHeight*0.45,
                   child: RadioButtonList( bookings: bookings,)),
@@ -71,7 +72,7 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
                     widget:  CancelBookingWidget(),
                     height: screenHeight * 0.7);
               },
-              text: "Continue",
+              text:tr( "Continue"),
               options: ButtonOptions(
                 height: 40,
                 padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

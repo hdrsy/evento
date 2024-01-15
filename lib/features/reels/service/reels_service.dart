@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:evento/core/cache_config/cache_config.dart';
-import 'package:evento/features/reels/model/reels_model.dart';
+import '../../../core/cache_config/cache_config.dart';
+import '../model/reels_model.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class ReelService {

@@ -6,7 +6,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class InviteFreinds extends StatelessWidget {
   const InviteFreinds({super.key});
 
@@ -50,7 +50,7 @@ class InviteFreinds extends StatelessWidget {
                           // context.pushNamed('Invite-friends-to-event');
                           Get.toNamed('/InviteFreindsToEventScreen',arguments: [eventDetailesController.eventId,eventDetailesController.eventDetailsModel.title]);
                         },
-                        text: "From Friends list",
+                        text:tr( "From Friends list"),
                         options: ButtonOptions(
                           width: 200,
                           height: 40,
@@ -79,7 +79,7 @@ class InviteFreinds extends StatelessWidget {
                               'Check out this event in Evento',
                             );
                           },
-                          text: "External Share",
+                          text:tr( "External Share"),
                           options: ButtonOptions(
                             width: 200,
                             height: 40,

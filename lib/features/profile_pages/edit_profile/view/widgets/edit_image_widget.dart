@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/edit_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EditImageWidget extends StatelessWidget {
   EditImageWidget({super.key});
   final EditProfileController editProfileController = Get.find();
@@ -69,7 +69,7 @@ class EditImageWidget extends StatelessWidget {
                       .pickImageForDashbard(ImageSource.gallery);
                 });
           },
-          text: "Change Photo",
+          text:tr( "Change Photo"),
           options: ButtonOptions(
             height: 35,
             padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),

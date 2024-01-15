@@ -14,6 +14,7 @@ class FreindsModel {
   });
 
   factory FreindsModel.fromJson(Map<String, dynamic> json) {
+    
     return FreindsModel(
       id: json['id'],
       lastName: json['last_name'],

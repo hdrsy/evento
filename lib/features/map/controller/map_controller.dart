@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:evento/core/server/follow_unfollow_event_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
+import '../../../core/server/follow_unfollow_event_api.dart';
+import '../../../core/server/server_config.dart';
+import '../../../core/utils/helper/flutter_flow_google_map.dart';
+import '../../events/home/controller/home_controller.dart';
+import '../../events/home/model/event_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

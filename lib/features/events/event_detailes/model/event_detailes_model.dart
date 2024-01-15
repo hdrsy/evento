@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:evento/features/events/event_detailes/model/related_event_model.dart';
+import 'package:evento/core/server/helper_api.dart';
+
+import 'related_event_model.dart';
 
 class EventDetailsModel {
   final int id;
@@ -51,7 +53,9 @@ class EventDetailsModel {
     // Initialize other fields...
   });
 
-  factory EventDetailsModel.fromJson(Map<String, dynamic> json) {
+  factory EventDetailsModel.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return EventDetailsModel(
       bookings:
           List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x))),
@@ -168,7 +172,9 @@ class OrganizerInfo {
     this.images,
   });
 
-  factory OrganizerInfo.fromJson(Map<String, dynamic> json) {
+  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return OrganizerInfo(
       id: json['id'],
       mobileUserId: json['mobile_user_id'],
@@ -197,7 +203,9 @@ class CategoryEvent {
     required this.updatedAt,
   });
 
-  factory CategoryEvent.fromJson(Map<String, dynamic> json) {
+  factory CategoryEvent.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return CategoryEvent(
       id: json['id'],
       title: json['title'],
@@ -253,7 +261,9 @@ class EventTrip {
     required this.description,
   });
 
-  factory EventTrip.fromJson(Map<String, dynamic> json) {
+  factory EventTrip.fromJson(Map<String, dynamic> oldJson){
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return EventTrip(
       id: json['id'],
       eventId: json['event_id'],
@@ -280,7 +290,9 @@ class Venue {
     required this.longitude,
   });
 
-  factory Venue.fromJson(Map<String, dynamic> json) {
+  factory Venue.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return Venue(
       id: json['id'],
       name: json['name'],
@@ -302,7 +314,9 @@ class Amenity {
     required this.icon,
   });
 
-  factory Amenity.fromJson(Map<String, dynamic> json) {
+  factory Amenity.fromJson(Map<String, dynamic> oldJson){
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return Amenity(
       id: json['id'],
       title: json['title'],
@@ -344,7 +358,10 @@ class ServiceProvider {
     required this.longitude,
   });
 
-  factory ServiceProvider.fromJson(Map<String, dynamic> json) => ServiceProvider(
+  factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) { 
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
+   return  ServiceProvider(
         id: json['id'],
         userId: json['user_id'],
         name: json['name'],
@@ -360,7 +377,7 @@ class ServiceProvider {
         endWork: json['end_work'],
         latitude: json['latitude'].toDouble(),
         longitude: json['longitude'].toDouble(),
-       );
+       );}
 
 }
 

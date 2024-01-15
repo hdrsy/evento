@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
-import 'package:evento/features/see_location_and_dirction/dirction/controller/dirction_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_google_map.dart';
+import '../controller/dirction_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class DirctionScreen extends StatelessWidget {
    DirctionScreen({super.key});
 final DirctionController dirctionController=Get.put(DirctionController());
@@ -14,7 +14,7 @@ final DirctionController dirctionController=Get.put(DirctionController());
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Location",
+        title: Text(tr("Location"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

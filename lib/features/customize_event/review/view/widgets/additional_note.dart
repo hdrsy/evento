@@ -1,8 +1,8 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AdditionalNote extends StatelessWidget {
   const AdditionalNote({super.key,required this.controller,required this.onChange});
 final TextEditingController controller;
@@ -18,7 +18,7 @@ final Function(String) onChange;
           "Additional Notes",
           style: customTextStyle.headlineMedium.override(
               fontSize: 22, fontWeight: FontWeight.w500, fontFamily: "Nunito"),
-        ),
+        ).tr(),
 
 Container(
   width: double.infinity,
@@ -44,7 +44,7 @@ Container(
       onChanged: onChange,
       obscureText: false,
       decoration: InputDecoration(
-        labelText:  "Label here...",
+        labelText:tr(  "Label here..."),
         labelStyle: customTextStyle.labelMedium,
         hintStyle: customTextStyle.labelMedium,
         enabledBorder: InputBorder.none,

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -91,7 +91,7 @@ class AchievementCard extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: 'Coupons: '.tr(),
+                text:tr( 'Coupons:'),
                 style: customTextStyle.bodyMedium.copyWith(
                   fontFamily: 'Readex Pro',
                   color: customColors.primary,

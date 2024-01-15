@@ -1,4 +1,4 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'flutter_flow_util.dart';
 
 import 'form_field_controller.dart';
 

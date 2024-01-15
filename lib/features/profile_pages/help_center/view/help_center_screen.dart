@@ -1,10 +1,10 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/help_center/view/widgets/contact_us.dart';
-import 'package:evento/features/profile_pages/help_center/view/widgets/faq.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import 'widgets/contact_us.dart';
+import 'widgets/faq.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key});
 
@@ -14,7 +14,7 @@ class HelpCenterScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Help Center",
+        title: Text(tr("Help Center"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -52,12 +52,12 @@ class HelpCenterScreen extends StatelessWidget {
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
-                        tabs: const [
+                        tabs:  [
                           Tab(
-                            text: "FAQ",
+                            text:tr( "FAQ"),
                           ),
                           Tab(
-                            text: "Contact Us",
+                            text:tr( "Contact Us"),
                           ),
 
                         ],

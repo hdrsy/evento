@@ -1,13 +1,13 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/utils/helper/flutter_flow_choice_chips.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/helper/form_field_controller.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../../../core/utils/helper/flutter_flow_choice_chips.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/helper/form_field_controller.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FAQ extends StatelessWidget {
   const FAQ({super.key});
 
@@ -27,15 +27,15 @@ class FAQ extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    question(context, "What is evento?",
+                    question(context, tr("What is evento?"),
                         "Lorem ipsum dolor sit amet, co..ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd."),
-                    question(context, " How to make a payment?",
+                    question(context,tr (" How to make a payment?"),
                         "Lorem ipsum dolor sit amet, co..."),
-                    question(context, " How do I can cancel booking?",
+                    question(context, tr(" How do I can cancel booking?"),
                         "Lorem ipsum dolor sit amet, co..."),
-                    question(context, " How to change the app language",
+                    question(context, tr(" How to change the app language"),
                         "Lorem ipsum dolor sit amet, co..."),
-                    question(context, "How do change my password? ",
+                    question(context,tr ("How do change my password? "),
                         "Lorem ipsum dolor sit amet, co..."),
                   ].divide(const SizedBox(height: 20)),
                 ),
@@ -142,11 +142,11 @@ class _ChipsCState extends State<ChipsC> {
 Padding(
   padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
   child: FlutterFlowChoiceChips(
-    options: const [
-      ChipData("General"),
-      ChipData("Account"),
-      ChipData( "Service"),
-      ChipData("Payment")
+    options:  [
+      ChipData(tr("General")),
+      ChipData(tr("Account")),
+      ChipData(tr ("Service")),
+      ChipData(tr("Payment"))
     ],
     onChanged: (val) => setState(() => choiceChipsValue = val?.first),
     selectedChipStyle: ChipStyle(

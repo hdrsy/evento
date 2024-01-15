@@ -1,14 +1,15 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/pin.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/pin.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/features/auth/step1/controller/step1_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/functions/validation/pin.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/shared/widgets/text_fields/pin.dart';
+import '../../../../core/utils/animation/animation_def.dart';
+import '../../../../core/utils/animation/animation_util.dart';
+import '../controller/step1_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step1Screen extends StatelessWidget {
@@ -54,7 +55,7 @@ class Step1Screen extends StatelessWidget {
                   color: customColors.primaryText,
                   fontWeight: FontWeight.w500,
                 ),
-              ),
+              ).tr(),
               SizedBox(
                 height: scaleHeight(50),
               ),
@@ -86,7 +87,7 @@ class Step1Screen extends StatelessWidget {
               onPressed: () async {
                 step1controller.onPressContinue();
               },
-              text: "Continue",
+              text:tr( "Continue"),
               showLoadingIndicator: false,
               options: ButtonOptions(
                 width: scaleWidth(330),

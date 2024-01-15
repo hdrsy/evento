@@ -3,18 +3,15 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-import 'package:image_picker/image_picker.dart';
-
-import 'package:evento/core/server/server_config.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import 'package:evento/main.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class OrganizerCreateProfileController extends GetxController {
   late TextEditingController organizerName;

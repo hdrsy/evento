@@ -1,18 +1,18 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
-import 'package:evento/features/customize_event/service_category/model/service_category_model.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/next_step_button.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/service_card.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/slider.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/step_text.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/venue_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/service_category_controller.dart';
+import '../model/service_category_model.dart';
+import 'widgets/next_step_button.dart';
+import 'widgets/service_card.dart';
+import 'widgets/slider.dart';
+import 'widgets/step_text.dart';
+import 'widgets/venue_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ServiceCategoryScreen extends StatelessWidget {
   ServiceCategoryScreen({super.key});
   final ServiceCategoryController serviceCategoryController = Get.find();
@@ -51,7 +51,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                   fontSize: 18,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
             ),
             Container(
               width: double.infinity,
@@ -66,7 +66,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                       fontSize: 12,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                   GetBuilder<ServiceCategoryController>(
                     builder: (context) {
                       return Text(

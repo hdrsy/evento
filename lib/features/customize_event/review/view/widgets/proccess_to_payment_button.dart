@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/review/controller/event_review_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/event_review_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ProccessToPaymentButton extends StatelessWidget {
   ProccessToPaymentButton({super.key});
   final EventReviewController eventReviewController = Get.find();
@@ -18,7 +18,7 @@ class ProccessToPaymentButton extends StatelessWidget {
           eventReviewController.onPressDone();
         },
         showLoadingIndicator: eventReviewController.isLoading.value,
-        text: "Proceed to Payment",
+        text:tr( "Proceed to Payment"),
         options: ButtonOptions(
           height: 40,
           width: screenWidth*0.5,

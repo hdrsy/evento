@@ -1,9 +1,9 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class LinksSection extends StatelessWidget {
   const LinksSection({super.key});
 
@@ -15,28 +15,28 @@ class LinksSection extends StatelessWidget {
           icon: Icons.language_outlined,
           title: "http://www.linguini",
         ),
-        const LinkCard(
+         LinkCard(
           icon: Icons.facebook,
-          title: "Spark Events",
+          title:tr( "Spark Events"),
         ),
         const LinkCard(
           icon: 'assets/images/Instagram.png',
           title: "@instagram",
         ),
-        const LinkCard(
+         LinkCard(
           icon: Icons.payment,
-          title: "Deposit information",
+          title:tr( "Deposit information"),
           subTitle: """\$50 deposit per person is required to be 
 paid in advance and will be deducted
 from your check.""",
         ),
-        const LinkCard(
+         LinkCard(
           icon: Icons.refresh_outlined,
-          title: "Refund policy",subTitle: "Refund until 1 day.",
+          title:tr( "Refund policy"),subTitle: "Refund until 1 day.",
         ),
-        const LinkCard(
+         LinkCard(
           icon: Icons.cancel_presentation_outlined,
-          title: "Cancellation policy",subTitle: """Cancellation allowed until 4 hours.
+          title:tr( "Cancellation policy"),subTitle: """Cancellation allowed until 4 hours.
 before your booking.""",
         ),
       ].divide(const SizedBox(

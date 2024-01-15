@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 class CancelledBooking {
   final int id;
   final int userId;
@@ -29,7 +31,9 @@ class CancelledBooking {
     required this.eventClass,
   });
 
-  factory CancelledBooking.fromJson(Map<String, dynamic> json) {
+  factory CancelledBooking.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     var interestList = jsonDecode(json['interest']) as List<dynamic>;
     return CancelledBooking(
       id: json['id'],
@@ -86,7 +90,9 @@ final List<String> images;
      required this.venue,
   });
 
-  factory CancelledEvent.fromJson(Map<String, dynamic> json) {
+  factory CancelledEvent.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return CancelledEvent(
       id: json['id'],
       title: json['title'],
@@ -111,7 +117,9 @@ class CancelledVenue {
     required this.locationDescription,
   });
 
-  factory CancelledVenue.fromJson(Map<String, dynamic> json) {
+  factory CancelledVenue.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return CancelledVenue(
       id: json['id'],
       governorate: json['governorate'],

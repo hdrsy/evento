@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:evento/core/utils/services/pdf_service.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import '../../../core/utils/services/pdf_service.dart';
+import '../../book_now/model/ticket_model.dart';
+import '../../events/event_detailes/model/event_detailes_model.dart';
 import 'package:get/get.dart';
     import 'package:open_file/open_file.dart';
 

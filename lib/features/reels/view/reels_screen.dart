@@ -1,7 +1,7 @@
 
-import 'package:evento/features/reels/controller/reels_controller.dart';
-import 'package:evento/features/reels/view/widgets/reel_widget.dart';
-import 'package:evento/main.dart';
+import '../controller/reels_controller.dart';
+import 'widgets/reel_widget.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

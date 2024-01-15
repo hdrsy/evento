@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:evento/core/cache_config/cache_config.dart';
-import 'package:evento/core/shared/controllers/tween_animation_controller.dart';
-import 'package:evento/features/reels/controller/reels_controller.dart';
-import 'package:evento/main.dart';
+import '../../../cache_config/cache_config.dart';
+import '../../controllers/tween_animation_controller.dart';
+import '../../../../features/reels/controller/reels_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';

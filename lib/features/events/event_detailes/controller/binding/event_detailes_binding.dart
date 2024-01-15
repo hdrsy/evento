@@ -1,4 +1,4 @@
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
+import '../event_detailes_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

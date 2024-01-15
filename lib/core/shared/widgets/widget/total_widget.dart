@@ -3,7 +3,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class TotalWidget extends StatelessWidget {
   const TotalWidget({Key? key}) : super(key: key);
 
@@ -53,7 +53,7 @@ class TotalWidget extends StatelessWidget {
                           color: customColors.dark600,
                           useGoogleFonts: true,
                         ),
-                  ),
+                  ).tr(),
                 ),
               ),
               Padding(
@@ -66,7 +66,7 @@ class TotalWidget extends StatelessWidget {
                         fontWeight: FontWeight.w300,
                         useGoogleFonts: true,
                       ),
-                ),
+                ).tr(),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -74,7 +74,7 @@ class TotalWidget extends StatelessWidget {
                   onPressed: () async {
                     Get.back();
                     },
-                  text:  "Okay",
+                  text:tr(  "Okay"),
                   options: ButtonOptions(
                     height: 40,
                     padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),

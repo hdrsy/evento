@@ -12,7 +12,7 @@ import 'package:evento/features/profile_pages/account_type_inner_screens/switch_
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the ChoiceTypeScreen as a StatelessWidget.
 class ChoiceTypeScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -62,7 +62,7 @@ class ChoiceTypeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
             ),
             // Aligning the description text at the center and applying animation.
             Align(
@@ -75,7 +75,7 @@ class ChoiceTypeScreen extends StatelessWidget {
                   color: customColors.primaryText,
                   useGoogleFonts: true,
                 ),
-              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+              ).tr().animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
             ),
             // Search text field.
             searchTextField(onChanged: (value) {}),
@@ -95,7 +95,7 @@ class ChoiceTypeScreen extends StatelessWidget {
                     height: MediaQuery.sizeOf(context).height * 0.6
                   );
                 },
-                text: "Done",
+                text:tr( "Done"),
                 options: ButtonOptions(
                   width: 200,
                   height: 40,

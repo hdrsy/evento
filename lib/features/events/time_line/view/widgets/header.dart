@@ -1,12 +1,12 @@
- import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/time_line/controller/time_line_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/time_line_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildHeaderTimeLine(BuildContext context) {
   TimeLineController timeLineController=Get.find();
    return Column(
@@ -68,7 +68,7 @@ Widget buildHeaderTimeLine(BuildContext context) {
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
                         ),
-                  ),
+                  ).tr(),
                 ),
               ],
             ),

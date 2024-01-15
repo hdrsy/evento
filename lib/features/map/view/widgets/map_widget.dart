@@ -1,4 +1,4 @@
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
+import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

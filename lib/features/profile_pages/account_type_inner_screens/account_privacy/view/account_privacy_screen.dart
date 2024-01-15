@@ -4,7 +4,7 @@ import 'package:evento/features/profile_pages/account_type_inner_screens/account
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the AccountPrivacyScreen as a StatelessWidget.
 class AccountPrivacyScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -27,7 +27,7 @@ class AccountPrivacyScreen extends StatelessWidget {
           "Account Privacy",
           style: customTextStyle.bodyMedium
               .copyWith(color: customColors.primary, fontSize: 20),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           onTap: () {
@@ -63,7 +63,7 @@ class AccountPrivacyScreen extends StatelessWidget {
                       fontSize: 16,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                   // Observing changes in the AccountPrivacyController.
                   Obx(
                     () => Switch.adaptive(
@@ -91,7 +91,7 @@ class AccountPrivacyScreen extends StatelessWidget {
                     fontSize: 14,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ),
             ],
           ),

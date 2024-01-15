@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/view/widgets/people_date_time_bottom_sheet.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import 'people_date_time_bottom_sheet.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SelectPeopleDateTime extends StatelessWidget {
   const SelectPeopleDateTime({super.key});
 
@@ -53,7 +53,7 @@ class SelectPeopleDateTime extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: true,
                   ),
-            ),
+            ).tr(),
           ],
         ),
       ),
@@ -84,7 +84,7 @@ class SelectPeopleDateTime extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: true,
                   ),
-            ),
+            ).tr(),
           ],
         ),
       ),
@@ -115,7 +115,7 @@ class SelectPeopleDateTime extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: true,
                   ),
-            ),
+            ).tr(),
           ],
         ),
       ),

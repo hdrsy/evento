@@ -1,20 +1,21 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
-import 'package:evento/core/shared/widgets/widget/total_widget.dart';
-import 'package:evento/core/utils/helper/expanded_image_view.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/booking_detailes/controller/booking_detailes_controller.dart';
-import 'package:evento/features/booking_detailes/view/widget/build_buttons.dart';
-import 'package:evento/features/booking_detailes/view/widget/event_info_card.dart';
-import 'package:evento/features/booking_detailes/view/widget/ticket_detailes_card.dart';
-import 'package:evento/features/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../core/responsive/responsive.dart';
+import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../core/shared/widgets/widget/rate_event_widget.dart';
+import '../../../core/shared/widgets/widget/total_widget.dart';
+import '../../../core/utils/helper/expanded_image_view.dart';
+import '../../../core/utils/theme/text_theme.dart';
+import '../../booking_detailes/controller/booking_detailes_controller.dart';
+import '../../booking_detailes/view/widget/build_buttons.dart';
+import '../../booking_detailes/view/widget/event_info_card.dart';
+import '../../booking_detailes/view/widget/ticket_detailes_card.dart';
+import '../controller/booking_detailes_controller.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BookingDetailesForMyBookingScreen extends StatelessWidget {
   BookingDetailesForMyBookingScreen({super.key});
@@ -25,7 +26,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Booking Detailes",
+        title: Text(tr("Booking Detailes"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -52,7 +53,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                   Text(
                     "Date Of Event",
                     style: customTextStyle.bodyMedium,
-                  ),
+                  ).tr(),
                 ],
               ),
               const SizedBox(
@@ -78,7 +79,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                     Text(
                       "Your booking has been completed",
                       style: customTextStyle.titleMedium,
-                    ),
+                    ).tr(),
                     Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
@@ -122,7 +123,7 @@ class BookingDetailes extends StatelessWidget {
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       useGoogleFonts: true),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -140,7 +141,7 @@ class BookingDetailes extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                       useGoogleFonts: true),
-                ),
+                ).tr(),
                 Text(
                   "156.000 sp",
                   style: customTextStyle.bodyLarge.override(
@@ -148,7 +149,7 @@ class BookingDetailes extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -166,7 +167,7 @@ class BookingDetailes extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                       useGoogleFonts: true),
-                ),
+                ).tr(),
                 Text(
                   "24.000 sp",
                   style: customTextStyle.bodyLarge.override(
@@ -174,7 +175,7 @@ class BookingDetailes extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -195,7 +196,7 @@ class BookingDetailes extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
                           useGoogleFonts: true),
-                    ),
+                    ).tr(),
                   ],
                 ),
                 Text(
@@ -205,7 +206,7 @@ class BookingDetailes extends StatelessWidget {
                     color: customColors.primary,
                     fontSize: 14,
                   ),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -226,7 +227,7 @@ class BookingDetailes extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.normal,
                           useGoogleFonts: true),
-                    ),
+                    ).tr(),
                     IconWithContainer(
                       borderRadius: 30,
                       backgroundColor: customColors.secondaryBackground,
@@ -245,7 +246,7 @@ class BookingDetailes extends StatelessWidget {
                 Text(
                   "200.000 sp",
                   style: customTextStyle.displaySmall,
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -342,7 +343,7 @@ class BookingInfo extends StatelessWidget {
             fontSize: 20,
             useGoogleFonts: true,
           ),
-        ),
+        ).tr(),
         SizedBox(
           height: 30,
           child: VerticalDivider(
@@ -357,7 +358,7 @@ class BookingInfo extends StatelessWidget {
             fontSize: 20,
             useGoogleFonts: true,
           ),
-        ),
+        ).tr(),
         SizedBox(
           height: 30,
           child: VerticalDivider(
@@ -372,7 +373,7 @@ class BookingInfo extends StatelessWidget {
             fontSize: 20,
             useGoogleFonts: true,
           ),
-        ),
+        ).tr(),
       ],
     );
   }

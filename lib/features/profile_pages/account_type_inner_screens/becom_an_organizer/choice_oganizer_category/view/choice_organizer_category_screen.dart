@@ -12,7 +12,7 @@ import 'package:evento/features/profile_pages/account_type_inner_screens/becom_a
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the ChoiceOrganizerCategoryScreen as a StatelessWidget.
 class ChoiceOrganizerCategoryScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -64,7 +64,7 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ),
               // Another text widget with center alignment and using animation.
               Align(
@@ -76,7 +76,7 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
                     color: customColors.primaryText,
                     useGoogleFonts: true,
                   ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+                ).tr().animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
               ),
               // A search text field.
               searchTextField(onChanged: (value) {}),
@@ -96,7 +96,7 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.6
                     );
                   },
-                  text: "Done",
+                  text:tr( "Done"),
                   options: ButtonOptions(
                     width: 200,
                     height: 40,

@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/going/view/going_screen.dart';
-import 'package:evento/features/profile_pages/add_friends/controller/add_friends_controller.dart';
-import 'package:evento/features/profile_pages/add_friends/model/add_friends_model.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../going/view/going_screen.dart';
+import '../controller/add_friends_controller.dart';
+import '../model/add_friends_model.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AddFriendsScreen extends StatelessWidget {
    AddFriendsScreen({super.key});
 final AddFriendsController addFriendsController=Get.put(AddFriendsController());
@@ -18,7 +18,7 @@ final AddFriendsController addFriendsController=Get.put(AddFriendsController());
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Add Freinds",
+        title: Text(tr("Add Freinds"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

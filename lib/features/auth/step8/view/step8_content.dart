@@ -1,15 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/step8/controller/step8_controller.dart';
-import 'package:evento/features/auth/step8/view/widget/selected_list.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/utils/animation/animation_def.dart';
+import '../../../../core/utils/animation/animation_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/step8_controller.dart';
+import 'widget/selected_list.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step8Content extends StatelessWidget {
@@ -29,7 +31,7 @@ class Step8Content extends StatelessWidget {
             fontSize: 16,
             useGoogleFonts: false,
           ),
-        ),
+        ).tr(),
         SizedBox(
           height: scaleHeight(12),
         ),
@@ -44,7 +46,7 @@ class Step8Content extends StatelessWidget {
             fontWeight: FontWeight.normal,
             useGoogleFonts: false,
           ),
-        ),
+        ).tr(),
         SizedBox(
           height: scaleHeight(50),
         ),
@@ -74,7 +76,7 @@ class Step8Content extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    step8controller.selectedState ?? "Select State",
+                    step8controller.selectedState ??tr( "Select State"),
                     style: customTextStyle.bodyMedium,
                   ),
                   Icon(
@@ -102,7 +104,7 @@ class Step8Content extends StatelessWidget {
               showLoadingIndicator: step8controller.isLoading.value,
               onPressed: () async {
                 step8controller.onPressContune();              },
-              text: "Continue",
+              text:tr( "Continue"),
               options: ButtonOptions(
                 width: scaleWidth(330),
                 height: scaleHeight(40),

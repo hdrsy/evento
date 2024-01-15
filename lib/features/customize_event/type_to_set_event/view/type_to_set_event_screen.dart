@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/widgets/customize_event_button.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/widgets/event_types_widget.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/widgets/slider.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/widgets/step_text.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/type_to_set_event_controller.dart';
+import 'widgets/customize_event_button.dart';
+import 'widgets/event_types_widget.dart';
+import 'widgets/slider.dart';
+import 'widgets/step_text.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class TypeToSetEventScreen extends StatelessWidget {
    TypeToSetEventScreen({super.key});
 final TypetoSetEventController typetoSetEventController=Get.find();
@@ -18,7 +18,7 @@ final TypetoSetEventController typetoSetEventController=Get.find();
        backgroundColor: customColors.secondaryBackground,
      appBar:  AppBar(
       backgroundColor: customColors.secondaryBackground,
-        title:Text( "Customize Event",style: customTextStyle.bodyMedium.copyWith(
+        title:Text(tr( "Customize Event"),style: customTextStyle.bodyMedium.copyWith(
           color: customColors.primary,
           fontSize: 20
         )),

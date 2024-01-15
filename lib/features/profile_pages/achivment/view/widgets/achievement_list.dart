@@ -1,5 +1,5 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/achivment/view/widgets/achievement_card.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import 'achievement_card.dart';
 import 'package:flutter/material.dart';
 
 class AchievementList extends StatelessWidget {

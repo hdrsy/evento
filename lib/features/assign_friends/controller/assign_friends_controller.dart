@@ -1,11 +1,6 @@
-import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/main.dart';
+
+import '../../book_now/controller/book_now_controller.dart';
+import '../../profile_pages/freinds/model/freinds_model.dart';
 import 'package:get/get.dart';
 
 class AssignFriendsController extends GetxController{

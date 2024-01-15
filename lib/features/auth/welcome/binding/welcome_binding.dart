@@ -1,5 +1,5 @@
-import 'package:evento/features/auth/signin/controller/signin_controller.dart';
-import 'package:evento/features/auth/signup/controller/signup_controller.dart';
+import '../../signin/controller/signin_controller.dart';
+import '../../signup/controller/signup_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

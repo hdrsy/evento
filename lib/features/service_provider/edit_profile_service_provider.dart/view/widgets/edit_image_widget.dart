@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/camera_icon.dart';
-import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import 'package:evento/features/service_provider/edit_profile_service_provider.dart/controller/edit_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../organizer/create_profile/view/widgets/camera_icon.dart';
+import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
+import '../../controller/edit_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EditImageWidget extends StatelessWidget {
   EditImageWidget({super.key});
   final EditProfileServiceProviderController controller = Get.find();
@@ -51,7 +51,7 @@ class EditImageWidget extends StatelessWidget {
                         alignment: AlignmentDirectional(-0.8, 2),
                         child: InkWell(
           onTap: (){
-              print("object");
+              print(tr("object"));
                      showBottomSheetForImages(
                   context: context,
                   onPressCamera: () {

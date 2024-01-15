@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_options.dart';
-import 'package:evento/core/responsive/responsive.dart';
+import '../../../responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
  class CaroucelOptionFunctions{

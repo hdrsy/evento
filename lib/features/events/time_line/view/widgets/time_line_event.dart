@@ -1,7 +1,7 @@
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/time_line/model/time_line_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../model/time_line_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 Widget buildTimelineEvent(BuildContext context, TimelineModel event) {

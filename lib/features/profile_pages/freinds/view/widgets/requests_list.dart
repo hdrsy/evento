@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/widget/users_shimmer_card.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
-import 'package:evento/features/profile_pages/freinds/model/recive_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/shared/widgets/widget/users_shimmer_card.dart';
+import '../../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/freinds_cotroller.dart';
+import '../../model/recive_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class RequestsList extends StatelessWidget {
   const RequestsList({super.key});
 
@@ -37,7 +37,7 @@ class RequestsList extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "Friend requests ",
+                          text:tr( "Friend requests "),
                           style: TextStyle(
                             color: customColors.primaryText,
                             fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class RequestsList extends StatelessWidget {
                       fontSize: 12,
                       useGoogleFonts: false,
                     ),
-                  ),
+                  ).tr(),
                 ],
               ),
             ),
@@ -134,7 +134,7 @@ class RequestsCard extends StatelessWidget {
                                  final FreindsController freindsController=Get.find();
                                  freindsController.confirmRecivedRequest(receiveRequest.senderId, modelId);
                                 },
-                                text: "Confirm",
+                                text:tr( "Confirm"),
                                 options: ButtonOptions(
                                   width: 120,
                                   height: 21,
@@ -164,7 +164,7 @@ class RequestsCard extends StatelessWidget {
                                  freindsController.deleteRecivedRequest(receiveRequest.senderId, modelId);
                                
                                 },
-                                text: "Delete",
+                                text:tr( "Delete"),
                                 options: ButtonOptions(
                                   width: 120,
                                   height: 21,

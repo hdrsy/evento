@@ -1,13 +1,13 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/amenities_section.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/event_detailes_controller.dart';
+import '../../model/event_detailes_model.dart';
+import 'inforamtion_event_widgets/amenities_section.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllAmenities extends StatelessWidget {
   SeeAllAmenities({super.key});
   final EventDetailesController eventDetailesController = Get.find();
@@ -18,7 +18,7 @@ class SeeAllAmenities extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Amenities",
+        title: Text(tr("Amenities"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -45,7 +45,7 @@ class SeeAllAmenities extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontFamily: primaryFontFamily,
                   useGoogleFonts: true),
-            ),
+            ).tr(),
             ...List.generate(
                 eventDetailesController.eventDetailsModel.amenities.length,
                 (index) => AmenitiesCard(

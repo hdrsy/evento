@@ -1,9 +1,9 @@
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/add_media_in_folder_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';

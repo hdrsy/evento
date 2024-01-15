@@ -1,12 +1,12 @@
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
-import 'package:evento/features/profile_pages/freinds/view/widgets/freinds_list.dart';
-import 'package:evento/features/profile_pages/freinds/view/widgets/requests_list.dart';
-import 'package:evento/features/profile_pages/freinds/view/widgets/sent_list.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/freinds_cotroller.dart';
+import 'widgets/freinds_list.dart';
+import 'widgets/requests_list.dart';
+import 'widgets/sent_list.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FreindsScreen extends StatelessWidget {
    FreindsScreen({super.key});
 final FreindsController  freindsController=Get.find();
@@ -29,7 +29,7 @@ final FreindsController  freindsController=Get.find();
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Freinds",
+        title: Text(tr("Freinds"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -67,15 +67,15 @@ final FreindsController  freindsController=Get.find();
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
-                        tabs: const [
+                        tabs:  [
                           Tab(
-                            text: "Friends",
+                            text:tr( "Friends"),
                           ),
                           Tab(
-                            text: "Requests",
+                            text:tr( "Requests"),
                           ),
                           Tab(
-                            text: "Sent",
+                            text:tr( "Sent"),
                           ),
                         ],
                       ),

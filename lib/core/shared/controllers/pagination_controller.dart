@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import '../../utils/error_handling/erroe_handling.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 

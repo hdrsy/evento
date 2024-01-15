@@ -1,8 +1,8 @@
-import 'package:evento/features/customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
-import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
-import 'package:evento/features/reels/controller/reels_controller.dart';
+import '../../customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
+import '../../events/home/controller/home_controller.dart';
+import 'main_bottom_navigation_controller.dart';
+import '../../profile_pages/profile/controller/profile_controller.dart';
+import '../../reels/controller/reels_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

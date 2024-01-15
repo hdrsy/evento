@@ -1,14 +1,16 @@
 
-  import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 ButtonWidget followButton() {
     return ButtonWidget(
       onPressed: () {
        },
-      text: "Follow",
+      text:tr( "Follow"),
       options: ButtonOptions(
         width: 85,
         height: 31,

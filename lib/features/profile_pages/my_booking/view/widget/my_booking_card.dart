@@ -1,18 +1,18 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/animation/animation_text.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
-import 'package:evento/features/profile_pages/my_booking/model/up_coming_booking.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/animation/animation_text.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../model/my_cancel_booking_model.dart';
+import '../../model/up_coming_booking.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class MyBookingCard extends StatelessWidget {
   const MyBookingCard(
       {super.key,
@@ -245,7 +245,7 @@ final List<EventBooking>? eventBooking;
       //  Get.toNamed('/BookingDetailesForMyBookingScreen',arguments: []);
         
       },
-      text: "View E-Ticket",
+      text:tr( "View E-Ticket"),
       options: ButtonOptions(
         height: 25,
         padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

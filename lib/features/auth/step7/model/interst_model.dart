@@ -1,3 +1,5 @@
+import 'package:evento/core/server/helper_api.dart';
+
 class InterestItem {
   final int id;
   final String icon;
@@ -5,7 +7,9 @@ class InterestItem {
 
   InterestItem({required this.id, required this.icon, required this.title});
 
-  factory InterestItem.fromJson(Map<String, dynamic> json) {
+  factory InterestItem.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return InterestItem(
       id: json['id'],
       icon: json['icon'],

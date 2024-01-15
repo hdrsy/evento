@@ -1,4 +1,6 @@
 
+import 'package:evento/core/server/helper_api.dart';
+
 class ServiceCategoryModel {
   final int id;
   final String title;
@@ -12,7 +14,9 @@ class ServiceCategoryModel {
     required this.icon,
    });
 
-  factory ServiceCategoryModel.fromJson(Map<String, dynamic> json) {
+  factory ServiceCategoryModel.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return ServiceCategoryModel(
       id: json['id'],
       title: json['title'],

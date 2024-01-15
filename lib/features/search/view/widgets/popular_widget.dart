@@ -1,9 +1,9 @@
-import 'package:evento/features/search/controller/search_controller.dart';
-import 'package:evento/features/search/view/widgets/search_event_card.dart';
-import 'package:evento/main.dart';
+import '../../controller/search_controller.dart';
+import 'search_event_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class PopularWidget extends StatelessWidget {
    PopularWidget({super.key});
   @override
@@ -19,7 +19,7 @@ class PopularWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                 child: Text(
-                  "Popular on Evanto",
+                  tr("Popular on Evanto"),
                   textAlign: TextAlign.start,
                   style: customTextStyle.labelLarge,
                 ),

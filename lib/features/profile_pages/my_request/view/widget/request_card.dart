@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/my_request/model/my_request_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../model/my_request_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class RequestCard extends StatelessWidget {
   const RequestCard({super.key, required this.myRequestModel});
 final MyRequestModel myRequestModel;
@@ -123,7 +123,7 @@ final MyRequestModel myRequestModel;
                           // context.pushNamed('Reque-ststatus');
                           Get.toNamed('/RequestStatusScreen',arguments: myRequestModel);
                         },
-                        text: "See details",
+                        text:tr( "See details"),
                         options: ButtonOptions(
                           height: 21,
                           padding: const EdgeInsetsDirectional.fromSTEB(

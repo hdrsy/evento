@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/confirm_cancale_booking.dart';
@@ -50,18 +51,18 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                       fontSize: 16,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const RadioButtonList(titles: [
-                        "I have another event",
-                        "I'm sick,  can't come",
-                        "I have an urgent need",
-                        "I have no transportation to come",
-                        "I want to book another event",
-                        "I just want to cancel"
+                       RadioButtonList(titles: [
+                        tr("I have another event"),
+                        tr("I'm sick,  can't come"),
+                        tr("I have an urgent need"),
+                        tr("I have no transportation to come"),
+                        tr("I want to book another event"),
+                        tr("I just want to cancel")
                       ]),
                       Padding(
                         padding:
@@ -69,7 +70,7 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                         child: Text(
                           "Other",
                           style: customTextStyle.bodyMedium,
-                        ),
+                        ).tr(),
                       ),
                       Padding(
                         padding:
@@ -82,7 +83,7 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: customTextStyle.labelMedium,
-                            hintText: "Others reason",
+                            hintText:tr( "Others reason"),
                             hintStyle: customTextStyle.labelMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.secondaryText,
@@ -139,7 +140,7 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                   }
 
                 },
-                text: "Cancel Booking",
+                text:tr( "Cancel Booking"),
                 options: ButtonOptions(
                   height: 40,
                   padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

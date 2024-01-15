@@ -1,12 +1,12 @@
-import 'package:evento/core/shared/functions/validation/name_validation.dart';
-import 'package:evento/core/shared/functions/validation/phone_validation.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/features/customize_event/date_time/view/widgets/text_field_contact_information.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/functions/validation/name_validation.dart';
+import '../../../../../core/shared/functions/validation/phone_validation.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import 'text_field_contact_information.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ContactInformationForm extends StatelessWidget {
   // Assuming controllers, focusNodes, and validators are defined elsewhere
   final FocusNode _focusNode1 = FocusNode();
@@ -33,7 +33,7 @@ class ContactInformationForm extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
-              ),
+              ).tr(),
             ],
           ),
         ),
@@ -53,8 +53,8 @@ class ContactInformationForm extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   TextFieldContactInformation(
-                      labelKey: "First name",
-                      hintTextKey: 'Label here...',
+                      labelKey:tr( "First name"),
+                      hintTextKey:tr( 'Label here...'),
                       controller: dateTimeController.firstName,
                       onChanged: (value) {
                         dateTimeController.firstName.text = value;
@@ -67,8 +67,8 @@ class ContactInformationForm extends StatelessWidget {
                     color: customColors.secondaryBackground,
                   ),
                   TextFieldContactInformation(
-                      labelKey: " Last name",
-                      hintTextKey: 'Label here...',
+                      labelKey:tr( " Last name"),
+                      hintTextKey:tr( 'Label here...'),
                       controller: dateTimeController.lastName,
                       onChanged: (value) {
                         dateTimeController.lastName.text = value;
@@ -81,8 +81,8 @@ class ContactInformationForm extends StatelessWidget {
                     color: customColors.secondaryBackground,
                   ),
                   TextFieldContactInformation(
-                      labelKey: "Phone Number",
-                      hintTextKey: 'Label here...',
+                      labelKey:tr( "Phone Number"),
+                      hintTextKey:tr( 'Label here...'),
                       controller: dateTimeController.phoneNumber,
                       onChanged: (value) {
                         dateTimeController.phoneNumber.text = value;

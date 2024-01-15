@@ -1,12 +1,14 @@
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/features/book_now/view/book_now_screen.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../book_now/controller/book_now_controller.dart';
+import '../../../../book_now/view/book_now_screen.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class BookNowButton extends StatelessWidget {
   const BookNowButton({super.key});
 
@@ -17,11 +19,14 @@ class BookNowButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 16),
       child: ButtonWidget(
         onPressed: () async {
+           if(isGuset){
+                    Get.dialog( const GuestPopupWidget());
+                  }else{
         await  showButtonSheet(context: context, widget: BookNowScreen(), height: MediaQuery.sizeOf(context).height * 0.9);
-          Get.delete<BookNowController>();
+          Get.delete<BookNowController>();}
                              
           },
-        text: "Book Now",
+        text:tr( "Book Now"),
         options: ButtonOptions(
           width: 230,
 

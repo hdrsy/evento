@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/camera_icon.dart';
-import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/edit_profile_controller.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../create_profile/view/widgets/camera_icon.dart';
+import '../../controller/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

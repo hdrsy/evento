@@ -1,8 +1,8 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/serivce_according_category/controller/service_according_category_controller.dart';
-import 'package:evento/features/customize_event/serivce_according_category/view/widgets/service_according_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/service_according_category_controller.dart';
+import 'widgets/service_according_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

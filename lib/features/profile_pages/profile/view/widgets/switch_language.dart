@@ -32,7 +32,7 @@ class LanguageSelector extends StatelessWidget {
               color: customColors.primary,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: dropDown(context),
+            child: dropDown(),
           ),
         ],
       ),
@@ -40,7 +40,7 @@ class LanguageSelector extends StatelessWidget {
   }
 }
 
-Widget dropDown(BuildContext context) {
+Widget dropDown() {
   String currentLanguage =
       sharedPreferences?.getString('language_code') ?? 'en';
   List<Language> languages = [
@@ -66,10 +66,19 @@ Widget dropDown(BuildContext context) {
       ),
       onChanged: (Language? newValue) {
     // Use EasyLocalization context here
-    context.locale   = newValue!.languageCode == 'en' 
+    Locale newLocale   = newValue!.languageCode == 'en' 
         ? Locale('en') 
         : Locale('ar');
-Get.back();
+        Get.updateLocale(newLocale);
+        prefService.createString("language_code", newValue.languageCode == 'en' 
+        ? 'en'
+        : 'ar');
+        Future.delayed(Duration(milliseconds: 500)).then((value) {
+
+        Get.offAllNamed('/home');
+        }
+        );
+// Get.back();
     // Get.offAllNamed('/home');
   },
       items: languages.map<DropdownMenuItem<Language>>((Language language) {

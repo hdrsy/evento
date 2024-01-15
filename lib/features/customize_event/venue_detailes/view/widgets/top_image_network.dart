@@ -1,4 +1,4 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
 import 'package:flutter/widgets.dart';
 
 class TopImageWidget extends StatelessWidget {

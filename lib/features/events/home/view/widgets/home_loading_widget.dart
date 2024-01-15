@@ -1,6 +1,6 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

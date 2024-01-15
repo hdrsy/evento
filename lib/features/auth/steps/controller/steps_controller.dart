@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:evento/core/utils/services/permission_service.dart';
-import 'package:evento/features/auth/step7/model/interst_model.dart';
+import '../../../../core/utils/services/permission_service.dart';
+import '../../step7/model/interst_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

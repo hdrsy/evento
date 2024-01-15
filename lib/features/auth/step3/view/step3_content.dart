@@ -1,17 +1,18 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/step3/view/widgets/build_day_month_year.dart';
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/utils/animation/animation_def.dart';
+import '../../../../core/utils/animation/animation_util.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import 'widgets/build_day_month_year.dart';
+import '../../steps/controller/page_controller.dart';
+import '../../steps/controller/steps_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step3Content extends StatelessWidget {
@@ -35,7 +36,7 @@ class Step3Content extends StatelessWidget {
                 fontFamily: 'BeerSerif',
                 color: customColors.primaryText,
                 fontSize: 16),
-          ),
+          ).tr(),
           SizedBox(
             height: scaleHeight(12),
           ),
@@ -48,7 +49,7 @@ class Step3Content extends StatelessWidget {
               letterSpacing: 0.2,
               fontWeight: FontWeight.normal,
             ),
-          ),
+          ).tr(),
           SizedBox(
             height: scaleHeight(50),
           ),
@@ -121,7 +122,7 @@ class Step3Content extends StatelessWidget {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      text: "Cancel",
+                                      text:tr( "Cancel"),
                                       options: ButtonOptions(
                                         width: 120,
                                         height: 45,
@@ -151,7 +152,7 @@ class Step3Content extends StatelessWidget {
                                         stepsController.update();
                                         Get.back();
                                       },
-                                      text: "Done",
+                                      text:tr( "Done"),
                                       options: ButtonOptions(
                         width: 120,
                         height: 45,
@@ -187,17 +188,17 @@ class Step3Content extends StatelessWidget {
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.MMMM().format(stepsController.day!)
-                            : "Month",
+                            :tr( "Month"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.d().format(stepsController.day!)
-                            : "Day",
+                            :tr ("Day"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.y().format(stepsController.day!)
-                            : "Year",
+                            :tr ("Year"),
                       ),
                     ].divide(const Spacer()),
                   );
@@ -225,10 +226,10 @@ class Step3Content extends StatelessWidget {
                   stepsPageController.pageIdex.value = 4;
                 } else {
                   stepsController.dateErrorMessage.value =
-                      "Please select your birthday first";
+                    tr(  "Please select your birthday first");
                 }
               },
-              text: "Continue",
+              text:tr( "Continue"),
               options: ButtonOptions(
                 width: scaleWidth(330),
                 height: scaleHeight(40),

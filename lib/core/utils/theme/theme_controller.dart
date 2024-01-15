@@ -1,5 +1,5 @@
-import 'package:evento/core/utils/theme/app_theme.dart';
-import 'package:evento/main.dart';
+import 'app_theme.dart';
+import '../../../main.dart';
 import 'package:get/get.dart';
 
 class ThemeController extends GetxController {

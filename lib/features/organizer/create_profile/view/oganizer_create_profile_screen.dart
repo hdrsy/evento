@@ -1,21 +1,21 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/text_fields/edit_profile_field.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/camera_icon.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/create_folder.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/folder_card.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/profile_image.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/selected_list.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/oganizer_create_profile_controller.dart';
+import 'widgets/camera_icon.dart';
+import 'widgets/create_folder.dart';
+import 'widgets/folder_card.dart';
+import 'widgets/profile_image.dart';
+import 'widgets/selected_list.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the OrganizerCreateProfileScreen as a StatelessWidget.
 class OrganizerCreateProfileScreen extends StatelessWidget {
   OrganizerCreateProfileScreen({super.key});
@@ -89,8 +89,8 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                   children: [
                     EditProfileField(
                       controller: controller.organizerName,
-                      hintText: "Spark",
-                      labelText: "Organization/Name",
+                      hintText:tr( "Spark"),
+                      labelText:tr( "Organization/Name"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -99,9 +99,9 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                     ),
                     EditProfileField(
                       controller: controller.bio,
-                      hintText:
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......""",
+                      hintText:tr
+                          ("""Event organizer specialist in decoration ,lighting and flowers .
+Wdding, Birthday ,anniversary......"""),
                       labelText: "Bio",
                       onChanged: (value) {},
                       validator: (value) {
@@ -125,7 +125,7 @@ Wdding, Birthday ,anniversary......""",
                         onPressed: () async {
                           organizerCreateProfileController.onPressDone();
                         },
-                        text: "Done",
+                        text:tr( "Done"),
                         options: ButtonOptions(
                           width: screenWidth * 0.3,
                           height: 40,
@@ -192,7 +192,7 @@ class OrganizerMediaCard extends StatelessWidget {
                       color: customColors.primary,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                 ),
                 InkWell(
                   splashColor: Colors.transparent,
@@ -282,7 +282,7 @@ class SelectStates extends StatelessWidget {
                   color: customColors.primary,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
               Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: customColors.secondaryText,

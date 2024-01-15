@@ -1,19 +1,19 @@
 
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/reels/controller/reels_controller.dart';
-import 'package:evento/features/reels/model/reels_model.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/comment_like_share.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/follow_button.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/number_of_showing.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/user_name.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/user_photo.dart';
-import 'package:evento/core/shared/widgets/video/reels_video_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/utils/helper/date_formatter.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/reels_controller.dart';
+import '../../model/reels_model.dart';
+import 'reel_component/comment_like_share.dart';
+import 'reel_component/follow_button.dart';
+import 'reel_component/number_of_showing.dart';
+import 'reel_component/reels_shimmer.dart';
+import 'reel_component/user_name.dart';
+import 'reel_component/user_photo.dart';
+import '../../../../core/shared/widgets/video/reels_video_widget.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

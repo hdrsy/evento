@@ -1,9 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/review/view/widgets/left_text_widget.dart';
-import 'package:evento/features/customize_event/review/view/widgets/right_text_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import 'left_text_widget.dart';
+import 'right_text_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {

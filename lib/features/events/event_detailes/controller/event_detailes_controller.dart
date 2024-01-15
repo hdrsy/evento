@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/follow_unfollow_event_api.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/core/utils/services/location_service.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/event_detailes/model/related_event_model.dart';
-import 'package:evento/main.dart';
+import '../../../../core/server/follow_unfollow_event_api.dart';
+import '../../../../core/server/helper_api.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/utils/error_handling/erroe_handling.dart';
+import '../../../../core/utils/services/location_service.dart';
+import '../model/event_detailes_model.dart';
+import '../model/related_event_model.dart';
+import '../../../../main.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 

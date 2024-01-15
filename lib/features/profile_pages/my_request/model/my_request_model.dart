@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 class MyRequestModel {
   final int id;
   final String title;
@@ -43,7 +45,9 @@ class MyRequestModel {
     required this.venue,
   });
 
-  factory MyRequestModel.fromJson(Map<String, dynamic> json) {
+  factory MyRequestModel.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
    var imageList = jsonDecode(json['images']) as List<dynamic>;
 List<String> images = imageList.map((e) => e as String).toList();
     var serviceProvidersList = json['service_providers'] as List;
@@ -90,6 +94,7 @@ class MyRequestServiceProvider {
   });
 
   factory MyRequestServiceProvider.fromJson(Map<String, dynamic> json) {
+
     return MyRequestServiceProvider(
       id: json['id'],
       categoryId: json['category_id'],
@@ -108,7 +113,9 @@ class MyRequestVenue {
     required this.name,
   });
 
-  factory MyRequestVenue.fromJson(Map<String, dynamic> json) {
+  factory MyRequestVenue.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return MyRequestVenue(
       id: json['id'],
       name: json['name'],

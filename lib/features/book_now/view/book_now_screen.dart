@@ -1,16 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/features/book_now/view/widgets/full_ticket_info.dart';
-import 'package:evento/features/book_now/view/widgets/price_summary_widget.dart';
-import 'package:evento/main.dart';
+import '../../../core/responsive/responsive.dart';
+import '../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../core/shared/widgets/images/network_image.dart';
+import '../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../core/utils/theme/text_theme.dart';
+import '../controller/book_now_controller.dart';
+import '../model/ticket_model.dart';
+import 'widgets/full_ticket_info.dart';
+import 'widgets/price_summary_widget.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BookNowScreen extends StatelessWidget {
   BookNowScreen({super.key});
@@ -75,7 +76,7 @@ class BookNowScreen extends StatelessWidget {
                 BookNowController bookNowController =Get.find();
                 bookNowController.ticketList.add(TicketModel(selectedClass: bookNowController.eventDetailsModel.classes[0]));
               },
-              child: Text("Add Ticket",style: customTextStyle.bodyMedium.override(
+              child: Text(tr("Add Ticket"),style: customTextStyle.bodyMedium.override(
                 fontFamily: primaryFontFamily,
                 useGoogleFonts: true,
                 fontSize: 14,
@@ -97,7 +98,7 @@ class BookNowScreen extends StatelessWidget {
                         bookNowController.onPressBookNow();
                         
                       },
-                      text: "Confirm Booking",
+                      text:tr( "Confirm Booking"),
                       options: ButtonOptions(
                         width: 300,
                         height: 40,

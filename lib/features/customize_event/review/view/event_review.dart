@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/customize_event/review/controller/event_review_controller.dart';
-import 'package:evento/features/customize_event/review/view/widgets/additional_note.dart';
-import 'package:evento/features/customize_event/review/view/widgets/proccess_to_payment_button.dart';
-import 'package:evento/features/customize_event/review/view/widgets/review_card.dart';
-import 'package:evento/features/customize_event/review/view/widgets/slider.dart';
-import 'package:evento/features/customize_event/review/view/widgets/step_text4.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/date_formatter.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/event_review_controller.dart';
+import 'widgets/additional_note.dart';
+import 'widgets/proccess_to_payment_button.dart';
+import 'widgets/review_card.dart';
+import 'widgets/slider.dart';
+import 'widgets/step_text4.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EventReviewScreen extends StatelessWidget {
   EventReviewScreen({super.key});
   final EventReviewController eventReviewController = Get.find();
@@ -39,12 +39,12 @@ class EventReviewScreen extends StatelessWidget {
             const StepText4(),
             const LinearPercentIndicatorWidget4(),
             ReviewCard(
-              title: "Contact Detailes",
-              leftColumnData: const [
-                "Name",
-                "Phone Number",
-                "Number of Adults",
-                "Number of Children",
+              title:tr( "Contact Detailes"),
+              leftColumnData:  [
+                tr("Name"),
+                tr("Phone Number"),
+                tr("Number of Adults"),
+                tr("Number of Children"),
               ],
               rightColumnData: [
                 eventReviewController.contactInfoModel.firstName +
@@ -55,12 +55,12 @@ class EventReviewScreen extends StatelessWidget {
               ],
             ),
             ReviewCard(
-              title: "Event Overview",
-              leftColumnData: const [
-                "Event Title",
-                "Start Time",
-                "End Time",
-                "Date"
+              title:tr( "Event Overview"),
+              leftColumnData:  [
+                tr("Event Title"),
+                tr("Start Time"),
+               tr( "End Time"),
+                tr("Date")
               ],
               rightColumnData: [
                 "La Rose",
@@ -73,7 +73,7 @@ class EventReviewScreen extends StatelessWidget {
               ],
             ),
             ReviewCard(
-              title: "Event Crew",
+              title:tr( "Event Crew"),
               leftColumnData: eventReviewController.selected.values
                   .map((value) => value.toString())
                   .toList(),

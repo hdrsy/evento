@@ -1,10 +1,10 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/features/gallery/controller/gallery_controller.dart';
-import 'package:evento/main.dart';
+import '../../../core/shared/widgets/images/network_image.dart';
+import '../controller/gallery_controller.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class GalleryScreen extends StatelessWidget {
    GalleryScreen({super.key});
   final GalleryController galleryController=Get.find();
@@ -14,7 +14,7 @@ class GalleryScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          title: Text("Gallery",
+          title: Text(tr("Gallery"),
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,

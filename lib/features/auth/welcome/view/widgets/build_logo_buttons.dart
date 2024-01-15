@@ -1,15 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/features/auth/signin/controller/signin_controller.dart';
-import 'package:evento/features/auth/signin/view/sign_in_screen.dart';
-import 'package:evento/features/auth/signup/controller/signup_controller.dart';
-import 'package:evento/features/auth/signup/view/signup_screen.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../signin/controller/signin_controller.dart';
+import '../../../signin/view/sign_in_screen.dart';
+import '../../../signup/controller/signup_controller.dart';
+import '../../../signup/view/signup_screen.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class BuildLogoButtons extends StatelessWidget {
@@ -55,7 +56,7 @@ class BuildLogoButtons extends StatelessWidget {
                              );
                        
                         },
-                        text: "Join",
+                        text:tr( "Join"),
                         options: ButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 50,
@@ -87,7 +88,7 @@ class BuildLogoButtons extends StatelessWidget {
                           await showButtonSheet(context: context, widget: SignInScreen(), height: screenHeight*0.8).then((value) => Get.delete<SigninController>());
                          
                         },
-                        text: "Sign in",
+                        text:tr( "Sign in"),
                         options: ButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 50,
@@ -120,6 +121,7 @@ class BuildLogoButtons extends StatelessWidget {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    isGuset=true;
                     Get.toNamed('/home');
                   },
                   child: Row(
@@ -133,7 +135,7 @@ class BuildLogoButtons extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 16,
                         ),
-                      ),
+                      ).tr(),
                       const Icon(
                         Icons.arrow_right_alt,
                         color: Colors.white,

@@ -1,6 +1,6 @@
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
-import 'package:evento/core/utils/services/location_service.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/helper/flutter_flow_google_map.dart';
+import '../../../../core/utils/services/location_service.dart';
+import '../../../../main.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

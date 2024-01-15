@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_google_map.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/see_location_and_dirction/see_location/controller/see_location_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/helper/flutter_flow_google_map.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/see_location_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeLocation extends StatelessWidget {
   SeeLocation({super.key});
   final SeeLocationController seeLocationController =
@@ -19,7 +19,7 @@ class SeeLocation extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Location",
+        title: Text(tr("Location"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -71,7 +71,7 @@ class SeeLocation extends StatelessWidget {
                 seeLocationController.longitude
               ]);
             },
-            text: "Get Direction",
+            text:tr( "Get Direction"),
             options: ButtonOptions(
               height: 40,
               // padding: EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

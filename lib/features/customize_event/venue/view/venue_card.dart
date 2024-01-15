@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
-import 'package:evento/features/customize_event/venue/controller/venue_controller.dart';
-import 'package:evento/features/customize_event/venue/model/venue_model.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../service_category/controller/service_category_controller.dart';
+import '../controller/venue_controller.dart';
+import '../model/venue_model.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VenueCard extends StatelessWidget {
   VenueCard({super.key, required this.venue});
   final Venue venue;
@@ -61,7 +61,7 @@ final VenueController venueController=Get.find();
                           fontSize: 12,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                       //// to update selected service provier in serviceCategoryController
                       GetBuilder<ServiceCategoryController>(
                           builder: (serviceCategoryController) {

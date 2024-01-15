@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/venue/controller/venue_controller.dart';
-import 'package:evento/features/customize_event/venue/view/venue_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/venue_controller.dart';
+import 'venue_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VenueScreen extends StatelessWidget {
    VenueScreen({super.key});
 final VenueController venueController=Get.find();
@@ -43,7 +43,7 @@ final VenueController venueController=Get.find();
                           fontSize: 25,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                       ...List.generate(
                               venueController.hasMoreData.value
                                   ? venueController.itemList.length + 1

@@ -1,7 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/features/main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../../main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +25,10 @@ Expanded(child: searchTextField(onChanged: (value){},onTap: (){
 SizedBox(width: scaleWidth(20),),
 InkWell(
   onTap: () {
-    Get.toNamed('/NotificationScreen');
+     if(isGuset){
+                    Get.dialog( GuestPopupWidget());
+                  }else{
+    Get.toNamed('/NotificationScreen');}
   },
   child:   Icon(
   

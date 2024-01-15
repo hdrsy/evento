@@ -1,20 +1,20 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/model/offer_model.dart';
-import 'package:evento/features/events/see_all_offers/controller/see_all_offers_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../core/utils/helper/date_formatter.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../home/model/offer_model.dart';
+import '../controller/see_all_offers_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllOffersScreen extends StatelessWidget {
   SeeAllOffersScreen({super.key});
   final SeeAllOffersController seeAllOffersController =
@@ -25,7 +25,7 @@ class SeeAllOffersScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Offers",
+        title: Text(tr("Offers"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -150,7 +150,7 @@ class SeeAllOffersCard extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
                                   ),
-                                ),
+                                ).tr(),
                               ),
                             ),
                           ],

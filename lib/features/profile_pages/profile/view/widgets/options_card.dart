@@ -1,7 +1,7 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,6 +31,7 @@ class OptionsCard extends StatelessWidget {
             Get.offAllNamed('/');
             prefService.remove('token');
             prefService.remove('userInfo');
+            prefService.remove('isCompleteProfile');
             print(await prefService.isContainKey('userInfo'));
           }else{
 

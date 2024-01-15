@@ -1,7 +1,7 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/venue/model/venue_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../venue/model/venue_model.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

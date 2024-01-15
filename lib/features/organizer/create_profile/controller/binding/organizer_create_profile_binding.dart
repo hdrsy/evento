@@ -1,4 +1,4 @@
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
+import '../oganizer_create_profile_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

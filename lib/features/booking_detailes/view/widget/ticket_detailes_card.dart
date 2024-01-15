@@ -1,11 +1,12 @@
 import 'package:barcode_widget/barcode_widget.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../../book_now/model/ticket_model.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TicketDetailesCard extends StatelessWidget {
   const TicketDetailesCard(
@@ -81,7 +82,7 @@ class TicketDetailesCard extends StatelessWidget {
                     child: Text(
                       "Attendee Information",
                       style: customTextStyle.headlineMedium,
-                    ),
+                    ).tr(),
                   ),
                 ),
                Divider(
@@ -95,7 +96,7 @@ class TicketDetailesCard extends StatelessWidget {
                     child: Text(
                       " Payment Summary",
                       style: customTextStyle.headlineMedium,
-                    ),
+                    ).tr(),
                   ),
                 ),
                 Padding(
@@ -116,7 +117,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontSize: 14,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             " EventoR7",
                             style: customTextStyle.bodyMedium.override(
@@ -126,7 +127,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                         ],
                       ),
                       Row(
@@ -141,7 +142,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontSize: 14,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "100,000 sp",
                             style: customTextStyle.bodyMedium.override(
@@ -151,7 +152,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                         ],
                       ),
                       Row(
@@ -167,7 +168,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "20,000 sp",
                             style: customTextStyle.bodyMedium.override(
@@ -177,7 +178,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                         ],
                       ),
                       Row(
@@ -193,7 +194,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "20%",
                             style: customTextStyle.bodyMedium.override(
@@ -225,7 +226,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "120,000 sp",
                             style: customTextStyle.bodyMedium.override(
@@ -235,7 +236,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                         ],
                       ),
                     ].divide(const SizedBox(height: 8)),
@@ -252,7 +253,7 @@ class TicketDetailesCard extends StatelessWidget {
                     child: Text(
                       " Payment Confirmation",
                       style: customTextStyle.headlineMedium,
-                    ),
+                    ).tr(),
                   ),
                 ),
                 Padding(
@@ -273,7 +274,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontSize: 14,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "Order ID",
                             style: customTextStyle.labelMedium.override(
@@ -283,7 +284,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "Status",
                             style: customTextStyle.labelMedium.override(
@@ -293,7 +294,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                         ].divide(const SizedBox(height: 8)),
                       ),
                       Column(
@@ -309,7 +310,7 @@ class TicketDetailesCard extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               useGoogleFonts: false,
                             ),
-                          ),
+                          ).tr(),
                           Text(
                             "75849302938",
                             style: customTextStyle.bodyMedium.override(
@@ -322,9 +323,9 @@ class TicketDetailesCard extends StatelessWidget {
                           ),
                           ButtonWidget(
                             onPressed: () {
-                              print('Button pressed ...');
+                              print(tr('Button pressed ...'));
                             },
-                            text: "Paid",
+                            text:tr( "Paid"),
                             options: ButtonOptions(
                               height: 22,
                               padding: const EdgeInsetsDirectional.fromSTEB(

@@ -1,4 +1,4 @@
-import 'package:evento/core/utils/animation/animation_util.dart';
+import 'animation_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 

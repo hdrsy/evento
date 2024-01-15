@@ -1,11 +1,11 @@
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
+import '../../../../../../main.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildAboutEventSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   String description = eventDetailesController.eventDetailsModel.description;
@@ -41,7 +41,7 @@ Widget _buildNormalDescription(BuildContext context, String description) {
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            ).tr(),
           ),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -85,7 +85,7 @@ Widget _buildExpandableDescription(BuildContext context, String description) {
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
-          ),
+          ).tr(),
         ),
         collapsed: Container(
           width: MediaQuery.of(context).size.width,
@@ -115,7 +115,7 @@ Widget _buildExpandableDescription(BuildContext context, String description) {
                     decoration: TextDecoration.underline,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ),
             ],
           ),
@@ -147,7 +147,7 @@ Widget _buildExpandableDescription(BuildContext context, String description) {
                     decoration: TextDecoration.underline,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ),
             ),
           ],

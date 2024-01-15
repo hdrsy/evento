@@ -1,11 +1,11 @@
-import 'package:evento/core/shared/functions/validation/name_validation.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/features/customize_event/date_time/view/widgets/text_field_contact_information.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/functions/validation/name_validation.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import 'text_field_contact_information.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EventTitle extends StatelessWidget {
    EventTitle({super.key});
  final DateTimeController dateTimeController = Get.find();
@@ -28,7 +28,7 @@ class EventTitle extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
-              ),
+              ).tr(),
             ],
           ),
         ),
@@ -46,8 +46,8 @@ class EventTitle extends StatelessWidget {
             child: Form(
               // key: dateTimeController.formstate,
               child: TextFieldContactInformation(
-                      labelKey: "Event title",
-                      hintTextKey: 'Label here...',
+                      labelKey:tr( "Event title"),
+                      hintTextKey:tr( 'Label here...'),
                       controller: dateTimeController.eventTitle,
                       onChanged: (value) {
                         dateTimeController.eventTitle.text = value;

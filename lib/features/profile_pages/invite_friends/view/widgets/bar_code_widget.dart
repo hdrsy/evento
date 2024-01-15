@@ -1,10 +1,10 @@
 import 'package:barcode_widget/barcode_widget.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class BarCodeWidget extends StatelessWidget {
   const BarCodeWidget({super.key});
 
@@ -25,7 +25,7 @@ class BarCodeWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
-            ),
+            ).tr(),
           ),
         ),
     
@@ -50,7 +50,7 @@ class BarCodeWidget extends StatelessWidget {
     text: TextSpan(
       children: [
         TextSpan(
-          text:  "Special invitation code",
+          text:tr(  "Special invitation code"),
           style: customTextStyle.bodyMedium.override(
                 fontFamily: 'Nunito',
                 color:customColors.primaryText,
@@ -59,7 +59,7 @@ class BarCodeWidget extends StatelessWidget {
               ),
         ),
         TextSpan(
-          text:   "DNdeeYR",
+          text:tr(   "DNdeeYR"),
           style: TextStyle(
             color:customColors.primary,
           ),
@@ -88,7 +88,7 @@ child: Row(
       onPressed: () {
         
       },
-      text:  "Copy code",
+      text:tr(  "Copy code"),
       icon: const Icon(
         Icons.content_copy,
         size: 15,

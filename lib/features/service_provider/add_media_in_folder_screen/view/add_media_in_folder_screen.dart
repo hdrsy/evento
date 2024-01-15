@@ -1,15 +1,15 @@
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/organizer/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
-import 'package:evento/features/service_provider/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../../organizer/add_media_in_folder_screen/controller/add_media_in_folder_controller.dart';
+import '../controller/add_media_in_folder_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
   AddMediaInFolderserviceProviderScreen({super.key});
   final AddMediaInFolderServiseProviderController addMediaInFolderController =
@@ -111,14 +111,14 @@ class AddMediaCard extends StatelessWidget {
             onPressVideo: () async {
               await Get.dialog(
                 AlertDialog(
-                  title: Text("Select Video",style: customTextStyle.bodyMedium.override(
+                  title: Text(tr("Select Video"),style: customTextStyle.bodyMedium.override(
                     fontFamily: secondaryFontFamily,
                     useGoogleFonts: true,
                     color: customColors.primaryText,
                     fontSize: 16
                   ),),
                   content: Text(
-                      "Please select a video that is no longer than 2 minutes.",style: customTextStyle.bodyMedium.override(
+                    tr ( "Please select a video that is no longer than 2 minutes."),style: customTextStyle.bodyMedium.override(
                     fontFamily: secondaryFontFamily,
                     useGoogleFonts: true,
                     color: customColors.secondaryText,
@@ -126,7 +126,7 @@ class AddMediaCard extends StatelessWidget {
                   ),),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("OK"),
+                      child: Text(tr("OK")),
                       onPressed: () {
                         Get.back(); // Close the dialog
                         addMediaInFolderController

@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/freinds_cotroller.dart';
+import '../../model/freinds_model.dart';
+import '../../../../../main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class UnfriendConfirmationWidget extends StatelessWidget {
   const UnfriendConfirmationWidget({Key? key,required this.freindsModel, required this.modelId}) : super(key: key);
 final FreindsModel freindsModel;
@@ -44,7 +44,7 @@ final FreindsModel freindsModel;
                       "Please remember that unfriending someone will remove them from your friend list, and you won't be able to see their private posts or interact as friends on this platform.",
                       textAlign: TextAlign.start,
                       style:customTextStyle.bodyMedium,
-                    ),
+                    ).tr(),
                   ),
                 ],
               ),
@@ -59,7 +59,7 @@ final FreindsModel freindsModel;
                         Get.offAndToNamed('/FreindsScreen');
                         
                       },
-                      text: " Cancel",
+                      text:tr( " Cancel"),
                       options: ButtonOptions(
                         width: 150,
                         height: 45,
@@ -89,7 +89,7 @@ final FreindsModel freindsModel;
                       freindsController.unFreindRequest(freindsModel.id, modelId);
                         
                       },
-                      text:  "Unfriend",
+                      text:tr(  "Unfriend"),
                       options: ButtonOptions(
                         width: 150,
                         height: 45,

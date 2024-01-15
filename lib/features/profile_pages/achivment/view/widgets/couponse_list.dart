@@ -1,5 +1,5 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/achivment/view/widgets/coupon_card.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import 'coupon_card.dart';
 import 'package:flutter/material.dart';
 
 class CouponseList extends StatelessWidget {

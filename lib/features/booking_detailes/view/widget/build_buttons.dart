@@ -1,12 +1,13 @@
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/booking_detailes/controller/booking_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/widget/rate_event_widget.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/booking_detailes_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BuildButton extends StatelessWidget {
    BuildButton({super.key});
@@ -23,7 +24,7 @@ class BuildButton extends StatelessWidget {
       
       bookingDetailesController.openPdf();
           },
-          text: "Download Ticket",
+          text:tr( "Download Ticket"),
           options: ButtonOptions(
             width: 170,
             height: 40,
@@ -48,10 +49,10 @@ class BuildButton extends StatelessWidget {
           onPressed: () async {
             await showButtonSheet(
                 context: context,
-                widget:  ReviewEventWidget(ratingTarget: "Your Event",id:bookingDetailesController.eventDetailsModel.id,idKey: "event_id",url: ServerConstApis.reviewEvent, ),
+                widget:  ReviewEventWidget(ratingTarget:tr( "Your Event"),id:bookingDetailesController.eventDetailsModel.id,idKey: "event_id",url: ServerConstApis.reviewEvent, ),
                 height: 450);
           },
-          text: "Review Event",
+          text:tr( "Review Event"),
           options: ButtonOptions(
             width: 150,
             height: 40,

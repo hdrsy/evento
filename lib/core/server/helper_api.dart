@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+
+import 'package:get/get.dart';
+import '../utils/error_handling/erroe_handling.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -58,7 +62,7 @@ class ApiHelper {
         // Sending the multipart request and getting the response.
         var streamedResponse = await request.send();
         response = await http.Response.fromStream(streamedResponse);
-        print(response.body);
+        // print(response.body);
       } else {
         // Standard handling for non-file-upload requests (GET, POST, etc.).
         Uri url = Uri.parse(targetRout);
@@ -78,11 +82,14 @@ class ApiHelper {
 
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-     print(responseBody);
-     print(response.statusCode);
+    //  print(responseBody);
+    //  print(response.statusCode);
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {
+          log("dddddddddddddddddddddddddddddddddddddddd");
+          parseResponse(responseBody);
+          log("dddddddddddddddddddddddddddddddddddddddd");
           // Return Right side of Either for successful response.
           return Right(responseBody);
         } else {
@@ -100,4 +107,31 @@ class ApiHelper {
     }
   }
 }
- 
+  parseResponse(Map<String, dynamic> responseBody)async{
+   
+  // if(await prefService.readString("language_code")=='en'){
+  //   return responseBody;
+  // }else{
+
+  // }
+  
+ }
+ Map<String, dynamic> removeDuplicateKeysAr(Map<String, dynamic> data) {
+  if(Get.locale==const Locale("en")){
+    return data;
+  }else{
+final newData = <String, dynamic>{};
+  for (final key in data.keys) {
+    if (!key.endsWith('_ar')) {
+      newData[key] = data[key];
+    } else if (data.containsKey(key.substring(0, key.length - 3)) &&
+        data[key.substring(0, key.length - 3)] != null) {
+      newData[key.substring(0, key.length - 3)] = data[key];
+    } else {
+      newData[key] = data[key];
+    }
+  }
+  return newData;
+
+  }
+  }

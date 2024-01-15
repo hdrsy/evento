@@ -1,17 +1,17 @@
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
 
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/venue_detailes/controller/venue_detailes_controller.dart';
-import 'package:evento/features/customize_event/venue_detailes/view/widgets/detailes_card.dart';
-import 'package:evento/features/customize_event/venue_detailes/view/widgets/name_check_box.dart';
-import 'package:evento/features/customize_event/venue_detailes/view/widgets/serives_card.dart';
-import 'package:evento/features/customize_event/venue_detailes/view/widgets/top_image_network.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/venue_detailes_controller.dart';
+import 'widgets/detailes_card.dart';
+import 'widgets/name_check_box.dart';
+import 'widgets/serives_card.dart';
+import 'widgets/top_image_network.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VenueDetailesScreen extends StatelessWidget {
   VenueDetailesScreen({super.key});
   final VenueDetailesController venueDetailesController = Get.find();
@@ -105,9 +105,9 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
               unselectedLabelStyle: const TextStyle(),
               indicatorColor: customColors.primary,
               indicatorWeight: 4,
-              tabs: const [
-                Tab(text: "Details"),
-                Tab(text: "Gallery"),
+              tabs:  [
+                Tab(text:tr( "Details")),
+                Tab(text:tr( "Gallery")),
               ],
             ),
           ),

@@ -1,15 +1,17 @@
-  import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/pin.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/pin.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/auth/forget_password_pages/verify_forget_password/controller/verify_forget_password_controller.dart';
-import 'package:evento/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/functions/validation/pin.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../../core/shared/widgets/text_fields/pin.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../main.dart';
+import '../controller/verify_forget_password_controller.dart';
 
 class VerifyForgetPasswordScreen extends StatelessWidget {
   VerifyForgetPasswordScreen({super.key});
@@ -83,7 +85,7 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
                       color: customColors.primaryText,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(
                     height: scaleHeight(50),
                   ),
@@ -107,7 +109,7 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
               onPressed: () async {
                 verifyForgetPasswordController.onPressContinue();
               },
-              text: "Continue",
+              text:tr( "Continue"),
               showLoadingIndicator: verifyForgetPasswordController.isLoading.value,
               options: ButtonOptions(
                 width: scaleWidth(330),

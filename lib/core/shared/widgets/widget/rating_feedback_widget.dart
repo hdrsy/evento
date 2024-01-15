@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class RateingFeedbackWidget extends StatelessWidget {
   const RateingFeedbackWidget({
     Key? key, required this.userRatingl,
@@ -54,7 +54,7 @@ final double userRatingl;
                              "Thank You for Your Feedback!",
                             textAlign: TextAlign.center,
                             style: customTextStyle.headlineSmall,
-                          ),
+                          ).tr(),
                         ),
                       ],
                     ),
@@ -82,7 +82,7 @@ final double userRatingl;
                         // context.pushNamed('Booking-Details');
                         Get.back();
                       },
-                      text:  "Done",
+                      text:tr(  "Done"),
                       options: ButtonOptions(
                         height: 45,
                         padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),

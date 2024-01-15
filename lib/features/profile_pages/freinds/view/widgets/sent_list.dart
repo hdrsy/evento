@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/freinds/controller/freinds_cotroller.dart';
-import 'package:evento/features/profile_pages/freinds/model/send_request.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/freinds_cotroller.dart';
+import '../../model/send_request.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SentList extends StatelessWidget {
   SentList({super.key});
   final FreindsController freindsController = Get.find();
@@ -33,7 +33,7 @@ class SentList extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Sent requests ",
+                            text:tr( "Sent requests "),
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,
@@ -61,7 +61,7 @@ class SentList extends StatelessWidget {
                         fontSize: 12,
                         useGoogleFonts: false,
                       ),
-                    ),
+                    ).tr(),
                   ],
                 ),
               ),
@@ -133,7 +133,7 @@ class SentCard extends StatelessWidget {
                                   freindsController.cancelSentRequest(
                                       sentRequest.receiverId, modelId);
                                 },
-                                text: "Cancel",
+                                text:tr( "Cancel"),
                                 options: ButtonOptions(
                                   width: 200,
                                   height: 20,

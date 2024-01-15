@@ -10,7 +10,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ReviewEventWidget extends StatelessWidget {
   const ReviewEventWidget({
     Key? key, required this.ratingTarget, required this.url, required this.id, required this.idKey,
@@ -83,7 +83,7 @@ class ReviewEventWidget extends StatelessWidget {
                         "Let us know what you thought o...",
                         textAlign: TextAlign.start,
                         style: customTextStyle.bodyMedium,
-                      ),
+                      ).tr(),
                     ),
                   ),
                 ],
@@ -100,7 +100,7 @@ class ReviewEventWidget extends StatelessWidget {
                            "How would you rate it?",
                           textAlign: TextAlign.start,
                           style: customTextStyle.bodySmall,
-                        ),
+                        ).tr(),
                       ),
                     ),
                   ],
@@ -130,7 +130,7 @@ class ReviewEventWidget extends StatelessWidget {
                   controller: comment,
                   obscureText: false,
                   decoration: InputDecoration(
-                    hintText: "Please leave a description of ...",
+                    hintText:tr( "Please leave a description of ..."),
                     hintStyle: customTextStyle.bodyMedium,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -175,7 +175,7 @@ class ReviewEventWidget extends StatelessWidget {
                 Get.back(),
                     showButtonSheet(context: context, widget:  RateingFeedbackWidget(userRatingl: ratingValue), height: MediaQuery.sizeOf(context).height * 0.8)}:Get.back();
                     },
-                  text:  "Submit Review",
+                  text:tr(  "Submit Review"),
                   options: ButtonOptions(
                     height: 45,
                     padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),

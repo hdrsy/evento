@@ -1,14 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import 'package:evento/features/profile_pages/edit_profile/view/widgets/buttons.dart';
-import 'package:evento/features/profile_pages/edit_profile/view/widgets/edit_image_widget.dart';
-import 'package:evento/features/profile_pages/edit_profile/view/widgets/files.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/edit_profile_controller.dart';
+import 'widgets/buttons.dart';
+import 'widgets/edit_image_widget.dart';
+import 'widgets/files.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({super.key});
   final EditProfileController editProfileController = Get.find();
@@ -18,7 +18,7 @@ class EditProfileScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Edit Profile",
+        title: Text(tr("Edit Profile"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

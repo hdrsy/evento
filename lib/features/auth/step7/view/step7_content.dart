@@ -1,14 +1,15 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/step7/controller/step7_controller.dart';
-import 'package:evento/features/auth/step7/view/widgets/interests_grid_view.dart';
-import 'package:evento/features/auth/step7/view/widgets/interests_shimmer.dart';
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../controller/step7_controller.dart';
+import 'widgets/interests_grid_view.dart';
+import 'widgets/interests_shimmer.dart';
+import '../../steps/controller/page_controller.dart';
+import '../../steps/controller/steps_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step7Content extends StatelessWidget {
@@ -34,7 +35,7 @@ class Step7Content extends StatelessWidget {
               letterSpacing: 0.2,
               useGoogleFonts: false,
             ),
-          ),
+          ).tr(),
         ),
         SizedBox(
 height: scaleHeight(400),
@@ -58,7 +59,7 @@ for (var i = 0; i < step7controller.selectedInterests.length; i++) {
 }
           stepsPageController.pageIdex.value = 8;
         },
-        text: "Continue",
+        text:tr ("Continue"),
         options: ButtonOptions(
           width: scaleWidth(330),
           height: scaleHeight(40),

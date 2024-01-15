@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:evento/core/server/helper_api.dart';
+
+import '../../events/event_detailes/model/event_detailes_model.dart';
+import '../../events/home/model/event_model.dart';
 
 class ReelModel {
     final int id;
@@ -38,9 +40,9 @@ class ReelModel {
         this.user,
     });
 
-    factory ReelModel.fromJson(Map<String, dynamic> json)  {
-      json['images'];
-      print("reeeeeeeeeeeeeeeeeeeeee ${json['event']}");
+    factory ReelModel.fromJson(Map<String, dynamic> oldJson)  {
+      Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
       return
       ReelModel(
         id: json['id'],

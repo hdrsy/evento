@@ -1,15 +1,15 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/going/controller/going_controller.dart';
-import 'package:evento/features/going/model/going_model.dart';
-import 'package:evento/main.dart';
+import '../../../core/responsive/responsive.dart';
+import '../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../core/shared/widgets/images/network_image.dart';
+import '../../../core/utils/animation/shimmer_animation.dart';
+import '../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../core/utils/theme/text_theme.dart';
+import '../controller/going_controller.dart';
+import '../model/going_model.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class GoingScreen extends StatelessWidget {
   GoingScreen({super.key});
   final GoingController goingController = Get.put(GoingController());
@@ -19,7 +19,7 @@ class GoingScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          title: Text("Going",
+          title: Text(tr("Going"),
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
@@ -142,7 +142,7 @@ class GoingCard extends StatelessWidget {
         modelId: modelId,
       );
     } else {
-      return goingModel.friendRequestStatus == "pending"
+      return goingModel.friendRequestStatus == tr("pending")
           ? CancelButton(requestId: goingModel.id, modelId: modelId)
           : const SizedBox();
     }
@@ -161,7 +161,7 @@ class AddFriendButton extends StatelessWidget {
         GoingController goingController = Get.find();
         goingController.onPressAddFreind(userId, modelId);
       },
-      text: "Add friend",
+      text:tr( "Add friend"),
       options: ButtonOptions(
         width: 120,
         height: 21,
@@ -195,7 +195,7 @@ class CancelButton extends StatelessWidget {
         GoingController goingController = Get.find();
         goingController.onPressCancelReques(requestId, modelId);
       },
-      text: "Cancel",
+      text:tr( "Cancel"),
       options: ButtonOptions(
         width: 120,
         height: 25,

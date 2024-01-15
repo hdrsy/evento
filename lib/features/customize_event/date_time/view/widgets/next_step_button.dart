@@ -1,10 +1,10 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NextStepButton extends StatelessWidget {
    NextStepButton({super.key});
 final DateTimeController dateTimeController=Get.find();
@@ -15,7 +15,7 @@ final DateTimeController dateTimeController=Get.find();
   onPressed: () async {
    dateTimeController.onPressedNext();
   },
-  text: "Next Step",
+  text:tr( "Next Step"),
   options: ButtonOptions(
     height: 40,
     padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

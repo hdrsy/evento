@@ -1,9 +1,9 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SwitchToOrganizerAccounWidget extends StatelessWidget {
   const SwitchToOrganizerAccounWidget({super.key});
 
@@ -37,7 +37,7 @@ class SwitchToOrganizerAccounWidget extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     useGoogleFonts: true,
                   ),
-                  ),
+                  ).tr(),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                     child: Text(
@@ -50,7 +50,7 @@ class SwitchToOrganizerAccounWidget extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: true,
                   ),
-                    ),
+                    ).tr(),
                   ),
                 ],
               ),
@@ -64,7 +64,7 @@ class SwitchToOrganizerAccounWidget extends StatelessWidget {
                       onPressed: () async {
                         Get.back();
                       },
-                      text: " Cancel",
+                      text:tr( " Cancel"),
                       options: ButtonOptions(
                         width: 150,
                         height: 45,
@@ -91,7 +91,7 @@ class SwitchToOrganizerAccounWidget extends StatelessWidget {
                       onPressed: () async {
                     Get.toNamed('/OrganizerCreateProfileScreen');
                       },
-                      text:  "Ok",
+                      text: tr( "Ok"),
                       options: ButtonOptions(
                         width: 150,
                         height: 45,

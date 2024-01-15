@@ -1,10 +1,10 @@
-import 'package:evento/features/events/time_line/controller/time_line_controller.dart';
-import 'package:evento/features/events/time_line/model/time_line_model.dart';
-import 'package:evento/features/events/time_line/view/widgets/header.dart';
-import 'package:evento/features/events/time_line/view/widgets/single_day_time_line.dart';
-import 'package:evento/features/events/time_line/view/widgets/time_line_event.dart';
-import 'package:evento/features/events/time_line/view/widgets/time_line_main_image.dart';
-import 'package:evento/main.dart';
+import '../controller/time_line_controller.dart';
+import '../model/time_line_model.dart';
+import 'widgets/header.dart';
+import 'widgets/single_day_time_line.dart';
+import 'widgets/time_line_event.dart';
+import 'widgets/time_line_main_image.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

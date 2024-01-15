@@ -1,4 +1,4 @@
-import 'package:evento/features/profile_pages/favorite/controller/favorite_controller.dart';
+import '../favorite_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

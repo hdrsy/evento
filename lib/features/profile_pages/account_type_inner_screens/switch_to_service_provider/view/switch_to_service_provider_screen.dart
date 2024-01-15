@@ -6,7 +6,7 @@ import 'package:evento/features/profile_pages/account_type_inner_screens/switch_
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the SwithcToServiceProviderScreen as a StatelessWidget.
 class SwithcToServiceProviderScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -64,7 +64,7 @@ class SwithcToServiceProviderScreen extends StatelessWidget {
             onPressed: () async {
               Get.toNamed('/ChoiceTypeScreen');
             },
-            text: " Continue",
+            text:tr( " Continue"),
             options: buttonOptions(context), // Using the buttonOptions function.
           ),
           // Spacing after the button.

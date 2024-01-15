@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
+import 'package:evento/core/server/helper_api.dart';
+
+import 'my_cancel_booking_model.dart';
 
 
 class UpComingBooking {
@@ -46,7 +48,11 @@ class EventBooking {
     required this.eventClass,
   });
 
-  factory EventBooking.fromJson(Map<String, dynamic> json) => EventBooking(
+  factory EventBooking.fromJson(Map<String, dynamic> oldJson)  {
+    
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
+    return EventBooking(
         id: json['id'],
         userId: json['user_id'],
         classId: json['class_id'],
@@ -56,7 +62,7 @@ class EventBooking {
         phoneNumber: json['phone_number'],
         interest: List<String>.from(jsonDecode(json['interest'])),
         eventClass: CancelledEventClass.fromJson(json['event_class']),
-      );
+      );}
 
   
 }

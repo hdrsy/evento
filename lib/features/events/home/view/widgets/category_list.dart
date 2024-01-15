@@ -1,17 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/model/category_model.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/features/events/home/view/widgets/home_loading_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/server/server_config.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/home_controller.dart';
+import '../../model/category_model.dart';
+import '../../model/event_model.dart';
+import 'home_loading_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CategoryList extends StatelessWidget {
   CategoryList({super.key});
   final CategoryListController categoryListController = Get.find();
@@ -66,7 +66,7 @@ class CategoryWidget extends StatelessWidget {
               String targetRout = '';
               String targetKeyMap = '';
               switch (categoryModel.title) {
-                case "Tonight":
+                case  "Tonight":
                   targetRout = ServerConstApis.getToNightList;
                   targetKeyMap = 'toNightEvent';
                   break;

@@ -1,9 +1,10 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/book_now_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TicketCount extends StatelessWidget {
   const TicketCount({
@@ -36,7 +37,7 @@ class TicketCount extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         useGoogleFonts: true,
                       ),
-                    ),
+                    ).tr(),
                   ].divide(const SizedBox(height: 5)),
                 ),
                 Container(

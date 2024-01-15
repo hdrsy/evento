@@ -1,13 +1,14 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/features/auth/step6/view/widgets/avatar_list.dart';
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import 'widgets/avatar_list.dart';
+import '../../steps/controller/page_controller.dart';
+import '../../steps/controller/steps_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step6Content extends StatelessWidget {
@@ -29,7 +30,7 @@ class Step6Content extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
-          ),
+          ).tr(),
           buildAvatarList(context),
           SizedBox(
             height: scaleHeight(60),
@@ -45,7 +46,7 @@ class Step6Content extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
               ),
-            ),
+            ).tr(),
           ),
           SizedBox(
             height: scaleHeight(50),
@@ -72,7 +73,7 @@ class Step6Content extends StatelessWidget {
                 color: customColors.primary,
                 fontWeight: FontWeight.w500,
               ),
-            ),
+            ).tr(),
           ),
           buildButton()
         ],
@@ -88,7 +89,7 @@ class Step6Content extends StatelessWidget {
           StepsPageController stepsPageController=Get.find();
           stepsPageController.pageIdex.value = 7;
         },
-        text: "Continue",
+        text:tr( "Continue"),
         options: ButtonOptions(
           width: scaleWidth(330),
           height: scaleHeight(40),

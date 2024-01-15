@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:evento/features/map/controller/map_controller.dart';
-import 'package:evento/features/map/view/widgets/event_card.dart';
+import '../../controller/map_controller.dart';
+import 'event_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

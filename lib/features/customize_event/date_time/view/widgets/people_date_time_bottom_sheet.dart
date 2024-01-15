@@ -1,17 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/list_wheel_body.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/list_wheel_body.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/date_time_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class PeopleDateTimeBottomSheet extends StatefulWidget {
   PeopleDateTimeBottomSheet({Key? key}) : super(key: key);
   final DateTimeController dateTimeController = Get.find();
@@ -39,7 +39,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
         widget.dateTimeController.isUserEnterDateInfo = true;
         Get.back();
       } else {
-        Get.snackbar("Uncomplete data", "Please fill all the required data",
+        Get.snackbar(tr("Uncomplete data"), tr("Please fill all the required data"),
             snackPosition: SnackPosition.TOP,
             backgroundColor: customColors.primaryBackground);
       }
@@ -111,7 +111,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
                 onPressed: () async {
                   _nextStep();
                 },
-                text: "Next",
+                text:tr( "Next"),
                 options: ButtonOptions(
                   width: 150,
                   height: 40,
@@ -248,7 +248,7 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: Container(width: 70, child: const Text("Adult")),
+                  child: Container(width: 70, child:  Text(tr("Adult"))),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -325,7 +325,7 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: Container(width: 70, child: const Text("children")),
+                  child: Container(width: 70, child:  Text(tr("children"))),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -429,7 +429,7 @@ Widget pickTime(BuildContext context) {
                     fontFamily: 'Readex Pro',
                     color: customColors.primary,
                   ),
-                ),
+                ).tr(),
                 SizedBox(
                   width: scaleWidth(10),
                 ),
@@ -470,7 +470,7 @@ Widget pickTime(BuildContext context) {
                     fontFamily: 'Readex Pro',
                     color: customColors.primary,
                   ),
-                ),
+                ).tr(),
                 SizedBox(
                   width: scaleWidth(10),
                 ),

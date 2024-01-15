@@ -1,13 +1,13 @@
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/customize_event/serivce_according_category/controller/service_according_category_controller.dart';
-import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
-import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/service_according_category_controller.dart';
+import '../../model/service_according_category_model.dart';
+import '../../../service_category/controller/service_category_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ServiceAccordingCard extends StatelessWidget {
   ServiceAccordingCard(
       {super.key,
@@ -67,7 +67,7 @@ class ServiceAccordingCard extends StatelessWidget {
                           fontSize: 12,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                       //// to update selected service provier in serviceCategoryController
                       GetBuilder<ServiceCategoryController>(
                           builder: (serviceCategoryController) {

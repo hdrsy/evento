@@ -17,6 +17,7 @@ class GoingModel {
 
 
   factory GoingModel.fromJson(Map<String, dynamic> json) {
+    
     return GoingModel(
       id: json['id'],
       friendRequestStatus: json['friend_request_status_with_auth_user'],

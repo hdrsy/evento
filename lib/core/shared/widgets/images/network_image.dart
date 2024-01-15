@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:evento/core/server/server_config.dart';
+import '../../../server/server_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

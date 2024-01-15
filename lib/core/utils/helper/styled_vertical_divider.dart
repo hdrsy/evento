@@ -1,7 +1,7 @@
 
 import 'dart:math';
 
-import 'package:evento/core/utils/helper/dotted_decoration.dart';
+import 'dotted_decoration.dart';
 import 'package:flutter/material.dart';
 
 

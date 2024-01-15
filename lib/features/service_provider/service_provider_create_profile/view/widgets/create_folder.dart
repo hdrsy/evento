@@ -1,10 +1,10 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/service_provider_create_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CreateFolder extends StatelessWidget {
    CreateFolder({super.key});
 final ServiceProviderCreateProfileController serviceProviderCreateProfileController=Get.find();
@@ -36,7 +36,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
                             color: customColors.primaryText,
                             useGoogleFonts: true,
                           ),
-                    ),
+                    ).tr(),
                   ),
                 ),
                 Padding(
@@ -47,7 +47,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
                     obscureText: false,
                     decoration: InputDecoration(
                       labelStyle: customTextStyle.labelMedium,
-                      hintText: " Folder name",
+                      hintText:tr( " Folder name"),
                       hintStyle:
                           customTextStyle.labelMedium.override(
                                 fontFamily: 'Nunito',
@@ -87,7 +87,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
                     validator:(value){
                       
                       if(value!.length<2){
-                        return "The folder name should at least 2 char";
+                        return tr("The folder name should at least 2 char");
                       }
                       return null;}
                        
@@ -103,7 +103,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
                         onPressed: () async {
                       Get.back();
                         },
-                        text: "Cancel",
+                        text:tr( "Cancel"),
                         options: ButtonOptions(
                           width: 100,
                           height: 45,
@@ -133,7 +133,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
                           
                           Get.toNamed('/AddMediaInFolderserviceProviderScreen',arguments: [serviceProviderCreateProfileController.createFolderName.text,serviceProviderCreateProfileController.foldersModel.length-1]);
                           },
-                        text:  "Create",
+                        text:tr(  "Create"),
                         options: ButtonOptions(
                           width: 100,
                           height: 45,

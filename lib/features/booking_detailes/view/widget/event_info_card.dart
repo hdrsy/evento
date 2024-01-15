@@ -1,10 +1,11 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/booking_detailes/controller/booking_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/booking_detailes_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class EventInfoCard extends StatelessWidget {
    EventInfoCard({super.key});
@@ -25,7 +26,7 @@ final BookingDetailesController bookingDetailesController=Get.find();
         fontFamily: secondaryFontFamily,
         useGoogleFonts: true
       ),
-    ),
+    ).tr(),
   ),
 
 ),
@@ -54,9 +55,9 @@ Padding(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SingleItemData(title: "Event",subTitle: bookingDetailesController.eventDetailsModel.title,),
-          SingleItemData(title: "Event Location",subTitle: bookingDetailesController.eventDetailsModel.venue.governorate,),
-          SingleItemData(title: "Event Organizer",subTitle: bookingDetailesController.eventDetailsModel.organizer!= null?"${bookingDetailesController.eventDetailsModel.organizer!.firstName} ${bookingDetailesController.eventDetailsModel.organizer!.lastName}":"Evento",),
+          SingleItemData(title:tr( "Event"),subTitle: bookingDetailesController.eventDetailsModel.title,),
+          SingleItemData(title:tr( "Event Location"),subTitle: bookingDetailesController.eventDetailsModel.venue.governorate,),
+          SingleItemData(title:tr( "Event Organizer"),subTitle: bookingDetailesController.eventDetailsModel.organizer!= null?"${bookingDetailesController.eventDetailsModel.organizer!.firstName} ${bookingDetailesController.eventDetailsModel.organizer!.lastName}":"Evento",),
         ].divide(const SizedBox(height: 18)),
       ),
     ),

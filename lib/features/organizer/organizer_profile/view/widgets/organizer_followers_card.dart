@@ -1,8 +1,8 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrganizerFolloersCard extends StatelessWidget {
   const OrganizerFolloersCard({super.key});
 
@@ -29,14 +29,14 @@ class OrganizerFolloersCard extends StatelessWidget {
               child: Text(
                  "Randy Rudolph",
                 style: customTextStyle.bodyLarge,
-              ),
+              ).tr(),
             ),
           ),
           ButtonWidget(
             onPressed: () {
-              print('Button pressed ...');
+              print(tr('Button pressed ...'));
             },
-            text:  "Following",
+            text:tr(  "Following"),
             options: ButtonOptions(
               width: 85,
               height: 21,

@@ -1,15 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/widget/invite_friends.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../../core/responsive/responsive.dart';
+import '../../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../core/shared/widgets/widget/invite_friends.dart';
+import '../../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildHeader(BuildContext context, String eventTitle) {
   return Column(
     mainAxisSize: MainAxisSize.max,
@@ -41,8 +43,11 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () async {
-            // context.pushNamed('Going');
-            Get.toNamed('/GoingScreen',arguments: eventDetailesController.eventId);
+             if(isGuset){
+                    Get.dialog( const GuestPopupWidget());
+                  }else{
+          
+            Get.toNamed('/GoingScreen',arguments: eventDetailesController.eventId);}
           },
           child: Container(
             decoration: const BoxDecoration(),
@@ -74,9 +79,12 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
         ),
         ButtonWidget(
           onPressed: () async {
-            showButtonSheet(context: context, widget: InviteFreinds(), height: screenHeight*0.2);
+             if(isGuset){
+                    Get.dialog( const GuestPopupWidget());
+                  }else{
+            showButtonSheet(context: context, widget: const InviteFreinds(), height: screenHeight*0.2);}
           },
-          text: "Invite Friend",
+          text:tr( "Invite Friend"),
           options: ButtonOptions(
             width: 109,
             height: 21,

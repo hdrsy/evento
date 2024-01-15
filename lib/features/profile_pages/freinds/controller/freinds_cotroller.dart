@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/features/profile_pages/freinds/model/recive_model.dart';
-import 'package:evento/features/profile_pages/freinds/model/send_request.dart';
-import 'package:evento/main.dart';
+import '../../../../core/server/helper_api.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/utils/error_handling/erroe_handling.dart';
+import '../model/freinds_model.dart';
+import '../model/recive_model.dart';
+import '../model/send_request.dart';
+import '../../../../main.dart';
 import 'package:get/get.dart';
 
 class FreindsController extends GetxController {

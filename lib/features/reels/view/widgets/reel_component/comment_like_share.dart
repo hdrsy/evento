@@ -1,8 +1,8 @@
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/reels/controller/reels_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/reels_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,5 @@
-import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
-import 'package:evento/features/customize_event/venue/model/venue_model.dart';
+import '../../serivce_according_category/model/service_according_category_model.dart';
+import '../../venue/model/venue_model.dart';
 import 'package:get/get.dart';
 
 class VenueDetailesController extends GetxController{

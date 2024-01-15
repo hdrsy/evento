@@ -1,24 +1,26 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
-import 'package:evento/core/shared/widgets/video/reels_video_widget.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/features/events/home/view/widgets/column_text.dart';
-import 'package:evento/features/events/home/view/widgets/home_loading_widget.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/server/server_config.dart';
+import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/shared/widgets/video/cards_video_widget.dart';
+import '../../../../../core/shared/widgets/video/reels_video_widget.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/home_controller.dart';
+import '../../model/event_model.dart';
+import 'column_text.dart';
+import 'home_loading_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FeaturedList extends StatelessWidget {
   FeaturedList({super.key});
   final FeaturedListController featuredListController = Get.find();
@@ -36,7 +38,7 @@ class FeaturedList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(
-                  title: "Featured",
+                  title:tr( "Featured"),
                   subTitle: " Enchanted Evening & Festive Lights",
                   onTap: () {
                     Get.toNamed('/seeAll', arguments: [
@@ -266,7 +268,7 @@ class FeaturedWidget extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   await Share.share(
-                    'Check out this event in Evento',
+                    tr('Check out this event in Evento'),
                   );
                 },
                 child: Icon(
@@ -277,10 +279,16 @@ class FeaturedWidget extends StatelessWidget {
               ),
               ToggleIcon(
                 onPressed: () async {
+                  if(isGuset){
+                    Get.dialog( GuestPopupWidget());
+                  }else{
+
+                  
+                  
                   final FeaturedListController featuredListController =
                       Get.find();
                   featuredListController.followOrUnFollowEvent(
-                      eventModel.id, modelIndex);
+                      eventModel.id, modelIndex);}
                 },
                 value: isFollowedByAuthUser,
                 onIcon: Icon(

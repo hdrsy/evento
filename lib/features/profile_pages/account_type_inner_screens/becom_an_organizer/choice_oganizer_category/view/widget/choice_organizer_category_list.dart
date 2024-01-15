@@ -1,11 +1,11 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/choice_organizer_category_controller.dart';
+import '../../../../switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
+import '../../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChoiceOrganizerCategoryList extends StatelessWidget {
   ChoiceOrganizerCategoryList({super.key});
   final ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
@@ -26,7 +26,7 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
               fontWeight: FontWeight.bold,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +54,7 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
                     fontSize: 16,
                     useGoogleFonts: true,
                   ),
-                ),
+                ).tr(),
               ].divide(const SizedBox(width: 5)),
             ),
             SizedBox(
@@ -146,7 +146,7 @@ final ChoiceOrganizerCategoryController  choiceOrganizerCategoryController=Get.f
       obscureText: false,
       decoration: InputDecoration(
         labelStyle: customTextStyle.labelMedium,
-        hintText: "Other specialties",
+        hintText:tr( "Other specialties"),
         hintStyle: customTextStyle.labelMedium.override(
           fontFamily: 'Nunito',
           color: customColors.secondaryText,

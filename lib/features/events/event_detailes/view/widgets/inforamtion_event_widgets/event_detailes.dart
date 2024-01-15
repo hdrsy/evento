@@ -1,16 +1,16 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../core/shared/widgets/buttons/icon_with_container.dart';
+import '../../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildEventDetails(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   return Column(
@@ -76,7 +76,7 @@ Widget buildEventDetails(BuildContext context) {
                     onPressed: () {
                       eventDetailesController.createAndAddReminderEvents();
                     },
-                    text: "Add to My Calendar",
+                    text:tr( "Add to My Calendar"),
                     options: ButtonOptions(
                       width: 170,
                       height: 25,
@@ -174,7 +174,7 @@ Widget buildEventDetails(BuildContext context) {
                   onPressed: () {
                     eventDetailesController.openMap();
                   },
-                  text: "See Location on Maps",
+                  text:tr( "See Location on Maps"),
                   options: ButtonOptions(
                     width: 170,
                     height: 25,

@@ -1,10 +1,10 @@
-import 'package:evento/core/utils/extenstions/color_extenstions.dart';
-import 'package:evento/core/utils/extenstions/text_extenstions.dart';
-import 'package:evento/features/main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
-import 'package:evento/main.dart';
+import '../../../core/utils/extenstions/color_extenstions.dart';
+import '../../../core/utils/extenstions/text_extenstions.dart';
+import '../controller/main_bottom_navigation_controller.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class MainBottomNavigationBarWidget extends StatelessWidget {
    MainBottomNavigationBarWidget({super.key});
 final MainBottomNavigationController mainBottomNavigationController=Get.find();
@@ -24,66 +24,66 @@ final MainBottomNavigationController mainBottomNavigationController=Get.find();
         showSelectedLabels: true,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        items:const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.home_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.home,
               size: 24.0,
             ),
-            label: "Home",
+            label:tr( "Home"),
             tooltip: '',
           ),
            BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               size: 20.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.search_sharp,
               size: 24.0,
             ),
-            label:  "search",
+            label:tr(  "search"),
             tooltip: '',
           ),
       
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.slow_motion_video_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.slow_motion_video,
               size: 24.0,
             ),
-            label:  "Reels",
+            label:tr(  "Reels"),
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.auto_awesome_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.auto_awesome_sharp,
               size: 24.0,
             ),
-            label:  "Customize",
+            label:tr( "Customize"),
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.account_circle,
               size: 24.0,
             ),
-            label: "Profile",
+            label:tr( "Profile"),
             tooltip: '',
           )
         ],

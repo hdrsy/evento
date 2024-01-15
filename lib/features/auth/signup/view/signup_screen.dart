@@ -1,15 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/name_validation.dart';
-import 'package:evento/core/shared/functions/validation/phone_validation.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/text_field.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/auth/signup/controller/signup_controller.dart';
-import 'package:evento/features/auth/signup/view/widgets/terms_and_condision_texts.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/functions/validation/name_validation.dart';
+import '../../../../core/shared/functions/validation/phone_validation.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/shared/widgets/text_fields/text_field.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/signup_controller.dart';
+import 'widgets/terms_and_condision_texts.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class SignupScreen extends StatelessWidget {
@@ -61,12 +62,12 @@ SignupController signupController=Get.find();
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
+                  ).tr(),
                   // Description text below 'Sign in'.
                   Text(
                     'Join our community and unlock exclusive features.', // Replace with localization if needed.
                     style: customTextStyle.bodyMedium,
-                  ),
+                  ).tr(),
                   SizedBox(
                     height: scaleHeight(5),
                   ),
@@ -80,7 +81,7 @@ SignupController signupController=Get.find();
                         Expanded(
                           child: customTextField(
                             context: context,
-                            label: "First Name",
+                            label:tr( "First Name"),
                             onChanged: (value) {
                               signupController.firstName.text=value!;
                             },
@@ -94,7 +95,7 @@ SignupController signupController=Get.find();
                         Expanded(
                           child: customTextField(
                             context: context,
-                            label: "Last Name",
+                            label:tr( "Last Name"),
                             onChanged: (value) {
                               signupController.lastName.text=value!;
                             },
@@ -110,7 +111,7 @@ SignupController signupController=Get.find();
                   ),
                   customTextField(
                     context: context,
-                    label: "+963    mobile Phone",
+                    label:tr( "+963    mobile Phone"),
                     onChanged: (value) {
                       signupController.phone.text=value!;
                     },
@@ -141,7 +142,7 @@ SignupController signupController=Get.find();
                               //  Get.toNamed('/steps');
                               signupController.onPressSignUp();
                                },
-                              text: 'Join', // Replace with localization if needed.
+                              text:tr( 'Join'), // Replace with localization if needed.
                               options: ButtonOptions(
                                 width: 350,
                                 height: 45,

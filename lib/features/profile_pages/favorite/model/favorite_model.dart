@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import 'package:evento/core/server/helper_api.dart';
+
+import '../../../events/event_detailes/model/event_detailes_model.dart';
 
 class EventWrapper {
   int id;
@@ -63,7 +65,9 @@ class FavoriteEventModel {
     required this.venue
   });
 
-  factory FavoriteEventModel.fromJson(Map<String, dynamic> json) {
+  factory FavoriteEventModel.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return FavoriteEventModel(
       id: json['id'],
       organizerId: json['organizer_id'],

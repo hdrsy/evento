@@ -1,9 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/features/organizer/organizer_conditions/view/organizer_conditions_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../organizer/organizer_conditions/view/organizer_conditions_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class BecomOrganizer extends StatelessWidget {
   const BecomOrganizer({super.key});
 
@@ -16,7 +16,7 @@ showButtonSheet(context: context, widget: const OrganizerConditionsWidget(), hei
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text("Become an Organizer",style: customTextStyle.bodyMedium.copyWith(
+          Text(tr("Become an Organizer"),style: customTextStyle.bodyMedium.copyWith(
     fontSize: screenSize == ScreenSize.small
                         ? 14
                         : (screenSize == ScreenSize.medium ? 16 : 18),

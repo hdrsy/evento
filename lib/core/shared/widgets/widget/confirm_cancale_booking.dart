@@ -7,7 +7,7 @@ import 'package:evento/features/profile_pages/my_booking/controller/cancel_booki
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ConfirmCancelBookingWidget extends StatelessWidget {
   const ConfirmCancelBookingWidget({Key? key}) : super(key: key);
 
@@ -42,14 +42,14 @@ class ConfirmCancelBookingWidget extends StatelessWidget {
                  "Are you sure you want to cancel this event?" ,
                 textAlign: TextAlign.center,
                 style: customTextStyle.headlineSmall,
-              ),
+              ).tr(),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                 child: Text(
                    "Only 8% funds will be returned to your account according to our policy.",
                   textAlign: TextAlign.center,
                   style: customTextStyle.bodyMedium,
-                ),
+                ).tr(),
               ),
             ],
           ),
@@ -63,7 +63,7 @@ class ConfirmCancelBookingWidget extends StatelessWidget {
                   onPressed: () async {
                     Get.back();
                   },
-                  text:  "No,Don't Cancel",
+                  text:tr(  "No,Don't Cancel"),
                   options: ButtonOptions(
                     width: 150,
                     height: 45,
@@ -95,7 +95,7 @@ if(cancelBookingController.cancellState){
 }
 
                   },
-                  text: "Yes,cancel",
+                  text:tr( "Yes,cancel"),
                   options: ButtonOptions(
                     width: 150,
                     height: 45,

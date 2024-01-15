@@ -1,5 +1,5 @@
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/main.dart';
+import '../../../features/book_now/model/ticket_model.dart';
+import '../../../main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

@@ -1,4 +1,4 @@
-import 'package:evento/main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 

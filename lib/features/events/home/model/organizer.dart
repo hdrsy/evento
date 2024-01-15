@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 
 class OrganizerEvent {
   final int id;
@@ -18,7 +20,9 @@ class OrganizerEvent {
     required this.venue,
   });
 
-  factory OrganizerEvent.fromJson(Map<String, dynamic> json) {
+  factory OrganizerEvent.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return OrganizerEvent(
       id: json['id'],
       title: json['title'],
@@ -43,7 +47,9 @@ class Venue {
     required this.longitude,
   });
 
-  factory Venue.fromJson(Map<String, dynamic> json) {
+  factory Venue.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     return Venue(
       id: json['id'],
       governorate: json['governorate'],

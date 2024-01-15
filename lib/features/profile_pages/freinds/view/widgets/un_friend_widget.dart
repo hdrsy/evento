@@ -1,10 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/features/profile_pages/freinds/view/widgets/un_friend_confirmation_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../model/freinds_model.dart';
+import 'un_friend_confirmation_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class UnfriendWidget extends StatelessWidget {

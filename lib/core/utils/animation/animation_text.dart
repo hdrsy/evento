@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../responsive/responsive.dart';
+import '../theme/text_theme.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 

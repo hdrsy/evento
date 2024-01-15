@@ -5,7 +5,7 @@ import 'package:evento/features/profile_pages/my_booking/controller/cancel_booki
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SuccefulCancelBookingWidget extends StatelessWidget {
   const SuccefulCancelBookingWidget({
     Key? key,
@@ -52,13 +52,13 @@ class SuccefulCancelBookingWidget extends StatelessWidget {
                     fontSize: 25,
                     useGoogleFonts: false,
                   ),
-            ),
+            ).tr(),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
               child: Text(
                 "You have successfully canceled the event 80% of the funds will be returned to your account.",
                 style: customTextStyle.bodyMedium,
-              ),
+              ).tr(),
             ),
             ButtonWidget(
               onPressed: () async {
@@ -67,7 +67,7 @@ class SuccefulCancelBookingWidget extends StatelessWidget {
                  Get.delete<CancelBookingController>();
                             
               },
-              text: "Ok",
+              text:tr( "Ok"),
               options: ButtonOptions(
                 height: 40,
                 padding: const EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),

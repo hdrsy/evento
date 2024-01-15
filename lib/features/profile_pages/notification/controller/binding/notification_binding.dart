@@ -1,4 +1,4 @@
-import 'package:evento/features/profile_pages/notification/controller/notification_controller.dart';
+import '../notification_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

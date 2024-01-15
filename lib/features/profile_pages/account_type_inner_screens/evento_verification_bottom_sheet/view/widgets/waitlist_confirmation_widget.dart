@@ -1,8 +1,8 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class WaitlistConfirmationWidget extends StatelessWidget {
   const WaitlistConfirmationWidget({super.key});
 
@@ -30,14 +30,14 @@ class WaitlistConfirmationWidget extends StatelessWidget {
                     "You're on the waitlist",
                     textAlign: TextAlign.center,
                     style: customTextStyle.headlineSmall,
-                  ),
+                  ).tr(),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                     child: Text(
                      "Thank you for your interest. We'll send you a notification when Meta Verified is available to you. Notifications may be sent via email or appear in your Facebook or Instagram app. Learn more",
                       textAlign: TextAlign.start,
                       style: customTextStyle.bodyMedium,
-                    ),
+                    ).tr(),
                   ),
                 ],
               ),
@@ -51,7 +51,7 @@ class WaitlistConfirmationWidget extends StatelessWidget {
                       onPressed: () async {
                         Navigator.pop(context);
                       },
-                      text:  "Ok",
+                      text:tr(  "Ok"),
                       options: ButtonOptions(
                         width: 250,
                         height: 45,

@@ -1,7 +1,8 @@
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/book_now/view/widgets/full_ticket_field.dart';
-import 'package:evento/main.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import 'full_ticket_field.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PaymontInformation extends StatelessWidget {
   const PaymontInformation({super.key});
@@ -15,11 +16,11 @@ class PaymontInformation extends StatelessWidget {
         Text(
           "Payment Information ",
           style: customTextStyle.bodyMedium,
-        ),
+        ).tr(),
         buildTextField(
             controller: TextEditingController(),
             hint: "1234567",
-            label: "Card Number",
+            label:tr( "Card Number"),
             validator: (value) {
               return null;
             }),
@@ -30,7 +31,7 @@ class PaymontInformation extends StatelessWidget {
                 child: buildTextField(
                     controller: TextEditingController(),
                     hint: "12/23",
-                    label: "Exp.Date",
+                    label:tr( "Exp.Date"),
                     validator: (value) {
                       return null;
                     })),
@@ -41,7 +42,7 @@ class PaymontInformation extends StatelessWidget {
                 child: buildTextField(
                     controller: TextEditingController(),
                     hint: "123",
-                    label: "CVV",
+                    label:tr( "CVV"),
                     validator: (value) {
                       return null;
                     })),

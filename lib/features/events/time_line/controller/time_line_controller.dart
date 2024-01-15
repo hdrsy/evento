@@ -1,5 +1,5 @@
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/time_line/model/single_day_time_line_model.dart';
+import '../../event_detailes/model/event_detailes_model.dart';
+import '../model/single_day_time_line_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 class TimeLineController extends GetxController{

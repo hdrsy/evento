@@ -1,17 +1,19 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed_with_filtering.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/search/controller/search_controller.dart';
-import 'package:evento/features/search/view/widgets/popular_widget.dart';
-import 'package:evento/features/search/view/widgets/recently_widget.dart';
-import 'package:evento/features/search/view/widgets/search_event_card.dart';
-import 'package:evento/main.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
+import '../../../core/responsive/responsive.dart';
+import '../../../core/shared/widgets/text_fields/search_filed.dart';
+import '../../../core/shared/widgets/text_fields/search_filed_with_filtering.dart';
+import '../../../core/utils/animation/animation_def.dart';
+import '../../../core/utils/animation/animation_util.dart';
+import '../../../core/utils/theme/text_theme.dart';
+import '../controller/search_controller.dart';
+import 'widgets/popular_widget.dart';
+import 'widgets/recently_widget.dart';
+import 'widgets/search_event_card.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SearchScreen extends StatelessWidget {
    SearchScreen({super.key});
 final SearchPageController searchPageController=Get.put(SearchPageController());
@@ -22,7 +24,7 @@ final SearchPageController searchPageController=Get.put(SearchPageController());
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Search",
+        title: Text(tr("Search"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
@@ -66,8 +68,11 @@ final SearchPageController searchPageController=Get.find();
 Widget floatingActionButton() {
   return FloatingActionButton.extended(
     onPressed: () async {
+       if(isGuset){
+                    Get.dialog( const GuestPopupWidget());
+                  }else{
       // context.pushNamed('Map');
-      Get.toNamed('/MapScreen');
+      Get.toNamed('/MapScreen');}
     },
     backgroundColor: customColors.primary,
     icon: Icon(
@@ -77,7 +82,7 @@ Widget floatingActionButton() {
     ),
     elevation: 8,
     label: Text(
-      "VIEW MAP",
+      tr("VIEW MAP"),
       style: customTextStyle.titleSmall.override(
         color: customColors.info,
         fontFamily: 'Nunito',

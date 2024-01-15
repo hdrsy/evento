@@ -1,9 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/features/auth/step7/controller/step7_controller.dart';
-import 'package:evento/features/auth/step7/model/interst_model.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/server/server_config.dart';
+import '../../controller/step7_controller.dart';
+import '../../model/interst_model.dart';
+import '../../../steps/controller/steps_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';

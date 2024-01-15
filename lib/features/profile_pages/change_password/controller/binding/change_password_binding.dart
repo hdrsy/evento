@@ -1,4 +1,4 @@
-import 'package:evento/features/profile_pages/change_password/controller/change_password_controller.dart';
+import '../change_password_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

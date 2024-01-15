@@ -1,4 +1,4 @@
-import 'package:evento/features/customize_event/review/controller/event_review_controller.dart';
+import '../event_review_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

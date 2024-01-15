@@ -1,6 +1,7 @@
-import 'package:evento/main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class StepsText extends StatelessWidget {
@@ -14,7 +15,7 @@ class StepsText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: "STEP",
+            text:tr( "STEP"),
             style: GoogleFonts.getFont(
               'Rubik',
               color: const Color(0xFF4B39EF),

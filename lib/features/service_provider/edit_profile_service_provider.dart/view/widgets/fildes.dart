@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/name_validation.dart';
-import 'package:evento/core/shared/functions/validation/phone_validation.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/shared/widgets/text_fields/edit_profile_field.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import 'package:evento/features/profile_pages/edit_profile/view/widgets/selected_list_edit_profile.dart';
-import 'package:evento/features/service_provider/edit_profile_service_provider.dart/controller/edit_profile_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/functions/validation/name_validation.dart';
+import '../../../../../core/shared/functions/validation/phone_validation.dart';
+import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
+import '../../../../profile_pages/edit_profile/view/widgets/selected_list_edit_profile.dart';
+import '../../controller/edit_profile_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class Fields extends StatelessWidget {
   Fields({super.key});
   final EditProfileServiceProviderController editProfileController = Get.find();
@@ -26,8 +26,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.person_outline,
                 controller: editProfileController.firstName,
-                hintText: "Mohammad",
-                labelText: "First Name",
+                hintText: tr("Mohammad"),
+                labelText: tr("First Name"),
                 onChanged: (value) {
                   editProfileController.firstName.text = value;
                 },
@@ -37,8 +37,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.person_outline,
                 controller: editProfileController.lastName,
-                hintText: "Ahmad",
-                labelText: "Last Name",
+                hintText:tr( "Ahmad"),
+                labelText:tr( "Last Name"),
                 onChanged: (value) {
                   editProfileController.lastName.text = value;
                 },
@@ -48,8 +48,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.calendar_month,
                 controller: editProfileController.date,
-                hintText: "19/7/1999",
-                labelText: "Date of Brith",
+                hintText: tr("19/7/1999"),
+                labelText:tr( "Date of Brith"),
                 onChanged: (value) {
                   editProfileController.date.text = value;
                 },
@@ -59,8 +59,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.phone_outlined,
                 controller: editProfileController.phone,
-                hintText: "+963 900000000",
-                labelText: "Phone Number",
+                hintText:tr( "+963 900000000"),
+                labelText:tr( "Phone Number"),
                 onChanged: (value) {
                   editProfileController.phone.text = value;
                 },
@@ -110,8 +110,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.people_alt_outlined,
                 controller: editProfileController.gender,
-                hintText: "Male",
-                labelText: "Gender",
+                hintText:tr( "Male"),
+                labelText:tr( "Gender"),
                 onChanged: (value) {
                   editProfileController.gender.text = value;
                 },

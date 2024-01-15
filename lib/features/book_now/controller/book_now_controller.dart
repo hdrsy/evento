@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/profile_pages/freinds/model/freinds_model.dart';
-import 'package:evento/main.dart';
+import '../../../core/server/helper_api.dart';
+import '../../../core/server/server_config.dart';
+import '../../../core/utils/error_handling/erroe_handling.dart';
+import '../../../core/utils/helper/date_formatter.dart';
+import '../model/ticket_model.dart';
+import '../../events/event_detailes/controller/event_detailes_controller.dart';
+import '../../events/event_detailes/model/event_detailes_model.dart';
+import '../../profile_pages/freinds/model/freinds_model.dart';
+import '../../../main.dart';
 import 'package:get/get.dart';
 
 class BookNowController extends GetxController {

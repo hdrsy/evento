@@ -1,5 +1,5 @@
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/model/category_model.dart';
+import '../../../../../events/home/controller/home_controller.dart';
+import '../../../../../events/home/model/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,10 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../controller/page_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 AppBar buildAppBarWithLineIndicatorincenter(double percent,int pageNumber) {
   return 
@@ -31,7 +32,7 @@ AppBar buildAppBarWithLineIndicatorincenter(double percent,int pageNumber) {
         StepsPageController stepsPageController=Get.find();
         stepsPageController.pageIdex.value=pageNumber+1;
         
-        }, child:Text("Skip",style:customTextStyle.bodyLarge)):const SizedBox(width: 24,)],
+        }, child:Text(tr("Skip"),style:customTextStyle.bodyLarge)):const SizedBox(width: 24,)],
         backgroundColor: Colors.transparent,
         leading:  InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(30)),

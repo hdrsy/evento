@@ -1,8 +1,8 @@
 
 
-import 'package:evento/core/colors/app_colors.dart';
-import 'package:evento/core/utils/extenstions/color_extenstions.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
+import '../../colors/app_colors.dart';
+import '../extenstions/color_extenstions.dart';
+import 'text_theme.dart';
 import 'package:flutter/material.dart';
 
 

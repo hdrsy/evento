@@ -1,15 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/phone_validation.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/text_field.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/forget_password_pages/enter_number/controller/enter_number_controller.dart';
-import 'package:evento/main.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/functions/validation/phone_validation.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../../core/shared/widgets/text_fields/text_field.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../controller/enter_number_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,7 @@ class EnterNumberScreen extends StatelessWidget {
                 "Enter your number",
                 textAlign: TextAlign.center,
                 style: customTextStyle.titleMedium,
-              ),
+              ).tr(),
               Text(
                 " Please enter a valid number to...",
                 textAlign: TextAlign.center,
@@ -58,7 +59,7 @@ class EnterNumberScreen extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
               SizedBox(
                   height: scaleHeight(50),
                 ),
@@ -74,7 +75,7 @@ class EnterNumberScreen extends StatelessWidget {
                 key: enterNumberController.formstate,
                 child: customTextField(
                   context: context,
-                  label: "+963    mobile Phone",
+                  label:tr( "+963    mobile Phone"),
                   onChanged: (value) {
                     enterNumberController.phone.text = value!;
                   },
@@ -103,7 +104,7 @@ class EnterNumberScreen extends StatelessWidget {
               onPressed: () async {
                 enterNumberController.onPressContinue();
               },
-              text: "Continue",
+              text:tr( "Continue"),
               showLoadingIndicator: false,
               options: ButtonOptions(
                 width: scaleWidth(330),

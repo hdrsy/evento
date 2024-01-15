@@ -1,12 +1,13 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/step8/controller/step8_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/step8_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class SelectState extends StatelessWidget {
@@ -98,7 +99,7 @@ String selectedState='';
                     step8controller.update();
                     Get.back();
                       },
-                      text:  "Done" ,
+                      text:tr(  "Done" ),
                       options: ButtonOptions(
                         width: 120,
                         height: 45,

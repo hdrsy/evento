@@ -1,8 +1,8 @@
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/controller/switch_to_service_provider_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/switch_to_service_provider_controller.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

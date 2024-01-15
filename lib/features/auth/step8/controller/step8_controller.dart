@@ -1,12 +1,12 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/server/helper_api.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/core/utils/services/user_info.dart';
-import 'package:evento/features/auth/step7/model/interst_model.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/server/helper_api.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/utils/error_handling/erroe_handling.dart';
+import '../../../../core/utils/services/user_info.dart';
+import '../../step7/model/interst_model.dart';
+import '../../steps/controller/steps_controller.dart';
+import '../../../../main.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -58,7 +58,8 @@ class Step8Controller extends GetxController {
 
   whenSendDataSuccess() async {
      user=await UserInfo.getUserInfo();
-   
+     prefService.createString("isCompleteProfile", "true");
+     isGuset=false;
      Get.offAllNamed('/home');
 
   }

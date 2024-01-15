@@ -8,7 +8,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/evento_verification_bottom_sheet/view/widgets/waitlist_confirmation_widget.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the EventVerificationCondidtionsBottomSheet as a StatelessWidget.
 class EventVerificationCondidtionsBottomSheet extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -41,13 +41,13 @@ class EventVerificationCondidtionsBottomSheet extends StatelessWidget {
                     ),
                   ),
                   // Title text of the bottom sheet.
-                  titleText(context, 'Join the waitlist for ُEvento Verified'),
+                  titleText(context, tr('Join the waitlist for ُEvento Verified')),
                   // Body text describing Evento Verified.
-                  bodyText(context, 'Establish your presence and get access to exclusive benefits with Evento Verified. Learn more', true),
+                  bodyText(context, tr('Establish your presence and get access to exclusive benefits with Evento Verified. Learn more'), true),
                   // Info section with rows of information.
                   infoSection(context),
                   // Body text with age restriction information.
-                  bodyText(context, 'Evento Verified is not available for people younger than 18 years of age.', false),
+                  bodyText(context,tr( 'Evento Verified is not available for people younger than 18 years of age.'), false),
                 ].divide(const SizedBox(height: 15,)), // Dividing widgets with spacing.
               ),
             ),
@@ -64,7 +64,7 @@ class EventVerificationCondidtionsBottomSheet extends StatelessWidget {
                   height: MediaQuery.sizeOf(context).height * 0.6
                 );
               },
-              text: "Join waitlist",
+              text:tr( "Join waitlist"),
               options: ButtonOptions(
                 width: 200,
                 height: 40,

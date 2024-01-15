@@ -1,5 +1,7 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/main.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndCondisionTexts extends StatelessWidget {
@@ -19,7 +21,7 @@ class TermsAndCondisionTexts extends StatelessWidget {
             color: customColors.secondaryText,
             fontSize: 10,
           ),
-        ),
+        ).tr(),
         // Generated code for this Row Widget...
 Padding(
   padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
@@ -33,7 +35,7 @@ Padding(
               fontSize: 12,
 
             ),
-      ),
+      ).tr(),
       Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
         child: Icon(
@@ -57,7 +59,7 @@ Row(
             fontSize: 12,
 
           ),
-    ),
+    ).tr(),
     Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
       child: Icon(

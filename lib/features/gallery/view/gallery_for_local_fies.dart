@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:evento/core/shared/models/media.dart';
-import 'package:evento/main.dart';
+import '../../../core/shared/models/media.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class GalleryForLocalScreen extends StatelessWidget {
    GalleryForLocalScreen({super.key, required this.files});
   // final GalleryController galleryController=Get.find();
@@ -17,7 +17,7 @@ class GalleryForLocalScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          title: Text("Gallery",
+          title: Text(tr("Gallery"),
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,

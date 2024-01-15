@@ -1,13 +1,13 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/core/utils/theme/theme_controller.dart';
-import 'package:evento/features/main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../core/utils/theme/theme_controller.dart';
+import '../../../../main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ThemeSwicth extends StatelessWidget {
   ThemeSwicth({super.key});
   final ThemeController themeController = Get.put(ThemeController());
@@ -20,7 +20,7 @@ class ThemeSwicth extends StatelessWidget {
         Align(
           alignment: const AlignmentDirectional(-1.00, -1.00),
           child: Text(
-            "Account",
+           tr( "Account"),
             style: customTextStyle.titleSmall.override(
               fontFamily: 'Nunito',
               color: customColors.primaryText,

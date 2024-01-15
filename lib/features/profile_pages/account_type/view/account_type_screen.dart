@@ -7,7 +7,7 @@ import 'package:evento/features/profile_pages/account_type_inner_screens/evento_
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 // Defining the AccountTypeScreen as a StatelessWidget.
 class AccountTypeScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -27,7 +27,7 @@ class AccountTypeScreen extends StatelessWidget {
           "Account Type",
           style: customTextStyle.bodyMedium
               .copyWith(color: customColors.primary, fontSize: 20),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           onTap: () {
@@ -63,29 +63,29 @@ class AccountTypeScreen extends StatelessWidget {
                   fontFamily: 'Nunito',
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
             ),
             
             // Adding various account type cards with icons and routes.
-            const AccountTypeCard(
+             AccountTypeCard(
               icon: Icons.privacy_tip_outlined,
               route: 'AccountPrivacyScreen',
-              title: "Account privacy",
+              title:tr( "Account privacy"),
             ),
-            const AccountTypeCard(
+             AccountTypeCard(
               icon: Icons.phone_outlined,
               route: 'SwithcToServiceProviderScreen',
-              title: "Switch to service provider",
+              title:tr( "Switch to service provider"),
             ),
             // const AccountTypeCard(
             //   icon: Icons.people_outlined,
             //   route: EventVerificationCondidtionsBottomSheet(),
             //   title: "Sign up for Evento Verified",
             // ),
-            const AccountTypeCard(
+             AccountTypeCard(
               icon: Icons.people_outlined,
               route: 'AccountOrganizerScreen',
-              title: "Become an Organizer",
+              title:tr( "Become an Organizer"),
             ),
           ].divide(const SizedBox(height: 16,)), // Dividing the cards with spacing.
         ),

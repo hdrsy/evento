@@ -1,20 +1,20 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/animation/shimmer_animation.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/home/controller/home_controller.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/features/events/home/view/widgets/column_text.dart';
-import 'package:evento/features/events/home/view/widgets/home_loading_widget.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/server/server_config.dart';
+import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../core/utils/animation/shimmer_animation.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../controller/home_controller.dart';
+import '../../model/event_model.dart';
+import 'column_text.dart';
+import 'home_loading_widget.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ForYou extends StatelessWidget {
   ForYou({super.key});
   final JustForYouController justForYouController = Get.find();
@@ -32,15 +32,15 @@ class ForYou extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ColumnText(
-                  title: "Just for you",
+                  title:tr( "Just for you"),
                   subTitle: "Tailored Experiences & Personalized Picks",
                   onTap: () {
                     Get.toNamed('/seeAll', arguments: [
                       justForYouController.pageId,
                       justForYouController.itemList,
                       ServerConstApis.getJustForYouList,
-                      "just_for_you",
-                      "Just for you"
+                     tr( "just_for_you"),
+                       tr( "just_for_you")
                     ]);
                   },
                 ),

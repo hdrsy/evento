@@ -1,16 +1,17 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/validation/password_validation.dart';
-import 'package:evento/core/shared/functions/validation/phone_validation.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
-import 'package:evento/core/shared/widgets/text_fields/text_field.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/auth/signin/controller/signin_controller.dart';
-import 'package:evento/features/auth/signin/view/widgets/forget_password_widget.dart';
-import 'package:evento/features/auth/signin/view/widgets/terms_and_condision_texts.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/functions/validation/password_validation.dart';
+import '../../../../core/shared/functions/validation/phone_validation.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/shared/widgets/error_messages/error_messages.dart';
+import '../../../../core/shared/widgets/text_fields/text_field.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/signin_controller.dart';
+import 'widgets/forget_password_widget.dart';
+import 'widgets/terms_and_condision_texts.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class SignInScreen extends StatelessWidget {
@@ -62,17 +63,17 @@ SigninController signinController=Get.find();
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
-                ),
+                ).tr(),
                 // Description text below 'Sign in'.
                 Text(
                   'Welcome back! Log in to continue.', // Replace with localization if needed.
                   style: customTextStyle.bodyMedium,
-                ),
+                ).tr(),
                 SizedBox(height: scaleHeight(5),),
                 // Input field for mobile phone.
                 customTextField(
                  context: context,
-                 label: "+963    mobile Phone",
+                 label:tr( "+963    mobile Phone"),
                  
                  onChanged: (value){
                   signinController.phone.text=value!;
@@ -86,7 +87,7 @@ SigninController signinController=Get.find();
                 // Input field for password.
                 customTextField(
                 context: context,
-                label: "Password",
+                label:tr( "Password"),
                 keyboardType:TextInputType.visiblePassword,
                 onChanged: (value){
                   signinController.password.text=value!;
@@ -112,7 +113,7 @@ SigninController signinController=Get.find();
                             onPressed: () {
                               signinController.onClickSignIn();
                               },
-                            text: 'Sign In', // Replace with localization if needed.
+                            text:tr( 'Sign In'), // Replace with localization if needed.
                             options: ButtonOptions(
                               width: 350,
                               height: 45,

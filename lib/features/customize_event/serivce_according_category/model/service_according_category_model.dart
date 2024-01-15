@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 class ServiceProvider {
   final int id;
   final int userId;
@@ -31,7 +33,9 @@ class ServiceProvider {
     required this.albums,
   });
 
-  factory ServiceProvider.fromJson(Map<String, dynamic> json) {
+  factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     var albumList = json['albums'] as List;
     List<Album> albums = albumList.map((album) => Album.fromJson(album)).toList();
 
@@ -95,7 +99,9 @@ class Album {
     required this.updatedAt,
   });
 
-  factory Album.fromJson(Map<String, dynamic> json) {
+  factory Album.fromJson(Map<String, dynamic> oldJson) {
+    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+ 
     List<String> parseImages(String imagesJson) {
       if (imagesJson.isEmpty) {
         return [];

@@ -6,6 +6,7 @@ import 'package:evento/features/auth/steps/controller/steps_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 Widget buildMainStack(BuildContext context) {
   StepsController stepsController=Get.find();
@@ -17,9 +18,9 @@ Widget buildMainStack(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Container for the first item (Male)
-          _buildItemContainer(context, 'Male',stepsController.isMale.value? customColors.primary:Colors.white,stepsController.isMale.value?  Colors.white:customColors.primary),
+          _buildItemContainer(context,tr( 'Male'),stepsController.isMale.value? customColors.primary:Colors.white,stepsController.isMale.value?  Colors.white:customColors.primary),
           // // Container for the second item (Female)
-          _buildItemContainer(context, 'Female', stepsController.isMale.value? Colors.white:customColors.primary,stepsController.isMale.value?  customColors.primary:Colors.white),
+          _buildItemContainer(context, tr('Female'), stepsController.isMale.value? Colors.white:customColors.primary,stepsController.isMale.value?  customColors.primary:Colors.white),
         ],
       ),
     ),

@@ -1,4 +1,4 @@
-import 'package:evento/core/responsive/responsive.dart';
+import 'responsive.dart';
 
 double responsiveIcon(double size,double distance){
   return screenSize == ScreenSize.small

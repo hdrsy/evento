@@ -1,8 +1,9 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/animation/animation_def.dart';
-import 'package:evento/core/utils/animation/animation_util.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/animation/animation_def.dart';
+import '../../../../../core/utils/animation/animation_util.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class BuildPageView extends StatelessWidget {
@@ -18,23 +19,23 @@ class BuildPageView extends StatelessWidget {
         children: [
           buildTextAndImageInBackGround(
               context: context,
-              title: "Unearth Upcoming Events",
+              title:tr( "Unearth Upcoming Events"),
               smallTitle:
-                  "Dive deep into a curated list of events, workshops, and festivals happening around you or anywhere in the world.",
+                  tr("Dive deep into a curated list of events, workshops, and festivals happening around you or anywhere in the world."),
               imagePath:
                   "assets/images/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space.jpg"),
           buildTextAndImageInBackGround(
               context: context,
-              title: "Tailored Just for You",
+              title:tr( "Tailored Just for You"),
               smallTitle:
-                  "Based on your interests and preferences, get personalized event recommendations that match your vibe.",
+                  tr("Based on your interests and preferences, get personalized event recommendations that match your vibe."),
               imagePath:
                   "assets/images/Encore_EventType_TheatreConcertandSpecialEvents_4.jpg"),
           buildTextAndImageInBackGround(
               context: context,
-              title: "Never Miss a Moment",
+              title:tr( "Never Miss a Moment"),
               smallTitle:
-                  " Receive real-time notifications about your booked events, reminders, and updates from event organizers.",
+                  tr(" Receive real-time notifications about your booked events, reminders, and updates from event organizers."),
               imagePath:
                   "assets/images/[fpdl.in]_view-from-back-unrecognizable-people-warm-clothes-shooting-fireworks-phone-night_636705-315_normal.jpg"),
         ],

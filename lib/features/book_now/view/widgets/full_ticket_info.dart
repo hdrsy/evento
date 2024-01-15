@@ -1,16 +1,17 @@
 import 'dart:developer';
 
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/controller/book_now_controller.dart';
-import 'package:evento/features/book_now/view/widgets/fill_ticket_bottom_sheet.dart';
-import 'package:evento/features/book_now/view/widgets/full_ticket_field.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import '../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../controller/book_now_controller.dart';
+import 'fill_ticket_bottom_sheet.dart';
+import 'full_ticket_field.dart';
+import '../../../events/event_detailes/model/event_detailes_model.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FullTicketInfo extends StatelessWidget {
   FullTicketInfo({super.key,required this.index});
@@ -48,7 +49,7 @@ class FullTicketInfo extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text("class",style: customTextStyle.bodyMedium.override(
+                     Text(tr("class"),style: customTextStyle.bodyMedium.override(
                       fontFamily: primaryFontFamily,
                       fontSize: 14
                      ),),
@@ -58,7 +59,7 @@ class FullTicketInfo extends StatelessWidget {
                        
                       ],
                     ),
-                     Text("Addional options",style: customTextStyle.bodyMedium.override(
+                     Text(tr("Addional options"),style: customTextStyle.bodyMedium.override(
                       fontFamily: primaryFontFamily,
                       fontSize: 14
                      )),
@@ -80,7 +81,7 @@ class FullTicketInfo extends StatelessWidget {
                      Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        children: [
-                         Text("Personal Information",style: customTextStyle.bodyMedium.override(
+                         Text(tr("Personal Information"),style: customTextStyle.bodyMedium.override(
                           fontFamily: primaryFontFamily,
                           fontSize: 14
                          )),
@@ -89,7 +90,7 @@ class FullTicketInfo extends StatelessWidget {
                          
                             showButtonSheet(context: context, widget: FilldataWidget(ticketIndex: index), height: screenHeight*0.2);
                           },
-                           child: Text("Fill profile / Friend list data",style: customTextStyle.bodyMedium.override(
+                           child: Text(tr("Fill profile / Friend list data"),style: customTextStyle.bodyMedium.override(
                             fontFamily: primaryFontFamily,
                             fontSize: 12,
                             color: customColors.primary
@@ -104,7 +105,7 @@ class FullTicketInfo extends StatelessWidget {
                             child: buildTextField(
                                 controller: bookNowController.ticketList[index].fisrtName,
                                 hint: "",
-                                label: "First Name",
+                                label:tr( "First Name"),
                                 validator: (value) {
                                   return null;
                                 })),
@@ -115,7 +116,7 @@ class FullTicketInfo extends StatelessWidget {
                             child: buildTextField(
                                 controller: bookNowController.ticketList[index].lastName,
                                 hint: "",
-                                label: "Last Name",
+                                label:tr( "Last Name"),
                                 validator: (value) {
                                   return null;
                                 })),
@@ -129,7 +130,7 @@ class FullTicketInfo extends StatelessWidget {
                             child: buildTextField(
                                 controller: bookNowController.ticketList[index].couponNumber,
                                 hint: "",
-                                label: "Coupon Code",
+                                label:tr( "Coupon Code"),
                                 validator: (value) {
                                   return null;
                                 })),
@@ -140,7 +141,7 @@ class FullTicketInfo extends StatelessWidget {
                             child: buildTextField(
                                 controller: bookNowController.ticketList[index].age,
                                 hint: "",
-                                label: "Age",
+                                label:tr( "Age"),
                                 validator: (value) {
                                   return null;
                                 })),
@@ -150,7 +151,7 @@ class FullTicketInfo extends StatelessWidget {
                     buildTextField(
                                 controller: bookNowController.ticketList[index].phoneNumber,
                                 hint: "",
-                                label: "Phone Number",
+                                label:tr( "Phone Number"),
                                 validator: (value) {
                                   return null;
                                 })

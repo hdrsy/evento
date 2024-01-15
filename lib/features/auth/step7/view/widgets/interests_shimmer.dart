@@ -1,4 +1,4 @@
-import 'package:evento/core/responsive/responsive.dart';
+import '../../../../../core/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

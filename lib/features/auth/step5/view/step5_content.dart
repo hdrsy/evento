@@ -1,11 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/features/auth/step5/view/widget/male_female.dart';
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import 'widget/male_female.dart';
+import '../../steps/controller/page_controller.dart';
+import '../../steps/controller/steps_controller.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step5Content extends StatelessWidget {
@@ -27,7 +28,7 @@ class Step5Content extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
-          ),
+          ).tr(),
           SizedBox(height: scaleHeight(50),),
           buildMainStack(context),
           SizedBox(height: scaleHeight(50),),
@@ -40,7 +41,7 @@ class Step5Content extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.normal,
             ),
-          ),
+          ).tr(),
           buildButton()
         ],
       ),
@@ -54,7 +55,7 @@ class Step5Content extends StatelessWidget {
           StepsPageController stepsPageController=Get.find();
           stepsPageController.pageIdex.value=6;
         },
-        text: "Continue",
+        text:tr( "Continue"),
         options: ButtonOptions(
           width: scaleWidth(330),
           height: scaleHeight(40),

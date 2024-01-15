@@ -1,16 +1,16 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/see_all_service_providers.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/responsive/responsive.dart';
+import '../../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
+import '../../../model/event_detailes_model.dart';
+import '../see_all_service_providers.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class BuildServiceProviderSection extends StatelessWidget {
    BuildServiceProviderSection({super.key});
 final EventDetailesController eventDetailesController=Get.find();
@@ -44,7 +44,7 @@ final EventDetailesController eventDetailesController=Get.find();
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: true),
-            ),
+            ).tr(),
             InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -59,7 +59,7 @@ final EventDetailesController eventDetailesController=Get.find();
                   color: customColors.primary,
                   fontSize: 10,
                 ),
-              ),
+              ).tr(),
             ),
           ],
         ),

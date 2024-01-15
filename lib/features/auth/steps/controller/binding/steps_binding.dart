@@ -1,5 +1,5 @@
-import 'package:evento/features/auth/steps/controller/page_controller.dart';
-import 'package:evento/features/auth/steps/controller/steps_controller.dart';
+import '../page_controller.dart';
+import '../steps_controller.dart';
 import 'package:get/get.dart';
  // Import your controller
 

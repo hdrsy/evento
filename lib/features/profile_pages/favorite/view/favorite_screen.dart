@@ -1,12 +1,12 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/widgets/text_fields/search_filed_with_filtering.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/profile_pages/favorite/controller/favorite_controller.dart';
-import 'package:evento/features/profile_pages/favorite/view/widgets/favorite_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/shared/widgets/text_fields/search_filed_with_filtering.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../controller/favorite_controller.dart';
+import 'widgets/favorite_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
@@ -16,7 +16,7 @@ class FavoriteScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("Favorite",
+        title: Text(tr("Favorite"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

@@ -1,13 +1,13 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/customize_event/service_category/view/widgets/next_step_button.dart';
-import 'package:evento/features/service_provider/see_all_service_category_profile_page/controller/see_all_service_category_controller.dart';
-import 'package:evento/features/service_provider/see_all_service_category_profile_page/view/widget/service_card.dart';
-import 'package:evento/features/service_provider/see_all_service_category_profile_page/view/widget/venue_card.dart';
-import 'package:evento/main.dart';
+import '../../../../core/responsive/responsive.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../customize_event/service_category/view/widgets/next_step_button.dart';
+import '../controller/see_all_service_category_controller.dart';
+import 'widget/service_card.dart';
+import 'widget/venue_card.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllServiceCategoryScreen extends StatelessWidget {
   SeeAllServiceCategoryScreen({super.key});
   final SeeAllServiceCategoryController serviceCategoryController =
@@ -18,7 +18,7 @@ class SeeAllServiceCategoryScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-         title: Text("Service Provider's",
+         title: Text(tr("Service Provider's"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,

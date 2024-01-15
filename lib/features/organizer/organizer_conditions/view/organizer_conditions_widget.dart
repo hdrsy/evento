@@ -1,10 +1,10 @@
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/main.dart';
+import '../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../core/utils/theme/text_theme.dart';
+import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrganizerConditionsWidget extends StatelessWidget {
   const OrganizerConditionsWidget({super.key});
 
@@ -45,7 +45,7 @@ class OrganizerConditionsWidget extends StatelessWidget {
                       color: customColors.primaryText,
                       useGoogleFonts: true,
                     ),
-                  ),
+                  ).tr(),
                 ),
               ),
               const WhatIsAnorganizer(),
@@ -82,7 +82,7 @@ class ExclusiveFeaturesforOrganizer extends StatelessWidget {
               color: customColors.primaryText,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
         Align(
           alignment: const AlignmentDirectional(-1.00, -1.00),
@@ -102,7 +102,7 @@ Seamless Collaborations: Effortlessly coordinate with vendors, sponsors, and fel
 Dedicated Support: Whenever you need assistance or advice, our support team is just a message away, ready to assist you in making your event a grand success.
 """,
             style: customTextStyle.bodyMedium,
-          ),
+          ).tr(),
         ),
       ].divide(const SizedBox(height: 5)),
     );
@@ -128,14 +128,14 @@ class WhatDoesBecominganOrganize extends StatelessWidget {
               color: customColors.primaryText,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
         Align(
           alignment: const AlignmentDirectional(-1.00, -1.00),
           child: Text(
             "Embracing the role of an Organizer means you are ready to take the lead in crafting events that resonate and inspire. It's about bringing your unique vision to life and creating spaces where stories unfold and connections are made.",
             style: customTextStyle.bodyMedium,
-          ),
+          ).tr(),
         ),
       ].divide(const SizedBox(height: 5)),
     );
@@ -161,14 +161,14 @@ class WhatIsAnorganizer extends StatelessWidget {
               color: customColors.primaryText,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
         Align(
           alignment: const AlignmentDirectional(-1.00, -1.00),
           child: Text(
             "An Organizer is more than just a planner; they are creators of experiences and architects of memories. If you have a flair for orchestrating events and a desire to bring people together, this role is tailored for you.",
             style: customTextStyle.bodyMedium,
-          ),
+          ).tr(),
         ),
       ].divide(const SizedBox(height: 5)),
     );
@@ -191,7 +191,7 @@ class Buttons extends StatelessWidget {
             // Navigator.pop(context);
             Get.back();
           },
-          text: "Cancel",
+          text:tr( "Cancel"),
           options: ButtonOptions(
             height: 40,
             padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
@@ -215,7 +215,7 @@ class Buttons extends StatelessWidget {
             // context.pushNamed('Become-an-Organizer');
             Get.toNamed('/OrganizerCreateProfileScreen');
           },
-          text: "Confirm",
+          text:tr( "Confirm"),
           options: ButtonOptions(
             height: 40,
             padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),

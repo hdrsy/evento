@@ -1,6 +1,8 @@
 
 import 'dart:convert';
 
+import 'package:evento/core/server/helper_api.dart';
+
 class EventModel {
   final int id;
   final String title;
@@ -21,8 +23,9 @@ final  EventHomeVenue? venue;
     required this.venue
   });
 
-  factory EventModel.fromJson(Map<String, dynamic> json) {
-    print(json['videos'] );
+  factory EventModel.fromJson(Map<String, dynamic> oldJson) {
+     Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+   
     return EventModel(
       id: json['id'],
       title: json['title'],
@@ -43,7 +46,9 @@ class EventHomeVenue{
   final String governorate;
 
   EventHomeVenue({required this.id, required this.long, required this.lang, required this.governorate});
-factory EventHomeVenue.fromJson(Map<String, dynamic> json){
+factory EventHomeVenue.fromJson(Map<String, dynamic> oldJson){
+   Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+   
   return EventHomeVenue(id: json['id'], long: json['longitude'], lang: json['latitude'], governorate: json["governorate"]);
 }
 }

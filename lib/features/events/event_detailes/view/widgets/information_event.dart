@@ -1,19 +1,19 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/book_now_button.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/about_event_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/amenities_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/build_service_provider_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/event_detailes.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/event_time_line_button.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/gallery_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/header.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/links_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/location_section.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/more_events.dart';
-import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/orgnization_section.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../model/event_detailes_model.dart';
+import 'book_now_button.dart';
+import 'inforamtion_event_widgets/about_event_section.dart';
+import 'inforamtion_event_widgets/amenities_section.dart';
+import 'inforamtion_event_widgets/build_service_provider_section.dart';
+import 'inforamtion_event_widgets/event_detailes.dart';
+import 'inforamtion_event_widgets/event_time_line_button.dart';
+import 'inforamtion_event_widgets/gallery_section.dart';
+import 'inforamtion_event_widgets/header.dart';
+import 'inforamtion_event_widgets/links_section.dart';
+import 'inforamtion_event_widgets/location_section.dart';
+import 'inforamtion_event_widgets/more_events.dart';
+import 'inforamtion_event_widgets/orgnization_section.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class InformationEvent extends StatelessWidget {

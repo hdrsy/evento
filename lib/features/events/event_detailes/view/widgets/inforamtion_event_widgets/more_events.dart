@@ -1,20 +1,20 @@
-import 'package:evento/core/responsive/responsive.dart';
-import 'package:evento/core/shared/functions/lists/carouse_options_functions.dart';
-import 'package:evento/core/shared/widgets/buttons/toggle_icon.dart';
-import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/core/shared/widgets/lists/carousel_slider.dart';
-import 'package:evento/core/utils/animation/animation_text.dart';
-import 'package:evento/core/utils/helper/date_formatter.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
-import 'package:evento/features/events/event_detailes/model/related_event_model.dart';
-import 'package:evento/main.dart';
+import '../../../../../../core/responsive/responsive.dart';
+import '../../../../../../core/shared/functions/lists/carouse_options_functions.dart';
+import '../../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../../core/shared/widgets/images/network_image.dart';
+import '../../../../../../core/shared/widgets/lists/carousel_slider.dart';
+import '../../../../../../core/utils/animation/animation_text.dart';
+import '../../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../controller/event_detailes_controller.dart';
+import '../../../model/related_event_model.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 Widget buildMoreEventsSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
 
@@ -36,7 +36,7 @@ Widget buildMoreEventsSection(BuildContext context) {
                 useGoogleFonts: true,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            ).tr(),
             InkWell(
               onTap: () {},
               child: Text(

@@ -1,4 +1,4 @@
-import 'package:evento/main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

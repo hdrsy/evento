@@ -1,12 +1,12 @@
 
-import 'package:evento/core/shared/models/media.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/gallery/view/gallery_for_local_fies.dart';
-import 'package:evento/main.dart';
+import '../../../../../core/shared/models/media.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../gallery/view/gallery_for_local_fies.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SeeAllfolders extends StatelessWidget {
   const SeeAllfolders({super.key, required this.allFolders});
   final List<FolderModel> allFolders;
@@ -16,7 +16,7 @@ class SeeAllfolders extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("All Folders",
+        title: Text(tr("All Folders"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
