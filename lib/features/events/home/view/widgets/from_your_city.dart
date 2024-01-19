@@ -33,7 +33,7 @@ class FromYourCity extends StatelessWidget {
               children: [
                 ColumnText(
                   title:tr( "Events in your city"),
-                  subTitle: " Local Celebrations & Urban Vibes",
+                  subTitle: tr("Local Celebrations & Urban Vibes"),
                   onTap: () {
                     Get.toNamed('/seeAll', arguments: [
                       eventInYourCityListController.pageId,

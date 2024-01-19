@@ -67,11 +67,11 @@ class CategoryWidget extends StatelessWidget {
               String targetKeyMap = '';
               switch (categoryModel.title) {
                 case  "Tonight":
-                  targetRout = ServerConstApis.getToNightList;
+                  targetRout =isGuset?ServerConstApis.getToNightListforGuest: ServerConstApis.getToNightList;
                   targetKeyMap = 'toNightEvent';
                   break;
                 case "This Week":
-                  targetRout = ServerConstApis.getThisWeekList;
+                  targetRout =isGuset?ServerConstApis.getThisWeekListforGuest: ServerConstApis.getThisWeekList;
                   targetKeyMap = 'thisWeekEvent';
                   break;
                 default:
@@ -116,7 +116,7 @@ class CategoryWidget extends StatelessWidget {
               fontWeight: FontWeight.normal,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
         ),
       ],
     );

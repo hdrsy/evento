@@ -2,6 +2,8 @@ class ServerConstApis {
   static String baseAPI = 'http://94.141.219.16:8000';
   // static String baseAPI = 'http://10.0.2.2:8000';
   // static String baseAPI = 'http://127.0.0.1:8000';
+  static String baseAPIImage = 'http://127.0.0.1:8000';
+  // static String baseAPI = 'http://192.168.100.7:8000';
 
 ///// auth
   static String signUpStep1 = '$baseAPI/api/signup_step1';
@@ -62,6 +64,10 @@ class ServerConstApis {
   static String myFavoriteEvents='$baseAPI/api/my_favorite';
   //// reels
   static String getReels = '$baseAPI/api/reels';
+  //// notification
+  static String getNotification = '$baseAPI/api/notification';
+  //// promoCode
+  static String myPromoCode = '$baseAPI/api/my_promo_code';
 
 
   //// profile
@@ -94,4 +100,22 @@ class ServerConstApis {
   static String reviewServiceProvider= '$baseAPI/api/service-provider-review';
   static String reviewVenue= '$baseAPI/api/venue-review';
   static String inviteEvent= '$baseAPI/api/Invite';
+
+
+  //// filter
+  static String filter= '$baseAPI/api/filter';
+
+
+  ///// guest
+  static String getCategoryListforGuest = '$baseAPI/api/event_category-guest';
+  static String getFeaturedListforGuest = '$baseAPI/api/featured_event-guest';
+  static String getTrendingListforGuest = '$baseAPI/api/trending_event-guest';
+  static String getToNightListforGuest = '$baseAPI/api/toNight-guest';
+  static String getThisWeekListforGuest = '$baseAPI/api/thisWeek-guest';
+  static String getOfferListforGuest = '$baseAPI/api/offer_event-guest';
+  static String getAccordingCategoryListforGuest = '$baseAPI/api/eventAccordingCategory-guest';
+  static String getReelsforGuest = '$baseAPI/api/reels-guest';
+  static String getEventDetailesforGuest = '$baseAPI/api/event-guest';
+  
+
 }

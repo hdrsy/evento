@@ -39,7 +39,7 @@ class FeaturedList extends StatelessWidget {
               children: [
                 ColumnText(
                   title:tr( "Featured"),
-                  subTitle: " Enchanted Evening & Festive Lights",
+                  subTitle: tr("Enchanted Evening & Festive Lights"),
                   onTap: () {
                     Get.toNamed('/seeAll', arguments: [
                       featuredListController.pageId,

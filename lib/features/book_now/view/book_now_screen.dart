@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
+
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/images/network_image.dart';
@@ -121,7 +123,11 @@ class BookNowScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                  )
+                  ),
+                   ...List.generate(bookNowController.errorMessage.length,(index)=>
+                              
+                              ErrorMessages(message:bookNowController.errorMessage[index] ,)
+                            ),
                 ],
               ),
             ))

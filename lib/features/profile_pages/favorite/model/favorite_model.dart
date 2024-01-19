@@ -45,8 +45,7 @@ class FavoriteEventModel {
   String type;
   List<String> images;
   bool isFollowedByAuthUser;
-  bool organizerIsFollowedByAuthUser;
-  Venue venue;
+    Venue venue;
 
   FavoriteEventModel({
     required this.id,
@@ -61,7 +60,6 @@ class FavoriteEventModel {
     required this.type,
     required this.images,
     required this.isFollowedByAuthUser,
-    required this.organizerIsFollowedByAuthUser,
     required this.venue
   });
 
@@ -82,7 +80,6 @@ class FavoriteEventModel {
       venue: Venue.fromJson( json["venue"]),
       images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
-      organizerIsFollowedByAuthUser: json['organizer_is_followed_by_auth_user'],
     );
   }
 }

@@ -108,6 +108,7 @@ class OrganizerCreateProfileController extends GetxController {
 
      fileMap['cover']=coverImage!;
     }
+    if(foldersModel.isNotEmpty){
     for (var i = 0; i < foldersModel.length; i++) {
       dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
       for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
@@ -124,10 +125,7 @@ class OrganizerCreateProfileController extends GetxController {
         print("Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
       } }
       }
-    }
-    print(fileMap.length);
-    print(fileMap['cover']!.path);
-    print(fileMap['profile']!.path);
+    }}
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.becomeOrganizer,
         method: "POST",

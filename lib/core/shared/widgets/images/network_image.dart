@@ -16,9 +16,10 @@ import 'package:shimmer/shimmer.dart';
     loadingBuilder:
         (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
       if (loadingProgress == null) {
+    
         return child; // Image has finished loading
       }
-      return Shimmer.fromColors(
+        return Shimmer.fromColors(
         baseColor: Colors.grey[300]!, // Replace with your base color
         highlightColor: Colors.grey[100]!, // Replace with your highlight color
         child: Container(
@@ -27,7 +28,7 @@ import 'package:shimmer/shimmer.dart';
           color: Colors.white,
         ),
       );
-    },
+      },
     errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
       log(stackTrace.toString());
       log(error.toString());

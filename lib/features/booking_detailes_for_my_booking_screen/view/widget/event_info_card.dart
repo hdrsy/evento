@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class EventInfoCard extends StatelessWidget {
-   EventInfoCard({super.key});
+class EventInfoCard2 extends StatelessWidget {
+   EventInfoCard2({super.key});
 final BookingDetailesForMyBookingController bookingDetailesController=Get.find();
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ Padding(
         children: [
           SingleItemData(title:tr( "Event"),subTitle: bookingDetailesController.eventDetailsModel.title,),
           SingleItemData(title:tr( "Event Location"),subTitle: bookingDetailesController.eventDetailsModel.venue.governorate,),
-          SingleItemData(title:tr( "Event Organizer"),subTitle: bookingDetailesController.eventDetailsModel.organizer!= null?"${bookingDetailesController.eventDetailsModel.organizer!.firstName} ${bookingDetailesController.eventDetailsModel.organizer!.lastName}":"Evento",),
+          SingleItemData(title:tr( "Event Organizer"),subTitle:"Evento",),
         ].divide(const SizedBox(height: 18)),
       ),
     ),

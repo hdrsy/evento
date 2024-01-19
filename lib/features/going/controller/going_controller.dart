@@ -9,7 +9,7 @@ import '../../../main.dart';
 import 'package:get/get.dart';
 
 class GoingController extends PaginationController<GoingModel> {
-  GoingController() : super(fetchDataCallback: _fetchData);
+  GoingController() : super(fetchDataCallback: _fetchData,cacheKey: "GoingController");
 static int? eventId;
 @override
   void onInit() {

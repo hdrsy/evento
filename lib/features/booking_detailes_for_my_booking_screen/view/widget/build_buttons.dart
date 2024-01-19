@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class BuildButton extends StatelessWidget {
-   BuildButton({super.key});
+class BuildButton2 extends StatelessWidget {
+   BuildButton2({super.key});
 
       final BookingDetailesForMyBookingController bookingDetailesController=Get.find();
   @override

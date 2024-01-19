@@ -47,7 +47,7 @@ late bool isOffer;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.getEventDetailes}/$eventId",
+        targetRout: "${isGuset?ServerConstApis.getEventDetailesforGuest:ServerConstApis.getEventDetailes}/$eventId",
         method: "GEt",
         token: token);
 

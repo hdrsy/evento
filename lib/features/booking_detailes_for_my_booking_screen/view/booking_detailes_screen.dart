@@ -1,3 +1,6 @@
+import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/build_buttons.dart';
+import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/event_info_card.dart';
+
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
@@ -19,7 +22,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class BookingDetailesForMyBookingScreen extends StatelessWidget {
   BookingDetailesForMyBookingScreen({super.key});
-  final BookingDetailesForMyBookingController bookingDetailesController = Get.find();
+  final BookingDetailesForMyBookingController bookingDetailesController = Get.put(BookingDetailesForMyBookingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,11 +62,11 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
               const SizedBox(
                 height: 6,
               ),
-              BookingInfo(),
+              EventInfoCard2(),
               const SizedBox(
                 height: 16,
               ),
-              EventInfoCard(),
+              EventInfoCard2(),
               ...List.generate(
                   bookingDetailesController.ticketList.length,
                   (index) => TicketDetailesCard(
@@ -83,7 +86,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                     Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                        child: BuildButton()),
+                        child: BuildButton2()),
                   ],
                 ),
               ),

@@ -1,19 +1,23 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
 import '../../utils/error_handling/erroe_handling.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 /// PaginationController is a generic class for managing paginated data.
 /// It is designed to be extended by specific controllers for different types of data.
-/// 
+///
 /// Type [T] represents the type of data in the list (e.g., Event).
 class PaginationController<T> extends GetxController {
   // A function that is responsible for fetching data. It takes the URL, page number, and any additional parameters.
-  late Future<Either<ErrorResponse, Map<String, dynamic>>> Function(String url, int page, Map<String, dynamic> additionalParams) fetchDataCallback;
+  late Future<Either<ErrorResponse, Map<String, dynamic>>> Function(
+          String url, int page, Map<String, dynamic> additionalParams)
+      fetchDataCallback;
 
-  // Reactive variables to track loading states.
+  // Reactive variables to track loading states.m
   late RxBool isLoading;
   late RxBool isLoadingMoreData;
 
@@ -25,6 +29,8 @@ class PaginationController<T> extends GetxController {
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
+  late CacheService cacheService;
+  final String cacheKey;
 
   // A reactive list to hold the items of type [T].
   late RxList<T> itemList;
@@ -33,7 +39,8 @@ class PaginationController<T> extends GetxController {
   late RxList<String> errorMessage;
 
   // Constructor: Initializes variables and sets up the scroll listener.
-  PaginationController({required this.fetchDataCallback}) {
+  PaginationController(
+      {required this.fetchDataCallback, required this.cacheKey}) {
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
     dataLimit = 4;
@@ -42,10 +49,12 @@ class PaginationController<T> extends GetxController {
     errorMessage = <String>[].obs;
     itemList = <T>[].obs;
     scrollController = ScrollController();
-
+    cacheService = cacheService = CacheService(cacheKey);
     // Scroll listener to handle 'load more' functionality on scroll.
     scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent == scrollController.offset && hasMoreData.value) {
+      if (scrollController.position.maxScrollExtent ==
+              scrollController.offset &&
+          hasMoreData.value) {
         isLoadingMoreData.value = true;
         fetchData();
       }
@@ -62,17 +71,35 @@ class PaginationController<T> extends GetxController {
   // Method to fetch data using the provided callback. It handles the response and updates the controller's state.
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
-    
-    Either<ErrorResponse, Map<String, dynamic>> response = await fetchDataCallback('your-api-url', pageId, {}); // Replace 'your-api-url' and {} with actual values
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-// log("ddd");
-print(handlingResponse);
-// log("ddd");
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
+    if (await checkInternet()) {
+      log("from cache");
+      final d = await cacheService.getObject<Map<String, dynamic>>(
+        cacheKey: cacheKey,
+        deserializeFunction: (jsonMap) => jsonMap,
+      );
+      print("$cacheKey : $d");
+      if(d != null){
+
+      handleDataSuccess(d);
+      }else{
+        isLoading.value=false;
+      }
     } else {
-      handleDataSuccess(handlingResponse);
+      Either<ErrorResponse, Map<String, dynamic>> response =
+          await fetchDataCallback('your-api-url', pageId,
+              {}); // Replace 'your-api-url' and {} with actual values
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        handleDataSuccess(handlingResponse);
+        cacheService.cacheObject<Map<String, dynamic>>(
+          object: handlingResponse,
+          cacheKey: cacheKey,
+          serializeFunction: (data) => data,
+        );
+      }
     }
     isLoading.value = false;
     isLoadingMoreData.value = false;
@@ -89,4 +116,12 @@ print(handlingResponse);
     scrollController.dispose();
     super.onClose();
   }
+  void handleNoCachedData() {
+  // Implement logic for handling no cached data
+  // For example, show a message to the user, update the UI, etc.
+  log("No cached data available. Unable to fetch data from the server.");
+  // You can update errorMessage or any other state variable to notify the user
+  errorMessage.value = ["No internet connection and no cached data available."];
+  // Update any other relevant state to reflect the situation
+}
 }

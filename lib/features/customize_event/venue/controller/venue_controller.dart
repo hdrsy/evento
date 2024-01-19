@@ -9,13 +9,13 @@ import 'package:get/get.dart';
 
 
 class VenueController  extends PaginationController<Venue> {
-  VenueController() : super(fetchDataCallback: _fetchData);
+  VenueController() : super(fetchDataCallback: _fetchData,cacheKey: "VenueController");
 late bool isInCustomuzEvent;
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
         
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     String apiUrl = "${ServerConstApis.getAllvenue}?page=$page";
 
     // Returning the result of the API call

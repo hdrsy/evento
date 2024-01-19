@@ -21,6 +21,8 @@ class ReelsVideoWidget extends StatefulWidget {
 class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObserver {
   bool videoInitialized = false;
   late VideoPlayerController videoPlayerController;
+  bool _isBuffering = false;
+  bool _isPlaying = false;
   @override
   void initState() {
     super.initState();
@@ -61,12 +63,25 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
     print("Error initializing video player: $error");
   });
       videoPlayerController.addListener(() {
+         final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&
+                                       videoPlayerController.value.isBuffering;
+ if (isActuallyBuffering != _isBuffering) {
+        setState(() {
+          _isBuffering = isActuallyBuffering;
+        });
+      }
+
         if (videoPlayerController.value.isPlaying && !_isPlaying) {
           // Video has started playing
           setState(() {
             _isPlaying = true;
           });
         }
+      else if (!videoPlayerController.value.isPlaying && _isPlaying) {
+        setState(() {
+          _isPlaying = false;
+        });
+      }
       });
     // }
   }
@@ -81,7 +96,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
     super.dispose();
   }
 
-  bool _isPlaying = false;
+  // bool _isPlaying = false;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -142,14 +157,16 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
                     ),
                   ],
                 ),
-                if (!_isPlaying)
-                  const Center(
-                    child: Icon(
-                      Icons.play_arrow,
-                      size: 50.0,
-                      color: Colors.white,
-                    ),
-                  ),
+                 if (_isBuffering)
+          const CircularProgressIndicator(),
+                // if (!_isPlaying)
+                //   const Center(
+                //     child: Icon(
+                //       Icons.play_arrow,
+                //       size: 50.0,
+                //       color: Colors.white,
+                //     ),
+                //   ),
 
                 GetBuilder<TweenAnimationController>(
                   builder: (context) {

@@ -1,3 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/shared/widgets/snak_bar/snak_bar_for_errors.dart';
+import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
+
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
@@ -10,30 +14,35 @@ class NextStepButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return // Generated code for this Button Widget...
-ButtonWidget(
-  onPressed: () async {
-Get.toNamed('/EventReviewScreen');
-  },
-  text: "Next ",
-  options: ButtonOptions(
-    height: 40,
-    padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-    color: customColors.primary,
-    textStyle: customTextStyle.titleSmall.override(
+        ButtonWidget(
+      onPressed: () async {
+        ServiceCategoryController serviceCategoryController = Get.find();
+        if (serviceCategoryController.selectedVenue.value != 0  && serviceCategoryController.selectedServiceProviders.isNotEmpty) {
+          Get.toNamed('/EventReviewScreen');
+        } else {
+snakBarForError(tr("Please Select Your Venue First"));
+
+        }
+      },
+      text: "Next ",
+      options: ButtonOptions(
+        height: 40,
+        padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        color: customColors.primary,
+        textStyle: customTextStyle.titleSmall.override(
           fontFamily: 'Nunito',
           color: customColors.info,
           fontWeight: FontWeight.w500,
           useGoogleFonts: false,
         ),
-    elevation: 3,
-    borderSide: const BorderSide(
-      color: Colors.transparent,
-      width: 1,
-    ),
-    borderRadius: BorderRadius.circular(40),
-  ),
-)
-;
+        elevation: 3,
+        borderSide: const BorderSide(
+          color: Colors.transparent,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(40),
+      ),
+    );
   }
 }

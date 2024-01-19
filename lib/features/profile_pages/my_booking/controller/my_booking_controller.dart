@@ -77,7 +77,7 @@ List<TicketModel> generatedTicketModel=[];
     }
   }
 
-  List<TicketModel> createTicketModelsFromEventBookings(List<EventBooking> bookings) {
+   createTicketModelsFromEventBookings(List<EventBooking> bookings) {
     generatedTicketModel.clear();
   
 for (var i=0;i<bookings.length;i++) {

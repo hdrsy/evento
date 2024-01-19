@@ -37,6 +37,17 @@ final  EventHomeVenue? venue;
       venue: json.containsKey('venue')?EventHomeVenue.fromJson(json['venue']):null
     );
   }
+Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'start_date': startDate.toIso8601String(),
+      'ticket_price': ticketPrice,
+      'images': jsonEncode(images),
+      'videos': jsonEncode(videos),
+      'is_followed_by_auth_user': isFollowedByAuthUser,
+      'venue': venue?.toJson(),
+    };}
 }
 
 class EventHomeVenue{
@@ -51,4 +62,12 @@ factory EventHomeVenue.fromJson(Map<String, dynamic> oldJson){
    
   return EventHomeVenue(id: json['id'], long: json['longitude'], lang: json['latitude'], governorate: json["governorate"]);
 }
+ Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'longitude': long,
+      'latitude': lang,
+      'governorate': governorate,
+    };
+  }
 }

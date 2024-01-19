@@ -52,16 +52,16 @@ class DateTimeController extends GetxController {
   }
 
   onPressedNext() {
-    // FormState? formdata = formstate.currentState;
-    // if (formdata!.validate() && isUserEnterDateInfo) {
-    //   formdata.save();
+    FormState? formdata = formstate.currentState;
+    if (formdata!.validate() && isUserEnterDateInfo) {
+      formdata.save();
       Get.toNamed('/ServiceCategoryScreen');
     // } else {
-    //   Get.snackbar("Uncomplete data", "Please fill all the required data",
-    //       snackPosition: SnackPosition.TOP,
-    //       backgroundColor: customColors.primaryBackground,
-    //        colorText: customColors.primaryText
-    //       );
-    // }
+      Get.snackbar("Uncomplete data", "Please fill all the required data",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: customColors.primaryBackground,
+           colorText: customColors.primaryText
+          );
+    }
   }
 }

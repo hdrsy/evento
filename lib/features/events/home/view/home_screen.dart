@@ -58,9 +58,7 @@ final HomeController homeController=Get.find();
         isGuset?SizedBox(): Orgnizers(),
          isGuset?SizedBox(): EventsFromOrganizer(),
          ForYou()
-      ].divide( SizedBox(height:  screenSize == ScreenSize.small
-        ? 20
-        : (screenSize == ScreenSize.medium ? 22 : 24),)),
+      ].divide( SizedBox(height: 5)),
       ),
     );
   }

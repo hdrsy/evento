@@ -1,3 +1,6 @@
+import 'package:evento/core/shared/widgets/snak_bar/snak_bar_for_errors.dart';
+import 'package:evento/features/customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
+
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,13 @@ class CustomizeEventButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonWidget(
   onPressed: () async {
+    TypetoSetEventController typetoSetEventController=Get.find();
+    if(typetoSetEventController.selectedCategory.value!=0){
+
     Get.toNamed('/dateTimeScreen');
+    }else{
+      snakBarForError(tr("Please Choice Your Event Type"));
+    }
     },
   text:tr(  "Customize Event"),
   icon: Icon(

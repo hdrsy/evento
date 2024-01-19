@@ -52,14 +52,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SearchPageController extends PaginationController<EventModel> {
-  SearchPageController() : super(fetchDataCallback: _fetchData);
+  SearchPageController() : super(fetchDataCallback: _fetchData,cacheKey: "SearchPageController");
   RxList<EventModel> searchResultSearch=<EventModel>[].obs;
    RxBool isSearchActive=false.obs;
   late TextEditingController searchField=TextEditingController();
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     String apiUrl = "${ServerConstApis.getTrendingList}?page=$page";
 
     // Returning the result of the API call
@@ -88,6 +88,7 @@ class SearchPageController extends PaginationController<EventModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
   void onPressSearch(String query) {
   if (query.isEmpty) {

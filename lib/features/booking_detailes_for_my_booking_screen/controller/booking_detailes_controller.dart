@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
+
 import '../../../core/utils/services/pdf_service.dart';
 import '../../book_now/model/ticket_model.dart';
 import '../../events/event_detailes/model/event_detailes_model.dart';
@@ -8,7 +10,7 @@ import 'package:get/get.dart';
 
 class BookingDetailesForMyBookingController extends GetxController{
   late List<TicketModel> ticketList;
-   late EventDetailsModel eventDetailsModel;
+   late CancelledEvent eventDetailsModel;
  
 @override
   void onInit() {

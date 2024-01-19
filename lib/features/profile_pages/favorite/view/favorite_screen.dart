@@ -36,7 +36,7 @@ class FavoriteScreen extends StatelessWidget {
           return SingleChildScrollView(
             padding: padding(10,16,0,16),
             child: Column(children: [
-              const SearchFieldWithFiltering(),
+               SearchFieldWithFiltering(),
               ...List.generate(controller.favoriteEvents.length, (index) =>  FavoriteCard(eventWrapper: controller.favoriteEvents[index],modelId:  index))
               ,
               

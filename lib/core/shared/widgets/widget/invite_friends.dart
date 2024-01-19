@@ -75,9 +75,14 @@ class InviteFreinds extends StatelessWidget {
                       Builder(
                         builder: (context) => ButtonWidget(
                           onPressed: () async {
-                            await Share.share(
-                              'Check out this event in Evento',
-                            );
+                            final EventDetailesController eventDetailesController = Get.find();
+  
+                             const String message = "Check out this event in Evento";
+          final String url = "http://94.141.219.16:8005/#/eventDetailes/${eventDetailesController.eventId}";  // Replace with your event link
+          final String shareContent = "$message\n\nFor more details, visit: $url";
+
+        await   Share.share(shareContent);
+                            
                           },
                           text:tr( "External Share"),
                           options: ButtonOptions(

@@ -7,9 +7,9 @@ import 'core/utils/extenstions/text_extenstions.dart';
 import 'core/utils/services/notification_service.dart';
 
 import 'package:evento/core/utils/services/pref_service.dart';
-import 'package:evento/core/utils/services/pusher.dart';
 
 import 'package:evento/core/utils/services/user_info.dart';
+import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -31,22 +31,18 @@ void main() async {
 
   themeValue = await prefService.readString('theme');
 
-  targetRout = await prefService.isContainKey('token') ? '/home' : "/";
-  bool isCompleteProfile =
-      await prefService.readString("isCompleteProfile") == "true";
-  if (isCompleteProfile && targetRout == '/home') {
-    
-    await PusherService.initPusher();
-    await NotificationService().init();
-  }
+  targetRout = await prefService.isContainKey('token') && await prefService.readString("isCompleteProfile")=="true" ? '/home' : "/";
+
 
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
+        
         path:
             'assets/localization', // <-- change the path of the translation files
         fallbackLocale: const Locale('en'),
-        child: const MyApp()),
+        child:
+         const MyApp())
   );
 }
 
@@ -56,7 +52,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initSizes(context);
+    // Messagess messagess=Messagess();
     return GetMaterialApp(
+
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

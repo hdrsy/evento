@@ -20,7 +20,7 @@ final  OffersController offersController=Get.find();
         children: [
            ColumnText(
             title:tr( "Offers"),
-            subTitle: " Local Celebrations & Urban Vibes",
+            subTitle: tr("Local Celebrations & Urban Vibes"),
             onTap: (){
               Get.toNamed('/SeeAllOffersScreen',arguments: [
                 offersController.pageId,

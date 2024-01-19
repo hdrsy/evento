@@ -142,7 +142,7 @@ class GoingCard extends StatelessWidget {
         modelId: modelId,
       );
     } else {
-      return goingModel.friendRequestStatus == tr("pending")
+      return goingModel.friendRequestStatus == "pending"
           ? CancelButton(requestId: goingModel.id, modelId: modelId)
           : const SizedBox();
     }
@@ -190,6 +190,7 @@ class CancelButton extends StatelessWidget {
   final int modelId;
   @override
   Widget build(BuildContext context) {
+    print("onside cancel");
     return ButtonWidget(
       onPressed: () {
         GoingController goingController = Get.find();

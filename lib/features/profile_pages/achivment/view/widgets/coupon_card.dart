@@ -1,26 +1,25 @@
 // Import necessary Flutter packages and your custom theme.
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/core/utils/helper/date_formatter.dart';
+import 'package:evento/features/profile_pages/achivment/model/coupon_model.dart';
+import 'package:evento/features/profile_pages/achivment/view/widgets/show_coupon_card.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
 // Define a StatelessWidget named 'CouponCard'.
 class CouponCard extends StatelessWidget {
   // Define required fields for the widget.
-  final String title;
-  final String subtitle;
-  final String expiryDate;
-  final String offerText;
-  final String imagePath;
-
+  
+final PromoCode promoCode;
   // Constructor for the CouponCard, initializing with required values.
   const CouponCard({
     Key? key,
-    required this.title,
-    required this.subtitle,
-    required this.expiryDate,
-    required this.offerText,
-    required this.imagePath,
+    required this.promoCode
   }) : super(key: key);
 
   // Override the build method to describe how the UI should be constructed.
@@ -32,6 +31,7 @@ class CouponCard extends StatelessWidget {
         InkWell(
           onTap: () {
             // Add your onTap functionality here
+            showButtonSheet(context: context, widget: CouponsWidget(promoCode: promoCode), height: screenHeight*0.5);
           },
           child: Container(
             width: 350,
@@ -68,7 +68,7 @@ class CouponCard extends StatelessWidget {
                     child: RotatedBox(
                       quarterTurns: 3,
                       child: Text(
-                        offerText,
+                        "OFFER",
                         style: customTextStyle.bodyMedium.copyWith(
                           color: customColors.info,
                           fontSize: 14,
@@ -92,16 +92,11 @@ class CouponCard extends StatelessWidget {
                             // Display the coupon image.
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                imagePath,
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              ),
+                              child:getImageNetwork(url: promoCode.image, width: 50, height:50)
                             ),
                             // Display the coupon title.
                             Text(
-                              title,
+                              "${promoCode.discount}% ${tr("Off")}",
                               style: customTextStyle.bodyMedium.copyWith(
                                 color: customColors.primaryText,
                                 fontSize: 20,
@@ -112,7 +107,7 @@ class CouponCard extends StatelessWidget {
                         ),
                         // Display the coupon subtitle.
                         Text(
-                          subtitle,
+                          promoCode.description,
                           style: customTextStyle.bodyMedium.copyWith(
                             color: customColors.primaryText,
                             fontSize: 12,
@@ -126,9 +121,9 @@ class CouponCard extends StatelessWidget {
                             Text(
                               'Expires at',
                               style: customTextStyle.bodyMedium,
-                            ),
+                            ).tr(),
                             Text(
-                              expiryDate,
+                              DateFormatter.formatDate( promoCode.endDate),
                               style: customTextStyle.bodyMedium.copyWith(
                                 color: customColors.primaryText,
                                 fontSize: 12,

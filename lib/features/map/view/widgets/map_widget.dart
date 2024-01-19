@@ -26,7 +26,7 @@ final MapController mapController = Get.find();
                     style: GoogleMapStyle.standard,
                     initialZoom: 14,
                     allowInteraction: true,
-                    allowZoom: false,
+                    allowZoom: true,
                     showZoomControls: false,
                     showLocation: true,
                     showCompass: false,

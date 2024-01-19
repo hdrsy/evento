@@ -33,7 +33,7 @@ class ForYou extends StatelessWidget {
               children: [
                 ColumnText(
                   title:tr( "Just for you"),
-                  subTitle: "Tailored Experiences & Personalized Picks",
+                  subTitle: tr("Tailored Experiences & Personalized Picks"),
                   onTap: () {
                     Get.toNamed('/seeAll', arguments: [
                       justForYouController.pageId,

@@ -9,13 +9,13 @@ import '../model/reels_model.dart';
 import '../../../main.dart';
 
 class ReelsController extends PaginationController<ReelModel> {
-  ReelsController() : super(fetchDataCallback: _fetchData);
+  ReelsController() : super(fetchDataCallback: _fetchData,cacheKey: "ReelsController");
   late int currentUserIndex; // Index of the current user
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ?? "";
-    String apiUrl = "${ServerConstApis.getReels}?page=$page";
+    String apiUrl = "${isGuset?ServerConstApis.getReelsforGuest:ServerConstApis.getReels}?page=$page";
 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
@@ -43,6 +43,7 @@ class ReelsController extends PaginationController<ReelModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
   void nextUser() {
     if (currentUserIndex + 1 < itemList.length) {

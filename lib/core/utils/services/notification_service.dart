@@ -36,8 +36,8 @@ class NotificationService {
     
   // Setting up the notification channel for foreground service.
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'my_foreground',
-    'MY FOREGROUND SERVICE',
+    'booking',
+    'booking',
     description: 'This channel is used for important notifications.',
     importance: Importance.low,
   );
@@ -66,7 +66,7 @@ class NotificationService {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('booking', 'booking',
             channelDescription: 'your_channel_description',
-            importance: Importance.max,
+            importance: Importance.min,
             priority: Priority.high,
             ongoing: true,
             showWhen: false);

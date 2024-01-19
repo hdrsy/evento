@@ -1,3 +1,5 @@
+import 'package:evento/core/colors/app_colors.dart';
+
 import '../../../core/utils/extenstions/color_extenstions.dart';
 import '../../../core/utils/extenstions/text_extenstions.dart';
 import '../controller/main_bottom_navigation_controller.dart';
@@ -18,7 +20,7 @@ final MainBottomNavigationController mainBottomNavigationController=Get.find();
       bottomNavigationBar:  BottomNavigationBar(
         currentIndex: mainBottomNavigationController.selectedPage.value,
         onTap: (i) => mainBottomNavigationController.changePage(i),
-        backgroundColor: customColors.secondaryBackground,
+        backgroundColor:mainBottomNavigationController.selectedPage.value==2?Colors.black:  customColors.secondaryBackground,
         selectedItemColor: customColors.primary,
         unselectedItemColor: customColors.grayIcon,
         showSelectedLabels: true,

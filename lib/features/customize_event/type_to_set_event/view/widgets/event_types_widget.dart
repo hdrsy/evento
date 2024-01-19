@@ -34,7 +34,7 @@ class EventTypesWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: screenHeight*0.6,
+            height: screenHeight*0.56,
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
               child:GridView.count(
@@ -87,29 +87,31 @@ class IconContainerWidget extends StatelessWidget {
       onTap: (){
         typetoSetEventController.selectedCategory.value=categoryModel.id;
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-                color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: getImageNetwork(
-                            url: categoryModel.icon, width: null, height: null)
-                        .image)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 3),
-            child: Text(
-              categoryModel.title,
-              style: customTextStyle.bodyMedium,
+      child: Obx(
+        ()=> Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: getImageNetwork(
+                              url: categoryModel.icon, width: null, height: null)
+                          .image)),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(
+                categoryModel.title,
+                style: customTextStyle.bodyMedium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

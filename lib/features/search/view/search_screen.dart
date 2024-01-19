@@ -35,11 +35,17 @@ final SearchPageController searchPageController=Get.put(SearchPageController());
           child:  Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              searchTextField(
-                controller: searchPageController.searchField,
-                onChanged: (value){
-      searchPageController.onPressSearch(value!);
-                }
+              InkWell(
+                onTap: (){
+                  searchPageController.isSearchActive.value=true;
+                },
+                child: SearchFieldWithFiltering(
+                   controller: searchPageController.searchField,
+                  onChanged: (value){
+                    searchPageController.onPressSearch(value!);
+                  },
+                  result: searchPageController.searchResultSearch,
+                ),
               ),
               // RecentlyWidget(),
             searchPageController.isSearchActive.value?SearchResult() : PopularWidget()

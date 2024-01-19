@@ -1,3 +1,5 @@
+import 'package:evento/features/profile_pages/my_booking/controller/my_booking_controller.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -242,7 +244,10 @@ final List<EventBooking>? eventBooking;
   Widget _buildViewTicketButton(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
-      //  Get.toNamed('/BookingDetailesForMyBookingScreen',arguments: []);
+        final MyBookingController myBookingController=Get.find();
+     var result= myBookingController.createTicketModelsFromEventBookings(eventBooking!);
+      print(result);
+       Get.toNamed('/BookingDetailesForMyBookingScreen',arguments: [model,result]);
         
       },
       text:tr( "View E-Ticket"),

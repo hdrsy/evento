@@ -27,6 +27,7 @@ class ChoiceOrganizerCategoryController extends GetxController{
     categories.removeAt(0);
     categories.removeAt(0);
      categories.forEach((element) {
+      print(element.id);
       choiceServiceList.add(ChoiceOrganizerCategoryTypeModel(name: element.title,categoryId: element.id));
      });
   }

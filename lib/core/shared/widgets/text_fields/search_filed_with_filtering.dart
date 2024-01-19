@@ -1,3 +1,5 @@
+import 'package:evento/core/responsive/responsive.dart';
+
 import '../bottom_sheets/show_bottom_sheet.dart';
 import '../buttons/toggle_icon.dart';
 import '../widget/filter_widget.dart';
@@ -6,8 +8,10 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class SearchFieldWithFiltering extends StatelessWidget {
-  const SearchFieldWithFiltering({super.key, this.onChanged});
+   SearchFieldWithFiltering({super.key, this.onChanged, this.controller,this.result});
 final Function(String)? onChanged;
+final TextEditingController? controller;
+var result;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +48,7 @@ final Function(String)? onChanged;
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                       child: TextFormField(
+                        controller: controller,
                         onChanged: onChanged,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -72,8 +77,8 @@ final Function(String)? onChanged;
                     onPressed: () async {
                       await showButtonSheet(
                           context: context,
-                          widget: FilterWidget(),
-                          height: 450);
+                          widget: FilterWidget(result:result),
+                          height: screenHeight*0.6);
                     },
                     value: false,
                     onIcon: Icon(

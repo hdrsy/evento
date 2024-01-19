@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'flutter_flow_util.dart';
 
 import 'form_field_controller.dart';
@@ -132,7 +134,7 @@ class _FlutterFlowChoiceChipsState extends State<FlutterFlowChoiceChips> {
             label: Text(
               option.label,
               style: style.textStyle,
-            ),
+            ).tr(),
             labelPadding: style.labelPadding,
             avatar: option.iconData != null
                 ? Icon(

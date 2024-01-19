@@ -14,7 +14,8 @@ enum ScreenSize { small, medium, large }
       915.0; // Base design screen height (e.g., iPhone X)
 
    initSizes(context) {
-    screenWidth = MediaQuery.of(context).size.width;
+    double ww= MediaQuery.of(context).size.width;
+    screenWidth =ww>1000?500:ww;
     screenHeight = MediaQuery.of(context).size.height;
     if (screenWidth < 400) { // Small screens (small phones)
       screenSize = ScreenSize.small;

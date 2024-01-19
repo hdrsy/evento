@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -43,6 +46,9 @@ class CategoryListController extends GetxController {
   late RxBool isLoading;
   late RxList<CategoryModel> categoryList;
   late RxList<String> errorMessage;
+  CacheService cacheService = CacheService('categoryListCache');
+  final String cacheKey = 'categoryList';
+
   @override
   void onInit() {
     isLoading = false.obs;
@@ -59,11 +65,23 @@ class CategoryListController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
+     if (await checkInternet()) {
+      log("from cache");
+      final d= await cacheService.getObject<Map<String, dynamic>>(
+        cacheKey: cacheKey,
+        deserializeFunction: (jsonMap) => jsonMap,
+      );
+      if(d != null){
+
+      whenGetDataSuccess(d);
+      }else{
+        isLoading.value=false;
+      }
+    } else{
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.getCategoryList,
+        targetRout:isGuset?ServerConstApis.getCategoryListforGuest: ServerConstApis.getCategoryList,
         method: "GEt",
         token: token);
-    print(response);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
@@ -81,21 +99,27 @@ class CategoryListController extends GetxController {
       
           } else {
       whenGetDataSuccess(handlingResponse);
-    }
+       cacheService.cacheObject<Map<String, dynamic>>(
+      object: handlingResponse,
+      cacheKey: cacheKey,
+      serializeFunction: (data) => data,
+    );
+    }}
     isLoading.value = false;
   }
 
-  whenGetDataSuccess(handlingResponse) {
+  whenGetDataSuccess(handlingResponse) async{
     List<dynamic> categoryListJson = handlingResponse['category'];
 
     categoryList.addAll(
         categoryListJson.map((jsonItem) => CategoryModel.fromJson(jsonItem)));
-log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     isLoading.value = false;
-  }
+     // Cache the current page data
+   
+    }
 }
 class EventsforOrganizerListController extends PaginationController<EventModel> {
-  EventsforOrganizerListController() : super(fetchDataCallback: _fetchData);
+  EventsforOrganizerListController() : super(fetchDataCallback: _fetchData,cacheKey: "EventsforOrganizerList");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -115,7 +139,6 @@ class EventsforOrganizerListController extends PaginationController<EventModel> 
   handleDataSuccess(dynamic handlingResponse) {
     
     List<dynamic> categoryListJson = handlingResponse['organizer_event']['data'];
-    print(categoryListJson);
     lastPageId = handlingResponse['organizer_event']['last_page'];
 
     itemList.addAll(categoryListJson
@@ -128,6 +151,7 @@ class EventsforOrganizerListController extends PaginationController<EventModel> 
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
@@ -151,13 +175,13 @@ class EventsforOrganizerListController extends PaginationController<EventModel> 
   }
 }
 class OffersController extends PaginationController<OfferEvent> {
-  OffersController() : super(fetchDataCallback: _fetchData);
+  OffersController() : super(fetchDataCallback: _fetchData,cacheKey: "Offers");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ;
-    String apiUrl = "${ServerConstApis.getOfferList}?page=$page";
+    String apiUrl = "${isGuset?ServerConstApis.getOfferListforGuest:ServerConstApis.getOfferList}?page=$page";
 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
@@ -171,7 +195,6 @@ class OffersController extends PaginationController<OfferEvent> {
   handleDataSuccess(dynamic handlingResponse) {
     
     List<dynamic> categoryListJson = handlingResponse['OfferEvent']['data'];
-    print(categoryListJson);
     lastPageId = handlingResponse['OfferEvent']['last_page'];
 
     itemList.addAll(categoryListJson
@@ -184,6 +207,7 @@ class OffersController extends PaginationController<OfferEvent> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
@@ -208,14 +232,14 @@ class OffersController extends PaginationController<OfferEvent> {
 }
 
 class FeaturedListController extends PaginationController<EventModel> {
-  FeaturedListController() : super(fetchDataCallback: _fetchData);
-
+  FeaturedListController() : super(fetchDataCallback: _fetchData,cacheKey: "FeaturedList");
+ 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ?? "";
-    String apiUrl = "${ServerConstApis.getFeaturedList}?page=$page";
-
+    String apiUrl = "${isGuset?ServerConstApis.getFeaturedListforGuest:ServerConstApis.getFeaturedList}?page=$page";
+ 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
       targetRout: apiUrl,
@@ -239,6 +263,7 @@ class FeaturedListController extends PaginationController<EventModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
@@ -263,7 +288,7 @@ class FeaturedListController extends PaginationController<EventModel> {
 }
 
 class EventInYourCityListController extends PaginationController<EventModel> {
-  EventInYourCityListController() : super(fetchDataCallback: _fetchData);
+  EventInYourCityListController() : super(fetchDataCallback: _fetchData,cacheKey: "EventInYourCityList");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -294,6 +319,7 @@ class EventInYourCityListController extends PaginationController<EventModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
@@ -318,7 +344,7 @@ class EventInYourCityListController extends PaginationController<EventModel> {
 }
 
 class OrganizerController extends PaginationController<OrganizerEvent> {
-  OrganizerController() : super(fetchDataCallback: _fetchData);
+  OrganizerController() : super(fetchDataCallback: _fetchData,cacheKey: "Organizer");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -349,11 +375,16 @@ log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+     cacheService.cacheObject<Map<String, dynamic>>(
+      object: handlingResponse,
+      cacheKey: cacheKey,
+      serializeFunction: (data) => data,
+    );
   }
 
 }
 class HomeOrganizerController extends PaginationController<OrganizerHome> {
-  HomeOrganizerController() : super(fetchDataCallback: _fetchData);
+  HomeOrganizerController() : super(fetchDataCallback: _fetchData,cacheKey: "HomeOrganizer");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -384,18 +415,19 @@ log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
 }
 
 class TrendingListController extends PaginationController<EventModel> {
-  TrendingListController() : super(fetchDataCallback: _fetchData);
+  TrendingListController() : super(fetchDataCallback: _fetchData,cacheKey: "TrendingList");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ?? "";
-    String apiUrl = "${ServerConstApis.getTrendingList}?page=$page";
+    String token = await prefService.readString("token") ;
+    String apiUrl = "${isGuset?ServerConstApis.getTrendingListforGuest:ServerConstApis.getTrendingList}?page=$page";
 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
@@ -409,7 +441,6 @@ class TrendingListController extends PaginationController<EventModel> {
   handleDataSuccess(dynamic handlingResponse) {
     
     List<dynamic> categoryListJson = handlingResponse['trending_event']['data'];
-    print(categoryListJson);
     lastPageId = handlingResponse['trending_event']['last_page'];
 
     itemList.addAll(categoryListJson
@@ -422,6 +453,7 @@ class TrendingListController extends PaginationController<EventModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
@@ -445,7 +477,7 @@ class TrendingListController extends PaginationController<EventModel> {
   }
 }
 class JustForYouController extends PaginationController<EventModel> {
-  JustForYouController() : super(fetchDataCallback: _fetchData);
+  JustForYouController() : super(fetchDataCallback: _fetchData,cacheKey: "JustForYou");
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -466,7 +498,6 @@ class JustForYouController extends PaginationController<EventModel> {
     
     List<dynamic> categoryListJson = handlingResponse['just_for_you']['data'];
     log("message");
-    print(categoryListJson);
     lastPageId = handlingResponse['just_for_you']['last_page'];
 
     itemList.addAll(categoryListJson
@@ -479,6 +510,7 @@ class JustForYouController extends PaginationController<EventModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {

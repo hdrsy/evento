@@ -1,3 +1,6 @@
+import 'package:evento/core/utils/helper/date_formatter.dart';
+import 'package:evento/features/profile_pages/notification/model/notification_model.dart';
+
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -5,13 +8,13 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({super.key,required this.isReaded});
-  final bool isReaded;
+  const NotificationCard({super.key,required this.notificationModel});
+  final NotificationModel notificationModel;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-      color:isReaded? null:customColors.primaryBackground,
+      color:notificationModel.type=="seen"? null:customColors.primaryBackground,
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 16),
@@ -43,7 +46,7 @@ class NotificationCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              "Booking Successful!",
+                              notificationModel.title,
                               style: customTextStyle.bodyMedium.override(
                                 fontFamily: 'Nunito',
                                 color: customColors.primaryText,
@@ -58,7 +61,7 @@ class NotificationCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              "11 Nov , 2023",
+                              DateFormatter.formatDate(notificationModel.createdAt),
                               style: customTextStyle.bodyMedium,
                             ).tr(),
                             SizedBox(
@@ -69,7 +72,7 @@ class NotificationCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "20:30 PM",
+                              DateFormatter.formatTime(notificationModel.createdAt),
                               style: customTextStyle.bodyMedium,
                             ).tr(),
                           ],
@@ -78,7 +81,7 @@ class NotificationCard extends StatelessWidget {
                     ),
                   ].divide(const SizedBox(width: 15)),
                 ),
-            isReaded?  const SizedBox():  Container(
+            notificationModel.type=="seen"?  const SizedBox():  Container(
                   width: 50,
                   height: 25,
                   decoration: BoxDecoration(
@@ -92,6 +95,7 @@ class NotificationCard extends StatelessWidget {
                       style: customTextStyle.titleSmall.override(
                         fontFamily: 'Nunito',
                         fontSize: 12,
+                        color: customColors.info,
                         useGoogleFonts: false,
                       ),
                     ).tr(),
@@ -100,7 +104,7 @@ class NotificationCard extends StatelessWidget {
               ],
             ),
             Text(
-              "You have successfully booked the Art Workshops.The event........",
+              notificationModel.description,
               style: customTextStyle.bodyMedium,
             ).tr(),
           ].divide(const SizedBox(height: 15)),

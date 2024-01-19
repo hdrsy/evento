@@ -42,6 +42,7 @@ class FavoriteController extends GetxController {
       favoriteEvents = interestsJson
           .map((jsonItem) => EventWrapper.fromJson(jsonItem))
           .toList();
+          print(favoriteEvents);
      distances=List.generate(favoriteEvents.length, (index) => "0 Km".obs);
       update();
     }

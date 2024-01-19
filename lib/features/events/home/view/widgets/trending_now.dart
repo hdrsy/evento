@@ -34,7 +34,7 @@ class TrendingNow extends StatelessWidget {
             children: [
               ColumnText(
                 title:tr( "Trending Now"),
-                subTitle: " Lively Gatherings & Illuminated Nights",
+                subTitle: tr("Lively Gatherings & Illuminated Nights"),
                 onTap: () {
                   Get.toNamed('/seeAll', arguments: [
                     trendingListController.pageId,

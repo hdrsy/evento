@@ -1,25 +1,41 @@
 
+import 'package:evento/core/server/filter.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_choice_chips.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/events/home/controller/home_controller.dart';
+import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 // ignore: must_be_immutable
-class FilterWidget extends StatelessWidget {
-   FilterWidget({Key? key}) : super(key: key);
+class FilterWidget extends StatefulWidget {
+   FilterWidget({Key? key,this.result}) : super(key: key);
+var result;
 
+  @override
+  State<FilterWidget> createState() => _FilterWidgetState();
+}
+
+class _FilterWidgetState extends State<FilterWidget> {
   FormFieldController<String>? dropDownValueController;
 
   FormFieldController<List<String>>? choiceChipsValueController;
 
-  List<String>? choiceChipsValues;
+  double price=1000;
+  double locationRange=1;
 
+  List<String>? choiceChipsValues;
+  CategoryListController categoryListController=Get.find();
+List<CategoryModel> categoryList =[];
+// = categoryListController.categoryList
   @override
   Widget build(BuildContext context) {
+categoryList.assignAll(categoryListController.categoryList);
     
 
     return Container(
@@ -101,22 +117,8 @@ class FilterWidget extends StatelessWidget {
                             child: FlutterFlowChoiceChips(
                               options: [
                                 ChipData(tr("All")),
-                                ChipData(
-                                    tr("Music"),
-                                    Icons.music_note_rounded),
-                                ChipData(
-                                     tr("Workshops"),
-                                    Icons.work),
-                                ChipData(
-                                    tr("Art"),
-                                    Icons.color_lens_sharp),
-                                ChipData(
-                                     tr("Food & Drink"),
-                                    Icons.fastfood_rounded),
-                                ChipData(
-                                     tr("Fashion"),
-                                    Icons.linked_camera)
-                              ],
+                                ...List.generate(categoryList.length, (index) => ChipData(categoryList[index].title))
+                               ],
                               onChanged: (val) {}
                                   ,
                               selectedChipStyle: ChipStyle(
@@ -200,7 +202,12 @@ class FilterWidget extends StatelessWidget {
                       "Homs",
                        "Lattakia" 
                     ],
-                    onChanged: (val){},
+                    onChanged: (val){
+                      setState(() {
+                        
+                      dropDownValueController!.value=val;
+                      });
+                    },
                     width: 200,
                     height: 40,
                     textStyle: customTextStyle.bodyMedium,
@@ -247,13 +254,15 @@ class FilterWidget extends StatelessWidget {
                 child: Slider(
                   activeColor: customColors.primary,
                   inactiveColor: customColors.secondaryBackground,
-                  min: 1,
-                  max: 20,
-                  value: 2,
-                  label: "2",
+                  min: 1000,
+                  max: 50000,
+                  value: price,
+                  label: price.toString(),
                   onChanged: (newValue) {
-                    // newValue = double.parse(newValue.toStringAsFixed(20));
-                    // setState(() => _model.sliderValue1 = newValue);
+                    setState(() {
+                      
+                   price=newValue;
+                    });
                   },
                 ),
               ),
@@ -283,10 +292,13 @@ class FilterWidget extends StatelessWidget {
                   activeColor: customColors.primary,
                   inactiveColor: customColors.secondaryBackground,
                   min: 1,
-                  max: 20,
-                  value:1,
-                  label:"1",
+                  max: 1000,
+                  value:locationRange,
+                  label:locationRange.toString(),
                   onChanged: (newValue) {
+                    setState(() {
+                      locationRange=newValue;
+                    });
                     // newValue = double.parse(newValue.toStringAsFixed(20));
                     // setState(() => _model.sliderValue2 = newValue);
                   },
@@ -333,6 +345,24 @@ class FilterWidget extends StatelessWidget {
                       ButtonWidget(
                         onPressed: () async {
                           // Navigator.pop(context);
+                          Map<String,dynamic> data={};
+                          if(choiceChipsValueController !=null){
+                          List<String> selectedChoices = choiceChipsValueController!.value!;
+
+                          for (var i = 0; i < selectedChoices.length; i++) {
+                            data['event_category[$i]']=selectedChoices[i];
+                          }
+                          }
+                          if(dropDownValueController !=null){
+
+                          data['state']=dropDownValueController!.value;
+                          }
+                          data['ticket_price']=price;
+                          if(data .isNotEmpty){
+print("object");
+                         await filter(widget.result,data);
+                         Get.back();
+                          }
                         },
                         text:tr( "Apply filters"),
                         options: ButtonOptions(
@@ -366,3 +396,4 @@ class FilterWidget extends StatelessWidget {
     );
   }
 }
+ 

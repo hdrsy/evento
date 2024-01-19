@@ -51,11 +51,11 @@ final ProfileController profileController=Get.find();
                     title: tr("Help Center"),
                   ),
                    OptionsCard(
-                    targetRout:  showButtonSheet(
-            context: context,
-            widget: const TermOfUse(),
-            height: MediaQuery.of(context).size.height * 0.8
-          ),
+                    targetRout:
+            
+            const TermOfUse(),
+            bottomSheetHeight: MediaQuery.of(context).size.height * 0.9,
+          
                     icon: Icons.contact_support,
                     title: tr("Terms of Use"),
                   ),
@@ -141,11 +141,11 @@ final ProfileController profileController=Get.find();
                     icon: Icons.miscellaneous_services_outlined,
                     title: tr("Service Provider"),
                   ),
-                  //  OptionsCard(
-                  //   targetRout: '/AchivmentScreen',
-                  //   icon: Icons.code_sharp,
-                  //   title: tr("Achievements"),
-                  // ),
+                   OptionsCard(
+                    targetRout: '/AchivmentScreen',
+                    icon: Icons.code_sharp,
+                    title: tr("Achievements"),
+                  ),
                    OptionsCard(
                     targetRout: LanguageSelector(),
                     icon: Icons.language_outlined,

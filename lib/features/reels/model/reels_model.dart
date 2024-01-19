@@ -40,8 +40,8 @@ class ReelModel {
         this.user,
     });
 
-    factory ReelModel.fromJson(Map<String, dynamic> oldJson)  {
-      Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
+    factory ReelModel.fromJson(Map<String, dynamic> json)  {
+      // Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
  
       return
       ReelModel(

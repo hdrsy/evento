@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -33,65 +35,71 @@ class EventReviewScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: padding(16, 24, 16, 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const StepText4(),
-            const LinearPercentIndicatorWidget4(),
-            ReviewCard(
-              title:tr( "Contact Detailes"),
-              leftColumnData:  [
-                tr("Name"),
-                tr("Phone Number"),
-                tr("Number of Adults"),
-                tr("Number of Children"),
-              ],
-              rightColumnData: [
-                eventReviewController.contactInfoModel.firstName +
-                    eventReviewController.contactInfoModel.lastName,
-                eventReviewController.contactInfoModel.phoneNumber,
-                "${eventReviewController.contactInfoModel.adultNumber} people",
-                "${eventReviewController.contactInfoModel.childrenNumber} people"
-              ],
-            ),
-            ReviewCard(
-              title:tr( "Event Overview"),
-              leftColumnData:  [
-                tr("Event Title"),
-                tr("Start Time"),
-               tr( "End Time"),
-                tr("Date")
-              ],
-              rightColumnData: [
-                "La Rose",
-                DateFormatter.formatTime(
-                    eventReviewController.eventOverView.startTime),
-                DateFormatter.formatTime(
-                    eventReviewController.eventOverView.endTime),
-                DateFormatter.formatDate(
-                    eventReviewController.eventOverView.date),
-              ],
-            ),
-            ReviewCard(
-              title:tr( "Event Crew"),
-              leftColumnData: eventReviewController.selected.values
-                  .map((value) => value.toString())
-                  .toList(),
-              rightColumnData: eventReviewController.selected.keys
-                  .map((value) => value.toString())
-                  .toList(),
-            ),
-            AdditionalNote(
-              controller: eventReviewController.notes,
-              onChange: (value) {},
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ProccessToPaymentButton()
-          ].divide(SizedBox(
-            height: scaleHeight(10),
-          )),
+        child: Obx(
+          ()=> Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const StepText4(),
+              const LinearPercentIndicatorWidget4(),
+              ReviewCard(
+                title:tr( "Contact Detailes"),
+                leftColumnData:  [
+                  tr("Name"),
+                  tr("Phone Number"),
+                  tr("Number of Adults"),
+                  tr("Number of Children"),
+                ],
+                rightColumnData: [
+                  eventReviewController.contactInfoModel.firstName +
+                      eventReviewController.contactInfoModel.lastName,
+                  eventReviewController.contactInfoModel.phoneNumber,
+                  "${eventReviewController.contactInfoModel.adultNumber} people",
+                  "${eventReviewController.contactInfoModel.childrenNumber} people"
+                ],
+              ),
+              ReviewCard(
+                title:tr( "Event Overview"),
+                leftColumnData:  [
+                  tr("Event Title"),
+                  tr("Start Time"),
+                 tr( "End Time"),
+                  tr("Date")
+                ],
+                rightColumnData: [
+                  "La Rose",
+                  DateFormatter.formatTime(
+                      eventReviewController.eventOverView.startTime),
+                  DateFormatter.formatTime(
+                      eventReviewController.eventOverView.endTime),
+                  DateFormatter.formatDate(
+                      eventReviewController.eventOverView.date),
+                ],
+              ),
+              ReviewCard(
+                title:tr( "Event Crew"),
+                leftColumnData: eventReviewController.selected.values
+                    .map((value) => value.toString())
+                    .toList(),
+                rightColumnData: eventReviewController.selected.keys
+                    .map((value) => value.toString())
+                    .toList(),
+              ),
+              AdditionalNote(
+                controller: eventReviewController.notes,
+                onChange: (value) {},
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ProccessToPaymentButton(),
+               ...List.generate(eventReviewController.errorMessage.length,(index)=>
+                                
+                                ErrorMessages(message:eventReviewController.errorMessage[index] ,)
+                              ),
+            ].divide(SizedBox(
+              height: scaleHeight(10),
+            )),
+          ),
         ),
       ),
     );
