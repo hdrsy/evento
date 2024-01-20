@@ -10,10 +10,10 @@ class ReelsScreen extends StatelessWidget {
   final ReelsController reelsController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.black,
-          body: GetBuilder<ReelsController>(builder: (ccontext) {
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: GetBuilder<ReelsController>(builder: (ccontext) {
             return PageView.builder(
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
@@ -31,7 +31,7 @@ class ReelsScreen extends StatelessWidget {
                     model: reelsController.itemList[index],
                   );
                 });
-          })),
-    );
+          }),
+        ));
   }
 }

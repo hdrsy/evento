@@ -56,7 +56,7 @@ class CategoryGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => InkWell(
+      () => GestureDetector(
         onTap: onTap,
         child: Container(
           width: scaleHeight(100),
@@ -84,7 +84,7 @@ class CategoryGridItem extends StatelessWidget {
                       ServerConstApis.baseAPI + item.icon,
                       width: 100,
                       height: 100,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                       loadingBuilder: (BuildContext context, Widget child,
                           ImageChunkEvent? loadingProgress) {
                         if (loadingProgress == null) {

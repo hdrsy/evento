@@ -34,7 +34,7 @@ class ServiceCategoryScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -67,18 +67,16 @@ class ServiceCategoryScreen extends StatelessWidget {
                       useGoogleFonts: true,
                     ),
                   ).tr(),
-                  GetBuilder<ServiceCategoryController>(
-                    builder: (context) {
-                      return Text(
-                        "${serviceCategoryController.selectedServiceProvidersNumbers()}/${serviceCategoryController.serviceCategoryList.length + 1}",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: primaryFontFamily,
-                          color: customColors.primaryText,
-                          fontSize: 12,
-                          useGoogleFonts: true,
-                        ),
-                      );
-                    }
+                  Obx(
+                    ()=> Text(
+                      "${serviceCategoryController.selectedServiceProvidersNumbers()}/${serviceCategoryController.serviceCategoryList.length + 1}",
+                      style: customTextStyle.bodyMedium.override(
+                        fontFamily: primaryFontFamily,
+                        color: customColors.primaryText,
+                        fontSize: 12,
+                        useGoogleFonts: true,
+                      ),
+                    ),
                   ),
                 ],
               ),

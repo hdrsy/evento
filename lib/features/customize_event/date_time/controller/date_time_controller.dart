@@ -56,7 +56,7 @@ class DateTimeController extends GetxController {
     if (formdata!.validate() && isUserEnterDateInfo) {
       formdata.save();
       Get.toNamed('/ServiceCategoryScreen');
-    // } else {
+    } else {
       Get.snackbar("Uncomplete data", "Please fill all the required data",
           snackPosition: SnackPosition.TOP,
           backgroundColor: customColors.primaryBackground,

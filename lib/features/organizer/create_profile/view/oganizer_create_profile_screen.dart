@@ -51,7 +51,6 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                         ///// cover image
                         image: controller.coverImage != null
                             ? FileImage(controller.coverImage!)
-                                as ImageProvider<Object>
                             : const AssetImage('assets/images/image.jpg')
                                 as ImageProvider<Object>,
                         fit: BoxFit.cover)),
@@ -74,7 +73,7 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  Align(
+                  const Align(
                       alignment: AlignmentDirectional(-0.8, 2),
                       child: ProfileImage())
                 ]),
@@ -117,7 +116,13 @@ Wdding, Birthday ,anniversary......"""),
                     const SizedBox(
                       height: 50,
                     ),
-                    // Generated code for this Button Widget...
+                    Obx(
+                      ()=> Column(children: [
+                    
+                       LinearProgressIndicator(value: controller.uploadProgress.value,backgroundColor: customColors.secondaryBackground,color: customColors.primary,),
+                            Text(controller.currentUploadingFile.value),
+                      ],),
+                    ),
                     Obx(
                       () => ButtonWidget(
                         showLoadingIndicator:

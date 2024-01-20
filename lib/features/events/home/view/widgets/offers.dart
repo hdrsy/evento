@@ -13,7 +13,7 @@ final  OffersController offersController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(
-      ()=> offersController.itemList.isEmpty? SizedBox.shrink():
+      ()=> offersController.itemList.isEmpty?const SizedBox.shrink():
       
        Column(
         crossAxisAlignment: CrossAxisAlignment.start,

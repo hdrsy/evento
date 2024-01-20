@@ -131,11 +131,11 @@ final ProfileController profileController=Get.find();
                     icon: Icons.group_outlined,
                     title: tr("Friends"),
                   ),
-                   OptionsCard(
-                    targetRout: '/InviteFreindsScreen',
-                    icon: Icons.groups_2_outlined,
-                    title: tr("Invite friends"),
-                  ),
+                  //  OptionsCard(
+                  //   targetRout: '/InviteFreindsScreen',
+                  //   icon: Icons.groups_2_outlined,
+                  //   title: tr("Invite friends"),
+                  // ),
                    OptionsCard(
                     targetRout: '/SeeAllServiceCategoryScreen',
                     icon: Icons.miscellaneous_services_outlined,

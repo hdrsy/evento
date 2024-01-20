@@ -85,7 +85,7 @@ class Album {
   final int serviceProviderId;
   final String name;
   final List<String> images;
-  final dynamic videos; // Can be further defined based on actual data structure
+  final List<String> videos; // Can be further defined based on actual data structure
   final String createdAt;
   final String updatedAt;
 
@@ -94,15 +94,28 @@ class Album {
     required this.serviceProviderId,
     required this.name,
     required this.images,
-    this.videos,
+    required this.videos,
     required this.createdAt,
     required this.updatedAt,
   });
 
   factory Album.fromJson(Map<String, dynamic> oldJson) {
+    print(oldJson);
     Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
  
     List<String> parseImages(String imagesJson) {
+      if (imagesJson.isEmpty) {
+        return [];
+      }
+      try {
+        return List<String>.from(jsonDecode(imagesJson));
+      } catch (e) {
+        print('Error decoding images JSON: $e');
+        return [];
+      }
+    }
+ 
+    List<String> parseVideos(String imagesJson) {
       if (imagesJson.isEmpty) {
         return [];
       }
@@ -119,7 +132,7 @@ class Album {
       serviceProviderId: json['service_provider_id'],
       name: json['name'],
       images: parseImages(json['images'] as String),
-      videos: json['videos'],
+      videos:parseVideos( json['videos']as String),
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );

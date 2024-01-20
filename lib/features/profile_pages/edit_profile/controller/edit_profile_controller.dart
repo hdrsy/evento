@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -16,8 +17,8 @@ class EditProfileController extends GetxController {
   late RxBool isImageSelected;
   late TextEditingController firstName;
   late TextEditingController lastName;
-  late TextEditingController date;
   late TextEditingController phone;
+    late DateTime day;
   // late TextEditingController location;
   late String selectedState;
   late TextEditingController gender;
@@ -32,8 +33,7 @@ class EditProfileController extends GetxController {
     isImageSelected = false.obs;
     firstName = TextEditingController(text: profileModel.firstName);
     lastName = TextEditingController(text: profileModel.lastName);
-    date = TextEditingController(
-        text: DateFormatter.formatDate(profileModel.birthDate));
+    day=profileModel.birthDate;
     phone = TextEditingController(text: profileModel.phoneNumber);
     // location = TextEditingController(text: profileModel.state);
     gender = TextEditingController(text: profileModel.gender);
@@ -88,8 +88,8 @@ class EditProfileController extends GetxController {
             "first_name": firstName.text,
             "last_name": lastName.text,
             "phone_number": phone.text,
-            // "gender": firstName.text,
-            // "birth_date": date.text,
+            "gender": gender.text,
+            "birth_date":  DateFormat('yyyy/M/d').format(day),
             "state": selectedState
           },
           files: isImageSelected.value ? {"image": customImage} : null);

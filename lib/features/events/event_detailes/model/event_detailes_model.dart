@@ -14,6 +14,7 @@ class EventDetailsModel {
   final String description;
   final String type;
   final List<String> images;
+  final List<String> videos;
   final bool isFollowedByAuthUser;
   bool isOrganizerFollowedByAuthUser;
   // final List<ServiceProvider> serviceProviders;
@@ -43,6 +44,7 @@ class EventDetailsModel {
     required this.description,
     required this.type,
     required this.images,
+    required this.videos,
     required this.isFollowedByAuthUser,
     required this.isOrganizerFollowedByAuthUser,
     // required this.serviceProviders,
@@ -67,7 +69,8 @@ class EventDetailsModel {
       ticketPrice: json['ticket_price'],
       description: json['description'],
       type: json['type'],
-      images: jsonDecode(json['images']).cast<String>(),
+      images: jsonDecode(json['images']).cast<String>()??[],
+      videos:json['videos']!=null? jsonDecode(json['videos']).cast<String>():[],
       isFollowedByAuthUser: json['is_followed_by_auth_user']??false,
       isOrganizerFollowedByAuthUser: json['organizer_is_followed_by_auth_user']??false,
       eventTrips: List<EventTrip>.from(
@@ -80,8 +83,8 @@ class EventDetailsModel {
           ? Organizer.fromJson(json['organizer'])
           : null,
       categoriesEvents: List<CategoryEvent>.from(
-          json['categories_events'].map((x) => CategoryEvent.fromJson(x)))??[],
-      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x)))??[],
+          json['categories_events'].map((x) => CategoryEvent.fromJson(x))),
+      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
       serviceProvider: List<ServiceProvider>.from(json['service_providers'].map((x) => ServiceProvider.fromJson(x)))??[],
       organizerId: json['organizer_id'] ?? 0,
     );

@@ -25,7 +25,7 @@ class ForYou extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: forYouLoading(),
             )
-          :  justForYouController.itemList.isEmpty?const SizedBox():
+          :  justForYouController.itemList.isEmpty?const SizedBox.shrink():
           
           
           Column(

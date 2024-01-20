@@ -55,7 +55,7 @@ class SeeAllScreen extends StatelessWidget {
                   : ShimmerLoadingWidget(
                       loadingShimmerWidget: Container(
                       width: 355,
-                      height: 300,
+                      height: 100,
                       // height: 330 ,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),

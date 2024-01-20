@@ -53,7 +53,7 @@ class ReelsWidget extends StatelessWidget {
                               currentVideoUrl:"${ServerConstApis.baseAPI}/storage/${ model.videos[0]}",
                             ),
                             videoInfo(),
-                            commentShareLike(),
+                            // commentShareLike(),
                           ],
                         ),
                       ),

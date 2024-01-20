@@ -32,7 +32,7 @@ Widget buildGallerySection(BuildContext context) {
             ).tr(),
             InkWell(
               onTap: () {
-                 Get.toNamed('/GalleryScreen',arguments: eventDetailesController.eventDetailsModel.images);
+                 Get.toNamed('/GalleryScreen',arguments: {"images":eventDetailesController.eventDetailsModel.images,'videos':eventDetailesController.eventDetailsModel.videos});
                     
               },
               child: Text(
@@ -66,7 +66,7 @@ Widget buildGallerySection(BuildContext context) {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/GalleryScreen',arguments: eventDetailesController.eventDetailsModel.images);
+                      Get.toNamed('/GalleryScreen',arguments: {"images":eventDetailesController.eventDetailsModel.images});
                     },
                     child: Container(
                       width: screenWidth * 0.25,
@@ -118,7 +118,7 @@ class GalleryCard extends StatelessWidget {
     return InkWell(
       onTap: (){
        final EventDetailesController eventDetailesController=Get.find();
-         Get.toNamed('/GalleryScreen',arguments: eventDetailesController.eventDetailsModel.images);
+         Get.toNamed('/GalleryScreen',arguments:{ "images":eventDetailesController.eventDetailsModel.images});
                     
       },
       child: ClipRRect(

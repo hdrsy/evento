@@ -25,6 +25,7 @@ class HomeController extends GetxController {
     isLoading = false.obs;
 
     super.onInit();
+    
   }
   Future onrefresh()async{
     // CategoryListController().onInit();
@@ -64,7 +65,7 @@ class CategoryListController extends GetxController {
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
      if (await checkInternet()) {
       log("from cache");
       final d= await cacheService.getObject<Map<String, dynamic>>(

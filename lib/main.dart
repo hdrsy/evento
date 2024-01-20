@@ -23,27 +23,25 @@ late TextExtension customTextStyle;
 late String? targetRout;
 late String? themeValue;
 late UserInfo? user;
- bool isGuset=false;
+bool isGuset = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
 
   themeValue = await prefService.readString('theme');
+print(themeValue is String);
+  targetRout = await prefService.isContainKey('token') &&
+          await prefService.readString("isCompleteProfile") == "true"
+      ? '/home'
+      : "/";
 
-  targetRout = await prefService.isContainKey('token') && await prefService.readString("isCompleteProfile")=="true" ? '/home' : "/";
-
-
-  runApp(
-    EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ar')],
-        
-        path:
-            'assets/localization', // <-- change the path of the translation files
-        fallbackLocale: const Locale('en'),
-        child:
-         const MyApp())
-  );
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path:
+          'assets/localization', // <-- change the path of the translation files
+      fallbackLocale: const Locale('en'),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -54,12 +52,11 @@ class MyApp extends StatelessWidget {
     initSizes(context);
     // Messagess messagess=Messagess();
     return GetMaterialApp(
-
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: themeValue == 'dark' ? AppTheme.dark : AppTheme.light,
+      theme: themeValue == ''?AppTheme.dark: themeValue ==  'dark' ? AppTheme.dark : AppTheme.light,
       themeMode: ThemeMode.light,
       getPages: appRoutes(),
       initialRoute: targetRout,

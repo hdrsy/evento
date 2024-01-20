@@ -32,7 +32,7 @@ class EventDetailesScreen extends StatelessWidget {
       children: [
         MainImage(
             imgUrl:
-                "/storage/${eventDetailesController.eventDetailsModel.images[0]}"),
+                "${eventDetailesController.eventDetailsModel.images[0]}"),
        eventDetailesController.isOffer? Positioned(
 
             top: screenHeight * 0.25,

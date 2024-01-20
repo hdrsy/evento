@@ -16,7 +16,7 @@ ButtonWidget followButton() {
         height: 31,
         padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: customColors.primaryText,
+        color: customColors.secondaryBackground,
         textStyle: customTextStyle.titleSmall.override(
           fontFamily: 'Nunito',
           color: customColors.info,

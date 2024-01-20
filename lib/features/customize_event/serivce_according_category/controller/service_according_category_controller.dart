@@ -48,6 +48,7 @@ serviceAccordingCategoryIndex=Get.arguments[0];
 
 
     } else {
+      print(handlingResponse);
       whenGetDataSuccess(handlingResponse);
     }
     isLoading.value = false;

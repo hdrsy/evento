@@ -53,12 +53,12 @@ final HomeController homeController=Get.find();
         const SearchAndNotification(),
          FeaturedList(),
         TrendingNow(),
-       isGuset?SizedBox():  FromYourCity(),
+       isGuset?const SizedBox():  FromYourCity(),
          Offers(),
-        isGuset?SizedBox(): Orgnizers(),
-         isGuset?SizedBox(): EventsFromOrganizer(),
+        isGuset?const SizedBox(): Orgnizers(),
+         isGuset?const SizedBox(): EventsFromOrganizer(),
          ForYou()
-      ].divide( SizedBox(height: 5)),
+      ].divide( const SizedBox(height: 10)),
       ),
     );
   }

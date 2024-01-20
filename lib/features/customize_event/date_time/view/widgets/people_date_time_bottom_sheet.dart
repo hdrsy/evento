@@ -216,6 +216,16 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: focusedDay,
+      headerStyle: HeaderStyle(
+        titleTextStyle: customTextStyle.bodyMedium.copyWith(
+          color: customColors.primaryText
+        ),
+        formatButtonTextStyle: customTextStyle.bodyMedium.copyWith(
+          color: customColors.primaryText
+        ),
+        formatButtonVisible: false,
+
+       ),
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),
       onDaySelected: (selectedDay, focusedDay) {
         widget.dateTimeController.date=selectedDay;
@@ -224,7 +234,26 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
           this.focusedDay = focusedDay; // update focusedDay as well if needed
         });
       },
-      // ... other properties
+      calendarStyle: CalendarStyle(
+        
+                todayDecoration: BoxDecoration(
+                  color: customColors.primary, // Replace with your color
+                  shape: BoxShape
+                      .circle, // Commonly a circle, but you can use other shapes
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: customColors.primary, // Replace with your color
+                  shape: BoxShape
+                      .circle, // Commonly a circle, but you can use other shapes
+                ),
+
+                // Use custom color for day numbers
+                defaultTextStyle: TextStyle(color: customColors.secondaryText),
+                weekendTextStyle: TextStyle(color: customColors.secondaryText),
+                holidayTextStyle: TextStyle(color: customColors.secondaryText ),
+                outsideTextStyle: TextStyle(color: customColors.secondaryText),
+              ),
+            
     );
   }
 }
@@ -248,7 +277,7 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: Container(width: 70, child:  Text(tr("Adult"))),
+                  child: SizedBox(width: 70, child:  Text(tr("Adult"),style: customTextStyle.bodyMedium.copyWith(color: customColors.primaryText),)),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -325,7 +354,7 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: Container(width: 70, child:  Text(tr("children"))),
+                  child: SizedBox(width: 70, child:  Text(tr("children"),style: customTextStyle.bodyMedium.copyWith(color: customColors.primaryText))),
                 ),
                 Material(
                   color: Colors.transparent,

@@ -51,12 +51,8 @@ class Step6Content extends StatelessWidget {
           SizedBox(
             height: scaleHeight(50),
           ),
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () {
+          GestureDetector(
+             onTap: () {
               showBottomSheetForImages(
                   context: context,
                   onPressCamera: () {

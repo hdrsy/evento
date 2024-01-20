@@ -14,7 +14,6 @@ class SearchAndNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding(0, 10, 0, 0),
-      height: scaleHeight(80),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

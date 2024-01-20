@@ -85,7 +85,7 @@ class FeaturedList extends StatelessWidget {
                                         color: customColors.info),
                                   ));
                           })
-                        ].divide(SizedBox(
+                        ].divide(const SizedBox(
                           width:10,
                         )),
                       )),
@@ -104,26 +104,27 @@ class FeaturedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FeaturedListController>(builder: (context) {
-      return Container(
-        width: screenWidth*0.9,// height: 330 ,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: customColors.primaryBackground,
+      return GestureDetector(
+        onTap: (){
+     Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
+                 
+        },
+        child: Container(
+          width: screenWidth*0.9,// height: 330 ,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: customColors.primaryBackground,
+            ),
           ),
-        ),
-        child: Align(
-          alignment: const AlignmentDirectional(0.00, -1.00),
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              children: [
-                mediaStack(eventModel),
-                InkWell(
-                  onTap: () {
-                    Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
-                  },
-                  child: Padding(
+          child: Align(
+            alignment: const AlignmentDirectional(0.00, -1.00),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  mediaStack(eventModel),
+                  Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -159,12 +160,12 @@ class FeaturedWidget extends StatelessWidget {
                           ),
                         ),
                         priceIcons(eventModel.ticketPrice,
-                            eventModel.isFollowedByAuthUser, modelIndex),
+                            eventModel.isFollowedByAuthUser, modelIndex,eventModel.id),
                       ].divide(const SizedBox(height: 3)),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -172,18 +173,15 @@ class FeaturedWidget extends StatelessWidget {
     });
   }
 
-  Stack mediaStack(EventModel eventModel) {
-    return Stack(
-      children: [
-        InkWell(
-          splashColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () async {
-            // context.pushNamed('Event-Details');
-          },
-          child: ClipRRect(
+  Widget mediaStack(EventModel eventModel) {
+    return GestureDetector(
+      onTap: (){
+ Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
+    
+      },
+      child: Stack(
+        children: [
+          ClipRRect(
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0),
               bottomRight: Radius.circular(0),
@@ -202,14 +200,15 @@ class FeaturedWidget extends StatelessWidget {
                     videoWidth: double.infinity,
                   ),
           ),
-        ),
-        Positioned(
-            bottom: scaleWidth(0),
-            right: scaleWidth(0),
-            //  alignment: AlignmentDirectional(0.00, 0.00),
-
-            child: soundToggleIcon())
-      ],
+          eventModel.videos.isNotEmpty?
+          Positioned(
+              bottom: scaleWidth(0),
+              right: scaleWidth(0),
+              //  alignment: AlignmentDirectional(0.00, 0.00),
+    
+              child: soundToggleIcon()):const SizedBox.shrink()
+        ],
+      ),
     );
   }
 
@@ -230,7 +229,7 @@ class FeaturedWidget extends StatelessWidget {
     );
   }
 
-  Row priceIcons(ticketPrice, bool isFollowedByAuthUser, int modelIndex) {
+  Row priceIcons(ticketPrice, bool isFollowedByAuthUser, int modelIndex, int eventId) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,9 +266,13 @@ class FeaturedWidget extends StatelessWidget {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  await Share.share(
-                    tr('Check out this event in Evento'),
-                  );
+                 
+                             const String message = "Check out this event in Evento";
+          final String url = "http://94.141.219.16:8005/#/eventDetailes/$eventId";  // Replace with your event link
+          final String shareContent = "$message\n\nFor more details, visit: $url";
+
+        await   Share.share(shareContent);
+                            
                 },
                 child: Icon(
                   Icons.share_rounded,
@@ -280,7 +283,7 @@ class FeaturedWidget extends StatelessWidget {
               ToggleIcon(
                 onPressed: () async {
                   if(isGuset){
-                    Get.dialog( GuestPopupWidget());
+                    Get.dialog( const GuestPopupWidget());
                   }else{
 
                   

@@ -27,7 +27,7 @@ class TrendingNow extends StatelessWidget {
         ? ShimmerLoadingWidget(
             loadingShimmerWidget: featuredLoading(),
           )
-        :  trendingListController.itemList.isEmpty?const SizedBox():
+        :  trendingListController.itemList.isEmpty?const SizedBox.shrink():
           
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,3 +1,6 @@
+import 'package:evento/features/gallery/controller/gallery_controller.dart';
+import 'package:evento/features/gallery/view/show_on_fullscreen.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -17,26 +20,24 @@ class MainImage extends StatelessWidget {
           child: Align(
             alignment: const AlignmentDirectional(0.00, 0.00),
 
-            child: InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {},
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0),
-                  child: getImageNetwork(
-                      url: imgUrl,
-                      width: double.infinity,
-                      height: double.infinity)
+            child: GestureDetector(
+              onTap: () async {
 
-                  //  Image.asset(
-                  //   'assets/images/alumni2.webp',
-                  //   width: double.infinity,
-                  //   height: double.infinity,
-                  //   fit: BoxFit.cover,
-                  // ),
-                  ),
+           Get.to(ShowInFullScreen(imageUrl:GalleryItem(url:  imgUrl,isVideo: false), tag: imgUrl))
+                ;
+              },
+              child: Hero(
+                tag: imgUrl,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(0),
+                    child: getImageNetwork(
+                        url: "/storage/${imgUrl}",
+                        width: double.infinity,
+                        height: double.infinity)
+              
+                   
+                    ),
+              ),
             ),
 
             // ),

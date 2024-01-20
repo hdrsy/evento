@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:evento/features/auth/steps/controller/page_controller.dart';
+
 import '../../../../core/utils/services/permission_service.dart';
 import '../../step7/model/interst_model.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +31,8 @@ class StepsController extends GetxController {
       'assets/images/0.png',
       'assets/images/1.png',
       'assets/images/2.png',
-      'assets/images/3.png',
-      'assets/images/4.png',
+      'assets/images/0.png',
+      'assets/images/1.png',
     ].obs;
     interestList = [];
       int initialPage = avatarList.length ~/ 2;
@@ -61,6 +63,9 @@ class StepsController extends GetxController {
     await Permission.notification.request();
   }
   if(status.isGranted){
+      StepsPageController stepsPageController=Get.find();
+        
+          stepsPageController.pageIdex.value=5;
     return true;
   }else {return false;}
  }

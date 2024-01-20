@@ -19,7 +19,7 @@ class SeeAllCard extends StatelessWidget {
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap:(){
   Get.toNamed('/eventDetailes',arguments: [eventModel.id,false,0]);
                     
@@ -31,7 +31,8 @@ class SeeAllCard extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)),
+                  color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)
+                  ),
             ]),
         child: Column(
           children: [
@@ -162,7 +163,7 @@ class SeeAllCard extends StatelessWidget {
                   ToggleIcon(
                     onPressed: () async {
                        if(isGuset){
-                    Get.dialog( GuestPopupWidget());
+                    Get.dialog( const GuestPopupWidget());
                   }else{}
                     },
                     value: false,
@@ -195,33 +196,24 @@ class SeeAllCard extends StatelessWidget {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        child: getImageNetwork(url: "/storage/${eventModel.images[0]}", width: double.infinity, height: scaleHeight(200))
+        child: getImageNetwork(url: "/storage/${eventModel.images[0]}", width: double.infinity, height: scaleHeight(210))
       ),
-      InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () async {
-          // context.pushNamed('Event-Details');
-        },
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 4,
-                color: Color(0x33000000),
-                offset: Offset(0, 2),
-              )
-            ],
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
+      Container(
+        width: double.infinity,
+        height: 200,
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4,
+              color: Color(0x33000000),
+              offset: Offset(0, 2),
+            )
+          ],
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
         ),
       ),

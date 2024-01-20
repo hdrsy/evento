@@ -139,14 +139,14 @@ SignupController signupController=Get.find();
                             ButtonWidget(
                               showLoadingIndicator: signupController.isLoading.value,
                               onPressed: () {
-                              //  Get.toNamed('/steps');
-                              signupController.onPressSignUp();
+                              signupController.isAgreedOn.value?
+                              signupController.onPressSignUp():null;
                                },
                               text:tr( 'Join'), // Replace with localization if needed.
                               options: ButtonOptions(
                                 width: 350,
                                 height: 45,
-                                color: customColors.primary,
+                                color:signupController.isAgreedOn.value?customColors.primary: customColors.alternate,
                                 textStyle: customTextStyle.titleSmall.copyWith(
                                   color: Colors.white,
                                 ),
@@ -178,7 +178,7 @@ SignupController signupController=Get.find();
     // Helper method to create additional UI elements like 'Forgot Password'.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [const TermsAndCondisionTexts()].divide(SizedBox(
+      children: [ TermsAndCondisionTexts()].divide(SizedBox(
         height: scaleHeight(10),
       )),
     );

@@ -18,12 +18,7 @@ class IconWithContainer extends StatelessWidget {
   final Color? iconColor;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-  focusColor: Colors.transparent,
-  hoverColor: Colors.transparent,
-  highlightColor: Colors.transparent,
-      // borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         width: buttonSize,

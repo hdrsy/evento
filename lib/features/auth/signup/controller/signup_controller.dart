@@ -12,6 +12,7 @@ class SignupController extends GetxController {
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
   late RxList<String> errorMessage;
+  late RxBool isAgreedOn;
   @override
   void onInit() {
     firstName = TextEditingController();
@@ -19,6 +20,7 @@ class SignupController extends GetxController {
     phone = TextEditingController();
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
+    isAgreedOn=false.obs;
     // statuseRequest = StatuseRequest.init;
     errorMessage = <String>[].obs;
     super.onInit();

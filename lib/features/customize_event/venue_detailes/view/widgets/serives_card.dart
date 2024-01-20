@@ -16,7 +16,7 @@ class VenueServicesCard extends StatelessWidget {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.toNamed('/GalleryScreen', arguments: album.images);
+        Get.toNamed('/GalleryScreen', arguments: {"images":album.images,"videos":album.videos});
       },
       child: SizedBox(
         width: double.infinity,

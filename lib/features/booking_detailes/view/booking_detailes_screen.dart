@@ -1,3 +1,5 @@
+import 'package:evento/core/utils/helper/date_formatter.dart';
+
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
@@ -278,11 +280,7 @@ class IMAGE extends StatelessWidget {
               ),
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: () async {
                     await Navigator.push(
                       context,
@@ -326,17 +324,18 @@ class IMAGE extends StatelessWidget {
 }
 
 class BookingInfo extends StatelessWidget {
-  const BookingInfo({
+   BookingInfo({
     super.key,
   });
-
+final BookingDetailesController bookingDetailesController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          "3 Tickets",
+          "${bookingDetailesController.ticketList.length} Tickets",
+         
           style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,
@@ -351,8 +350,8 @@ class BookingInfo extends StatelessWidget {
           ),
         ),
         Text(
-          "Nov 19 , 2023",
-          style: customTextStyle.displaySmall.override(
+           DateFormatter.formatDate(bookingDetailesController.eventDetailsModel.startDate),
+         style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,
             useGoogleFonts: true,
@@ -366,7 +365,8 @@ class BookingInfo extends StatelessWidget {
           ),
         ),
         Text(
-          "20:00 PM",
+           DateFormatter.formatTime(bookingDetailesController.eventDetailsModel.startDate),
+         
           style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,

@@ -83,10 +83,10 @@ class IconContainerWidget extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: (){
-        typetoSetEventController.selectedCategory.value=categoryModel.id;
-      },
+        typetoSetEventController.selectedCategory.value==categoryModel.id?typetoSetEventController.selectedCategory.value=0:typetoSetEventController.selectedCategory.value=categoryModel.id;
+       },
       child: Obx(
         ()=> Column(
           mainAxisSize: MainAxisSize.max,

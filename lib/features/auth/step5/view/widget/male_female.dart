@@ -11,11 +11,11 @@ import 'package:easy_localization/easy_localization.dart';
 Widget buildMainStack(BuildContext context) {
   StepsController stepsController=Get.find();
   return Padding(
-    padding: const EdgeInsetsDirectional.fromSTEB(0, 6, 0, 6),
+    padding: const EdgeInsetsDirectional.fromSTEB(10, 6, 10, 6),
     child: Obx(
   ()    => Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Container for the first item (Male)
           _buildItemContainer(context,tr( 'Male'),stepsController.isMale.value? customColors.primary:Colors.white,stepsController.isMale.value?  Colors.white:customColors.primary),

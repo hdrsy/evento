@@ -41,7 +41,7 @@ getOtp();
       Get.snackbar(handlingResponse['message'], "",
           // duration: Duration(minutes: 1),
           snackPosition: SnackPosition.TOP,
-          backgroundColor: customColors.primaryBackground);
+          backgroundColor: customColors.primaryBackground,colorText: customColors.primaryText);
     }
   }
 

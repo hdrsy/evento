@@ -117,7 +117,7 @@ class ReviewEventWidget extends StatelessWidget {
                     color: customColors.primary,
                   ),
                   direction: Axis.horizontal,
-                  initialRating:  5,
+                  initialRating:  0,
                   unratedColor: customColors.primaryBackground,
                   itemCount: 5,
                   itemSize: 48,

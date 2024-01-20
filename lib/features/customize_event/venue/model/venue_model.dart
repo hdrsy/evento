@@ -56,14 +56,14 @@ class VenueAlbum {
   final int venueId;
   final String name;
   final List<String> images;
-  final dynamic videos;
+  final List<String> videos;
 
   VenueAlbum({
     required this.id,
     required this.venueId,
     required this.name,
     required this.images,
-    this.videos,
+   required this.videos,
   });
 
  factory VenueAlbum.fromJson(Map<String, dynamic> oldJson) {
@@ -90,7 +90,7 @@ class VenueAlbum {
     venueId: json['venue_id'],
     name: json['name'],
     images: parseImages(json['images']),
-    videos: json['videos'] ?? [], // Ensure this handles null correctly
+    videos: parseImages(json['videos']),
   );
 }
 }

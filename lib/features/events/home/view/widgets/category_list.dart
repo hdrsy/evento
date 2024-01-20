@@ -56,12 +56,8 @@ class CategoryWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-          child: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
+          padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+          child: GestureDetector(
             onTap: () async {
               String targetRout = '';
               String targetKeyMap = '';
@@ -83,8 +79,8 @@ class CategoryWidget extends StatelessWidget {
                   arguments: [1, <EventModel>[].obs, targetRout, targetKeyMap,categoryModel.title]);
             },
             child: Container(
-              width: imageSize,
-              height: imageSize,
+              width: 70,
+              height: 70,
               decoration: BoxDecoration(
                 color: customColors.primaryBackground,
                 image: DecorationImage(

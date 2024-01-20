@@ -11,101 +11,106 @@ class VenueCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return 
-Stack(
-  alignment: const AlignmentDirectional(0, 1),
-  children: [
-    Container(
-      
-      height: screenHeight*0.17,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          alignment: const AlignmentDirectional(0.00, 0.20),
-          image: Image.asset(
-            'assets/images/pexels-asad-photo-maldives-169189.jpg',
-          ).image,
+GestureDetector(
+  onTap: (){
+ Get.toNamed('/VenueScreen',arguments: true);
+                    
+  },
+  child:   Stack(
+    alignment: const AlignmentDirectional(0, 1),
+    children: [
+      Container(
+        
+        height: screenHeight*0.17,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: const AlignmentDirectional(0.00, 0.20),
+            image: Image.asset(
+              'assets/images/pexels-asad-photo-maldives-169189.jpg',
+            ).image,
+          ),
+          boxShadow:const [
+             BoxShadow(
+              blurRadius: 4,
+              color: Color(0x33000000),
+              offset: Offset(0, 2),
+            )
+          ],
+          borderRadius: BorderRadius.circular(12),
         ),
-        boxShadow:const [
-           BoxShadow(
-            blurRadius: 4,
-            color: Color(0x33000000),
-            offset: Offset(0, 2),
-          )
-        ],
-        borderRadius: BorderRadius.circular(12),
       ),
-    ),
-    Container(
-      
-      height: screenHeight*0.17,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF050606), Color(0x00EE8B60)],
-          stops: [0, 0.7],
-          begin: AlignmentDirectional(-1, 0),
-          end: AlignmentDirectional(1, 0),
+      Container(
+        
+        height: screenHeight*0.17,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF050606), Color(0x00EE8B60)],
+            stops: [0, 0.7],
+            begin: AlignmentDirectional(-1, 0),
+            end: AlignmentDirectional(1, 0),
+          ),
+          borderRadius: BorderRadius.circular(12),
         ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                     "Venue",
-                    style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Montserrat',
-                          color: customColors.info,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ).tr(),
-                  Text(
-                    "Select a picturesque setting for your special day",
-                    style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.info,
-                          fontSize: 12,
-                          useGoogleFonts: true,
-                        ),
-                  ).tr(),
-                ].divide(const SizedBox(height: 5)),
-              ),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconWithContainer(
-                  borderRadius: 20,
-                  buttonSize: 40,
-                  iconColor: customColors.info,
-                   backgroundColor: customColors.primary,
-                  icon: 
-                    Icons.arrow_forward,
-                   
-                  
-                  onTap: () async {
-                    // context.pushNamed('Venuelist');
-                    Get.toNamed('/VenueScreen',arguments: true);
-                  },
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                       "Venue",
+                      style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Montserrat',
+                            color: customColors.info,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            useGoogleFonts: false,
+                          ),
+                    ).tr(),
+                    Text(
+                      "Select a picturesque setting for your special day",
+                      style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.info,
+                            fontSize: 12,
+                            useGoogleFonts: true,
+                          ),
+                    ).tr(),
+                  ].divide(const SizedBox(height: 5)),
                 ),
-              ].addToEnd(const SizedBox(height: 30)),
-            ),
-          ].divide(const SizedBox(width: 60)),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconWithContainer(
+                    borderRadius: 20,
+                    buttonSize: 40,
+                    iconColor: customColors.info,
+                     backgroundColor: customColors.primary,
+                    icon: 
+                      Icons.arrow_forward,
+                     
+                    
+                    onTap: () async {
+                      // context.pushNamed('Venuelist');
+                     },
+                  ),
+                ].addToEnd(const SizedBox(height: 30)),
+              ),
+            ].divide(const SizedBox(width: 60)),
+          ),
         ),
       ),
-    ),
-  ],
+    ],
+  ),
 )
 ;
   }
