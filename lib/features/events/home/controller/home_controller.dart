@@ -405,7 +405,7 @@ class HomeOrganizerController extends PaginationController<OrganizerHome> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['organizers']['data'];
     lastPageId = handlingResponse['organizers']['last_page'];
-log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+    print(handlingResponse);
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizerHome.fromJson(jsonItem))
         .toList());

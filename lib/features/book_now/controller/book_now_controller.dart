@@ -15,7 +15,7 @@ class BookNowController extends GetxController {
   late RxBool isLoading;
   late RxList<String> errorMessage;
   late RxList<FreindsModel> myFreinds;
-  
+
   late RxList<TicketModel> ticketList;
   @override
   void onInit() {
@@ -24,8 +24,11 @@ class BookNowController extends GetxController {
     ticketList = <TicketModel>[
       TicketModel(selectedClass: eventDetailsModel.classes[0])
     ].obs;
-     myFreinds = <FreindsModel>[].obs;
-   
+    print(ticketList[0].selectedClass!.ticketPrice);
+    ticketList[0].totalPrice=eventDetailsModel.classes[0].ticketPrice;
+    print(eventDetailsModel.classes[0].ticketPrice);
+    myFreinds = <FreindsModel>[].obs;
+
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     getMyFreinds();
@@ -33,15 +36,29 @@ class BookNowController extends GetxController {
   }
 
   addOrRemoveAminitesFromCladd(Amenity title, int index) {
-    ticketList[index].selectedAminiteds.contains(title)
-        ? ticketList[index].selectedAminiteds.remove(title)
-        : ticketList[index].selectedAminiteds.add(title);
+    int aminityPrice = 0;
+    
+    for (var element in eventDetailsModel.amenities) {
+      if (element.id==title.id
+         ) {
+        aminityPrice = element.price!;
+       
+      }
+    }
+    if (ticketList[index].selectedAminiteds.contains(title)) {
+      ticketList[index].selectedAminiteds.remove(title);
 
+      ticketList[index].totalPrice -= aminityPrice;
+    } else {
+      ticketList[index].selectedAminiteds.add(title);
+      ticketList[index].totalPrice += aminityPrice;
+    }
     update();
   }
 
   changeSelectedCalss(Class newClass, int index) {
     ticketList[index].selectedClass = newClass;
+    ticketList[index].totalPrice=newClass.ticketPrice;
     ticketList[index].selectedAminiteds = [];
     update();
   }
@@ -108,9 +125,9 @@ class BookNowController extends GetxController {
     ticketList[ticketIndex].phoneNumber.text = user!.phoneNumber;
     ticketList[ticketIndex].age.text =
         calculateAge(DateTime.parse(user!.birthDate)).toString();
-    
   }
-    getMyFreinds() async {
+
+  getMyFreinds() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -118,7 +135,7 @@ class BookNowController extends GetxController {
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
-     } else {
+    } else {
       List<dynamic> interestsJson = handlingResponse['friends'];
 
       myFreinds.value = interestsJson
@@ -127,6 +144,5 @@ class BookNowController extends GetxController {
       print(myFreinds.length);
     }
     update();
-    }
-
+  }
 }

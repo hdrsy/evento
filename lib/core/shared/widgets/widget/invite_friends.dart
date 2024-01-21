@@ -78,7 +78,7 @@ class InviteFreinds extends StatelessWidget {
                             final EventDetailesController eventDetailesController = Get.find();
   
                              const String message = "Check out this event in Evento";
-          final String url = "http://94.141.219.16:8005/#/eventDetailes/${eventDetailesController.eventId}";  // Replace with your event link
+          final String url = "http://94.141.219.16:8003/#/eventDetailes/${eventDetailesController.eventId}";  // Replace with your event link
           final String shareContent = "$message\n\nFor more details, visit: $url";
 
         await   Share.share(shareContent);

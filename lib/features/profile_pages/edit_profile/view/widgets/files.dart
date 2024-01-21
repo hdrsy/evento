@@ -85,8 +85,7 @@ class Fields extends StatelessWidget {
                                   ),
                                   child: CupertinoDatePicker(
                                     initialDateTime:
-                                        editProfileController.day ??
-                                            DateTime.now(),
+                                        editProfileController.day,
                                     mode: CupertinoDatePickerMode.date,
                                     onDateTimeChanged: (val) {
                                       selectedDate = val;

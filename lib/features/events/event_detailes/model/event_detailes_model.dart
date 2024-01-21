@@ -310,20 +310,22 @@ class Amenity {
   final int id;
   final String title; 
   final String icon;
-
+final int? price;
   Amenity({
     required this.id,
     required this.title,
     required this.icon,
+    required this.price,
   });
 
   factory Amenity.fromJson(Map<String, dynamic> oldJson){
     Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+ print(json['pivot']);
     return Amenity(
       id: json['id'],
       title: json['title'],
       icon: json['icon'],
+      price: json['pivot']['price']??0  ,
     );
   }
 }

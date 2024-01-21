@@ -24,7 +24,8 @@ final int modelId;
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-               Get.toNamed('/eventDetailes', arguments: eventWrapper.event.id);
+
+               Get.toNamed('/eventDetailes', arguments: [eventWrapper.event.id,false,0]);
                   
                },
       child: Container(

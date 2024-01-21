@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class TicketModel {
   Class? selectedClass;
    List<Amenity> selectedAminiteds=[];
+   int totalPrice=0;
    TextEditingController fisrtName=TextEditingController();
    TextEditingController lastName=TextEditingController();
    TextEditingController couponNumber=TextEditingController();

@@ -39,6 +39,7 @@ class EventReviewController extends GetxController {
   getSelectedserviceProvider() {
     final ServiceCategoryController serviceCategoryController = Get.find();
     selected = serviceCategoryController.selected;
+
   }
 
   getContactInfo() {
@@ -93,15 +94,17 @@ String formattedEndTime = DateFormat('HH:mm:ss').format(dateTimeController.endTi
 List<int> serviceProviderIds = serviceCategoryController.selectedServiceProviders.map((rxInt) => rxInt.value).toList();
 
 for (int i = 0; i < serviceProviderIds.length; i++) {
-  dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
-}
+  print(serviceProviderIds[i]); 
+  if(serviceProviderIds[i]!=0){
 
+  dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
+  }
+}
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];
     }
-    print(dataRequest['service_provider_id'] is List);
-
+  
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.sendEventRequest,
         method: "POST",

@@ -157,16 +157,16 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
                     ),
                   ],
                 ),
-                 if (_isBuffering)
-          const CircularProgressIndicator(),
-                // if (!_isPlaying)
-                //   const Center(
-                //     child: Icon(
-                //       Icons.play_arrow,
-                //       size: 50.0,
-                //       color: Colors.white,
-                //     ),
-                //   ),
+          //        if (_isBuffering)
+          // const CircularProgressIndicator(),
+                if (!_isPlaying)
+                  const Center(
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 50.0,
+                      color: Colors.white,
+                    ),
+                  ),
 
                 GetBuilder<TweenAnimationController>(
                   builder: (context) {
