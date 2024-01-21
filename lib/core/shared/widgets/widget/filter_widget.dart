@@ -1,5 +1,4 @@
-
-import 'package:evento/core/server/filter.dart';
+import 'package:evento/core/const/states.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_choice_chips.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
@@ -12,10 +11,12 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
+
 // ignore: must_be_immutable
 class FilterWidget extends StatefulWidget {
-   FilterWidget({Key? key,this.result}) : super(key: key);
-var result;
+  FilterWidget({Key? key, required this.onApplyFilters}) : super(key: key);
+  final Function(Map<String, dynamic>) onApplyFilters;
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
@@ -26,24 +27,23 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   FormFieldController<List<String>>? choiceChipsValueController;
 
-  double price=1000;
-  double locationRange=1;
-
+  double price = 1000;
+  double locationRange = 1;
+  SfRangeValues _values = const SfRangeValues(0.0, 1000000.0);
   List<String>? choiceChipsValues;
-  CategoryListController categoryListController=Get.find();
-List<CategoryModel> categoryList =[];
+  CategoryListController categoryListController = Get.find();
+  List<CategoryModel> categoryList = [];
 // = categoryListController.categoryList
   @override
   Widget build(BuildContext context) {
-categoryList.assignAll(categoryListController.categoryList);
-    
+    categoryList.assignAll(categoryListController.categoryList);
 
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: customColors.secondaryBackground,
-        boxShadow:const [
-           BoxShadow(
+        boxShadow: const [
+          BoxShadow(
             blurRadius: 6,
             color: Color(0x35000000),
             offset: Offset(0, -2),
@@ -93,21 +93,21 @@ categoryList.assignAll(categoryListController.categoryList);
                       Align(
                         alignment: const AlignmentDirectional(-1.00, -1.00),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                           child: Text(
                             "Event Catergory",
-                            style: customTextStyle
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Nunito',
-                                  color: customColors.primaryText,
-                                  useGoogleFonts: true,
-                                ),
+                            style: customTextStyle.bodyMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.primaryText,
+                              useGoogleFonts: true,
+                            ),
                           ).tr(),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
@@ -117,21 +117,19 @@ categoryList.assignAll(categoryListController.categoryList);
                             child: FlutterFlowChoiceChips(
                               options: [
                                 ChipData(tr("All")),
-                                ...List.generate(categoryList.length, (index) => ChipData(categoryList[index].title))
-                               ],
-                              onChanged: (val) {}
-                                  ,
+                                ...List.generate(
+                                    categoryList.length,
+                                    (index) =>
+                                        ChipData(categoryList[index].title))
+                              ],
+                              onChanged: (val) {},
                               selectedChipStyle: ChipStyle(
-                                backgroundColor:
-                                    customColors.primary,
-                                textStyle: customTextStyle
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors
-                                          .secondaryBackground,
-                                      useGoogleFonts: true,
-                                    ),
+                                backgroundColor: customColors.primary,
+                                textStyle: customTextStyle.bodyMedium.override(
+                                  fontFamily: 'Nunito',
+                                  color: customColors.secondaryBackground,
+                                  useGoogleFonts: true,
+                                ),
                                 iconColor: customColors.tertiary,
                                 iconSize: 18,
                                 elevation: 0,
@@ -139,20 +137,15 @@ categoryList.assignAll(categoryListController.categoryList);
                               ),
                               unselectedChipStyle: ChipStyle(
                                 backgroundColor: const Color(0x00000000),
-                                textStyle: customTextStyle 
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors
-                                          .secondaryText,
-                                      useGoogleFonts: true,
-                                    ),
-                                iconColor:
-                                    customColors.secondaryText,
+                                textStyle: customTextStyle.bodyMedium.override(
+                                  fontFamily: 'Nunito',
+                                  color: customColors.secondaryText,
+                                  useGoogleFonts: true,
+                                ),
+                                iconColor: customColors.secondaryText,
                                 iconSize: 18,
                                 elevation: 0,
-                                borderColor: customColors
-                                    .primaryBackground,
+                                borderColor: customColors.primaryBackground,
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               chipSpacing: 12,
@@ -187,31 +180,25 @@ categoryList.assignAll(categoryListController.categoryList);
                     child: Text(
                       "Location",
                       style: customTextStyle.bodyMedium.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.primaryText,
-                            useGoogleFonts: true,
-                          ),
+                        fontFamily: 'Nunito',
+                        color: customColors.primaryText,
+                        useGoogleFonts: true,
+                      ),
                     ).tr(),
                   ),
                   FlutterFlowDropDown<String>(
                     controller: dropDownValueController ??=
                         FormFieldController<String>(null),
-                    options:const  [
-                       "Damascus",
-                      "Tartus",
-                      "Homs",
-                       "Lattakia" 
-                    ],
-                    onChanged: (val){
+                    options: states,
+                    onChanged: (val) {
                       setState(() {
-                        
-                      dropDownValueController!.value=val;
+                        dropDownValueController!.value = val;
                       });
                     },
                     width: 200,
                     height: 40,
                     textStyle: customTextStyle.bodyMedium,
-                    hintText:tr( "Please select..."),
+                    hintText: tr("Please select..."),
                     icon: Icon(
                       Icons.keyboard_arrow_down_rounded,
                       color: customColors.secondaryText,
@@ -240,31 +227,30 @@ categoryList.assignAll(categoryListController.categoryList);
                   child: Text(
                     "Ticket Price Range",
                     style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primaryText,
-                          useGoogleFonts: true,
-                        ),
+                      fontFamily: 'Nunito',
+                      color: customColors.primaryText,
+                      useGoogleFonts: true,
+                    ),
                   ).tr(),
                 ),
               ),
-              SliderTheme(
-                data: const SliderThemeData(
-                  showValueIndicator: ShowValueIndicator.always,
-                ),
-                child: Slider(
-                  activeColor: customColors.primary,
-                  inactiveColor: customColors.secondaryBackground,
-                  min: 1000,
-                  max: 50000,
-                  value: price,
-                  label: price.toString(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      
-                   price=newValue;
-                    });
-                  },
-                ),
+              SfRangeSlider(
+                min: 0.0,
+                max: 1000000.0,
+                values: _values,
+                interval: 200000,
+                showTicks: true,
+                showLabels: true,
+                enableTooltip: true,
+                minorTicksPerInterval: 2,
+                activeColor: customColors.primary,
+                inactiveColor: customColors.secondaryText,
+                showDividers: true,
+                onChanged: (SfRangeValues values) {
+                  setState(() {
+                    _values = values;
+                  });
+                },
               ),
               Divider(
                 thickness: 2,
@@ -277,10 +263,10 @@ categoryList.assignAll(categoryListController.categoryList);
                   child: Text(
                     "Event Location Range (km)",
                     style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primaryText,
-                          useGoogleFonts: true,
-                        ),
+                      fontFamily: 'Nunito',
+                      color: customColors.primaryText,
+                      useGoogleFonts: true,
+                    ),
                   ).tr(),
                 ),
               ),
@@ -293,11 +279,11 @@ categoryList.assignAll(categoryListController.categoryList);
                   inactiveColor: customColors.secondaryBackground,
                   min: 1,
                   max: 1000,
-                  value:locationRange,
-                  label:locationRange.toString(),
+                  value: locationRange,
+                  label: locationRange.toString(),
                   onChanged: (newValue) {
                     setState(() {
-                      locationRange=newValue;
+                      locationRange = newValue;
                     });
                     // newValue = double.parse(newValue.toStringAsFixed(20));
                     // setState(() => _model.sliderValue2 = newValue);
@@ -318,23 +304,22 @@ categoryList.assignAll(categoryListController.categoryList);
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ButtonWidget(
-                        onPressed: () {
-                          },
-                        text:tr( "Reset"),
+                        onPressed: () {},
+                        text: tr("Reset"),
                         options: ButtonOptions(
                           width: 120,
                           height: 35,
-                          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20, 0, 20, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: customColors.secondaryBackground,
-                          textStyle: customTextStyle
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Nunito',
-                                color: customColors.primaryText,
-                                fontSize: 12,
-                                useGoogleFonts: false,
-                              ),
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.primaryText,
+                            fontSize: 12,
+                            useGoogleFonts: false,
+                          ),
                           borderSide: BorderSide(
                             color: customColors.primary,
                             width: 1,
@@ -345,39 +330,39 @@ categoryList.assignAll(categoryListController.categoryList);
                       ButtonWidget(
                         onPressed: () async {
                           // Navigator.pop(context);
-                          Map<String,dynamic> data={};
-                          if(choiceChipsValueController !=null){
-                          List<String> selectedChoices = choiceChipsValueController!.value!;
+                          Map<String, dynamic> data = {};
+                          if (choiceChipsValueController != null) {
+                            List<String> selectedChoices =
+                                choiceChipsValueController!.value!;
 
-                          for (var i = 0; i < selectedChoices.length; i++) {
-                            data['event_category[$i]']=selectedChoices[i];
+                            for (var i = 0; i < selectedChoices.length; i++) {
+                              data['event_category[$i]'] = selectedChoices[i];
+                            }
                           }
+                          if (dropDownValueController != null) {
+                            data['state'] = dropDownValueController!.value;
                           }
-                          if(dropDownValueController !=null){
-
-                          data['state']=dropDownValueController!.value;
-                          }
-                          data['ticket_price']=price;
-                          if(data .isNotEmpty){
-print("object");
-                         await filter(widget.result,data);
-                         Get.back();
+                          data['min_ticket_price'] = _values.start;
+                          data['max_ticket_price'] = _values.end;
+                          if (data.isNotEmpty) {
+                            widget.onApplyFilters(data);
                           }
                         },
-                        text:tr( "Apply filters"),
+                        text: tr("Apply filters"),
                         options: ButtonOptions(
                           width: 120,
                           height: 35,
-                          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20, 0, 20, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: customColors.primary,
-                          textStyle:
-                              customTextStyle.titleSmall.override(
-                                    fontFamily: 'Nunito',
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    useGoogleFonts: false,
-                                  ),
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            fontSize: 12,
+                            useGoogleFonts: false,
+                          ),
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1,
@@ -396,4 +381,3 @@ print("object");
     );
   }
 }
- 

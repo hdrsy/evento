@@ -34,7 +34,9 @@ class BookNowController extends GetxController {
     getMyFreinds();
     super.onInit();
   }
+ getAminityPrice(Amenity title){
 
+}
   addOrRemoveAminitesFromCladd(Amenity title, int index) {
     int aminityPrice = 0;
     
@@ -42,6 +44,7 @@ class BookNowController extends GetxController {
       if (element.id==title.id
          ) {
         aminityPrice = element.price!;
+        title.price!=aminityPrice;
        
       }
     }
@@ -52,6 +55,8 @@ class BookNowController extends GetxController {
     } else {
       ticketList[index].selectedAminiteds.add(title);
       ticketList[index].totalPrice += aminityPrice;
+    title.price=aminityPrice;
+
     }
     update();
   }

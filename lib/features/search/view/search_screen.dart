@@ -14,9 +14,11 @@ import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SearchScreen extends StatelessWidget {
-   SearchScreen({super.key});
-final SearchPageController searchPageController=Get.put(SearchPageController());
+  SearchScreen({super.key});
+  final SearchPageController searchPageController =
+      Get.put(SearchPageController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +32,28 @@ final SearchPageController searchPageController=Get.put(SearchPageController());
         centerTitle: true,
       ),
       body: Obx(
-()=>SingleChildScrollView(
+        () => SingleChildScrollView(
           padding: padding(16, 24, 16, 24),
-          child:  Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
-                onTap: (){
-                  searchPageController.isSearchActive.value=true;
+                onTap: () {
+                  searchPageController.isSearchActive.value = true;
                 },
                 child: SearchFieldWithFiltering(
-                   controller: searchPageController.searchField,
-                  onChanged: (value){
-                    searchPageController.onPressSearch(value!);
-                  },
-                  result: searchPageController.searchResultSearch,
-                ),
+                    controller: searchPageController.searchField,
+                    onChanged: (value) {
+                      searchPageController.onPressSearch(value!);
+                    },
+                    onApplyFilters: (filters) {
+                      searchPageController.onApplyFilters(filters);
+                    }),
               ),
               // RecentlyWidget(),
-            searchPageController.isSearchActive.value?SearchResult() : PopularWidget()
+              searchPageController.isSearchActive.value
+                  ? SearchResult()
+                  : PopularWidget()
             ],
           ),
         ),
@@ -56,29 +61,36 @@ final SearchPageController searchPageController=Get.put(SearchPageController());
     );
   }
 }
+
 class SearchResult extends StatelessWidget {
-   SearchResult({super.key});
-final SearchPageController searchPageController=Get.find();
+  SearchResult({super.key});
+  final SearchPageController searchPageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-()=> Column(children: [
-         ...List.generate(searchPageController.searchResultSearch.length, (index) =>  SearchEventCard(
-               eventModel: searchPageController.searchResultSearch[index],
-              )),
-      ],),
+      () => Column(
+        children: [
+          ...List.generate(
+              searchPageController.searchResultSearch.length,
+              (index) => SearchEventCard(
+                    eventModel: searchPageController.searchResultSearch[index],
+                  )),
+        ],
+      ),
     );
   }
 }
+
 Widget floatingActionButton() {
   return FloatingActionButton.extended(
     onPressed: () async {
-       if(isGuset){
-                    Get.dialog( const GuestPopupWidget());
-                  }else{
-      // context.pushNamed('Map');
-      Get.toNamed('/MapScreen');}
+      if (isGuset) {
+        Get.dialog(const GuestPopupWidget());
+      } else {
+        // context.pushNamed('Map');
+        Get.toNamed('/MapScreen');
+      }
     },
     backgroundColor: customColors.primary,
     icon: Icon(

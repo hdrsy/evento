@@ -35,11 +35,18 @@ Column(
             ),
             child:  Padding(
               padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-              child:  searchTextField(onChanged: (value){
- mapController.onPressSearch(value!);
-    
-              },
-              controller: mapController.searchController
+              child: InkWell(
+                onTap: () {
+                  mapController.isSearchActive.value = true;
+                },
+                child: SearchFieldWithFiltering(
+                    controller: mapController.searchField,
+                    onChanged: (value) {
+                      mapController.onPressSearch(value!);
+                    },
+                    onApplyFilters: (filters) {
+                      mapController.onApplyFilters(filters);
+                    }),
               ),
                  ),
           ),

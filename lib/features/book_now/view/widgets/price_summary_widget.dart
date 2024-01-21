@@ -45,88 +45,10 @@ child:Column(
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                 "Ticket",
-                style: customTextStyle.bodySmall.override(
-                      fontFamily: 'Lexend Deca',
-                      color: const Color(0xFF8B97A2),
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      useGoogleFonts: true
-                    ),
-              ).tr(),
-              Text(
-                "${bookNowController.ticketList[index].totalPrice} sp",
-                style: customTextStyle.bodyLarge.override(
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                      useGoogleFonts: true,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                 "Taxes",
-                style: customTextStyle.bodySmall.override(
-                      fontFamily: 'Lexend Deca',
-                      color: const Color(0xFF8B97A2),
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      useGoogleFonts: true
-                    ),
-              ).tr(),
-              Text(
-                 "0 sp",
-                style: customTextStyle.bodyLarge.override(
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                      useGoogleFonts: true,
-                    ),
-              ).tr(),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                 "Discount",
-                style: customTextStyle.bodySmall.override(
-                      fontFamily: 'Lexend Deca',
-                      color: customColors.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                      useGoogleFonts: true
-                    ),
-              ).tr(),
-              Text(
-                 "0 sp",
-                style: customTextStyle.titleSmall.override(
-                      fontFamily: 'Nunito',
-                      color: customColors.primary,
-                      fontSize: 14,
-                      useGoogleFonts: true,
-                    ),
-              ).tr(),
-            ],
-          ),
-        ),
+        priceElement("Ticket",bookNowController.ticketList[index].totalPrice),
+        ...List.generate(bookNowController.ticketList[index].selectedAminiteds.length, (innerIndex) => priceElement(bookNowController.ticketList[index].selectedAminiteds[innerIndex].title,bookNowController.ticketList[index].selectedAminiteds[innerIndex].price!)),
+        priceElement("Taxes",0),
+        priceElement("Discount",0),
         Divider(
           thickness: 1,
           indent: 12,
@@ -193,5 +115,35 @@ child:Column(
       }
     )
 ;
+  }
+
+  Padding priceElement(String title,int price) {
+    return Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title ,
+              style: customTextStyle.bodySmall.override(
+                    fontFamily: 'Lexend Deca',
+                    color: const Color(0xFF8B97A2),
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    useGoogleFonts: true
+                  ),
+            ).tr(),
+            Text(
+               "$price ${tr("sp")}",
+              style: customTextStyle.bodyLarge.override(
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.bold,
+                    useGoogleFonts: true,
+                  ),
+            ).tr(),
+          ],
+        ),
+      );
   }
 }

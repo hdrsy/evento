@@ -310,7 +310,7 @@ class Amenity {
   final int id;
   final String title; 
   final String icon;
-final int? price;
+ int? price;
   Amenity({
     required this.id,
     required this.title,

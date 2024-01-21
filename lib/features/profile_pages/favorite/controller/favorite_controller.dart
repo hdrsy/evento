@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/server/filter.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -11,13 +13,17 @@ import '../../../../main.dart';
 import 'package:get/get.dart';
 
 class FavoriteController extends GetxController {
-  late List<EventWrapper> favoriteEvents;
+  late RxList<EventWrapper> favoriteEvents;
   late List<RxString> distances;
   late RxList<String> errorMessage;
+   RxList<EventWrapper> searchResultSearch=<EventWrapper>[].obs;
+   RxBool isSearchActive=false.obs;
+  late TextEditingController searchField=TextEditingController();
+ 
 
   @override
   void onInit() async{
-    favoriteEvents = [];
+    favoriteEvents = <EventWrapper>[].obs;
     errorMessage = <String>[].obs;
     distances = [];
    await getMyFavoriteEvents();
@@ -39,12 +45,12 @@ class FavoriteController extends GetxController {
     } else {
       List<dynamic> interestsJson = handlingResponse['events'];
 
-      favoriteEvents = interestsJson
+      favoriteEvents.value = interestsJson
           .map((jsonItem) => EventWrapper.fromJson(jsonItem))
           .toList();
           print(favoriteEvents);
      distances=List.generate(favoriteEvents.length, (index) => "0 Km".obs);
-      update();
+
     }
   }
 
@@ -76,4 +82,28 @@ class FavoriteController extends GetxController {
     }
     
   }
+  void onPressSearch(String query) {
+  if (query.isEmpty) {
+    isSearchActive.value = false;
+    searchResultSearch.clear();
+  } else {
+    print(query);
+    isSearchActive.value = true;
+    searchResultSearch.assignAll(
+      favoriteEvents.where(
+        (event) => event.event.title.toLowerCase().contains(query.toLowerCase())
+      ).toList()
+    );
+  }
+}
+void onApplyFilters(Map<String ,dynamic> data)async{
+  isSearchActive.value=true;
+  final d=await  filter( data,url: ServerConstApis.favoritefilter);
+  print(d);
+Get.back();
+    var eventModels = d.map((jsonItem) => EventWrapper.fromJson(jsonItem)).toList();
+  searchResultSearch.addAll(eventModels.cast<EventWrapper>());
+
+}
+
 }

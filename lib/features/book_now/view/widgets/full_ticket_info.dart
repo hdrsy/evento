@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class FullTicketInfo extends StatelessWidget {
-  FullTicketInfo({super.key,required this.index});
+  FullTicketInfo({super.key, required this.index});
   final BookNowController bookNowController = Get.find();
   final int index;
   @override
@@ -25,7 +25,7 @@ class FullTicketInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
           child: Text(
-            "Ticket ${index+1}",
+            "Ticket ${index + 1}",
             style: customTextStyle.bodyMedium.override(
               fontFamily: primaryFontFamily,
               color: customColors.primaryText,
@@ -35,155 +35,163 @@ class FullTicketInfo extends StatelessWidget {
             ),
           ),
         ),
-         GetBuilder<BookNowController>(
-           builder: (ccontext) {
-             return Container(
-                width: double.infinity,
-                padding: padding(8, 8, 8, 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: customColors.primaryBackground,
-                  ),
+        GetBuilder<BookNowController>(builder: (ccontext) {
+          return Container(
+            width: double.infinity,
+            padding: padding(8, 8, 8, 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: customColors.primaryBackground,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tr("class"),
+                  style: customTextStyle.bodyMedium
+                      .override(fontFamily: primaryFontFamily, fontSize: 14),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
                   children: [
-                     Text(tr("class"),style: customTextStyle.bodyMedium.override(
-                      fontFamily: primaryFontFamily,
-                      fontSize: 14
-                     ),),
-                    Wrap(
-                      children: [
-                        ...List.generate(bookNowController.eventDetailsModel.classes.length, (index) => _buildRadioOption(bookNowController.eventDetailsModel.classes[index]))
-                       
-                      ],
-                    ),
-                     Text(tr("Addional options"),style: customTextStyle.bodyMedium.override(
-                      fontFamily: primaryFontFamily,
-                      fontSize: 14
-                     )),
-                    Wrap(
-                      spacing: 8.0, // gap between adjacent chips
-                      runSpacing: 4.0, // gap between lines
-                      children: bookNowController.ticketList[index].selectedClass!.interests .map(( label) {
-                        return ChoiceChip(
-                          label: Text(label.title),
-                          selected: bookNowController.ticketList[index].selectedAminiteds.contains(label),
-                          selectedColor: customColors.primary,
-                          onSelected: (bool selected) {
-                            log("ssss");
-        bookNowController.addOrRemoveAminitesFromCladd(label,index);
-                          },
-                        );
-                      }).toList(),
-                    ),
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         Text(tr("Personal Information"),style: customTextStyle.bodyMedium.override(
-                          fontFamily: primaryFontFamily,
-                          fontSize: 14
-                         )),
-                         InkWell(
-                          onTap: (){
-                         
-                            showButtonSheet(context: context, widget: FilldataWidget(ticketIndex: index), height: screenHeight*0.2);
-                          },
-                           child: Text(tr("Fill profile / Friend list data"),style: customTextStyle.bodyMedium.override(
-                            fontFamily: primaryFontFamily,
-                            fontSize: 12,
-                            color: customColors.primary
-                           )),
-                         ),
-
-                       ],
-                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: buildTextField(
-                                controller: bookNowController.ticketList[index].fisrtName,
-                                hint: "",
-                                label:tr( "First Name"),
-                                validator: (value) {
-                                  return null;
-                                })),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                            child: buildTextField(
-                                controller: bookNowController.ticketList[index].lastName,
-                                hint: "",
-                                label:tr( "Last Name"),
-                                validator: (value) {
-                                  return null;
-                                })),
-                      ],
-                    ),
-                    const SizedBox(height: 5,),
-                    Row(
-                      children: [
-                        Expanded(
-                            flex: 4,
-                            child: buildTextField(
-                                controller: bookNowController.ticketList[index].couponNumber,
-                                hint: "",
-                                label:tr( "Coupon Code"),
-                                validator: (value) {
-                                  return null;
-                                })),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                            child: buildTextField(
-                                controller: bookNowController.ticketList[index].age,
-                                hint: "",
-                                label:tr( "Age"),
-                                validator: (value) {
-                                  return null;
-                                })),
-                      ],
-                    ),
-                    const SizedBox(height: 5,),
-                    buildTextField(
-                                controller: bookNowController.ticketList[index].phoneNumber,
-                                hint: "",
-                                label:tr( "Phone Number"),
-                                validator: (value) {
-                                  return null;
-                                })
+                    ...List.generate(
+                        bookNowController.eventDetailsModel.classes.length,
+                        (index) => _buildRadioOption(
+                            bookNowController.eventDetailsModel.classes[index]))
                   ],
                 ),
-              );
-           }
-         ),
-        
+                Text(tr("Select Addional options"),
+                    style: customTextStyle.bodyMedium
+                        .override(fontFamily: primaryFontFamily, fontSize: 14)),
+                Wrap(
+                  spacing: 8.0, // gap between adjacent chips
+                  runSpacing: 4.0, // gap between lines
+                  children: bookNowController
+                      .ticketList[index].selectedClass!.interests
+                      .map((label) {
+                    return ChoiceChip(
+                      label: Text("+ ${label.title}"),
+                      selected: bookNowController
+                          .ticketList[index].selectedAminiteds
+                          .contains(label),
+                      selectedColor: customColors.primary,
+                      onSelected: (bool selected) {
+                        bookNowController.addOrRemoveAminitesFromCladd(
+                            label, index);
+                      },
+                    );
+                  }).toList(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(tr("Personal Information"),
+                        style: customTextStyle.bodyMedium.override(
+                            fontFamily: primaryFontFamily, fontSize: 14)),
+                    InkWell(
+                      onTap: () {
+                        showButtonSheet(
+                            context: context,
+                            widget: FilldataWidget(ticketIndex: index),
+                            height: screenHeight * 0.2);
+                      },
+                      child: Text(tr("Fill profile / Friend list data"),
+                          style: customTextStyle.bodyMedium.override(
+                              fontFamily: primaryFontFamily,
+                              fontSize: 12,
+                              color: customColors.primary)),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: buildTextField(
+                            controller:
+                                bookNowController.ticketList[index].fisrtName,
+                            hint: "",
+                            label: tr("First Name"),
+                            validator: (value) {
+                              return null;
+                            })),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                        child: buildTextField(
+                            controller:
+                                bookNowController.ticketList[index].lastName,
+                            hint: "",
+                            label: tr("Last Name"),
+                            validator: (value) {
+                              return null;
+                            })),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 4,
+                        child: buildTextField(
+                            controller: bookNowController
+                                .ticketList[index].couponNumber,
+                            hint: "",
+                            label: tr("Coupon Code"),
+                            validator: (value) {
+                              return null;
+                            })),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                        child: buildTextField(
+                            controller: bookNowController.ticketList[index].age,
+                            hint: "",
+                            label: tr("Age"),
+                            validator: (value) {
+                              return null;
+                            })),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                buildTextField(
+                    controller: bookNowController.ticketList[index].phoneNumber,
+                    hint: "",
+                    label: tr("Phone Number"),
+                    validator: (value) {
+                      return null;
+                    })
+              ],
+            ),
+          );
+        }),
       ],
     );
   }
 
-  Widget _buildRadioOption(Class singleClass ) {
-    BookNowController bookNowController=Get.find();
+  Widget _buildRadioOption(Class singleClass) {
+    BookNowController bookNowController = Get.find();
     return Obx(
-      ()=>Row(
+      () => Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Radio<String>(
             activeColor: customColors.primary,
-            
             value: singleClass.code,
             groupValue: bookNowController.ticketList[index].selectedClass!.code,
             onChanged: (newValue) {
-             bookNowController.changeSelectedCalss(singleClass,index);
+              bookNowController.changeSelectedCalss(singleClass, index);
             },
           ),
-          Text(singleClass.code,style: customTextStyle.bodyMedium.override(
-                  fontFamily: primaryFontFamily,
-                  fontSize: 14
-                 )),
+          Text(singleClass.code,
+              style: customTextStyle.bodyMedium
+                  .override(fontFamily: primaryFontFamily, fontSize: 14)),
         ],
       ),
     );

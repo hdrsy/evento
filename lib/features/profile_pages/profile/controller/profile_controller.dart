@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/pusher.dart';
+import 'package:evento/core/utils/services/sse_serive.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -26,9 +27,9 @@ class ProfileController extends GetxController{
       await prefService.readString("isCompleteProfile") == "true";
  
     if (isCompleteProfile && targetRout == '/home') {
-    
-    await PusherService.initPusher();
-    await NotificationService().init();
+    SSEService.connectToSSE();
+    // await PusherService.initPusher();
+    // await NotificationService().init();
   }
     await  getProfileInfo();
     super.onInit();

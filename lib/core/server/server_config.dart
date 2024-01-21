@@ -104,6 +104,7 @@ class ServerConstApis {
 
   //// filter
   static String filter= '$baseAPI/api/filter';
+  static String favoritefilter= '$baseAPI/api/favorite_filter';
 
 
   ///// guest

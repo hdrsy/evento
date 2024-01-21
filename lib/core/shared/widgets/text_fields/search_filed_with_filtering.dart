@@ -8,10 +8,11 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class SearchFieldWithFiltering extends StatelessWidget {
-   SearchFieldWithFiltering({super.key, this.onChanged, this.controller,this.result});
+   SearchFieldWithFiltering({super.key, this.onChanged, this.controller,required this.onApplyFilters});
 final Function(String)? onChanged;
 final TextEditingController? controller;
-var result;
+final Function(Map<String, dynamic>) onApplyFilters;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,7 +78,7 @@ var result;
                     onPressed: () async {
                       await showButtonSheet(
                           context: context,
-                          widget: FilterWidget(result:result),
+                          widget: FilterWidget(onApplyFilters:onApplyFilters),
                           height: screenHeight*0.6);
                     },
                     value: false,

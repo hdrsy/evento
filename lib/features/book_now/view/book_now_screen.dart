@@ -55,41 +55,45 @@ class BookNowScreen extends StatelessWidget {
                   ),
                   EventLocation(
                     ///// show location
-                    eventLocation: bookNowController
-                                .eventDetailsModel.venue.governorate,
+                    eventLocation:
+                        bookNowController.eventDetailsModel.venue.governorate,
                   ),
                   Divider(
                     height: 2,
                     thickness: 1,
                     color: customColors.secondary,
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   // const TicketCount(),
                   ...List.generate(
                       bookNowController.ticketList.length,
                       (index) => TicketCard(
                             index: index,
                           )),
-                               Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            InkWell(
-              onTap: (){
-                BookNowController bookNowController =Get.find();
-                bookNowController.ticketList.add(TicketModel(selectedClass: bookNowController.eventDetailsModel.classes[0]));
-              },
-              child: Text(tr("Add Ticket"),style: customTextStyle.bodyMedium.override(
-                fontFamily: primaryFontFamily,
-                useGoogleFonts: true,
-                fontSize: 14,
-                color: customColors.primary
-              ),
-              textAlign: TextAlign.end,
-              ),
-            ),
-          ],
-        )
-   ,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          BookNowController bookNowController = Get.find();
+                          bookNowController.ticketList.add(TicketModel(
+                              selectedClass: bookNowController
+                                  .eventDetailsModel.classes[0]));
+                        },
+                        child: Text(
+                          tr("Add Ticket"),
+                          style: customTextStyle.bodyMedium.override(
+                              fontFamily: primaryFontFamily,
+                              useGoogleFonts: true,
+                              fontSize: 14,
+                              color: customColors.primary),
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                    ],
+                  ),
                   // const PaymontInformation(),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
@@ -98,9 +102,8 @@ class BookNowScreen extends StatelessWidget {
                       onPressed: () async {
                         // context.pushNamed('Booking-Details');
                         bookNowController.onPressBookNow();
-                        
                       },
-                      text:tr( "Confirm Booking"),
+                      text: tr("Confirm Booking"),
                       options: ButtonOptions(
                         width: 300,
                         height: 40,
@@ -124,10 +127,11 @@ class BookNowScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                   ...List.generate(bookNowController.errorMessage.length,(index)=>
-                              
-                              ErrorMessages(message:bookNowController.errorMessage[index] ,)
-                            ),
+                  ...List.generate(
+                      bookNowController.errorMessage.length,
+                      (index) => ErrorMessages(
+                            message: bookNowController.errorMessage[index],
+                          )),
                 ],
               ),
             ))
@@ -160,15 +164,12 @@ class TicketCard extends StatelessWidget {
       color: customColors.secondaryBackground,
       child: Column(
         children: [
-    FullTicketInfo(index: index),
-
-    PriceSummaryWidget(
-      index: index,
-    ),
-
+          FullTicketInfo(index: index),
+          PriceSummaryWidget(
+            index: index,
+          ),
         ],
-      )
-      ,
+      ),
     );
   }
 }
@@ -221,10 +222,11 @@ class EventName extends StatelessWidget {
     );
   }
 }
-class CircleContainer extends StatelessWidget {
-  
 
-  const CircleContainer({super.key, });
+class CircleContainer extends StatelessWidget {
+  const CircleContainer({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

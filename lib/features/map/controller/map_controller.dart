@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:evento/core/server/filter.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/helper/flutter_flow_google_map.dart';
@@ -17,7 +18,7 @@ TextEditingController searchController=TextEditingController();
   late FlutterFlowMarker myMarker;
   RxList<EventModel> searchResultSearch=<EventModel>[].obs;
    RxBool isSearchActive=false.obs;
-  
+  TextEditingController searchField =TextEditingController();
 late LatLng currentPosition;
   @override
   void onInit() async {
@@ -28,6 +29,28 @@ late LatLng currentPosition;
    
     super.onInit();
   }
+   void onPressSearch(String query) {
+  if (query.isEmpty) {
+    isSearchActive.value = false;
+    searchResultSearch.clear();
+  } else {
+    isSearchActive.value = true;
+    searchResultSearch.assignAll(
+      events.where(
+        (event) => event.title.toLowerCase().contains(query.toLowerCase())
+      ).toList()
+    );
+  }
+}
+void onApplyFilters(Map<String ,dynamic> data)async{
+  isSearchActive.value=true;
+  final d=await  filter( data);
+  print(d);
+Get.back();
+    var eventModels = d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
+  searchResultSearch.addAll(eventModels.cast<EventModel>());
+
+}
 
   late LatLng? googleMapsCenter = const LatLng(13.106061, -59.613158);
   CarouselController? carouselController;
@@ -113,19 +136,7 @@ followOrUnFollowEvent(int eventId, int modelIndex) async {
     }
    }
 
-    void onPressSearch(String query) {
-  if (query.isEmpty) {
-    isSearchActive.value = false;
-    searchResultSearch.clear();
-  } else {
-    isSearchActive.value = true;
-    searchResultSearch.assignAll(
-      events.where(
-        (event) => event.title.toLowerCase().contains(query.toLowerCase())
-      ).toList()
-    );
-  }
-}
+   
 
 
 }

@@ -6,7 +6,7 @@ import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:evento/main.dart';
 
-filter(result,Map<String,dynamic> data) async {
+ filter(Map<String,dynamic> data,{String? url}) async {
   // Read the stored token from preferences. A fallback empty string is used if it's null.
   String token = await prefService.readString("token") ;
 
@@ -18,7 +18,7 @@ filter(result,Map<String,dynamic> data) async {
 
   // Making the API request. The method is set to "GET".
   response = await ApiHelper.makeRequest(
-      targetRout: ServerConstApis.filter,
+      targetRout:url?? ServerConstApis.filter,
       method: "post",
       data: data,
       token: token);
@@ -35,8 +35,6 @@ print(handlingResponse);
     return errorMessage.first;
   } else {
      List<dynamic> categoryListJson = handlingResponse['events'];
-
-    result.addAll(
-        categoryListJson.map((jsonItem) => EventModel.fromJson(jsonItem)));  
+return categoryListJson;
   }
 }

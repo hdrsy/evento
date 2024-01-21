@@ -1,47 +1,6 @@
-// import 'package:evento/features/events/home/controller/home_controller.dart';
-// import 'package:evento/features/events/home/model/event_model.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
 
-// class SearchPageController extends GetxController{
-//   late List<EventModel> orginalSearchEvents;
-//   late RxList<EventModel> searchResultSearch;
-//   late RxBool isSearchActive;
-//   late TextEditingController searchField;
-//   @override
-//   void onInit() {
-//     searchResultSearch=<EventModel>[].obs;
-//     orginalSearchEvents=<EventModel>[].obs;
-//     isSearchActive=false.obs;
-//     searchField=TextEditingController();
-//     getorginalSerachData();
-//     super.onInit();
-//   }
-//   getorginalSerachData(){
-//    final TrendingListController trendingListController=Get.find();
-//    print("searddddd");
-// print(trendingListController.itemList.length);
-//    orginalSearchEvents.assignAll(trendingListController.itemList);
-//    print(orginalSearchEvents.length);
-//    update();
-//   }
- 
-// void onPressSearch(String query) {
-//   if (query.isEmpty) {
-//     isSearchActive.value = false;
-//     searchResultSearch.clear();
-//   } else {
-//     isSearchActive.value = true;
-//     searchResultSearch.assignAll(
-//       orginalSearchEvents.where(
-//         (event) => event.title.toLowerCase().contains(query.toLowerCase())
-//       ).toList()
-//     );
-//   }
-// }
-
-// }
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/server/filter.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/controllers/pagination_controller.dart';
@@ -102,6 +61,15 @@ class SearchPageController extends PaginationController<EventModel> {
       ).toList()
     );
   }
+}
+void onApplyFilters(Map<String ,dynamic> data)async{
+  isSearchActive.value=true;
+  final d=await  filter( data);
+  print(d);
+Get.back();
+    var eventModels = d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
+  searchResultSearch.addAll(eventModels.cast<EventModel>());
+
 }
 
 }
