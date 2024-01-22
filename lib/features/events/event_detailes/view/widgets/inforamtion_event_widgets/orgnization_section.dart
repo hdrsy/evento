@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 
 import '../../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -23,7 +24,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
                     Get.dialog( GuestPopupWidget());
                   }else{
         
-        Get.toNamed('/OrganizerProfileScreen');}
+       eventDetailesController.eventDetailsModel.organizer!=null? Get.toNamed('/OrganizerProfileScreen',arguments:eventDetailesController.eventDetailsModel.organizer!.organizerInfo.id ):null;}
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -39,8 +40,10 @@ Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset(
-                  'assets/images/pexels-brett-sayles-992734.jpg',
+                child: eventDetailesController.eventDetailsModel.organizer!=null?getImageNetwork(url: eventDetailesController.eventDetailsModel.organizer!.organizerInfo.profile, width: null, height: null):
+                
+                Image.asset(
+                  'assets/images/Artboard_1.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -49,7 +52,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                 organizer!=null?   "${organizer.firstName} ${organizer.lastName}":"Evento",
+                 organizer!=null?   "${organizer.organizerInfo.name} ":"Evento",
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'BeerSerif',
                       color:customColors.primaryText,
@@ -59,7 +62,7 @@ Widget buildOrganizerSection(BuildContext context,Organizer? organizer) {
                     ),
                   ),
                   Text(
-                     organizer!=null?   "${organizer.firstName} ${organizer.lastName}":"Evento",
+                     "Organizer",
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'BeerSerif',
                       fontSize: 12,

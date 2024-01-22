@@ -83,6 +83,8 @@ class BookNowController extends GetxController {
     errorMessage = <String>[].obs;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
+    print(token);
+    print(createBookingJson(ticketList));
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.bookNow,
         method: "post",
@@ -90,6 +92,7 @@ class BookNowController extends GetxController {
         data: createBookingJson(ticketList));
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {

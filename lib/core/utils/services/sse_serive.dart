@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/main.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
@@ -34,22 +35,68 @@ request.headers['Authorization'] = 'Bearer $token';
     log("message");
     response.stream
         .transform(utf8.decoder) // Decode bytes to UTF8.
-        .transform(LineSplitter()) // Convert stream to individual lines.
+        .transform(const LineSplitter()) // Convert stream to individual lines.
         .listen((line) {
-          print("line $line");
-      // Process the line (assuming JSON data)
-      if (line.isNotEmpty) {
-        // var data = json.decode(line);
-        // Handle the data (e.g., show notification)
-      }
+        print("line $line");
+    log(line);
+
+    // Process the line (assuming JSON data)
+    if (line.isNotEmpty) {
+        // Remove the 'data: ' prefix if it exists
+        var jsonLine = line.startsWith('data: ') ? line.substring(6) : line;
+
+        try {
+            var data = json.decode(jsonLine);
+            print(data);
+
+            if (data is Map) {
+              isThereNotification.value=true;
+                NotificationService()
+                    .showNotification(data['title'], data['description']);
+            }
+        } catch (e) {
+            print('Error parsing JSON: $e');
+        }}
     }, onDone: () {
       print("done");
+      log("done");
       // Connection closed
     }, onError: (error) {
+      log("onError");
       print("error :$error");
       // Handle errors
     });
   });
 }
+static Map<String, String> parseNotification(String message) {
+  // First, remove any leading identifiers like "data:"
+  String cleanedMessage = message.replaceFirst(RegExp(r'^data: '), '');
+
+  // Remove leading and trailing quotation marks and unnecessary escape characters
+  cleanedMessage = cleanedMessage.replaceAll(RegExp(r'\\'), '');
+  cleanedMessage = cleanedMessage.replaceAll(RegExp(r'^"|"$'), '');
+
+  // Split the message at each forward slash
+  List<String> parts = cleanedMessage.split('/');
+
+  // Check if we have at least two parts to form a title and a body
+  if (parts.length >= 2) {
+    String title = parts[0].trim();
+    // The body is everything after the title, but before the second slash
+    String body = parts[1].trim();
+
+    return {
+      'title': title,
+      'body': body,
+    };
+  } else {
+    // Handle the case where the message format is not as expected
+    return {
+      'title': 'Unknown',
+      'body': 'Message format is incorrect',
+    };
+  }
+}
+
 
 }

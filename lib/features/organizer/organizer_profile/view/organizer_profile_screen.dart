@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/utils/animation/animation_text.dart';
@@ -78,15 +80,12 @@ class OrganizerProfileScreen extends StatelessWidget {
   }
 
   Widget _buildBackgroundImage() {
+    final OrganizerProfileController organizerProfileController=Get.find();
     return Align(
       alignment: const AlignmentDirectional(0, -1),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(0),
-        child: Image.network(
-          'https://picsum.photos/seed/902/600',
-          width: double.infinity,
-          fit: BoxFit.cover,
-        ),
+        child:getImageNetwork(url: "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}", width: double.infinity, height:null)
       ),
     );
   }
@@ -105,10 +104,8 @@ class OrganizerProfileScreen extends StatelessWidget {
               width: 2,
             ),
             image: DecorationImage(
-                image: Image.network(
-              'https://picsum.photos/seed/902/600',
-              fit: BoxFit.cover,
-            ).image)),
+                image: getImageNetwork(url: "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}", width: double.infinity, height:null)
+      .image)),
       ),
     );
   }
@@ -408,7 +405,7 @@ class MyTabBarWidget extends StatelessWidget {
 
   Widget _buildGalleryTab(BuildContext context) {
     final OrganizerProfileController organizerProfileController = Get.find();
-
+print(organizerProfileController.organizerProfileModel.organizerInfo.albums);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(

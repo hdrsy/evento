@@ -100,7 +100,7 @@ Widget buildOrganizerItem({required OrganizerHome organizerHome,required int mod
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-     buildEventImage(organizerHome.imageUrl),
+     buildEventImage(organizerHome.organizerHomeInfo.profile),
         buildEventTitle(organizerHome.organizerHomeInfo.name),
         // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
       ],

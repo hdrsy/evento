@@ -19,7 +19,7 @@ final int modelIndex;
     return 
         InkWell(
           onTap: (){
-              Get.toNamed('/eventDetailes', arguments: eventModel.id);
+              Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
                  
           },
           child: Padding(

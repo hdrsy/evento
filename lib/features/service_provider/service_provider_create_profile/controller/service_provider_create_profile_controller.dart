@@ -127,10 +127,12 @@ class ServiceProviderCreateProfileController extends GetxController {
         data: dataRequest,
         files: fileMap);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
       isLoading.value = false;
       print("object");
+
     } else {
       isLoading.value=false;
       print(handlingResponse);

@@ -29,7 +29,7 @@ class ProfileController extends GetxController{
     if (isCompleteProfile && targetRout == '/home') {
     SSEService.connectToSSE();
     // await PusherService.initPusher();
-    // await NotificationService().init();
+    await NotificationService().init();
   }
     await  getProfileInfo();
     super.onInit();

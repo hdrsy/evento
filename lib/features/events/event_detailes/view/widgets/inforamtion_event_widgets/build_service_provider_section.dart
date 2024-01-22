@@ -93,9 +93,9 @@ final ServiceProvider serviceProvider;
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Get.toNamed('/ServiceAccordingDetailesScreen',arguments: [serviceProvider,1,false]);
+        Get.toNamed('/ServiceAccordingDetailesForUserScreen',arguments: serviceProvider.id);
       },
-      child: Column(
+      child: Column( 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(

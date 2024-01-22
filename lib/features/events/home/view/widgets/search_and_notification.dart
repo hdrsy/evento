@@ -37,10 +37,27 @@ class SearchAndNotification extends StatelessWidget {
                 Get.toNamed('/NotificationScreen');
               }
             },
-            child: Icon(
-              Icons.notifications_none_outlined,
-              color: customColors.secondaryText,
-              size: 30,
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Icon(
+                  Icons.notifications_none_outlined,
+                  color: customColors.secondaryText,
+                  size: 30,
+                ),
+                Obx(
+                  ()=>
+                  isThereNotification.value?
+                  Container(
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                              ),
+                          ):SizedBox.shrink(),
+                )
+              ],
             ),
           )
         ],

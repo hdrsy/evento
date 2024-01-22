@@ -56,20 +56,23 @@ OrganizerHomeInfo organizerHomeInfo;
 class OrganizerHomeInfo {
   final int id;
   final String name;
+  final String profile;
    bool isFollowedByAuthUser;
 
   OrganizerHomeInfo({
     required this.id,
     required this.name,
+    required this.profile,
     required this.isFollowedByAuthUser,
   });
 
   factory OrganizerHomeInfo.fromJson(Map<String, dynamic> oldJson) {
     Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+ print(json);
     return OrganizerHomeInfo(
       id: json['id'],
       name: json['name'],
+      profile: json['profile']??"ReelImages/RkEKOSmPimq7fdQDgo3eNv6ADlZUmiFF7kHxbrno.png",
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
     );
   }

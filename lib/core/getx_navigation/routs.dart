@@ -1,3 +1,5 @@
+import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
+
 import '../../features/assign_friends/view/assign_friends_screen.dart';
 import '../../features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
 import '../../features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
@@ -109,6 +111,7 @@ appRoutes() => [
     GetPage(name: '/EditProfileServiceProviderScreen', page:()=> EditProfileServiceProviderScreen(),binding:EditProfileServiceProviderBinding() ) , 
     GetPage(name: '/BookingDetailesForMyBookingScreen', page:()=> BookingDetailesForMyBookingScreen(),binding:BookingDetailesForMyBookingBinding() ) , 
     GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
+    GetPage(name: '/ServiceAccordingDetailesForUserScreen', page:()=> ServiceAccordingDetailesForUserScreen() ) , 
     GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
     GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
     GetPage(name: '/ServiceProviderCreateProfileScreen', page:()=>  ServiceProviderCreateProfileScreen(),binding:ServiceProviderCreateProfileBinding() ) , 

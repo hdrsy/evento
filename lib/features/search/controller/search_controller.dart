@@ -29,6 +29,19 @@ class SearchPageController extends PaginationController<EventModel> {
     );
    
   }
+  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchDataInSearch(
+      String url, int page, Map<String, dynamic> additionalParams) async {
+    String token = await prefService.readString("token") ;
+    String apiUrl = "${ServerConstApis.getTrendingList}?page=$page";
+
+    // Returning the result of the API call
+    return ApiHelper.makeRequest(
+      targetRout: apiUrl,
+      method: "GET",
+      token: token,
+    );
+   
+  }
 
   @override
   handleDataSuccess(dynamic handlingResponse) {

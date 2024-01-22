@@ -1,13 +1,14 @@
+import 'package:evento/features/service_provider/show_profile_for_user.dart/model/show_profile_for_user.dart';
+
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
-import '../../model/organizer_profile_model.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrganizerFolderCard extends StatelessWidget {
-  const OrganizerFolderCard({super.key, required this.album, });
-  final OrganizerProfileAlbum album;
+class FolderCard extends StatelessWidget {
+  const FolderCard({super.key, required this.album});
+  final Album album;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,9 +26,10 @@ class OrganizerFolderCard extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: getImageNetwork(url: "/storage/${album.images[0]}", width: 340, height: 200)
-                
-                ),
+                child: getImageNetwork(
+                    url: "/storage/${album.images[0]}",
+                    width: 340,
+                    height: 200)),
             Opacity(
               opacity: 0.4,
               child: Align(

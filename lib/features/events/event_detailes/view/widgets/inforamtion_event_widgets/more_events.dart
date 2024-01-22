@@ -83,13 +83,9 @@ class MoreEventsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-      child: InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      child: GestureDetector(
         onTap: () async {
-          Get.toNamed('/eventDetailes', arguments: relatedEventModel.id);
+          Get.toNamed('/eventDetailes', arguments: [relatedEventModel.id,false,0]);
         },
         child: Container(
           width: screenWidth * 0.8,

@@ -159,6 +159,7 @@ class OrganizerInfo {
   final int mobileUserId;
   final int categoryId;
   final String name;
+  final String profile;
   final String bio;
   final String services;
   final String state;
@@ -169,6 +170,7 @@ class OrganizerInfo {
     required this.mobileUserId,
     required this.categoryId,
     required this.name,
+    required this.profile,
     required this.bio,
     required this.services,
     required this.state,
@@ -183,6 +185,7 @@ class OrganizerInfo {
       mobileUserId: json['mobile_user_id'],
       categoryId: json['category_id']??1,
       name: json['name'],
+      profile: json['profile'],
       bio: json['bio'],
       services: json['services'],
       state: json['state'],
@@ -341,10 +344,6 @@ class ServiceProvider {
   String description;
   String profile;
   String cover;
-  String startWork;
-  String endWork;
-  double latitude;
-  double longitude;
   ServiceProvider({
     required this.id,
     required this.userId,
@@ -357,11 +356,7 @@ class ServiceProvider {
     required this.description,
     required this.profile,
     required this.cover,
-    required this.startWork,
-    required this.endWork,
-    required this.latitude,
-    required this.longitude,
-  });
+   });
 
   factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) { 
     Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
@@ -378,11 +373,7 @@ class ServiceProvider {
         description: json['description'],
         profile: json['profile'],
         cover: json['cover'],
-        startWork: json['start_work'],
-        endWork: json['end_work'],
-        latitude: json['latitude'].toDouble(),
-        longitude: json['longitude'].toDouble(),
-       );}
+        );}
 
 }
 

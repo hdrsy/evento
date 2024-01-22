@@ -33,6 +33,7 @@ class ServerConstApis {
   ///// service provider
   
   static String becomeServiceProvider = '$baseAPI/api/become_service_provider';
+  static String serviceProfileForUser = '$baseAPI/api/service_provider';
   ///// home page
   static String getCategoryList = '$baseAPI/api/event_category';
   static String getFeaturedList = '$baseAPI/api/featured_event';

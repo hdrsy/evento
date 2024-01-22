@@ -39,7 +39,8 @@ class NotificationService {
     'booking',
     'booking',
     description: 'This channel is used for important notifications.',
-    importance: Importance.low,
+    importance: Importance.max  ,
+    playSound: true
   );
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -63,15 +64,17 @@ class NotificationService {
   }
 
   Future<void> showNotification(String title, String body) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails('booking', 'booking',
-            channelDescription: 'your_channel_description',
-            importance: Importance.min,
+     AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(title, body,
+            channelDescription: 'This channel is used for important notifications.',
+            importance: Importance.max,
             priority: Priority.high,
-            ongoing: true,
+            ongoing: false,
+            playSound: true,
+            
             showWhen: false);
 
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+     NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
     );
 
