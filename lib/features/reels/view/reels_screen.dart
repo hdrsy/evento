@@ -15,6 +15,7 @@ class ReelsScreen extends StatelessWidget {
         body: SafeArea(
           child: GetBuilder<ReelsController>(builder: (ccontext) {
             return PageView.builder(
+              
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
                   if (index > reelsController.currentUserIndex) {
@@ -29,6 +30,7 @@ class ReelsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ReelsWidget(
                     model: reelsController.itemList[index],
+                    modelIndex: index,
                   );
                 });
           }),

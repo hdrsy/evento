@@ -27,7 +27,7 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
           ()=>serviceAccordingDetailesController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
            Stack(children: [
             TopImageWidget(
-              imageUrl: ServerConstApis.baseAPI +
+              imageUrl: ServerConstApis.baseAPI +"/storage/"+
                   serviceAccordingDetailesController.serviceProvider.profile,
             ),
             Align(

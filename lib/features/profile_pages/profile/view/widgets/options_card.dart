@@ -1,3 +1,5 @@
+import 'package:flutter_background_service/flutter_background_service.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -32,6 +34,9 @@ class OptionsCard extends StatelessWidget {
             prefService.remove('token');
             prefService.remove('userInfo');
             prefService.remove('isCompleteProfile');
+             FlutterBackgroundService service=FlutterBackgroundService();
+    service.invoke("stop");
+  
             print(await prefService.isContainKey('userInfo'));
           }else{
 

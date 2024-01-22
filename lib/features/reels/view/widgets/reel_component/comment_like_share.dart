@@ -1,3 +1,5 @@
+import 'package:share_plus/share_plus.dart';
+
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -6,7 +8,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget commentShareLike() {
+Widget commentShareLike(int modelIndex) {
   ReelsController reelsController=Get.find();
     return GetBuilder<ReelsController>(
       builder: (context) {
@@ -25,12 +27,11 @@ Widget commentShareLike() {
                   children: [
                     ToggleIcon(
                       onPressed: () async {
-                        // bool isVedioliked= reelsController.itemList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked;
-                        // reelsController.videoList[reelsController.currentUserIndex].videos[reelsController.currentVideoIndex].isLiked=! isVedioliked;
-                        // reelsController.update();
+                        print("dddddd");
+                      reelsController. followOrUnFollowEvent(reelsController.itemList[modelIndex].id,modelIndex);
                       },
                       // value: reelsController.itemList[reelsController.currentUserIndex].videos[0].isLiked,
-                      value: false,
+                      value: reelsController.itemList[modelIndex].likedByUser,
                       onIcon: Icon(
                         Icons.favorite_rounded,
                         color: customColors.error,
@@ -43,7 +44,7 @@ Widget commentShareLike() {
                       ),
                     ),
                     Text(
-                      "2.6k",
+                      reelsController.itemList[modelIndex].likesCount.toString(),
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
                         color: customColors.info,
@@ -54,51 +55,62 @@ Widget commentShareLike() {
                   ],
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     Icon(
-                      Icons.insert_comment_outlined,
-                      color: customColors.info
-                      ,
-                      size: 30,
-                    ),
-                    Text(
-                      "200",
-                      style: customTextStyle.bodyMedium.override(
-                        fontFamily: 'Nunito',
+              // Container(
+              //   decoration: const BoxDecoration(),
+              //   child: Column(
+              //     mainAxisSize: MainAxisSize.max,
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //        Icon(
+              //         Icons.insert_comment_outlined,
+              //         color: customColors.info
+              //         ,
+              //         size: 30,
+              //       ),
+              //       Text(
+              //         "200",
+              //         style: customTextStyle.bodyMedium.override(
+              //           fontFamily: 'Nunito',
+              //           color: customColors.info,
+              //           useGoogleFonts: true,
+              //           fontSize: 16
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+        
+              GestureDetector(
+                onTap: ()async{
+            const String message = "Check out this event in Evento";
+          final String url = "http://94.141.219.16:8003/#/eventDetailes/";  // Replace with your event link
+          final String shareContent = "$message\n\nFor more details, visit: $url";
+
+        await   Share.share(shareContent);
+                 
+                },
+                child: Container(
+                  decoration: const BoxDecoration(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       Icon(
+                        Icons.reply_outlined,
                         color: customColors.info,
-                        useGoogleFonts: true,
-                        fontSize: 16
+                        size: 30,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     Icon(
-                      Icons.reply_outlined,
-                      color: customColors.info,
-                      size: 30,
-                    ),
-                    Text(
-                      "12",
-                      style: customTextStyle.bodyMedium.override(
-                        fontFamily: 'Nunito',
-                        color: customColors.info,
-                        useGoogleFonts: true,
-                        fontSize: 16
-                      ),
-                    ),
-                  ],
+                      // Text(
+                      //   "12",
+                      //   style: customTextStyle.bodyMedium.override(
+                      //     fontFamily: 'Nunito',
+                      //     color: customColors.info,
+                      //     useGoogleFonts: true,
+                      //     fontSize: 16
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
               ),
             ].divide(const SizedBox(height: 10,)),

@@ -3,16 +3,20 @@ import 'dart:developer';
 
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
+import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/main.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 class SSEService{
 
 static void connectToSSE()async {
+   user = await UserInfo.getUserInfo();
     final int? userId = user?.id; // Ensure null safety
-    if (userId == null) {
-      print("User ID is null");
+    if (user == null) {
+      FlutterBackgroundService service=FlutterBackgroundService();
+    service.invoke("stop");
       return; // Handle null user ID appropriately
     }
 
@@ -22,13 +26,13 @@ static void connectToSSE()async {
       return; // Handle token not found case appropriately
     }
 
-  var url = Uri.parse('${ServerConstApis.baseAPI}/api/notifications/$userId');
+  var url = Uri.parse('${ServerConstApis.baseAPI}/api/notifications/1');
   http.Request request = http.Request("GET", url);
   request.headers["Cache-Control"] = "no-cache";
   request.headers["Accept"] = "text/event-stream";
 request.headers['Authorization'] = 'Bearer $token';
   // Send the request
-  print("start");
+  print("start sse");
   http.Client().send(request).then((response) {
     // Listen to the stream
     print("response in sse :$response");
@@ -68,35 +72,5 @@ request.headers['Authorization'] = 'Bearer $token';
     });
   });
 }
-static Map<String, String> parseNotification(String message) {
-  // First, remove any leading identifiers like "data:"
-  String cleanedMessage = message.replaceFirst(RegExp(r'^data: '), '');
-
-  // Remove leading and trailing quotation marks and unnecessary escape characters
-  cleanedMessage = cleanedMessage.replaceAll(RegExp(r'\\'), '');
-  cleanedMessage = cleanedMessage.replaceAll(RegExp(r'^"|"$'), '');
-
-  // Split the message at each forward slash
-  List<String> parts = cleanedMessage.split('/');
-
-  // Check if we have at least two parts to form a title and a body
-  if (parts.length >= 2) {
-    String title = parts[0].trim();
-    // The body is everything after the title, but before the second slash
-    String body = parts[1].trim();
-
-    return {
-      'title': title,
-      'body': body,
-    };
-  } else {
-    // Handle the case where the message format is not as expected
-    return {
-      'title': 'Unknown',
-      'body': 'Message format is incorrect',
-    };
-  }
-}
-
 
 }

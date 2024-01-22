@@ -65,6 +65,7 @@ class ServerConstApis {
   static String myFavoriteEvents='$baseAPI/api/my_favorite';
   //// reels
   static String getReels = '$baseAPI/api/reels';
+  static String likeReel = '$baseAPI/api/reels';
   //// notification
   static String getNotification = '$baseAPI/api/notification';
   //// promoCode

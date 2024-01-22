@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/shared/controllers/pagination_controller.dart';
@@ -45,6 +46,44 @@ class ReelsController extends PaginationController<ReelModel> {
     isLoadingMoreData.value = false;
     
   }
+  followOrUnFollowreelEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (itemList[modelIndex].event!.isFollowedByAuthUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.unFollowEvent}/$eventId");
+    } else {
+      isDoneSuccefully =
+          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+    }
+    if (isDoneSuccefully == "followed successfully") {
+      itemList[modelIndex].event!.isFollowedByAuthUser = true;
+      update();
+    } else if (isDoneSuccefully == "removed successfully") {
+      itemList[modelIndex].event!.isFollowedByAuthUser = false;
+
+      update();
+    }
+   }
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (itemList[modelIndex].likedByUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.likeReel}/$eventId/like");
+    } else {
+      isDoneSuccefully =
+          await followUnFollowEvent("${ServerConstApis.likeReel}/$eventId/like");
+    }
+    if (isDoneSuccefully == "Like added successfully") {
+      itemList[modelIndex].likedByUser = true;
+      itemList[modelIndex].likesCount += 1;
+      update();
+    } else if (isDoneSuccefully == "like deleted successfully") {
+      itemList[modelIndex].likedByUser = false;
+
+      itemList[modelIndex].likesCount -= 1;
+      update();
+    }
+    }
   void nextUser() {
     if (currentUserIndex + 1 < itemList.length) {
       currentUserIndex++;

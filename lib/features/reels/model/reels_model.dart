@@ -15,10 +15,10 @@ class ReelModel {
     final String description;
     final DateTime createdAt;
     final DateTime updatedAt;
-    final int likesCount;
+     int likesCount;
     final int commentsCount;
-    final bool likedByUser;
-    // final EventModel? event;
+     bool likedByUser;
+    final EventModel? event;
     final Venue? venue;
     final User? user;
 
@@ -35,14 +35,14 @@ class ReelModel {
         required this.likesCount,
         required this.commentsCount,
         required this.likedByUser,
-        // this.event,
+        this.event,
         required this.venue,
         this.user,
     });
 
     factory ReelModel.fromJson(Map<String, dynamic> json)  {
       // Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+ print("evnt in reel:${json['event']}");
       return
       ReelModel(
         id: json['id'],
@@ -57,7 +57,7 @@ class ReelModel {
         likesCount: json['likes_count'],
         commentsCount: json['comments_count'],
         likedByUser: json['liked_by_user'],
-        // event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
+        event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
         venue:json['venue']!=null? Venue.fromJson(json['venue']):null,
         user: json['user'] != null ? User.fromJson(json['user']) : null,
     );}

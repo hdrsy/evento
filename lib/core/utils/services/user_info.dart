@@ -60,11 +60,12 @@ class UserInfo {
 
   static Future<UserInfo?> getUserInfo() async {
      bool userInfoJson =await  prefService.isContainKey('userInfo');
-      print(userInfoJson);
+
+      print("iscontainuserInfoJson:$userInfoJson");
       print("userInfoJson");
     if (userInfoJson ) {
       final userInfo=jsonDecode( await prefService.readString('userInfo'));
-      print(userInfo);
+      print("userInfofrom storage:$userInfo");
       return UserInfo.fromJson(userInfo);
     }
     else{

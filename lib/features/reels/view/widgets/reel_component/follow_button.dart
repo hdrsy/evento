@@ -1,33 +1,46 @@
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
+import 'package:evento/features/reels/controller/reels_controller.dart';
+import 'package:get/get.dart';
 
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
-ButtonWidget followButton() {
-    return ButtonWidget(
-      onPressed: () {
-       },
-      text:tr( "Follow"),
-      options: ButtonOptions(
-        width: 85,
-        height: 31,
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        color: customColors.secondaryBackground,
-        textStyle: customTextStyle.titleSmall.override(
-          fontFamily: 'Nunito',
-          color: customColors.info,
+Widget followButton(int modelIndex) {
+  final ReelsController reelsController=Get.find();
+    return GetBuilder<ReelsController>(
+      builder: (context) {
+        return ButtonWidget(
+          onPressed: () {
+reelsController.followOrUnFollowreelEvent(reelsController.itemList[modelIndex].event!.id, modelIndex);
+           },
+          text:reelsController.itemList[modelIndex].event!.isFollowedByAuthUser?tr("UnFollow"):tr( "Follow"),
+          options: ButtonOptions(
+            width: 85,
+            height: 31,
+              color: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
+                        ? customColors.secondaryBackground
+                        : customColors.primary,
+                    textStyle: customTextStyle.titleSmall.override(
+                      fontFamily: 'Nunito',
           fontSize: 14,
           fontWeight: FontWeight.normal,
           useGoogleFonts: true,
-        ),
-        borderSide: BorderSide(
-          color: customColors.primaryBackground,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
+                      color:reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
+                          ? customColors.primary
+                          : customColors.info,),
+                  
+            padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+            iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            borderSide: BorderSide(
+              color: customColors.primaryBackground,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+        );
+      }
     );
   }

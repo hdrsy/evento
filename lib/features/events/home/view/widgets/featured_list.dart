@@ -268,7 +268,7 @@ class FeaturedWidget extends StatelessWidget {
                 onTap: () async {
                  
                              const String message = "Check out this event in Evento";
-          final String url = "http://94.141.219.16:8005/#/eventDetailes/$eventId";  // Replace with your event link
+          final String url = "http://94.141.219.16:8003/#/eventDetailes/$eventId";  // Replace with your event link
           final String shareContent = "$message\n\nFor more details, visit: $url";
 
         await   Share.share(shareContent);

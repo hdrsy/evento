@@ -31,9 +31,7 @@ class StepsController extends GetxController {
       'assets/images/0.png',
       'assets/images/1.png',
       'assets/images/2.png',
-      'assets/images/0.png',
-      'assets/images/1.png',
-    ].obs;
+      ].obs;
     interestList = [];
       int initialPage = avatarList.length ~/ 2;
       selectedProfileindex=initialPage;

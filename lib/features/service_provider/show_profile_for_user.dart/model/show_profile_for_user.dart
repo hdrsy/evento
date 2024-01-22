@@ -43,6 +43,9 @@ class ServiceProvider{
   });
 
   factory ServiceProvider.fromJson(Map<String, dynamic> json) {
+     var albumsList = json['albums'] as List;
+  List<Album> albums = albumsList.map((i) => Album.fromJson(i)).toList();
+
     return ServiceProvider(
       id: json['id'],
       userId: json['user_id'],
@@ -61,7 +64,7 @@ class ServiceProvider{
       type: json['type'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
-      albums: json['albums'] ?? [],
+      albums: albums,
     );
   }
 }

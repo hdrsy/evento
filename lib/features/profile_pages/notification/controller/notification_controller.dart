@@ -30,6 +30,7 @@ class NotificationController extends GetxController {
         method: "GEt",
         token: token);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
 

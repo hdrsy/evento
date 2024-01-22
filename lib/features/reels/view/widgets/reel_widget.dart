@@ -18,9 +18,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReelsWidget extends StatelessWidget {
-  ReelsWidget({super.key, required this.model});
+  ReelsWidget({super.key, required this.model, required this.modelIndex});
   
   final ReelModel model;
+  final int modelIndex;
 
   final ReelsController reelsController = Get.find();
 
@@ -53,7 +54,7 @@ class ReelsWidget extends StatelessWidget {
                               currentVideoUrl:"${ServerConstApis.baseAPI}/storage/${ model.videos[0]}",
                             ),
                             videoInfo(),
-                            // commentShareLike(),
+                            commentShareLike(modelIndex),
                           ],
                         ),
                       ),
@@ -93,7 +94,7 @@ class ReelsWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     userPhotoAndName(model: model),
-                    followButton(),
+              model.event!=null?      followButton(modelIndex):SizedBox.shrink(),
                   ].divide(const SizedBox(width: 10)),
                 ),
               ),
@@ -111,7 +112,7 @@ Row videInfoDataAndNumberViews(ReelModel model) {
   return Row(
     mainAxisSize: MainAxisSize.max,
     children: [
-      numberOfShowing(),
+      // numberOfShowing(),
       reelDate(DateFormatter.formatDate(model.createdAt)),
     ].divide(const SizedBox(width: 10)),
   );
@@ -161,38 +162,25 @@ class userPhotoAndName extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        userPhoto(),
+        userPhoto(model),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-          child: userName(model.user!=null?model.user!.firstName:"Evento"),
+          child: userName(getReelToname(model)),
         ),
       ],
     );
   }
 }
-
-// void handleVideoTap(
-//     TapUpDetails details, VideoPlayerController videoPlayerController) {
-//   double localscreenWidth = screenWidth;
-//   double tappedPosition = details.globalPosition.dx;
-//   ReelsController reelsController = Get.find();
-
-//   if (videoPlayerController == null) {
-//     return; // Exit if playerController is not initialized
-//   }
-//   if (tappedPosition > localscreenWidth * 0.75) {
-//     log("right tap");
-//     // Right side tapped
-//     reelsController.nextVideo();
-//   } else if (tappedPosition < localscreenWidth * 0.25) {
-//     // Left side tapped
-//     reelsController.previousVideo();
-//   } else {
-//     // Center tapped, toggle play/pause
-//     if (videoPlayerController.value.isPlaying) {
-//       videoPlayerController.pause();
-//     } else {
-//       videoPlayerController.play();
-//     }
-//   }
-// }
+String getReelToname(ReelModel model){
+if(model.event!=null){
+  return model.event!.title;
+}
+else if(model.user!=null){
+  return model.user!.firstName;
+}
+else if(model.venue!=null){
+  return model.venue!.name;
+}else{
+  return "Evento";
+}
+}

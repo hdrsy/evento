@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/back_ground_service.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/pusher.dart';
 import 'package:evento/core/utils/services/sse_serive.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -27,9 +29,14 @@ class ProfileController extends GetxController{
       await prefService.readString("isCompleteProfile") == "true";
  
     if (isCompleteProfile && targetRout == '/home') {
-    SSEService.connectToSSE();
-    // await PusherService.initPusher();
+    while(user==null){
+      log("inside while");
+    }
+    initializeService();
+// SSEService.connectToSSE();  
     await NotificationService().init();
+    FlutterBackgroundService service=FlutterBackgroundService();
+    service.startService();
   }
     await  getProfileInfo();
     super.onInit();
