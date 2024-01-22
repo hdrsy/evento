@@ -60,6 +60,7 @@ StepsController stepsController=Get.find();
                 margin: EdgeInsets.symmetric(vertical: scaleHeight(48)),
 
                 child: customTextField(
+
                     context: context,
                     label:tr( "Enter Password"),
                     keyboardType: TextInputType.visiblePassword,
@@ -69,7 +70,7 @@ StepsController stepsController=Get.find();
                     validator: (value) {
                       return passwordValidation(value);
                     },
-                    isPassWordVisible: false)),
+                    isPassWordVisible: true)),
             buildButton()
           ],
         ),

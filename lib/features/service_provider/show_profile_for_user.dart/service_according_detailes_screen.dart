@@ -23,67 +23,70 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       body: SafeArea(
-        child: Stack(children: [
-          TopImageWidget(
-            imageUrl: ServerConstApis.baseAPI +
-                serviceAccordingDetailesController.serviceProvider.profile,
-          ),
-          Align(
-            alignment: const AlignmentDirectional(-0.95, -0.95),
-            child: Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: const Color(0x3A000000),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: IconWithContainer(
-                backgroundColor: Colors.transparent,
-                buttonSize: 46,
-                borderRadius: 10,
-                icon: Icons.arrow_back_rounded,
-                iconColor: customColors.info,
-                onTap: () {
-                  Get.back();
-                },
-              ),
+        child: Obx(
+          ()=>serviceAccordingDetailesController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+           Stack(children: [
+            TopImageWidget(
+              imageUrl: ServerConstApis.baseAPI +
+                  serviceAccordingDetailesController.serviceProvider.profile,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: customColors.secondaryBackground,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: Color(0x320E151B),
-                    offset: Offset(0, -2),
-                  )
-                ],
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+            Align(
+              alignment: const AlignmentDirectional(-0.95, -0.95),
+              child: Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: const Color(0x3A000000),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: IconWithContainer(
+                  backgroundColor: Colors.transparent,
+                  buttonSize: 46,
+                  borderRadius: 10,
+                  icon: Icons.arrow_back_rounded,
+                  iconColor: customColors.info,
+                  onTap: () {
+                    Get.back();
+                  },
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    NameCheckBox(
-                        serviceProvider: serviceAccordingDetailesController
-                            .serviceProvider,
-                        ),
-                    const SizedBox(height: 20),
-                    Expanded(child: TabBarGalleryAndDetailes())
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: customColors.secondaryBackground,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x320E151B),
+                      offset: Offset(0, -2),
+                    )
                   ],
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      NameCheckBox(
+                          serviceProvider: serviceAccordingDetailesController
+                              .serviceProvider,
+                          ),
+                      const SizedBox(height: 20),
+                      Expanded(child: TabBarGalleryAndDetailes())
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

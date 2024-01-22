@@ -10,7 +10,8 @@ class EditProfileField extends StatelessWidget {
   required this.labelText,
   required this.onChanged,
   required this.validator,
-   this.suffixIcon
+   this.suffixIcon,
+   this.isPasswordSecure
   });
 final String labelText;
 final String hintText;
@@ -18,7 +19,7 @@ final String? Function(String?)? validator;
 final Function(String)? onChanged;
 final TextEditingController controller;
  IconData? suffixIcon;
-
+bool? isPasswordSecure;
   @override
   Widget build(BuildContext context) {
     return 
@@ -27,7 +28,7 @@ Padding(
   child: TextFormField(
     onChanged: onChanged,
     controller: controller,
-    obscureText: false,
+    obscureText:isPasswordSecure?? false,
     decoration: InputDecoration(
       labelText: labelText,
       // floatingLabelBehavior: FloatingLabelBehavior.always,

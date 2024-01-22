@@ -65,6 +65,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   height: 15,
                 ),
                 EditProfileField(
+                  isPasswordSecure: true,
                     controller: changePasswordController.oldPassword,
                     hintText: "",
                     labelText:tr( "Current pssword"),
@@ -75,6 +76,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       return null;
                     }),
                 EditProfileField(
+                                    isPasswordSecure: true,
                     controller: changePasswordController.newPassword,
                     hintText: "",
                     labelText:tr( "New pssword"),
@@ -85,6 +87,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       return null;
                     }),
                 EditProfileField(
+                                    isPasswordSecure: true,
                     controller: changePasswordController.retypePassword,
                     hintText: "",
                     labelText:tr( "Re-type new password"),

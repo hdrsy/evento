@@ -41,11 +41,12 @@ late int serviceProviderId;
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       final interestsJson = handlingResponse['message'];
-
+print(interestsJson); 
       serviceProvider = ServiceProvider.fromJson(interestsJson);
       
     }
     isLoading.value=false;
+    update();
   }
   
  

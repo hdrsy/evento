@@ -86,6 +86,7 @@ SigninController signinController=Get.find();
                 ),
                 // Input field for password.
                 customTextField(
+                  isPassWordVisible: true,
                 context: context,
                 label:tr( "Password"),
                 keyboardType:TextInputType.visiblePassword,

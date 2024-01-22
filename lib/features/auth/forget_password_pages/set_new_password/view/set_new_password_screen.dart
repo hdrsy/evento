@@ -86,7 +86,7 @@ key: setNewPasswordController.formstate,
                   validator: (value) {
                     return passwordValidation(value);
                   },
-                  isPassWordVisible: false),
+                  isPassWordVisible: true),
               
               customTextField(
                   context: context,
@@ -99,7 +99,7 @@ key: setNewPasswordController.formstate,
                 return   setNewPasswordController.confPassword.text==setNewPasswordController.newPassword.text?null:"The confirm password doesn't mathcing the new password";
                    
                   },
-                  isPassWordVisible: false),
+                  isPassWordVisible: true),
               
                 buildButton()
               ].divide(const SizedBox(height: 16,)),
