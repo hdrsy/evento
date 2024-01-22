@@ -113,7 +113,12 @@ SignupController signupController=Get.find();
                     context: context,
                     label:tr( "+963    mobile Phone"),
                     onChanged: (value) {
-                      signupController.phone.text=value!;
+                       if (value != null && !value.startsWith('0') && value.isNotEmpty) {
+      // Prepend '0' if it's not already there and the value is not empty
+      signupController.phone.text = '0$value';
+    } else {
+      signupController.phone.text = value!;
+    }
                     },
                     keyboardType: TextInputType.phone,
                     validator: (value) {
