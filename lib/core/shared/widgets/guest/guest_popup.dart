@@ -28,6 +28,7 @@ class GuestPopupWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Material(
+            color: customColors.secondaryBackground,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,6 +54,7 @@ class GuestPopupWidget extends StatelessWidget {
                         style: customTextStyle.headlineSmall.override(
                           fontFamily: 'Nunito',
                           fontSize: 16,
+                          color: customColors.primaryText,
                           useGoogleFonts: false,
                         ),
                         overflow: TextOverflow.visible,

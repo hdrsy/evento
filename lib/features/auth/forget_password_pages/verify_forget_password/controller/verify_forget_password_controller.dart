@@ -39,6 +39,7 @@ class VerifyForgetPasswordController extends GetxController {
       Get.snackbar(errorMessage[0], "",
           // duration: Duration(minutes: 1),
           snackPosition: SnackPosition.TOP,
+          colorText: customColors.primaryText,
           backgroundColor: customColors.primaryBackground);
     } else {
       print(handlingResponse);

@@ -76,7 +76,12 @@ SigninController signinController=Get.find();
                  label:tr( "+963    mobile Phone"),
                  
                  onChanged: (value){
-                  signinController.phone.text=value!;
+                   if (value != null && !value.startsWith('0') && value.isNotEmpty) {
+      // Prepend '0' if it's not already there and the value is not empty
+      signinController.phone.text = '0$value';
+    } else {
+      signinController.phone.text = value!;
+    }
                  },
                  keyboardType:TextInputType.phone,
                  validator: (value){
@@ -149,7 +154,7 @@ SigninController signinController=Get.find();
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 const FogetPasswordWidget(),
-const TermsAndCondisionTexts()
+// const TermsAndCondisionTexts()
       ].divide(SizedBox(height: scaleHeight(10),)),
     );
   }

@@ -29,9 +29,9 @@ class ProfileController extends GetxController{
       await prefService.readString("isCompleteProfile") == "true";
  
     if (isCompleteProfile && targetRout == '/home') {
-    while(user==null){
-      log("inside while");
-    }
+    // while(user==null){
+    //   log("inside while");
+    // }
     initializeService();
 // SSEService.connectToSSE();  
     await NotificationService().init();

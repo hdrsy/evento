@@ -31,6 +31,8 @@ void main() async {
 
   themeValue = await prefService.readString('theme');
 print(themeValue is String);
+print(await prefService.readString("isCompleteProfile"));
+print("ssssssssssssssssssssssssssssssssssssssssssss");
   targetRout = await prefService.isContainKey('token') &&
           await prefService.readString("isCompleteProfile") == "true"
       ? '/home'

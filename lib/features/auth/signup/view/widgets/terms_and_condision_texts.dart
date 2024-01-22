@@ -55,7 +55,10 @@ Padding(
       ),
       Spacer(),
       Obx(
-        ()=> Checkbox(value: signupController.isAgreedOn.value, onChanged:(value) {
+        ()=> Checkbox(value: signupController.isAgreedOn.value, 
+        
+        side: BorderSide(color: customColors.primary),
+        onChanged:(value) {
       signupController.isAgreedOn.value=value!;
         },
         activeColor: customColors.primary,
