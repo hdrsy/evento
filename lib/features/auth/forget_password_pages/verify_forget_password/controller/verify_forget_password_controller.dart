@@ -35,14 +35,12 @@ class VerifyForgetPasswordController extends GetxController {
 
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-      print(errorMessage[0]);
       Get.snackbar(errorMessage[0], "",
           // duration: Duration(minutes: 1),
           snackPosition: SnackPosition.TOP,
           colorText: customColors.primaryText,
           backgroundColor: customColors.primaryBackground);
     } else {
-      print(handlingResponse);
       pin.text = handlingResponse['code'].toString();
       update();
       Get.snackbar(handlingResponse['code'].toString(), "",
@@ -56,7 +54,7 @@ class VerifyForgetPasswordController extends GetxController {
     
     FormState? formdata = formstate.currentState;
     print(formdata!.validate());
-    if (formdata!.validate()) {
+    if (formdata.validate()) {
       formdata.save();
       isLoading.value = true;
 

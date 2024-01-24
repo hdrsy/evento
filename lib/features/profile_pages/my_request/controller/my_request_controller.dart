@@ -9,15 +9,18 @@ import 'package:get/get.dart';
 class MyRequestController extends GetxController {
   late List<MyRequestModel> myRequestsList;
   late RxList<String> errorMessage;
+  late RxBool isLoading;
   @override
   void onInit() {
     myRequestsList = [];
     errorMessage = <String>[].obs;
+    isLoading=false.obs;
     getMyEventRequests();
     super.onInit();
   }
 
   getMyEventRequests() async {
+    isLoading.value=true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -34,6 +37,7 @@ class MyRequestController extends GetxController {
       myRequestsList = interestsJson
           .map((jsonItem) => MyRequestModel.fromJson(jsonItem))
           .toList();
+    isLoading.value=false;
       update();
     }
   }

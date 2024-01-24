@@ -13,12 +13,13 @@ import '../../../model/related_event_model.dart';
 import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marquee/marquee.dart';
 import 'package:easy_localization/easy_localization.dart';
 Widget buildMoreEventsSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
 
-  return Column(
+  return eventDetailesController.relatedEvents.isEmpty?const SizedBox.shrink():
+  
+  Column(
     mainAxisSize: MainAxisSize.max,
     children: [
       Padding(
@@ -231,19 +232,10 @@ class MoreEventsCard extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        // context.pushNamed('Reels');
-                                      },
-                                      child: Icon(
-                                        Icons.play_arrow_outlined,
-                                        color: customColors.primaryText,
-                                        size: 25,
-                                      ),
+                                    Icon(
+                                      Icons.play_arrow_outlined,
+                                      color: customColors.primaryText,
+                                      size: 25,
                                     ),
                                   ],
                                 ),
@@ -283,19 +275,10 @@ class MoreEventsCard extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0, 0, 3, 0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  // context.pushNamed('Event-Details');
-                                },
-                                child: Icon(
-                                  Icons.arrow_forward_outlined,
-                                  color: customColors.secondaryText,
-                                  size: 20,
-                                ),
+                              child: Icon(
+                                Icons.arrow_forward_outlined,
+                                color: customColors.secondaryText,
+                                size: 20,
                               ),
                             ),
                           ],

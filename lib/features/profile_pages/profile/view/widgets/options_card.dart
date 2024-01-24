@@ -23,20 +23,18 @@ class OptionsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 12, 8, 0),
-      child: InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      child: GestureDetector(
         onTap: () async {
           if(targetRout is String && targetRout == '/'){
             Get.offAllNamed('/');
             prefService.remove('token');
             prefService.remove('userInfo');
             prefService.remove('isCompleteProfile');
-             FlutterBackgroundService service=FlutterBackgroundService();
-    service.invoke("stop");
-  
+                 FlutterBackgroundService service=FlutterBackgroundService();
+    service.invoke("stopService");
+  print("is running service");
+            print(await service.isRunning());
+          
             print(await prefService.isContainKey('userInfo'));
           }else{
 

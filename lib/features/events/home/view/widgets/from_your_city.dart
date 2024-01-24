@@ -126,15 +126,12 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
 
 // Function to build the image section of the card
 Widget buildEventImage(String imageUrl) {
-  return InkWell(
-    onTap: () {},
-    child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: getImageNetwork(
-            url: "/storage/$imageUrl",
-            width: double.infinity,
-            height: double.infinity)),
-  );
+  return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: getImageNetwork(
+          url: "/storage/$imageUrl",
+          width: double.infinity,
+          height: double.infinity));
 }
 
 // Function to build the favorite icon

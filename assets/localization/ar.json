@@ -379,6 +379,21 @@
 "Local Celebrations & Urban Vibes":"احتفالات محلية نابضة بالحياة وأجواء عصرية",
 "Lively Gatherings & Illuminated Nights":"تجمعات فريدة وليالي رائعة",
 "Off":"خصم",
-"Expires at":"تنتهي عند"
+"Expires at":"تنتهي عند",
+"Event title":"اسم الفعالية",
+
+"No current coupons. Exclusive offers will be featured here as they're available.":".لا توجد كوبونات متاحة حالياً. ستظهر العروض الحصرية هنا عند توفرها",
+"No favorites saved. Add your most loved events here.":".لم يتم حفظ أي مفضلات. أضف الأحداث التي تحبها أكثر هنا",
+"All caught up! No new notifications right now.":"ليس هناك إشعارات جديدة في الوقت الحالي",
+"You haven't made any requests. Start by searching for events you're interested in!":"لم تقم بأي طلبات. ابدأ بالبحث عن الأحداث التي تهتم بها!",
+"No canceled bookings! Explore events to find your next great experience.":"ليس هناك حجوزات ملغاة! استكشف الأحداث لتجد تجربتك الممتازة التالية.",
+ "No completed bookings! Explore events to find your next great experience.":"ليس هناك حجوزات مكتملة! استكشف الأحداث لتجد تجربتك الممتازة التالية",
+ "No upcoming bookings! Explore events to find your next great experience.":"ليس هناك حجوزات قادمة! استكشف الأحداث لتجد تجربتك الممتازة التالية."
+ ,"It looks like no one has confirmed attendance yet. Be the first to join!":"يبدو أن لا أحد قد أكد الحضور بعد. كن أول من ينضم!",
+ "You haven't sent any friend requests yet. Find friends and expand your network!":"لم ترسل أي طلبات صداقة بعد. ابحث عن أصدقاء ووسّع شبكتك!",
+
+ "No new friend requests. Send out some invites to get connected!":"ليس هناك طلبات صداقة جديدة. أرسل بعض الدعوات للتواصل!",
+ "Your friends list is looking a bit lonely. Go ahead and connect with people!":"قائمة أصدقائك تبدو وحيدة بعض الشيء. تقدم وتواصل مع الناس!"
+
   
 }

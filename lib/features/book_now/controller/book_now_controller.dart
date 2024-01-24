@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
@@ -21,12 +23,10 @@ class BookNowController extends GetxController {
   void onInit() {
     EventDetailesController eventDetailesController = Get.find();
     eventDetailsModel = eventDetailesController.eventDetailsModel;
-    ticketList = <TicketModel>[
-      TicketModel(selectedClass: eventDetailsModel.classes[0])
-    ].obs;
-    print(ticketList[0].selectedClass!.ticketPrice);
-    ticketList[0].totalPrice=eventDetailsModel.classes[0].ticketPrice;
-    print(eventDetailsModel.classes[0].ticketPrice);
+    ticketList = <TicketModel>[TicketModel()].obs;
+    // print(ticketList[0].selectedClass!.ticketPrice);
+    ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
+    // print(eventDetailsModel.classes[0].ticketPrice);
     myFreinds = <FreindsModel>[].obs;
 
     isLoading = false.obs;
@@ -34,18 +34,15 @@ class BookNowController extends GetxController {
     getMyFreinds();
     super.onInit();
   }
- getAminityPrice(Amenity title){
 
-}
+  getAminityPrice(Amenity title) {}
   addOrRemoveAminitesFromCladd(Amenity title, int index) {
     int aminityPrice = 0;
-    
+
     for (var element in eventDetailsModel.amenities) {
-      if (element.id==title.id
-         ) {
+      if (element.id == title.id) {
         aminityPrice = element.price!;
-        title.price!=aminityPrice;
-       
+        title.price != aminityPrice;
       }
     }
     if (ticketList[index].selectedAminiteds.contains(title)) {
@@ -55,22 +52,44 @@ class BookNowController extends GetxController {
     } else {
       ticketList[index].selectedAminiteds.add(title);
       ticketList[index].totalPrice += aminityPrice;
-    title.price=aminityPrice;
+      title.price = aminityPrice;
+    }
+    update();
+  }
+  removeTicket(int ticketIndex){
+    ticketList.removeAt(ticketIndex);
+  }
+  changeSelectedCalss(Class newClass, int index) {
+    //// check if there no class selecte yet
+    if (ticketList[index].selectedClass == null) {
+      ticketList[index].totalPrice += newClass.ticketPrice;
+      ticketList[index].selectedClass = newClass;
+      ticketList[index].selectedAminiteds = [];
+    } else {
+      //// check if the selected class same the prev selected one unselected the current calss
+      if (ticketList[index].selectedClass == newClass) {
+        log("unselected calss");
+        ticketList[index].selectedClass == null;
+        ticketList[index].totalPrice -=
+            ticketList[index].selectedClass!.ticketPrice;
+        ticketList[index].selectedAminiteds = [];
+      } else {
+        /// then select new calss and selete the prev one data
+        log("last else");
+        ticketList[index].totalPrice -=
+            ticketList[index].selectedClass!.ticketPrice;
 
+        ticketList[index].totalPrice += newClass.ticketPrice;
+        ticketList[index].selectedClass = newClass;
+        ticketList[index].selectedAminiteds = [];
+      }
     }
     update();
   }
 
-  changeSelectedCalss(Class newClass, int index) {
-    ticketList[index].selectedClass = newClass;
-    ticketList[index].totalPrice=newClass.ticketPrice;
-    ticketList[index].selectedAminiteds = [];
-    update();
-  }
-
-  inCrementTicketCount() {
-    ticketList.add(TicketModel(selectedClass: eventDetailsModel.classes[0]));
-  }
+  // inCrementTicketCount() {
+  //   ticketList.add(TicketModel(selectedClass: eventDetailsModel.classes[0]));
+  // }
 
   deCrementTicketCount() {
     if (ticketList.length > 1) {
@@ -112,6 +131,16 @@ class BookNowController extends GetxController {
     List<Map<String, dynamic>> bookingList = [];
 
     for (var booking in bookings) {
+      if(booking.selectedClass==null){
+          bookingList.add({
+        'first_name': booking.fisrtName.text,
+        'last_name': booking.lastName.text,
+        'age': int.tryParse(booking.age.text) ?? 0,
+        'phone_number': booking.phoneNumber.text,
+       });
+    
+      }else{
+
       bookingList.add({
         'class_id': booking.selectedClass!.id,
         'first_name': booking.fisrtName.text,
@@ -121,6 +150,7 @@ class BookNowController extends GetxController {
         'options':
             booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
       });
+      }
     }
 
     Map<String, dynamic> jsonMap = {'bookings': bookingList};

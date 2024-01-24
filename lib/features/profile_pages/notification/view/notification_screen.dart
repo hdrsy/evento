@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/features/profile_pages/notification/controller/notification_controller.dart';
 
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -32,7 +33,13 @@ class NotificationScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        ()=> SingleChildScrollView(
+        ()=> 
+         notificationController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            notificationController.notificationList.isEmpty?const EmptyData(icon:Icons.notifications_sharp ,message:"All caught up! No new notifications right now." ,):
+            
+        
+        
+        SingleChildScrollView(
           
           child: 
           

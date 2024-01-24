@@ -3,7 +3,6 @@ import '../../server/helper_api.dart';
 import '../../server/server_config.dart';
 import '../error_handling/erroe_handling.dart';
 import '../../../main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class UserInfo {
@@ -77,7 +76,7 @@ class UserInfo {
   static Future<UserInfo?> getUserInfoFromApi()async{
       
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.getprofile,
         method: "GEt",
@@ -92,6 +91,7 @@ class UserInfo {
       return UserInfo.fromJson(handlingResponse["user"]);
       
     }
+    return null;
     
   
   }

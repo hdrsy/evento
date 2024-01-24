@@ -2,8 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/features/events/home/model/category_model.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:evento/main.dart';
 
  filter(Map<String,dynamic> data,{String? url}) async {
@@ -25,7 +23,6 @@ import 'package:evento/main.dart';
 
   // Handling the response. 'fold' is used to handle both Left (error) and Right (success) cases.
   dynamic handlingResponse = response.fold((l) => l, (r) => r);
-print(handlingResponse);
   // Check if the handlingResponse is an error.
   if (handlingResponse is ErrorResponse) {
     // If it's an error, extract the error messages.

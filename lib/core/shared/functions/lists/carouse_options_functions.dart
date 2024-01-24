@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_options.dart';
-import '../../../responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
  class CaroucelOptionFunctions{
@@ -89,8 +88,8 @@ static CarouselOptions featuredOptions= CarouselOptions(
                   enableInfiniteScroll: true,
                   scrollDirection: Axis.vertical,
                   autoPlay: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayInterval: Duration(milliseconds: (800 + 4000)),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayInterval: const Duration(milliseconds: (800 + 4000)),
                   autoPlayCurve: Curves.linear,
                   pauseAutoPlayInFiniteScroll: true,  onPageChanged: (index, _) {}
               );

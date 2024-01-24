@@ -1,3 +1,6 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:evento/main.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../controller/my_booking_controller.dart';
@@ -11,7 +14,11 @@ final MyBookingController myBookingController =Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return  Obx(() => 
+     myBookingController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            myBookingController.upComingBooking.isEmpty?const EmptyData(icon:Icons.calendar_today ,message:"No completed bookings! Explore events to find your next great experience." ,):
+       
+     SingleChildScrollView(
       padding: padding(10,24,10,24),
       child: Column(
         children: [
@@ -24,6 +31,6 @@ final MyBookingController myBookingController =Get.find();
           ))
         ].divide(const SizedBox(height: 10,)),
       ),
-    );
+    ));
   }
 }

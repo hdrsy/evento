@@ -63,7 +63,7 @@ class NotificationService {
       ?.createNotificationChannel(channel);
   }
 
-  Future<void> showNotification(String title, String body) async {
+  Future<void> showNotification(int notificationId,String title, String body) async {
      AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(title, body,
             channelDescription: 'This channel is used for important notifications.',
@@ -79,6 +79,6 @@ class NotificationService {
     );
 
     await flutterLocalNotificationsPlugin
-        .show(888, title, body, platformChannelSpecifics, );
+        .show(notificationId, title, body, platformChannelSpecifics, );
   }
 }

@@ -1,15 +1,9 @@
 import 'dart:developer';
-
-import '../../../cache_config/cache_config.dart';
-import '../../controllers/tween_animation_controller.dart';
-import '../../../../features/reels/controller/reels_controller.dart';
-import '../../../../main.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class CardsVideoWidget extends StatefulWidget {
-  CardsVideoWidget(
+  const CardsVideoWidget(
       {super.key,
       required this.currentVideoUrl,
       required this.videoHgiht,
@@ -63,7 +57,6 @@ class _VideoWidgetState extends State<CardsVideoWidget>
             });
           }).catchError((error) {
             // Handle the error here
-            print("Error initializing video player: $error");
           });
     videoPlayerController.addListener(() {
       if (videoPlayerController.value.isPlaying && !_isPlaying) {
@@ -110,7 +103,7 @@ class _VideoWidgetState extends State<CardsVideoWidget>
   @override
   Widget build(BuildContext context) {
     return !videoInitialized
-        ? SizedBox()
+        ? const SizedBox()
         : GestureDetector(
             onTap: () {
               if (videoInitialized) {

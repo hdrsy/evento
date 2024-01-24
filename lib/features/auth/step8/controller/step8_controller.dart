@@ -60,6 +60,8 @@ class Step8Controller extends GetxController {
      user=await UserInfo.getUserInfo();
      prefService.createString("isCompleteProfile", "true");
      isGuset=false;
+       targetRout == '/home';
+   
      Get.offAllNamed('/home');
 
   }

@@ -65,6 +65,8 @@ FormState? formdata = formstate.currentState;
     prefService.createString("token", token);
     prefService.createString("isCompleteProfile", "true");
      isGuset=false;
+       targetRout == '/home';
+   
      user=await UserInfo.getUserInfo();
    
     Get.offAllNamed('/home');

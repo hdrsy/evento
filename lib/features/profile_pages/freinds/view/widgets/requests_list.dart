@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -17,9 +19,13 @@ class RequestsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FreindsController>(builder: (controller) {
-      return SingleChildScrollView(
-        child: controller.isRecivedFreindsLoading.value?ShimmerLoadingWidget(loadingShimmerWidget: ShimmerFriendCard()):
-        
+      return      controller.isRecivedFreindsLoading.value
+            ?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            controller.recivedFreinds.isEmpty?const EmptyData(icon:Icons.person ,message:"No new friend requests. Send out some invites to get connected!" ,):
+    
+      SingleChildScrollView(
+        child: 
+       
         
         Column(
           children: [
@@ -58,16 +64,7 @@ class RequestsList extends StatelessWidget {
                       style: customTextStyle.bodyMedium,
                     ),
                   ),
-                  Text(
-                    "see all",
-                    style: customTextStyle.bodyMedium.override(
-                      fontFamily: 'Nunito',
-                      color: customColors.primary,
-                      fontSize: 12,
-                      useGoogleFonts: false,
-                    ),
-                  ).tr(),
-                ],
+                  ],
               ),
             ),
           

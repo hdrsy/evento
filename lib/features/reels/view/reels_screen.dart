@@ -15,7 +15,7 @@ class ReelsScreen extends StatelessWidget {
         body: SafeArea(
           child: GetBuilder<ReelsController>(builder: (ccontext) {
             return PageView.builder(
-              
+              controller: reelsController.pageController,
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
                   if (index > reelsController.currentUserIndex) {

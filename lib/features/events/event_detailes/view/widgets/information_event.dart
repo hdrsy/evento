@@ -31,7 +31,7 @@ final EventDetailsModel eventDetailsModel;
             width: screenWidth*0.95 ,
             margin: const EdgeInsets.symmetric(horizontal: 10),
             padding:
-             EdgeInsets.symmetric(vertical: screenHeight*0.05,horizontal: screenWidth*0.05),
+             EdgeInsets.symmetric(vertical: screenHeight*0.01,horizontal: screenWidth*0.05),
             // padding(16,26,16,26),
             decoration: BoxDecoration(
               color: customColors.secondaryBackground,
@@ -54,7 +54,7 @@ final EventDetailsModel eventDetailsModel;
                   buildEventTimelineButton(context,eventDetailsModel),
                   LinksSection(),
                   buildMoreEventsSection(context),
-                ].divide(const SizedBox(height: 20)).addToStart(const SizedBox(height: 10)).addToEnd(const SizedBox(height: 40)),
+                ].divide(const SizedBox(height: 10)).addToStart(const SizedBox(height: 10)).addToEnd(const SizedBox(height: 40)),
               ),
                  
                ),

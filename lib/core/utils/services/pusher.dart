@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:evento/core/server/server_config.dart';
-import 'notification_service.dart';
 import '../../../main.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
-import 'package:http/http.dart' as http;
 
 final PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
 
@@ -54,8 +52,8 @@ class PusherService {
             var data = json.decode(event.data);
             print(data);
             if (data is Map) {
-              NotificationService()
-                  .showNotification(data['title'], data['description']);
+              // NotificationService()
+              //     .showNotification(data['title'], data['description']);
             }
           }
         },

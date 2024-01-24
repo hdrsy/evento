@@ -25,20 +25,21 @@ class ProfileController extends GetxController{
     isLoading=false.obs;
     errorMessage=<String>[].obs;
     user = await UserInfo.getUserInfo();
+    print("user object :$user");
        bool isCompleteProfile =
       await prefService.readString("isCompleteProfile") == "true";
- 
-    if (isCompleteProfile && targetRout == '/home') {
-    // while(user==null){
-    //   log("inside while");
-    // }
-    initializeService();
-// SSEService.connectToSSE();  
-    await NotificationService().init();
-    FlutterBackgroundService service=FlutterBackgroundService();
-    service.startService();
-  }
+ print("isCompleteProfile :$isCompleteProfile");
     await  getProfileInfo();
+    print(targetRout);
+    if (isCompleteProfile && targetRout == '/home') {
+   print("inide init service");
+    initializeService();
+    await NotificationService().init();
+    // SSEService.connectToSSE();
+    final service=FlutterBackgroundService();
+    service.startService();
+    
+  }
     super.onInit();
   }
   

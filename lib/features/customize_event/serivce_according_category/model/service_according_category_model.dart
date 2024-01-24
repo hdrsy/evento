@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:evento/core/server/helper_api.dart';
+import 'package:flutter/services.dart';
 
 class ServiceProvider {
   final int id;
@@ -8,12 +9,8 @@ class ServiceProvider {
   final int categoryId;
   final String locationWorkGovernorate;
   final String address;
-  final String startWork;
-  final String endWork;
   final String profile;
   final String description;
-  final double latitude;
-  final double longitude;
   final User user;
   final List<Album> albums;
 
@@ -23,12 +20,8 @@ class ServiceProvider {
     required this.categoryId,
     required this.locationWorkGovernorate,
     required this.address,
-    required this.startWork,
-    required this.endWork,
     required this.profile,
     required this.description,
-    required this.latitude,
-    required this.longitude,
     required this.user,
     required this.albums,
   });
@@ -45,12 +38,8 @@ class ServiceProvider {
       categoryId: json['category_id'],
       locationWorkGovernorate: json['location_work_governorate'],
       address: json['address'],
-      startWork: json['start_work'],
-      endWork: json['end_work'],
       profile: json['profile'],
       description: json['description'],
-      latitude: json['latitude'].toDouble(),
-      longitude: json['longitude'].toDouble(),
       user: User.fromJson(json['user']),
       albums: albums,
     );
@@ -71,6 +60,7 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
+
     return User(
       id: json['id'],
       firstName: json['first_name'],
@@ -131,8 +121,8 @@ class Album {
       id: json['id'],
       serviceProviderId: json['service_provider_id'],
       name: json['name'],
-      images: parseImages(json['images'] as String),
-      videos:parseVideos( json['videos']as String),
+      images:json['images']!=null? parseImages(json['images'] as String):[],
+      videos:json['videos']!=null?parseVideos( json['videos']as String):[],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );

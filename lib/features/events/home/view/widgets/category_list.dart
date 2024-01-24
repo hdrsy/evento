@@ -84,14 +84,13 @@ class CategoryWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: customColors.primaryBackground,
                 image: DecorationImage(
-                  fit: BoxFit.cover,
                   image: categoryModel.title == "Tonight" ||
                           categoryModel.title == "This Week"
-                      ? Image.asset(categoryModel.icon).image
+                      ? Image.asset(categoryModel.icon,fit: BoxFit.cover,width: 70,height: 70,).image
                       : getImageNetwork(
                               url: categoryModel.icon,
-                              width: imageSize,
-                              height: imageSize)
+                              width: 70,
+                              height: 70)
                           .image,
                 ),
                 borderRadius: BorderRadius.circular(15),

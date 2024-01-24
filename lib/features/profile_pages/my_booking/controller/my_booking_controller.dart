@@ -47,6 +47,7 @@ List<TicketModel> generatedTicketModel=[];
       cancelledBooking = interestsJson
           .map((jsonItem) => CancelledBooking.fromJson(jsonItem))
           .toList();
+          isLoading.value=false;
       update();
     }
   }
@@ -73,6 +74,7 @@ List<TicketModel> generatedTicketModel=[];
           .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
           .toList();
           print(upComingBooking.length);
+          isLoading.value=false;
       update();
     }
   }

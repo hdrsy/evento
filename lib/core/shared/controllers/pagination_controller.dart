@@ -23,6 +23,7 @@ class PaginationController<T> extends GetxController {
 
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
+  late PageController pageController;
 
   // Variables for managing pagination.
   late int dataLimit;
@@ -49,9 +50,18 @@ class PaginationController<T> extends GetxController {
     errorMessage = <String>[].obs;
     itemList = <T>[].obs;
     scrollController = ScrollController();
+    pageController = PageController();
     cacheService = cacheService = CacheService(cacheKey);
     // Scroll listener to handle 'load more' functionality on scroll.
     scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+              scrollController.offset &&
+          hasMoreData.value) {
+        isLoadingMoreData.value = true;
+        fetchData();
+      }
+    });
+    pageController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.offset &&
           hasMoreData.value) {

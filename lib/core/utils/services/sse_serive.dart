@@ -6,9 +6,8 @@ import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/main.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
+import 'package:permission_handler/permission_handler.dart';
 class SSEService{
 
 static void connectToSSE()async {
@@ -16,7 +15,7 @@ static void connectToSSE()async {
     final int? userId = user?.id; // Ensure null safety
     if (user == null) {
       FlutterBackgroundService service=FlutterBackgroundService();
-    service.invoke("stop");
+    service.invoke("stopService");
       return; // Handle null user ID appropriately
     }
 
@@ -25,8 +24,13 @@ static void connectToSSE()async {
       print("Token is null or empty");
       return; // Handle token not found case appropriately
     }
-
-  var url = Uri.parse('${ServerConstApis.baseAPI}/api/notifications/1');
+  //   var status = await Permission.notification.status;
+  // if (!status.isGranted) {
+  //   // Request permission
+  //   await Permission.notification.request();
+  // }
+ 
+  var url = Uri.parse('${ServerConstApis.baseAPI}/api/notifications/$userId');
   http.Request request = http.Request("GET", url);
   request.headers["Cache-Control"] = "no-cache";
   request.headers["Accept"] = "text/event-stream";
@@ -56,7 +60,7 @@ request.headers['Authorization'] = 'Bearer $token';
             if (data is Map) {
               isThereNotification.value=true;
                 NotificationService()
-                    .showNotification(data['title'], data['description']);
+                    .showNotification(data['id'],data['title'], data['description']);
             }
         } catch (e) {
             print('Error parsing JSON: $e');

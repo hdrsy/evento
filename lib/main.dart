@@ -22,7 +22,7 @@ late AppColorsExtension customColors;
 late TextExtension customTextStyle;
 late String? targetRout;
 late String? themeValue;
-late UserInfo? user;
+ UserInfo? user=null;
 bool isGuset = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

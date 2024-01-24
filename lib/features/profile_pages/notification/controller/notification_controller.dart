@@ -45,8 +45,14 @@ class NotificationController extends GetxController {
   whenGetDataSuccess(handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['Notification'];
 
-    notificationList.addAll(
-        categoryListJson.map((jsonItem) => NotificationModel.fromJson(jsonItem)));
+    var reversedList = categoryListJson
+      .map((jsonItem) => NotificationModel.fromJson(jsonItem))
+      .toList()
+      .reversed
+      .toList();
+
+  notificationList.addAll(reversedList);
+
     isLoading.value = false;
   }
 }

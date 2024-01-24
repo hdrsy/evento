@@ -69,7 +69,7 @@ class TicketCount extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: (){
-                            bookNowController.inCrementTicketCount();
+                            // bookNowController.inCrementTicketCount();
                           },
                           child: Icon(
                             Icons.add_circle_outline,

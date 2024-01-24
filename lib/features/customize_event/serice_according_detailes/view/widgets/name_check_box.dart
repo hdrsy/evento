@@ -25,7 +25,7 @@ class NameCheckBox extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Abernathy Reynolds",
+          "${serviceProvider.user.firstName} ${serviceProvider.user.lastName}",
           style: customTextStyle.headlineSmall,
         ).tr(),
         Container(

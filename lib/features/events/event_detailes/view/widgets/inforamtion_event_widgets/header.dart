@@ -19,6 +19,18 @@ Widget buildHeader(BuildContext context, String eventTitle) {
       Align(
         alignment: const AlignmentDirectional(-1.00, -1.00),
         child: Text(
+          tr("Event title"),
+          style: customTextStyle.bodyMedium.copyWith(
+            fontSize: 24,
+            color: customColors.primaryText,
+            fontWeight: FontWeight.w700
+
+          ),
+        ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+      ),
+      Align(
+        alignment: const AlignmentDirectional(-1.00, -1.00),
+        child: Text(
           eventTitle,
           style: customTextStyle.displaySmall,
         ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),

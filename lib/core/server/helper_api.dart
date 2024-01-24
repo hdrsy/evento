@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+
 import 'dart:io';
 import 'dart:ui';
 
@@ -82,15 +82,9 @@ class ApiHelper {
 
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-     print(responseBody);
-     print(response.statusCode);
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {
-          log("dddddddddddddddddddddddddddddddddddddddd");
-          parseResponse(responseBody);
-          log("dddddddddddddddddddddddddddddddddddddddd");
-          // Return Right side of Either for successful response.
           return Right(responseBody);
         } else {
           // Return Left side of Either for API-level errors.

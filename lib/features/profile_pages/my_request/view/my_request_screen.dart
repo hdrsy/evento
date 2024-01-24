@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/text_fields/search_filed.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -32,7 +34,12 @@ class MyrequestScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder<MyRequestController>(builder: (context) {
-        return SingleChildScrollView(
+        return   myRequestController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            myRequestController.myRequestsList.isEmpty?const EmptyData(icon:Icons.email_rounded ,message:"You haven't made any requests. Start by searching for events you're interested in!" ,):
+            
+        
+        
+        SingleChildScrollView(
           padding: padding(16, 20, 10, 20),
           child: Column(
             children: [

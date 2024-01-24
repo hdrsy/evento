@@ -104,7 +104,7 @@ final ServiceProvider serviceProvider;
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20))
             ),
-            child: getImageNetwork(url: "/storage/${serviceProvider.profile}", width: 100, height: 100),
+            child: getImageNetwork(url: "${serviceProvider.profile}", width: 100, height: 100),
           ),
           SizedBox(height: 10,),
           Text(serviceProvider.name,style: customTextStyle.bodyMedium.override(

@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/functions/validation/password_validation.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/error_messages/error_messages.dart';
@@ -73,7 +75,8 @@ class ChangePasswordScreen extends StatelessWidget {
                       // editProfileController.gender.text=value;
                     },
                     validator: (value) {
-                      return null;
+                      return passwordValidation(value);
+                      
                     }),
                 EditProfileField(
                                     isPasswordSecure: true,
@@ -84,7 +87,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       // editProfileController.gender.text=value;
                     },
                     validator: (value) {
-                      return null;
+                      return passwordValidation(value);
                     }),
                 EditProfileField(
                                     isPasswordSecure: true,

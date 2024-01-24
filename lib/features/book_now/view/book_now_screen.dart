@@ -79,8 +79,7 @@ class BookNowScreen extends StatelessWidget {
                         onTap: () {
                           BookNowController bookNowController = Get.find();
                           bookNowController.ticketList.add(TicketModel(
-                              selectedClass: bookNowController
-                                  .eventDetailsModel.classes[0]));
+                            ));
                         },
                         child: Text(
                           tr("Add Ticket"),

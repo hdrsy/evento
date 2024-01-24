@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import '../../../../core/responsive/responsive.dart';
@@ -48,41 +49,71 @@ class FullTicketInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  tr("class"),
-                  style: customTextStyle.bodyMedium
-                      .override(fontFamily: primaryFontFamily, fontSize: 14),
-                ),
-                Wrap(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ...List.generate(
-                        bookNowController.eventDetailsModel.classes.length,
-                        (index) => _buildRadioOption(
-                            bookNowController.eventDetailsModel.classes[index]))
+                    GestureDetector(
+                      onTap: (){
+                        bookNowController.removeTicket(index);
+                      },
+                      child: Icon(Icons.cancel_outlined,color: customColors.primaryText,size: 20,))
                   ],
                 ),
-                Text(tr("Select Addional options"),
-                    style: customTextStyle.bodyMedium
-                        .override(fontFamily: primaryFontFamily, fontSize: 14)),
-                Wrap(
-                  spacing: 8.0, // gap between adjacent chips
-                  runSpacing: 4.0, // gap between lines
-                  children: bookNowController
-                      .ticketList[index].selectedClass!.interests
-                      .map((label) {
-                    return ChoiceChip(
-                      label: Text("+ ${label.title}"),
-                      selected: bookNowController
-                          .ticketList[index].selectedAminiteds
-                          .contains(label),
-                      selectedColor: customColors.primary,
-                      onSelected: (bool selected) {
-                        bookNowController.addOrRemoveAminitesFromCladd(
-                            label, index);
-                      },
-                    );
-                  }).toList(),
-                ),
+                bookNowController.eventDetailsModel.classes.isEmpty
+                    ? const SizedBox.shrink()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr("class"),
+                            style: customTextStyle.bodyMedium.override(
+                                fontFamily: primaryFontFamily, fontSize: 14),
+                          ),
+                          Wrap(
+                            children: [
+                              ...List.generate(
+                                  bookNowController
+                                      .eventDetailsModel.classes.length,
+                                  (index) => _buildRadioOption(bookNowController
+                                      .eventDetailsModel.classes[index]))
+                            ],
+                          ),
+                          bookNowController.ticketList[index].selectedClass ==
+                                  null
+                              ? const SizedBox.shrink()
+                              : bookNowController.ticketList[index]
+                                      .selectedClass!.interests.isEmpty
+                                  ? const SizedBox.shrink()
+                                  : Text(tr("Select Addional options"),
+                                      style: customTextStyle.bodyMedium
+                                          .override(
+                                              fontFamily: primaryFontFamily,
+                                              fontSize: 14)),
+                          bookNowController.ticketList[index].selectedClass ==
+                                  null
+                              ? const SizedBox.shrink()
+                              : Wrap(
+                                  spacing: 8.0, // gap between adjacent chips
+                                  runSpacing: 4.0, // gap between lines
+                                  children: bookNowController.ticketList[index]
+                                      .selectedClass!.interests
+                                      .map((label) {
+                                    return ChoiceChip(
+                                      label: Text("+ ${label.title}"),
+                                      selected: bookNowController
+                                          .ticketList[index].selectedAminiteds
+                                          .contains(label),
+                                      selectedColor: customColors.primary,
+                                      onSelected: (bool selected) {
+                                        bookNowController
+                                            .addOrRemoveAminitesFromCladd(
+                                                label, index);
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                        ],
+                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -184,8 +215,13 @@ class FullTicketInfo extends StatelessWidget {
           Radio<String>(
             activeColor: customColors.primary,
             value: singleClass.code,
-            groupValue: bookNowController.ticketList[index].selectedClass!.code,
+            groupValue:
+                bookNowController.ticketList[index].selectedClass == null
+                    ? ""
+                    : bookNowController.ticketList[index].selectedClass!.code,
             onChanged: (newValue) {
+              log("on change");
+              print(newValue);
               bookNowController.changeSelectedCalss(singleClass, index);
             },
           ),

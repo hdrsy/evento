@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -16,7 +18,13 @@ class SentList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FreindsController>(
       builder: (ccontext) {
-        return SingleChildScrollView(
+        return  freindsController.isSentFreindsLoading.value
+            ?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            freindsController.sentFreinds.isEmpty?const EmptyData(icon:Icons.person_add ,message:"You haven't sent any friend requests yet. Find friends and expand your network!" ,):
+       
+        
+        
+        SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
@@ -53,15 +61,7 @@ class SentList extends StatelessWidget {
                         style: customTextStyle.bodyMedium,
                       ),
                     ),
-                    Text(
-                      "Manage",
-                      style: customTextStyle.bodyMedium.override(
-                        fontFamily: 'Nunito',
-                        color: customColors.primary,
-                        fontSize: 12,
-                        useGoogleFonts: false,
-                      ),
-                    ).tr(),
+                   
                   ],
                 ),
               ),

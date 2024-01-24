@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -21,17 +23,12 @@ class FreindsList extends StatelessWidget {
     return GetBuilder<FreindsController>(builder: (ccontext) {
       return SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-        child: freindsController.isMyFriendsLoading.value
-            ? Column(
-                children: [
-                  const ShimmerFriendCard(),
-                  const ShimmerFriendCard(),
-                  const ShimmerFriendCard(),
-                ].divide(const SizedBox(
-                  height: 5,
-                )),
-              )
-            : Column(
+        child: 
+        freindsController.isMyFriendsLoading.value
+            ?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            freindsController.myFreinds.isEmpty?const EmptyData(icon:Icons.person_add ,message:"Your friends list is looking a bit lonely. Go ahead and connect with people!" ,):
+       
+            Column(
                 children: [
                   const SizedBox(
                     height: 10,

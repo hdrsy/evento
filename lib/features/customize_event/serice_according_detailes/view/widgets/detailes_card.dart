@@ -63,7 +63,7 @@ final ServiceAccordingDetailesController serviceAccordingDetailesController =
       alignment: const AlignmentDirectional(1, 1),
       child: ButtonWidget(
         onPressed: () {
-         Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
+        //  Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
         },
         text:tr( "See Location on Maps"),
         options: ButtonOptions(

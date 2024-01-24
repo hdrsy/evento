@@ -95,6 +95,7 @@ class IconContainerWidget extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
+                border: Border.all(width: 2,color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground),
                   color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground,
                   shape: BoxShape.circle,
                   image: DecorationImage(

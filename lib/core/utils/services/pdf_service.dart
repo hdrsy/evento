@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'ticket_pdf_layout.dart';
@@ -61,8 +60,7 @@ Future<void> saveAndOpenFile(List<int> bytes, String filename) async {
     // Handle other platforms (optional)
     return;
   }
-  print(path);
-
+  
   final file = File('$path/$filename');
   await file.writeAsBytes(bytes, flush: true);
   OpenFile.open(file.path);

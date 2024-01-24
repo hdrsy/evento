@@ -1,5 +1,4 @@
 import 'package:evento/core/server/review_api.dart';
-import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/rating_feedback_widget.dart';

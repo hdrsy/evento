@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import '../../../cache_config/cache_config.dart';
 import '../../controllers/tween_animation_controller.dart';
 import '../../../../features/reels/controller/reels_controller.dart';
 import '../../../../main.dart';
@@ -50,7 +49,6 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
     // }
     // if (mounted) {
       // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
-      print("Vedioooooooooo ${widget.currentVideoUrl}");
       videoPlayerController = VideoPlayerController.networkUrl(Uri.parse( widget.currentVideoUrl))
         ..initialize().then((_) {
           setState(() {
@@ -60,8 +58,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
           });
         }).catchError((error) {
     // Handle the error here
-    print("Error initializing video player: $error");
-  });
+     });
       videoPlayerController.addListener(() {
          final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&
                                        videoPlayerController.value.isBuffering;
@@ -119,7 +116,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
   @override
   Widget build(BuildContext context) {
     return !videoInitialized
-        ? SizedBox()
+        ? const SizedBox()
         : GestureDetector(
             onDoubleTap: onDoubleTap,
             onTap: () {

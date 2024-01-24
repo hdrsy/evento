@@ -1,3 +1,6 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:evento/main.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/widget/cancale_booking.dart';
@@ -16,7 +19,13 @@ class UpComingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MyBookingController>(builder: (myBookingController) {
-      return SingleChildScrollView(
+      return 
+       myBookingController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            myBookingController.upComingBooking.isEmpty?const EmptyData(icon:Icons.calendar_today ,message:"No upcoming bookings! Explore events to find your next great experience." ,):
+            
+      
+      
+      SingleChildScrollView(
         padding: padding(10, 10, 10, 10),
         child: Column(
           children: [

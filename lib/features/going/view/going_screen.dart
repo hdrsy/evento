@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/images/network_image.dart';
@@ -41,7 +43,12 @@ class GoingScreen extends StatelessWidget {
                     color: customColors.primary,
                   ),
                 )
-              : SingleChildScrollView(
+              : 
+               
+            goingController.itemList.isEmpty?const EmptyData(icon:Icons.people_rounded ,message:"It looks like no one has confirmed attendance yet. Be the first to join!" ,):
+            
+              
+              SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                   controller: goingController.scrollController,
                   child: Column(

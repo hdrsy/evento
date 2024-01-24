@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/text_fields/search_filed_with_filtering.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -31,7 +33,13 @@ final FavoriteController controller=Get.find();
           ),
         ),
       ),
-      body: Obx(()=> SingleChildScrollView(
+      body: Obx(()=> 
+       controller.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
+            controller.favoriteEvents.isEmpty?const EmptyData(icon:Icons.add_circle ,message:"No favorites saved. Add your most loved events here." ,):
+            
+      
+      
+      SingleChildScrollView(
             padding: padding(10,16,0,16),
             child: Column(children: [
                GestureDetector(

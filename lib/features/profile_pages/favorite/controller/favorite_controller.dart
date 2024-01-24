@@ -18,6 +18,7 @@ class FavoriteController extends GetxController {
   late RxList<String> errorMessage;
    RxList<EventWrapper> searchResultSearch=<EventWrapper>[].obs;
    RxBool isSearchActive=false.obs;
+   RxBool isLoading=false.obs;
   late TextEditingController searchField=TextEditingController();
  
 
@@ -25,6 +26,7 @@ class FavoriteController extends GetxController {
   void onInit() async{
     favoriteEvents = <EventWrapper>[].obs;
     errorMessage = <String>[].obs;
+    isLoading=false.obs;
     distances = [];
    await getMyFavoriteEvents();
    calculateDistance();
@@ -32,6 +34,7 @@ class FavoriteController extends GetxController {
   }
 
   getMyFavoriteEvents() async {
+    isLoading.value=true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     response = await ApiHelper.makeRequest(
@@ -50,6 +53,7 @@ class FavoriteController extends GetxController {
           .toList();
           print(favoriteEvents);
      distances=List.generate(favoriteEvents.length, (index) => "0 Km".obs);
+     isLoading.value=false;
 
     }
   }

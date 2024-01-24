@@ -53,9 +53,9 @@ stepsPageController.pageIdex  .value -=1:null;
 }
  bool ifThereActionInAppBar(int pageNumber){
       switch (pageNumber) {
-        case 1 ||2 ||4 ||5 ||6 ||7: return false;
+        case 1 ||2 ||3 ||5 ||6 ||7: return false;
           
-          case 3: return true;  
+          case 4: return true;  
         default:return false;
       }
   }
