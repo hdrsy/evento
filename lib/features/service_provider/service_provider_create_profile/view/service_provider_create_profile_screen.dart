@@ -11,6 +11,7 @@ import 'package:evento/features/service_provider/service_provider_create_profile
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/folder_card.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/profile_image.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/selected_list.dart';
+import 'package:evento/features/service_provider/set_location_on_maps/view/set_location_on_maps_screen_for_service_provider.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,28 +130,35 @@ Wdding, Birthday ,anniversary......"""),
                     SelectStates(
                         serviceProviderCreateProfileController:
                             serviceProviderCreateProfileController),
-                    Container(
-                      width: double.infinity,
-                      height: scaleHeight(50),
-                      margin: EdgeInsets.only(top: 12),
-                      padding: padding(0, 10, 0, 10),
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: customColors.primaryBackground, width: 2),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30)),
-                        // color: customColors.primaryBackground
-                      ),
-                      child: Text(
-                        serviceProviderCreateProfileController.selectedState ??
-                            "Location",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primary,
-                          useGoogleFonts: true,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(LocationPickerScreen());
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: scaleHeight(50),
+                        margin: EdgeInsets.only(top: 12),
+                        padding: padding(0, 10, 0, 10),
+                        alignment: Alignment.centerLeft,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: customColors.primaryBackground, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          // color: customColors.primaryBackground
                         ),
-                      ).tr(),
+                        child: Text(
+                          serviceProviderCreateProfileController.locationData ==
+                                  null
+                              ? "Location"
+                              : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.primary,
+                            useGoogleFonts: true,
+                          ),
+                        ).tr(),
+                      ),
                     ),
 
                     OrganizerMediaCard(),

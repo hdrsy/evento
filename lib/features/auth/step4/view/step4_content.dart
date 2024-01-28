@@ -12,9 +12,9 @@ import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step4Content extends StatelessWidget {
-   Step4Content({super.key});
-StepsController stepsController = Get.find();
-  
+  Step4Content({super.key});
+  StepsController stepsController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,35 +31,40 @@ StepsController stepsController = Get.find();
               fontSize: 14,
             ),
           ).tr(),
-          SizedBox(height: scaleHeight(50),),
+          SizedBox(
+            height: scaleHeight(50),
+          ),
           // Generated code for this Image Widget...
-Image.asset(
-  'assets/images/pana.png',
-  height: 180,
-  fit: BoxFit.contain,
-).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationsteps']!),
-SizedBox(height: scaleHeight(50),),
-const NotificationTypesText(),
-buildButton()
+          Image.asset(
+            'assets/images/pana.png',
+            height: 180,
+            fit: BoxFit.contain,
+          ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationsteps']!),
+          SizedBox(
+            height: scaleHeight(50),
+          ),
+          const NotificationTypesText(),
+          buildButton()
         ],
       ),
     );
   }
+
   Widget buildButton() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
-          StepsPageController stepsPageController=Get.find();
+          StepsPageController stepsPageController = Get.find();
           // stepsController.turnOnNotification=true;
-          await stepsController
-          .requestNotificationPermission()?
-          stepsPageController.pageIdex.value=5:null;
+          await stepsController.requestNotificationPermission()
+              ? stepsPageController.pageIdex.value = 5
+              : null;
         },
-        text:tr( "Activate"),
+        text: tr("Activate"),
         options: ButtonOptions(
-          width: scaleWidth(330),
-          height: scaleHeight(40),
+          width: 350,
+          height: 45,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           color: customColors.primary,

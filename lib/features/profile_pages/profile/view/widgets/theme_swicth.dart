@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ThemeSwicth extends StatelessWidget {
   ThemeSwicth({super.key});
   final ThemeController themeController = Get.put(ThemeController());
@@ -20,7 +21,7 @@ class ThemeSwicth extends StatelessWidget {
         Align(
           alignment: const AlignmentDirectional(-1.00, -1.00),
           child: Text(
-           tr( "Account"),
+            tr("Account"),
             style: customTextStyle.titleSmall.override(
               fontFamily: 'Nunito',
               color: customColors.primaryText,
@@ -43,12 +44,10 @@ Widget themeSwitcher() {
 
   // Listen to changes and toggle theme
   switchController.addListener(() {
-      themeController.changeTheme();
-       
-   
+    themeController.changeTheme();
   });
   return Obx(
-    ()=> AdvancedSwitch(
+    () => AdvancedSwitch(
       borderRadius: const BorderRadius.vertical(
           top: Radius.elliptical(30, 30), bottom: Radius.elliptical(30, 30)),
       thumb: Container(
@@ -59,11 +58,13 @@ Widget themeSwitcher() {
       height: 45,
       width: 70,
       controller: switchController,
-  
+
       activeChild: activeChild(themeController.theThemeIsDark.value),
       inactiveChild: inactiveChild(themeController.theThemeIsDark.value),
-      activeColor: customColors.primaryBackground, //the background color of the moon
-      inactiveColor:customColors.primaryBackground, //the background color of the sun
+      activeColor:
+          customColors.primaryBackground, //the background color of the moon
+      inactiveColor:
+          customColors.primaryBackground, //the background color of the sun
     ),
   );
 }
@@ -115,10 +116,6 @@ class ThemeToggleSwitch extends StatelessWidget {
             spacing: 0,
             onChanged: (isDarkMode) async {
               await themeController.changeTheme(); // Trigger the theme change
-
-              Future.delayed(const Duration(milliseconds: 500)).then((value) {
-                Get.offAllNamed('/home');
-              });
             },
             style: ToggleStyle(indicatorColor: customColors.primary),
             textBuilder: (value) => value

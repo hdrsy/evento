@@ -15,54 +15,58 @@ import 'package:easy_localization/easy_localization.dart';
 class Step7Content extends StatelessWidget {
   Step7Content({super.key});
   StepsController stepsController = Get.find();
-  Step7Controller step7controller=Get.put(Step7Controller());
+  Step7Controller step7controller = Get.put(Step7Controller());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-          child: Text(
-            "Time to customize your interest",
-            textAlign: TextAlign.center,
-            style: customTextStyle.bodyMedium.override(
-              fontFamily: 'BeerSerif',
-              color: customColors.primaryText,
-             
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              letterSpacing: 0.2,
-              useGoogleFonts: false,
-            ),
-          ).tr(),
-        ),
-        SizedBox(
-height: scaleHeight(400),
-          child: 
-          
-          Obx(()=>step7controller.isLoading.value?interestShimmerGridView() :MyGridView())),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+            child: Text(
+              "Time to customize your interest",
+              textAlign: TextAlign.center,
+              style: customTextStyle.bodyMedium.override(
+                fontFamily: 'BeerSerif',
+                color: customColors.primaryText,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                letterSpacing: 0.2,
+                useGoogleFonts: false,
+              ),
+            ).tr(),
+          ),
+          SizedBox(
+              height: scaleHeight(400),
+              child: Obx(() => step7controller.isLoading.value
+                  ? interestShimmerGridView()
+                  : MyGridView())),
           buildButton()
-      ],),
+        ],
+      ),
     );
   }
-    Widget buildButton() {
+
+  Widget buildButton() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
-          StepsPageController stepsPageController=Get.find();
-for (var i = 0; i < step7controller.selectedInterests.length; i++) {
-  if(step7controller.selectedInterests[i].value){
-    stepsController.interestList.add(step7controller.allInterestItem[i]);
-  }
-}
+          StepsPageController stepsPageController = Get.find();
+          for (var i = 0; i < step7controller.selectedInterests.length; i++) {
+            if (step7controller.selectedInterests[i].value) {
+              stepsController.interestList
+                  .add(step7controller.allInterestItem[i]);
+            }
+          }
           stepsPageController.pageIdex.value = 8;
         },
-        text:tr ("Continue"),
+        text: tr("Continue"),
         options: ButtonOptions(
-          width: scaleWidth(330),
-          height: scaleHeight(40),
+          width: 350,
+          height: 45,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           color: customColors.primary,
@@ -82,5 +86,4 @@ for (var i = 0; i < step7controller.selectedInterests.length; i++) {
       ),
     );
   }
-
 }

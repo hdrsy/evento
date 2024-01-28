@@ -52,7 +52,7 @@ class Step6Content extends StatelessWidget {
             height: scaleHeight(50),
           ),
           GestureDetector(
-             onTap: () {
+            onTap: () {
               showBottomSheetForImages(
                   context: context,
                   onPressCamera: () {
@@ -82,13 +82,13 @@ class Step6Content extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
-          StepsPageController stepsPageController=Get.find();
+          StepsPageController stepsPageController = Get.find();
           stepsPageController.pageIdex.value = 7;
         },
-        text:tr( "Continue"),
+        text: tr("Continue"),
         options: ButtonOptions(
-          width: scaleWidth(330),
-          height: scaleHeight(40),
+          width: 350,
+          height: 45,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           color: customColors.primary,

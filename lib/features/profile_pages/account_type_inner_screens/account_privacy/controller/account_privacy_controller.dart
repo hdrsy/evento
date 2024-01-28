@@ -10,15 +10,16 @@ class AccountPrivacyController extends GetxController {
   late RxBool isAccountPrivate;
   @override
   void onInit() {
-    
-    user!.type=="normal"?isAccountPrivate = false.obs:isAccountPrivate = true.obs;
+    user!.type == "normal"
+        ? isAccountPrivate = false.obs
+        : isAccountPrivate = true.obs;
     super.onInit();
   }
 
   changeAccoutPrivacy() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ;
-    
+    String token = await prefService.readString("token");
+
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.userChangeType,
         method: "get",
@@ -29,8 +30,8 @@ class AccountPrivacyController extends GetxController {
       print(handlingResponse);
     } else {
       isAccountPrivate.value = !isAccountPrivate.value;
-      prefService.remove('userInfo');
-      Get.offAllNamed('/home');
+      // prefService.remove('userInfo');
+      // Get.offAllNamed('/home');
     }
   }
 }

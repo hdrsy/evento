@@ -7,25 +7,25 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class FreindsScreen extends StatelessWidget {
-   FreindsScreen({super.key});
-final FreindsController  freindsController=Get.find();
+  FreindsScreen({super.key});
+  final FreindsController freindsController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return 
-    Scaffold(
-  //     floatingActionButton: FloatingActionButton(
-  //        backgroundColor: customColors.primary,
-  // elevation: 8,
-  // child: Icon(
-  //   Icons.add,
-  //   color: customColors.info,
-  //   size: 24,
-  // ),
-  //       onPressed: (){
+    return Scaffold(
+      //     floatingActionButton: FloatingActionButton(
+      //        backgroundColor: customColors.primary,
+      // elevation: 8,
+      // child: Icon(
+      //   Icons.add,
+      //   color: customColors.info,
+      //   size: 24,
+      // ),
+      //       onPressed: (){
 
-  //         Get.toNamed('/AddFriendsScreen');
-  //       }),
+      //         Get.toNamed('/AddFriendsScreen');
+      //       }),
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
@@ -44,7 +44,7 @@ final FreindsController  freindsController=Get.find();
           ),
         ),
       ),
-      body:  SafeArea(
+      body: SafeArea(
         top: true,
         child: DefaultTabController(
           length: 3,
@@ -64,18 +64,19 @@ final FreindsController  freindsController=Get.find();
                           fontWeight: FontWeight.w500,
                           useGoogleFonts: true,
                         ),
+                        dividerColor: customColors.secondaryBackground,
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
-                        tabs:  [
+                        tabs: [
                           Tab(
-                            text:tr( "Friends"),
+                            text: tr("Friends"),
                           ),
                           Tab(
-                            text:tr( "Requests"),
+                            text: tr("Requests"),
                           ),
                           Tab(
-                            text:tr( "Sent"),
+                            text: tr("Sent"),
                           ),
                         ],
                       ),
@@ -86,7 +87,7 @@ final FreindsController  freindsController=Get.find();
                         FreindsList(),
                         RequestsList(),
                         SentList(),
-                       ],
+                      ],
                     ))
                   ],
                 ),
@@ -95,6 +96,6 @@ final FreindsController  freindsController=Get.find();
           ),
         ),
       ),
-      );
+    );
   }
 }

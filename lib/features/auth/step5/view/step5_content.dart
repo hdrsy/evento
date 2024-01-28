@@ -29,9 +29,13 @@ class Step5Content extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ).tr(),
-          SizedBox(height: scaleHeight(50),),
+          SizedBox(
+            height: scaleHeight(50),
+          ),
           buildMainStack(context),
-          SizedBox(height: scaleHeight(50),),
+          SizedBox(
+            height: scaleHeight(50),
+          ),
           Text(
             "To give you a customize experience we need to know your gender",
             textAlign: TextAlign.center,
@@ -47,18 +51,19 @@ class Step5Content extends StatelessWidget {
       ),
     );
   }
-   Widget buildButton() {
+
+  Widget buildButton() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
-          StepsPageController stepsPageController=Get.find();
-          stepsPageController.pageIdex.value=6;
+          StepsPageController stepsPageController = Get.find();
+          stepsPageController.pageIdex.value = 6;
         },
-        text:tr( "Continue"),
+        text: tr("Continue"),
         options: ButtonOptions(
-          width: scaleWidth(330),
-          height: scaleHeight(40),
+          width: 350,
+          height: 45,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           color: customColors.primary,

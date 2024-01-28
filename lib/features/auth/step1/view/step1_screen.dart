@@ -60,7 +60,6 @@ class Step1Screen extends StatelessWidget {
                 height: scaleHeight(50),
               ),
               Pin(
-              
                 onChanged: (value) {
                   step1controller.pin.text = value;
                 },
@@ -79,7 +78,7 @@ class Step1Screen extends StatelessWidget {
 
   Widget buildButton() {
     return Obx(
-      ()=> Column(
+      () => Column(
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
@@ -87,11 +86,11 @@ class Step1Screen extends StatelessWidget {
               onPressed: () async {
                 step1controller.onPressContinue();
               },
-              text:tr( "Continue"),
+              text: tr("Continue"),
               showLoadingIndicator: false,
               options: ButtonOptions(
-                width: scaleWidth(330),
-                height: scaleHeight(40),
+                width: 350,
+                height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: customColors.primary,
@@ -110,11 +109,14 @@ class Step1Screen extends StatelessWidget {
               ),
             ),
           ),
-           SizedBox(height: scaleHeight(5),),
-                         ...List.generate(step1controller.errorMessage.length,(index)=>
-                            
-                            ErrorMessages(message:step1controller.errorMessage[index] ,)
-                          ),
+          SizedBox(
+            height: scaleHeight(5),
+          ),
+          ...List.generate(
+              step1controller.errorMessage.length,
+              (index) => ErrorMessages(
+                    message: step1controller.errorMessage[index],
+                  )),
         ],
       ),
     );

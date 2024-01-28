@@ -15,14 +15,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-RxBool isThereNotification=false.obs;
+
+RxBool isThereNotification = false.obs;
 SharedPreferences? sharedPreferences;
 PrefService prefService = PrefService();
 late AppColorsExtension customColors;
 late TextExtension customTextStyle;
 late String? targetRout;
 late String? themeValue;
- UserInfo? user=null;
+UserInfo? user = null;
 bool isGuset = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,9 +31,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   themeValue = await prefService.readString('theme');
-print(themeValue is String);
-print(await prefService.readString("isCompleteProfile"));
-print("ssssssssssssssssssssssssssssssssssssssssssss");
+  themeValue == '' ? prefService.createString('theme', "dark") : null;
   targetRout = await prefService.isContainKey('token') &&
           await prefService.readString("isCompleteProfile") == "true"
       ? '/home'
@@ -58,7 +57,11 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: themeValue == ''?AppTheme.dark: themeValue ==  'dark' ? AppTheme.dark : AppTheme.light,
+      theme: themeValue == ''
+          ? AppTheme.dark
+          : themeValue == 'dark'
+              ? AppTheme.dark
+              : AppTheme.light,
       themeMode: ThemeMode.light,
       getPages: appRoutes(),
       initialRoute: targetRout,

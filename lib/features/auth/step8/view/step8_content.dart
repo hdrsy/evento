@@ -76,7 +76,7 @@ class Step8Content extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    step8controller.selectedState ??tr( "Select State"),
+                    step8controller.selectedState ?? tr("Select State"),
                     style: customTextStyle.bodyMedium,
                   ),
                   Icon(
@@ -98,16 +98,17 @@ class Step8Content extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
       child: Obx(
-        ()=> Column(
+        () => Column(
           children: [
             ButtonWidget(
               showLoadingIndicator: step8controller.isLoading.value,
               onPressed: () async {
-                step8controller.onPressContune();              },
-              text:tr( "Continue"),
+                step8controller.onPressContune();
+              },
+              text: tr("Continue"),
               options: ButtonOptions(
-                width: scaleWidth(330),
-                height: scaleHeight(40),
+                width: 350,
+                height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: customColors.primary,

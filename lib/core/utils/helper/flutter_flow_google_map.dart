@@ -6,7 +6,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'dart:async' show Completer;
 export 'package:google_maps_flutter/google_maps_flutter.dart' hide LatLng;
 
-
 enum GoogleMapStyle {
   standard,
   silver,
@@ -54,7 +53,6 @@ class FlutterFlowGoogleMap extends StatefulWidget {
     this.showMapToolbar = false,
     this.showTraffic = false,
     this.centerMapOnMarkerTap = false,
-    
     this.polylines,
     Key? key,
   }) : super(key: key);
@@ -101,8 +99,7 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
   Widget build(BuildContext context) => AbsorbPointer(
         absorbing: !widget.allowInteraction,
         child: GoogleMap(
-        
-          polylines:widget.polylines ?? {},
+          polylines: widget.polylines ?? {},
           onMapCreated: (controller) async {
             _controller.complete(controller);
             await controller.setMapStyle(googleMapStyleStrings[widget.style]);
@@ -128,16 +125,18 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       googleMarkerColorMap[widget.markerColor]!),
                   onTap: () async {
- final controller = await _controller.future; // Get the GoogleMapController
-  await m.onTap?.call(controller); // Pass the controller to onTap
+                    final controller =
+                        await _controller.future; // Get the GoogleMapController
+                    await m.onTap
+                        ?.call(controller); // Pass the controller to onTap
 
-  if (widget.centerMapOnMarkerTap) {
-    await controller.animateCamera(
-      CameraUpdate.newLatLng(m.location.toGoogleMaps()),
-    );
-    currentMapCenter = m.location.toGoogleMaps();
-    onCameraIdle();
-  }
+                    if (widget.centerMapOnMarkerTap) {
+                      await controller.animateCamera(
+                        CameraUpdate.newLatLng(m.location.toGoogleMaps()),
+                      );
+                      currentMapCenter = m.location.toGoogleMaps();
+                      onCameraIdle();
+                    }
                   },
                 ),
               )

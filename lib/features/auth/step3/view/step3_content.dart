@@ -234,8 +234,8 @@ class Step3Content extends StatelessWidget {
               },
               text: tr("Continue"),
               options: ButtonOptions(
-                width: scaleWidth(330),
-                height: scaleHeight(40),
+                width: 350,
+                height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: customColors.primary,

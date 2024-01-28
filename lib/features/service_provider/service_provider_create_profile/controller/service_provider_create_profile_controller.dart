@@ -9,6 +9,7 @@ import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:evento/core/server/server_config.dart';
@@ -27,8 +28,10 @@ class ServiceProviderCreateProfileController extends GetxController {
   late File? coverImage;
   late String? selectedState;
   late RxList<FolderModel> foldersModel;
+  late LatLng? locationData;
   @override
   void onInit() {
+    locationData = null;
     organizerName = TextEditingController();
     bio = TextEditingController();
     description = TextEditingController();
@@ -82,9 +85,8 @@ class ServiceProviderCreateProfileController extends GetxController {
   onPressDone() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    ChoiceTypeController choiceTypeController =
-        Get.find();
-    String token = await prefService.readString("token") ;
+    ChoiceTypeController choiceTypeController = Get.find();
+    String token = await prefService.readString("token");
     Map<String, dynamic> dataRequest = {
       'name': organizerName.text,
       'bio': bio.text,
@@ -93,15 +95,13 @@ class ServiceProviderCreateProfileController extends GetxController {
       'category_id': choiceTypeController.sericeSelected
     };
     Map<String, File> fileMap = {};
-     if(profileImage!=null){
-
-     fileMap['profile']=profileImage!;
+    if (profileImage != null) {
+      fileMap['profile'] = profileImage!;
     }
-    if(coverImage!=null){
-
-     fileMap['cover']=coverImage!;
+    if (coverImage != null) {
+      fileMap['cover'] = coverImage!;
     }
-   
+
     for (var i = 0; i < foldersModel.length; i++) {
       dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
       for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
@@ -109,14 +109,17 @@ class ServiceProviderCreateProfileController extends GetxController {
           fileMap['album-${i + 1}-images[$j]'] =
               foldersModel[i].mediaList[j].media;
         } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
-          File? compressedVideo = await compressVideo(foldersModel[i].mediaList[j].media);
-      if (compressedVideo != null) {
-        fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
-      } else {
-        // Handle the case where video compression fails
-        // For example, you might choose to skip this file, log an error, or use the original file
-        print("Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
-      } }
+          File? compressedVideo =
+              await compressVideo(foldersModel[i].mediaList[j].media);
+          if (compressedVideo != null) {
+            fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
+          } else {
+            // Handle the case where video compression fails
+            // For example, you might choose to skip this file, log an error, or use the original file
+            print(
+                "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
+          }
+        }
       }
     }
     print(fileMap.length);
@@ -132,12 +135,10 @@ class ServiceProviderCreateProfileController extends GetxController {
       errorMessage.value = handlingResponse.getErrorMessages();
       isLoading.value = false;
       print("object");
-
     } else {
-      isLoading.value=false;
+      isLoading.value = false;
       print(handlingResponse);
-Get.offAllNamed('/home');
+      Get.offAllNamed('/home');
+    }
+  }
 }
-  }
-
-  }

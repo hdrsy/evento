@@ -13,8 +13,8 @@ import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step2Content extends StatelessWidget {
-   Step2Content({super.key});
-StepsController stepsController=Get.find();
+  Step2Content({super.key});
+  StepsController stepsController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -54,18 +54,16 @@ StepsController stepsController=Get.find();
               'assets/images/pana.png',
               height: 180,
               fit: BoxFit.contain,
-            ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationsteps']!),
+            ).animateOnPageLoad(
+                animationsMap['imageOnPageLoadAnimationsteps']!),
             Container(
-
                 margin: EdgeInsets.symmetric(vertical: scaleHeight(48)),
-
                 child: customTextField(
-
                     context: context,
-                    label:tr( "Enter Password"),
+                    label: tr("Enter Password"),
                     keyboardType: TextInputType.visiblePassword,
                     onChanged: (value) {
-                      stepsController.password.text=value!;
+                      stepsController.password.text = value!;
                     },
                     validator: (value) {
                       return passwordValidation(value);
@@ -85,15 +83,16 @@ StepsController stepsController=Get.find();
         showLoadingIndicator: false,
         onPressed: () async {
           FormState? formdata = stepsController.passwordformstate.currentState;
-    if (formdata!.validate()) {
-      formdata.save();
-          StepsPageController stepsPageController=Get.find();
-          stepsPageController.pageIdex.value=3;
-        }},
-        text:tr( "Continue"),
+          if (formdata!.validate()) {
+            formdata.save();
+            StepsPageController stepsPageController = Get.find();
+            stepsPageController.pageIdex.value = 3;
+          }
+        },
+        text: tr("Continue"),
         options: ButtonOptions(
-          width: scaleWidth(330),
-          height: scaleHeight(40),
+          width: 350,
+          height: 45,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           color: customColors.primary,
