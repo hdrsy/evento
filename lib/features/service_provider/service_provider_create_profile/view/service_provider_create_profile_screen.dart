@@ -1,4 +1,3 @@
-
 // Defining the OrganizerCreateProfileScreen as a StatelessWidget.
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -19,9 +18,11 @@ import 'package:image_picker/image_picker.dart';
 
 import '../controller/service_provider_create_profile_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ServiceProviderCreateProfileScreen extends StatelessWidget {
   ServiceProviderCreateProfileScreen({super.key});
-  final ServiceProviderCreateProfileController serviceProviderCreateProfileController =
+  final ServiceProviderCreateProfileController
+      serviceProviderCreateProfileController =
       Get.put(ServiceProviderCreateProfileController());
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,8 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: GetBuilder<ServiceProviderCreateProfileController>(builder: (controller) {
+      body: GetBuilder<ServiceProviderCreateProfileController>(
+          builder: (controller) {
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -76,10 +78,9 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                   Align(
-                        alignment: AlignmentDirectional(-0.8, 2),
-                        child: ProfileImagesServiceProvider()),
-                  
+                  Align(
+                      alignment: AlignmentDirectional(-0.8, 2),
+                      child: ProfileImagesServiceProvider()),
                 ]),
               ),
               SizedBox(
@@ -92,8 +93,8 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                   children: [
                     EditProfileField(
                       controller: controller.organizerName,
-                      hintText:tr( "Spark"),
-                      labelText:tr( "ServiceProviderName"),
+                      hintText: tr("Spark"),
+                      labelText: tr("ServiceProviderName"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -102,10 +103,10 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                     ),
                     EditProfileField(
                       controller: controller.bio,
-                      hintText:
-                         tr ("""Event organizer specialist in decoration ,lighting and flowers .
+                      hintText: tr(
+                          """Event organizer specialist in decoration ,lighting and flowers .
 Wdding, Birthday ,anniversary......"""),
-                      labelText:tr( "Bio"),
+                      labelText: tr("Bio"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -114,10 +115,10 @@ Wdding, Birthday ,anniversary......"""),
                     ),
                     EditProfileField(
                       controller: controller.description,
-                      hintText:
-                        tr  ("""Event organizer specialist in decoration ,lighting and flowers .
+                      hintText: tr(
+                          """Event organizer specialist in decoration ,lighting and flowers .
 Wdding, Birthday ,anniversary......"""),
-                      labelText:tr( "Description"),
+                      labelText: tr("Description"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -128,6 +129,30 @@ Wdding, Birthday ,anniversary......"""),
                     SelectStates(
                         serviceProviderCreateProfileController:
                             serviceProviderCreateProfileController),
+                    Container(
+                      width: double.infinity,
+                      height: scaleHeight(50),
+                      margin: EdgeInsets.only(top: 12),
+                      padding: padding(0, 10, 0, 10),
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: customColors.primaryBackground, width: 2),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30)),
+                        // color: customColors.primaryBackground
+                      ),
+                      child: Text(
+                        serviceProviderCreateProfileController.selectedState ??
+                            "Location",
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.primary,
+                          useGoogleFonts: true,
+                        ),
+                      ).tr(),
+                    ),
+
                     OrganizerMediaCard(),
                     const SizedBox(
                       height: 50,
@@ -136,13 +161,14 @@ Wdding, Birthday ,anniversary......"""),
                     Obx(
                       () => ButtonWidget(
                         showLoadingIndicator:
-                            serviceProviderCreateProfileController.isLoading.value,
+                            serviceProviderCreateProfileController
+                                .isLoading.value,
                         onPressed: () async {
                           serviceProviderCreateProfileController.onPressDone();
                         },
-                        text:tr( "Done"),
+                        text: tr("Done"),
                         options: ButtonOptions(
-                          width: screenWidth*0.3,
+                          width: screenWidth * 0.3,
                           height: 40,
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               32, 0, 32, 0),
@@ -178,8 +204,8 @@ class OrganizerMediaCard extends StatelessWidget {
   OrganizerMediaCard({
     super.key,
   });
-  final ServiceProviderCreateProfileController organizerCreateProfileController =
-      Get.find();
+  final ServiceProviderCreateProfileController
+      organizerCreateProfileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +292,8 @@ class SelectStates extends StatelessWidget {
     required this.serviceProviderCreateProfileController,
   });
 
-  final ServiceProviderCreateProfileController serviceProviderCreateProfileController;
+  final ServiceProviderCreateProfileController
+      serviceProviderCreateProfileController;
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +302,8 @@ class SelectStates extends StatelessWidget {
         await showButtonSheet(
             context: context, widget: SelectState(), height: 300);
       },
-      child: GetBuilder<ServiceProviderCreateProfileController>(builder: (ccontext) {
+      child: GetBuilder<ServiceProviderCreateProfileController>(
+          builder: (ccontext) {
         return Container(
           width: double.infinity,
           height: scaleHeight(50),

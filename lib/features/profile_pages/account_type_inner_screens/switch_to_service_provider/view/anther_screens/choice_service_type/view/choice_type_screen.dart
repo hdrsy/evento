@@ -13,13 +13,15 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the ChoiceTypeScreen as a StatelessWidget.
 class ChoiceTypeScreen extends StatelessWidget {
   // Constructor with optional key parameter.
   ChoiceTypeScreen({super.key});
 
   // Creating an instance of ChoiceTypeController and registering it with GetX.
-  final ChoiceTypeController choiceTypeController = Get.put(ChoiceTypeController());
+  final ChoiceTypeController choiceTypeController =
+      Get.put(ChoiceTypeController());
 
   @override
   // Building the widget.
@@ -45,7 +47,7 @@ class ChoiceTypeScreen extends StatelessWidget {
 
       // Setting the body of the Scaffold.
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +77,9 @@ class ChoiceTypeScreen extends StatelessWidget {
                   color: customColors.primaryText,
                   useGoogleFonts: true,
                 ),
-              ).tr().animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+              )
+                  .tr()
+                  .animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
             ),
             // Search text field.
             searchTextField(onChanged: (value) {}),
@@ -89,13 +93,14 @@ class ChoiceTypeScreen extends StatelessWidget {
               child: ButtonWidget(
                 onPressed: () async {
                   // Showing a bottom sheet on button press.
+                  // Get.dialog(ServiceProviderAccounWidget());
+
                   showButtonSheet(
-                    context: context, 
-                    widget: const ServiceProviderAccounWidget(), 
-                    height: MediaQuery.sizeOf(context).height * 0.6
-                  );
+                      context: context,
+                      widget: const ServiceProviderAccounWidget(),
+                      height: MediaQuery.sizeOf(context).height * 0.6);
                 },
-                text:tr( "Done"),
+                text: tr("Done"),
                 options: ButtonOptions(
                   width: 200,
                   height: 40,
@@ -116,7 +121,9 @@ class ChoiceTypeScreen extends StatelessWidget {
                 ),
               ),
             )
-          ].divide(const SizedBox(height: 10,)), // Dividing widgets with spacing.
+          ].divide(const SizedBox(
+            height: 10,
+          )), // Dividing widgets with spacing.
         ),
       ),
     );

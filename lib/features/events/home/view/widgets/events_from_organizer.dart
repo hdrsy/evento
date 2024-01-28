@@ -16,41 +16,43 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EventsFromOrganizer extends StatelessWidget {
   EventsFromOrganizer({super.key});
-  final EventsforOrganizerListController eventsforOrganizerListController = Get.find();
+  final EventsforOrganizerListController eventsforOrganizerListController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(() => eventsforOrganizerListController.isLoading.value
         ? ShimmerLoadingWidget(
             loadingShimmerWidget: featuredLoading(),
           )
-        :  eventsforOrganizerListController.itemList.isEmpty?const SizedBox():
-          
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ColumnText(
-                title:tr( "Organizer's Events"),
-                subTitle: "Curated Concerts & Exclusive Engagements",
-                onTap: () {
-                  Get.toNamed('/seeAll', arguments: [
-                    eventsforOrganizerListController.pageId,
-                    eventsforOrganizerListController.itemList,
-                    ServerConstApis.getTrendingList,
-                    "trending_event",
-                    tr("Organizer's Events")
-                  ]);
-                },
-              ),
-              SizedBox(
-                height: scaleHeight(8),
-              ),
-              SizedBox(
-                  // height: scaleHeight(350),
-                  child: buildEventRow())
-            ],
-          ));
+        : eventsforOrganizerListController.itemList.isEmpty
+            ? const SizedBox()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ColumnText(
+                    title: tr("Organizer's Events"),
+                    subTitle: "Curated Concerts & Exclusive Engagements",
+                    onTap: () {
+                      Get.toNamed('/seeAll', arguments: [
+                        eventsforOrganizerListController.pageId,
+                        eventsforOrganizerListController.itemList,
+                        ServerConstApis.getTrendingList,
+                        "trending_event",
+                        tr("Organizer's Events")
+                      ]);
+                    },
+                  ),
+                  SizedBox(
+                    height: scaleHeight(8),
+                  ),
+                  SizedBox(
+                      // height: scaleHeight(350),
+                      child: buildEventRow())
+                ],
+              ));
   }
 
 // Main widget function
@@ -67,7 +69,8 @@ class EventsFromOrganizer extends StatelessWidget {
                   : eventsforOrganizerListController.itemList.length, (index) {
             return index < eventsforOrganizerListController.itemList.length
                 ? buildEventCard(
-                    eventModel: eventsforOrganizerListController.itemList[index],
+                    eventModel:
+                        eventsforOrganizerListController.itemList[index],
                     modelIndex: index,
                   )
                 : ShimmerLoadingWidget(
@@ -84,9 +87,7 @@ class EventsFromOrganizer extends StatelessWidget {
                   ));
           })
         ].divide(SizedBox(
-          width: screenSize == ScreenSize.small
-              ? 10
-              : (screenSize == ScreenSize.medium ? 13 : 16),
+          width: 13,
         )),
       ),
     );
@@ -100,12 +101,8 @@ class EventsFromOrganizer extends StatelessWidget {
         Get.toNamed('/eventDetailes', arguments: eventModel.id);
       },
       child: Container(
-        width: screenSize == ScreenSize.small
-            ? 320
-            : (screenSize == ScreenSize.medium ? 355 : 370),
-        height: screenSize == ScreenSize.small
-            ? 340
-            : (screenSize == ScreenSize.medium ? 360 : 370),
+        width: 355,
+        height: 360,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
@@ -237,9 +234,7 @@ class EventsFromOrganizer extends StatelessWidget {
         Text(
           eventName,
           style: customTextStyle.headlineSmall.copyWith(
-            fontSize: screenSize == ScreenSize.small
-                ? 16
-                : (screenSize == ScreenSize.medium ? 18 : 20),
+            fontSize: 18,
           ),
         ),
         buildShareAndFavoriteIcons(modelIndex),
@@ -294,10 +289,10 @@ class EventsFromOrganizer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
       child: InkWell(
-        onTap: ()async{
-           await Share.share(
-                              tr('Check out this event in Evento'),
-                            );
+        onTap: () async {
+          await Share.share(
+            tr('Check out this event in Evento'),
+          );
         },
         child: Icon(
           Icons.share_rounded,
@@ -314,9 +309,11 @@ class EventsFromOrganizer extends StatelessWidget {
       return ToggleIcon(
         onPressed: () {
           eventsforOrganizerListController.followOrUnFollowEvent(
-              eventsforOrganizerListController.itemList[modelIndex].id, modelIndex);
+              eventsforOrganizerListController.itemList[modelIndex].id,
+              modelIndex);
         },
-        value: eventsforOrganizerListController.itemList[modelIndex].isFollowedByAuthUser,
+        value: eventsforOrganizerListController
+            .itemList[modelIndex].isFollowedByAuthUser,
         onIcon: Icon(Icons.favorite_sharp,
             color: customColors.error, size: responsiveIcon(25, 2)),
         offIcon: Icon(Icons.favorite_border,

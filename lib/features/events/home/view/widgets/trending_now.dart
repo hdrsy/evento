@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class TrendingNow extends StatelessWidget {
   TrendingNow({super.key});
   final TrendingListController trendingListController = Get.find();
@@ -27,32 +28,32 @@ class TrendingNow extends StatelessWidget {
         ? ShimmerLoadingWidget(
             loadingShimmerWidget: featuredLoading(),
           )
-        :  trendingListController.itemList.isEmpty?const SizedBox.shrink():
-          
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ColumnText(
-                title:tr( "Trending Now"),
-                subTitle: tr("Lively Gatherings & Illuminated Nights"),
-                onTap: () {
-                  Get.toNamed('/seeAll', arguments: [
-                    trendingListController.pageId,
-                    trendingListController.itemList,
-                    ServerConstApis.getTrendingList,
-                    "trending_event",
-                    "Trending Now"
-                  ]);
-                },
-              ),
-              SizedBox(
-                height: scaleHeight(8),
-              ),
-              SizedBox(
-                  // height: scaleHeight(350),
-                  child: buildEventRow())
-            ],
-          ));
+        : trendingListController.itemList.isEmpty
+            ? const SizedBox.shrink()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ColumnText(
+                    title: tr("Trending Now"),
+                    subTitle: tr("Lively Gatherings & Illuminated Nights"),
+                    onTap: () {
+                      Get.toNamed('/seeAll', arguments: [
+                        trendingListController.pageId,
+                        trendingListController.itemList,
+                        ServerConstApis.getTrendingList,
+                        "trending_event",
+                        "Trending Now"
+                      ]);
+                    },
+                  ),
+                  SizedBox(
+                    height: scaleHeight(8),
+                  ),
+                  SizedBox(
+                      // height: scaleHeight(350),
+                      child: buildEventRow())
+                ],
+              ));
   }
 
 // Main widget function
@@ -86,9 +87,7 @@ class TrendingNow extends StatelessWidget {
                   ));
           })
         ].divide(SizedBox(
-          width: screenSize == ScreenSize.small
-              ? 10
-              : (screenSize == ScreenSize.medium ? 13 : 16),
+          width: 13,
         )),
       ),
     );
@@ -99,15 +98,11 @@ class TrendingNow extends StatelessWidget {
       {required EventModel eventModel, required int modelIndex}) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Container(
-        width: screenWidth*0.9,
-        
-        
-        height: screenSize == ScreenSize.small
-            ? 340
-            : (screenSize == ScreenSize.medium ? 360 : 370),
+        width: screenWidth * 0.9,
+        height: 360,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
@@ -194,16 +189,9 @@ class TrendingNow extends StatelessWidget {
     return ToggleIcon(
       onPressed: () {},
       value: false,
-      onIcon: Icon(Icons.volume_off,
-          color: customColors.info,
-          size: screenSize == ScreenSize.small
-              ? 20
-              : (screenSize == ScreenSize.medium ? 23 : 25)),
-      offIcon: Icon(Icons.volume_up_outlined,
-          color: customColors.info,
-          size: screenSize == ScreenSize.small
-              ? 20
-              : (screenSize == ScreenSize.medium ? 23 : 25)),
+      onIcon: Icon(Icons.volume_off, color: customColors.info, size: 23),
+      offIcon:
+          Icon(Icons.volume_up_outlined, color: customColors.info, size: 23),
     );
   }
 
@@ -236,9 +224,7 @@ class TrendingNow extends StatelessWidget {
         Text(
           eventName,
           style: customTextStyle.headlineSmall.copyWith(
-            fontSize: screenSize == ScreenSize.small
-                ? 16
-                : (screenSize == ScreenSize.medium ? 18 : 20),
+            fontSize: 18,
           ),
         ),
         buildShareAndFavoriteIcons(modelIndex),
@@ -293,10 +279,10 @@ class TrendingNow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
       child: InkWell(
-        onTap: ()async{
-           await Share.share(
-                              tr('Check out this event in Evento'),
-                            );
+        onTap: () async {
+          await Share.share(
+            tr('Check out this event in Evento'),
+          );
         },
         child: Icon(
           Icons.share_rounded,
@@ -312,11 +298,12 @@ class TrendingNow extends StatelessWidget {
     return GetBuilder<TrendingListController>(builder: (context) {
       return ToggleIcon(
         onPressed: () {
-           if(isGuset){
-                    Get.dialog( GuestPopupWidget());
-                  }else{
-          trendingListController.followOrUnFollowEvent(
-              trendingListController.itemList[modelIndex].id, modelIndex);}
+          if (isGuset) {
+            Get.dialog(GuestPopupWidget());
+          } else {
+            trendingListController.followOrUnFollowEvent(
+                trendingListController.itemList[modelIndex].id, modelIndex);
+          }
         },
         value: trendingListController.itemList[modelIndex].isFollowedByAuthUser,
         onIcon: Icon(Icons.favorite_sharp,

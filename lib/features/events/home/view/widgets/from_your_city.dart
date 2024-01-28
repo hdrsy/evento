@@ -14,6 +14,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class FromYourCity extends StatelessWidget {
   final EventInYourCityListController eventInYourCityListController =
       Get.find();
@@ -26,32 +27,32 @@ class FromYourCity extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: inYourCityLoading(),
             )
-          :  eventInYourCityListController.itemList.isEmpty?const SizedBox.shrink():
-          
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ColumnText(
-                  title:tr( "Events in your city"),
-                  subTitle: tr("Local Celebrations & Urban Vibes"),
-                  onTap: () {
-                    Get.toNamed('/seeAll', arguments: [
-                      eventInYourCityListController.pageId,
-                      eventInYourCityListController.itemList,
-                      ServerConstApis.getInyourCityList,
-                      "events_in_your_city",
-                      "Events in your city"
-                    ]);
-                  },
+          : eventInYourCityListController.itemList.isEmpty
+              ? const SizedBox.shrink()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ColumnText(
+                      title: tr("Events in your city"),
+                      subTitle: tr("Local Celebrations & Urban Vibes"),
+                      onTap: () {
+                        Get.toNamed('/seeAll', arguments: [
+                          eventInYourCityListController.pageId,
+                          eventInYourCityListController.itemList,
+                          ServerConstApis.getInyourCityList,
+                          "events_in_your_city",
+                          "Events in your city"
+                        ]);
+                      },
+                    ),
+                    SizedBox(
+                      height: scaleHeight(10),
+                    ),
+                    SizedBox(
+                        // height: scaleHeight(350),
+                        child: buildHorizontalListView())
+                  ],
                 ),
-                SizedBox(
-                  height: scaleHeight(10),
-                ),
-                SizedBox(
-                    // height: scaleHeight(350),
-                    child: buildHorizontalListView())
-              ],
-            ),
     );
   }
 }
@@ -96,7 +97,7 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
   return GetBuilder<EventInYourCityListController>(builder: (context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Container(
         width: 150,
@@ -173,9 +174,7 @@ Widget buildEventText(String category, String dateTime) {
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'BeerSerif',
               color: customColors.info,
-              fontSize: screenSize == ScreenSize.small
-                  ? 14
-                  : (screenSize == ScreenSize.medium ? 16 : 18),
+              fontSize: 18,
               useGoogleFonts: false,
             ),
           ),

@@ -14,6 +14,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class Orgnizers extends StatelessWidget {
   Orgnizers({super.key});
   final HomeOrganizerController homeOrganizerController = Get.find();
@@ -24,33 +25,32 @@ class Orgnizers extends StatelessWidget {
           ? const ShimmerLoadingWidget(
               loadingShimmerWidget: GridViewBuilderExample(),
             )
-          : homeOrganizerController.itemList.isEmpty?const SizedBox.shrink():
-          
-           Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ColumnText(
-                  title:tr( "Organizer"),
-                  subTitle: " Top Choices &  Highly Rated",
-                  onTap: () {
-                    Get.toNamed('/SeeAllOrganizersScreen',arguments: [
-                      homeOrganizerController.pageId,
-                      homeOrganizerController.itemList,
-                      ServerConstApis.getOrganizerHomeList,
-                      "organizers",
-                      "Organizers",
-                      
-                    ]);
-                  },
+          : homeOrganizerController.itemList.isEmpty
+              ? const SizedBox.shrink()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ColumnText(
+                      title: tr("Organizer"),
+                      subTitle: " Top Choices &  Highly Rated",
+                      onTap: () {
+                        Get.toNamed('/SeeAllOrganizersScreen', arguments: [
+                          homeOrganizerController.pageId,
+                          homeOrganizerController.itemList,
+                          ServerConstApis.getOrganizerHomeList,
+                          "organizers",
+                          "Organizers",
+                        ]);
+                      },
+                    ),
+                    SizedBox(
+                      height: scaleHeight(10),
+                    ),
+                    SizedBox(
+                        // height: scaleHeight(350),
+                        child: buildEventColumn())
+                  ],
                 ),
-                SizedBox(
-                  height: scaleHeight(10),
-                ),
-                SizedBox(
-                    // height: scaleHeight(350),
-                    child: buildEventColumn())
-              ],
-            ),
     );
   }
 }
@@ -69,20 +69,16 @@ Widget buildEventColumn() {
       children: [
         Wrap(
           alignment: WrapAlignment.start,
-          spacing: screenSize == ScreenSize.small
-              ? 30
-              : (screenSize == ScreenSize.medium ? 32 : 34),
-          runSpacing: screenSize == ScreenSize.small
-              ? 30
-              : (screenSize == ScreenSize.medium ? 32 : 34),
+          spacing: 32,
+          runSpacing: 32,
           children: [
             ...List.generate(
                 homeOrganizerController.itemList.length > 4
                     ? 4
                     : homeOrganizerController.itemList.length,
                 (index) => buildOrganizerItem(
-                     organizerHome: homeOrganizerController.itemList[index],modelIndex: index
-                    ))
+                    organizerHome: homeOrganizerController.itemList[index],
+                    modelIndex: index))
           ],
         ),
       ],
@@ -91,46 +87,39 @@ Widget buildEventColumn() {
 }
 
 // Function to create each event item
-Widget buildOrganizerItem({required OrganizerHome organizerHome,required int modelIndex}) {
-  return        GestureDetector(onTap: (){
-    print('ffffffffffffffffff');
-      Get.toNamed('/OrganizerProfileScreen',arguments: organizerHome.id);
-     },
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-     buildEventImage(organizerHome.organizerHomeInfo.profile),
-        buildEventTitle(organizerHome.organizerHomeInfo.name),
-        // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
-      ],
-    )
-  );
+Widget buildOrganizerItem(
+    {required OrganizerHome organizerHome, required int modelIndex}) {
+  return GestureDetector(
+      onTap: () {
+        print('ffffffffffffffffff');
+        Get.toNamed('/OrganizerProfileScreen', arguments: organizerHome.id);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildEventImage(organizerHome.organizerHomeInfo.profile),
+          buildEventTitle(organizerHome.organizerHomeInfo.name),
+          // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
+        ],
+      ));
 }
 
 // Function to build the event image
 Widget buildEventImage(String imagePath) {
   return ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-    child:imagePath.length>6?
-      
-    
-     getImageNetwork(url: '/storage/$imagePath', width: screenSize == ScreenSize.small
-          ? 120
-          : (screenSize == ScreenSize.medium ? 150 : 160),
-      height: screenSize == ScreenSize.small
-          ? 120
-          : (screenSize == ScreenSize.medium ? 150 : 160),):Image.asset(
-                  'assets/images/${imagePath.substring(imagePath.length - 1)}.png',width: screenSize == ScreenSize.small
-          ? 120
-          : (screenSize == ScreenSize.medium ? 150 : 160),
-      height: screenSize == ScreenSize.small
-          ? 120
-          : (screenSize == ScreenSize.medium ? 150 : 160),)
-    
-    
-   
-  );
+      borderRadius: BorderRadius.circular(20),
+      child: imagePath.length > 6
+          ? getImageNetwork(
+              url: '/storage/$imagePath',
+              width: 150,
+              height: 150,
+            )
+          : Image.asset(
+              'assets/images/${imagePath.substring(imagePath.length - 1)}.png',
+              width: 150,
+              height: 150,
+            ));
 }
 
 // Function to build the event title

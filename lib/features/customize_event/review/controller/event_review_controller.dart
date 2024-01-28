@@ -39,7 +39,6 @@ class EventReviewController extends GetxController {
   getSelectedserviceProvider() {
     final ServiceCategoryController serviceCategoryController = Get.find();
     selected = serviceCategoryController.selected;
-
   }
 
   getContactInfo() {
@@ -61,7 +60,7 @@ class EventReviewController extends GetxController {
   }
 
   onPressDone() async {
-    isLoading.value=true;
+    isLoading.value = true;
     final ServiceCategoryController serviceCategoryController = Get.find();
     final TypetoSetEventController typetoSetEventController = Get.find();
 
@@ -70,11 +69,14 @@ class EventReviewController extends GetxController {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token") ?? "";
     // Assuming 'dateTimeController.date' is a DateTime object
-String formattedDate = DateFormat('yyyy-MM-dd').format(dateTimeController.date);
+    String formattedDate =
+        DateFormat('yyyy-MM-dd').format(dateTimeController.date);
 
 // Assuming 'dateTimeController.startTime' and 'dateTimeController.endTime' are DateTime objects
-String formattedStartTime = DateFormat('HH:mm:ss').format(dateTimeController.startTime);
-String formattedEndTime = DateFormat('HH:mm:ss').format(dateTimeController.endTime);
+    String formattedStartTime =
+        DateFormat('HH:mm:ss').format(dateTimeController.startTime);
+    String formattedEndTime =
+        DateFormat('HH:mm:ss').format(dateTimeController.endTime);
 
     Map<String, dynamic> dataRequest = {
       "first_name": contactInfoModel.firstName,
@@ -89,22 +91,24 @@ String formattedEndTime = DateFormat('HH:mm:ss').format(dateTimeController.endTi
       "category_id": typetoSetEventController.selectedCategory.value,
       "start_time": formattedStartTime,
       "end_time": formattedEndTime,
-      "title":dateTimeController.eventTitle.text
+      "title": dateTimeController.eventTitle.text
     };
-List<int> serviceProviderIds = serviceCategoryController.selectedServiceProviders.map((rxInt) => rxInt.value).toList();
+    List<int> serviceProviderIds = serviceCategoryController
+        .selectedServiceProviders
+        .map((rxInt) => rxInt.value)
+        .toList();
 
-for (int i = 0; i < serviceProviderIds.length; i++) {
-  print(serviceProviderIds[i]); 
-  if(serviceProviderIds[i]!=0){
-
-  dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
-  }
-}
+    for (int i = 0; i < serviceProviderIds.length; i++) {
+      print(serviceProviderIds[i]);
+      if (serviceProviderIds[i] != 0) {
+        dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
+      }
+    }
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];
     }
-  
+
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.sendEventRequest,
         method: "POST",
@@ -120,7 +124,7 @@ for (int i = 0; i < serviceProviderIds.length; i++) {
       isLoading.value = false;
       print("object");
     } else {
-      isLoading.value=false;
+      isLoading.value = false;
       print(handlingResponse);
 
       Get.toNamed('/PaymentScreen');

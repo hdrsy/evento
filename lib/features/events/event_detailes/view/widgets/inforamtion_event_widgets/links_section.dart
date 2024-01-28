@@ -4,6 +4,7 @@ import '../../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class LinksSection extends StatelessWidget {
   const LinksSection({super.key});
 
@@ -15,28 +16,30 @@ class LinksSection extends StatelessWidget {
           icon: Icons.language_outlined,
           title: "http://www.linguini",
         ),
-         LinkCard(
+        LinkCard(
           icon: Icons.facebook,
-          title:tr( "Spark Events"),
+          title: tr("Spark Events"),
         ),
         const LinkCard(
           icon: 'assets/images/Instagram.png',
           title: "@instagram",
         ),
-         LinkCard(
-          icon: Icons.payment,
-          title:tr( "Deposit information"),
-          subTitle: """\$50 deposit per person is required to be 
-paid in advance and will be deducted
-from your check.""",
-        ),
-         LinkCard(
+//          LinkCard(
+//           icon: Icons.payment,
+//           title:tr( "Deposit information"),
+//           subTitle: """\$50 deposit per person is required to be
+// paid in advance and will be deducted
+// from your check.""",
+//         ),
+        LinkCard(
           icon: Icons.refresh_outlined,
-          title:tr( "Refund policy"),subTitle: "Refund until 1 day.",
+          title: tr("Refund policy"),
+          subTitle: "Refund until 1 day.",
         ),
-         LinkCard(
+        LinkCard(
           icon: Icons.cancel_presentation_outlined,
-          title:tr( "Cancellation policy"),subTitle: """Cancellation allowed until 4 hours.
+          title: tr("Cancellation policy"),
+          subTitle: """Cancellation allowed until 4 hours.
 before your booking.""",
         ),
       ].divide(const SizedBox(
@@ -77,40 +80,40 @@ class LinkCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                  child: icon is String
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            icon,
-                            width: 20,
-                            height: 20,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : Icon(
-                          icon,
-                          color: customColors.primary,
-                          size: 20,
-                        ),
-                ),
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+              child: icon is String
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        icon,
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      color: customColors.primary,
+                      size: 20,
+                    ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: customTextStyle.bodyMedium.copyWith(
-                    fontSize: 14
-                  ),
+                  style: customTextStyle.bodyMedium.copyWith(fontSize: 14),
                 ),
-            subTitle!= null?    Text(
-                  subTitle ?? "",
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: primaryFontFamily,
-                    fontSize: 12,
-                    useGoogleFonts: true,
-                  ),
-                ):SizedBox(),
+                subTitle != null
+                    ? Text(
+                        subTitle ?? "",
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: primaryFontFamily,
+                          fontSize: 12,
+                          useGoogleFonts: true,
+                        ),
+                      )
+                    : SizedBox(),
               ],
             ),
           ],

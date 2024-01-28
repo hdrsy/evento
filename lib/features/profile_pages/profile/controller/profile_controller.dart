@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/back_ground_service.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/pusher.dart';
+import 'package:evento/core/utils/services/socket_servie.dart';
 import 'package:evento/core/utils/services/sse_serive.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import '../../../../core/server/helper_api.dart';
@@ -32,13 +33,14 @@ class ProfileController extends GetxController {
     await getProfileInfo();
     print(targetRout);
     if (isCompleteProfile && targetRout == '/home') {
-      print("inide init service");
-      initializeService();
-      await NotificationService().init();
+      // print("inide init service");
+      // initializeService();
+      // await NotificationService().init();
       // SSEService.connectToSSE();
-      final service = FlutterBackgroundService();
-      service.startService();
-      service.invoke("setAsBackground");
+      // final service = FlutterBackgroundService();
+      // service.startService();
+      // service.invoke("setAsBackground");
+      // SocketService.createSocketConnection();
     }
     super.onInit();
   }

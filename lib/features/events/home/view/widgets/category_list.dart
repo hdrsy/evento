@@ -12,15 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class CategoryList extends StatelessWidget {
   CategoryList({super.key});
   final CategoryListController categoryListController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenSize == ScreenSize.small
-          ? 100
-          : (screenSize == ScreenSize.medium ? 100 : 120),
+      height: 100,
       child: Obx(
         () => categoryListController.isLoading.value
             ? ShimmerLoadingWidget(
@@ -44,13 +43,7 @@ class CategoryWidget extends StatelessWidget {
   final CategoryModel categoryModel;
   @override
   Widget build(BuildContext context) {
-    double imageSize = screenSize == ScreenSize.small
-        ? 60
-        : (screenSize == ScreenSize.medium ? 70 : 75);
-    double fontSize = screenSize == ScreenSize.small
-        ? 10
-        : (screenSize == ScreenSize.medium ? 12 : 14);
-
+    double fontSize = 12;
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -62,12 +55,16 @@ class CategoryWidget extends StatelessWidget {
               String targetRout = '';
               String targetKeyMap = '';
               switch (categoryModel.title) {
-                case  "Tonight":
-                  targetRout =isGuset?ServerConstApis.getToNightListforGuest: ServerConstApis.getToNightList;
+                case "Tonight":
+                  targetRout = isGuset
+                      ? ServerConstApis.getToNightListforGuest
+                      : ServerConstApis.getToNightList;
                   targetKeyMap = 'toNightEvent';
                   break;
                 case "This Week":
-                  targetRout =isGuset?ServerConstApis.getThisWeekListforGuest: ServerConstApis.getThisWeekList;
+                  targetRout = isGuset
+                      ? ServerConstApis.getThisWeekListforGuest
+                      : ServerConstApis.getThisWeekList;
                   targetKeyMap = 'thisWeekEvent';
                   break;
                 default:
@@ -75,8 +72,13 @@ class CategoryWidget extends StatelessWidget {
                       "${ServerConstApis.getAccordingCategoryList}/${categoryModel.id}";
                   targetKeyMap = 'Events';
               }
-              Get.toNamed('/seeAll',
-                  arguments: [1, <EventModel>[].obs, targetRout, targetKeyMap,categoryModel.title]);
+              Get.toNamed('/seeAll', arguments: [
+                1,
+                <EventModel>[].obs,
+                targetRout,
+                targetKeyMap,
+                categoryModel.title
+              ]);
             },
             child: Container(
               width: 70,
@@ -86,11 +88,14 @@ class CategoryWidget extends StatelessWidget {
                 image: DecorationImage(
                   image: categoryModel.title == "Tonight" ||
                           categoryModel.title == "This Week"
-                      ? Image.asset(categoryModel.icon,fit: BoxFit.cover,width: 70,height: 70,).image
+                      ? Image.asset(
+                          categoryModel.icon,
+                          fit: BoxFit.cover,
+                          width: 70,
+                          height: 70,
+                        ).image
                       : getImageNetwork(
-                              url: categoryModel.icon,
-                              width: 70,
-                              height: 70)
+                              url: categoryModel.icon, width: 70, height: 70)
                           .image,
                 ),
                 borderRadius: BorderRadius.circular(15),

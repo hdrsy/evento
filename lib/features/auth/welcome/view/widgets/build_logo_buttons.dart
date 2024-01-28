@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-
 class BuildLogoButtons extends StatelessWidget {
   const BuildLogoButtons({super.key});
 
@@ -50,13 +49,14 @@ class BuildLogoButtons extends StatelessWidget {
                       child: ButtonWidget(
                         showLoadingIndicator: false,
                         onPressed: () async {
-                          Get.lazyPut(()=>SignupController());
-                             await showButtonSheet(context: context, widget:  SignupScreen(), height: screenHeight*0.8).then((value) => 
-                             Get.delete<SignupController>()
-                             );
-                       
+                          Get.lazyPut(() => SignupController());
+                          await showButtonSheet(
+                                  context: context,
+                                  widget: SignupScreen(),
+                                  height: screenHeight * 0.8)
+                              .then((value) => Get.delete<SignupController>());
                         },
-                        text:tr( "Join"),
+                        text: tr("Join"),
                         options: ButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 50,
@@ -83,12 +83,15 @@ class BuildLogoButtons extends StatelessWidget {
                       child: ButtonWidget(
                         showLoadingIndicator: false,
                         onPressed: () async {
-                          Get.lazyPut(()=>SigninController());
-                          
-                          await showButtonSheet(context: context, widget: SignInScreen(), height: screenHeight*0.8).then((value) => Get.delete<SigninController>());
-                         
+                          Get.lazyPut(() => SigninController());
+
+                          await showButtonSheet(
+                                  context: context,
+                                  widget: SignInScreen(),
+                                  height: screenHeight * 0.8)
+                              .then((value) => Get.delete<SigninController>());
                         },
-                        text:tr( "Sign in"),
+                        text: tr("Sign in"),
                         options: ButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 50,
@@ -121,7 +124,7 @@ class BuildLogoButtons extends StatelessWidget {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    isGuset=true;
+                    isGuset = true;
                     Get.toNamed('/home');
                   },
                   child: Row(

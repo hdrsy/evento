@@ -8,15 +8,14 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {
-   WelcomeScreen({super.key});
- PageController controller =
+  WelcomeScreen({super.key});
+  PageController controller =
       PageController(viewportFraction: 1, keepPage: true);
 
   @override
   Widget build(BuildContext context) {
     customColors = Theme.of(context).extension<AppColorsExtension>()!;
     customTextStyle = Theme.of(context).extension<TextExtension>()!;
-    
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -28,10 +27,13 @@ class WelcomeScreen extends StatelessWidget {
     return Stack(
       alignment: const AlignmentDirectional(0, 1),
       children: [
-        BuildPageView(controller: controller,),
-        BuildPageIndecator(pageController: controller,),
-       
-      const BuildLogoButtons()
+        BuildPageView(
+          controller: controller,
+        ),
+        BuildPageIndecator(
+          pageController: controller,
+        ),
+        const BuildLogoButtons()
       ],
     );
   }

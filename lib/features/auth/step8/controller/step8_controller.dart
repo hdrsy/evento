@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -44,34 +43,35 @@ class Step8Controller extends GetxController {
     if (selectedState == null) {
       errorMessage.add("Please Select Your State");
     } else {
-      isLoading.value=true;
-   bool isDoneSignUp2=await signUpStep2();
-   bool isDoneinsertInterest=await storeUserInterest();
-     if(isDoneinsertInterest && isDoneSignUp2){
-      whenSendDataSuccess();
-      isLoading.value=false;
-     }else{
-      isLoading.value=false;
-     }
+      isLoading.value = true;
+      bool isDoneSignUp2 = await signUpStep2();
+      bool isDoneinsertInterest = await storeUserInterest();
+      if (isDoneinsertInterest && isDoneSignUp2) {
+        whenSendDataSuccess();
+        isLoading.value = false;
+      } else {
+        isLoading.value = false;
+      }
     }
   }
 
   whenSendDataSuccess() async {
-     user=await UserInfo.getUserInfo();
-     prefService.createString("isCompleteProfile", "true");
-     isGuset=false;
-       targetRout == '/home';
-   
-     Get.offAllNamed('/home');
+    user = await UserInfo.getUserInfo();
+    prefService.createString("isCompleteProfile", "true");
+    isGuset = false;
+    targetRout == '/home';
 
+    Get.offAllNamed('/home');
   }
+
   Future<bool> signUpStep2() async {
     StepsController stepsController = Get.find();
 
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
 
     Map<String, String> data = getDataFromAllSteps();
+    print(data['birth_date']);
     data.containsKey('image')
         ? response = await ApiHelper.makeRequest(
             targetRout: ServerConstApis.signUpStep2,
@@ -90,7 +90,7 @@ class Step8Controller extends GetxController {
       errorMessage.value = handlingResponse.getErrorMessages();
       return false;
     } else {
-       return true;
+      return true;
     }
   }
 
@@ -98,7 +98,7 @@ class Step8Controller extends GetxController {
     StepsController stepsController = Get.find();
 
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     List<InterestItem> interestList = stepsController.interestList;
     List<int> interestIndex = [];
     for (var i = 0; i < interestList.length; i++) {
@@ -108,7 +108,7 @@ class Step8Controller extends GetxController {
         targetRout: ServerConstApis.storeUserInterest,
         method: "POST",
         token: token,
-        data: {"interest":interestIndex});
+        data: {"interest": interestIndex});
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
 
     if (handlingResponse is ErrorResponse) {
@@ -125,7 +125,8 @@ class Step8Controller extends GetxController {
     StepsController stepsController = Get.find();
     data['password'] = stepsController.password.text;
     data['gender'] = stepsController.isMale.value ? "male" : "female";
-    data['birth_date'] = DateFormat('yyyy/M/d').format(stepsController.day!);
+    data['birth_date'] =
+        DateFormat('yyyy/M/d', 'en').format(stepsController.day!);
     data['state'] = selectedState!;
     stepsController.avatarList[stepsController.selectedProfileindex] is String
         ? data['image'] = stepsController.selectedProfileindex.toString()

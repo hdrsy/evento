@@ -4,11 +4,16 @@ import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ColumnText extends StatelessWidget {
-  const ColumnText({super.key, required this.title, required this.subTitle,required this.onTap});
+  const ColumnText(
+      {super.key,
+      required this.title,
+      required this.subTitle,
+      required this.onTap});
   final String title;
   final String subTitle;
-final Function() onTap;
+  final Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,9 +27,7 @@ final Function() onTap;
             style: customTextStyle.bodyMedium.override(
               fontFamily: breeSerif,
               color: customColors.primaryText,
-              fontSize: screenSize == ScreenSize.small
-                  ? 18
-                  : (screenSize == ScreenSize.medium ? 20 : 22  ),
+              fontSize: 20,
               useGoogleFonts: true,
             ),
           ),
@@ -44,20 +47,14 @@ final Function() onTap;
                 useGoogleFonts: true,
               ),
             ),
-            InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
+            GestureDetector(
               onTap: onTap,
               child: Text(
                 "See All",
                 style: customTextStyle.labelSmall.override(
                   fontFamily: breeSerif,
                   color: customColors.primary,
-                  fontSize: screenSize == ScreenSize.small
-                      ? 10
-                      : (screenSize == ScreenSize.medium ? 12 : 14),
+                  fontSize: 13,
                   useGoogleFonts: true,
                 ),
               ).tr(),

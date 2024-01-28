@@ -91,6 +91,7 @@ dependencies:
   flutter_background_service_ios: ^5.0.0
   connectivity_plus: ^5.0.2
   syncfusion_flutter_sliders: ^22.2.11
+  socket_io_client: ^2.0.3+1
 
   
   # video_compress: ^3.1.2

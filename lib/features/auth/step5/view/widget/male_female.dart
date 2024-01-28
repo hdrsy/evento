@@ -53,8 +53,8 @@ Widget _buildItemContainer(BuildContext context, String localizationKey,
     },
     child: Stack(
       alignment: localizationKey == tr("Female")
-          ? const AlignmentDirectional(-1, 0)
-          : const AlignmentDirectional(1, 0),
+          ? const Alignment(-1, 0) // Changed to Alignment
+          : const Alignment(1, 0),
       children: [
         Container(
           width: scaleWidth(156),

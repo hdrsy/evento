@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class FeaturedList extends StatelessWidget {
   FeaturedList({super.key});
   final FeaturedListController featuredListController = Get.find();
@@ -31,67 +32,68 @@ class FeaturedList extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: featuredLoading(),
             )
-          : featuredListController.itemList.isEmpty?const SizedBox():
-          
-          
-           Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ColumnText(
-                  title:tr( "Featured"),
-                  subTitle: tr("Enchanted Evening & Festive Lights"),
-                  onTap: () {
-                    Get.toNamed('/seeAll', arguments: [
-                      featuredListController.pageId,
-                      featuredListController.itemList,
-                      ServerConstApis.getFeaturedList,
-                      "featured_event",
-                      "Featured"
-                    ]);
-                  },
+          : featuredListController.itemList.isEmpty
+              ? const SizedBox()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ColumnText(
+                      title: tr("Featured"),
+                      subTitle: tr("Enchanted Evening & Festive Lights"),
+                      onTap: () {
+                        Get.toNamed('/seeAll', arguments: [
+                          featuredListController.pageId,
+                          featuredListController.itemList,
+                          ServerConstApis.getFeaturedList,
+                          "featured_event",
+                          "Featured"
+                        ]);
+                      },
+                    ),
+                    SizedBox(
+                      height: scaleHeight(8),
+                    ),
+                    SizedBox(
+                      // height: scaleHeight(330),
+                      child: SingleChildScrollView(
+                          controller: featuredListController.scrollController,
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              ...List.generate(
+                                  featuredListController.hasMoreData.value
+                                      ? featuredListController.itemList.length +
+                                          1
+                                      : featuredListController.itemList.length,
+                                  (index) {
+                                return index <
+                                        featuredListController.itemList.length
+                                    ? FeaturedWidget(
+                                        eventModel: featuredListController
+                                            .itemList[index],
+                                        modelIndex: index,
+                                      )
+                                    : ShimmerLoadingWidget(
+                                        loadingShimmerWidget: Container(
+                                        width: 355,
+                                        height: 300,
+                                        // height: 330 ,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                              color: customColors.info,
+                                            ),
+                                            color: customColors.info),
+                                      ));
+                              })
+                            ].divide(const SizedBox(
+                              width: 10,
+                            )),
+                          )),
+                    )
+                  ],
                 ),
-                SizedBox(
-                  height: scaleHeight(8),
-                ),
-                SizedBox(
-                  // height: scaleHeight(330),
-                  child: SingleChildScrollView(
-                      controller: featuredListController.scrollController,
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ...List.generate(
-                              featuredListController.hasMoreData.value
-                                  ? featuredListController.itemList.length + 1
-                                  : featuredListController.itemList.length,
-                              (index) {
-                            return index <
-                                    featuredListController.itemList.length
-                                ? FeaturedWidget(
-                                    eventModel:
-                                        featuredListController.itemList[index],
-                                    modelIndex: index,
-                                  )
-                                : ShimmerLoadingWidget(
-                                    loadingShimmerWidget: Container(
-                                    width: 355,
-                                    height: 300,
-                                    // height: 330 ,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: customColors.info,
-                                        ),
-                                        color: customColors.info),
-                                  ));
-                          })
-                        ].divide(const SizedBox(
-                          width:10,
-                        )),
-                      )),
-                )
-              ],
-            ),
     );
   }
 }
@@ -105,12 +107,11 @@ class FeaturedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FeaturedListController>(builder: (context) {
       return GestureDetector(
-        onTap: (){
-     Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
-                 
+        onTap: () {
+          Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
         },
         child: Container(
-          width: screenWidth*0.9,// height: 330 ,
+          width: screenWidth * 0.9, // height: 330 ,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -136,9 +137,7 @@ class FeaturedWidget extends StatelessWidget {
                           style: customTextStyle.headlineSmall.override(
                             fontFamily: 'BeerSerif',
                             color: customColors.primaryText,
-                            fontSize: screenSize == ScreenSize.small
-                                ? 16
-                                : (screenSize == ScreenSize.medium ? 18 : 20),
+                            fontSize: 18,
                             useGoogleFonts: false,
                           ),
                         ),
@@ -159,8 +158,11 @@ class FeaturedWidget extends StatelessWidget {
                             useGoogleFonts: false,
                           ),
                         ),
-                        priceIcons(eventModel.ticketPrice,
-                            eventModel.isFollowedByAuthUser, modelIndex,eventModel.id),
+                        priceIcons(
+                            eventModel.ticketPrice,
+                            eventModel.isFollowedByAuthUser,
+                            modelIndex,
+                            eventModel.id),
                       ].divide(const SizedBox(height: 3)),
                     ),
                   ),
@@ -175,9 +177,8 @@ class FeaturedWidget extends StatelessWidget {
 
   Widget mediaStack(EventModel eventModel) {
     return GestureDetector(
-      onTap: (){
- Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
-    
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Stack(
         children: [
@@ -200,13 +201,14 @@ class FeaturedWidget extends StatelessWidget {
                     videoWidth: double.infinity,
                   ),
           ),
-          eventModel.videos.isNotEmpty?
-          Positioned(
-              bottom: scaleWidth(0),
-              right: scaleWidth(0),
-              //  alignment: AlignmentDirectional(0.00, 0.00),
-    
-              child: soundToggleIcon()):const SizedBox.shrink()
+          eventModel.videos.isNotEmpty
+              ? Positioned(
+                  bottom: scaleWidth(0),
+                  right: scaleWidth(0),
+                  //  alignment: AlignmentDirectional(0.00, 0.00),
+
+                  child: soundToggleIcon())
+              : const SizedBox.shrink()
         ],
       ),
     );
@@ -229,7 +231,8 @@ class FeaturedWidget extends StatelessWidget {
     );
   }
 
-  Row priceIcons(ticketPrice, bool isFollowedByAuthUser, int modelIndex, int eventId) {
+  Row priceIcons(
+      ticketPrice, bool isFollowedByAuthUser, int modelIndex, int eventId) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -266,13 +269,13 @@ class FeaturedWidget extends StatelessWidget {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                 
-                             const String message = "Check out this event in Evento";
-          final String url = "http://94.141.219.16:8003/#/eventDetailes/$eventId";  // Replace with your event link
-          final String shareContent = "$message\n\nFor more details, visit: $url";
+                  const String message = "Check out this event in Evento";
+                  final String url =
+                      "http://94.141.219.16:8003/#/eventDetailes/$eventId"; // Replace with your event link
+                  final String shareContent =
+                      "$message\n\nFor more details, visit: $url";
 
-        await   Share.share(shareContent);
-                            
+                  await Share.share(shareContent);
                 },
                 child: Icon(
                   Icons.share_rounded,
@@ -282,16 +285,14 @@ class FeaturedWidget extends StatelessWidget {
               ),
               ToggleIcon(
                 onPressed: () async {
-                  if(isGuset){
-                    Get.dialog( const GuestPopupWidget());
-                  }else{
-
-                  
-                  
-                  final FeaturedListController featuredListController =
-                      Get.find();
-                  featuredListController.followOrUnFollowEvent(
-                      eventModel.id, modelIndex);}
+                  if (isGuset) {
+                    Get.dialog(const GuestPopupWidget());
+                  } else {
+                    final FeaturedListController featuredListController =
+                        Get.find();
+                    featuredListController.followOrUnFollowEvent(
+                        eventModel.id, modelIndex);
+                  }
                 },
                 value: isFollowedByAuthUser,
                 onIcon: Icon(

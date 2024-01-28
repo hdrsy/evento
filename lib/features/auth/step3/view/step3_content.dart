@@ -80,14 +80,14 @@ class Step3Content extends StatelessWidget {
                             padding: padding(10, 0, 20, 0),
                             height: 300,
                             decoration: BoxDecoration(
-        color: customColors.secondaryBackground,
-        borderRadius:const BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),  
+                              color: customColors.secondaryBackground,
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(0),
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -122,7 +122,7 @@ class Step3Content extends StatelessWidget {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      text:tr( "Cancel"),
+                                      text: tr("Cancel"),
                                       options: ButtonOptions(
                                         width: 120,
                                         height: 45,
@@ -149,31 +149,34 @@ class Step3Content extends StatelessWidget {
                                     ButtonWidget(
                                       onPressed: () {
                                         stepsController.day = selectedDate;
+                                        print(
+                                            "selected date is:${stepsController.day}");
                                         stepsController.update();
                                         Get.back();
                                       },
-                                      text:tr( "Done"),
+                                      text: tr("Done"),
                                       options: ButtonOptions(
-                        width: 120,
-                        height: 45,
-                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
-                        textStyle:
-                            customTextStyle.titleSmall.override(
-                                  fontFamily: 'BeerSerif',
-                                  color: customColors.info,
-                                  fontSize: 14,
-                                  useGoogleFonts: false,
-                                ),
-                        elevation: 0,
-                        borderSide: BorderSide(
-                          color: customColors.primary,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    
+                                        width: 120,
+                                        height: 45,
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(20, 0, 20, 0),
+                                        iconPadding: const EdgeInsetsDirectional
+                                            .fromSTEB(0, 0, 0, 0),
+                                        color: customColors.primary,
+                                        textStyle:
+                                            customTextStyle.titleSmall.override(
+                                          fontFamily: 'BeerSerif',
+                                          color: customColors.info,
+                                          fontSize: 14,
+                                          useGoogleFonts: false,
+                                        ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: customColors.primary,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     )
                                   ],
                                 )
@@ -188,17 +191,17 @@ class Step3Content extends StatelessWidget {
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.MMMM().format(stepsController.day!)
-                            :tr( "Month"),
+                            : tr("Month"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.d().format(stepsController.day!)
-                            :tr ("Day"),
+                            : tr("Day"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
                             ? DateFormat.y().format(stepsController.day!)
-                            :tr ("Year"),
+                            : tr("Year"),
                       ),
                     ].divide(const Spacer()),
                   );
@@ -226,10 +229,10 @@ class Step3Content extends StatelessWidget {
                   stepsPageController.pageIdex.value = 4;
                 } else {
                   stepsController.dateErrorMessage.value =
-                    tr(  "Please select your birthday first");
+                      tr("Please select your birthday first");
                 }
               },
-              text:tr( "Continue"),
+              text: tr("Continue"),
               options: ButtonOptions(
                 width: scaleWidth(330),
                 height: scaleHeight(40),
