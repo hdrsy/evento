@@ -3,10 +3,11 @@ import 'dart:ui';
 import 'package:evento/core/utils/services/sse_serive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 
 Future<void> initializeService() async {
   final service = FlutterBackgroundService();
-  
+
   // Configuring the background service.
   await service.configure(
     androidConfiguration: AndroidConfiguration(
@@ -35,10 +36,20 @@ Future<bool> onIosBackground(ServiceInstance service) async {
 // Entry point for the service.
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) async {
-
   DartPluginRegistrant.ensureInitialized();
-    SSEService.connectToSSE();
   log("stat serr");
+  if (service is AndroidServiceInstance) {
+    service.on("setAsBackground").listen((event) {
+      service.setAsBackgroundService();
+      print("the service in backround");
+    });
+    service.on('stopService').listen((event) {
+      print("stop service :$event");
+      service.stopSelf();
+    });
+  }
+  SSEService.connectToSSE();
+
   //   if(service is AndroidServiceInstance){
   //     service.setAsBackgroundService();
   //     // if(user==null){
@@ -51,15 +62,10 @@ void onStart(ServiceInstance service) async {
   //   service.stopSelf();
   // });
   // // service.setAsBackgroundService();
-  // // if(await service .isForegroundService()){ 
+  // // if(await service .isForegroundService()){
   // //   print("inside set as background");
   // //   SSEService.connectToSSE();
 
   // // }
   //   }
-    
-   
 }
-
-
-

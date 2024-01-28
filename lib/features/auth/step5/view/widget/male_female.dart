@@ -9,18 +9,34 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 Widget buildMainStack(BuildContext context) {
-  StepsController stepsController=Get.find();
+  StepsController stepsController = Get.find();
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(10, 6, 10, 6),
     child: Obx(
-  ()    => Row(
+      () => Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Container for the first item (Male)
-          _buildItemContainer(context,tr( 'Male'),stepsController.isMale.value? customColors.primary:Colors.white,stepsController.isMale.value?  Colors.white:customColors.primary),
+          _buildItemContainer(
+              context,
+              tr('Male'),
+              stepsController.isMale.value
+                  ? customColors.primary
+                  : Colors.white,
+              stepsController.isMale.value
+                  ? Colors.white
+                  : customColors.primary),
           // // Container for the second item (Female)
-          _buildItemContainer(context, tr('Female'), stepsController.isMale.value? Colors.white:customColors.primary,stepsController.isMale.value?  customColors.primary:Colors.white),
+          _buildItemContainer(
+              context,
+              tr('Female'),
+              stepsController.isMale.value
+                  ? Colors.white
+                  : customColors.primary,
+              stepsController.isMale.value
+                  ? customColors.primary
+                  : Colors.white),
         ],
       ),
     ),
@@ -28,66 +44,71 @@ Widget buildMainStack(BuildContext context) {
 }
 
 // Function to build the item container
-Widget _buildItemContainer(BuildContext context, String localizationKey, Color backgroundColor, Color textColor) {
-
+Widget _buildItemContainer(BuildContext context, String localizationKey,
+    Color backgroundColor, Color textColor) {
   return GestureDetector(
-    onTap: (){
-      StepsController stepsController=Get.find();
-stepsController.isMale.value=localizationKey=="Male";
-
+    onTap: () {
+      StepsController stepsController = Get.find();
+      stepsController.isMale.value = localizationKey == tr("Male");
     },
     child: Stack(
-      alignment:localizationKey=="Female"? const AlignmentDirectional(-1,0):const AlignmentDirectional(1,0),
+      alignment: localizationKey == tr("Female")
+          ? const AlignmentDirectional(-1, 0)
+          : const AlignmentDirectional(1, 0),
       children: [
         Container(
-            width: scaleWidth(156),
-            height: scaleHeight(216),
-            decoration: BoxDecoration(
-              color:backgroundColor,
-              boxShadow:const [
-                 BoxShadow(
-                  blurRadius: 24,
-                  color: Color(0x0D000000),
-                  offset: Offset(0, 0),
-                )
-              ],
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment:localizationKey=="Female"?  MainAxisAlignment.start:MainAxisAlignment.end,
-                crossAxisAlignment:localizationKey=="Female"? CrossAxisAlignment.center :CrossAxisAlignment.start,
-                children: [
-                  
-                  Align(
-                    alignment: localizationKey=="Female"?const AlignmentDirectional(1,0):const AlignmentDirectional(-1,0),
-                    child: Text(
+          width: scaleWidth(156),
+          height: scaleHeight(216),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 24,
+                color: Color(0x0D000000),
+                offset: Offset(0, 0),
+              )
+            ],
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: localizationKey == tr("Female")
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.end,
+              crossAxisAlignment: localizationKey == tr("Female")
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: localizationKey == tr("Female")
+                      ? const AlignmentDirectional(1, 0)
+                      : const AlignmentDirectional(-1, 0),
+                  child: Text(
                     localizationKey,
-                      style: customTextStyle.bodyMedium.copyWith(
-                            fontFamily: 'BeerSerif',
-                            color:textColor,
-                            fontWeight: FontWeight.w500,
-                            
-                          ),
+                    style: customTextStyle.bodyMedium.copyWith(
+                      fontFamily: 'BeerSerif',
+                      color: textColor,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-     Image.asset(
-      localizationKey=="Female"?  'assets/images/Group_17613_(1).png':  'assets/images/character-1_(1).png',
-        width: scaleWidth(150),
-      height: scaleHeight(200),
-      fit: BoxFit.cover,
-      alignment: const Alignment(0.00, -1.00),
-      ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationmalefemale']!), // Animation on page load
-   
-    
+        ),
+        Image.asset(
+          localizationKey == tr("Female")
+              ? 'assets/images/Group_17613_(1).png'
+              : 'assets/images/character-1_(1).png',
+          width: scaleWidth(150),
+          height: scaleHeight(200),
+          fit: BoxFit.cover,
+          alignment: const Alignment(0.00, -1.00),
+        ).animateOnPageLoad(animationsMap[
+            'imageOnPageLoadAnimationmalefemale']!), // Animation on page load
       ],
     ),
-    
   );
 }
