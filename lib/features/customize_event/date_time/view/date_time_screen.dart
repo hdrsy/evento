@@ -18,12 +18,11 @@ class DateTimeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: customColors.secondaryBackground,
-     appBar:  AppBar(
       backgroundColor: customColors.secondaryBackground,
-       
-         leading:  InkWell(
-          onTap: (){
+      appBar: AppBar(
+        backgroundColor: customColors.secondaryBackground,
+        leading: GestureDetector(
+          onTap: () {
             Get.back();
           },
           child: Icon(
@@ -33,25 +32,26 @@ class DateTimeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(padding: padding(16,16,16,16),
-      child: Column(
+      body: SingleChildScrollView(
+        padding: padding(16, 16, 16, 16),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-        children: [
-           const StepText2(),
-              const LinearPercentIndicatorWidget(),
-              EventTitle(),
-              ContactInformationForm(),
-              const SelectPeopleDateTime(),
-               UploadMedia(),
-               NotesLabel(),
-               NextStepButton()
-        ].divide(SizedBox(height: scaleHeight(10),)),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const StepText2(),
+            const LinearPercentIndicatorWidget(),
+            EventTitle(),
+            ContactInformationForm(),
+            const SelectPeopleDateTime(),
+            UploadMedia(),
+            NotesLabel(),
+            NextStepButton()
+          ].divide(SizedBox(
+            height: scaleHeight(10),
+          )),
+        ),
       ),
-      
-      )
-      ,
     );
   }
 }

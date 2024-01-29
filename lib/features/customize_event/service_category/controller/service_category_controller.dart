@@ -14,14 +14,14 @@ class ServiceCategoryController extends GetxController {
   late List<RxInt> selectedServiceProviders;
   late RxList<String> errorMessage;
   late RxInt selectedVenue;
-  Map selected={};
+  Map selected = {};
   @override
   void onInit() async {
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     serviceCategoryList = <ServiceCategoryModel>[].obs;
     selectedServiceProviders = [];
-    selectedVenue=0.obs;
+    selectedVenue = 0.obs;
     await fetchCategoryData();
     selectedServiceProviders = List.generate(
         serviceCategoryList.length,
@@ -35,34 +35,30 @@ class ServiceCategoryController extends GetxController {
     return selectedServiceProviders[serviceCategoryIndex].value == id;
   }
 
-  changeSelectedServiceProviderInEachCategory(
-      int serviceProviderId, int serviceCategoryIndex,String serviceProviderName) {
+  changeSelectedServiceProviderInEachCategory(int serviceProviderId,
+      int serviceCategoryIndex, String serviceProviderName) {
     ////to select new service provider and unselected one
-    if(selectedServiceProviders[serviceCategoryIndex].value == serviceProviderId){
-        selectedServiceProviders[serviceCategoryIndex].value = 0;
-        selected.remove(serviceCategoryList[serviceCategoryIndex].title);
-
-    }else{
-
-        selectedServiceProviders[serviceCategoryIndex].value =
-            serviceProviderId;
-            selected[serviceCategoryList[serviceCategoryIndex].title]=serviceProviderName;
+    if (selectedServiceProviders[serviceCategoryIndex].value ==
+        serviceProviderId) {
+      selectedServiceProviders[serviceCategoryIndex].value = 0;
+      selected.remove(serviceCategoryList[serviceCategoryIndex].title);
+    } else {
+      selectedServiceProviders[serviceCategoryIndex].value = serviceProviderId;
+      selected[serviceCategoryList[serviceCategoryIndex].title] =
+          serviceProviderName;
     }
     update();
   }
-  changeSelectedVenue(
-      int venueIndex,String venueName) {
+
+  changeSelectedVenue(int venueIndex, String venueName) {
     ////to select new service provider and unselected one
-   if (selectedVenue.value == venueIndex){
-         selectedVenue.value = 0;
-         selected.remove("Venue Name");
-
-   }else{
-
-        selectedVenue.value =
-            venueIndex;
-            selected["Venue Name"]=venueName;
-   }
+    if (selectedVenue.value == venueIndex) {
+      selectedVenue.value = 0;
+      selected.remove("Venue Name");
+    } else {
+      selectedVenue.value = venueIndex;
+      selected["Venue Name"] = venueName;
+    }
     update();
   }
 
@@ -71,14 +67,14 @@ class ServiceCategoryController extends GetxController {
     for (var i = 0; i < selectedServiceProviders.length; i++) {
       selectedServiceProviders[i].value != 0 ? number++ : null;
     }
-    selectedVenue.value==0?null:number++;
+    selectedVenue.value == 0 ? null : number++;
     return number;
   }
 
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.serviceCategory,
         method: "GEt",

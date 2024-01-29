@@ -3,7 +3,6 @@ import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/images/network_image.dart';
-import '../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../core/utils/theme/text_theme.dart';
 import '../controller/book_now_controller.dart';
@@ -75,11 +74,10 @@ class BookNowScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           BookNowController bookNowController = Get.find();
-                          bookNowController.ticketList.add(TicketModel(
-                            ));
+                          bookNowController.ticketList.add(TicketModel());
                         },
                         child: Text(
                           tr("Add Ticket"),

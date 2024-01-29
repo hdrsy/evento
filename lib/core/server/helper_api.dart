@@ -12,7 +12,7 @@ import 'package:http_parser/http_parser.dart';
 
 class ApiHelper {
   /// Static method to make HTTP requests.
-  /// 
+  ///
   /// Parameters:
   /// [targetRout] - URL of the API endpoint.
   /// [data] - Data to be sent with the request. Used in POST requests.
@@ -46,7 +46,7 @@ class ApiHelper {
         var request = http.MultipartRequest(method, url);
         request.headers.addAll(headers);
 
-        // Add text fields to the request.  
+        // Add text fields to the request.
         data?.forEach((key, value) {
           request.fields[key] = value.toString();
         });
@@ -90,8 +90,7 @@ class ApiHelper {
           // Return Left side of Either for API-level errors.
           return Left(ErrorResponse.fromJson(responseBody));
         }
-      } 
-      else {
+      } else {
         // Return Left side of Either for HTTP-level errors.
         return Left(ErrorResponse.fromJson(responseBody));
       }
@@ -101,31 +100,29 @@ class ApiHelper {
     }
   }
 }
-  parseResponse(Map<String, dynamic> responseBody)async{
-   
+
+parseResponse(Map<String, dynamic> responseBody) async {
   // if(await prefService.readString("language_code")=='en'){
   //   return responseBody;
   // }else{
 
   // }
-  
- }
- Map<String, dynamic> removeDuplicateKeysAr(Map<String, dynamic> data) {
-  if(Get.locale==const Locale("en")){
+}
+Map<String, dynamic> removeDuplicateKeysAr(Map<String, dynamic> data) {
+  if (Get.locale == const Locale("en")) {
     return data;
-  }else{
-final newData = <String, dynamic>{};
-  for (final key in data.keys) {
-    if (!key.endsWith('_ar')) {
-      newData[key] = data[key];
-    } else if (data.containsKey(key.substring(0, key.length - 3)) &&
-        data[key.substring(0, key.length - 3)] != null) {
-      newData[key.substring(0, key.length - 3)] = data[key];
-    } else {
-      newData[key] = data[key];
+  } else {
+    final newData = <String, dynamic>{};
+    for (final key in data.keys) {
+      if (!key.endsWith('_ar')) {
+        newData[key] = data[key];
+      } else if (data.containsKey(key.substring(0, key.length - 3)) &&
+          data[key.substring(0, key.length - 3)] != null) {
+        newData[key.substring(0, key.length - 3)] = data[key];
+      } else {
+        newData[key] = data[key];
+      }
     }
+    return newData;
   }
-  return newData;
-
-  }
-  }
+}

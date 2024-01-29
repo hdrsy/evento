@@ -272,7 +272,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
           child: StatefulBuilder(
             builder: (context, menuSetState) {
               final isSelected = selectedItems.contains(item);
-              return InkWell(
+              return GestureDetector(
                 onTap: () {
                   isSelected
                       ? selectedItems.remove(item)

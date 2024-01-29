@@ -1,7 +1,6 @@
-
 import '../controller/reels_controller.dart';
 import 'widgets/reel_widget.dart';
-import '../../../main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,7 @@ class ReelsScreen extends StatelessWidget {
         body: SafeArea(
           child: GetBuilder<ReelsController>(builder: (ccontext) {
             return PageView.builder(
-              controller: reelsController.pageController,
+                controller: reelsController.pageController,
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
                   if (index > reelsController.currentUserIndex) {

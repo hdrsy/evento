@@ -2,9 +2,7 @@ import 'package:evento/core/utils/helper/date_formatter.dart';
 
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/buttons/icon_with_container.dart';
-import '../../../core/shared/widgets/widget/rate_event_widget.dart';
 import '../../../core/shared/widgets/widget/total_widget.dart';
 import '../../../core/utils/helper/expanded_image_view.dart';
 import '../../../core/utils/theme/text_theme.dart';
@@ -31,7 +29,7 @@ class BookingDetailesScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -88,7 +86,7 @@ class BookingDetailesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],
@@ -324,10 +322,10 @@ class IMAGE extends StatelessWidget {
 }
 
 class BookingInfo extends StatelessWidget {
-   BookingInfo({
+  BookingInfo({
     super.key,
   });
-final BookingDetailesController bookingDetailesController=Get.find();
+  final BookingDetailesController bookingDetailesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -335,7 +333,6 @@ final BookingDetailesController bookingDetailesController=Get.find();
       children: [
         Text(
           "${bookingDetailesController.ticketList.length} Tickets",
-         
           style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,
@@ -350,8 +347,9 @@ final BookingDetailesController bookingDetailesController=Get.find();
           ),
         ),
         Text(
-           DateFormatter.formatDate(bookingDetailesController.eventDetailsModel.startDate),
-         style: customTextStyle.displaySmall.override(
+          DateFormatter.formatDate(
+              bookingDetailesController.eventDetailsModel.startDate),
+          style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,
             useGoogleFonts: true,
@@ -365,8 +363,8 @@ final BookingDetailesController bookingDetailesController=Get.find();
           ),
         ),
         Text(
-           DateFormatter.formatTime(bookingDetailesController.eventDetailsModel.startDate),
-         
+          DateFormatter.formatTime(
+              bookingDetailesController.eventDetailsModel.startDate),
           style: customTextStyle.displaySmall.override(
             fontFamily: 'Nunito',
             fontSize: 20,

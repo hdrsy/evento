@@ -10,13 +10,10 @@ class VenueServicesCard extends StatelessWidget {
   final VenueAlbum album;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
-        Get.toNamed('/GalleryScreen', arguments: {"images":album.images,"videos":album.videos});
+        Get.toNamed('/GalleryScreen',
+            arguments: {"images": album.images, "videos": album.videos});
       },
       child: SizedBox(
         width: double.infinity,

@@ -12,6 +12,7 @@ import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class GoingScreen extends StatelessWidget {
   GoingScreen({super.key});
   final GoingController goingController = Get.put(GoingController());
@@ -25,7 +26,7 @@ class GoingScreen extends StatelessWidget {
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -43,43 +44,45 @@ class GoingScreen extends StatelessWidget {
                     color: customColors.primary,
                   ),
                 )
-              : 
-               
-            goingController.itemList.isEmpty?const EmptyData(icon:Icons.people_rounded ,message:"It looks like no one has confirmed attendance yet. Be the first to join!" ,):
-            
-              
-              SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  controller: goingController.scrollController,
-                  child: Column(
-                    children: [
-                      ...List.generate(
-                          goingController.hasMoreData.value
-                              ? goingController.itemList.length + 1
-                              : goingController.itemList.length, (index) {
-                        return index < goingController.itemList.length
-                            ? GoingCard(
-                                goingModel: goingController.itemList[index],
-                                modelId: index,
-                              )
-                            : ShimmerLoadingWidget(
-                                loadingShimmerWidget: Container(
-                                width: double.infinity,
-                                height: screenHeight * 0.1,
-                                // height: 330 ,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: customColors.info,
-                                    ),
-                                    color: customColors.info),
-                              ));
-                      })
-                    ].divide(const SizedBox(
-                      height: 10,
-                    )),
-                  ),
-                ),
+              : goingController.itemList.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.people_rounded,
+                      message:
+                          "It looks like no one has confirmed attendance yet. Be the first to join!",
+                    )
+                  : SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 16),
+                      controller: goingController.scrollController,
+                      child: Column(
+                        children: [
+                          ...List.generate(
+                              goingController.hasMoreData.value
+                                  ? goingController.itemList.length + 1
+                                  : goingController.itemList.length, (index) {
+                            return index < goingController.itemList.length
+                                ? GoingCard(
+                                    goingModel: goingController.itemList[index],
+                                    modelId: index,
+                                  )
+                                : ShimmerLoadingWidget(
+                                    loadingShimmerWidget: Container(
+                                    width: double.infinity,
+                                    height: screenHeight * 0.1,
+                                    // height: 330 ,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: customColors.info,
+                                        ),
+                                        color: customColors.info),
+                                  ));
+                          })
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
+                      ),
+                    ),
         ));
   }
 }
@@ -106,16 +109,17 @@ class GoingCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: goingModel.image.length > 6
-                ? getImageNetwork(
-                    url: "/storage/${goingModel.image}",
-                    width: 90 ,
-                    height: 90)
-                : Image.asset(
-                    'assets/images/${goingModel.image}.png',width: 90,height: 90,)),
-        
-                    
+                        borderRadius: BorderRadius.circular(40),
+                        child: goingModel.image.length > 6
+                            ? getImageNetwork(
+                                url: "/storage/${goingModel.image}",
+                                width: 90,
+                                height: 90)
+                            : Image.asset(
+                                'assets/images/${goingModel.image}.png',
+                                width: 90,
+                                height: 90,
+                              )),
                     Expanded(
                       child: Padding(
                         padding:
@@ -128,8 +132,7 @@ class GoingCard extends StatelessWidget {
                               "${goingModel.firstName} ${goingModel.lastName}",
                               style: customTextStyle.bodyLarge,
                             ),
-                            userState(
-                                goingModel, modelId)
+                            userState(goingModel, modelId)
                           ].divide(const SizedBox(height: 10)),
                         ),
                       ),
@@ -142,7 +145,7 @@ class GoingCard extends StatelessWidget {
     });
   }
 
-  Widget userState( GoingModel goingModel, int modelId) {
+  Widget userState(GoingModel goingModel, int modelId) {
     if (goingModel.friendRequestStatus == null) {
       return AddFriendButton(
         userId: goingModel.id,
@@ -168,7 +171,7 @@ class AddFriendButton extends StatelessWidget {
         GoingController goingController = Get.find();
         goingController.onPressAddFreind(userId, modelId);
       },
-      text:tr( "Add friend"),
+      text: tr("Add friend"),
       options: ButtonOptions(
         width: 120,
         height: 21,
@@ -192,7 +195,8 @@ class AddFriendButton extends StatelessWidget {
 }
 
 class CancelButton extends StatelessWidget {
-  const CancelButton({super.key, required this.requestId, required this.modelId});
+  const CancelButton(
+      {super.key, required this.requestId, required this.modelId});
   final int requestId;
   final int modelId;
   @override
@@ -203,7 +207,7 @@ class CancelButton extends StatelessWidget {
         GoingController goingController = Get.find();
         goingController.onPressCancelReques(requestId, modelId);
       },
-      text:tr( "Cancel"),
+      text: tr("Cancel"),
       options: ButtonOptions(
         width: 120,
         height: 25,

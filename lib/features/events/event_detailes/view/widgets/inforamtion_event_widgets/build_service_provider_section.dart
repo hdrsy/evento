@@ -6,7 +6,7 @@ import '../../../controller/event_detailes_controller.dart';
 import '../../../model/event_detailes_model.dart';
 import '../see_all_service_providers.dart';
 import '../../../../../../main.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -19,8 +19,8 @@ class BuildServiceProviderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final double itemHeight =
         screenHeight * 0.2; // Height of each item, change as needed
-    final double mainAxisSpacing = 10; // Spacing between rows
-    final int crossAxisCount = 2; // Number of items in a row
+    const double mainAxisSpacing = 10; // Spacing between rows
+    const int crossAxisCount = 2; // Number of items in a row
 
     // Calculate the number of rows
     int totalItems =
@@ -34,7 +34,7 @@ class BuildServiceProviderSection extends StatelessWidget {
         (numberOfRows * itemHeight) + ((numberOfRows - 1) * mainAxisSpacing);
 
     return eventDetailesController.eventDetailsModel.serviceProvider.isEmpty
-        ? SizedBox()
+        ? const SizedBox()
         : Column(
             children: [
               Padding(
@@ -79,8 +79,9 @@ class BuildServiceProviderSection extends StatelessWidget {
                         : eventDetailesController.eventDetailsModel
                             .serviceProvider.length, // Max number of items
                     physics:
-                        NeverScrollableScrollPhysics(), // Disables scrolling
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        const NeverScrollableScrollPhysics(), // Disables scrolling
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, // Number of items in a row
                       // Adjust child aspect ratio and cross axis spacing if needed
                       childAspectRatio: 1,
@@ -104,7 +105,7 @@ class ServiceProviderCard extends StatelessWidget {
   final ServiceProvider serviceProvider;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Get.toNamed('/ServiceAccordingDetailesForUserScreen',
             arguments: serviceProvider.id);
@@ -115,14 +116,14 @@ class ServiceProviderCard extends StatelessWidget {
           Container(
             width: 100,
             height: 100,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: getImageNetwork(
                 url: "/storage/${serviceProvider.profile}",
                 width: 100,
                 height: 100),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(

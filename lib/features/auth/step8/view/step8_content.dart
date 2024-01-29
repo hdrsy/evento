@@ -11,7 +11,6 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Step8Content extends StatelessWidget {
@@ -58,7 +57,7 @@ class Step8Content extends StatelessWidget {
         SizedBox(
           height: scaleHeight(50),
         ),
-        InkWell(
+        GestureDetector(
           onTap: () async {
             await showButtonSheet(
                 context: context, widget: SelectState(), height: 300);

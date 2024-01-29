@@ -6,29 +6,31 @@ import '../../../../../../../customize_event/service_category/model/service_cate
 import '../../../../../../../../main.dart';
 import 'package:get/get.dart';
 
-class ChoiceTypeController extends GetxController{
-  int sericeSelected=5000;
+class ChoiceTypeController extends GetxController {
+  int sericeSelected = 5000;
   late RxList<String> errorMessage;
-   late RxList<ServiceCategoryModel> serviceCategoryList;
- 
+  late RxList<ServiceCategoryModel> serviceCategoryList;
+
   late RxBool isLoading;
- @override
-  void onInit() async{
-    errorMessage=<String>[].obs;
-    isLoading=false.obs;
-    serviceCategoryList=<ServiceCategoryModel>[].obs;
+  @override
+  void onInit() async {
+    errorMessage = <String>[].obs;
+    isLoading = false.obs;
+    serviceCategoryList = <ServiceCategoryModel>[].obs;
     await fetchCategoryData();
-   
+
     super.onInit();
   }
-  changeSelectedService(int index){
-    sericeSelected=index;
+
+  changeSelectedService(int index) {
+    sericeSelected = index;
     update();
   }
+
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.serviceCategory,
         method: "GEt",
@@ -52,11 +54,10 @@ class ChoiceTypeController extends GetxController{
   }
 }
 
-class  ChoiceServiceTypeModel{
+class ChoiceServiceTypeModel {
   final String name;
-  
-  
 
-  ChoiceServiceTypeModel({required this.name, });
-
+  ChoiceServiceTypeModel({
+    required this.name,
+  });
 }

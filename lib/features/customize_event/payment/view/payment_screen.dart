@@ -7,6 +7,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class PaymentScreen extends StatelessWidget {
   PaymentScreen({super.key});
   final PaymentController paymentController = Get.put(PaymentController());
@@ -20,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },

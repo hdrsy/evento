@@ -16,7 +16,7 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -36,7 +36,7 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        serviceAccordingCategoryController.serviceCategoryType!,
+                        serviceAccordingCategoryController.serviceCategoryType,
                         style: customTextStyle.bodyMedium.override(
                           fontFamily: 'Nunito',
                           color: customColors.primaryText,
@@ -53,7 +53,7 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
                                         .serviceProviderList[index],
                                 serviceCategoryIndex:
                                     serviceAccordingCategoryController
-                                        .serviceCategoryIndex!,
+                                        .serviceCategoryIndex,
                               ))
                     ])),
           ),

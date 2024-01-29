@@ -118,11 +118,7 @@ class BuildLogoButtons extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: () async {
                     isGuset = true;
                     Get.toNamed('/home');

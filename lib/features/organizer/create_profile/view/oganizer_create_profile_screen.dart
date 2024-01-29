@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the OrganizerCreateProfileScreen as a StatelessWidget.
 class OrganizerCreateProfileScreen extends StatelessWidget {
   OrganizerCreateProfileScreen({super.key});
@@ -28,7 +29,7 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -88,8 +89,8 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                   children: [
                     EditProfileField(
                       controller: controller.organizerName,
-                      hintText:tr( "Spark"),
-                      labelText:tr( "Organization/Name"),
+                      hintText: tr("Spark"),
+                      labelText: tr("Organization/Name"),
                       onChanged: (value) {},
                       validator: (value) {
                         return null;
@@ -98,8 +99,8 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                     ),
                     EditProfileField(
                       controller: controller.bio,
-                      hintText:tr
-                          ("""Event organizer specialist in decoration ,lighting and flowers .
+                      hintText: tr(
+                          """Event organizer specialist in decoration ,lighting and flowers .
 Wdding, Birthday ,anniversary......"""),
                       labelText: "Bio",
                       onChanged: (value) {},
@@ -108,7 +109,6 @@ Wdding, Birthday ,anniversary......"""),
                       },
                       suffixIcon: Icons.description_outlined,
                     ),
-
                     SelectStates(
                         organizerCreateProfileController:
                             organizerCreateProfileController),
@@ -117,11 +117,16 @@ Wdding, Birthday ,anniversary......"""),
                       height: 50,
                     ),
                     Obx(
-                      ()=> Column(children: [
-                    
-                       LinearProgressIndicator(value: controller.uploadProgress.value,backgroundColor: customColors.secondaryBackground,color: customColors.primary,),
-                            Text(controller.currentUploadingFile.value),
-                      ],),
+                      () => Column(
+                        children: [
+                          LinearProgressIndicator(
+                            value: controller.uploadProgress.value,
+                            backgroundColor: customColors.secondaryBackground,
+                            color: customColors.primary,
+                          ),
+                          Text(controller.currentUploadingFile.value),
+                        ],
+                      ),
                     ),
                     Obx(
                       () => ButtonWidget(
@@ -130,7 +135,7 @@ Wdding, Birthday ,anniversary......"""),
                         onPressed: () async {
                           organizerCreateProfileController.onPressDone();
                         },
-                        text:tr( "Done"),
+                        text: tr("Done"),
                         options: ButtonOptions(
                           width: screenWidth * 0.3,
                           height: 40,
@@ -199,11 +204,7 @@ class OrganizerMediaCard extends StatelessWidget {
                     ),
                   ).tr(),
                 ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                GestureDetector(
                   onTap: () async {
                     showButtonSheet(
                         context: context, widget: CreateFolder(), height: 500);

@@ -1,88 +1,148 @@
+import 'dart:async';
+import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/filter.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
-import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/features/search/model/search_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dartz/dartz.dart';
+// Add your other necessary imports here
 
-class SearchPageController extends PaginationController<EventModel> {
-  SearchPageController() : super(fetchDataCallback: _fetchData,cacheKey: "SearchPageController");
-  RxList<EventModel> searchResultSearch=<EventModel>[].obs;
-   RxBool isSearchActive=false.obs;
-  late TextEditingController searchField=TextEditingController();
-  // Updated _fetchData to match the new signature
-  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
-      String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ;
-    String apiUrl = "${ServerConstApis.getTrendingList}?page=$page";
+class SearchPageController extends GetxController {
+  var searchResults = <SearchModel>[].obs;
+  var recentSearch = <SearchModel>[].obs;
+  var isSearchActive = false.obs;
+  TextEditingController searchField = TextEditingController();
+  Timer? _debounce;
+  CacheService cacheService = CacheService('searchRecent');
+  final String cacheKey = 'searchRecent';
 
-    // Returning the result of the API call
-    return ApiHelper.makeRequest(
-      targetRout: apiUrl,
-      method: "GET",
-      token: token,
-    );
-   
+  @override
+  void onInit() {
+    super.onInit();
+    _fetchData(""); // Fetch initial data with empty query
+    searchField.addListener(_onSearchChanged);
+    getRecentSearch();
   }
-  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchDataInSearch(
-      String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ;
-    String apiUrl = "${ServerConstApis.getTrendingList}?page=$page";
 
-    // Returning the result of the API call
-    return ApiHelper.makeRequest(
-      targetRout: apiUrl,
-      method: "GET",
-      token: token,
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (searchField.text.isNotEmpty) {
+        onPressSearch(searchField.text);
+        print("inisde the timer ");
+      } else {
+        // Optionally handle empty search field case
+        _fetchData("");
+      }
+    });
+  }
+
+  Future<void> getRecentSearch() async {
+    final jsonString = await cacheService.getObject<Map<String, dynamic>>(
+      cacheKey: cacheKey,
+      deserializeFunction: (jsonMap) => jsonMap,
     );
-   
+    if (jsonString != null) {
+      var results = (jsonString['result'] as List)
+          .map((jsonItem) => SearchModel.fromJson(jsonItem))
+          .toList();
+
+      recentSearch.addAll(results);
+    }
+  }
+
+  bool _isSavingToCache = false;
+
+  void addNewEventToCache(SearchModel searchModel) async {
+    print("in add new");
+    if (_isSavingToCache) return; // Prevent concurrent access
+    _isSavingToCache = true;
+    if (!recentSearch.any((item) => item.id == searchModel.id)) {
+      recentSearch.add(searchModel);
+      if (recentSearch.length > 10) {
+        // Limit to 10 recent searches
+        recentSearch.removeAt(0);
+      }
+      // Serialize the entire recentSearch list to JSON within a map
+
+      Map<String, dynamic> resultMap = {
+        'result': recentSearch.map((item) => item.toJson()).toList()
+      };
+      print("result of search $resultMap");
+      // String jsonList = jsonEncode(resultMap);
+      await cacheService.cacheObject<Map<String, dynamic>>(
+        object: resultMap,
+        cacheKey: cacheKey,
+        serializeFunction: (string) => string,
+      );
+    } else {
+      print("data rejected");
+    }
+  }
+
+  void _fetchData(String query) async {
+    String token = await prefService.readString("token");
+    var response = await ApiHelper.makeRequest(
+        targetRout: ServerConstApis.eventSearch,
+        method: "post",
+        data: {"Search": query},
+        token: token);
+
+    response.fold(
+      (error) => _handleError(error),
+      (result) => _handleSuccess(result),
+    );
+  }
+
+  void _handleError(ErrorResponse error) {
+    // Handle your error, maybe show a snackbar or log it
+    // Get.snackbar("Error", error.message); // Example
+  }
+
+  void _handleSuccess(Map<String, dynamic> data) {
+    var results = (data['result'] as List)
+        .map((jsonItem) => SearchModel.fromJson(jsonItem))
+        .toList();
+    print(results);
+    _updateSearchResults(results);
+  }
+
+  void _updateSearchResults(List<SearchModel> results) {
+    searchResults.assignAll(results);
+    update();
+  }
+
+  void onPressSearch(String query) {
+    isSearchActive.value = query.isNotEmpty;
+    if (isSearchActive.isTrue) {
+      _fetchData(query);
+    } else {
+      _fetchData("");
+      update();
+      // _updateSearchResults([]);
+    }
+  }
+
+  void onApplyFilters(Map<String, dynamic> data) async {
+    // Your filter logic
+    // Assuming this returns a List<Map<String, dynamic>> representing filtered data
+    var filteredData =
+        await filter(data); // Replace with your actual filter function
+    var filteredResults =
+        filteredData.map((jsonItem) => SearchModel.fromJson(jsonItem)).toList();
+    _updateSearchResults(filteredResults);
   }
 
   @override
-  handleDataSuccess(dynamic handlingResponse) {
-    
-    List<dynamic> categoryListJson = handlingResponse['trending_event']['data'];
-    print(categoryListJson);
-    lastPageId = handlingResponse['trending_event']['last_page'];
-
-    itemList.addAll(categoryListJson
-        .map((jsonItem) => EventModel.fromJson(jsonItem))
-        .toList());
-    if (pageId == lastPageId) {
-      hasMoreData.value = false;
-    }
-    pageId++;
-    isLoading.value = false;
-    isLoading.value = false;
-    isLoadingMoreData.value = false;
-    
+  void onClose() {
+    searchField.dispose();
+    _debounce?.cancel();
+    super.onClose();
   }
-  void onPressSearch(String query) {
-  if (query.isEmpty) {
-    isSearchActive.value = false;
-    searchResultSearch.clear();
-  } else {
-    isSearchActive.value = true;
-    searchResultSearch.assignAll(
-      itemList.where(
-        (event) => event.title.toLowerCase().contains(query.toLowerCase())
-      ).toList()
-    );
-  }
-}
-void onApplyFilters(Map<String ,dynamic> data)async{
-  isSearchActive.value=true;
-  final d=await  filter( data);
-  print(d);
-Get.back();
-    var eventModels = d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
-  searchResultSearch.addAll(eventModels.cast<EventModel>());
-
-}
-
 }

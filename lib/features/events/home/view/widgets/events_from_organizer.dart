@@ -34,7 +34,7 @@ class EventsFromOrganizer extends StatelessWidget {
                 children: [
                   ColumnText(
                     title: tr("Organizer's Events"),
-                    subTitle: "Curated Concerts & Exclusive Engagements",
+                    subTitle: tr("Curated Concerts & Exclusive Engagements"),
                     onTap: () {
                       Get.toNamed('/seeAll', arguments: [
                         eventsforOrganizerListController.pageId,
@@ -96,7 +96,7 @@ class EventsFromOrganizer extends StatelessWidget {
 // Function to create each event card
   Widget buildEventCard(
       {required EventModel eventModel, required int modelIndex}) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Get.toNamed('/eventDetailes', arguments: eventModel.id);
       },
@@ -148,7 +148,7 @@ class EventsFromOrganizer extends StatelessWidget {
 
 // Function to build the image widget
   Widget buildImage(String imagePath) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {},
       child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
@@ -265,7 +265,7 @@ class EventsFromOrganizer extends StatelessWidget {
           eventTime,
           style: customTextStyle.bodyMedium,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () {},
           child: Icon(Icons.arrow_forward_outlined,
               color: customColors.secondaryText, size: responsiveIcon(25, 2)),
@@ -288,7 +288,7 @@ class EventsFromOrganizer extends StatelessWidget {
   Widget buildShareIcon() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () async {
           await Share.share(
             tr('Check out this event in Evento'),

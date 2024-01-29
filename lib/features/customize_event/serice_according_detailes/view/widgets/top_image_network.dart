@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:flutter/widgets.dart';
 
 class TopImageWidget extends StatelessWidget {
@@ -7,11 +8,6 @@ class TopImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      imageUrl,
-      width: double.infinity,
-      height: 340,
-      fit: BoxFit.cover,
-    );
+    return getImageNetwork(url: imageUrl, width: double.infinity, height: 340);
   }
 }

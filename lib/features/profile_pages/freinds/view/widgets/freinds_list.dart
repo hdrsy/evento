@@ -3,8 +3,6 @@ import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
-import '../../../../../core/shared/widgets/widget/users_shimmer_card.dart';
-import '../../../../../core/utils/animation/shimmer_animation.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/freinds_cotroller.dart';
@@ -50,12 +48,10 @@ class FreindsList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             RichText(
-                              textScaleFactor:
-                                  MediaQuery.of(context).textScaleFactor,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: tr("Friends "),
+                                    text: tr("Friends"),
                                     style: TextStyle(
                                       color: customColors.primaryText,
                                       fontWeight: FontWeight.bold,

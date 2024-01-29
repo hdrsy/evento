@@ -11,7 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class ThemeSwicth extends StatelessWidget {
   ThemeSwicth({super.key});
-  final ThemeController themeController = Get.put(ThemeController());
+  // final ThemeController themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return Row(

@@ -9,12 +9,7 @@ class FogetPasswordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-        InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent  ,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
         // context.pushNamed('Forgetpassword');
         Get.toNamed('/EnterNumberScreen');
@@ -24,7 +19,7 @@ class FogetPasswordWidget extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text:tr ( "Forget Password?"),
+              text: tr("Forget Password?"),
               style: customTextStyle.bodyMedium.copyWith(
                 fontFamily: 'Merriweather',
                 color: customColors.primary,
@@ -32,7 +27,7 @@ class FogetPasswordWidget extends StatelessWidget {
               ),
             ),
             TextSpan(
-              text:tr( " send me code."),
+              text: tr(" send me code."),
               style: TextStyle(
                 color: customColors.secondaryText,
                 fontSize: 12,

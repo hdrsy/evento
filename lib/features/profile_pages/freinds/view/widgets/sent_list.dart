@@ -10,74 +10,82 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SentList extends StatelessWidget {
   SentList({super.key});
   final FreindsController freindsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FreindsController>(
-      builder: (ccontext) {
-        return  freindsController.isSentFreindsLoading.value
-            ?Center(child: CircularProgressIndicator(color: customColors.primary,),):
-            freindsController.sentFreinds.isEmpty?const EmptyData(icon:Icons.person_add ,message:"You haven't sent any friend requests yet. Find friends and expand your network!" ,):
-       
-        
-        
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
+    return GetBuilder<FreindsController>(builder: (ccontext) {
+      return freindsController.isSentFreindsLoading.value
+          ? Center(
+              child: CircularProgressIndicator(
+                color: customColors.primary,
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RichText(
-                      textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text:tr( "Sent requests "),
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: true,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "${freindsController.sentFreinds.length}",
-                            style: TextStyle(
-                              color: customColors.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                        style: customTextStyle.bodyMedium,
+            )
+          : freindsController.sentFreinds.isEmpty
+              ? const EmptyData(
+                  icon: Icons.person_add,
+                  message:
+                      "You haven't sent any friend requests yet. Find friends and expand your network!",
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                   
-                  ],
-                ),
-              ),
-              ...List.generate(
-                  freindsController.sentFreinds.length,
-                  (index) => SentCard(
-                        sentRequest: freindsController.sentFreinds[index],
-                        modelId: index,
-                      ))
-            ].divide(const SizedBox(
-              height: 10,
-            )),
-          ),
-        );
-      }
-    );
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RichText(
+                              textScaleFactor:
+                                  MediaQuery.of(context).textScaleFactor,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: tr("Sent requests"),
+                                    style: customTextStyle.bodyMedium.override(
+                                      fontFamily: 'Nunito',
+                                      color: customColors.primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: true,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        "${freindsController.sentFreinds.length}",
+                                    style: TextStyle(
+                                      color: customColors.primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                                style: customTextStyle.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ...List.generate(
+                          freindsController.sentFreinds.length,
+                          (index) => SentCard(
+                                sentRequest:
+                                    freindsController.sentFreinds[index],
+                                modelId: index,
+                              ))
+                    ].divide(const SizedBox(
+                      height: 10,
+                    )),
+                  ),
+                );
+    });
   }
 }
 
@@ -133,7 +141,7 @@ class SentCard extends StatelessWidget {
                                   freindsController.cancelSentRequest(
                                       sentRequest.receiverId, modelId);
                                 },
-                                text:tr( "Cancel"),
+                                text: tr("Cancel"),
                                 options: ButtonOptions(
                                   width: 200,
                                   height: 20,

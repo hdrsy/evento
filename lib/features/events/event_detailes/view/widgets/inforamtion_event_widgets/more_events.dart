@@ -14,65 +14,66 @@ import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 Widget buildMoreEventsSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
 
-  return eventDetailesController.relatedEvents.isEmpty?const SizedBox.shrink():
-  
-  Column(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 8),
-        child: Row(
+  return eventDetailesController.relatedEvents.isEmpty
+      ? const SizedBox.shrink()
+      : Column(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "More Events like this",
-              style: customTextStyle.bodySmall.override(
-                fontFamily: 'Open Sans',
-                color: customColors.primaryText,
-                fontSize: 16,
-                useGoogleFonts: true,
-                fontWeight: FontWeight.bold,
-              ),
-            ).tr(),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                "See All",
-                style: customTextStyle.labelSmall.override(
-                  fontFamily: breeSerif,
-                  color: customColors.primary,
-                  fontSize: 10,
-                  useGoogleFonts: true,
-                ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "More Events like this",
+                    style: customTextStyle.bodySmall.override(
+                      fontFamily: 'Open Sans',
+                      color: customColors.primaryText,
+                      fontSize: 16,
+                      useGoogleFonts: true,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ).tr(),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "See All",
+                      style: customTextStyle.labelSmall.override(
+                        fontFamily: breeSerif,
+                        color: customColors.primary,
+                        fontSize: 10,
+                        useGoogleFonts: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+            // Carousel or List of Additional Events
+            // Placeholder for carousel/slider/list widget
+            eventDetailesController.relatedEvents.isEmpty
+                ? const SizedBox()
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.23,
+                    child: buildListShow(
+                        body: List.generate(
+                            eventDetailesController.relatedEvents.length,
+                            (index) => MoreEventsCard(
+                                  relatedEventModel: eventDetailesController
+                                      .relatedEvents[index],
+                                  modelId: index,
+                                )),
+                        carouselOptions:
+                            eventDetailesController.relatedEvents.length == 1
+                                ? CaroucelOptionFunctions.seeMoreEventsJustOne
+                                : CaroucelOptionFunctions.seeMoreEvents)),
           ],
-        ),
-      ),
-      // Carousel or List of Additional Events
-      // Placeholder for carousel/slider/list widget
-      eventDetailesController.relatedEvents.isEmpty
-          ? const SizedBox()
-          : SizedBox(
-              height: MediaQuery.of(context).size.height * 0.23,
-              child: buildListShow(
-                  body: List.generate(
-                      eventDetailesController.relatedEvents.length,
-                      (index) => MoreEventsCard(
-                            relatedEventModel:
-                                eventDetailesController.relatedEvents[index],
-                            modelId: index,
-                          )),
-                  carouselOptions:
-                      eventDetailesController.relatedEvents.length == 1
-                          ? CaroucelOptionFunctions.seeMoreEventsJustOne
-                          : CaroucelOptionFunctions.seeMoreEvents)),
-    ],
-  );
+        );
 }
 
 class MoreEventsCard extends StatelessWidget {
@@ -86,7 +87,8 @@ class MoreEventsCard extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
       child: GestureDetector(
         onTap: () async {
-          Get.toNamed('/eventDetailes', arguments: [relatedEventModel.id,false,0]);
+          Get.toNamed('/eventDetailes',
+              arguments: [relatedEventModel.id, false, 0]);
         },
         child: Container(
           width: screenWidth * 0.8,
@@ -129,7 +131,7 @@ class MoreEventsCard extends StatelessWidget {
                                       const Alignment(0.00, 1.00))),
                           Container(
                             width: screenWidth * 0.8,
-                            height:    screenHeight*0.08,
+                            height: screenHeight * 0.08,
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [Color(0x9A2E4052), Color(0x0089CFF0)],

@@ -56,9 +56,11 @@ class BookNowController extends GetxController {
     }
     update();
   }
-  removeTicket(int ticketIndex){
+
+  removeTicket(int ticketIndex) {
     ticketList.removeAt(ticketIndex);
   }
+
   changeSelectedCalss(Class newClass, int index) {
     //// check if there no class selecte yet
     if (ticketList[index].selectedClass == null) {
@@ -101,9 +103,7 @@ class BookNowController extends GetxController {
     isLoading.value = true;
     errorMessage = <String>[].obs;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
-    print(token);
-    print(createBookingJson(ticketList));
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.bookNow,
         method: "post",
@@ -111,7 +111,6 @@ class BookNowController extends GetxController {
         data: createBookingJson(ticketList));
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
@@ -131,25 +130,23 @@ class BookNowController extends GetxController {
     List<Map<String, dynamic>> bookingList = [];
 
     for (var booking in bookings) {
-      if(booking.selectedClass==null){
-          bookingList.add({
-        'first_name': booking.fisrtName.text,
-        'last_name': booking.lastName.text,
-        'age': int.tryParse(booking.age.text) ?? 0,
-        'phone_number': booking.phoneNumber.text,
-       });
-    
-      }else{
-
-      bookingList.add({
-        'class_id': booking.selectedClass!.id,
-        'first_name': booking.fisrtName.text,
-        'last_name': booking.lastName.text,
-        'age': int.tryParse(booking.age.text) ?? 0,
-        'phone_number': booking.phoneNumber.text,
-        'options':
-            booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
-      });
+      if (booking.selectedClass == null) {
+        bookingList.add({
+          'first_name': booking.fisrtName.text,
+          'last_name': booking.lastName.text,
+          'age': int.tryParse(booking.age.text) ?? 0,
+          'phone_number': booking.phoneNumber.text,
+        });
+      } else {
+        bookingList.add({
+          'class_id': booking.selectedClass!.id,
+          'first_name': booking.fisrtName.text,
+          'last_name': booking.lastName.text,
+          'age': int.tryParse(booking.age.text) ?? 0,
+          'phone_number': booking.phoneNumber.text,
+          'options':
+              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+        });
       }
     }
 
@@ -167,7 +164,7 @@ class BookNowController extends GetxController {
 
   getMyFreinds() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
 
@@ -179,7 +176,6 @@ class BookNowController extends GetxController {
       myFreinds.value = interestsJson
           .map((jsonItem) => FreindsModel.fromJson(jsonItem))
           .toList();
-      print(myFreinds.length);
     }
     update();
   }

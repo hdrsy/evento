@@ -9,9 +9,11 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EditProfileOrganizerScreen extends StatelessWidget {
   EditProfileOrganizerScreen({super.key});
-  final EditProfileOrganizerController editProfileOrganizerController = Get.find();
+  final EditProfileOrganizerController editProfileOrganizerController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class EditProfileOrganizerScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -34,7 +36,7 @@ class EditProfileOrganizerScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        ()=> SizedBox(
+        () => SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
             padding: padding(20, 20, 0, 20),
@@ -42,14 +44,17 @@ class EditProfileOrganizerScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 EditImageWidget(),
-               Fields(),
+                Fields(),
                 Buttons(),
                 ...List.generate(
-                      editProfileOrganizerController.errorMessage.length,
-                      (index) => ErrorMessages(
-                            message: editProfileOrganizerController.errorMessage[index],
-                          )),
-              ].divide(SizedBox(height: scaleHeight(15),)),
+                    editProfileOrganizerController.errorMessage.length,
+                    (index) => ErrorMessages(
+                          message: editProfileOrganizerController
+                              .errorMessage[index],
+                        )),
+              ].divide(SizedBox(
+                height: scaleHeight(15),
+              )),
             ),
           ),
         ),

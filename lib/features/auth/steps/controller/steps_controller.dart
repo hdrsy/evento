@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:evento/features/auth/steps/controller/page_controller.dart';
-
-import '../../../../core/utils/services/permission_service.dart';
 import '../../step7/model/interst_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,13 +29,13 @@ class StepsController extends GetxController {
       'assets/images/0.png',
       'assets/images/1.png',
       'assets/images/2.png',
-      ].obs;
+    ].obs;
     interestList = [];
-      int initialPage = avatarList.length ~/ 2;
-      selectedProfileindex=initialPage;
+    int initialPage = avatarList.length ~/ 2;
+    selectedProfileindex = initialPage;
     super.onInit();
   }
-   
+
   final imagePicker = ImagePicker();
   void pickImageForDashbard(ImageSource imageSource) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -53,19 +51,19 @@ class StepsController extends GetxController {
   }
 
   Future<bool> requestNotificationPermission() async {
-    print("requedst");
-//  return await PermissionService().requestNotificationPermission();
- var status = await Permission.notification.status;
-  if (!status.isGranted) {
-    // Request permission
-    await Permission.notification.request();
-  }
-  if(status.isGranted){
-      StepsPageController stepsPageController=Get.find();
-        
-          stepsPageController.pageIdex.value=5;
-    return true;
-  }else {return false;}
- }
+    //  return await PermissionService().requestNotificationPermission();
+    var status = await Permission.notification.status;
+    if (!status.isGranted) {
+      // Request permission
+      await Permission.notification.request();
+    }
+    if (status.isGranted) {
+      StepsPageController stepsPageController = Get.find();
 
+      stepsPageController.pageIdex.value = 5;
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

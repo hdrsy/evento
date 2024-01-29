@@ -7,10 +7,10 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class VenueDetailesCard extends StatelessWidget {
-   VenueDetailesCard({super.key});
-final VenueDetailesController venueDetailesController =
-      Get.find();
+  VenueDetailesCard({super.key});
+  final VenueDetailesController venueDetailesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +18,15 @@ final VenueDetailesController venueDetailesController =
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-           _buildIconTextRow(context, Icons.description_outlined, 'Description', "${venueDetailesController.venue.description}/n${venueDetailesController.venue.locationDescription}"),
-            _buildIconTextRow(context, Icons.reduce_capacity_sharp, 'Capacity', venueDetailesController.venue.capacity.toString()),
-            _buildIconTextRow(context, Icons.location_on_outlined, 'Location', venueDetailesController.venue.governorate),
-            _buildLocationButton(context),
-        ].divide(const SizedBox(height: 20))
+          _buildIconTextRow(context, Icons.description_outlined, 'Description',
+              "${venueDetailesController.venue.description}/n${venueDetailesController.venue.locationDescription}"),
+          _buildIconTextRow(context, Icons.reduce_capacity_sharp, 'Capacity',
+              venueDetailesController.venue.capacity.toString()),
+          _buildIconTextRow(context, Icons.location_on_outlined, 'Location',
+              venueDetailesController.venue.locationDescription),
+          _buildLocationButton(context),
+        ]
+            .divide(const SizedBox(height: 20))
             .addToStart(const SizedBox(height: 16))
             .addToEnd(const SizedBox(height: 16)),
       ),
@@ -58,16 +62,19 @@ final VenueDetailesController venueDetailesController =
       ],
     );
   }
+
   Widget _buildLocationButton(BuildContext context) {
     return Align(
       alignment: const AlignmentDirectional(1, 1),
       child: ButtonWidget(
         onPressed: () {
           print('Button pressed ...');
-           Get.toNamed('/SeeLocation',arguments: [venueDetailesController.venue.latitude,venueDetailesController.venue.longitude]);
-        
+          Get.toNamed('/SeeLocation', arguments: [
+            venueDetailesController.venue.latitude,
+            venueDetailesController.venue.longitude
+          ]);
         },
-        text:tr( "See Location on Maps"),
+        text: tr("See Location on Maps"),
         options: ButtonOptions(
           width: 170,
           height: 25,

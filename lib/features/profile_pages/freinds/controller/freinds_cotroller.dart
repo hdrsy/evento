@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -36,7 +34,7 @@ class FreindsController extends GetxController {
   getMyFreinds() async {
     isMyFriendsLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
 
@@ -49,7 +47,6 @@ class FreindsController extends GetxController {
       myFreinds.value = interestsJson
           .map((jsonItem) => FreindsModel.fromJson(jsonItem))
           .toList();
-      print(myFreinds.length);
     }
     update();
     isMyFriendsLoading.value = false;
@@ -57,7 +54,7 @@ class FreindsController extends GetxController {
 
   getSendRequest() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.mySentRequests,
         method: "GEt",
@@ -73,14 +70,13 @@ class FreindsController extends GetxController {
           .map((jsonItem) => SentRequest.fromJson(jsonItem))
           .toList();
       update();
-      print(sentFreinds.length);
     }
   }
 
   getRecivedRequest() async {
     // isRecivedFreindsLoading.value=true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.myReciviedRequests,
         method: "GEt",
@@ -95,7 +91,6 @@ class FreindsController extends GetxController {
       recivedFreinds.value = interestsJson
           .map((jsonItem) => ReceiveRequest.fromJson(jsonItem))
           .toList();
-      print(recivedFreinds.length);
       update();
     }
     // isRecivedFreindsLoading.value=false;
@@ -103,7 +98,7 @@ class FreindsController extends GetxController {
 
   cancelSentRequest(int requestId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.cancelRequest}/$requestId",
         method: "GEt",
@@ -120,7 +115,7 @@ class FreindsController extends GetxController {
 
   unFreindRequest(int userId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.cancelRequest}/$userId",
         method: "GEt",
@@ -144,7 +139,7 @@ class FreindsController extends GetxController {
 
   confirmRecivedRequest(int senderId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.approveRequest}/$senderId",
         method: "GEt",
@@ -161,7 +156,7 @@ class FreindsController extends GetxController {
 
   deleteRecivedRequest(int senderId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.denyRequest}/$senderId",
         method: "GEt",

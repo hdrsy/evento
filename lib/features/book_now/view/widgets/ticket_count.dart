@@ -13,7 +13,7 @@ class TicketCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BookNowController bookNowController=Get.find();
+    BookNowController bookNowController = Get.find();
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
       child: Column(
@@ -51,8 +51,8 @@ class TicketCount extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        InkWell(
-                          onTap: (){
+                        GestureDetector(
+                          onTap: () {
                             bookNowController.deCrementTicketCount();
                           },
                           child: Icon(
@@ -62,13 +62,13 @@ class TicketCount extends StatelessWidget {
                           ),
                         ),
                         Obx(
-                          ()=> Text(
-                           bookNowController.ticketList.length.toString() ,
+                          () => Text(
+                            bookNowController.ticketList.length.toString(),
                             style: customTextStyle.titleLarge,
                           ),
                         ),
-                        InkWell(
-                          onTap: (){
+                        GestureDetector(
+                          onTap: () {
                             // bookNowController.inCrementTicketCount();
                           },
                           child: Icon(

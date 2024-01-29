@@ -1,7 +1,6 @@
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/images/network_image.dart';
-import '../../../core/shared/widgets/text_fields/search_filed.dart';
 import '../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../core/utils/theme/text_theme.dart';
@@ -11,9 +10,11 @@ import '../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class InviteFreindsToEventScreen extends StatelessWidget {
-   InviteFreindsToEventScreen({super.key});
-final InviteFreindsToEventController inviteFreindsToEventController=Get.put(InviteFreindsToEventController());
+  InviteFreindsToEventScreen({super.key});
+  final InviteFreindsToEventController inviteFreindsToEventController =
+      Get.put(InviteFreindsToEventController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,7 @@ final InviteFreindsToEventController inviteFreindsToEventController=Get.put(Invi
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -36,13 +37,21 @@ final InviteFreindsToEventController inviteFreindsToEventController=Get.put(Invi
         ),
       ),
       body: Obx(
-        ()=> SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        () => SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             children: [
               // searchTextField(onChanged: (c) {}),
-              ...List.generate(inviteFreindsToEventController.myFreinds.length, (index) =>InviteFreindsCard(freindsModel:inviteFreindsToEventController.myFreinds[index] ,modelIndex: index,))
-            ].divide(SizedBox(height: 10,)),
+              ...List.generate(
+                  inviteFreindsToEventController.myFreinds.length,
+                  (index) => InviteFreindsCard(
+                        freindsModel:
+                            inviteFreindsToEventController.myFreinds[index],
+                        modelIndex: index,
+                      ))
+            ].divide(const SizedBox(
+              height: 10,
+            )),
           ),
         ),
       ),
@@ -51,9 +60,10 @@ final InviteFreindsToEventController inviteFreindsToEventController=Get.put(Invi
 }
 
 class InviteFreindsCard extends StatelessWidget {
-  const InviteFreindsCard({super.key, required this.freindsModel,required this.modelIndex});
-final FreindsModel freindsModel;
-final int modelIndex;
+  const InviteFreindsCard(
+      {super.key, required this.freindsModel, required this.modelIndex});
+  final FreindsModel freindsModel;
+  final int modelIndex;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -72,54 +82,62 @@ final int modelIndex;
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
-                    child:  freindsModel.image.length > 6
-                ? getImageNetwork(
-                    url: "/storage/${freindsModel.image}",
-                    width: 90,
-                    height: 90)
-                : Image.asset(
-                    'assets/images/${freindsModel.image}.png',width: 90,height: 90,),
-       
-                  
+                    child: freindsModel.image.length > 6
+                        ? getImageNetwork(
+                            url: "/storage/${freindsModel.image}",
+                            width: 90,
+                            height: 90)
+                        : Image.asset(
+                            'assets/images/${freindsModel.image}.png',
+                            width: 90,
+                            height: 90,
+                          ),
                   ),
-                  SizedBox(width: 12,),
+                  const SizedBox(
+                    width: 12,
+                  ),
                   Text(
                     "${freindsModel.firstName} ${freindsModel.lastName}",
                     style: customTextStyle.bodyLarge.override(
-                      fontSize: 16,
-                      fontFamily: secondaryFontFamily,
-                      useGoogleFonts: true
-                    ),
+                        fontSize: 16,
+                        fontFamily: secondaryFontFamily,
+                        useGoogleFonts: true),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GetBuilder<InviteFreindsToEventController>(
-                    builder: (controller) {
-                      return ButtonWidget(
-                        onPressed: () {
-                          controller.onPressInviteFriend(freindsModel.id, modelIndex);
-                        },
-                        text:controller.initedList[modelIndex]? "Invited":"Invite",
-                        options: ButtonOptions(
-                          width: 100,
-                          height: 21,
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color:controller.initedList[modelIndex]? customColors.secondaryBackground:customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color:controller.initedList[modelIndex]? customColors.primary:customColors.info,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            useGoogleFonts: true,
-                          ),
-                          borderSide: BorderSide(
-                            color: customColors.primary,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
+                      builder: (controller) {
+                    return ButtonWidget(
+                      onPressed: () {
+                        controller.onPressInviteFriend(
+                            freindsModel.id, modelIndex);
+                      },
+                      text: controller.initedList[modelIndex]
+                          ? "Invited"
+                          : "Invite",
+                      options: ButtonOptions(
+                        width: 100,
+                        height: 21,
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: controller.initedList[modelIndex]
+                            ? customColors.secondaryBackground
+                            : customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: controller.initedList[modelIndex]
+                              ? customColors.primary
+                              : customColors.info,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          useGoogleFonts: true,
                         ),
-                      );
-                    }
-                  ),
+                        borderSide: BorderSide(
+                          color: customColors.primary,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    );
+                  }),
                 ],
               )),
         ),

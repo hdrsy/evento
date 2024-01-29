@@ -1,11 +1,11 @@
 import '../../../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/choice_organizer_category_controller.dart';
-import '../../../../switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
 import '../../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ChoiceOrganizerCategoryList extends StatelessWidget {
   ChoiceOrganizerCategoryList({super.key});
   final ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
@@ -40,7 +40,7 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
                     )).divide(const SizedBox(
               height: 10,
             )),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -57,7 +57,7 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
                 ).tr(),
               ].divide(const SizedBox(width: 5)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             OtherTextField()
@@ -137,8 +137,9 @@ class OrganizerCategoryCard extends StatelessWidget {
 }
 
 class OtherTextField extends StatelessWidget {
-   OtherTextField({super.key});
-final ChoiceOrganizerCategoryController  choiceOrganizerCategoryController=Get.find();
+  OtherTextField({super.key});
+  final ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -146,7 +147,7 @@ final ChoiceOrganizerCategoryController  choiceOrganizerCategoryController=Get.f
       obscureText: false,
       decoration: InputDecoration(
         labelStyle: customTextStyle.labelMedium,
-        hintText:tr( "Other specialties"),
+        hintText: tr("Other specialties"),
         hintStyle: customTextStyle.labelMedium.override(
           fontFamily: 'Nunito',
           color: customColors.secondaryText,

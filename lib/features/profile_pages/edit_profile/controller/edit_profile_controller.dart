@@ -5,7 +5,7 @@ import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
-import '../../../../core/utils/helper/date_formatter.dart';
+
 import '../../profile/model/profile_model.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class EditProfileController extends GetxController {
   late TextEditingController firstName;
   late TextEditingController lastName;
   late TextEditingController phone;
-    late DateTime day;
+  late DateTime day;
   // late TextEditingController location;
   late String selectedState;
   late TextEditingController gender;
@@ -33,7 +33,7 @@ class EditProfileController extends GetxController {
     isImageSelected = false.obs;
     firstName = TextEditingController(text: profileModel.firstName);
     lastName = TextEditingController(text: profileModel.lastName);
-    day=profileModel.birthDate;
+    day = profileModel.birthDate;
     phone = TextEditingController(text: profileModel.phoneNumber);
     // location = TextEditingController(text: profileModel.state);
     gender = TextEditingController(text: profileModel.gender);
@@ -79,7 +79,7 @@ class EditProfileController extends GetxController {
       errorMessage.clear();
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token") ?? "";
+      String token = await prefService.readString("token");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.updateProfile,
           method: "post",
@@ -89,13 +89,12 @@ class EditProfileController extends GetxController {
             "last_name": lastName.text,
             "phone_number": phone.text,
             "gender": gender.text,
-            "birth_date":  DateFormat('yyyy/M/d').format(day),
+            "birth_date": DateFormat('yyyy/M/d').format(day),
             "state": selectedState
           },
           files: isImageSelected.value ? {"image": customImage} : null);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
@@ -106,7 +105,6 @@ class EditProfileController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
-    print(handlingResponse);
     Get.back();
   }
 }

@@ -2,12 +2,10 @@ import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/animation/shimmer_animation.dart';
-import '../../../../../core/utils/helper/date_formatter.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/home_controller.dart';
 import '../../model/home_oganizer.dart';
-import '../../model/organizer.dart';
 import 'column_text.dart';
 import 'home_loading_widget.dart';
 import '../../../../../main.dart';
@@ -32,7 +30,7 @@ class Orgnizers extends StatelessWidget {
                   children: [
                     ColumnText(
                       title: tr("Organizer"),
-                      subTitle: " Top Choices &  Highly Rated",
+                      subTitle: tr("Top Choices &  Highly Rated"),
                       onTap: () {
                         Get.toNamed('/SeeAllOrganizersScreen', arguments: [
                           homeOrganizerController.pageId,
@@ -60,7 +58,7 @@ Widget buildEventColumn() {
   final HomeOrganizerController homeOrganizerController = Get.find();
 
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 0),
+    padding: const EdgeInsets.symmetric(horizontal: 0),
     width: double.infinity,
     child: Column(
       mainAxisSize: MainAxisSize.max,
@@ -91,7 +89,6 @@ Widget buildOrganizerItem(
     {required OrganizerHome organizerHome, required int modelIndex}) {
   return GestureDetector(
       onTap: () {
-        print('ffffffffffffffffff');
         Get.toNamed('/OrganizerProfileScreen', arguments: organizerHome.id);
       },
       child: Column(

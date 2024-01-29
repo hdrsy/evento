@@ -26,7 +26,7 @@ class SeeAllOrganizersScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -79,9 +79,9 @@ class OrganizerSeeAllCard extends StatelessWidget {
   final int modelId;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        Get.toNamed('/OrganizerProfileScreen',arguments: organizerHome.id);
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/OrganizerProfileScreen', arguments: organizerHome.id);
       },
       child: SizedBox(
         width: double.infinity,
@@ -118,33 +118,42 @@ class OrganizerSeeAllCard extends StatelessWidget {
                     ),
                     Spacer(),
                     GetBuilder<SeeAllOrganizersController>(
-                      builder: (controller) {
-                        return ButtonWidget(
-                          onPressed: () {
-                          controller.followOrUnFollowOrganizer(organizerHome.id, modelId);
-                          },
-                          text:organizerHome.organizerHomeInfo.isFollowedByAuthUser? "Following":"Follow",
-                          options: ButtonOptions(
-                            width: 100,
-                            height: 21,
-                            iconPadding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            color:organizerHome.organizerHomeInfo.isFollowedByAuthUser? customColors.secondaryBackground:customColors.primary,
-                            textStyle: customTextStyle.titleSmall.override(
-                              fontFamily: 'Nunito',
-                              color:organizerHome.organizerHomeInfo.isFollowedByAuthUser? customColors.primary:customColors.info,
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: true,
-                            ),
-                            borderSide: BorderSide(
-                              color: customColors.primary,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
+                        builder: (controller) {
+                      return ButtonWidget(
+                        onPressed: () {
+                          controller.followOrUnFollowOrganizer(
+                              organizerHome.id, modelId);
+                        },
+                        text:
+                            organizerHome.organizerHomeInfo.isFollowedByAuthUser
+                                ? "Following"
+                                : "Follow",
+                        options: ButtonOptions(
+                          width: 100,
+                          height: 21,
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: organizerHome
+                                  .organizerHomeInfo.isFollowedByAuthUser
+                              ? customColors.secondaryBackground
+                              : customColors.primary,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: organizerHome
+                                    .organizerHomeInfo.isFollowedByAuthUser
+                                ? customColors.primary
+                                : customColors.info,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            useGoogleFonts: true,
                           ),
-                        );
-                      }
-                    ),
+                          borderSide: BorderSide(
+                            color: customColors.primary,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      );
+                    }),
                   ],
                 )),
           ),

@@ -12,6 +12,7 @@ import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 Widget buildHeader(BuildContext context, String eventTitle) {
   return Column(
     mainAxisSize: MainAxisSize.max,
@@ -21,11 +22,9 @@ Widget buildHeader(BuildContext context, String eventTitle) {
         child: Text(
           tr("Event title"),
           style: customTextStyle.bodyMedium.copyWith(
-            fontSize: 24,
-            color: customColors.primaryText,
-            fontWeight: FontWeight.w700
-
-          ),
+              fontSize: 24,
+              color: customColors.primaryText,
+              fontWeight: FontWeight.w700),
         ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
       ),
       Align(
@@ -49,17 +48,14 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        InkWell(
-          splashColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          highlightColor: Colors.transparent,
+        GestureDetector(
           onTap: () async {
-             if(isGuset){
-                    Get.dialog( const GuestPopupWidget());
-                  }else{
-          
-            Get.toNamed('/GoingScreen',arguments: eventDetailesController.eventId);}
+            if (isGuset) {
+              Get.dialog(const GuestPopupWidget());
+            } else {
+              Get.toNamed('/GoingScreen',
+                  arguments: eventDetailesController.eventId);
+            }
           },
           child: Container(
             decoration: const BoxDecoration(),
@@ -91,12 +87,16 @@ class NumberOfGoingAndInviteFriendsButton extends StatelessWidget {
         ),
         ButtonWidget(
           onPressed: () async {
-             if(isGuset){
-                    Get.dialog( const GuestPopupWidget());
-                  }else{
-            showButtonSheet(context: context, widget: const InviteFreinds(), height: screenHeight*0.2);}
+            if (isGuset) {
+              Get.dialog(const GuestPopupWidget());
+            } else {
+              showButtonSheet(
+                  context: context,
+                  widget: const InviteFreinds(),
+                  height: screenHeight * 0.2);
+            }
           },
-          text:tr( "Invite Friend"),
+          text: tr("Invite Friend"),
           options: ButtonOptions(
             width: 109,
             height: 21,
@@ -142,6 +142,7 @@ class GoingImage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class DynamicImageStack extends StatelessWidget {
   EventDetailesController eventDetailesController = Get.find();
   DynamicImageStack({
@@ -152,8 +153,7 @@ class DynamicImageStack extends StatelessWidget {
     List<Widget> widgets = [];
 
     for (int i = 0;
-        i < eventDetailesController.eventDetailsModel.bookings.length &&
-            i < 3;
+        i < eventDetailesController.eventDetailsModel.bookings.length && i < 3;
         i++) {
       double alignmentValue = -1 + (i * 0.27); // Adjust this value as needed
       widgets.add(

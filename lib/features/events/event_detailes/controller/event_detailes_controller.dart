@@ -14,47 +14,47 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailesController extends GetxController {
- @override
+  @override
   void onClose() {
     LocationService().stopTracking();
     super.onClose();
-  }  
+  }
+
   late EventDetailsModel eventDetailsModel;
   late RxBool isLoading;
   late int eventId;
   RxString distance = "0 km".obs;
   late RxList<String> errorMessage;
-  late List<RelatedEventModel>relatedEvents;
-late bool isOffer;
+  late List<RelatedEventModel> relatedEvents;
+  late bool isOffer;
   late int offerPrecent;
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
     isLoading = false.obs;
     eventId = Get.arguments[0];
-    isOffer = Get.arguments[1]??false;
-    offerPrecent = Get.arguments[2]??0;
+    isOffer = Get.arguments[1] ?? false;
+    offerPrecent = Get.arguments[2] ?? 0;
 
-    
     await getEventDetailesModel();
     await calculateDistance();
-    
+
     super.onInit();
   }
 
   getEventDetailesModel() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: "${isGuset?ServerConstApis.getEventDetailesforGuest:ServerConstApis.getEventDetailes}/$eventId",
+        targetRout:
+            "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
         method: "GEt",
         token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-      print(errorMessage);
     } else {
       whenGetDataSuccess(handlingResponse);
     }
@@ -63,14 +63,11 @@ late bool isOffer;
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
-print(handlingResponse['relatedEvents']);
- relatedEvents = List<RelatedEventModel>.from(
-    handlingResponse['relatedEvents'].map(
-      (x) => RelatedEventModel.fromJson(x)
-    )
-  ); 
-    
+    relatedEvents = List<RelatedEventModel>.from(
+        handlingResponse['relatedEvents']
+            .map((x) => RelatedEventModel.fromJson(x)));
   }
+
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (relatedEvents[modelIndex].isFollowedByAuthUser) {
@@ -145,30 +142,33 @@ print(handlingResponse['relatedEvents']);
       );
     }
   }
-Future<void> openMap() async {
-  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${eventDetailsModel.venue.latitude},${eventDetailsModel.venue.longitude}';
-try{
 
-  if (!await launchUrl(Uri.parse(googleUrl))) {
-    throw Exception('Could not launch $googleUrl');
+  Future<void> openMap() async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=${eventDetailsModel.venue.latitude},${eventDetailsModel.venue.longitude}';
+    try {
+      if (!await launchUrl(Uri.parse(googleUrl))) {
+        throw Exception('Could not launch $googleUrl');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
-}catch(e){
-  log(e.toString());
-}
-}
+
   calculateDistance() async {
     LocationService locationService = LocationService();
     distance.value = await locationService.calculateDistance(
         eventDetailsModel.venue.latitude, eventDetailsModel.venue.longitude);
   }
-  followAndUnFollowOrganizer()async{
+
+  followAndUnFollowOrganizer() async {
     late String isDoneSuccefully;
     if (eventDetailsModel.isOrganizerFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/${eventDetailsModel.organizerId}");
     } else {
-      isDoneSuccefully =
-          await followUnFollowEvent("${ServerConstApis.followOrganizer}/${eventDetailsModel.organizerId}");
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.followOrganizer}/${eventDetailsModel.organizerId}");
     }
     if (isDoneSuccefully == "followed successfully") {
       eventDetailsModel.isOrganizerFollowedByAuthUser = true;
@@ -180,5 +180,4 @@ try{
     }
     // log(itemList[modelIndex].isFollowedByAuthUser.toString());
   }
-  
 }

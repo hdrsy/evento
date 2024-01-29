@@ -13,6 +13,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EventReviewScreen extends StatelessWidget {
   EventReviewScreen({super.key});
   final EventReviewController eventReviewController = Get.find();
@@ -22,7 +23,7 @@ class EventReviewScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -36,14 +37,14 @@ class EventReviewScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: padding(16, 24, 16, 24),
         child: Obx(
-          ()=> Column(
+          () => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const StepText4(),
               const LinearPercentIndicatorWidget4(),
               ReviewCard(
-                title:tr( "Contact Detailes"),
-                leftColumnData:  [
+                title: tr("Contact Detailes"),
+                leftColumnData: [
                   tr("Name"),
                   tr("Phone Number"),
                   tr("Number of Adults"),
@@ -58,11 +59,11 @@ class EventReviewScreen extends StatelessWidget {
                 ],
               ),
               ReviewCard(
-                title:tr( "Event Overview"),
-                leftColumnData:  [
+                title: tr("Event Overview"),
+                leftColumnData: [
                   tr("Event Title"),
                   tr("Start Time"),
-                 tr( "End Time"),
+                  tr("End Time"),
                   tr("Date")
                 ],
                 rightColumnData: [
@@ -76,7 +77,7 @@ class EventReviewScreen extends StatelessWidget {
                 ],
               ),
               ReviewCard(
-                title:tr( "Event Crew"),
+                title: tr("Event Crew"),
                 leftColumnData: eventReviewController.selected.values
                     .map((value) => value.toString())
                     .toList(),
@@ -92,10 +93,11 @@ class EventReviewScreen extends StatelessWidget {
                 height: 10,
               ),
               ProccessToPaymentButton(),
-               ...List.generate(eventReviewController.errorMessage.length,(index)=>
-                                
-                                ErrorMessages(message:eventReviewController.errorMessage[index] ,)
-                              ),
+              ...List.generate(
+                  eventReviewController.errorMessage.length,
+                  (index) => ErrorMessages(
+                        message: eventReviewController.errorMessage[index],
+                      )),
             ].divide(SizedBox(
               height: scaleHeight(10),
             )),

@@ -7,16 +7,17 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class VenueScreen extends StatelessWidget {
-   VenueScreen({super.key});
-final VenueController venueController=Get.find();
+  VenueScreen({super.key});
+  final VenueController venueController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -36,7 +37,7 @@ final VenueController venueController=Get.find();
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                       "Venue",
+                        "Venue",
                         style: customTextStyle.bodyMedium.override(
                           fontFamily: 'Nunito',
                           color: customColors.primaryText,
@@ -45,28 +46,27 @@ final VenueController venueController=Get.find();
                         ),
                       ).tr(),
                       ...List.generate(
-                              venueController.hasMoreData.value
-                                  ? venueController.itemList.length + 1
-                                  : venueController.itemList.length,
-                              (index) {
-                            return index <
-                                    venueController.itemList.length
-                                ? VenueCard(
-                                    venue: venueController.itemList[index],
-                                  )
-                                : ShimmerLoadingWidget(loadingShimmerWidget:  Container(
-                          width: double.infinity,
-                          height: 300,
-                          // height: 330 ,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: customColors.info,
-                            ),
-                            color: customColors.info
-                          ),
-                        ));
-                          })])),
+                          venueController.hasMoreData.value
+                              ? venueController.itemList.length + 1
+                              : venueController.itemList.length, (index) {
+                        return index < venueController.itemList.length
+                            ? VenueCard(
+                                venue: venueController.itemList[index],
+                              )
+                            : ShimmerLoadingWidget(
+                                loadingShimmerWidget: Container(
+                                width: double.infinity,
+                                height: 300,
+                                // height: 330 ,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: customColors.info,
+                                    ),
+                                    color: customColors.info),
+                              ));
+                      })
+                    ])),
           ),
         ));
   }

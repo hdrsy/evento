@@ -1,4 +1,3 @@
-import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images_videos.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../core/utils/theme/text_theme.dart';
@@ -23,7 +22,7 @@ class AddMediaInFolderScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             addMediaInFolderController.addAtatchedMediaToFolder();
             Get.back();
@@ -74,7 +73,7 @@ class AddMediaInFolderScreen extends StatelessWidget {
                           ],
                         );
                       } else {
-                        return SizedBox
+                        return const SizedBox
                             .shrink(); // Fallback for unknown media type
                       }
                     }
@@ -95,37 +94,40 @@ class AddMediaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         showBottomSheetForImagesAndVideos(
             context: context,
             onPressCamera: () {
-               Get.back();
+              Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.camera);
             },
             onPressGallery: () async {
-               Get.back();
+              Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.gallery);
             },
             onPressVideo: () async {
               await Get.dialog(
                 AlertDialog(
-                  title: Text("Select Video",style: customTextStyle.bodyMedium.override(
-                    fontFamily: secondaryFontFamily,
-                    useGoogleFonts: true,
-                    color: customColors.primaryText,
-                    fontSize: 16
-                  ),),
+                  title: Text(
+                    "Select Video",
+                    style: customTextStyle.bodyMedium.override(
+                        fontFamily: secondaryFontFamily,
+                        useGoogleFonts: true,
+                        color: customColors.primaryText,
+                        fontSize: 16),
+                  ),
                   content: Text(
-                      "Please select a video that is no longer than 2 minutes.",style: customTextStyle.bodyMedium.override(
-                    fontFamily: secondaryFontFamily,
-                    useGoogleFonts: true,
-                    color: customColors.secondaryText,
-                    fontSize: 14
-                  ),),
+                    "Please select a video that is no longer than 2 minutes.",
+                    style: customTextStyle.bodyMedium.override(
+                        fontFamily: secondaryFontFamily,
+                        useGoogleFonts: true,
+                        color: customColors.secondaryText,
+                        fontSize: 14),
+                  ),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("OK"),
+                      child: const Text("OK"),
                       onPressed: () {
                         Get.back(); // Close the dialog
                         addMediaInFolderController

@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:evento/core/server/helper_api.dart';
 
-import 'related_event_model.dart';
-
 class EventDetailsModel {
   final int id;
   final int organizerId;
@@ -27,7 +25,7 @@ class EventDetailsModel {
   final List<ServiceProvider> serviceProvider;
   final int capacity;
   final List<Booking> bookings;
-  
+
   EventDetailsModel({
     required this.bookings,
     required this.id,
@@ -51,13 +49,13 @@ class EventDetailsModel {
     required this.eventTrips,
     required this.venue,
     required this.amenities,
-    
+
     // Initialize other fields...
   });
 
   factory EventDetailsModel.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return EventDetailsModel(
       bookings:
           List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x))),
@@ -69,10 +67,13 @@ class EventDetailsModel {
       ticketPrice: json['ticket_price'],
       description: json['description'],
       type: json['type'],
-      images: jsonDecode(json['images']).cast<String>()??[],
-      videos:json['videos']!=null? jsonDecode(json['videos']).cast<String>():[],
-      isFollowedByAuthUser: json['is_followed_by_auth_user']??false,
-      isOrganizerFollowedByAuthUser: json['organizer_is_followed_by_auth_user']??false,
+      images: jsonDecode(json['images']).cast<String>() ?? [],
+      videos: json['videos'] != null
+          ? jsonDecode(json['videos']).cast<String>()
+          : [],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
+      isOrganizerFollowedByAuthUser:
+          json['organizer_is_followed_by_auth_user'] ?? false,
       eventTrips: List<EventTrip>.from(
           json['event_trips'].map((x) => EventTrip.fromJson(x))),
       venue: Venue.fromJson(json['venue']),
@@ -85,7 +86,8 @@ class EventDetailsModel {
       categoriesEvents: List<CategoryEvent>.from(
           json['categories_events'].map((x) => CategoryEvent.fromJson(x))),
       classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
-      serviceProvider: List<ServiceProvider>.from(json['service_providers'].map((x) => ServiceProvider.fromJson(x)))??[],
+      serviceProvider: List<ServiceProvider>.from(
+          json['service_providers'].map((x) => ServiceProvider.fromJson(x))),
       organizerId: json['organizer_id'] ?? 0,
     );
   }
@@ -178,12 +180,12 @@ class OrganizerInfo {
   });
 
   factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return OrganizerInfo(
       id: json['id'],
       mobileUserId: json['mobile_user_id'],
-      categoryId: json['category_id']??1,
+      categoryId: json['category_id'] ?? 1,
       name: json['name'],
       profile: json['profile'],
       bio: json['bio'],
@@ -210,8 +212,8 @@ class CategoryEvent {
   });
 
   factory CategoryEvent.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return CategoryEvent(
       id: json['id'],
       title: json['title'],
@@ -267,9 +269,9 @@ class EventTrip {
     required this.description,
   });
 
-  factory EventTrip.fromJson(Map<String, dynamic> oldJson){
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+  factory EventTrip.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return EventTrip(
       id: json['id'],
       eventId: json['event_id'],
@@ -297,8 +299,8 @@ class Venue {
   });
 
   factory Venue.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return Venue(
       id: json['id'],
       name: json['name'],
@@ -311,9 +313,9 @@ class Venue {
 
 class Amenity {
   final int id;
-  final String title; 
+  final String title;
   final String icon;
- int? price;
+  int? price;
   Amenity({
     required this.id,
     required this.title,
@@ -321,17 +323,17 @@ class Amenity {
     required this.price,
   });
 
-  factory Amenity.fromJson(Map<String, dynamic> oldJson){
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- print(json['pivot']);
+  factory Amenity.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return Amenity(
       id: json['id'],
       title: json['title'],
       icon: json['icon'],
-      price: json['pivot']['price']??0  ,
+      price: json['pivot']['price'] ?? 0,
     );
   }
 }
+
 class ServiceProvider {
   int id;
   int userId;
@@ -356,24 +358,23 @@ class ServiceProvider {
     required this.description,
     required this.profile,
     required this.cover,
-   });
+  });
 
-  factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) { 
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
-   return  ServiceProvider(
-        id: json['id'],
-        userId: json['user_id'],
-        name: json['name'],
-        bio: json['bio'],
-        services: json['services'],
-        locationWorkGovernorate: json['location_work_governorate'],
-        address: json['address'],
-        categoryId: json['category_id'],
-        description: json['description'],
-        profile: json['profile'],
-        cover: json['cover'],
-        );}
+  factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
+    return ServiceProvider(
+      id: json['id'],
+      userId: json['user_id'],
+      name: json['name'],
+      bio: json['bio'],
+      services: json['services'],
+      locationWorkGovernorate: json['location_work_governorate'],
+      address: json['address'],
+      categoryId: json['category_id'],
+      description: json['description'],
+      profile: json['profile'],
+      cover: json['cover'],
+    );
+  }
 }
-

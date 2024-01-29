@@ -7,7 +7,6 @@ import '../../../../core/shared/widgets/text_fields/text_field.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../controller/signin_controller.dart';
 import 'widgets/forget_password_widget.dart';
-import 'widgets/terms_and_condision_texts.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,10 +14,10 @@ import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class SignInScreen extends StatelessWidget {
-   SignInScreen({super.key});
+  SignInScreen({super.key});
 
   // Add any necessary class-level variables, like controllers, here.
-SigninController signinController=Get.find();
+  SigninController signinController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,12 +27,13 @@ SigninController signinController=Get.find();
       // Decorate with color and rounded corners.
       decoration: BoxDecoration(
         color: customColors.secondaryBackground,
-        borderRadius:const BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-      
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
       // Padding for the inner content.
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: scaleHeight(40)),
+        padding:
+            EdgeInsets.symmetric(horizontal: 20, vertical: scaleHeight(40)),
         // SingleChildScrollView allows the content to be scrollable.
         child: SingleChildScrollView(
           child: Form(
@@ -51,7 +51,7 @@ SigninController signinController=Get.find();
                     },
                     child: Icon(
                       Icons.cancel_outlined,
-                      color:customColors.secondaryText,
+                      color: customColors.secondaryText,
                       size: 24,
                     ),
                   ),
@@ -60,86 +60,93 @@ SigninController signinController=Get.find();
                 Text(
                   'Sign in', // Replace with localization if needed.
                   style: customTextStyle.bodyMedium.copyWith(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ).tr(),
                 // Description text below 'Sign in'.
                 Text(
                   'Welcome back! Log in to continue.', // Replace with localization if needed.
                   style: customTextStyle.bodyMedium,
                 ).tr(),
-                SizedBox(height: scaleHeight(5),),
+                SizedBox(
+                  height: scaleHeight(5),
+                ),
                 // Input field for mobile phone.
                 customTextField(
-                 context: context,
-                 label:tr( "+963    mobile Phone"),
-                 
-                 onChanged: (value){
-                   if (value != null && !value.startsWith('0') && value.isNotEmpty) {
-      // Prepend '0' if it's not already there and the value is not empty
-      signinController.phone.text = '0$value';
-    } else {
-      signinController.phone.text = value!;
-    }
-                 },
-                 keyboardType:TextInputType.phone,
-                 validator: (value){
-                  
-                   return phoneValidation(value);},
-          
+                  context: context,
+                  label: tr("+963    mobile Phone"),
+                  onChanged: (value) {
+                    if (value != null &&
+                        !value.startsWith('0') &&
+                        value.isNotEmpty) {
+                      // Prepend '0' if it's not already there and the value is not empty
+                      signinController.phone.text = '0$value';
+                    } else {
+                      signinController.phone.text = value!;
+                    }
+                  },
+                  keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    return phoneValidation(value);
+                  },
                 ),
                 // Input field for password.
                 customTextField(
                   isPassWordVisible: true,
-                context: context,
-                label:tr( "Password"),
-                keyboardType:TextInputType.visiblePassword,
-                onChanged: (value){
-                  signinController.password.text=value!;
-                },
-                validator: (value){return passwordValidation(value);},
-                
-               ),
+                  context: context,
+                  label: tr("Password"),
+                  keyboardType: TextInputType.visiblePassword,
+                  onChanged: (value) {
+                    signinController.password.text = value!;
+                  },
+                  validator: (value) {
+                    return passwordValidation(value);
+                  },
+                ),
                 // Additional UI elements like 'Forgot Password' and 'Terms of Use'.
                 _buildAdditionalUI(context),
-                SizedBox(height: scaleHeight(5),),
+                SizedBox(
+                  height: scaleHeight(5),
+                ),
                 // Sign In button.
                 Obx(
-                  ()=> Column(
-                
+                  () => Column(
                     children: [
-                    
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          
                           ButtonWidget(
-                            showLoadingIndicator: signinController.isLoading.value,
+                            showLoadingIndicator:
+                                signinController.isLoading.value,
                             onPressed: () {
                               signinController.onClickSignIn();
-                              },
-                            text:tr( 'Sign In'), // Replace with localization if needed.
+                            },
+                            text: tr(
+                                'Sign In'), // Replace with localization if needed.
                             options: ButtonOptions(
                               width: 350,
                               height: 45,
                               color: customColors.primary,
                               textStyle: customTextStyle.titleSmall.copyWith(
-                                    color: Colors.white,
-                                  ),
+                                color: Colors.white,
+                              ),
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
                         ],
                       ),
-                        ...List.generate(signinController.errorMessage.length,(index)=>
-                              
-                              ErrorMessages(message:signinController.errorMessage[index] ,)
-                            ),
+                      ...List.generate(
+                          signinController.errorMessage.length,
+                          (index) => ErrorMessages(
+                                message: signinController.errorMessage[index],
+                              )),
                     ],
                   ),
                 ),
-              ].divide(const SizedBox(height: 16,)),
+              ].divide(const SizedBox(
+                height: 16,
+              )),
             ),
           ),
         ),
@@ -147,15 +154,16 @@ SigninController signinController=Get.find();
     );
   }
 
-  
   Widget _buildAdditionalUI(BuildContext context) {
     // Helper method to create additional UI elements like 'Forgot Password'.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-const FogetPasswordWidget(),
+        const FogetPasswordWidget(),
 // const TermsAndCondisionTexts()
-      ].divide(SizedBox(height: scaleHeight(10),)),
+      ].divide(SizedBox(
+        height: scaleHeight(10),
+      )),
     );
   }
 }

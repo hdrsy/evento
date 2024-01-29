@@ -11,22 +11,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({super.key, required this.eventModel, required this.modelIndex});
-final EventModel eventModel;
-final int modelIndex;
+  const EventCard(
+      {super.key, required this.eventModel, required this.modelIndex});
+  final EventModel eventModel;
+  final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return 
-        InkWell(
-          onTap: (){
-              Get.toNamed('/eventDetailes', arguments: [eventModel.id,false,0]);
-                 
-          },
-          child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 10),
-              child: Container(
-          width: screenWidth*0.7,
-          height: screenHeight*0.2,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+      },
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 10),
+        child: Container(
+          width: screenWidth * 0.7,
+          height: screenHeight * 0.2,
           decoration: BoxDecoration(
             color: customColors.secondaryBackground,
             borderRadius: BorderRadius.circular(20),
@@ -52,14 +51,23 @@ final int modelIndex;
                         controller: PageController(initialPage: 0),
                         scrollDirection: Axis.horizontal,
                         children: [
-                          ...List.generate(eventModel.images.length>3?3:eventModel.images.length, (index) => imageGridView(context,eventModel.images[index],index,eventModel.id,modelIndex))
-                        
+                          ...List.generate(
+                              eventModel.images.length > 3
+                                  ? 3
+                                  : eventModel.images.length,
+                              (index) => imageGridView(
+                                  context,
+                                  eventModel.images[index],
+                                  index,
+                                  eventModel.id,
+                                  modelIndex))
                         ],
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -86,7 +94,8 @@ final int modelIndex;
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,7 +131,8 @@ final int modelIndex;
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                   DateFormatter.formatDate(eventModel.startDate),
+                                  DateFormatter.formatDate(
+                                      eventModel.startDate),
                                   style: customTextStyle.bodyMedium.override(
                                     fontFamily: 'Nunito',
                                     color: customColors.primary,
@@ -131,7 +141,8 @@ final int modelIndex;
                                   ),
                                 ),
                                 Text(
-                                  DateFormatter.formatTime(eventModel.startDate),
+                                  DateFormatter.formatTime(
+                                      eventModel.startDate),
                                   style: customTextStyle.bodyMedium.override(
                                     fontFamily: 'Nunito',
                                     color: customColors.primary,
@@ -144,12 +155,11 @@ final int modelIndex;
                             Align(
                               alignment: const AlignmentDirectional(1.00, 0.00),
                               child: Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 3, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 3, 0),
                                 child: Icon(
                                   Icons.arrow_forward_outlined,
-                                  color: customColors
-                                      .secondaryText,
+                                  color: customColors.secondaryText,
                                   size: 20,
                                 ),
                               ),
@@ -163,27 +173,28 @@ final int modelIndex;
               ),
             ),
           ),
-              ),
-            ),
-        );
+        ),
+      ),
+    );
   }
 
-  Align imageGridView(BuildContext context,String imgUrl,int imgIndex,int eventIndex,int modelIndex) {
+  Align imageGridView(BuildContext context, String imgUrl, int imgIndex,
+      int eventIndex, int modelIndex) {
     return Align(
       alignment: const AlignmentDirectional(1.00, -1.00),
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            child : getImageNetwork(url: "/storage/${imgUrl}", width: double.infinity, height: null)
-            
-             
-          ),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(0),
+                bottomRight: Radius.circular(0),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              child: getImageNetwork(
+                  url: "/storage/${imgUrl}",
+                  width: double.infinity,
+                  height: null)),
           Container(
             width: 344,
             height: 140,
@@ -218,7 +229,7 @@ final int modelIndex;
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      "${imgIndex+1}/3",
+                      "${imgIndex + 1}/3",
                       textAlign: TextAlign.center,
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
@@ -240,26 +251,26 @@ final int modelIndex;
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                  child: GetBuilder<MapController>(
-                    builder: (mapController) {
-                      return ToggleIcon(
-                        onPressed: () async {
-mapController.followOrUnFollowEvent(eventIndex, modelIndex);
-                        },
-                        value: mapController.events[modelIndex].isFollowedByAuthUser,
-                        onIcon: Icon(
-                          Icons.favorite_rounded,
-                          color: customColors.rejected,
-                          size: 25,
-                        ),
-                        offIcon: Icon(
-                          Icons.favorite_border,
-                          color: customColors.info,
-                          size: 25,
-                        ),
-                      );
-                    }
-                  ),
+                  child: GetBuilder<MapController>(builder: (mapController) {
+                    return ToggleIcon(
+                      onPressed: () async {
+                        mapController.followOrUnFollowEvent(
+                            eventIndex, modelIndex);
+                      },
+                      value:
+                          mapController.events[modelIndex].isFollowedByAuthUser,
+                      onIcon: Icon(
+                        Icons.favorite_rounded,
+                        color: customColors.rejected,
+                        size: 25,
+                      ),
+                      offIcon: Icon(
+                        Icons.favorite_border,
+                        color: customColors.info,
+                        size: 25,
+                      ),
+                    );
+                  }),
                 ),
               ],
             ),

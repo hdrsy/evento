@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import '../../../../core/responsive/responsive.dart';
@@ -53,10 +52,14 @@ class FullTicketInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     GestureDetector(
-                      onTap: (){
-                        bookNowController.removeTicket(index);
-                      },
-                      child: Icon(Icons.cancel_outlined,color: customColors.primaryText,size: 20,))
+                        onTap: () {
+                          bookNowController.removeTicket(index);
+                        },
+                        child: Icon(
+                          Icons.cancel_outlined,
+                          color: customColors.primaryText,
+                          size: 20,
+                        ))
                   ],
                 ),
                 bookNowController.eventDetailsModel.classes.isEmpty
@@ -120,7 +123,7 @@ class FullTicketInfo extends StatelessWidget {
                     Text(tr("Personal Information"),
                         style: customTextStyle.bodyMedium.override(
                             fontFamily: primaryFontFamily, fontSize: 14)),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         showButtonSheet(
                             context: context,

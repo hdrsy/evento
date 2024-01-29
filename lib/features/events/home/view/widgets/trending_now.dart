@@ -96,7 +96,7 @@ class TrendingNow extends StatelessWidget {
 // Function to create each event card
   Widget buildEventCard(
       {required EventModel eventModel, required int modelIndex}) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
@@ -170,7 +170,7 @@ class TrendingNow extends StatelessWidget {
           child: Align(
             alignment: const AlignmentDirectional(0.00, 0.00),
             child: Text(
-              "$price s.p",
+              "$price ${tr("sp")}",
               textAlign: TextAlign.center,
               style: customTextStyle.bodyMedium.override(
                 fontFamily: 'BeerSerif',
@@ -255,7 +255,7 @@ class TrendingNow extends StatelessWidget {
           eventTime,
           style: customTextStyle.bodyMedium,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () {},
           child: Icon(Icons.arrow_forward_outlined,
               color: customColors.secondaryText, size: responsiveIcon(25, 2)),
@@ -278,7 +278,7 @@ class TrendingNow extends StatelessWidget {
   Widget buildShareIcon() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () async {
           await Share.share(
             tr('Check out this event in Evento'),

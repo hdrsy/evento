@@ -1,13 +1,12 @@
 // Importing necessary packages and widgets.
-import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/account_type/view/widgets/account_type_card.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/evento_verification_bottom_sheet/view/evento_verification_conditions_bottom_sheet.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the AccountTypeScreen as a StatelessWidget.
 class AccountTypeScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -50,7 +49,7 @@ class AccountTypeScreen extends StatelessWidget {
           children: [
             // Adding a search text field.
             // searchTextField(onChanged: (value) {}),
-            
+
             // Aligning the text to the start.
             Align(
               alignment: const AlignmentDirectional(-1, -1),
@@ -65,29 +64,31 @@ class AccountTypeScreen extends StatelessWidget {
                 ),
               ).tr(),
             ),
-            
+
             // Adding various account type cards with icons and routes.
-             AccountTypeCard(
+            AccountTypeCard(
               icon: Icons.privacy_tip_outlined,
               route: 'AccountPrivacyScreen',
-              title:tr( "Account privacy"),
+              title: tr("Account privacy"),
             ),
-             AccountTypeCard(
+            AccountTypeCard(
               icon: Icons.phone_outlined,
               route: 'SwithcToServiceProviderScreen',
-              title:tr( "Switch to service provider"),
+              title: tr("Switch to service provider"),
             ),
             // const AccountTypeCard(
             //   icon: Icons.people_outlined,
             //   route: EventVerificationCondidtionsBottomSheet(),
             //   title: "Sign up for Evento Verified",
             // ),
-             AccountTypeCard(
+            AccountTypeCard(
               icon: Icons.people_outlined,
               route: 'AccountOrganizerScreen',
-              title:tr( "Become an Organizer"),
+              title: tr("Become an Organizer"),
             ),
-          ].divide(const SizedBox(height: 16,)), // Dividing the cards with spacing.
+          ].divide(const SizedBox(
+            height: 16,
+          )), // Dividing the cards with spacing.
         ),
       ),
     );

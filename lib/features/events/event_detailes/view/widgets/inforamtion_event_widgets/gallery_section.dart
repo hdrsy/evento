@@ -1,4 +1,3 @@
-
 import '../../../../../../core/responsive/responsive.dart';
 import '../../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -10,6 +9,7 @@ import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 Widget buildGallerySection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   return Column(
@@ -30,10 +30,12 @@ Widget buildGallerySection(BuildContext context) {
                 fontWeight: FontWeight.bold,
               ),
             ).tr(),
-            InkWell(
+            GestureDetector(
               onTap: () {
-                 Get.toNamed('/GalleryScreen',arguments: {"images":eventDetailesController.eventDetailsModel.images,'videos':eventDetailesController.eventDetailsModel.videos});
-                    
+                Get.toNamed('/GalleryScreen', arguments: {
+                  "images": eventDetailesController.eventDetailsModel.images,
+                  'videos': eventDetailesController.eventDetailsModel.videos
+                });
               },
               child: Text(
                 "See All",
@@ -57,50 +59,54 @@ Widget buildGallerySection(BuildContext context) {
                   ? 3
                   : eventDetailesController.eventDetailsModel.images.length,
               (index) {
-                return 
-                      (index==2 && eventDetailesController.eventDetailsModel.images.length>3)?Stack(
-                children: [
-                  GalleryCard(
-                    imgUrl:
-                        "/storage/${eventDetailesController.eventDetailsModel.images[index]}",
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/GalleryScreen',arguments: {"images":eventDetailesController.eventDetailsModel.images});
-                    },
-                    child: Container(
-                      width: screenWidth * 0.25,
-                      height: screenWidth * 0.25,
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4,
-                            color: Color(0x33000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
+            return (index == 2 &&
+                    eventDetailesController.eventDetailsModel.images.length > 3)
+                ? Stack(
+                    children: [
+                      GalleryCard(
+                        imgUrl:
+                            "/storage/${eventDetailesController.eventDetailsModel.images[index]}",
                       ),
-                      child: Align(
-                        alignment: const AlignmentDirectional(0.00, 0.00),
-                        child: Text(
-                          "+ ${eventDetailesController.eventDetailsModel.images.length - 3}",
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: breeSerif,
-                            color: customColors.info,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            useGoogleFonts: true,
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/GalleryScreen', arguments: {
+                            "images":
+                                eventDetailesController.eventDetailsModel.images
+                          });
+                        },
+                        child: Container(
+                          width: screenWidth * 0.25,
+                          height: screenWidth * 0.25,
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.00, 0.00),
+                            child: Text(
+                              "+ ${eventDetailesController.eventDetailsModel.images.length - 3}",
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: breeSerif,
+                                color: customColors.info,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                useGoogleFonts: true,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ): GalleryCard(
-                imgUrl:
-                    "/storage/${eventDetailesController.eventDetailsModel.images[index]}",
-              );
-             
+                    ],
+                  )
+                : GalleryCard(
+                    imgUrl:
+                        "/storage/${eventDetailesController.eventDetailsModel.images[index]}",
+                  );
           })
         ].divide(SizedBox(
           width: scaleWidth(5),
@@ -115,11 +121,12 @@ class GalleryCard extends StatelessWidget {
   final String imgUrl;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-       final EventDetailesController eventDetailesController=Get.find();
-         Get.toNamed('/GalleryScreen',arguments:{ "images":eventDetailesController.eventDetailsModel.images});
-                    
+    return GestureDetector(
+      onTap: () {
+        final EventDetailesController eventDetailesController = Get.find();
+        Get.toNamed('/GalleryScreen', arguments: {
+          "images": eventDetailesController.eventDetailsModel.images
+        });
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),

@@ -9,6 +9,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class NameCheckBox extends StatelessWidget {
   NameCheckBox(
       {super.key,
@@ -37,7 +38,7 @@ class NameCheckBox extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      " Add To Event",
+                      "Add To Event",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
                         color: customColors.primary,
@@ -78,18 +79,19 @@ class NameCheckBox extends StatelessWidget {
                     }),
                   ],
                 )
-              : InkWell(
-                splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-                onTap: ()async{
-                  await showButtonSheet(
-              context: context,
-              widget:  ReviewEventWidget(ratingTarget:tr( "Service Provider"),id:serviceProvider.id,idKey: "service_provider_id",url: ServerConstApis.reviewServiceProvider, ),
-              height: 450);
-              },
-                child: Text(
+              : GestureDetector(
+                  onTap: () async {
+                    await showButtonSheet(
+                        context: context,
+                        widget: ReviewEventWidget(
+                          ratingTarget: tr("Service Provider"),
+                          id: serviceProvider.id,
+                          idKey: "service_provider_id",
+                          url: ServerConstApis.reviewServiceProvider,
+                        ),
+                        height: 450);
+                  },
+                  child: Text(
                     "Review Service Provider",
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
@@ -98,7 +100,7 @@ class NameCheckBox extends StatelessWidget {
                       useGoogleFonts: true,
                     ),
                   ).tr(),
-              ),
+                ),
         ),
       ],
     );

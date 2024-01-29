@@ -8,6 +8,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ServiceAccordingCard extends StatelessWidget {
   ServiceAccordingCard(
       {super.key,
@@ -15,17 +16,17 @@ class ServiceAccordingCard extends StatelessWidget {
       required this.serviceCategoryIndex});
   final ServiceProvider serviceProvider;
   final int serviceCategoryIndex;
-  final ServiceAccordingCategoryController serviceAccordingCategoryController=Get.find();
+  final ServiceAccordingCategoryController serviceAccordingCategoryController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
-        Get.toNamed('/ServiceAccordingDetailesScreen',
-            arguments: [serviceProvider, serviceCategoryIndex,serviceAccordingCategoryController.isInCustomuzEvent]);
+        Get.toNamed('/ServiceAccordingDetailesScreen', arguments: [
+          serviceProvider,
+          serviceCategoryIndex,
+          serviceAccordingCategoryController.isInCustomuzEvent
+        ]);
       },
       child: Container(
         width: double.infinity,
@@ -54,52 +55,57 @@ class ServiceAccordingCard extends StatelessWidget {
                         serviceProvider.user.lastName,
                     style: customTextStyle.headlineSmall,
                   ),
-    serviceAccordingCategoryController.isInCustomuzEvent?
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add to Event",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primary,
-                          fontSize: 12,
-                          useGoogleFonts: true,
-                        ),
-                      ).tr(),
-                      //// to update selected service provier in serviceCategoryController
-                      GetBuilder<ServiceCategoryController>(
-                          builder: (serviceCategoryController) {
-                        return Theme(
-                          data: ThemeData(
-                            checkboxTheme: CheckboxThemeData(
-                              visualDensity: VisualDensity.compact,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
+                  serviceAccordingCategoryController.isInCustomuzEvent
+                      ? Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Add to Event",
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'Nunito',
+                                color: customColors.primary,
+                                fontSize: 12,
+                                useGoogleFonts: true,
                               ),
-                            ),
-                            unselectedWidgetColor: customColors.secondaryText,
-                          ),
-                          child: Checkbox(
-                            value: serviceCategoryController
-                                .isSelectedServiceProvider(
-                                    serviceProvider.id, serviceCategoryIndex),
-                            onChanged: (newValue) async {
-                              serviceCategoryController
-                                  .changeSelectedServiceProviderInEachCategory(
-                                      serviceProvider.id, serviceCategoryIndex,serviceProvider.user.firstName+serviceProvider.user.lastName);
-                            },
-                            activeColor: customColors.success,
-                            checkColor: customColors.info,
-                          ),
-                        );
-                      }),
-                    ],
-                  )
-               :const SizedBox.shrink()
+                            ).tr(),
+                            //// to update selected service provier in serviceCategoryController
+                            GetBuilder<ServiceCategoryController>(
+                                builder: (serviceCategoryController) {
+                              return Theme(
+                                data: ThemeData(
+                                  checkboxTheme: CheckboxThemeData(
+                                    visualDensity: VisualDensity.compact,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  unselectedWidgetColor:
+                                      customColors.secondaryText,
+                                ),
+                                child: Checkbox(
+                                  value: serviceCategoryController
+                                      .isSelectedServiceProvider(
+                                          serviceProvider.id,
+                                          serviceCategoryIndex),
+                                  onChanged: (newValue) async {
+                                    serviceCategoryController
+                                        .changeSelectedServiceProviderInEachCategory(
+                                            serviceProvider.id,
+                                            serviceCategoryIndex,
+                                            serviceProvider.user.firstName +
+                                                serviceProvider.user.lastName);
+                                  },
+                                  activeColor: customColors.success,
+                                  checkColor: customColors.info,
+                                ),
+                              );
+                            }),
+                          ],
+                        )
+                      : const SizedBox.shrink()
                 ],
               ),
               Padding(
@@ -110,7 +116,7 @@ class ServiceAccordingCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "Location: ${serviceProvider.address}",
+                        "${tr("Location")}: ${serviceProvider.address}",
                         style: customTextStyle.labelMedium.override(
                             fontFamily: secondaryFontFamily,
                             useGoogleFonts: true,

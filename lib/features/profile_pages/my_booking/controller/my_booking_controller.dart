@@ -1,38 +1,37 @@
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
 import '../../../book_now/model/ticket_model.dart';
-import '../../../events/event_detailes/model/event_detailes_model.dart';
 import '../model/my_cancel_booking_model.dart';
 import '../model/up_coming_booking.dart';
 import '../../../../main.dart';
 import 'package:get/get.dart';
 
-class MyBookingController extends GetxController{
+class MyBookingController extends GetxController {
   late List<CancelledBooking> cancelledBooking;
   late List<UpComingBooking> upComingBooking;
   late List<UpComingBooking> completedBooking;
   late RxList<String> errorMessage;
-late RxBool isLoading;
-List<TicketModel> generatedTicketModel=[];
-   @override
-  void onInit() async{
+  late RxBool isLoading;
+  List<TicketModel> generatedTicketModel = [];
+  @override
+  void onInit() async {
     errorMessage = <String>[].obs;
-    cancelledBooking=[];
-    upComingBooking=[];
-    completedBooking=[];
-    isLoading=false.obs;
-  await  getUpComingAndCompletedBooking();
+    cancelledBooking = [];
+    upComingBooking = [];
+    completedBooking = [];
+    isLoading = false.obs;
+    await getUpComingAndCompletedBooking();
     await getCalceledBooking();
     // TODO: implement onInit
     super.onInit();
   }
-   getCalceledBooking() async {
-    isLoading.value=true;
+
+  getCalceledBooking() async {
+    isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.myCancelledBookings,
         method: "GEt",
@@ -47,18 +46,17 @@ List<TicketModel> generatedTicketModel=[];
       cancelledBooking = interestsJson
           .map((jsonItem) => CancelledBooking.fromJson(jsonItem))
           .toList();
-          isLoading.value=false;
+      isLoading.value = false;
       update();
     }
   }
-   getUpComingAndCompletedBooking() async {
-    isLoading.value=true;
+
+  getUpComingAndCompletedBooking() async {
+    isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myBooking,
-        method: "GEt",
-        token: token);
+        targetRout: ServerConstApis.myBooking, method: "GEt", token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
@@ -73,25 +71,22 @@ List<TicketModel> generatedTicketModel=[];
       completedBooking = completedJson
           .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
           .toList();
-          print(upComingBooking.length);
-          isLoading.value=false;
+      isLoading.value = false;
       update();
     }
   }
 
-   createTicketModelsFromEventBookings(List<EventBooking> bookings) {
+  createTicketModelsFromEventBookings(List<EventBooking> bookings) {
     generatedTicketModel.clear();
-  
-for (var i=0;i<bookings.length;i++) {
-  generatedTicketModel.add(TicketModel());
-  generatedTicketModel[i].age.text=bookings[i].age.toString();
-  generatedTicketModel[i].fisrtName.text=bookings[i].firstName.toString();
-  generatedTicketModel[i].lastName.text=bookings[i].lastName.toString();
-  generatedTicketModel[i].phoneNumber.text=bookings[i].phoneNumber.toString();
-}
-print(generatedTicketModel.length);
-  return generatedTicketModel;
-}
 
-
+    for (var i = 0; i < bookings.length; i++) {
+      generatedTicketModel.add(TicketModel());
+      generatedTicketModel[i].age.text = bookings[i].age.toString();
+      generatedTicketModel[i].fisrtName.text = bookings[i].firstName.toString();
+      generatedTicketModel[i].lastName.text = bookings[i].lastName.toString();
+      generatedTicketModel[i].phoneNumber.text =
+          bookings[i].phoneNumber.toString();
+    }
+    return generatedTicketModel;
+  }
 }

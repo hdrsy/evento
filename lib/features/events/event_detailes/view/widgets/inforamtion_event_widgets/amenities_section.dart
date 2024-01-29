@@ -8,6 +8,7 @@ import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 Widget buildAmenitiesSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   return Column(
@@ -28,11 +29,7 @@ Widget buildAmenitiesSection(BuildContext context) {
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: true),
             ).tr(),
-            InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
+            GestureDetector(
               onTap: () async {
                 // context.pushNamed('Amenities');
                 Get.toNamed('/SeeAllAmenities');
@@ -68,13 +65,14 @@ Widget buildAmenitiesSection(BuildContext context) {
 
 Container amentitesIcon(String imgUrl) {
   return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
+    width: 40,
+    height: 40,
+    decoration: BoxDecoration(
         border: Border.all(color: customColors.secondaryText, width: 2),
         color: customColors.primaryBackground,
         shape: BoxShape.circle,
-        image: DecorationImage(image: getImageNetwork(url: "$imgUrl", width: null, height: null).image)
-      ),
-       );
+        image: DecorationImage(
+            image: getImageNetwork(url: "$imgUrl", width: null, height: null)
+                .image)),
+  );
 }

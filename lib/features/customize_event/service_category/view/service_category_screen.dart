@@ -3,7 +3,6 @@ import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../core/utils/theme/text_theme.dart';
 import '../controller/service_category_controller.dart';
-import '../model/service_category_model.dart';
 import 'widgets/next_step_button.dart';
 import 'widgets/service_card.dart';
 import 'widgets/slider.dart';
@@ -13,6 +12,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ServiceCategoryScreen extends StatelessWidget {
   ServiceCategoryScreen({super.key});
   final ServiceCategoryController serviceCategoryController = Get.find();
@@ -53,7 +53,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                 ),
               ).tr(),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +68,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                     ),
                   ).tr(),
                   Obx(
-                    ()=> Text(
+                    () => Text(
                       "${serviceCategoryController.selectedServiceProvidersNumbers()}/${serviceCategoryController.serviceCategoryList.length + 1}",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: primaryFontFamily,
@@ -81,13 +81,12 @@ class ServiceCategoryScreen extends StatelessWidget {
                 ],
               ),
             ),
-           
             Obx(
               () => Expanded(
                   child: SingleChildScrollView(
                 child: Column(
                   children: [
-                     const VenueCard(),
+                    const VenueCard(),
                     ...List.generate(
                       serviceCategoryController.serviceCategoryList.length,
                       (index) => ServiceCard(

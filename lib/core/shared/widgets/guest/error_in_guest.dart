@@ -10,11 +10,13 @@ class ErrorInGuest extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       body: SizedBox(
-        child: Center(child: InkWell(
-          onTap: (){
-            Get.offAllNamed('/');
-          },
-          child: Text("You are guest")),),
+        child: Center(
+          child: GestureDetector(
+              onTap: () {
+                Get.offAllNamed('/');
+              },
+              child: Text("You are guest")),
+        ),
       ),
     );
   }

@@ -2,38 +2,35 @@ import '../../../utils/theme/text_theme.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 
-Future<void>  showBottomSheetForImages({  required BuildContext context,required Function()? onPressGallery,required Function()? onPressCamera})async {
- return await  showModalBottomSheet(
-                            context: context,
-                            builder: (context) => Container(
-                              color: customColors.secondaryBackground,
-                              height: 250,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-
-                                  choosePhotoSource(
-                                    context: context,
-                                    title: "Choose Sourse",
-                                    textColor:customColors
-                                        .secondaryText,
-                                  ),
-                                  
-                                  choosePhotoSource(
-                                      context: context,
-                                      title: "Gallery",
-                                      onPress: onPressGallery),
-                                  choosePhotoSource(
-                                    context: context,
-                                    title: "Camera",
-                                    onPress:onPressCamera ,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
+Future<void> showBottomSheetForImages(
+    {required BuildContext context,
+    required Function()? onPressGallery,
+    required Function()? onPressCamera}) async {
+  return await showModalBottomSheet(
+    context: context,
+    builder: (context) => Container(
+      color: customColors.secondaryBackground,
+      height: 250,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          choosePhotoSource(
+            context: context,
+            title: "Choose Sourse",
+            textColor: customColors.secondaryText,
+          ),
+          choosePhotoSource(
+              context: context, title: "Gallery", onPress: onPressGallery),
+          choosePhotoSource(
+            context: context,
+            title: "Camera",
+            onPress: onPressCamera,
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget choosePhotoSource(
@@ -54,18 +51,16 @@ Widget choosePhotoSource(
       ),
     ),
     child: Center(
-      child: InkWell(
+      child: GestureDetector(
         onTap: onPress,
         child: Text(
           title,
-          style:  customTextStyle.bodyMedium.override(
+          style: customTextStyle.bodyMedium.override(
               fontFamily: 'Readex Pro',
               fontSize: 20,
               fontWeight: FontWeight.w400,
-              color:
-                  textColor ?? customColors.primaryText),
+              color: textColor ?? customColors.primaryText),
         ),
-        
       ),
     ),
   );

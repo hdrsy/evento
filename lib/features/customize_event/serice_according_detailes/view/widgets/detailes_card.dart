@@ -7,9 +7,10 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class DetailesCard extends StatelessWidget {
-   DetailesCard({super.key});
-final ServiceAccordingDetailesController serviceAccordingDetailesController =
+  DetailesCard({super.key});
+  final ServiceAccordingDetailesController serviceAccordingDetailesController =
       Get.find();
 
   @override
@@ -18,11 +19,14 @@ final ServiceAccordingDetailesController serviceAccordingDetailesController =
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-           _buildIconTextRow(context, Icons.description_outlined, 'Description', serviceAccordingDetailesController.serviceProvider.description),
-            // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
-            _buildIconTextRow(context, Icons.location_on_outlined, 'Location', serviceAccordingDetailesController.serviceProvider.address),
-            _buildLocationButton(context),
-        ].divide(const SizedBox(height: 20))
+          _buildIconTextRow(context, Icons.description_outlined, 'Description',
+              serviceAccordingDetailesController.serviceProvider.description),
+          // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
+          _buildIconTextRow(context, Icons.location_on_outlined, 'Location',
+              serviceAccordingDetailesController.serviceProvider.address),
+          _buildLocationButton(context),
+        ]
+            .divide(const SizedBox(height: 20))
             .addToStart(const SizedBox(height: 16))
             .addToEnd(const SizedBox(height: 16)),
       ),
@@ -58,14 +62,15 @@ final ServiceAccordingDetailesController serviceAccordingDetailesController =
       ],
     );
   }
+
   Widget _buildLocationButton(BuildContext context) {
     return Align(
       alignment: const AlignmentDirectional(1, 1),
       child: ButtonWidget(
         onPressed: () {
-        //  Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
+          //  Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
         },
-        text:tr( "See Location on Maps"),
+        text: tr("See Location on Maps"),
         options: ButtonOptions(
           width: 170,
           height: 25,

@@ -1,13 +1,11 @@
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/functions/validation/name_validation.dart';
-import '../../../../../core/shared/functions/validation/phone_validation.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../controller/edit_profile_controller.dart';
 import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
 import '../../../../profile_pages/edit_profile/view/widgets/selected_list_edit_profile.dart';
-import '../../../../service_provider/edit_profile_service_provider.dart/controller/edit_profile_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

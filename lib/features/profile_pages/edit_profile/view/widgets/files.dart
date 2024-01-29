@@ -1,12 +1,10 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/auth/step3/view/widgets/build_day_month_year.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/functions/validation/name_validation.dart';
-import '../../../../../core/shared/functions/validation/phone_validation.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -23,7 +21,7 @@ class Fields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  DateTime selectedDate =editProfileController.day;
+    DateTime selectedDate = editProfileController.day;
     return SizedBox(
       width: double.infinity,
       child: Form(
@@ -84,8 +82,7 @@ class Fields extends StatelessWidget {
                                     ),
                                   ),
                                   child: CupertinoDatePicker(
-                                    initialDateTime:
-                                        editProfileController.day,
+                                    initialDateTime: editProfileController.day,
                                     mode: CupertinoDatePickerMode.date,
                                     onDateTimeChanged: (val) {
                                       selectedDate = val;
@@ -171,7 +168,7 @@ class Fields extends StatelessWidget {
                   width: double.infinity,
                   height: scaleHeight(50),
                   padding: padding(0, 10, 0, 10),
-                  margin: EdgeInsets.only(bottom: 12),
+                  margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       border: Border.all(
@@ -184,7 +181,7 @@ class Fields extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        DateFormatter.formatDate(editProfileController.day!),
+                        DateFormatter.formatDate(editProfileController.day),
                         style: customTextStyle.bodyMedium,
                       ),
                       Icon(
@@ -209,7 +206,7 @@ class Fields extends StatelessWidget {
                   width: double.infinity,
                   height: scaleHeight(50),
                   padding: padding(0, 10, 0, 10),
-                  margin: EdgeInsets.only(bottom: 12),
+                  margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       border: Border.all(
@@ -244,10 +241,10 @@ class Fields extends StatelessWidget {
                   editProfileController.gender.text = value;
                 },
                 validator: (value) {
-                  if(value== "Male" || value =="Female"){
-                  return null;
+                  if (value == "Male" || value == "Female") {
+                    return null;
                   }
-                    return "Plsease Type Your gender correctly";
+                  return "Plsease Type Your gender correctly";
                 }),
           ].divide(SizedBox(
             height: scaleHeight(10),

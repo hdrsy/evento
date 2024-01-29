@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 
 import '../../../core/responsive/responsive.dart';
@@ -44,7 +45,7 @@ class SearchScreen extends StatelessWidget {
                 child: SearchFieldWithFiltering(
                     controller: searchPageController.searchField,
                     onChanged: (value) {
-                      searchPageController.onPressSearch(value!);
+                      // searchPageController.onPressSearch(value!);
                     },
                     onApplyFilters: (filters) {
                       searchPageController.onApplyFilters(filters);
@@ -69,12 +70,20 @@ class SearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
+      () =>
+
+          //  searchPageController.searchResults.isEmpty
+          //     ? const EmptyData(
+          //         icon: Icons.search_sharp,
+          //         message:
+          //             "No luck this time, but the perfect event might be just a few keywords away!",
+          //       )
+          Column(
         children: [
           ...List.generate(
-              searchPageController.searchResultSearch.length,
+              searchPageController.searchResults.length,
               (index) => SearchEventCard(
-                    eventModel: searchPageController.searchResultSearch[index],
+                    eventModel: searchPageController.searchResults[index],
                   )),
         ],
       ),

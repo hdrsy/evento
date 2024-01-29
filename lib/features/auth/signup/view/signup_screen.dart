@@ -14,9 +14,9 @@ import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class SignupScreen extends StatelessWidget {
-   SignupScreen({super.key});
-   
-SignupController signupController=Get.find();
+  SignupScreen({super.key});
+
+  SignupController signupController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,7 +27,8 @@ SignupController signupController=Get.find();
         // Decorate with color and rounded corners.
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
-          borderRadius:const BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
         ),
         // Padding for the inner content.
         child: Padding(
@@ -44,7 +45,7 @@ SignupController signupController=Get.find();
                   // Close button at the top right corner.
                   Align(
                     alignment: AlignmentDirectional.topEnd,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         Get.back();
                       },
@@ -81,28 +82,29 @@ SignupController signupController=Get.find();
                         Expanded(
                           child: customTextField(
                             context: context,
-                            label:tr( "First Name"),
+                            label: tr("First Name"),
                             onChanged: (value) {
-                              signupController.firstName.text=value!;
+                              signupController.firstName.text = value!;
                             },
                             validator: (value) {
-                             return  nameValidation(value);
-                            // return null;
+                              return nameValidation(value);
+                              // return null;
                             },
                           ),
                         ),
-                        SizedBox(width: scaleWidth(10),),
+                        SizedBox(
+                          width: scaleWidth(10),
+                        ),
                         Expanded(
                           child: customTextField(
                             context: context,
-                            label:tr( "Last Name"),
+                            label: tr("Last Name"),
                             onChanged: (value) {
-                              signupController.lastName.text=value!;
+                              signupController.lastName.text = value!;
                             },
                             validator: (value) {
-                             
-                             return  nameValidation(value);
-                            // return null;
+                              return nameValidation(value);
+                              // return null;
                             },
                           ),
                         ),
@@ -111,14 +113,16 @@ SignupController signupController=Get.find();
                   ),
                   customTextField(
                     context: context,
-                    label:tr( "+963    mobile Phone"),
+                    label: tr("+963    mobile Phone"),
                     onChanged: (value) {
-                       if (value != null && !value.startsWith('0') && value.isNotEmpty) {
-      // Prepend '0' if it's not already there and the value is not empty
-      signupController.phone.text = '0$value';
-    } else {
-      signupController.phone.text = value!;
-    }
+                      if (value != null &&
+                          !value.startsWith('0') &&
+                          value.isNotEmpty) {
+                        // Prepend '0' if it's not already there and the value is not empty
+                        signupController.phone.text = '0$value';
+                      } else {
+                        signupController.phone.text = value!;
+                      }
                     },
                     keyboardType: TextInputType.phone,
                     validator: (value) {
@@ -126,7 +130,7 @@ SignupController signupController=Get.find();
                       // return null;
                     },
                   ),
-                 
+
                   // Additional UI elements like 'Forgot Password' and 'Terms of Use'.
                   _buildAdditionalUI(context),
                   SizedBox(
@@ -134,24 +138,27 @@ SignupController signupController=Get.find();
                   ),
                   // Sign In button.
                   Obx(
-                    ()=> Column(
+                    () => Column(
                       children: [
-                         
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                          
                             ButtonWidget(
-                              showLoadingIndicator: signupController.isLoading.value,
+                              showLoadingIndicator:
+                                  signupController.isLoading.value,
                               onPressed: () {
-                              signupController.isAgreedOn.value?
-                              signupController.onPressSignUp():null;
-                               },
-                              text:tr( 'Join'), // Replace with localization if needed.
+                                signupController.isAgreedOn.value
+                                    ? signupController.onPressSignUp()
+                                    : null;
+                              },
+                              text: tr(
+                                  'Join'), // Replace with localization if needed.
                               options: ButtonOptions(
                                 width: 350,
                                 height: 45,
-                                color:signupController.isAgreedOn.value?customColors.primary: customColors.alternate,
+                                color: signupController.isAgreedOn.value
+                                    ? customColors.primary
+                                    : customColors.alternate,
                                 textStyle: customTextStyle.titleSmall.copyWith(
                                   color: Colors.white,
                                 ),
@@ -160,11 +167,14 @@ SignupController signupController=Get.find();
                             ),
                           ],
                         ),
-                        SizedBox(height: scaleHeight(5),),
-                         ...List.generate(signupController.errorMessage.length,(index)=>
-                            
-                            ErrorMessages(message:signupController.errorMessage[index] ,)
-                          ),
+                        SizedBox(
+                          height: scaleHeight(5),
+                        ),
+                        ...List.generate(
+                            signupController.errorMessage.length,
+                            (index) => ErrorMessages(
+                                  message: signupController.errorMessage[index],
+                                )),
                       ],
                     ),
                   ),
@@ -183,7 +193,7 @@ SignupController signupController=Get.find();
     // Helper method to create additional UI elements like 'Forgot Password'.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [ TermsAndCondisionTexts()].divide(SizedBox(
+      children: [TermsAndCondisionTexts()].divide(SizedBox(
         height: scaleHeight(10),
       )),
     );

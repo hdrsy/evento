@@ -38,19 +38,20 @@ class SeeAllOrganizersController extends GetxController {
     pageId = Get.arguments[0] ?? 1;
     hasMoreData = false.obs;
     errorMessage = <String>[].obs;
-    itemList= <OrganizerHome>[].obs;
-    itemList.assignAll( Get.arguments[1] ?? <OrganizerHome>[].obs) ;
+    itemList = <OrganizerHome>[].obs;
+    itemList.assignAll(Get.arguments[1] ?? <OrganizerHome>[].obs);
     targetRout = Get.arguments[2];
     mapKey = Get.arguments[3];
-    pageTitle = Get.arguments[4] ?? "";
+    pageTitle = Get.arguments[4];
     log(pageId.toString());
     scrollController = ScrollController();
-    itemList.isEmpty ? fetchData() :
-    pageId==2?(fetchData() ):
-    log(pageId.toString());
+    itemList.isEmpty
+        ? fetchData()
+        : pageId == 2
+            ? (fetchData())
+            : log(pageId.toString());
 
-    
-     null;
+    null;
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.offset &&
@@ -64,9 +65,9 @@ class SeeAllOrganizersController extends GetxController {
 
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
-    hasMoreData.value=true;
-log("page id $pageId");
-    String token = await prefService.readString("token") ?? "";
+    hasMoreData.value = true;
+    log("page id $pageId");
+    String token = await prefService.readString("token");
     String apiUrl = "$targetRout?page=$pageId";
 
     Either<ErrorResponse, Map<String, dynamic>> response =
@@ -93,8 +94,6 @@ log("page id $pageId");
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizerHome.fromJson(jsonItem))
         .toList());
-        print("curent page $pageId");
-        print("last pge $lastPageId");
     if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }
@@ -103,15 +102,15 @@ log("page id $pageId");
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
-followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
+
+  followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
     late String isDoneSuccefully;
-    print(organizerId);
     if (itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
-      isDoneSuccefully =
-          await followUnFollowEvent("${ServerConstApis.followOrganizer}/$organizerId");
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser = true;
@@ -123,6 +122,7 @@ followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
     }
     log(itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser.toString());
   }
+
   @override
   void onClose() {
     scrollController.dispose();

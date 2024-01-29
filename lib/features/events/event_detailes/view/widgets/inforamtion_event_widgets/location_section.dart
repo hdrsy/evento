@@ -9,21 +9,23 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 Widget buildLocationSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
   LatLng googleMapsCenter = LatLng(
       eventDetailesController.eventDetailsModel.venue.latitude,
       eventDetailesController.eventDetailsModel.venue.longitude);
   final googleMapsController = Completer<GoogleMapController>();
-  return InkWell(
+  return GestureDetector(
       onTap: () {
-         if(isGuset){
-                    Get.dialog( GuestPopupWidget());
-                  }else{
-        Get.toNamed('/SeeLocation', arguments: [
-          eventDetailesController.eventDetailsModel.venue.latitude,
-          eventDetailesController.eventDetailsModel.venue.longitude
-        ]);}
+        if (isGuset) {
+          Get.dialog(GuestPopupWidget());
+        } else {
+          Get.toNamed('/SeeLocation', arguments: [
+            eventDetailesController.eventDetailsModel.venue.latitude,
+            eventDetailesController.eventDetailsModel.venue.longitude
+          ]);
+        }
       },
       child: Column(
         mainAxisSize: MainAxisSize.max,

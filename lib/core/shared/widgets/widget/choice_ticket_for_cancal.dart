@@ -12,12 +12,14 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ChoiceTicketForCancalWidget extends StatelessWidget {
-   ChoiceTicketForCancalWidget({Key? key, required this.bookings}) : super(key: key);
- final List<EventBooking> bookings;
- final CancelBookingController cancelBookingController=Get.put(CancelBookingController());
+  ChoiceTicketForCancalWidget({Key? key, required this.bookings})
+      : super(key: key);
+  final List<EventBooking> bookings;
+  final CancelBookingController cancelBookingController =
+      Get.put(CancelBookingController());
   @override
   Widget build(BuildContext context) {
-    cancelBookingController.bookings=bookings;
+    cancelBookingController.bookings = bookings;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -55,8 +57,10 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
                   ),
                 ).tr(),
                 SizedBox(
-                  height: screenHeight*0.45,
-                  child: RadioButtonList( bookings: bookings,)),
+                    height: screenHeight * 0.45,
+                    child: RadioButtonList(
+                      bookings: bookings,
+                    )),
               ]
                   .divide(const SizedBox(height: 20))
                   .addToStart(const SizedBox(height: 20)),
@@ -67,12 +71,13 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
             child: ButtonWidget(
               onPressed: () async {
+                Get.back();
                 showButtonSheet(
                     context: context,
-                    widget:  CancelBookingWidget(),
+                    widget: CancelBookingWidget(),
                     height: screenHeight * 0.7);
               },
-              text:tr( "Continue"),
+              text: tr("Continue"),
               options: ButtonOptions(
                 height: 40,
                 padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
@@ -108,34 +113,29 @@ class RadioButtonList extends StatefulWidget {
 }
 
 class _RadioButtonListState extends State<RadioButtonList> {
-  
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(children: [
         ...List.generate(
             widget.bookings.length,
-            (index) => ddd(eventBooking: widget.bookings[index],index: index,)
-            
-            )
+            (index) => ddd(
+                  eventBooking: widget.bookings[index],
+                  index: index,
+                ))
       ]),
     );
   }
 }
 
 class ddd extends StatelessWidget {
-  const ddd({super.key, required this.eventBooking,required this.index});
-final EventBooking eventBooking;
-final int index;
+  const ddd({super.key, required this.eventBooking, required this.index});
+  final EventBooking eventBooking;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CancelBookingController>(
-      builder:(c)=> InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      builder: (c) => GestureDetector(
         onTap: () async {
           // context.pushNamed('Account-privacy');
         },
@@ -147,29 +147,31 @@ final int index;
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                     Theme(
-              data: ThemeData(
-                checkboxTheme: CheckboxThemeData(
-                  visualDensity: VisualDensity.compact,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+                Theme(
+                  data: ThemeData(
+                    checkboxTheme: CheckboxThemeData(
+                      visualDensity: VisualDensity.compact,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    unselectedWidgetColor: customColors.secondaryText,
+                  ),
+                  child: Checkbox(
+                    value: c.selectedTicket.contains(eventBooking.id),
+                    onChanged: (value) {
+                      c.changeSelected(eventBooking.id);
+                    },
+                    activeColor: customColors.primary,
+                    checkColor: customColors.info,
                   ),
                 ),
-                unselectedWidgetColor: customColors.secondaryText,
-              ),
-              child: Checkbox(
-                value: c.selectedTicket.contains(eventBooking.id),
-                onChanged: (value) {
-                  c.changeSelected(eventBooking.id);
-                },
-                activeColor: customColors.primary,
-                checkColor: customColors.info,
-              ),
-            ),
-       SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
-                   "Ticket ${index+1} : ${eventBooking.firstName} ${eventBooking.lastName}",
+                  "Ticket ${index + 1} : ${eventBooking.firstName} ${eventBooking.lastName}",
 //                    ,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: 'Nunito',

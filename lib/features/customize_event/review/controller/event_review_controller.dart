@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
-import '../../../../core/utils/helper/date_formatter.dart';
 import '../../date_time/controller/date_time_controller.dart';
 import '../model/contact_info_model.dart';
 import '../model/event_over_view.dart';
@@ -67,16 +66,16 @@ class EventReviewController extends GetxController {
     final DateTimeController dateTimeController = Get.find();
 
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     // Assuming 'dateTimeController.date' is a DateTime object
     String formattedDate =
-        DateFormat('yyyy-MM-dd').format(dateTimeController.date);
+        DateFormat('yyyy-MM-dd', 'en').format(dateTimeController.date);
 
 // Assuming 'dateTimeController.startTime' and 'dateTimeController.endTime' are DateTime objects
     String formattedStartTime =
-        DateFormat('HH:mm:ss').format(dateTimeController.startTime);
+        DateFormat('HH:mm:ss', 'en').format(dateTimeController.startTime);
     String formattedEndTime =
-        DateFormat('HH:mm:ss').format(dateTimeController.endTime);
+        DateFormat('HH:mm:ss', 'en').format(dateTimeController.endTime);
 
     Map<String, dynamic> dataRequest = {
       "first_name": contactInfoModel.firstName,
@@ -98,12 +97,14 @@ class EventReviewController extends GetxController {
         .map((rxInt) => rxInt.value)
         .toList();
 
-    for (int i = 0; i < serviceProviderIds.length; i++) {
-      print(serviceProviderIds[i]);
-      if (serviceProviderIds[i] != 0) {
-        dataRequest['service_provider_id[$i]'] = serviceProviderIds[i];
-      }
-    }
+    // for (int i = 0; i < serviceProviderIds.length; i++) {
+    //   print(serviceProviderIds[i]);
+    //   if (serviceProviderIds[i] != 0) {
+    //     dataRequest['service_provider_id[$i]'] =
+    //         serviceProviderIds[i].toString();
+    //   }
+    // }
+    dataRequest['service_provider_id'] = serviceProviderIds;
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];
@@ -117,15 +118,12 @@ class EventReviewController extends GetxController {
         files: fileMap);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     log("Ggggggggggggggggggggggggggggggggggg");
-    print(handlingResponse);
     log("Ggggggggggggggggggggggggggggggggggg");
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
       isLoading.value = false;
-      print("object");
     } else {
       isLoading.value = false;
-      print(handlingResponse);
 
       Get.toNamed('/PaymentScreen');
     }
@@ -155,7 +153,6 @@ String standardizeTimeFormat(String timeString) {
     DateTime dateTime = inputFormat.parse(modifiedTimeString);
     return outputFormat.format(dateTime);
   } catch (e) {
-    print("Error parsing time: $e");
     return timeString;
   }
 }

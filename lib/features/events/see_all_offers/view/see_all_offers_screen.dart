@@ -1,8 +1,6 @@
 import '../../../../core/responsive/responsive.dart';
-import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../core/shared/widgets/images/network_image.dart';
-import '../../../../core/shared/widgets/text_fields/search_filed.dart';
 import '../../../../core/utils/animation/shimmer_animation.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -15,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SeeAllOffersScreen extends StatelessWidget {
   SeeAllOffersScreen({super.key});
   final SeeAllOffersController seeAllOffersController =
@@ -29,7 +28,7 @@ class SeeAllOffersScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -88,10 +87,14 @@ class SeeAllOffersCard extends StatelessWidget {
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-            Get.toNamed('/eventDetailes', arguments: [offerEvent.offer.eventId,true,offerEvent.offer.percent]);
-               },
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [
+          offerEvent.offer.eventId,
+          true,
+          offerEvent.offer.percent
+        ]);
+      },
       child: Container(
         width: double.infinity,
         height: screenHeight * 0.25,
@@ -108,7 +111,7 @@ class SeeAllOffersCard extends StatelessWidget {
             Expanded(
               child: Align(
                 alignment: const AlignmentDirectional(0, -1),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
                   child: Stack(

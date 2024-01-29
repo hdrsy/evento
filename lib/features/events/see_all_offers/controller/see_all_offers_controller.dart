@@ -8,7 +8,6 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class SeeAllOffersController extends GetxController {
   late String rout;
   late RxBool isLoading;
@@ -31,13 +30,13 @@ class SeeAllOffersController extends GetxController {
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
     dataLimit = 4;
-    pageId = Get.arguments[0]??1;
+    pageId = Get.arguments[0] ?? 1;
     hasMoreData = false.obs;
     errorMessage = <String>[].obs;
-    itemList =Get.arguments[1]?? <OfferEvent>[].obs;
-    
+    itemList = Get.arguments[1] ?? <OfferEvent>[].obs;
+
     scrollController = ScrollController();
-    itemList.isEmpty?fetchData():null;
+    itemList.isEmpty ? fetchData() : null;
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.offset &&
@@ -52,8 +51,8 @@ class SeeAllOffersController extends GetxController {
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
 
-    String token = await prefService.readString("token") ?? "";
-   String apiUrl = "${ServerConstApis.getOfferList}?page=$pageId";
+    String token = await prefService.readString("token");
+    String apiUrl = "${ServerConstApis.getOfferList}?page=$pageId";
 
     Either<ErrorResponse, Map<String, dynamic>> response =
         await ApiHelper.makeRequest(
@@ -73,14 +72,13 @@ class SeeAllOffersController extends GetxController {
   }
 
   handleDataSuccess(dynamic handlingResponse) {
-  
     List<dynamic> categoryListJson = handlingResponse["OfferEvent"]['data'];
     lastPageId = handlingResponse["OfferEvent"]['last_page'];
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => OfferEvent.fromJson(jsonItem))
         .toList());
-    if (pageId >= lastPageId  ){
+    if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }
     pageId++;
@@ -88,7 +86,8 @@ class SeeAllOffersController extends GetxController {
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
- followOrUnFollowEvent(int eventId, int modelIndex) async {
+
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
@@ -105,7 +104,7 @@ class SeeAllOffersController extends GetxController {
 
       update();
     }
-   }
+  }
 
   @override
   void onClose() {

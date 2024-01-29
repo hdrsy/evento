@@ -16,27 +16,26 @@ class FavoriteController extends GetxController {
   late RxList<EventWrapper> favoriteEvents;
   late List<RxString> distances;
   late RxList<String> errorMessage;
-   RxList<EventWrapper> searchResultSearch=<EventWrapper>[].obs;
-   RxBool isSearchActive=false.obs;
-   RxBool isLoading=false.obs;
-  late TextEditingController searchField=TextEditingController();
- 
+  RxList<EventWrapper> searchResultSearch = <EventWrapper>[].obs;
+  RxBool isSearchActive = false.obs;
+  RxBool isLoading = false.obs;
+  late TextEditingController searchField = TextEditingController();
 
   @override
-  void onInit() async{
+  void onInit() async {
     favoriteEvents = <EventWrapper>[].obs;
     errorMessage = <String>[].obs;
-    isLoading=false.obs;
+    isLoading = false.obs;
     distances = [];
-   await getMyFavoriteEvents();
-   calculateDistance();
+    await getMyFavoriteEvents();
+    calculateDistance();
     super.onInit();
   }
 
   getMyFavoriteEvents() async {
-    isLoading.value=true;
+    isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.myFavoriteEvents,
         method: "GEt",
@@ -51,10 +50,8 @@ class FavoriteController extends GetxController {
       favoriteEvents.value = interestsJson
           .map((jsonItem) => EventWrapper.fromJson(jsonItem))
           .toList();
-          print(favoriteEvents);
-     distances=List.generate(favoriteEvents.length, (index) => "0 Km".obs);
-     isLoading.value=false;
-
+      distances = List.generate(favoriteEvents.length, (index) => "0 Km".obs);
+      isLoading.value = false;
     }
   }
 
@@ -78,36 +75,35 @@ class FavoriteController extends GetxController {
     log(favoriteEvents[modelIndex].event.isFollowedByAuthUser.toString());
   }
 
-   calculateDistance() async {
+  calculateDistance() async {
     LocationService locationService = LocationService();
     for (var i = 0; i < favoriteEvents.length; i++) {
-      distances[i]=(await locationService.calculateDistance(favoriteEvents[i].event.venue.latitude, favoriteEvents[i].event.venue.longitude)).obs;
-   print(distances[i].value);
+      distances[i] = (await locationService.calculateDistance(
+              favoriteEvents[i].event.venue.latitude,
+              favoriteEvents[i].event.venue.longitude))
+          .obs;
     }
-    
   }
+
   void onPressSearch(String query) {
-  if (query.isEmpty) {
-    isSearchActive.value = false;
-    searchResultSearch.clear();
-  } else {
-    print(query);
-    isSearchActive.value = true;
-    searchResultSearch.assignAll(
-      favoriteEvents.where(
-        (event) => event.event.title.toLowerCase().contains(query.toLowerCase())
-      ).toList()
-    );
+    if (query.isEmpty) {
+      isSearchActive.value = false;
+      searchResultSearch.clear();
+    } else {
+      isSearchActive.value = true;
+      searchResultSearch.assignAll(favoriteEvents
+          .where((event) =>
+              event.event.title.toLowerCase().contains(query.toLowerCase()))
+          .toList());
+    }
   }
-}
-void onApplyFilters(Map<String ,dynamic> data)async{
-  isSearchActive.value=true;
-  final d=await  filter( data,url: ServerConstApis.favoritefilter);
-  print(d);
-Get.back();
-    var eventModels = d.map((jsonItem) => EventWrapper.fromJson(jsonItem)).toList();
-  searchResultSearch.addAll(eventModels.cast<EventWrapper>());
 
-}
-
+  void onApplyFilters(Map<String, dynamic> data) async {
+    isSearchActive.value = true;
+    final d = await filter(data, url: ServerConstApis.favoritefilter);
+    Get.back();
+    var eventModels =
+        d.map((jsonItem) => EventWrapper.fromJson(jsonItem)).toList();
+    searchResultSearch.addAll(eventModels.cast<EventWrapper>());
+  }
 }

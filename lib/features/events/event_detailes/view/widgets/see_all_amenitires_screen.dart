@@ -8,6 +8,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SeeAllAmenities extends StatelessWidget {
   SeeAllAmenities({super.key});
   final EventDetailesController eventDetailesController = Get.find();
@@ -22,7 +23,7 @@ class SeeAllAmenities extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -52,7 +53,9 @@ class SeeAllAmenities extends StatelessWidget {
                       amenity: eventDetailesController
                           .eventDetailsModel.amenities[index],
                     ))
-          ].divide(const SizedBox(height: 10,)),
+          ].divide(const SizedBox(
+            height: 10,
+          )),
         ),
       ),
     );

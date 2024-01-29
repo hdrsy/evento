@@ -11,10 +11,9 @@ class CancelBookingController extends GetxController {
   List<int> selectedTicket = [];
   String? selectedValue;
   late RxList<String> errorMessage;
-  bool cancellState=false;
+  bool cancellState = false;
   @override
   void onInit() {
-    // TODO: implement onInit
     errorMessage = <String>[].obs;
     super.onInit();
   }
@@ -29,26 +28,21 @@ class CancelBookingController extends GetxController {
   onPressCancell() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     for (var i = 0; i < selectedTicket.length; i++) {
-      print(selectedTicket[0]);
-      print(selectedValue);
-String token = await prefService.readString("token") ?? "";
-    
+      String token = await prefService.readString("token");
+
       response = await ApiHelper.makeRequest(
           targetRout: "${ServerConstApis.cancellBooking}/${selectedTicket[i]}",
           method: "Post",
           token: token,
           data: {"reason": selectedValue!});
-      print(response);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
-        print(errorMessage[0]);
-        cancellState=false;
+        cancellState = false;
       } else {
-        cancellState=true;
+        cancellState = true;
       }
     }
-    
   }
 }

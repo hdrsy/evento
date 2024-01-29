@@ -3,7 +3,7 @@ import 'package:evento/features/profile_pages/my_booking/controller/my_booking_c
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
-import '../../../../../core/utils/animation/animation_text.dart';
+
 import '../../../../../core/utils/helper/date_formatter.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
@@ -15,21 +15,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class MyBookingCard extends StatelessWidget {
   const MyBookingCard(
       {super.key,
       required this.isCanceldSection,
       required this.model,
       this.leftButtonOnTap,
-this.eventBooking,
+      this.eventBooking,
       this.leftButtonTitle,
       required this.bookingStatus});
-final List<EventBooking>? eventBooking;
+  final List<EventBooking>? eventBooking;
   final Function()? leftButtonOnTap;
   final String? leftButtonTitle;
   final bool isCanceldSection;
   final String bookingStatus;
-   final CancelledEvent model;
+  final CancelledEvent model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +40,7 @@ final List<EventBooking>? eventBooking;
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _buildImageSection(context,model),
+            _buildImageSection(context, model),
             Divider(
               thickness: 1,
               color: customColors.primaryBackground,
@@ -51,7 +52,7 @@ final List<EventBooking>? eventBooking;
     );
   }
 
-  Widget _buildImageSection(BuildContext context,CancelledEvent model) {
+  Widget _buildImageSection(BuildContext context, CancelledEvent model) {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(),
@@ -61,7 +62,7 @@ final List<EventBooking>? eventBooking;
           mainAxisSize: MainAxisSize.max,
           children: [
             _buildImage(model.images),
-            Expanded(child: _buildEventDetails(context,model)),
+            Expanded(child: _buildEventDetails(context, model)),
           ].divide(const SizedBox(width: 10)),
         ),
       ),
@@ -71,32 +72,31 @@ final List<EventBooking>? eventBooking;
   Widget _buildImage(List<String> img) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child:img.isNotEmpty? getImageNetwork(url: "/storage/${img[0]}", width: 110, height: 110):Image.network(
-        'https://picsum.photos/seed/886/600',
-        width: 110,
-        height: 110,
-        fit: BoxFit.cover,
-      ),
-      
-      
-       
+      child: img.isNotEmpty
+          ? getImageNetwork(url: "/storage/${img[0]}", width: 110, height: 110)
+          : Image.network(
+              'https://picsum.photos/seed/886/600',
+              width: 110,
+              height: 110,
+              fit: BoxFit.cover,
+            ),
     );
   }
 
-  Widget _buildEventDetails(BuildContext context,CancelledEvent model) {
+  Widget _buildEventDetails(BuildContext context, CancelledEvent model) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildEventName(context, model.title),
-        _buildEventTime(context,model),
-        _buildLocationAndPrice(context,model),
+        _buildEventTime(context, model),
+        _buildLocationAndPrice(context, model),
       ].divide(const SizedBox(height: 8)),
     );
   }
 
-  Widget _buildEventName(BuildContext context,String title) {
+  Widget _buildEventName(BuildContext context, String title) {
     return Text(
       title,
       style: customTextStyle.bodyMedium.override(
@@ -109,7 +109,7 @@ final List<EventBooking>? eventBooking;
     );
   }
 
-  Widget _buildEventTime(BuildContext context,CancelledEvent model) {
+  Widget _buildEventTime(BuildContext context, CancelledEvent model) {
     return Text(
       "${DateFormatter.formatDate(model.startDate)} - ${DateFormatter.formatTime(model.startDate)} - ${DateFormatter.formatTime(model.endDate)}",
       style: customTextStyle.bodyMedium.override(
@@ -121,20 +121,21 @@ final List<EventBooking>? eventBooking;
     );
   }
 
-  Widget _buildLocationAndPrice(BuildContext context,CancelledEvent model) {
+  Widget _buildLocationAndPrice(BuildContext context, CancelledEvent model) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        _buildLocation(context,"${model.venue.governorate} / ${model.venue.locationDescription}"),
-        Spacer(),
+        _buildLocation(context,
+            "${model.venue.governorate} / ${model.venue.locationDescription}"),
+        const Spacer(),
         _buildPaidButton(context),
       ],
     );
   }
 
-  Widget _buildLocation(BuildContext context,String location) {
+  Widget _buildLocation(BuildContext context, String location) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -144,7 +145,6 @@ final List<EventBooking>? eventBooking;
           size: 15,
         ),
         SizedBox(
-          
           width: screenWidth * 0.25,
           height: screenHeight * 0.03,
           child: Marquee(
@@ -154,14 +154,13 @@ final List<EventBooking>? eventBooking;
             velocity: 70.0,
             pauseAfterRound: const Duration(seconds: 3),
             style: customTextStyle.bodyMedium.override(
-              useGoogleFonts: false,
+                useGoogleFonts: false,
                 color: customColors.secondaryText,
                 fontFamily: secondaryFontFamily,
                 fontSize: 12,
                 fontWeight: FontWeight.w400),
           ),
         )
-       
       ],
     );
   }
@@ -170,8 +169,7 @@ final List<EventBooking>? eventBooking;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
       child: ButtonWidget(
-        onPressed: () {
-        },
+        onPressed: () {},
         text: bookingStatus,
         options: ButtonOptions(
           height: 22,
@@ -189,12 +187,11 @@ final List<EventBooking>? eventBooking;
             useGoogleFonts: true,
           ),
           borderSide: BorderSide(
-            color: bookingStatus == "Canceled" 
-    ? customColors.error 
-    : (bookingStatus == "Completed" 
-        ? customColors.success 
-        : customColors.alternate)
-,
+            color: bookingStatus == "Canceled"
+                ? customColors.error
+                : (bookingStatus == "Completed"
+                    ? customColors.success
+                    : customColors.alternate),
           ),
           borderRadius: BorderRadius.circular(6),
         ),
@@ -244,13 +241,13 @@ final List<EventBooking>? eventBooking;
   Widget _buildViewTicketButton(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
-        final MyBookingController myBookingController=Get.find();
-     var result= myBookingController.createTicketModelsFromEventBookings(eventBooking!);
-      print(result);
-       Get.toNamed('/BookingDetailesForMyBookingScreen',arguments: [model,result]);
-        
+        final MyBookingController myBookingController = Get.find();
+        var result = myBookingController
+            .createTicketModelsFromEventBookings(eventBooking!);
+        Get.toNamed('/BookingDetailesForMyBookingScreen',
+            arguments: [model, result]);
       },
-      text:tr( "View E-Ticket"),
+      text: tr("View E-Ticket"),
       options: ButtonOptions(
         height: 25,
         padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

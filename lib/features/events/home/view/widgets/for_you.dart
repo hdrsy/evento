@@ -15,6 +15,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ForYou extends StatelessWidget {
   ForYou({super.key});
   final JustForYouController justForYouController = Get.find();
@@ -25,33 +26,32 @@ class ForYou extends StatelessWidget {
           ? ShimmerLoadingWidget(
               loadingShimmerWidget: forYouLoading(),
             )
-          :  justForYouController.itemList.isEmpty?const SizedBox.shrink():
-          
-          
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ColumnText(
-                  title:tr( "Just for you"),
-                  subTitle: tr("Tailored Experiences & Personalized Picks"),
-                  onTap: () {
-                    Get.toNamed('/seeAll', arguments: [
-                      justForYouController.pageId,
-                      justForYouController.itemList,
-                      ServerConstApis.getJustForYouList,
-                     tr( "just_for_you"),
-                       tr( "just_for_you")
-                    ]);
-                  },
+          : justForYouController.itemList.isEmpty
+              ? const SizedBox.shrink()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ColumnText(
+                      title: tr("Just for you"),
+                      subTitle: tr("Tailored Experiences & Personalized Picks"),
+                      onTap: () {
+                        Get.toNamed('/seeAll', arguments: [
+                          justForYouController.pageId,
+                          justForYouController.itemList,
+                          ServerConstApis.getJustForYouList,
+                          tr("just_for_you"),
+                          tr("just_for_you")
+                        ]);
+                      },
+                    ),
+                    SizedBox(
+                      height: scaleHeight(10),
+                    ),
+                    SizedBox(
+                        // height: scaleHeight(350),
+                        child: buildHorizontalScrollEventCards())
+                  ],
                 ),
-                SizedBox(
-                  height: scaleHeight(10),
-                ),
-                SizedBox(
-                    // height: scaleHeight(350),
-                    child: buildHorizontalScrollEventCards())
-              ],
-            ),
     );
   }
 }
@@ -95,9 +95,10 @@ Widget buildHorizontalScrollEventCards() {
 // Function to create each event card
 Widget buildEventCard(EventModel eventModel, int modelIndex) {
   return GetBuilder<JustForYouController>(builder: (context) {
-    return InkWell(
-      onTap: (){  Get.toNamed('/eventDetailes',arguments: [eventModel.id,false,0]);
-                    },
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+      },
       child: Container(
         width: screenWidth * 0.45,
         // height: scaleHeight(210),

@@ -1,4 +1,3 @@
-import '../../../../core/server/server_config.dart';
 import '../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 
@@ -12,6 +11,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class VenueDetailesScreen extends StatelessWidget {
   VenueDetailesScreen({super.key});
   final VenueDetailesController venueDetailesController = Get.find();
@@ -105,9 +105,9 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
               unselectedLabelStyle: const TextStyle(),
               indicatorColor: customColors.primary,
               indicatorWeight: 4,
-              tabs:  [
-                Tab(text:tr( "Details")),
-                Tab(text:tr( "Gallery")),
+              tabs: [
+                Tab(text: tr("Details")),
+                Tab(text: tr("Gallery")),
               ],
             ),
           ),
@@ -115,7 +115,7 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
             child: TabBarView(
               children: [
                 Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: VenueDetailesCard()),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),

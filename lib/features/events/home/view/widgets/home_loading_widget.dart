@@ -2,7 +2,6 @@ import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 SizedBox featuredLoading() {
   return SizedBox(
@@ -120,8 +119,8 @@ SizedBox inYourCityLoading() {
                 ...List.generate(
                   3,
                   (index) => Container(
-                   width: 150,
-    height: 215,
+                    width: 150,
+                    height: 215,
                     // height: 330 ,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),

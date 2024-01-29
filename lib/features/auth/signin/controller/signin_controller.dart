@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -9,23 +7,24 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SigninController extends GetxController{
+class SigninController extends GetxController {
   late TextEditingController phone;
   late TextEditingController password;
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
   late RxList<String> errorMessage;
- @override
+  @override
   void onInit() {
-    phone=TextEditingController();
-    password=TextEditingController();
-     formstate = GlobalKey<FormState>();
+    phone = TextEditingController();
+    password = TextEditingController();
+    formstate = GlobalKey<FormState>();
     isLoading = false.obs;
-    errorMessage=<String>[].obs;
+    errorMessage = <String>[].obs;
     super.onInit();
   }
-  onClickSignIn()async{
-FormState? formdata = formstate.currentState;
+
+  onClickSignIn() async {
+    FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
       isLoading.value = true;
@@ -35,40 +34,33 @@ FormState? formdata = formstate.currentState;
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.signIn,
           method: "Post",
-          data: {
-            "phone_number": phone.text,
-    "password":password.text
-          });
-          print(response);
+          data: {"phone_number": phone.text, "password": password.text});
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      
+
       if (handlingResponse is ErrorResponse) {
-        errorMessage.value= handlingResponse.getErrorMessages();
+        errorMessage.value = handlingResponse.getErrorMessages();
         for (var i = 0; i < errorMessage.length; i++) {
-          if(errorMessage[i]=="please complete your data"){
-            Get.toNamed('/steps',arguments: [1,phone.text]);
-  
+          if (errorMessage[i] == "please complete your data") {
+            Get.toNamed('/steps', arguments: [1, phone.text]);
           }
         }
-      }else{
-
+      } else {
         whenSignInSuccess(handlingResponse);
       }
     }
 
     isLoading.value = false;
-  
   }
-  whenSignInSuccess(handlingResponse)async{
-     String token = handlingResponse['token'];
-       print(handlingResponse);
+
+  whenSignInSuccess(handlingResponse) async {
+    String token = handlingResponse['token'];
     prefService.createString("token", token);
     prefService.createString("isCompleteProfile", "true");
-     isGuset=false;
-       targetRout == '/home';
-   
-     user=await UserInfo.getUserInfo();
-   
+    isGuset = false;
+    targetRout == '/home';
+
+    user = await UserInfo.getUserInfo();
+
     Get.offAllNamed('/home');
   }
 }

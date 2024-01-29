@@ -13,11 +13,10 @@ class ServerConstApis {
   /////Otp
   static String verifyotp = '$baseAPI/api/checkOTP';
   static String sendOtp = '$baseAPI/api/sendOTP';
-    ///// forgetPassword
+  ///// forgetPassword
   static String sendCode = '$baseAPI/api/sendCode';
   static String checkCode = '$baseAPI/api/checkCode';
   static String changePasswordForgetten = '$baseAPI/api/changePassword';
-    
 
   ///// interest
   static String getInterest = '$baseAPI/api/interest';
@@ -31,7 +30,7 @@ class ServerConstApis {
   static String becomeOrganizer = '$baseAPI/api/become_organizer';
   static String organizerProfile = '$baseAPI/api/organizer_profile';
   ///// service provider
-  
+
   static String becomeServiceProvider = '$baseAPI/api/become_service_provider';
   static String serviceProfileForUser = '$baseAPI/api/service_provider';
   ///// home page
@@ -45,7 +44,8 @@ class ServerConstApis {
   static String getOrganizerEventList = '$baseAPI/api/organizer_event';
   static String getOfferList = '$baseAPI/api/offer_event';
   static String getOrganizerHomeList = '$baseAPI/api/Home-Organizer';
-  static String getAccordingCategoryList = '$baseAPI/api/eventAccordingCategory';
+  static String getAccordingCategoryList =
+      '$baseAPI/api/eventAccordingCategory';
   //// event detailes
   static String getEventDetailes = '$baseAPI/api/event';
   static String showGoing = '$baseAPI/api/showGoing';
@@ -53,16 +53,15 @@ class ServerConstApis {
 /////
   static String bookNow = '$baseAPI/api/book';
 
-
   /////my booking
   static String myCancelledBookings = '$baseAPI/api/my-cancelled-bookings';
   static String myBooking = '$baseAPI/api/my_booking';
   static String cancellBooking = '$baseAPI/api/booking/cancel';
 
-  //// follow 
+  //// follow
   static String followEvent = '$baseAPI/api/event_follow';
   static String unFollowEvent = '$baseAPI/api/event_unfollow';
-  static String myFavoriteEvents='$baseAPI/api/my_favorite';
+  static String myFavoriteEvents = '$baseAPI/api/my_favorite';
   //// reels
   static String getReels = '$baseAPI/api/reels';
   static String likeReel = '$baseAPI/api/reels';
@@ -71,43 +70,39 @@ class ServerConstApis {
   //// promoCode
   static String myPromoCode = '$baseAPI/api/my_promo_code';
 
-
   //// profile
   static String getprofile = '$baseAPI/api/profile';
-  static String changePassword= '$baseAPI/api/user/reset-password';
-  static String updateProfile= '$baseAPI/api/user/update';
-  static String userChangeType= '$baseAPI/api/change_type';
-
+  static String changePassword = '$baseAPI/api/user/reset-password';
+  static String updateProfile = '$baseAPI/api/user/update';
+  static String userChangeType = '$baseAPI/api/change_type';
 
   //// customiz event
-  static String serviceCategory= '$baseAPI/api/service_category';
-  static String serviceAccordingCategory= '$baseAPI/api/serviceAccordingCategory';
-  static String getAllvenue= '$baseAPI/api/venue';
-  static String sendEventRequest= '$baseAPI/api/sendEventRequest';
-  static String myEventRequest= '$baseAPI/api/my_request';
-
-
+  static String serviceCategory = '$baseAPI/api/service_category';
+  static String serviceAccordingCategory =
+      '$baseAPI/api/serviceAccordingCategory';
+  static String getAllvenue = '$baseAPI/api/venue';
+  static String sendEventRequest = '$baseAPI/api/sendEventRequest';
+  static String myEventRequest = '$baseAPI/api/my_request';
 
   ///// freinds
-  static String freindRequest= '$baseAPI/api/friend-request';
-  static String denyRequest= '$baseAPI/api/friend-request/deny';
-  static String cancelRequest= '$baseAPI/api/friend-request/cancel';
-  static String approveRequest= '$baseAPI/api/friend-request/approve';
-  static String myFreinds= '$baseAPI/api/my-friends';
-  static String mySentRequests= '$baseAPI/api/my-sent-requests';
-  static String myReciviedRequests= '$baseAPI/api/my-received-requests';
+  static String freindRequest = '$baseAPI/api/friend-request';
+  static String denyRequest = '$baseAPI/api/friend-request/deny';
+  static String cancelRequest = '$baseAPI/api/friend-request/cancel';
+  static String approveRequest = '$baseAPI/api/friend-request/approve';
+  static String myFreinds = '$baseAPI/api/my-friends';
+  static String mySentRequests = '$baseAPI/api/my-sent-requests';
+  static String myReciviedRequests = '$baseAPI/api/my-received-requests';
 
-  /// review 
-  static String reviewEvent= '$baseAPI/api/event-review';
-  static String reviewServiceProvider= '$baseAPI/api/service-provider-review';
-  static String reviewVenue= '$baseAPI/api/venue-review';
-  static String inviteEvent= '$baseAPI/api/Invite';
-
+  /// review
+  static String reviewEvent = '$baseAPI/api/event-review';
+  static String reviewServiceProvider = '$baseAPI/api/service-provider-review';
+  static String reviewVenue = '$baseAPI/api/venue-review';
+  static String inviteEvent = '$baseAPI/api/Invite';
 
   //// filter
-  static String filter= '$baseAPI/api/filter';
-  static String favoritefilter= '$baseAPI/api/favorite_filter';
-
+  static String filter = '$baseAPI/api/filter';
+  static String favoritefilter = '$baseAPI/api/favorite_filter';
+  static String eventSearch = '$baseAPI/api/event_search';
 
   ///// guest
   static String getCategoryListforGuest = '$baseAPI/api/event_category-guest';
@@ -116,9 +111,8 @@ class ServerConstApis {
   static String getToNightListforGuest = '$baseAPI/api/toNight-guest';
   static String getThisWeekListforGuest = '$baseAPI/api/thisWeek-guest';
   static String getOfferListforGuest = '$baseAPI/api/offer_event-guest';
-  static String getAccordingCategoryListforGuest = '$baseAPI/api/eventAccordingCategory-guest';
+  static String getAccordingCategoryListforGuest =
+      '$baseAPI/api/eventAccordingCategory-guest';
   static String getReelsforGuest = '$baseAPI/api/reels-guest';
   static String getEventDetailesforGuest = '$baseAPI/api/event-guest';
-  
-
 }

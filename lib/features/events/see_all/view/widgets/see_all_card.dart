@@ -12,6 +12,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SeeAllCard extends StatelessWidget {
   const SeeAllCard(
       {super.key, required this.eventModel, required this.modelIndex});
@@ -20,9 +21,8 @@ class SeeAllCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:(){
-  Get.toNamed('/eventDetailes',arguments: [eventModel.id,false,0]);
-                    
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Container(
         width: double.infinity,
@@ -31,14 +31,14 @@ class SeeAllCard extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)
-                  ),
+                  color: Color(0x33000000),
+                  blurRadius: 4,
+                  offset: Offset(0, 2)),
             ]),
         child: Column(
           children: [
             _buildImage(eventModel),
             _dateWithPlayVedio(eventModel),
-            
             Divider(
               thickness: 1,
               indent: 12,
@@ -53,18 +53,13 @@ class SeeAllCard extends StatelessWidget {
   }
 
   Widget _locationWithDistance(EventModel eventModel) {
-    return 
-        Padding(
+    return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
+          GestureDetector(
             onTap: () async {
               // context.pushNamed('Event-Location');
             },
@@ -88,11 +83,7 @@ class SeeAllCard extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
+          GestureDetector(
             onTap: () async {
               // context.pushNamed('Going');
             },
@@ -162,9 +153,9 @@ class SeeAllCard extends StatelessWidget {
                   ),
                   ToggleIcon(
                     onPressed: () async {
-                       if(isGuset){
-                    Get.dialog( const GuestPopupWidget());
-                  }else{}
+                      if (isGuset) {
+                        Get.dialog(const GuestPopupWidget());
+                      } else {}
                     },
                     value: false,
                     onIcon: Icon(
@@ -190,14 +181,16 @@ class SeeAllCard extends StatelessWidget {
   Widget _buildImage(EventModel eventModel) {
     return Stack(alignment: const AlignmentDirectional(0, 1), children: [
       ClipRRect(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        child: getImageNetwork(url: "/storage/${eventModel.images[0]}", width: double.infinity, height: scaleHeight(210))
-      ),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: getImageNetwork(
+              url: "/storage/${eventModel.images[0]}",
+              width: double.infinity,
+              height: scaleHeight(210))),
       Container(
         width: double.infinity,
         height: 200,

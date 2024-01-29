@@ -21,7 +21,7 @@ class MapScreen extends StatelessWidget {
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -35,7 +35,7 @@ class MapScreen extends StatelessWidget {
         body: Stack(
           children: [
             MapWidget(),
-             ElementWidget(),
+            ElementWidget(),
             Align(
                 alignment: const AlignmentDirectional(1, 1),
                 child: EventsList()),
@@ -45,8 +45,8 @@ class MapScreen extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                 child: ButtonWidget(
                   onPressed: () async {
-                   Get.back();
-                   },
+                    Get.back();
+                  },
                   text: '',
                   icon: const Icon(
                     Icons.list,

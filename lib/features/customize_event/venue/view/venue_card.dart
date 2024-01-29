@@ -8,19 +8,17 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class VenueCard extends StatelessWidget {
   VenueCard({super.key, required this.venue});
   final Venue venue;
-final VenueController venueController=Get.find();
+  final VenueController venueController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
-        Get.toNamed('/VenueDetailesScreen',arguments: [venue,venueController.isInCustomuzEvent]);
+        Get.toNamed('/VenueDetailesScreen',
+            arguments: [venue, venueController.isInCustomuzEvent]);
       },
       child: Container(
         width: double.infinity,
@@ -37,7 +35,7 @@ final VenueController venueController=Get.find();
                     borderRadius: BorderRadius.circular(16),
                     child: getImageNetwork(
                         url: venue.profile,
-                              width: double.infinity,
+                        width: double.infinity,
                         height: 230)),
               ),
               Row(
@@ -48,52 +46,53 @@ final VenueController venueController=Get.find();
                     venue.name,
                     style: customTextStyle.headlineSmall,
                   ),
-             venueController.isInCustomuzEvent?
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add to Event",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primary,
-                          fontSize: 12,
-                          useGoogleFonts: true,
-                        ),
-                      ).tr(),
-                      //// to update selected service provier in serviceCategoryController
-                      GetBuilder<ServiceCategoryController>(
-                          builder: (serviceCategoryController) {
-                        return Theme(
-                          data: ThemeData(
-                            checkboxTheme: CheckboxThemeData(
-                              visualDensity: VisualDensity.compact,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
+                  venueController.isInCustomuzEvent
+                      ? Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Add to Event",
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'Nunito',
+                                color: customColors.primary,
+                                fontSize: 12,
+                                useGoogleFonts: true,
                               ),
-                            ),
-                            unselectedWidgetColor: customColors.secondaryText,
-                          ),
-                          child: Checkbox(
-                            value:
-                                serviceCategoryController.selectedVenue.value ==
-                                    venue.id,
-                            onChanged: (newValue) async {
-                              serviceCategoryController
-                                  .changeSelectedVenue(venue.id,"La Rosa");
-                            },
-                            activeColor: customColors.success,
-                            checkColor: customColors.info,
-                          ),
-                        );
-                      }),
-                    ],
-                  )
-              
-              :const SizedBox.shrink()
+                            ).tr(),
+                            //// to update selected service provier in serviceCategoryController
+                            GetBuilder<ServiceCategoryController>(
+                                builder: (serviceCategoryController) {
+                              return Theme(
+                                data: ThemeData(
+                                  checkboxTheme: CheckboxThemeData(
+                                    visualDensity: VisualDensity.compact,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  unselectedWidgetColor:
+                                      customColors.secondaryText,
+                                ),
+                                child: Checkbox(
+                                  value: serviceCategoryController
+                                          .selectedVenue.value ==
+                                      venue.id,
+                                  onChanged: (newValue) async {
+                                    serviceCategoryController
+                                        .changeSelectedVenue(
+                                            venue.id, "La Rosa");
+                                  },
+                                  activeColor: customColors.success,
+                                  checkColor: customColors.info,
+                                ),
+                              );
+                            }),
+                          ],
+                        )
+                      : const SizedBox.shrink()
                 ],
               ),
               Padding(

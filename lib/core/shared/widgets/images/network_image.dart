@@ -4,22 +4,24 @@ import '../../../server/server_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
- getImageNetwork(
-    {required String url, required double? width, required double? height,AlignmentGeometry? alignmentGeometry}) {
-      
+getImageNetwork(
+    {required String url,
+    required double? width,
+    required double? height,
+    AlignmentGeometry? alignmentGeometry}) {
+  String cleanUrl = url.contains("storage") ? url : "/storage/$url";
   return Image.network(
-    ServerConstApis.baseAPI + url,
+    ServerConstApis.baseAPI + cleanUrl,
     width: width,
-    alignment: alignmentGeometry??Alignment.center,
+    alignment: alignmentGeometry ?? Alignment.center,
     height: height,
     fit: BoxFit.cover,
     loadingBuilder:
         (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
       if (loadingProgress == null) {
-    
         return child; // Image has finished loading
       }
-        return Shimmer.fromColors(
+      return Shimmer.fromColors(
         baseColor: Colors.grey[300]!, // Replace with your base color
         highlightColor: Colors.grey[100]!, // Replace with your highlight color
         child: Container(
@@ -28,7 +30,7 @@ import 'package:shimmer/shimmer.dart';
           color: Colors.white,
         ),
       );
-      },
+    },
     errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
       log(stackTrace.toString());
       log(error.toString());

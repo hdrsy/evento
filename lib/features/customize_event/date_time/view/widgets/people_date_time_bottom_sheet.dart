@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class PeopleDateTimeBottomSheet extends StatefulWidget {
   PeopleDateTimeBottomSheet({Key? key}) : super(key: key);
   final DateTimeController dateTimeController = Get.find();
@@ -39,7 +40,8 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
         widget.dateTimeController.isUserEnterDateInfo = true;
         Get.back();
       } else {
-        Get.snackbar(tr("Uncomplete data"), tr("Please fill all the required data"),
+        Get.snackbar(
+            tr("Uncomplete data"), tr("Please fill all the required data"),
             snackPosition: SnackPosition.TOP,
             backgroundColor: customColors.primaryBackground);
       }
@@ -111,7 +113,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
                 onPressed: () async {
                   _nextStep();
                 },
-                text:tr( "Next"),
+                text: tr("Next"),
                 options: ButtonOptions(
                   width: 150,
                   height: 40,
@@ -136,7 +138,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
   }
 
   Widget stepWithDivider(String stepName, int index, IconData icon) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         setState(() {
           activeStep = index;
@@ -166,7 +168,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
                       fontWeight: FontWeight.w500,
                       color: customColors.primaryText,
                       useGoogleFonts: true),
-                ),
+                ).tr(),
               ],
             ),
           ),
@@ -198,6 +200,7 @@ class _PeopleDateTimeBottomSheetState extends State<PeopleDateTimeBottomSheet> {
     );
   }
 }
+
 class MyCalendarWidget extends StatefulWidget {
   final DateTimeController dateTimeController = Get.find();
 
@@ -212,48 +215,43 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      rowHeight: screenHeight*0.05,
+      rowHeight: screenHeight * 0.05,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: focusedDay,
       headerStyle: HeaderStyle(
-        titleTextStyle: customTextStyle.bodyMedium.copyWith(
-          color: customColors.primaryText
-        ),
-        formatButtonTextStyle: customTextStyle.bodyMedium.copyWith(
-          color: customColors.primaryText
-        ),
+        titleTextStyle: customTextStyle.bodyMedium
+            .copyWith(color: customColors.primaryText),
+        formatButtonTextStyle: customTextStyle.bodyMedium
+            .copyWith(color: customColors.primaryText),
         formatButtonVisible: false,
-
-       ),
+      ),
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),
       onDaySelected: (selectedDay, focusedDay) {
-        widget.dateTimeController.date=selectedDay;
+        widget.dateTimeController.date = selectedDay;
         setState(() {
           this.selectedDay = selectedDay;
           this.focusedDay = focusedDay; // update focusedDay as well if needed
         });
       },
       calendarStyle: CalendarStyle(
-        
-                todayDecoration: BoxDecoration(
-                  color: customColors.primary, // Replace with your color
-                  shape: BoxShape
-                      .circle, // Commonly a circle, but you can use other shapes
-                ),
-                selectedDecoration: BoxDecoration(
-                  color: customColors.primary, // Replace with your color
-                  shape: BoxShape
-                      .circle, // Commonly a circle, but you can use other shapes
-                ),
+        todayDecoration: BoxDecoration(
+          color: customColors.primary, // Replace with your color
+          shape: BoxShape
+              .circle, // Commonly a circle, but you can use other shapes
+        ),
+        selectedDecoration: BoxDecoration(
+          color: customColors.primary, // Replace with your color
+          shape: BoxShape
+              .circle, // Commonly a circle, but you can use other shapes
+        ),
 
-                // Use custom color for day numbers
-                defaultTextStyle: TextStyle(color: customColors.secondaryText),
-                weekendTextStyle: TextStyle(color: customColors.secondaryText),
-                holidayTextStyle: TextStyle(color: customColors.secondaryText ),
-                outsideTextStyle: TextStyle(color: customColors.secondaryText),
-              ),
-            
+        // Use custom color for day numbers
+        defaultTextStyle: TextStyle(color: customColors.secondaryText),
+        weekendTextStyle: TextStyle(color: customColors.secondaryText),
+        holidayTextStyle: TextStyle(color: customColors.secondaryText),
+        outsideTextStyle: TextStyle(color: customColors.secondaryText),
+      ),
     );
   }
 }
@@ -277,7 +275,13 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: SizedBox(width: 70, child:  Text(tr("Adult"),style: customTextStyle.bodyMedium.copyWith(color: customColors.primaryText),)),
+                  child: SizedBox(
+                      width: 70,
+                      child: Text(
+                        tr("Adult"),
+                        style: customTextStyle.bodyMedium
+                            .copyWith(color: customColors.primaryText),
+                      )),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -354,7 +358,11 @@ Widget selectPeople() {
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: SizedBox(width: 70, child:  Text(tr("children"),style: customTextStyle.bodyMedium.copyWith(color: customColors.primaryText))),
+                  child: SizedBox(
+                      width: 70,
+                      child: Text(tr("children"),
+                          style: customTextStyle.bodyMedium
+                              .copyWith(color: customColors.primaryText))),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -433,7 +441,7 @@ Widget pickTime(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        InkWell(
+        GestureDetector(
           onTap: () async {
             showButtonSheet(
                 context: context,
@@ -463,7 +471,7 @@ Widget pickTime(BuildContext context) {
                   width: scaleWidth(10),
                 ),
                 Text(
-               DateFormatter.formatTime(   dateTimeController.startTime),
+                  DateFormatter.formatTime(dateTimeController.startTime),
                   style: customTextStyle.bodySmall.override(
                     fontFamily: 'Readex Pro',
                     color: customColors.secondaryText,
@@ -474,7 +482,7 @@ Widget pickTime(BuildContext context) {
           ),
         ),
         const SizedBox(width: 10), // Space between the input fields
-        InkWell(
+        GestureDetector(
           onTap: () async {
             showButtonSheet(
                 context: context,
@@ -504,7 +512,7 @@ Widget pickTime(BuildContext context) {
                   width: scaleWidth(10),
                 ),
                 Text(
-                DateFormatter.formatTime(  dateTimeController.endTime) ,
+                  DateFormatter.formatTime(dateTimeController.endTime),
                   style: customTextStyle.bodySmall.override(
                     fontFamily: 'Readex Pro',
                     color: customColors.secondaryText,

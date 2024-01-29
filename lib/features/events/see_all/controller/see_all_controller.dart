@@ -26,24 +26,24 @@ class SeeAllController extends GetxController {
   late RxList<EventModel> itemList;
 
   late RxList<String> errorMessage;
-late String targetRout;
-late String mapKey;
-late String pageTitle;
+  late String targetRout;
+  late String mapKey;
+  late String pageTitle;
   @override
   void onInit() {
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
     dataLimit = 4;
-    pageId = Get.arguments[0]??1;
+    pageId = Get.arguments[0] ?? 1;
     hasMoreData = false.obs;
     errorMessage = <String>[].obs;
-    itemList =Get.arguments[1]?? <EventModel>[].obs;
-    targetRout=Get.arguments[2];
-    mapKey=Get.arguments[3];
-    pageTitle=Get.arguments[4]??"";
+    itemList = Get.arguments[1] ?? <EventModel>[].obs;
+    targetRout = Get.arguments[2];
+    mapKey = Get.arguments[3];
+    pageTitle = Get.arguments[4] ?? "";
     log(pageId.toString());
     scrollController = ScrollController();
-    itemList.isEmpty?fetchData():null;
+    itemList.isEmpty ? fetchData() : null;
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.offset &&
@@ -58,7 +58,7 @@ late String pageTitle;
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
 
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     String apiUrl = "$targetRout?page=$pageId";
 
     Either<ErrorResponse, Map<String, dynamic>> response =
@@ -79,14 +79,13 @@ late String pageTitle;
   }
 
   handleDataSuccess(dynamic handlingResponse) {
-  
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
-    if (pageId >= lastPageId  ){
+    if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }
     pageId++;

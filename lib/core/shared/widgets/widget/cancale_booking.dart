@@ -10,9 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CancelBookingWidget extends StatelessWidget {
-   CancelBookingWidget({Key? key}) : super(key: key);
-final CancelBookingController cancelBookingController=Get.put(CancelBookingController());
- 
+  CancelBookingWidget({Key? key}) : super(key: key);
+  final CancelBookingController cancelBookingController =
+      Get.put(CancelBookingController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,7 +57,7 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       RadioButtonList(titles: [
+                      RadioButtonList(titles: [
                         tr("I have another event"),
                         tr("I'm sick,  can't come"),
                         tr("I have an urgent need"),
@@ -76,14 +77,14 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                         child: TextFormField(
-                          onChanged: (value){
-                            cancelBookingController.selectedValue=value;
+                          onChanged: (value) {
+                            cancelBookingController.selectedValue = value;
                             cancelBookingController.update();
                           },
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: customTextStyle.labelMedium,
-                            hintText:tr( "Others reason"),
+                            hintText: tr("Others reason"),
                             hintStyle: customTextStyle.labelMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.secondaryText,
@@ -132,15 +133,21 @@ final CancelBookingController cancelBookingController=Get.put(CancelBookingContr
               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
               child: ButtonWidget(
                 onPressed: () async {
-                  if(cancelBookingController.selectedValue!=null && cancelBookingController.selectedValue!.length>4){
-
-                  showButtonSheet(context: context, widget: const ConfirmCancelBookingWidget(), height: 200);
-                  }else{
-                    Get.snackbar("Action Required", "Please select a reason for cancellation from the list or type in your specific reason to proceed with booking cancellation.",snackPosition: SnackPosition.TOP,backgroundColor: customColors.primaryBackground);
+                  Get.back();
+                  if (cancelBookingController.selectedValue != null &&
+                      cancelBookingController.selectedValue!.length > 4) {
+                    showButtonSheet(
+                        context: context,
+                        widget: const ConfirmCancelBookingWidget(),
+                        height: 200);
+                  } else {
+                    Get.snackbar("Action Required",
+                        "Please select a reason for cancellation from the list or type in your specific reason to proceed with booking cancellation.",
+                        snackPosition: SnackPosition.TOP,
+                        backgroundColor: customColors.primaryBackground);
                   }
-
                 },
-                text:tr( "Cancel Booking"),
+                text: tr("Cancel Booking"),
                 options: ButtonOptions(
                   height: 40,
                   padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
@@ -185,34 +192,31 @@ class _RadioButtonListState extends State<RadioButtonList> {
       ...List.generate(
           widget.titles.length,
           (index) => GetBuilder<CancelBookingController>(
-            builder: (cancelBookingController) {
-              return RadioListTile<String>(
-                    activeColor: customColors.primary,
-                    title: Text(
-                      widget.titles[index],
-                      style: _selectedValue != widget.titles[index]
-                          ? customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              fontSize: 16,
-                              useGoogleFonts: true,
-                            )
-                          : customTextStyle.titleMedium,
-                    ),
-                    value: widget.titles[index],
-                    groupValue: cancelBookingController.selectedValue,
-                    contentPadding: EdgeInsets
-                        .zero, // Removes default padding around the tile content
-                    dense: true,
-                    onChanged: (String? value) {
-                      setState(() {
-                        
-                      });
-                      cancelBookingController.selectedValue=value;
-                      cancelBookingController.update();
-                    },
-                  );
-            }
-          ))
+                  builder: (cancelBookingController) {
+                return RadioListTile<String>(
+                  activeColor: customColors.primary,
+                  title: Text(
+                    widget.titles[index],
+                    style: _selectedValue != widget.titles[index]
+                        ? customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            fontSize: 16,
+                            useGoogleFonts: true,
+                          )
+                        : customTextStyle.titleMedium,
+                  ),
+                  value: widget.titles[index],
+                  groupValue: cancelBookingController.selectedValue,
+                  contentPadding: EdgeInsets
+                      .zero, // Removes default padding around the tile content
+                  dense: true,
+                  onChanged: (String? value) {
+                    setState(() {});
+                    cancelBookingController.selectedValue = value;
+                    cancelBookingController.update();
+                  },
+                );
+              }))
     ]);
   }
 }

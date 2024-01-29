@@ -95,7 +95,7 @@ Widget buildHorizontalListView() {
 // Function to create each event card
 Widget buildEventCard(EventModel eventModel, int modelId) {
   return GetBuilder<EventInYourCityListController>(builder: (context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },

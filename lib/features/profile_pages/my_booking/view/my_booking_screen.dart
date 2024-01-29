@@ -6,6 +6,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class MyBookingScreen extends StatelessWidget {
   const MyBookingScreen({super.key});
 
@@ -15,9 +16,10 @@ class MyBookingScreen extends StatelessWidget {
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text("My Booking",
-            style: customTextStyle.bodyMedium
-                .copyWith(color: customColors.primary, fontSize: 20)),
+        title: Text("My Bookings",
+                style: customTextStyle.bodyMedium
+                    .copyWith(color: customColors.primary, fontSize: 20))
+            .tr(),
         centerTitle: true,
         leading: InkWell(
           onTap: () {
@@ -40,31 +42,29 @@ class MyBookingScreen extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Align(
-                      alignment: const Alignment(0, 0),
-                      child: TabBar(
-                        labelColor: customColors.primary,
-                        unselectedLabelColor: customColors.grayIcon,
-                        labelStyle: customTextStyle.titleSmall.override(
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w500,
-                          useGoogleFonts: true,
-                        ),
-                        unselectedLabelStyle: const TextStyle(),
-                        indicatorColor: customColors.primary,
-                        indicatorWeight: 4,
-                        tabs:  [
-                          Tab(
-                            text: tr("Upcoming"),
-                          ),
-                          Tab(
-                            text:tr( "Completed"),
-                          ),
-                          Tab(
-                            text:tr( "Canceled"),
-                          ),
-                        ],
+                    TabBar(
+                      labelColor: customColors.primary,
+                      unselectedLabelColor: customColors.grayIcon,
+                      labelStyle: customTextStyle.titleSmall.override(
+                        fontFamily: 'Nunito',
+                        fontWeight: FontWeight.w500,
+                        useGoogleFonts: true,
                       ),
+                      unselectedLabelStyle: const TextStyle(),
+                      indicatorColor: customColors.primary,
+                      dividerColor: customColors.secondaryBackground,
+                      indicatorWeight: 4,
+                      tabs: [
+                        Tab(
+                          text: tr("Upcoming"),
+                        ),
+                        Tab(
+                          text: tr("Completed"),
+                        ),
+                        Tab(
+                          text: tr("Canceled"),
+                        ),
+                      ],
                     ),
                     Expanded(
                         child: TabBarView(

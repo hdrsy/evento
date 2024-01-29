@@ -1,4 +1,3 @@
-import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/animation/shimmer_animation.dart';
@@ -10,7 +9,6 @@ import 'home_loading_widget.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CategoryList extends StatelessWidget {

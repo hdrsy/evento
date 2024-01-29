@@ -29,7 +29,7 @@ class SearchAndNotification extends StatelessWidget {
           SizedBox(
             width: scaleWidth(20),
           ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (isGuset) {
                 Get.dialog(GuestPopupWidget());
@@ -46,16 +46,16 @@ class SearchAndNotification extends StatelessWidget {
                   size: 30,
                 ),
                 Obx(
-                  ()=>
-                  isThereNotification.value?
-                  Container(
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                              ),
-                          ):SizedBox.shrink(),
+                  () => isThereNotification.value
+                      ? Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        )
+                      : SizedBox.shrink(),
                 )
               ],
             ),

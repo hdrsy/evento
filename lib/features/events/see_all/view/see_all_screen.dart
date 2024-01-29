@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SeeAllScreen extends StatelessWidget {
-   SeeAllScreen({super.key});
- final SeeAllController seeAllController = Get.find();
+  SeeAllScreen({super.key});
+  final SeeAllController seeAllController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class SeeAllScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -41,7 +41,7 @@ class SeeAllScreen extends StatelessWidget {
       controller: seeAllController.scrollController,
       padding: padding(16, 16, 16, 16),
       child: Obx(
-        ()=> Column(
+        () => Column(
           children: [
             ...List.generate(
                 seeAllController.hasMoreData.value

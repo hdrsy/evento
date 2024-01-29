@@ -3,15 +3,10 @@ import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widg
 
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/buttons/icon_with_container.dart';
-import '../../../core/shared/widgets/widget/rate_event_widget.dart';
 import '../../../core/shared/widgets/widget/total_widget.dart';
 import '../../../core/utils/helper/expanded_image_view.dart';
 import '../../../core/utils/theme/text_theme.dart';
-import '../../booking_detailes/controller/booking_detailes_controller.dart';
-import '../../booking_detailes/view/widget/build_buttons.dart';
-import '../../booking_detailes/view/widget/event_info_card.dart';
 import '../../booking_detailes/view/widget/ticket_detailes_card.dart';
 import '../controller/booking_detailes_controller.dart';
 import '../../../main.dart';
@@ -22,7 +17,8 @@ import 'package:easy_localization/easy_localization.dart';
 
 class BookingDetailesForMyBookingScreen extends StatelessWidget {
   BookingDetailesForMyBookingScreen({super.key});
-  final BookingDetailesForMyBookingController bookingDetailesController = Get.put(BookingDetailesForMyBookingController());
+  final BookingDetailesForMyBookingController bookingDetailesController =
+      Get.put(BookingDetailesForMyBookingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +29,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -90,7 +86,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                   ],
                 ),
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],
@@ -282,11 +278,7 @@ class IMAGE extends StatelessWidget {
               ),
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: () async {
                     await Navigator.push(
                       context,

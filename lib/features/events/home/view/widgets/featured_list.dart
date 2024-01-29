@@ -5,7 +5,6 @@ import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/shared/widgets/video/cards_video_widget.dart';
-import '../../../../../core/shared/widgets/video/reels_video_widget.dart';
 import '../../../../../core/utils/animation/animation_def.dart';
 import '../../../../../core/utils/animation/animation_util.dart';
 import '../../../../../core/utils/animation/shimmer_animation.dart';
@@ -248,7 +247,7 @@ class FeaturedWidget extends StatelessWidget {
           child: Align(
             alignment: const AlignmentDirectional(0.00, 0.00),
             child: Text(
-              "$ticketPrice s.p",
+              "$ticketPrice ${tr("sp")}",
               textAlign: TextAlign.center,
               style: customTextStyle.bodyMedium.override(
                 fontFamily: 'BeerSerif',
@@ -263,11 +262,7 @@ class FeaturedWidget extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              GestureDetector(
                 onTap: () async {
                   const String message = "Check out this event in Evento";
                   final String url =

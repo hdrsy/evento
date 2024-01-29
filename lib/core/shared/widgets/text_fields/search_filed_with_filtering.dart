@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
 
 import '../bottom_sheets/show_bottom_sheet.dart';
@@ -8,10 +9,14 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class SearchFieldWithFiltering extends StatelessWidget {
-   SearchFieldWithFiltering({super.key, this.onChanged, this.controller,required this.onApplyFilters});
-final Function(String)? onChanged;
-final TextEditingController? controller;
-final Function(Map<String, dynamic>) onApplyFilters;
+  SearchFieldWithFiltering(
+      {super.key,
+      this.onChanged,
+      this.controller,
+      required this.onApplyFilters});
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
+  final Function(Map<String, dynamic>) onApplyFilters;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ final Function(Map<String, dynamic>) onApplyFilters;
                       color: Color(0xFF8B9BA8),
                       size: 24,
                     ),
-                  ),  
+                  ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
@@ -53,7 +58,7 @@ final Function(Map<String, dynamic>) onApplyFilters;
                         onChanged: onChanged,
                         obscureText: false,
                         decoration: InputDecoration(
-                          hintText: "Search...",
+                          hintText: tr("Search..."),
                           hintStyle: customTextStyle.bodyMedium.override(
                               fontFamily: 'Open Sans',
                               color: customColors.secondaryText,
@@ -78,8 +83,8 @@ final Function(Map<String, dynamic>) onApplyFilters;
                     onPressed: () async {
                       await showButtonSheet(
                           context: context,
-                          widget: FilterWidget(onApplyFilters:onApplyFilters),
-                          height: screenHeight*0.6);
+                          widget: FilterWidget(onApplyFilters: onApplyFilters),
+                          height: screenHeight * 0.6);
                     },
                     value: false,
                     onIcon: Icon(

@@ -9,18 +9,20 @@ import '../../../main.dart';
 import 'package:get/get.dart';
 
 class GoingController extends PaginationController<GoingModel> {
-  GoingController() : super(fetchDataCallback: _fetchData,cacheKey: "GoingController");
-static int? eventId;
-@override
+  GoingController()
+      : super(fetchDataCallback: _fetchData, cacheKey: "GoingController");
+  static int? eventId;
+  @override
   void onInit() {
     super.onInit();
     eventId = Get.arguments as int; // Cast to the appropriate type
     // Now you can use eventId in your fetchData or anywhere in the controller
   }
+
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     String apiUrl = "${ServerConstApis.showGoing}/$eventId?page=$page";
 
     // Returning the result of the API call
@@ -33,14 +35,13 @@ static int? eventId;
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
-    print(handlingResponse);
     List<dynamic> categoryListJson = handlingResponse['Goings']['data'];
     lastPageId = handlingResponse['Goings']['last_page'];
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => GoingModel.fromJson(jsonItem))
         .toList());
-        updateFriendRequestStatus(itemList);
+    updateFriendRequestStatus(itemList);
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }
@@ -49,20 +50,20 @@ static int? eventId;
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
+
   void updateFriendRequestStatus(List<GoingModel> models) {
-   final ProfileController profileController=Get.find();
-  for (var model in models) {
-    // Assuming a match is defined as having the same id
-    if (model.id == profileController.profileModel.id) {
-      model.friendRequestStatus = 'me';
+    final ProfileController profileController = Get.find();
+    for (var model in models) {
+      // Assuming a match is defined as having the same id
+      if (model.id == profileController.profileModel.id) {
+        model.friendRequestStatus = 'me';
+      }
     }
   }
-}
-
 
   onPressAddFreind(int userId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.freindRequest}/$userId",
         method: "GEt",
@@ -76,9 +77,10 @@ static int? eventId;
       update();
     }
   }
+
   onPressCancelReques(int requestId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.cancelRequest}/$requestId",
         method: "GEt",

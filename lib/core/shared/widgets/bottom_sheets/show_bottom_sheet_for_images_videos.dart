@@ -57,7 +57,7 @@ Widget choosePhotoSource(
       ),
     ),
     child: Center(
-      child: InkWell(
+      child: GestureDetector(
         onTap: onPress,
         child: Text(
           title,

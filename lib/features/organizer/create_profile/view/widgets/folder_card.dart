@@ -13,67 +13,59 @@ class FolderCard extends StatelessWidget {
   final FolderModel folder;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () async {
-        // Get.toNamed("/GalleryScreen");
-        Get.to(GalleryForLocalScreen(files: folder.mediaList,));
-      },
-      child:
-Column(
-  mainAxisSize: MainAxisSize.max,
-  children: [
-    ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.asset(
-        'assets/images/folder_card.png',
-        height: 100,
-        width: 100,
-        fit: BoxFit.contain,
-        // color: Colors.red,
-      ),
-    ),
-    Text(
-      folder.folderName,
-      style: customTextStyle.bodyMedium,
-    ),
-  ].divide(SizedBox(height: 5)),
-)
-
-    );
+    return GestureDetector(
+        onTap: () async {
+          // Get.toNamed("/GalleryScreen");
+          Get.to(GalleryForLocalScreen(
+            files: folder.mediaList,
+          ));
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/folder_card.png',
+                height: 100,
+                width: 100,
+                fit: BoxFit.contain,
+                // color: Colors.red,
+              ),
+            ),
+            Text(
+              folder.folderName,
+              style: customTextStyle.bodyMedium,
+            ),
+          ].divide(SizedBox(height: 5)),
+        ));
   }
 }
 
-
 class SeeAllFoldersCard extends StatelessWidget {
-   SeeAllFoldersCard({super.key});
-final OrganizerCreateProfileController organizerCreateProfileController =
+  SeeAllFoldersCard({super.key});
+  final OrganizerCreateProfileController organizerCreateProfileController =
       Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
-        Get.to(SeeAllfolders(allFolders: organizerCreateProfileController.foldersModel,));
+        Get.to(SeeAllfolders(
+          allFolders: organizerCreateProfileController.foldersModel,
+        ));
       },
       child: Stack(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-        'assets/images/folder_card.png',
-        height: 100,
-        width: 100,
-        fit: BoxFit.contain,
-        // color: Colors.red,
-      ),
+              'assets/images/folder_card.png',
+              height: 100,
+              width: 100,
+              fit: BoxFit.contain,
+              // color: Colors.red,
+            ),
           ),
           Container(
             width: 100,
@@ -90,7 +82,7 @@ final OrganizerCreateProfileController organizerCreateProfileController =
             child: Align(
               alignment: const AlignmentDirectional(0, 0),
               child: Text(
-                "+${organizerCreateProfileController.foldersModel.length-2}",
+                "+${organizerCreateProfileController.foldersModel.length - 2}",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.info,
