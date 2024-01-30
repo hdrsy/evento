@@ -150,6 +150,7 @@ class FreindsController extends GetxController {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       recivedFreinds.removeAt(modelId);
+      await getMyFreinds();
       update();
     }
   }

@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 
 import '../../../../../core/responsive/helper_functions.dart';
 import '../../../../../core/responsive/responsive.dart';
@@ -278,7 +279,7 @@ class TrendingNow extends StatelessWidget {
   Widget buildShareIcon() {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-      child: GestureDetector(
+      child: InkWell(
         onTap: () async {
           await Share.share(
             tr('Check out this event in Evento'),
@@ -295,8 +296,13 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the favorite toggle button
   Widget buildFavoriteToggleButton(int modelIndex) {
-    return GetBuilder<TrendingListController>(builder: (context) {
-      return ToggleIcon(
+    final EventStateManager eventStateManager=Get.find();
+    return Obx(
+        (){
+
+          var eventModel = eventStateManager.getEventById( trendingListController.itemList[modelIndex].id).value;
+
+          return ToggleIcon(
         onPressed: () {
           if (isGuset) {
             Get.dialog(GuestPopupWidget());
@@ -305,12 +311,12 @@ class TrendingNow extends StatelessWidget {
                 trendingListController.itemList[modelIndex].id, modelIndex);
           }
         },
-        value: trendingListController.itemList[modelIndex].isFollowedByAuthUser,
+        value: eventModel.isFollowedByAuthUser,
         onIcon: Icon(Icons.favorite_sharp,
             color: customColors.error, size: responsiveIcon(25, 2)),
         offIcon: Icon(Icons.favorite_border,
             color: customColors.secondaryText, size: responsiveIcon(25, 2)),
-      );
-    });
+      );}
+    );
   }
 }

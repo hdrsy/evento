@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -12,6 +13,7 @@ class SeeAllOffersController extends GetxController {
   late String rout;
   late RxBool isLoading;
   late RxBool isLoadingMoreData;
+  final EventStateManager eventStateManager=Get.find();
 
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
@@ -98,9 +100,12 @@ class SeeAllOffersController extends GetxController {
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }

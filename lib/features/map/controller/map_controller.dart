@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:evento/core/server/filter.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/helper/flutter_flow_google_map.dart';
@@ -13,7 +14,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
   List<EventModel> events = [];
-TextEditingController searchController=TextEditingController();
+  final EventStateManager eventStateManager=Get.find();
+
+  TextEditingController searchController=TextEditingController();
   final googleMapsController = Completer<GoogleMapController>();
   late FlutterFlowMarker myMarker;
   RxList<EventModel> searchResultSearch=<EventModel>[].obs;
@@ -63,6 +66,7 @@ Get.back();
 // final TrendingListController trendingListController=Get.find();
     final TrendingListController eventInYourCityListController = Get.put(TrendingListController());
     events.assignAll(eventInYourCityListController.itemList);
+
     print(events.length);
      carouselCurrentIndex = 0;
     print(events.length);
@@ -128,9 +132,12 @@ followOrUnFollowEvent(int eventId, int modelIndex) async {
     }
     if (isDoneSuccefully == "followed successfully") {
       events[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       events[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
+
 
       update();
     }

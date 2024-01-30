@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -20,6 +21,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   late RxBool isLoading;
+   
   @override
   void onInit() {
     isLoading = false.obs;
@@ -246,7 +248,7 @@ class OffersController extends PaginationController<OfferEvent> {
 class FeaturedListController extends PaginationController<EventModel> {
   FeaturedListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "FeaturedList");
-
+final EventStateManager eventStateManager=Get.find();
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
@@ -266,7 +268,14 @@ class FeaturedListController extends PaginationController<EventModel> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['featured_event']['data'];
     lastPageId = handlingResponse['featured_event']['last_page'];
-
+var ll=categoryListJson
+    .map((jsonItem) => EventModel.fromJson(jsonItem))
+    .toList();
+for(int i=0;i<ll.length;i++){
+  eventStateManager.addOrUpdateEvent(ll[i]);
+}
+// ll.map((e) => eventStateManager.addOrUpdateEvent(e));
+print("the length of list is :${eventStateManager.allEvents.length}");
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
@@ -290,9 +299,11 @@ class FeaturedListController extends PaginationController<EventModel> {
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }
@@ -303,6 +314,7 @@ class FeaturedListController extends PaginationController<EventModel> {
 class EventInYourCityListController extends PaginationController<EventModel> {
   EventInYourCityListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "EventInYourCityList");
+  final EventStateManager eventStateManager=Get.find();
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -323,6 +335,12 @@ class EventInYourCityListController extends PaginationController<EventModel> {
     List<dynamic> categoryListJson =
         handlingResponse['events_in_your_city']['data'];
     lastPageId = handlingResponse['events_in_your_city']['last_page'];
+    var ll=categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList();
+    for(int i=0;i<ll.length;i++){
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
@@ -347,8 +365,12 @@ class EventInYourCityListController extends PaginationController<EventModel> {
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
+      eventStateManager.toggleFavorite(eventId);
+
       itemList[modelIndex].isFollowedByAuthUser = false;
 
       update();
@@ -380,7 +402,7 @@ class OrganizerController extends PaginationController<OrganizerEvent> {
     List<dynamic> categoryListJson =
         handlingResponse['organizer_event']['data'];
     lastPageId = handlingResponse['organizer_event']['last_page'];
-    log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizerEvent.fromJson(jsonItem))
         .toList());
@@ -437,7 +459,7 @@ class HomeOrganizerController extends PaginationController<OrganizerHome> {
 class TrendingListController extends PaginationController<EventModel> {
   TrendingListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "TrendingList");
-
+final EventStateManager eventStateManager=Get.find();
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
@@ -458,6 +480,12 @@ class TrendingListController extends PaginationController<EventModel> {
     List<dynamic> categoryListJson = handlingResponse['trending_event']['data'];
     lastPageId = handlingResponse['trending_event']['last_page'];
 
+    var ll=categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList();
+    for(int i=0;i<ll.length;i++){
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
@@ -494,6 +522,7 @@ class TrendingListController extends PaginationController<EventModel> {
 class JustForYouController extends PaginationController<EventModel> {
   JustForYouController()
       : super(fetchDataCallback: _fetchData, cacheKey: "JustForYou");
+  final EventStateManager eventStateManager=Get.find();
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -514,6 +543,12 @@ class JustForYouController extends PaginationController<EventModel> {
     List<dynamic> categoryListJson = handlingResponse['just_for_you']['data'];
     log("message");
     lastPageId = handlingResponse['just_for_you']['last_page'];
+    var ll=categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList();
+    for(int i=0;i<ll.length;i++){
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
@@ -538,8 +573,12 @@ class JustForYouController extends PaginationController<EventModel> {
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
+      eventStateManager.toggleFavorite(eventId);
+
       itemList[modelIndex].isFollowedByAuthUser = false;
 
       update();

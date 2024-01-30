@@ -19,7 +19,7 @@ class SearchEventCard extends StatelessWidget {
       onTap: () {
         final SearchPageController searchPageController = Get.find();
         searchPageController.addNewEventToCache(eventModel);
-        Get.toNamed('/eventDetai les', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,

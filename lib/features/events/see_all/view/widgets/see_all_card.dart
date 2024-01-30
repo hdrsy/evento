@@ -1,4 +1,6 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:evento/features/events/see_all/controller/see_all_controller.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -45,63 +47,62 @@ class SeeAllCard extends StatelessWidget {
               endIndent: 12,
               color: customColors.secondary,
             ),
-            _locationWithDistance(eventModel)
+            _locationWithDistance(eventModel,modelIndex)
           ],
         ),
       ),
     );
   }
 
-  Widget _locationWithDistance(EventModel eventModel) {
+  Widget _locationWithDistance(EventModel eventModel,int modelIndex) {
+    final SeeAllController seeAllController=Get.find();
+
+
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () async {
-              // context.pushNamed('Event-Location');
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  color: customColors.primary,
-                  size: 18,
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                color: customColors.primary,
+                size: 18,
+              ),
+              Text(
+                eventModel.venue!.governorate,
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: breeSerif,
+                  color: customColors.primaryText,
+                  fontSize: 12,
+                  useGoogleFonts: true,
                 ),
-                Text(
-                  "Dama",
+              ).tr(),
+            ],
+          ),
+         GetBuilder<SeeAllController>(
+           builder: (context) {
+             return Text(
+                  seeAllController.distances[modelIndex].value,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,
-                    color: customColors.primaryText,
-                    fontSize: 12,
+                    color: customColors.primary,
                     useGoogleFonts: true,
                   ),
-                ).tr(),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () async {
-              // context.pushNamed('Going');
-            },
-            child: Text(
-              "3.7 Km",
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: breeSerif,
-                color: customColors.primary,
-                useGoogleFonts: true,
-              ),
-            ),
-          ),
+                );
+           }
+         ),
+
         ],
       ),
     );
   }
 
   Widget _dateWithPlayVedio(EventModel eventModel) {
+    final EventStateManager eventStateManager=Get.find();
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
       child: Row(
@@ -151,23 +152,35 @@ class SeeAllCard extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  ToggleIcon(
-                    onPressed: () async {
-                      if (isGuset) {
-                        Get.dialog(const GuestPopupWidget());
-                      } else {}
+                  Obx(
+                  (){
+
+                    var eventModell = eventStateManager.getEventById(eventModel.id).value;
+
+                    return ToggleIcon(
+                      onPressed: () async {
+                        if (isGuset) {
+                          Get.dialog(const GuestPopupWidget());
+                        } else {
+                          final SeeAllController seeAllController =
+                          Get.find();
+                          seeAllController.followOrUnFollowEvent(
+                              eventModel.id, modelIndex);
+
+                        }
+                      },
+                      value: eventModell.isFollowedByAuthUser,
+                      onIcon: Icon(
+                        Icons.favorite_sharp,
+                        color: customColors.error,
+                        size: 25,
+                      ),
+                      offIcon: Icon(
+                        Icons.favorite_border,
+                        color: customColors.secondaryText,
+                        size: 20,
+                    ));
                     },
-                    value: false,
-                    onIcon: Icon(
-                      Icons.favorite_sharp,
-                      color: customColors.error,
-                      size: 25,
-                    ),
-                    offIcon: Icon(
-                      Icons.favorite_border,
-                      color: customColors.secondaryText,
-                      size: 20,
-                    ),
                   ),
                 ],
               ),

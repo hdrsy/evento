@@ -62,13 +62,20 @@ Future<void> connectToServer() async {
     // import 'package:web_socket_channel/web_socket_channel.dart';
 
     final channel = WebSocketChannel.connect(
-      Uri.parse('ws://94.141.219.16:8000/ws2'),
+      Uri.parse('ws://94.141.219.16:8000/app'),
     );
     print("channel$channel");
     channel.stream.listen((message) {
       // Handle incoming messages
-      print(message);
-    });
+      print("message in socket :$message");
+    },
+      onError: (error){
+      print("socket error $error");
+      },onDone: (){
+      print("soket done");
+        }
+
+    );
 
     // To send messages
     // channel.sink.add('Your Message');

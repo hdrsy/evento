@@ -18,12 +18,8 @@ final EventWrapper eventWrapper;
 final int modelId;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
+    return GestureDetector(
+onTap: ()  {
 
                Get.toNamed('/eventDetailes', arguments: [eventWrapper.event.id,false,0]);
                   
@@ -65,33 +61,24 @@ final int modelId;
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              // context.pushNamed('Event-Location');
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  color: customColors.primary,
-                  size: 18,
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                color: customColors.primary,
+                size: 18,
+              ),
+              Text(
+                venue.governorate,
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: breeSerif,
+                  color: customColors.primaryText,
+                  fontSize: 12,
+                  useGoogleFonts: true,
                 ),
-                Text(
-                  venue.governorate,
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: breeSerif,
-                    color: customColors.primaryText,
-                    fontSize: 12,
-                    useGoogleFonts: true,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           Obx(
             ()=> Text(
@@ -208,31 +195,22 @@ final int modelId;
         ):getImageNetwork(url: "/storage/${favoriteEventModel.images[0]}", width: double.infinity,
           height: scaleHeight(200),alignmentGeometry:const Alignment(0.00, 1.00)),
       ),
-      InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () async {
-          // context.pushNamed('Event-Details');
-        },
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 4,
-                color: Color(0x33000000),
-                offset: Offset(0, 2),
-              )
-            ],
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
+      Container(
+        width: double.infinity,
+        height: 200,
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4,
+              color: Color(0x33000000),
+              offset: Offset(0, 2),
+            )
+          ],
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
         ),
       ),

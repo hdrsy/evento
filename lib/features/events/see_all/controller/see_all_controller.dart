@@ -1,6 +1,10 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/server/follow_unfollow_event_api.dart';
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/utils/services/location_service.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import '../../../../core/server/helper_api.dart';
 
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -22,7 +26,8 @@ class SeeAllController extends GetxController {
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
-
+  final EventStateManager eventStateManager=Get.find();
+  late List<RxString> distances;
   late RxList<EventModel> itemList;
 
   late RxList<String> errorMessage;
@@ -33,6 +38,7 @@ class SeeAllController extends GetxController {
   void onInit() {
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
+    distances=[];
     dataLimit = 4;
     pageId = Get.arguments[0] ?? 1;
     hasMoreData = false.obs;
@@ -44,6 +50,9 @@ class SeeAllController extends GetxController {
     log(pageId.toString());
     scrollController = ScrollController();
     itemList.isEmpty ? fetchData() : null;
+    itemList.isNotEmpty?(
+    distances.addAll(List.generate(itemList.length, (index) => "0 km".obs))
+    ):null;
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.offset &&
@@ -52,6 +61,7 @@ class SeeAllController extends GetxController {
         fetchData();
       }
     });
+    calculateDistance();
     super.onInit();
   }
 
@@ -81,10 +91,19 @@ class SeeAllController extends GetxController {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
+    var ll=categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList();
+    for(int i=0;i<ll.length;i++){
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
+    distances.addAll(List.generate(categoryListJson.length, (index) => "0".obs));
+
+
     if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }
@@ -93,6 +112,41 @@ class SeeAllController extends GetxController {
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
+    late String isDoneSuccefully;
+    if (itemList[modelIndex].isFollowedByAuthUser) {
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.unFollowEvent}/$eventId");
+    } else {
+      isDoneSuccefully =
+      await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+    }
+    if (isDoneSuccefully == "followed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+      update();
+    } else if (isDoneSuccefully == "removed successfully") {
+      itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
+
+      update();
+    }
+    log(itemList[modelIndex].isFollowedByAuthUser.toString());
+  }
+  calculateDistance() async {
+    LocationService locationService = LocationService();
+    for (var i = 0; i < itemList.length; i++) {
+      distances[i] = (await locationService.calculateDistance(
+          itemList[i].venue!.lang,
+          itemList[i].venue!.long))
+          .obs;
+
+      print("event id $i distance is ${distances[i].value}");
+    }
+    update();
+  }
+
+
 
   @override
   void onClose() {

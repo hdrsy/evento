@@ -128,11 +128,11 @@ class TermOfUse extends StatelessWidget {
       'Please remember that unfriending someone will remove them from your friend list, and you won\'t be able to see their private posts or interact as friends on this platform.';
    String introduction =
       '"Evento" is a digital platform specialized in marketing and booking community events. Please read these terms of use carefully before using the app to ensure your understanding and agreement with these terms.';
-   String acceptanceOfTerms =
-      'By using the "Evento" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.';
    String accountRegistrationAndSecurity =
       """•	Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.
 •	Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.""";
+   String acceptanceOfTerms =
+      'By using the "Evento" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.';
    String useOfTheApp ="""•	Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.
 •	Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.""";
      String intellectualPropertyRights ="""•	App Rights: All content on the app, including texts, graphics, and logos, is protected by intellectual property rights and belongs to the "Evento" app or to registered and accredited content and service providers on the app.""";

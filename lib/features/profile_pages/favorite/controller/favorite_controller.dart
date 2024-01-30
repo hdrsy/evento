@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/filter.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
@@ -15,6 +16,8 @@ import 'package:get/get.dart';
 class FavoriteController extends GetxController {
   late RxList<EventWrapper> favoriteEvents;
   late List<RxString> distances;
+  final EventStateManager eventStateManager=Get.find();
+
   late RxList<String> errorMessage;
   RxList<EventWrapper> searchResultSearch = <EventWrapper>[].obs;
   RxBool isSearchActive = false.obs;
@@ -47,6 +50,7 @@ class FavoriteController extends GetxController {
     } else {
       List<dynamic> interestsJson = handlingResponse['events'];
 
+
       favoriteEvents.value = interestsJson
           .map((jsonItem) => EventWrapper.fromJson(jsonItem))
           .toList();
@@ -66,9 +70,13 @@ class FavoriteController extends GetxController {
     }
     if (isDoneSuccefully == "followed successfully") {
       favoriteEvents[modelIndex].event.isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       favoriteEvents[modelIndex].event.isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
+
 
       update();
     }
