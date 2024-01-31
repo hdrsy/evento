@@ -23,7 +23,9 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: floatingActionButton(),
+      floatingActionButton: MediaQuery.of(context).viewInsets.bottom != 0
+          ? null
+          : floatingActionButton(),
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,

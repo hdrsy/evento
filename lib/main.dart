@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/services/fire_base_api.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -29,6 +33,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
+  // Platform.isAndroid
+  //     ? await Firebase.initializeApp(
+  //         options: const FirebaseOptions(
+  //             apiKey: "AIzaSyDSZ4ulFXW6nvxZw22ET-d4ejxjWV8daGU",
+  //             appId: "1:631957135040:android:3916fbaae446ba245f5725",
+  //             messagingSenderId: "631957135040",
+  //             projectId: "evento-app-d813c"))
+  //     : await Firebase.initializeApp();
+  // await FirebaseApi().initNotification();
 
   themeValue = await prefService.readString('theme');
   themeValue == '' ? prefService.createString('theme', "dark") : null;

@@ -46,12 +46,13 @@ class EventDetailesController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
+    print("token $token");
     response = await ApiHelper.makeRequest(
         targetRout:
             "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
         method: "GEt",
         token: token);
-
+    print(response);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();

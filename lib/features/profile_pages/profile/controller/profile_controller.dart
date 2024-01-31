@@ -1,3 +1,4 @@
+import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/core/utils/services/socket_servie.dart';
 
 import '../../../../core/utils/services/user_info.dart';
@@ -25,13 +26,15 @@ class ProfileController extends GetxController {
     if (isCompleteProfile && targetRout == '/home') {
       // print("inide init service");
       // initializeService();
-      // await NotificationService().init();
+      await NotificationService().init();
       // SSEService.connectToSSE();
       // final service = FlutterBackgroundService();
       // service.startService();
       // service.invoke("setAsBackground");
       // SocketService.createSocketConnection();
-      connectToServer();
+      // connectToServer();
+      // connectToWebSocket();
+      listenToEvents(2);
     }
     super.onInit();
   }

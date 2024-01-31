@@ -1,5 +1,5 @@
 class ServerConstApis {
-  static String baseAPI = 'http://94.141.219.16:8000';
+  static String baseAPI = 'http://94.141.219.13:8000';
   // static String baseAPI = 'http://10.0.2.2:8000';
   // static String baseAPI = 'http://127.0.0.1:8000';
   static String baseAPIImage = 'http://127.0.0.1:8000';

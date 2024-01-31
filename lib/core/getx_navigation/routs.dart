@@ -88,62 +88,171 @@ import '../../features/service_provider/service_provider_create_profile/view/ser
 import 'package:get/get.dart';
 
 appRoutes() => [
-    GetPage(name: '/', page:()=> WelcomeScreen(),binding:WelcomeBinding() ) ,
-    GetPage(name: '/steps', page:()=> MainStepsScreen(),binding:StepsBinding() ) , 
-    GetPage(name: '/home', page:()=> MainBottomNavigationBarWidget(),binding:MainBottomNavigationBinding() ) , 
-    GetPage(name: '/seeAll', page:()=>  SeeAllScreen(),binding:SeeAllBinding() ) , 
-    GetPage(name: '/eventDetailes', page:()=>  EventDetailesScreen(),binding:EventDetailesBinding() ) , 
-    GetPage(name: '/eventTimeLine', page:()=> TimeLineScreen(),binding:TimeLineBinding() ) , 
-    GetPage(name: '/dateTimeScreen', page:()=> const DateTimeScreen(),binding:DateTimeBinding() ) , 
-    GetPage(name: '/ServiceCategoryScreen', page:()=>  ServiceCategoryScreen(),binding:ServiceCategoryBinding() ) , 
-    GetPage(name: '/ServiceAccordingCategoryScreen', page:()=>  ServiceAccordingCategoryScreen(),binding:ServiceAccordingCategoryBinding() ) , 
-    GetPage(name: '/ServiceAccordingDetailesScreen', page:()=>  ServiceAccordingDetailesScreen(),binding:ServiceAccordingDetailesBinding() ) , 
-    GetPage(name: '/GalleryScreen', page:()=> GalleryScreen(),binding:GalleryBinding() ) , 
-    GetPage(name: '/EventReviewScreen', page:()=>    EventReviewScreen(),binding:EventReviewBinding() ) , 
-    GetPage(name: '/MyBookingScreen', page:()=>  MyBookingScreen(),binding:MyBookingBinding() ) , 
-    GetPage(name: '/MyRequestScreen', page:()=>  MyrequestScreen(),binding:MyRequestBinding() ) , 
-    GetPage(name: '/RequestStatusScreen', page:()=>  RequestStatusScreen(),binding:RequestStatusBinding() ) , 
-    GetPage(name: '/FavoriteScreen', page:()=>  FavoriteScreen(),binding:FavoriteBinding() ) , 
-    GetPage(name: '/NotificationScreen', page:()=>  NotificationScreen(),binding:NotificationBinding() ) , 
-    GetPage(name: '/FreindsScreen', page:()=>  FreindsScreen(),binding:FreindsBinding() ) , 
-    GetPage(name: '/InviteFreindsScreen', page:()=> const InviteFriendsScreen(),binding:InviteFriendsBinding() ) , 
-    GetPage(name: '/EditProfileScreen', page:()=> EditProfileScreen(),binding:EditProfileBinding() ) , 
-    GetPage(name: '/EditProfileServiceProviderScreen', page:()=> EditProfileServiceProviderScreen(),binding:EditProfileServiceProviderBinding() ) , 
-    GetPage(name: '/BookingDetailesForMyBookingScreen', page:()=> BookingDetailesForMyBookingScreen(),binding:BookingDetailesForMyBookingBinding() ) , 
-    GetPage(name: '/MapScreen', page:()=> MapScreen(),binding:MapBinding() ) , 
-    GetPage(name: '/ServiceAccordingDetailesForUserScreen', page:()=> ServiceAccordingDetailesForUserScreen() ) , 
-    GetPage(name: '/BookingDetailesScreen', page:()=>  BookingDetailesScreen(),binding:BookingDetailesBinding() ) , 
-    GetPage(name: '/OrganizerCreateProfileScreen', page:()=>  OrganizerCreateProfileScreen(),binding:OrganizerCreateProfileBinding() ) , 
-    GetPage(name: '/ServiceProviderCreateProfileScreen', page:()=>  ServiceProviderCreateProfileScreen(),binding:ServiceProviderCreateProfileBinding() ) , 
-    GetPage(name: '/AccountTypeScreen', page:()=> const AccountTypeScreen(),binding:AccountTypeBinding() ) , 
-    GetPage(name: '/ChangePasswordScreen', page:()=>  ChangePasswordScreen(),binding:ChangePasswordBinding() ) , 
-    GetPage(name: '/OrganizerProfileScreen', page:()=>  OrganizerProfileScreen(),binding:OrganizerProfileBinding() ) , 
-    GetPage(name: '/VenueScreen', page:()=>  VenueScreen(),binding:VenueBinding() ) , 
-    GetPage(name: '/VenueDetailesScreen', page:()=>  VenueDetailesScreen(),binding:VenueDetailesBinding() ) , 
-    GetPage(name: '/SwithcToServiceProviderScreen', page:()=>  SwithcToServiceProviderScreen()) , 
-    GetPage(name: '/HelpCenterScreen', page:()=> const HelpCenterScreen()) , 
-    GetPage(name: '/InviteFreindsToEventScreen', page:()=>  InviteFreindsToEventScreen()) , 
-    GetPage(name: '/AssignFriendsScreen', page:()=>  AssignFriendsScreen()) , 
-    GetPage(name: '/SeeAllServiceCategoryScreen', page:()=>  SeeAllServiceCategoryScreen()) , 
-    GetPage(name: '/SeeAllOrganizersScreen', page:()=>  SeeAllOrganizersScreen()) , 
-    GetPage(name: '/SeeAllOffersScreen', page:()=>  SeeAllOffersScreen()) , 
-    GetPage(name: '/PaymentScreen', page:()=>  PaymentScreen()) , 
-    GetPage(name: '/AccountPrivacyScreen', page:()=>  AccountPrivacyScreen()) , 
-    GetPage(name: '/AchivmentScreen', page:()=>  AchivmentScreen()) , 
-    GetPage(name: '/ChoiceTypeScreen', page:()=>  ChoiceTypeScreen()) , 
-    GetPage(name: '/AddFriendsScreen', page:()=>  AddFriendsScreen()) , 
-    GetPage(name: '/SetNewPasswordScreen', page:()=>  SetNewPasswordScreen()) , 
-    GetPage(name: '/SeeAllAmenities', page:()=>  SeeAllAmenities()) , 
-    GetPage(name: '/SeeLocation', page:()=>  SeeLocation()) , 
-    GetPage(name: '/GoingScreen', page:()=>  GoingScreen()) , 
-    GetPage(name: '/DirctionScreen', page:()=>  DirctionScreen()) , 
-    GetPage(name: '/EnterNumberScreen', page:()=>  EnterNumberScreen()) , 
-    GetPage(name: '/VerifyForgetPasswordScreen', page:()=>  VerifyForgetPasswordScreen()) , 
-    GetPage(name: '/AccountOrganizerScreen', page:()=>  AccountOrganizerScreen()) , 
-    GetPage(name: '/ChoiceOrganizerCategoryScreen', page:()=>  ChoiceOrganizerCategoryScreen()) , 
-    GetPage(name: '/AddMediaInFolderScreen', page:()=>  AddMediaInFolderScreen()) , 
-    GetPage(name: '/AddMediaInFolderserviceProviderScreen', page:()=>  AddMediaInFolderserviceProviderScreen()) , 
-    // GetPage(name: '/vedioReels', page:()=> VedioReels()) , 
-    
-    
-      ];
+      GetPage(
+          name: '/', page: () => WelcomeScreen(), binding: WelcomeBinding()),
+      GetPage(
+          name: '/steps',
+          page: () => MainStepsScreen(),
+          binding: StepsBinding()),
+      GetPage(
+          name: '/home',
+          page: () => MainBottomNavigationBarWidget(),
+          binding: MainBottomNavigationBinding()),
+      GetPage(
+          name: '/seeAll',
+          page: () => SeeAllScreen(),
+          binding: SeeAllBinding()),
+      GetPage(
+          name: '/eventDetailes',
+          page: () => EventDetailesScreen(),
+          binding: EventDetailesBinding()),
+      GetPage(
+          name: '/eventTimeLine',
+          page: () => TimeLineScreen(),
+          binding: TimeLineBinding()),
+      GetPage(
+          name: '/dateTimeScreen',
+          page: () => const DateTimeScreen(),
+          binding: DateTimeBinding()),
+      GetPage(
+          name: '/ServiceCategoryScreen',
+          page: () => ServiceCategoryScreen(),
+          binding: ServiceCategoryBinding()),
+      GetPage(
+          name: '/ServiceAccordingCategoryScreen',
+          page: () => ServiceAccordingCategoryScreen(),
+          binding: ServiceAccordingCategoryBinding()),
+      GetPage(
+          name: '/ServiceAccordingDetailesScreen',
+          page: () => ServiceAccordingDetailesScreen(),
+          binding: ServiceAccordingDetailesBinding()),
+      GetPage(
+          name: '/GalleryScreen',
+          page: () => GalleryScreen(),
+          binding: GalleryBinding()),
+      GetPage(
+          name: '/EventReviewScreen',
+          page: () => EventReviewScreen(),
+          binding: EventReviewBinding()),
+      GetPage(
+          name: '/MyBookingScreen',
+          page: () => MyBookingScreen(),
+          binding: MyBookingBinding()),
+      GetPage(
+          name: '/MyRequestScreen',
+          page: () => MyrequestScreen(),
+          binding: MyRequestBinding()),
+      GetPage(
+          name: '/RequestStatusScreen',
+          page: () => RequestStatusScreen(),
+          binding: RequestStatusBinding()),
+      GetPage(
+          name: '/FavoriteScreen',
+          page: () => FavoriteScreen(),
+          binding: FavoriteBinding()),
+      GetPage(
+          name: '/NotificationScreen',
+          page: () => NotificationScreen(),
+          binding: NotificationBinding()),
+      GetPage(
+          name: '/FreindsScreen',
+          page: () => FreindsScreen(),
+          binding: FreindsBinding()),
+      GetPage(
+          name: '/InviteFreindsScreen',
+          page: () => const InviteFriendsScreen(),
+          binding: InviteFriendsBinding()),
+      GetPage(
+          name: '/EditProfileScreen',
+          page: () => EditProfileScreen(),
+          binding: EditProfileBinding()),
+      GetPage(
+          name: '/EditProfileServiceProviderScreen',
+          page: () => EditProfileServiceProviderScreen(),
+          binding: EditProfileServiceProviderBinding()),
+      GetPage(
+          name: '/BookingDetailesForMyBookingScreen',
+          page: () => BookingDetailesForMyBookingScreen(),
+          binding: BookingDetailesForMyBookingBinding()),
+      GetPage(
+          name: '/MapScreen', page: () => MapScreen(), binding: MapBinding()),
+      GetPage(
+          name: '/ServiceAccordingDetailesForUserScreen',
+          page: () => ServiceAccordingDetailesForUserScreen()),
+      GetPage(
+          name: '/BookingDetailesScreen',
+          page: () => BookingDetailesScreen(),
+          binding: BookingDetailesBinding()),
+      GetPage(
+          name: '/OrganizerCreateProfileScreen',
+          page: () => OrganizerCreateProfileScreen(),
+          binding: OrganizerCreateProfileBinding()),
+      GetPage(
+          name: '/ServiceProviderCreateProfileScreen',
+          page: () => ServiceProviderCreateProfileScreen(),
+          binding: ServiceProviderCreateProfileBinding()),
+      GetPage(
+          name: '/AccountTypeScreen',
+          page: () => const AccountTypeScreen(),
+          binding: AccountTypeBinding()),
+      GetPage(
+          name: '/ChangePasswordScreen',
+          page: () => ChangePasswordScreen(),
+          binding: ChangePasswordBinding()),
+      GetPage(
+          name: '/OrganizerProfileScreen',
+          page: () => OrganizerProfileScreen(),
+          binding: OrganizerProfileBinding()),
+      GetPage(
+          name: '/VenueScreen',
+          page: () => VenueScreen(),
+          binding: VenueBinding()),
+      GetPage(
+          name: '/VenueDetailesScreen',
+          page: () => VenueDetailesScreen(),
+          binding: VenueDetailesBinding()),
+      GetPage(
+          name: '/SwithcToServiceProviderScreen',
+          page: () => SwithcToServiceProviderScreen()),
+      GetPage(name: '/HelpCenterScreen', page: () => const HelpCenterScreen()),
+      GetPage(
+          name: '/InviteFreindsToEventScreen',
+          page: () => InviteFreindsToEventScreen()),
+      GetPage(name: '/AssignFriendsScreen', page: () => AssignFriendsScreen()),
+      GetPage(
+          name: '/SeeAllServiceCategoryScreen',
+          page: () => SeeAllServiceCategoryScreen()),
+      GetPage(
+          name: '/SeeAllOrganizersScreen',
+          page: () => SeeAllOrganizersScreen()),
+      GetPage(name: '/SeeAllOffersScreen', page: () => SeeAllOffersScreen()),
+      GetPage(name: '/PaymentScreen', page: () => PaymentScreen()),
+      GetPage(
+          name: '/AccountPrivacyScreen', page: () => AccountPrivacyScreen()),
+      GetPage(name: '/AchivmentScreen', page: () => AchivmentScreen()),
+      GetPage(name: '/ChoiceTypeScreen', page: () => ChoiceTypeScreen()),
+      GetPage(name: '/AddFriendsScreen', page: () => AddFriendsScreen()),
+      GetPage(
+          name: '/SetNewPasswordScreen', page: () => SetNewPasswordScreen()),
+      GetPage(name: '/SeeAllAmenities', page: () => SeeAllAmenities()),
+      GetPage(name: '/SeeLocation', page: () => SeeLocation()),
+      GetPage(name: '/GoingScreen', page: () => GoingScreen()),
+      GetPage(name: '/DirctionScreen', page: () => DirctionScreen()),
+      GetPage(name: '/EnterNumberScreen', page: () => EnterNumberScreen()),
+      GetPage(
+          name: '/VerifyForgetPasswordScreen',
+          page: () => VerifyForgetPasswordScreen()),
+      GetPage(
+          name: '/AccountOrganizerScreen',
+          page: () => AccountOrganizerScreen()),
+      GetPage(
+          name: '/ChoiceOrganizerCategoryScreen',
+          page: () => ChoiceOrganizerCategoryScreen()),
+      GetPage(
+          name: '/AddMediaInFolderScreen',
+          page: () => AddMediaInFolderScreen()),
+      GetPage(
+          name: '/AddMediaInFolderserviceProviderScreen',
+          page: () => AddMediaInFolderserviceProviderScreen()),
+      // GetPage(name: '/vedioReels', page:()=> VedioReels()) ,
+    ];

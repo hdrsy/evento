@@ -10,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 class LocationPickerScreen extends StatefulWidget {
   @override
   _LocationPickerScreenState createState() => _LocationPickerScreenState();
@@ -28,6 +29,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
     _getUserLocation();
     searchController.addListener(_onSearchChanged);
   }
+
   void _onSearchChanged() {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
@@ -41,8 +43,10 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
       }
     });
   }
+
   Future<List<Place>> _searchPlaces(String searchTerm) async {
-    final url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs&input=$searchTerm';
+    final url =
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs&input=$searchTerm';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -50,7 +54,9 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
       // Parse the result to get the places
       // ...
       print("result $result");
-      List<Place> place=[];
+      List<Place> place = [];
+      place = result.map((j) => Place.fromJson(j)).toList;
+      print(place);
       return place; // List of Place objects
     } else {
       throw Exception('Failed to load places');
@@ -120,8 +126,8 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           ),
         ],
       ),
-      body: Stack(
-        children:[ GoogleMap(
+      body: Stack(children: [
+        GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: LatLng(0.0, 0.0), // Default initial position
@@ -130,45 +136,49 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           onTap: _onMapTap,
           markers: _markers,
         ),
-          Positioned(
-            top: 10, // Adjust the positioning as needed
-            left: 10,
-            right: 10,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 4,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search Location',
-                  border: InputBorder.none,
+        Positioned(
+          top: 10, // Adjust the positioning as needed
+          left: 10,
+          right: 10,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  spreadRadius: 1,
                 ),
-                // onChanged: _onSearchChanged,
+              ],
+            ),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                hintText: 'Search Location',
+                border: InputBorder.none,
               ),
+              // onChanged: _onSearchChanged,
             ),
           ),
-        ]
-      ),
+        ),
+      ]),
     );
   }
 }
+
 class Place {
   final String name;
   final String address;
   final double latitude;
   final double longitude;
 
-  Place({required this.name, required this.address, required this.latitude, required this.longitude});
+  Place(
+      {required this.name,
+      required this.address,
+      required this.latitude,
+      required this.longitude});
 
   factory Place.fromJson(Map<String, dynamic> json) {
     // Assuming the JSON structure fits these fields; adjust as per actual API response
