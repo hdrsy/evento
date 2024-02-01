@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'dart:ui';
-import 'package:evento/core/utils/services/sse_serive.dart';
+import 'package:evento/core/utils/services/socket_servie.dart';
+import 'package:evento/core/utils/services/user_info.dart';
+import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
@@ -48,24 +50,7 @@ void onStart(ServiceInstance service) async {
       service.stopSelf();
     });
   }
-  SSEService.connectToSSE();
+  user = await UserInfo.getUserInfo();
 
-  //   if(service is AndroidServiceInstance){
-  //     service.setAsBackgroundService();
-  //     // if(user==null){
-  //     // print("user object in back ground:$user");
-  //     //   service.stopSelf();
-  //     //   print("the service stopped no user exist");
-  //     // }
-  //      service.on('stopService').listen((event) {
-  //       print ("stop service :$event");
-  //   service.stopSelf();
-  // });
-  // // service.setAsBackgroundService();
-  // // if(await service .isForegroundService()){
-  // //   print("inside set as background");
-  // //   SSEService.connectToSSE();
-
-  // // }
-  //   }
+  listenToEvents(user!.id);
 }

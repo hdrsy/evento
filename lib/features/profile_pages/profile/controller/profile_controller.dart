@@ -1,5 +1,7 @@
+import 'package:evento/core/utils/services/back_ground_service.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
-import 'package:evento/core/utils/services/socket_servie.dart';
+import 'package:evento/core/utils/services/work_manager.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 
 import '../../../../core/utils/services/user_info.dart';
 import '../model/profile_model.dart';
@@ -17,24 +19,18 @@ class ProfileController extends GetxController {
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     user = await UserInfo.getUserInfo();
-    print("user object :$user");
     bool isCompleteProfile =
         await prefService.readString("isCompleteProfile") == "true";
-    print("isCompleteProfile :$isCompleteProfile");
     await getProfileInfo();
-    print(targetRout);
     if (isCompleteProfile && targetRout == '/home') {
-      // print("inide init service");
       // initializeService();
       await NotificationService().init();
-      // SSEService.connectToSSE();
       // final service = FlutterBackgroundService();
       // service.startService();
       // service.invoke("setAsBackground");
-      // SocketService.createSocketConnection();
-      // connectToServer();
-      // connectToWebSocket();
-      listenToEvents(2);
+      // listenToEvents(2);
+      // initWorkManager();
+      // registertask();
     }
     super.onInit();
   }

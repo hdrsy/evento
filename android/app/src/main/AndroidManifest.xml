@@ -16,8 +16,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
+    
 
     <queries>
         <intent>
@@ -34,6 +33,8 @@
         
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs"/>
+        <meta-data android:name="flutterEmbedding"
+                   android:value="2" />           
 
         <activity
             android:name=".MainActivity"

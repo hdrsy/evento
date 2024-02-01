@@ -55,7 +55,7 @@ class InformationEvent extends StatelessWidget {
               ]
                   .divide(const SizedBox(height: 10))
                   .addToStart(const SizedBox(height: 10))
-                  .addToEnd(const SizedBox(height: 40)),
+                  .addToEnd(const SizedBox(height: 80)),
             ),
           ),
         ),

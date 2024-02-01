@@ -17,7 +17,8 @@ class ReelsVideoWidget extends StatefulWidget {
   State<ReelsVideoWidget> createState() => _VideoWidgetState();
 }
 
-class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObserver {
+class _VideoWidgetState extends State<ReelsVideoWidget>
+    with WidgetsBindingObserver {
   bool videoInitialized = false;
   late VideoPlayerController videoPlayerController;
   bool _isBuffering = false;
@@ -48,38 +49,38 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
     //   fileInfo = await kCacheManager.getFileFromCache(widget.currentVideoUrl);
     // }
     // if (mounted) {
-      // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
-      videoPlayerController = VideoPlayerController.networkUrl(Uri.parse( widget.currentVideoUrl))
-        ..initialize().then((_) {
-          setState(() {
-            videoPlayerController.setLooping(false); // Set video to loop
-            videoPlayerController.play();
-            videoInitialized = true;
+    // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
+    videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(widget.currentVideoUrl))
+          ..initialize().then((_) {
+            setState(() {
+              videoPlayerController.setLooping(false); // Set video to loop
+              videoPlayerController.play();
+              videoInitialized = true;
+            });
+          }).catchError((error) {
+            // Handle the error here
           });
-        }).catchError((error) {
-    // Handle the error here
-     });
-      videoPlayerController.addListener(() {
-         final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&
-                                       videoPlayerController.value.isBuffering;
- if (isActuallyBuffering != _isBuffering) {
+    videoPlayerController.addListener(() {
+      final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&
+          videoPlayerController.value.isBuffering;
+      if (isActuallyBuffering != _isBuffering) {
         setState(() {
           _isBuffering = isActuallyBuffering;
         });
       }
 
-        if (videoPlayerController.value.isPlaying && !_isPlaying) {
-          // Video has started playing
-          setState(() {
-            _isPlaying = true;
-          });
-        }
-      else if (!videoPlayerController.value.isPlaying && _isPlaying) {
+      if (videoPlayerController.value.isPlaying && !_isPlaying) {
+        // Video has started playing
+        setState(() {
+          _isPlaying = true;
+        });
+      } else if (!videoPlayerController.value.isPlaying && _isPlaying) {
         setState(() {
           _isPlaying = false;
         });
       }
-      });
+    });
     // }
   }
 
@@ -134,12 +135,12 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
             },
             child: Stack(
               children: [
-                 !videoInitialized
+                !videoInitialized
                     ? const SizedBox()
                     : VideoProgressIndicator(
                         videoPlayerController,
                         allowScrubbing: true,
-                        colors:  VideoProgressColors(
+                        colors: VideoProgressColors(
                           playedColor: customColors.primary,
                           bufferedColor: Colors.grey,
                           backgroundColor: Colors.white,
@@ -154,8 +155,8 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
                     ),
                   ],
                 ),
-          //        if (_isBuffering)
-          // const CircularProgressIndicator(),
+                //        if (_isBuffering)
+                // const CircularProgressIndicator(),
                 if (!_isPlaying)
                   const Center(
                     child: Icon(
@@ -165,18 +166,16 @@ class _VideoWidgetState extends State<ReelsVideoWidget> with WidgetsBindingObser
                     ),
                   ),
 
-                GetBuilder<TweenAnimationController>(
-                  builder: (context) {
-                    return widget.tweenAnimationController.aSize.value! > 30
-                        ? Align(
-                            alignment: const AlignmentDirectional(0, 0),
-                            child: Icon(Icons.favorite,
-                                size: widget.tweenAnimationController.aSize.value,
-                                color: Colors.red),
-                          )
-                        : const SizedBox();
-                  }
-                ),
+                GetBuilder<TweenAnimationController>(builder: (context) {
+                  return widget.tweenAnimationController.aSize.value! > 30
+                      ? Align(
+                          alignment: const AlignmentDirectional(0, 0),
+                          child: Icon(Icons.favorite,
+                              size: widget.tweenAnimationController.aSize.value,
+                              color: Colors.red),
+                        )
+                      : const SizedBox();
+                }),
               ],
             ),
           );
