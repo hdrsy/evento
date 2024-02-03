@@ -8,8 +8,8 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class TicketDetailesCard extends StatelessWidget {
-  const TicketDetailesCard(
+class TicketDetailesCardForMyBooking extends StatelessWidget {
+  const TicketDetailesCardForMyBooking(
       {super.key, required this.ticketModel, required this.modelIndex});
   final TicketModel ticketModel;
   final int modelIndex;
@@ -85,7 +85,7 @@ class TicketDetailesCard extends StatelessWidget {
                     ).tr(),
                   ),
                 ),
-               Divider(
+                Divider(
                   thickness: 1,
                   color: customColors.secondary,
                 ),
@@ -325,7 +325,7 @@ class TicketDetailesCard extends StatelessWidget {
                             onPressed: () {
                               print(tr('Button pressed ...'));
                             },
-                            text:tr( "Paid"),
+                            text: tr("Paid"),
                             options: ButtonOptions(
                               height: 22,
                               padding: const EdgeInsetsDirectional.fromSTEB(

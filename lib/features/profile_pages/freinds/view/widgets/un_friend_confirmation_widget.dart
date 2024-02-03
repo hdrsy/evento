@@ -19,7 +19,7 @@ final FreindsModel freindsModel;
       alignment: const AlignmentDirectional(0, 0),
       child: Container(
         width: 350,
-        height: 250,
+        // height: 250,
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
           borderRadius: BorderRadius.circular(20),
@@ -27,11 +27,11 @@ final FreindsModel freindsModel;
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     "Are you sure you want to unfriend ${freindsModel. firstName}?",

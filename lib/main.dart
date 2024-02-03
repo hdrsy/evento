@@ -54,11 +54,11 @@ void main() async {
       ? '/home'
       : "/";
 
-  await Workmanager().initialize(
-    callbackDispatcher, // The top-level function, defined above
-    isInDebugMode: true, // Set to true to see logs in debug mode
-  );
-  registertask();
+  // await Workmanager().initialize(
+  //   callbackDispatcher, // The top-level function, defined above
+  //   isInDebugMode: true, // Set to true to see logs in debug mode
+  // );
+  // registertask();
   print("after init");
   runApp(EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],

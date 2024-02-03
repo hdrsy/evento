@@ -45,10 +45,12 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
   }
 
   Future<List<Place>> _searchPlaces(String searchTerm) async {
+    print("state search");
     final url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs&input=$searchTerm';
     final response = await http.get(Uri.parse(url));
-
+    print(response.statusCode);
+    print(response);
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
       // Parse the result to get the places
@@ -56,7 +58,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
       print("result $result");
       List<Place> place = [];
       place = result.map((j) => Place.fromJson(j)).toList;
-      print(place);
+      print("places is :$place");
       return place; // List of Place objects
     } else {
       throw Exception('Failed to load places');
@@ -118,7 +120,9 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
             onPressed: () {
               if (_selectedLocation != null) {
                 ServiceProviderCreateProfileController controller = Get.find();
+
                 controller.locationData = _selectedLocation;
+                controller.update();
                 Get.back();
                 // Navigator.pop(context, _selectedLocation);
               }
@@ -136,33 +140,33 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           onTap: _onMapTap,
           markers: _markers,
         ),
-        Positioned(
-          top: 10, // Adjust the positioning as needed
-          left: 10,
-          right: 10,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                hintText: 'Search Location',
-                border: InputBorder.none,
-              ),
-              // onChanged: _onSearchChanged,
-            ),
-          ),
-        ),
+        // Positioned(
+        //   top: 10, // Adjust the positioning as needed
+        //   left: 10,
+        //   right: 10,
+        //   child: Container(
+        //     padding: EdgeInsets.symmetric(horizontal: 10),
+        //     decoration: BoxDecoration(
+        //       color: Colors.white,
+        //       borderRadius: BorderRadius.circular(10),
+        //       boxShadow: [
+        //         BoxShadow(
+        //           color: Colors.black26,
+        //           blurRadius: 4,
+        //           spreadRadius: 1,
+        //         ),
+        //       ],
+        //     ),
+        //     child: TextField(
+        //       controller: searchController,
+        //       decoration: InputDecoration(
+        //         hintText: 'Search Location',
+        //         border: InputBorder.none,
+        //       ),
+        //       // onChanged: _onSearchChanged,
+        //     ),
+        //   ),
+        // ),
       ]),
     );
   }

@@ -7,15 +7,14 @@ import '../model/venue_model.dart';
 import '../../../../main.dart';
 import 'package:get/get.dart';
 
-
-class VenueController  extends PaginationController<Venue> {
-  VenueController() : super(fetchDataCallback: _fetchData,cacheKey: "VenueController");
-late bool isInCustomuzEvent;
+class VenueController extends PaginationController<Venue> {
+  VenueController()
+      : super(fetchDataCallback: _fetchData, cacheKey: "VenueController");
+  late bool isInCustomuzEvent;
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
-        
-    String token = await prefService.readString("token") ;
+    String token = await prefService.readString("token");
     String apiUrl = "${ServerConstApis.getAllvenue}?page=$page";
 
     // Returning the result of the API call
@@ -28,19 +27,20 @@ late bool isInCustomuzEvent;
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
-    isInCustomuzEvent=Get.arguments;
-    
+    isInCustomuzEvent = Get.arguments;
+
     List<dynamic> categoryListJson = handlingResponse['message']['data'];
     lastPageId = handlingResponse['message']['last_page'];
+    print("length of data ${categoryListJson.length}");
+    itemList.addAll(
+        categoryListJson.map((jsonItem) => Venue.fromJson(jsonItem)).toList());
 
-    itemList.addAll(categoryListJson
-        .map((jsonItem) => Venue.fromJson(jsonItem))
-        .toList());
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }
+    print("page id :$pageId");
+    print("last page id :$lastPageId");
     pageId++;
-    isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }

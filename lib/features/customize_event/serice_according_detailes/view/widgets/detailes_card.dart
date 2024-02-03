@@ -24,7 +24,9 @@ class DetailesCard extends StatelessWidget {
           // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
           _buildIconTextRow(context, Icons.location_on_outlined, 'Location',
               serviceAccordingDetailesController.serviceProvider.address),
-          _buildLocationButton(context),
+          serviceAccordingDetailesController.serviceProvider.latitude != null
+              ? _buildLocationButton(context)
+              : const SizedBox(),
         ]
             .divide(const SizedBox(height: 20))
             .addToStart(const SizedBox(height: 16))
@@ -68,7 +70,10 @@ class DetailesCard extends StatelessWidget {
       alignment: const AlignmentDirectional(1, 1),
       child: ButtonWidget(
         onPressed: () {
-          //  Get.toNamed('/SeeLocation',arguments: [serviceAccordingDetailesController.serviceProvider.latitude,serviceAccordingDetailesController.serviceProvider.longitude]);
+          Get.toNamed('/SeeLocation', arguments: [
+            serviceAccordingDetailesController.serviceProvider.latitude,
+            serviceAccordingDetailesController.serviceProvider.longitude
+          ]);
         },
         text: tr("See Location on Maps"),
         options: ButtonOptions(

@@ -8,18 +8,19 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class UnfriendWidget extends StatelessWidget {
-  const UnfriendWidget({Key? key,required this.freindsModel, required this.modelId}) : super(key: key);
-final  FreindsModel freindsModel;
-final int modelId;
-  
+  const UnfriendWidget(
+      {Key? key, required this.freindsModel, required this.modelId})
+      : super(key: key);
+  final FreindsModel freindsModel;
+  final int modelId;
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: customColors.secondaryBackground,
-        borderRadius:const BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0),
           bottomRight: Radius.circular(0),
           topLeft: Radius.circular(20),
@@ -29,7 +30,7 @@ final int modelId;
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 16),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               width: 50,
@@ -40,14 +41,14 @@ final int modelId;
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              child: GestureDetector(
                 onTap: () async {
-                  showButtonSheet(context: context, widget: UnfriendConfirmationWidget(freindsModel: freindsModel,modelId: modelId), height: screenHeight*0.5);
-                  },
+                  showButtonSheet(
+                      context: context,
+                      widget: UnfriendConfirmationWidget(
+                          freindsModel: freindsModel, modelId: modelId),
+                      height: screenHeight * 0.5);
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,27 +63,23 @@ final int modelId;
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          " Unfriend ${freindsModel. firstName}",
-                          style:
-                              customTextStyle.bodyMedium.override(
-                                    fontFamily: 'Nunito',
-                                    color: customColors.delete,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: true,
-                                  ),
+                          " Unfriend ${freindsModel.firstName}",
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.delete,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            useGoogleFonts: true,
+                          ),
                         ),
                         Text(
-                           "Remove ${freindsModel. firstName} as a friend",
-                          style:customTextStyle
-                              .bodyMedium
-                              .override(
-                                fontFamily: 'Nunito',
-                                color:
-                                    customColors.secondaryText,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: true,
-                              ),
+                          "Remove ${freindsModel.firstName} as a friend",
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.secondaryText,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: true,
+                          ),
                         ),
                       ],
                     ),

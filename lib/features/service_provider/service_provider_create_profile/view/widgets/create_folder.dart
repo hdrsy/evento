@@ -14,7 +14,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
       alignment: const AlignmentDirectional(0, 0),
       child: Container(
         width: 300,
-        height: 250,
+        // height: 250,
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
           borderRadius: BorderRadius.circular(20),
@@ -23,7 +23,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),

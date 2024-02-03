@@ -1,3 +1,5 @@
+import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/view/widget/confirm_switch_to_organizer_account_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
@@ -128,36 +130,36 @@ Wdding, Birthday ,anniversary......"""),
                         ],
                       ),
                     ),
-                    Obx(
-                      () => ButtonWidget(
-                        showLoadingIndicator:
-                            organizerCreateProfileController.isLoading.value,
-                        onPressed: () async {
-                          organizerCreateProfileController.onPressDone();
-                        },
-                        text: tr("Done"),
-                        options: ButtonOptions(
-                          width: screenWidth * 0.3,
-                          height: 40,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              32, 0, 32, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: Colors.white,
-                            useGoogleFonts: true,
-                          ),
-                          elevation: 3,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
+                    ButtonWidget(
+                      showLoadingIndicator: false,
+                      onPressed: () {
+                        showButtonSheet(
+                            context: context,
+                            widget: SwitchToOrganizerAccounWidget(),
+                            height: MediaQuery.of(context).size.height * 0.6);
+                      },
+                      text: tr("Done"),
+                      options: ButtonOptions(
+                        width: screenWidth * 0.3,
+                        height: 40,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: Colors.white,
+                          useGoogleFonts: true,
                         ),
+                        elevation: 3,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
@@ -282,7 +284,7 @@ class SelectStates extends StatelessWidget {
             children: [
               Text(
                 organizerCreateProfileController.selectedState ??
-                    " Covering Areas",
+                    "Covering Areas",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.primary,

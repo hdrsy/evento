@@ -19,7 +19,7 @@ class VenueDetailesCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           _buildIconTextRow(context, Icons.description_outlined, 'Description',
-              "${venueDetailesController.venue.description}/n${venueDetailesController.venue.locationDescription}"),
+              venueDetailesController.venue.description),
           _buildIconTextRow(context, Icons.reduce_capacity_sharp, 'Capacity',
               venueDetailesController.venue.capacity.toString()),
           _buildIconTextRow(context, Icons.location_on_outlined, 'Location',

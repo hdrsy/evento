@@ -20,6 +20,7 @@ class DateTimeController extends GetxController {
   late GlobalKey<FormState> formstate;
   bool isUserEnterDateInfo = false;
   late RxList<String> errorMessage;
+  RxBool isEdit = false.obs;
 
   @override
   void onInit() {
@@ -55,13 +56,16 @@ class DateTimeController extends GetxController {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate() && isUserEnterDateInfo) {
       formdata.save();
-      Get.toNamed('/ServiceCategoryScreen');
+      if (isEdit.value) {
+        Get.back();
+      } else {
+        Get.toNamed('/ServiceCategoryScreen');
+      }
     } else {
       Get.snackbar("Uncomplete data", "Please fill all the required data",
           snackPosition: SnackPosition.TOP,
           backgroundColor: customColors.primaryBackground,
-           colorText: customColors.primaryText
-          );
+          colorText: customColors.primaryText);
     }
   }
 }

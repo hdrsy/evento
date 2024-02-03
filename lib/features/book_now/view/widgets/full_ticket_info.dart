@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
@@ -102,6 +100,7 @@ class FullTicketInfo extends StatelessWidget {
                                       .selectedClass!.interests
                                       .map((label) {
                                     return ChoiceChip(
+                                      showCheckmark: false,
                                       label: Text("+ ${label.title}"),
                                       selected: bookNowController
                                           .ticketList[index].selectedAminiteds
@@ -137,6 +136,9 @@ class FullTicketInfo extends StatelessWidget {
                               color: customColors.primary)),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 Row(
                   children: [
@@ -223,8 +225,6 @@ class FullTicketInfo extends StatelessWidget {
                     ? ""
                     : bookNowController.ticketList[index].selectedClass!.code,
             onChanged: (newValue) {
-              log("on change");
-              print(newValue);
               bookNowController.changeSelectedCalss(singleClass, index);
             },
           ),

@@ -7,16 +7,24 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({super.key,required this.leftColumnData,required this.rightColumnData,required this.title});
-final String title;
-final List<String> leftColumnData;
-final List<String> rightColumnData ;
+  const ReviewCard(
+      {super.key,
+      required this.leftColumnData,
+      required this.rightColumnData,
+      required this.title,
+      required this.onTapEdit});
+  final String title;
+  final List<String> leftColumnData;
+  final List<String> rightColumnData;
+  final Function() onTapEdit;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 11,),
-        headline(title),
+        const SizedBox(
+          height: 11,
+        ),
+        headline(title, onTapEdit),
         Container(
             width: double.infinity,
             padding: padding(10, 10, 10, 10),
@@ -54,13 +62,13 @@ final List<String> rightColumnData ;
     );
   }
 
-  Column rightColumn(List<String > rightColumnData) {
+  Column rightColumn(List<String> rightColumnData) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        ...List.generate(rightColumnData.length, (index) => RightTextWidget(value: rightColumnData[index])),
-       
+        ...List.generate(rightColumnData.length,
+            (index) => RightTextWidget(value: rightColumnData[index])),
       ].divide(const SizedBox(height: 5)),
     );
   }
@@ -70,13 +78,13 @@ final List<String> rightColumnData ;
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...List.generate(rightColumnData.length, (index) => LeftTextWidget(title: leftColumnData[index])),
-       
+        ...List.generate(rightColumnData.length,
+            (index) => LeftTextWidget(title: leftColumnData[index])),
       ].divide(const SizedBox(height: 5)),
     );
   }
 
-  Row headline(String title) {
+  Row headline(String title, Function() onTapEdit) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -89,10 +97,13 @@ final List<String> rightColumnData ;
           alignment: const AlignmentDirectional(1.00, -1.00),
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-            child: Icon(
-              Icons.edit_outlined,
-              color: customColors.primary,
-              size: 20,
+            child: GestureDetector(
+              onTap: onTapEdit,
+              child: Icon(
+                Icons.edit_outlined,
+                color: customColors.primary,
+                size: 20,
+              ),
             ),
           ),
         ),

@@ -92,13 +92,7 @@ class ChoiceTypeScreen extends StatelessWidget {
               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: ButtonWidget(
                 onPressed: () async {
-                  // Showing a bottom sheet on button press.
-                  // Get.dialog(ServiceProviderAccounWidget());
-
-                  showButtonSheet(
-                      context: context,
-                      widget: const ServiceProviderAccounWidget(),
-                      height: MediaQuery.sizeOf(context).height * 0.6);
+                  Get.toNamed('/ServiceProviderCreateProfileScreen');
                 },
                 text: tr("Done"),
                 options: ButtonOptions(

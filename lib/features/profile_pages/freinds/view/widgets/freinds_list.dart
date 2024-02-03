@@ -150,7 +150,7 @@ class FreindsCard extends StatelessWidget {
                         context: context,
                         widget: UnfriendWidget(
                             freindsModel: freindsModel, modelId: modelId),
-                        height: screenHeight * 0.1);
+                        height: screenHeight * 0.2);
                   },
                   child: Icon(
                     Icons.keyboard_control_sharp,

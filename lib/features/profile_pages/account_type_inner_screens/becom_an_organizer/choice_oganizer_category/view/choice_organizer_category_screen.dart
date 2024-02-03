@@ -13,6 +13,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the ChoiceOrganizerCategoryScreen as a StatelessWidget.
 class ChoiceOrganizerCategoryScreen extends StatelessWidget {
   // Constructor with optional key parameter.
@@ -76,7 +77,8 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
                     color: customColors.primaryText,
                     useGoogleFonts: true,
                   ),
-                ).tr().animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+                ).tr().animateOnPageLoad(
+                    animationsMap['textOnPageLoadAnimation']!),
               ),
               // A search text field.
               searchTextField(onChanged: (value) {}),
@@ -88,20 +90,18 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: ButtonWidget(
-                  onPressed: () async {
+                  onPressed: () {
+                    Get.toNamed('/OrganizerCreateProfileScreen');
+
                     // Showing a bottom sheet on button press.
-                    showButtonSheet(
-                      context: context,
-                      widget: const SwitchToOrganizerAccounWidget(),
-                      height: MediaQuery.of(context).size.height * 0.6
-                    );
                   },
-                  text:tr( "Done"),
+                  text: tr("Done"),
                   options: ButtonOptions(
                     width: 200,
                     height: 40,
                     padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     color: customColors.primary,
                     textStyle: customTextStyle.titleSmall.override(
                       fontFamily: 'Nunito',
@@ -117,7 +117,8 @@ class ChoiceOrganizerCategoryScreen extends StatelessWidget {
                   ),
                 ),
               )
-            ].divide(const SizedBox(height: 10)), // Dividing widgets with spacing.
+            ].divide(
+                const SizedBox(height: 10)), // Dividing widgets with spacing.
           ),
         ),
       ),

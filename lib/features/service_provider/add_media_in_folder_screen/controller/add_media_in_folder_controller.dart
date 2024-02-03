@@ -12,9 +12,14 @@ import '../../service_provider_create_profile/controller/service_provider_create
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_compress_plus/video_compress_plus.dart';
 
 class AddMediaInFolderServiseProviderController extends GetxController {
+ @override
+  void onClose() {
+addAtatchedMediaToFolder();
+           
+    super.onClose();
+  } 
   late String folderName;
   late int folderIndex;
   // late RxList<File> attachedMedia;

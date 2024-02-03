@@ -64,10 +64,11 @@ class MyBookingController extends GetxController {
     } else {
       List<dynamic> interestsJson = handlingResponse['bookings'];
       List<dynamic> completedJson = handlingResponse['completed_bookings'];
-
+      print("upComing List is :$interestsJson");
       upComingBooking = interestsJson
           .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
           .toList();
+
       completedBooking = completedJson
           .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
           .toList();

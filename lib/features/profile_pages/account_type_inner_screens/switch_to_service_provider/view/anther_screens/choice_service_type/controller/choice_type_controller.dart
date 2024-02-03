@@ -7,14 +7,14 @@ import '../../../../../../../../main.dart';
 import 'package:get/get.dart';
 
 class ChoiceTypeController extends GetxController {
-  int sericeSelected = 5000;
   late RxList<String> errorMessage;
   late RxList<ServiceCategoryModel> serviceCategoryList;
-
+  late RxList<int> selectedCategories;
   late RxBool isLoading;
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
+    selectedCategories = <int>[].obs;
     isLoading = false.obs;
     serviceCategoryList = <ServiceCategoryModel>[].obs;
     await fetchCategoryData();
@@ -22,8 +22,10 @@ class ChoiceTypeController extends GetxController {
     super.onInit();
   }
 
-  changeSelectedService(int index) {
-    sericeSelected = index;
+  changeSelectedService(int categoryId) {
+    selectedCategories.contains(categoryId)
+        ? selectedCategories.remove(categoryId)
+        : selectedCategories.add(categoryId);
     update();
   }
 

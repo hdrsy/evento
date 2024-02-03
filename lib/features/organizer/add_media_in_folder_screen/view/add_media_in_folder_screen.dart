@@ -24,9 +24,7 @@ class AddMediaInFolderScreen extends StatelessWidget {
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
-            addMediaInFolderController.addAtatchedMediaToFolder();
             Get.back();
-            // Get.back();
           },
           child: Icon(
             Icons.arrow_back_rounded,

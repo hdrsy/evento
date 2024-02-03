@@ -35,7 +35,11 @@ class BookNowController extends GetxController {
     super.onInit();
   }
 
-  getAminityPrice(Amenity title) {}
+  addnewTicket() {
+    ticketList.add(TicketModel());
+    ticketList.last.totalPrice = eventDetailsModel.ticketPrice;
+  }
+
   addOrRemoveAminitesFromCladd(Amenity title, int index) {
     int aminityPrice = 0;
 

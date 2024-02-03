@@ -14,6 +14,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class OrganizerProfileScreen extends StatelessWidget {
   OrganizerProfileScreen({super.key});
   final OrganizerProfileController organizerProfileController = Get.find();
@@ -80,13 +81,16 @@ class OrganizerProfileScreen extends StatelessWidget {
   }
 
   Widget _buildBackgroundImage() {
-    final OrganizerProfileController organizerProfileController=Get.find();
+    final OrganizerProfileController organizerProfileController = Get.find();
     return Align(
       alignment: const AlignmentDirectional(0, -1),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(0),
-        child:getImageNetwork(url: "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}", width: double.infinity, height:null)
-      ),
+          borderRadius: BorderRadius.circular(0),
+          child: getImageNetwork(
+              url:
+                  "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}",
+              width: double.infinity,
+              height: null)),
     );
   }
 
@@ -104,8 +108,12 @@ class OrganizerProfileScreen extends StatelessWidget {
               width: 2,
             ),
             image: DecorationImage(
-                image: getImageNetwork(url: "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}", width: double.infinity, height:null)
-      .image)),
+                image: getImageNetwork(
+                        url:
+                            "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
+                        width: double.infinity,
+                        height: null)
+                    .image)),
       ),
     );
   }
@@ -124,8 +132,7 @@ class NameAndFollow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           marqueeTitle(
-             organizerProfileController
-                .organizerProfileModel.organizerInfo.name,
+            organizerProfileController.organizerProfileModel.organizerInfo.name,
             heigthFromTheScreen: 0.04,
             widthFromTheScreen: 0.4,
             fontFamily: 'Plus Jakarta Sans',
@@ -133,9 +140,9 @@ class NameAndFollow extends StatelessWidget {
           ),
           GetBuilder<OrganizerProfileController>(builder: (context) {
             return
-            
-            // !organizerProfileController.isorganizerEditProfile?
-             ButtonWidget(
+
+                // !organizerProfileController.isorganizerEditProfile?
+                ButtonWidget(
               onPressed: () async {
                 organizerProfileController.followOrUnFollowOrganizer(
                     organizerProfileController.orgnizerId);
@@ -173,41 +180,40 @@ class NameAndFollow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             );
-        // :        ButtonWidget(
-        //       onPressed: () async {
-        //        Get.toNamed('/EditProfileOrganizerScreen');
-        //        },
-        //       text: "Edit Profile",
-        //       icon: const Icon(
-        //         Icons.edit,
-        //         size: 20,
-        //       ),
-        //       options: ButtonOptions(
-        //         width: 150,
-        //         height: 35,
-        //         padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
-        //         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        //         color: organizerProfileController.organizerProfileModel
-        //                 .organizerInfo.isFollowedByAuthUser
-        //             ? customColors.secondaryBackground
-        //             : customColors.primary,
-        //         textStyle: customTextStyle.titleSmall.override(
-        //           fontFamily: secondaryFontFamily,
-        //           color: organizerProfileController.organizerProfileModel
-        //                   .organizerInfo.isFollowedByAuthUser
-        //               ? customColors.primary
-        //               : customColors.info,
-        //           fontSize: 10,
-        //           fontWeight: FontWeight.normal,
-        //           useGoogleFonts: true,
-        //         ),
-        //         borderSide: BorderSide(
-        //           color: customColors.primary,
-        //         ),
-        //         borderRadius: BorderRadius.circular(20),
-        //       ),
-        //     );
-    
+            // :        ButtonWidget(
+            //       onPressed: () async {
+            //        Get.toNamed('/EditProfileOrganizerScreen');
+            //        },
+            //       text: "Edit Profile",
+            //       icon: const Icon(
+            //         Icons.edit,
+            //         size: 20,
+            //       ),
+            //       options: ButtonOptions(
+            //         width: 150,
+            //         height: 35,
+            //         padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
+            //         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            //         color: organizerProfileController.organizerProfileModel
+            //                 .organizerInfo.isFollowedByAuthUser
+            //             ? customColors.secondaryBackground
+            //             : customColors.primary,
+            //         textStyle: customTextStyle.titleSmall.override(
+            //           fontFamily: secondaryFontFamily,
+            //           color: organizerProfileController.organizerProfileModel
+            //                   .organizerInfo.isFollowedByAuthUser
+            //               ? customColors.primary
+            //               : customColors.info,
+            //           fontSize: 10,
+            //           fontWeight: FontWeight.normal,
+            //           useGoogleFonts: true,
+            //         ),
+            //         borderSide: BorderSide(
+            //           color: customColors.primary,
+            //         ),
+            //         borderRadius: BorderRadius.circular(20),
+            //       ),
+            //     );
           }),
         ],
       ),
@@ -229,9 +235,9 @@ class StaticSection extends StatelessWidget {
             count: organizerProfileController
                 .organizerProfileModel.organizedEventsCount
                 .toString(),
-            title:tr( "Events")),
+            title: tr("Events")),
         statisticSingleElement(
-            title:tr( "Followers"),
+            title: tr("Followers"),
             count: organizerProfileController
                         .organizerProfileModel.followersCount >
                     1000
@@ -240,7 +246,7 @@ class StaticSection extends StatelessWidget {
                     .organizerProfileModel.organizedEventsCount
                     .toString()),
         statisticSingleElement(
-            title:tr( "Following"),
+            title: tr("Following"),
             count: organizerProfileController
                 .organizerProfileModel.followingCount
                 .toString()),
@@ -340,11 +346,11 @@ class MyTabBarWidget extends StatelessWidget {
         unselectedLabelStyle: const TextStyle(),
         indicatorColor: customColors.primary,
         padding: const EdgeInsets.all(4),
-        tabs:  [
-          Tab(text:tr( 'Bio')),
-          Tab(text:tr( 'Events')),
+        tabs: [
+          Tab(text: tr('Bio')),
+          Tab(text: tr('Events')),
           Tab(text: tr('Followers')),
-          Tab(text:tr( 'Gallery')),
+          Tab(text: tr('Gallery')),
         ],
       ),
     );
@@ -405,7 +411,8 @@ class MyTabBarWidget extends StatelessWidget {
 
   Widget _buildGalleryTab(BuildContext context) {
     final OrganizerProfileController organizerProfileController = Get.find();
-print(organizerProfileController.organizerProfileModel.organizerInfo.albums);
+    print(
+        organizerProfileController.organizerProfileModel.organizerInfo.albums);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(

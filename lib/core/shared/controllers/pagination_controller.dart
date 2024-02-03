@@ -20,7 +20,7 @@ class PaginationController<T> extends GetxController {
   // Reactive variables to track loading states.m
   late RxBool isLoading;
   late RxBool isLoadingMoreData;
-
+  
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
   late PageController pageController;

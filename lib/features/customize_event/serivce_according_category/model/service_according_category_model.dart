@@ -11,6 +11,9 @@ class ServiceProvider {
   final String profile;
   final String cover;
   final String description;
+  final double? latitude;
+  final double? longitude;
+
   final User user;
   final List<Album> albums;
 
@@ -25,6 +28,8 @@ class ServiceProvider {
     required this.description,
     required this.user,
     required this.albums,
+    required this.latitude,
+    required this.longitude,
   });
 
   factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) {
@@ -33,9 +38,12 @@ class ServiceProvider {
     var albumList = json['albums'] as List;
     List<Album> albums =
         albumList.map((album) => Album.fromJson(album)).toList();
-
+    print(json);
     return ServiceProvider(
       id: json['id'],
+      latitude: json['latitude'] != null ? json['latitude'].toDouble() : null,
+      longitude:
+          json['longitude'] != null ? json['longitude'].toDouble() : null,
       userId: json['user_id'],
       categoryId: json['category_id'],
       locationWorkGovernorate: json['location_work_governorate'],

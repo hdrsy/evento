@@ -1,5 +1,6 @@
 import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/build_buttons.dart';
 import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/event_info_card.dart';
+import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/ticket_detailes_card.dart';
 
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -65,7 +66,7 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
               EventInfoCard2(),
               ...List.generate(
                   bookingDetailesController.ticketList.length,
-                  (index) => TicketDetailesCard(
+                  (index) => TicketDetailesCardForMyBooking(
                         ticketModel:
                             bookingDetailesController.ticketList[index],
                         modelIndex: index,

@@ -413,5 +413,13 @@
 "cancellationAndRefund": "• Event Approval: The app does not advertise any event before studying and approving the organization request.• Contractual Relations: Contractual relations arising from the event are valid only upon the app's approval of the event.",
 "9. Selection of Service Providers by Event Organizers":"9. Selection of Service Providers by Event Organizers",
 "privacyAndDataProtection":"• Organizer's Choice: The event organizer's choice of a service provider for organizing an event is the organizer's responsibility.Contractual Relationship: The contractual relationship for executing a service or event lies between the event organizer and the service provider.• App/'s Responsibility: The app is not responsible for executing events and does not guarantee the commitments of service providers. The app may only follow up with the service provider upon the organizer's request.",
-"10. Booking and Payment":"10. Booking and Payment"
+"10. Booking and Payment":"10. Booking and Payment",
+
+
+
+
+
+"Logout":"Logout",
+"Are you sure you want to Logout?":"Are you sure you want to Logout?",
+"Yes, Logout":"Yes, Logout"
 }

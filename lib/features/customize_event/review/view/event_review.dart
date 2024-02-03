@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
+import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
@@ -43,6 +44,11 @@ class EventReviewScreen extends StatelessWidget {
               const StepText4(),
               const LinearPercentIndicatorWidget4(),
               ReviewCard(
+                onTapEdit: () {
+                  final DateTimeController dateTimeController = Get.find();
+                  dateTimeController.isEdit.value = true;
+                  Get.toNamed('/dateTimeScreen');
+                },
                 title: tr("Contact Detailes"),
                 leftColumnData: [
                   tr("Name"),
@@ -59,6 +65,11 @@ class EventReviewScreen extends StatelessWidget {
                 ],
               ),
               ReviewCard(
+                onTapEdit: () {
+                  final DateTimeController dateTimeController = Get.find();
+                  dateTimeController.isEdit.value = true;
+                  Get.toNamed('/dateTimeScreen');
+                },
                 title: tr("Event Overview"),
                 leftColumnData: [
                   tr("Event Title"),
@@ -77,6 +88,9 @@ class EventReviewScreen extends StatelessWidget {
                 ],
               ),
               ReviewCard(
+                onTapEdit: () {
+                  Get.back();
+                },
                 title: tr("Event Crew"),
                 leftColumnData: eventReviewController.selected.values
                     .map((value) => value.toString())

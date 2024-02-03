@@ -11,11 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class TicketDetailesCard extends StatelessWidget {
-   TicketDetailesCard(
+  TicketDetailesCard(
       {super.key, required this.ticketModel, required this.modelIndex});
   final TicketModel ticketModel;
   final int modelIndex;
-  final BookingDetailesController bookingDetailesController=Get.find();
+  final BookingDetailesController bookingDetailesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -88,7 +88,27 @@ class TicketDetailesCard extends StatelessWidget {
                     ).tr(),
                   ),
                 ),
-               Divider(
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SinglePriceElement(
+                          title: "First Name",
+                          subTitle: ticketModel.fisrtName.text),
+                      SinglePriceElement(
+                          title: "Last Name",
+                          subTitle: ticketModel.lastName.text),
+                      SinglePriceElement(
+                          title: "Phone Number",
+                          subTitle: ticketModel.phoneNumber.text),
+                      SinglePriceElement(
+                          title: "Age", subTitle: ticketModel.age.text),
+                    ].divide(const SizedBox(height: 8)),
+                  ),
+                ),
+                Divider(
                   thickness: 1,
                   color: customColors.secondary,
                 ),
@@ -97,7 +117,7 @@ class TicketDetailesCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                     child: Text(
-                      " Payment Summary",
+                      "Payment Summary",
                       style: customTextStyle.headlineMedium,
                     ).tr(),
                   ),
@@ -108,13 +128,29 @@ class TicketDetailesCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SinglePriceElement(title: "Coupon code", subTitle: "Sc"),
-                      SinglePriceElement(title: "Ticket", subTitle: bookingDetailesController.eventDetailsModel.ticketPrice.toString()),
-                      ticketModel.selectedClass==null?const SizedBox.shrink():    SinglePriceElement(title: ticketModel.selectedClass!.code,subTitle: ticketModel.selectedClass!.ticketPrice.toString()),
-        ...List.generate(ticketModel.selectedAminiteds.length, (innerIndex) => SinglePriceElement(title:ticketModel.selectedAminiteds[innerIndex].title,subTitle:ticketModel.selectedAminiteds[innerIndex].price!.toString())),
-    
-                      const SinglePriceElement(title: "Tax", subTitle:""),
-                      const SinglePriceElement(title: "Discount", subTitle:""),
+                      const SinglePriceElement(
+                          title: "Coupon code", subTitle: "Sc"),
+                      SinglePriceElement(
+                          title: "Ticket",
+                          subTitle: bookingDetailesController
+                              .eventDetailsModel.ticketPrice
+                              .toString()),
+                      ticketModel.selectedClass == null
+                          ? const SizedBox.shrink()
+                          : SinglePriceElement(
+                              title: ticketModel.selectedClass!.code,
+                              subTitle: ticketModel.selectedClass!.ticketPrice
+                                  .toString()),
+                      ...List.generate(
+                          ticketModel.selectedAminiteds.length,
+                          (innerIndex) => SinglePriceElement(
+                              title: ticketModel
+                                  .selectedAminiteds[innerIndex].title,
+                              subTitle: ticketModel
+                                  .selectedAminiteds[innerIndex].price!
+                                  .toString())),
+                      const SinglePriceElement(title: "Tax", subTitle: ""),
+                      const SinglePriceElement(title: "Discount", subTitle: ""),
                       Divider(
                         thickness: 1,
                         indent: 50,
@@ -230,10 +266,8 @@ class TicketDetailesCard extends StatelessWidget {
                             ),
                           ),
                           ButtonWidget(
-                            onPressed: () {
-                              print(tr('Button pressed ...'));
-                            },
-                            text:tr( "Paid"),
+                            onPressed: () {},
+                            text: tr("Paid"),
                             options: ButtonOptions(
                               height: 22,
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -270,10 +304,12 @@ class TicketDetailesCard extends StatelessWidget {
 
 class SinglePriceElement extends StatelessWidget {
   const SinglePriceElement({
-    super.key, required this.title, required this.subTitle,
+    super.key,
+    required this.title,
+    required this.subTitle,
   });
-final String title;
-final String subTitle;
+  final String title;
+  final String subTitle;
   @override
   Widget build(BuildContext context) {
     return Row(

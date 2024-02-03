@@ -10,6 +10,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
   AddMediaInFolderserviceProviderScreen({super.key});
   final AddMediaInFolderServiseProviderController addMediaInFolderController =
@@ -26,7 +27,6 @@ class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            addMediaInFolderController.addAtatchedMediaToFolder();
             Get.back();
             // Get.back();
           },
@@ -92,7 +92,8 @@ class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
 
 class AddMediaCard extends StatelessWidget {
   AddMediaCard({super.key});
-  final AddMediaInFolderServiseProviderController addMediaInFolderController = Get.find();
+  final AddMediaInFolderServiseProviderController addMediaInFolderController =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -101,29 +102,32 @@ class AddMediaCard extends StatelessWidget {
         showBottomSheetForImagesAndVideos(
             context: context,
             onPressCamera: () {
-               Get.back();
+              Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.camera);
             },
             onPressGallery: () async {
-               Get.back();
+              Get.back();
               addMediaInFolderController.pickNewMedia(ImageSource.gallery);
             },
             onPressVideo: () async {
               await Get.dialog(
                 AlertDialog(
-                  title: Text(tr("Select Video"),style: customTextStyle.bodyMedium.override(
-                    fontFamily: secondaryFontFamily,
-                    useGoogleFonts: true,
-                    color: customColors.primaryText,
-                    fontSize: 16
-                  ),),
+                  title: Text(
+                    tr("Select Video"),
+                    style: customTextStyle.bodyMedium.override(
+                        fontFamily: secondaryFontFamily,
+                        useGoogleFonts: true,
+                        color: customColors.primaryText,
+                        fontSize: 16),
+                  ),
                   content: Text(
-                    tr ( "Please select a video that is no longer than 2 minutes."),style: customTextStyle.bodyMedium.override(
-                    fontFamily: secondaryFontFamily,
-                    useGoogleFonts: true,
-                    color: customColors.secondaryText,
-                    fontSize: 14
-                  ),),
+                    tr("Please select a video that is no longer than 2 minutes."),
+                    style: customTextStyle.bodyMedium.override(
+                        fontFamily: secondaryFontFamily,
+                        useGoogleFonts: true,
+                        color: customColors.secondaryText,
+                        fontSize: 14),
+                  ),
                   actions: <Widget>[
                     TextButton(
                       child: Text(tr("OK")),

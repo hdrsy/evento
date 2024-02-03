@@ -16,49 +16,46 @@ class ShimmerFriendCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           Shimmer.fromColors(
-        baseColor: customColors.secondary,
-        highlightColor: customColors.gray600,
-        child:  Container(
-              width: 64.0,
-              height: 64.0,
-              decoration: const BoxDecoration(
-              color: Colors.white,
-                
-                shape: BoxShape.circle),
-            )),
+            Shimmer.fromColors(
+                baseColor: customColors.secondary,
+                highlightColor: customColors.gray600,
+                child: Container(
+                  width: 64.0,
+                  height: 64.0,
+                  decoration: const BoxDecoration(
+                      color: Colors.white, shape: BoxShape.circle),
+                )),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Shimmer.fromColors(
-        baseColor: customColors.secondary,
-        highlightColor: customColors.gray600,
-        child: Container(
-                    width: 150,
-                    height: 8.0,
-                    color: Colors.white,
-                    
-                  )),
-                
-                  const SizedBox(height: 20,),
-                 Shimmer.fromColors(
-        baseColor: customColors.secondary,
-        highlightColor: customColors.gray600,
-        child:
-                  Container(
-                    width: 100,
-                    height: 10.0,
-                    decoration: BoxDecoration(
-                    color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                  )),
+                      baseColor: customColors.secondary,
+                      highlightColor: customColors.gray600,
+                      child: Container(
+                        width: 150,
+                        height: 8.0,
+                        color: Colors.white,
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Shimmer.fromColors(
+                      baseColor: customColors.secondary,
+                      highlightColor: customColors.gray600,
+                      child: Container(
+                        width: 100,
+                        height: 10.0,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                      )),
                 ],
               ),
             ),

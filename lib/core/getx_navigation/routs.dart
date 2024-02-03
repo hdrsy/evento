@@ -112,7 +112,7 @@ appRoutes() => [
           binding: TimeLineBinding()),
       GetPage(
           name: '/dateTimeScreen',
-          page: () => const DateTimeScreen(),
+          page: () => DateTimeScreen(),
           binding: DateTimeBinding()),
       GetPage(
           name: '/ServiceCategoryScreen',

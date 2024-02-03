@@ -77,7 +77,7 @@ class BookNowScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           BookNowController bookNowController = Get.find();
-                          bookNowController.ticketList.add(TicketModel());
+                          bookNowController.addnewTicket();
                         },
                         child: Text(
                           tr("Add Ticket"),
@@ -97,8 +97,9 @@ class BookNowScreen extends StatelessWidget {
                     child: ButtonWidget(
                       showLoadingIndicator: bookNowController.isLoading.value,
                       onPressed: () async {
-                        // context.pushNamed('Booking-Details');
-                        bookNowController.onPressBookNow();
+                        bookNowController.ticketList.isNotEmpty
+                            ? bookNowController.onPressBookNow()
+                            : null;
                       },
                       text: tr("Confirm Booking"),
                       options: ButtonOptions(
@@ -108,7 +109,9 @@ class BookNowScreen extends StatelessWidget {
                             const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
+                        color: bookNowController.ticketList.isNotEmpty
+                            ? customColors.primary
+                            : customColors.alternate,
                         textStyle: customTextStyle.displaySmall.override(
                           fontFamily: 'Lexend Deca',
                           color: Colors.white,

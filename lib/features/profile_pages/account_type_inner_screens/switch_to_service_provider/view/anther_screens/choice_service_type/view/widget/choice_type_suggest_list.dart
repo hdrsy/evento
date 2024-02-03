@@ -1,4 +1,3 @@
-
 import '../../../../../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/choice_type_controller.dart';
@@ -6,6 +5,7 @@ import '../../../../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ChoiceTypeSuggestList extends StatelessWidget {
   ChoiceTypeSuggestList({super.key});
   final ChoiceTypeController choiceTypeController = Get.find();
@@ -28,22 +28,27 @@ class ChoiceTypeSuggestList extends StatelessWidget {
           ).tr(),
         ),
         Obx(
-          ()=> SingleChildScrollView(
+          () => SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-          
-          ...List.generate(
-              choiceTypeController.serviceCategoryList.length,
-              (index) => SuggestServiceCard(
-                    title: choiceTypeController.serviceCategoryList[index].title,
-                    id: choiceTypeController.serviceCategoryList[index].id,
-                  )).divide(const SizedBox(height: 10,))
+                ...List.generate(
+                    choiceTypeController.serviceCategoryList.length,
+                    (index) => SuggestServiceCard(
+                          title: choiceTypeController
+                              .serviceCategoryList[index].title,
+                          id: choiceTypeController
+                              .serviceCategoryList[index].id,
+                        )).divide(const SizedBox(
+                  height: 10,
+                ))
               ],
             ),
           ),
         )
-      ].divide(const SizedBox(height: 5,)),
+      ].divide(const SizedBox(
+        height: 5,
+      )),
     );
   }
 }
@@ -57,7 +62,7 @@ class SuggestServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChoiceTypeController>(
-      builder:(c)=> Row(
+      builder: (c) => Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,10 +93,9 @@ class SuggestServiceCard extends StatelessWidget {
               unselectedWidgetColor: customColors.secondaryText,
             ),
             child: Checkbox(
-              value: choiceTypeController.sericeSelected == id,
+              value: choiceTypeController.selectedCategories.contains(id),
               onChanged: (value) {
                 choiceTypeController.changeSelectedService(id);
-                
               },
               activeColor: customColors.primary,
               checkColor: customColors.info,

@@ -104,7 +104,11 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
               ),
               unselectedLabelStyle: const TextStyle(),
               indicatorColor: customColors.primary,
-              indicatorWeight: 4,
+              dividerColor: customColors.secondaryBackground,
+              // indicatorWeight: 4,
+              indicatorWeight: 2.0,
+              indicatorSize: TabBarIndicatorSize.tab,
+
               tabs: [
                 Tab(text: tr("Details")),
                 Tab(text: tr("Gallery")),

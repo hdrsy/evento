@@ -10,6 +10,12 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddMediaInFolderController extends GetxController {
+  @override
+  void onClose() {
+    addAtatchedMediaToFolder();
+    super.onClose();
+  }
+
   late String folderName;
   late int folderIndex;
   // late RxList<File> attachedMedia;

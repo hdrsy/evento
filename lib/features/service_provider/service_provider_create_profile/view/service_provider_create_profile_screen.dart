@@ -6,6 +6,7 @@ import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/text_fields/edit_profile_field.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/view/widget/service_provider_account_widget.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/camera_icon.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/create_folder.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/folder_card.dart';
@@ -134,31 +135,36 @@ Wdding, Birthday ,anniversary......"""),
                       onTap: () {
                         Get.to(LocationPickerScreen());
                       },
-                      child: Container(
-                        width: double.infinity,
-                        height: scaleHeight(50),
-                        margin: EdgeInsets.only(top: 12),
-                        padding: padding(0, 10, 0, 10),
-                        alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: customColors.primaryBackground, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(30)),
-                          // color: customColors.primaryBackground
-                        ),
-                        child: Text(
-                          serviceProviderCreateProfileController.locationData ==
-                                  null
-                              ? "Location"
-                              : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.primary,
-                            useGoogleFonts: true,
+                      child: GetBuilder<ServiceProviderCreateProfileController>(
+                          builder: (context) {
+                        return Container(
+                          width: double.infinity,
+                          height: scaleHeight(50),
+                          margin: EdgeInsets.only(top: 12),
+                          padding: padding(0, 10, 0, 10),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: customColors.primaryBackground,
+                                width: 2),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            // color: customColors.primaryBackground
                           ),
-                        ).tr(),
-                      ),
+                          child: Text(
+                            serviceProviderCreateProfileController
+                                        .locationData ==
+                                    null
+                                ? "Location"
+                                : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
+                            style: customTextStyle.bodyMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.primary,
+                              useGoogleFonts: true,
+                            ),
+                          ).tr(),
+                        );
+                      }),
                     ),
 
                     OrganizerMediaCard(),
@@ -166,37 +172,38 @@ Wdding, Birthday ,anniversary......"""),
                       height: 50,
                     ),
                     // Generated code for this Button Widget...
-                    Obx(
-                      () => ButtonWidget(
-                        showLoadingIndicator:
-                            serviceProviderCreateProfileController
-                                .isLoading.value,
-                        onPressed: () async {
-                          serviceProviderCreateProfileController.onPressDone();
-                        },
-                        text: tr("Done"),
-                        options: ButtonOptions(
-                          width: screenWidth * 0.3,
-                          height: 40,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              32, 0, 32, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: Colors.white,
-                            useGoogleFonts: true,
-                          ),
-                          elevation: 3,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
+                    ButtonWidget(
+                      showLoadingIndicator:
+                          serviceProviderCreateProfileController
+                              .isLoading.value,
+                      onPressed: () async {
+                        showButtonSheet(
+                            context: context,
+                            widget: ServiceProviderAccounWidget(),
+                            height: MediaQuery.sizeOf(context).height * 0.6);
+                      },
+                      text: tr("Done"),
+                      options: ButtonOptions(
+                        width: screenWidth * 0.3,
+                        height: 40,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: Colors.white,
+                          useGoogleFonts: true,
                         ),
+                        elevation: 3,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
@@ -243,11 +250,7 @@ class OrganizerMediaCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                GestureDetector(
                   onTap: () async {
                     showButtonSheet(
                         context: context, widget: CreateFolder(), height: 500);

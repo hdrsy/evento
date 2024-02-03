@@ -1,3 +1,6 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+
 import '../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 
@@ -22,67 +25,97 @@ class ServiceAccordingDetailesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       body: SafeArea(
-        child: Stack(children: [
-          TopImageWidget(
-            imageUrl: serviceAccordingDetailesController.serviceProvider.cover,
-          ),
-          Align(
-            alignment: const AlignmentDirectional(-0.95, -0.95),
-            child: Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: const Color(0x3A000000),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: IconWithContainer(
-                backgroundColor: Colors.transparent,
-                buttonSize: 46,
-                borderRadius: 10,
-                icon: Icons.arrow_back_rounded,
-                iconColor: customColors.info,
-                onTap: () {
-                  Get.back();
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: customColors.secondaryBackground,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: Color(0x320E151B),
-                    offset: Offset(0, -2),
-                  )
-                ],
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+        child: Column(
+          children: [
+            Container(
+              height: 400,
+              child: Stack(children: [
+                TopImageWidget(
+                  imageUrl:
+                      serviceAccordingDetailesController.serviceProvider.cover,
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    NameCheckBox(
-                        serviceProvider:
-                            serviceAccordingDetailesController.serviceProvider,
-                        serviceCategoryIndex: serviceAccordingDetailesController
-                            .serviceCategoryIndex),
-                    const SizedBox(height: 20),
-                    Expanded(child: TabBarGalleryAndDetailes())
+                Positioned(
+                  bottom: 0,
+                  left: 20,
+                  child: Container(
+                    width: screenWidth * 0.3,
+                    height: screenWidth * 0.3,
+                    decoration: BoxDecoration(
+                        color: customColors.primaryBackground,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: customColors.secondaryBackground,
+                          width: 2,
+                        ),
+                        image: DecorationImage(
+                            image: getImageNetwork(
+                                    url:
+                                        "/storage/${serviceAccordingDetailesController.serviceProvider.profile}",
+                                    width: double.infinity,
+                                    height: null)
+                                .image)),
+                  ),
+                ),
+                Align(
+                  alignment: const AlignmentDirectional(-0.95, -0.95),
+                  child: Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: const Color(0x3A000000),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: IconWithContainer(
+                      backgroundColor: Colors.transparent,
+                      buttonSize: 46,
+                      borderRadius: 10,
+                      icon: Icons.arrow_back_rounded,
+                      iconColor: customColors.info,
+                      onTap: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                ),
+              ]),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: customColors.secondaryBackground,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x320E151B),
+                      offset: Offset(0, -2),
+                    )
                   ],
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      NameCheckBox(
+                          serviceProvider: serviceAccordingDetailesController
+                              .serviceProvider,
+                          serviceCategoryIndex:
+                              serviceAccordingDetailesController
+                                  .serviceCategoryIndex),
+                      const SizedBox(height: 20),
+                      Expanded(child: TabBarGalleryAndDetailes())
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
@@ -110,7 +143,9 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
               ),
               unselectedLabelStyle: const TextStyle(),
               indicatorColor: customColors.primary,
-              indicatorWeight: 4,
+              indicatorWeight: 2.0,
+              dividerColor: customColors.secondaryBackground,
+              indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
                 Tab(text: tr("Details")),
                 Tab(text: tr("Gallery")),

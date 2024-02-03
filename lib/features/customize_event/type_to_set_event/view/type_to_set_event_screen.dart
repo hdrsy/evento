@@ -9,42 +9,41 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class TypeToSetEventScreen extends StatelessWidget {
-   TypeToSetEventScreen({super.key});
-final TypetoSetEventController typetoSetEventController=Get.find();
+  TypeToSetEventScreen({super.key});
+  final TypetoSetEventController typetoSetEventController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: customColors.secondaryBackground,
-     appBar:  AppBar(
-      backgroundColor: customColors.secondaryBackground,
-        title:Text(tr( "Customize Event"),style: customTextStyle.bodyMedium.copyWith(
-          color: customColors.primary,
-          fontSize: 20
-        )),
-        centerTitle: true,
-      ),
-      body:Obx(
-()=> typetoSetEventController.isLoading.value?SizedBox():
- Container(
-  padding: padding(16, 16,16, 16),
-          
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const StepText(),
-              const LinearPercentIndicatorWidget(),
-               EventTypesWidget(),
-              Spacer(),
-              const CustomizeEventButton()
-              
-            ].divide(SizedBox(height: scaleHeight(10),))
-            ),
+        backgroundColor: customColors.secondaryBackground,
+        appBar: AppBar(
+          backgroundColor: customColors.secondaryBackground,
+          title: Text(tr("Customize Event"),
+              style: customTextStyle.bodyMedium
+                  .copyWith(color: customColors.primary, fontSize: 20)),
+          centerTitle: true,
         ),
-      )
-      );
+        body: Obx(
+          () => typetoSetEventController.isLoading.value
+              ? SizedBox()
+              : Container(
+                  padding: padding(16, 16, 16, 16),
+                  width: double.infinity,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const StepText(),
+                        const LinearPercentIndicatorWidget(),
+                        EventTypesWidget(),
+                        Spacer(),
+                        const CustomizeEventButton()
+                      ].divide(SizedBox(
+                        height: scaleHeight(10),
+                      ))),
+                ),
+        ));
   }
 }

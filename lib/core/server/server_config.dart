@@ -92,6 +92,7 @@ class ServerConstApis {
   static String myFreinds = '$baseAPI/api/my-friends';
   static String mySentRequests = '$baseAPI/api/my-sent-requests';
   static String myReciviedRequests = '$baseAPI/api/my-received-requests';
+  static String freindSearch = '$baseAPI/api/searchFriend';
 
   /// review
   static String reviewEvent = '$baseAPI/api/event-review';

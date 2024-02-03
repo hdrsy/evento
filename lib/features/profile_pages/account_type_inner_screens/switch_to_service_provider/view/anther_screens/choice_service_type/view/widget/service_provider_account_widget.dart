@@ -1,4 +1,5 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 
 import '../../../../../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../../../../../core/utils/theme/text_theme.dart';
@@ -8,15 +9,16 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ServiceProviderAccounWidget extends StatelessWidget {
-  const ServiceProviderAccounWidget({super.key});
-
+   ServiceProviderAccounWidget({super.key});
+  final ServiceProviderCreateProfileController
+      serviceProviderCreateProfileController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: const AlignmentDirectional(0, 0),
       child: Container(
         width: 350,
-        height: screenHeight * 0.32,
+        // height: screenHeight * 0.32,
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
           borderRadius: BorderRadius.circular(20),
@@ -24,11 +26,11 @@ class ServiceProviderAccounWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     "Switch to a service provider account?",
@@ -44,7 +46,7 @@ class ServiceProviderAccounWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                     child: Text(
-                      " Switching to a service provider account makes your profile public. Anyone will be able to see your photos and videos on Instagram. You will no longer need to approve followers. Any pending follow requests will be automatically approved.",
+                      "Switching to a service provider account makes your profile public. Anyone will be able to see your photos and videos on Instagram. You will no longer need to approve followers. Any pending follow requests will be automatically approved.",
                       textAlign: TextAlign.start,
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
@@ -91,34 +93,35 @@ class ServiceProviderAccounWidget extends StatelessWidget {
                       ),
                       showLoadingIndicator: false,
                     ),
-                    ButtonWidget(
-                      onPressed: () async {
-                        Get.back();
-                        Get.toNamed('/ServiceProviderCreateProfileScreen');
-                      },
-                      text: tr("Ok"),
-                      options: ButtonOptions(
-                        width: 150,
-                        height: 45,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
-                        textStyle: customTextStyle.titleSmall.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.info,
-                          fontSize: 14,
-                          useGoogleFonts: true,
-                        ),
-                        elevation: 0,
-                        borderSide: BorderSide(
+                    Obx(
+                      ()=> ButtonWidget(
+                        onPressed: () {
+                          serviceProviderCreateProfileController.onPressDone();
+                        },
+                        text: tr("Ok"),
+                        options: ButtonOptions(
+                          width: 150,
+                          height: 45,
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: customColors.primary,
-                          width: 2,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.info,
+                            fontSize: 14,
+                            useGoogleFonts: true,
+                          ),
+                          elevation: 0,
+                          borderSide: BorderSide(
+                            color: customColors.primary,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        showLoadingIndicator: serviceProviderCreateProfileController.isLoading.value,
                       ),
-                      showLoadingIndicator: false,
                     ),
                   ],
                 ),

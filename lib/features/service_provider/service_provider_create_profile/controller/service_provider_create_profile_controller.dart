@@ -92,8 +92,14 @@ class ServiceProviderCreateProfileController extends GetxController {
       'bio': bio.text,
       'location_work_governorate': selectedState!,
       'description': description.text,
-      'category_id': choiceTypeController.sericeSelected
+      'category_id': choiceTypeController.selectedCategories[0],
     };
+    locationData != null
+        ? dataRequest['latitude'] = locationData!.latitude
+        : null;
+    locationData != null
+        ? dataRequest['longitude'] = locationData!.longitude
+        : null;
     Map<String, File> fileMap = {};
     if (profileImage != null) {
       fileMap['profile'] = profileImage!;
