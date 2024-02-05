@@ -21,7 +21,19 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   late RxBool isLoading;
-   
+  var loadedWidgetsCount = 4.obs; // Start with 2 widgets loaded
+  final int totalWidgetsCount = 9; // Total number of widgets you have
+
+  void loadMoreWidgets() {
+    if (loadedWidgetsCount.value < totalWidgetsCount) {
+      loadedWidgetsCount.value += 2; // Load 2 more widgets at a time
+      if (loadedWidgetsCount.value > totalWidgetsCount) {
+        loadedWidgetsCount.value =
+            totalWidgetsCount; // Don't exceed total count
+      }
+    }
+  }
+
   @override
   void onInit() {
     isLoading = false.obs;
@@ -248,7 +260,7 @@ class OffersController extends PaginationController<OfferEvent> {
 class FeaturedListController extends PaginationController<EventModel> {
   FeaturedListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "FeaturedList");
-final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
@@ -268,14 +280,14 @@ final EventStateManager eventStateManager=Get.find();
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['featured_event']['data'];
     lastPageId = handlingResponse['featured_event']['last_page'];
-var ll=categoryListJson
-    .map((jsonItem) => EventModel.fromJson(jsonItem))
-    .toList();
-for(int i=0;i<ll.length;i++){
-  eventStateManager.addOrUpdateEvent(ll[i]);
-}
+    var ll = categoryListJson
+        .map((jsonItem) => EventModel.fromJson(jsonItem))
+        .toList();
+    for (int i = 0; i < ll.length; i++) {
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
 // ll.map((e) => eventStateManager.addOrUpdateEvent(e));
-print("the length of list is :${eventStateManager.allEvents.length}");
+    print("the length of list is :${eventStateManager.allEvents.length}");
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
@@ -314,7 +326,7 @@ print("the length of list is :${eventStateManager.allEvents.length}");
 class EventInYourCityListController extends PaginationController<EventModel> {
   EventInYourCityListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "EventInYourCityList");
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -335,10 +347,10 @@ class EventInYourCityListController extends PaginationController<EventModel> {
     List<dynamic> categoryListJson =
         handlingResponse['events_in_your_city']['data'];
     lastPageId = handlingResponse['events_in_your_city']['last_page'];
-    var ll=categoryListJson
+    var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
-    for(int i=0;i<ll.length;i++){
+    for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
 
@@ -459,7 +471,7 @@ class HomeOrganizerController extends PaginationController<OrganizerHome> {
 class TrendingListController extends PaginationController<EventModel> {
   TrendingListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "TrendingList");
-final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
@@ -480,10 +492,10 @@ final EventStateManager eventStateManager=Get.find();
     List<dynamic> categoryListJson = handlingResponse['trending_event']['data'];
     lastPageId = handlingResponse['trending_event']['last_page'];
 
-    var ll=categoryListJson
+    var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
-    for(int i=0;i<ll.length;i++){
+    for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
     itemList.addAll(categoryListJson
@@ -522,7 +534,7 @@ final EventStateManager eventStateManager=Get.find();
 class JustForYouController extends PaginationController<EventModel> {
   JustForYouController()
       : super(fetchDataCallback: _fetchData, cacheKey: "JustForYou");
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -543,10 +555,10 @@ class JustForYouController extends PaginationController<EventModel> {
     List<dynamic> categoryListJson = handlingResponse['just_for_you']['data'];
     log("message");
     lastPageId = handlingResponse['just_for_you']['last_page'];
-    var ll=categoryListJson
+    var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
-    for(int i=0;i<ll.length;i++){
+    for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
 

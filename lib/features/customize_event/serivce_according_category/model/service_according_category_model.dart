@@ -13,6 +13,7 @@ class ServiceProvider {
   final String description;
   final double? latitude;
   final double? longitude;
+  final double? rating;
 
   final User user;
   final List<Album> albums;
@@ -27,6 +28,7 @@ class ServiceProvider {
     required this.cover,
     required this.description,
     required this.user,
+    required this.rating,
     required this.albums,
     required this.latitude,
     required this.longitude,
@@ -50,6 +52,9 @@ class ServiceProvider {
       address: json['address'],
       profile: json['profile'],
       cover: json['cover'],
+      rating: json['average_rating'] != null
+          ? double.parse(json['average_rating'])
+          : 0,
       description: json['description'],
       user: User.fromJson(json['user']),
       albums: albums,

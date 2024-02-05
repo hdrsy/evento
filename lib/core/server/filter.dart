@@ -4,9 +4,9 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/main.dart';
 
- filter(Map<String,dynamic> data,{String? url}) async {
+filter(Map<String, dynamic> data, {String? url}) async {
   // Read the stored token from preferences. A fallback empty string is used if it's null.
-  String token = await prefService.readString("token") ;
+  String token = await prefService.readString("token");
 
   // A list to store error messages.
   List<String> errorMessage = [];
@@ -16,7 +16,7 @@ import 'package:evento/main.dart';
 
   // Making the API request. The method is set to "GET".
   response = await ApiHelper.makeRequest(
-      targetRout:url?? ServerConstApis.filter,
+      targetRout: url ?? ServerConstApis.filter,
       method: "post",
       data: data,
       token: token);
@@ -31,7 +31,7 @@ import 'package:evento/main.dart';
     // Return the first error message.
     return errorMessage.first;
   } else {
-     List<dynamic> categoryListJson = handlingResponse['events'];
-return categoryListJson;
+    List<dynamic> categoryListJson = handlingResponse['events'];
+    return categoryListJson;
   }
 }

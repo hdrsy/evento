@@ -10,17 +10,17 @@ import 'package:get/get.dart';
 class OrganizerProfileController extends GetxController {
   late OrganizerProfileModel organizerProfileModel;
   late RxList<String> errorMessage;
-late RxBool isLoading;
-late int orgnizerId;
+  late RxBool isLoading;
+  late int orgnizerId;
 // late bool isorganizerEditProfile;
-  
+
   @override
   void onInit() {
     errorMessage = <String>[].obs;
-    isLoading=false.obs;
-    orgnizerId=Get.arguments;
-      // isorganizerEditProfile = Get.arguments[1]??false;
-  
+    isLoading = false.obs;
+    orgnizerId = Get.arguments;
+    // isorganizerEditProfile = Get.arguments[1]??false;
+
     getOrganizerProfile();
     // TODO: implement onInit
     super.onInit();
@@ -28,8 +28,8 @@ late int orgnizerId;
 
   getOrganizerProfile() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    isLoading.value=true;
-    String token = await prefService.readString("token") ;
+    isLoading.value = true;
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
         method: "GEt",
@@ -45,11 +45,13 @@ late int orgnizerId;
       organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
       update();
     }
-    isLoading.value=false;
+    isLoading.value = false;
   }
-    followOrUnFollowEvent(int eventId, int modelIndex) async {
+
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
-    if (organizerProfileModel.organizedEvents[modelIndex] .isFollowedByAuthUser) {
+    if (organizerProfileModel
+        .organizedEvents[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowEvent}/$eventId");
     } else {
@@ -57,14 +59,16 @@ late int orgnizerId;
           await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      organizerProfileModel.organizedEvents[modelIndex].isFollowedByAuthUser = true;
+      organizerProfileModel.organizedEvents[modelIndex].isFollowedByAuthUser =
+          true;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      organizerProfileModel.organizedEvents[modelIndex].isFollowedByAuthUser = false;
+      organizerProfileModel.organizedEvents[modelIndex].isFollowedByAuthUser =
+          false;
 
       update();
     }
-   }
+  }
 
   followOrUnFollowOrganizer(int organizerId) async {
     late String isDoneSuccefully;
@@ -72,17 +76,18 @@ late int orgnizerId;
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
-      isDoneSuccefully =
-          await followUnFollowEvent("${ServerConstApis.followOrganizer}/$organizerId");
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
       organizerProfileModel.organizerInfo.isFollowedByAuthUser = true;
+      organizerProfileModel.followersCount++;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       organizerProfileModel.organizerInfo.isFollowedByAuthUser = false;
+      organizerProfileModel.followersCount--;
 
       update();
     }
-   }
-
+  }
 }

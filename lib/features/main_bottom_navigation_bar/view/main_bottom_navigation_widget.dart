@@ -22,7 +22,7 @@ class MainBottomNavigationBarWidget extends StatelessWidget {
       ),
       child: Obx(() => Scaffold(
             body: mainBottomNavigationController
-                .screens[mainBottomNavigationController.selectedPage.value],
+                .getScreen(mainBottomNavigationController.selectedPage.value),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: mainBottomNavigationController.selectedPage.value,
               onTap: (i) => mainBottomNavigationController.changePage(i),

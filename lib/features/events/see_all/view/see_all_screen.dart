@@ -37,39 +37,45 @@ class SeeAllScreen extends StatelessWidget {
 
   Widget _buildBody() {
     SeeAllController seeAllController = Get.find();
-    return SingleChildScrollView(
-      controller: seeAllController.scrollController,
-      padding: padding(16, 16, 16, 16),
-      child: Obx(
-        () => Column(
-          children: [
-            ...List.generate(
-                seeAllController.hasMoreData.value
-                    ? seeAllController.itemList.length + 1
-                    : seeAllController.itemList.length, (index) {
-              return index < seeAllController.itemList.length
-                  ? SeeAllCard(
-                      eventModel: seeAllController.itemList[index],
-                      modelIndex: index,
-                    )
-                  : ShimmerLoadingWidget(
-                      loadingShimmerWidget: Container(
-                      width: 355,
-                      height: 100,
-                      // height: 330 ,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: customColors.info,
-                          ),
-                          color: customColors.info),
-                    ));
-            })
-          ].divide(SizedBox(
-            height: scaleHeight(15),
-          )),
-        ),
-      ),
+    return Obx(
+      () => seeAllController.isLoading.value
+          ? Center(
+              child: CircularProgressIndicator(
+                color: customColors.primary,
+              ),
+            )
+          : SingleChildScrollView(
+              controller: seeAllController.scrollController,
+              padding: padding(16, 16, 16, 16),
+              child: Column(
+                children: [
+                  ...List.generate(
+                      seeAllController.hasMoreData.value
+                          ? seeAllController.itemList.length + 1
+                          : seeAllController.itemList.length, (index) {
+                    return index < seeAllController.itemList.length
+                        ? SeeAllCard(
+                            eventModel: seeAllController.itemList[index],
+                            modelIndex: index,
+                          )
+                        : ShimmerLoadingWidget(
+                            loadingShimmerWidget: Container(
+                            width: 355,
+                            height: 100,
+                            // height: 330 ,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: customColors.info,
+                                ),
+                                color: customColors.info),
+                          ));
+                  })
+                ].divide(SizedBox(
+                  height: scaleHeight(15),
+                )),
+              ),
+            ),
     );
   }
 }

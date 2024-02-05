@@ -233,7 +233,7 @@ class FeaturedWidget extends StatelessWidget {
 
   Row priceIcons(
       ticketPrice, bool isFollowedByAuthUser, int modelIndex, int eventId) {
-    final EventStateManager eventStateManager=Get.find();
+    final EventStateManager eventStateManager = Get.find();
 
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -269,7 +269,7 @@ class FeaturedWidget extends StatelessWidget {
                 onTap: () async {
                   const String message = "Check out this event in Evento";
                   final String url =
-                      "http://94.141.219.16:8003/#/eventDetailes/$eventId"; // Replace with your event link
+                      "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
                   final String shareContent =
                       "$message\n\nFor more details, visit: $url";
 
@@ -281,37 +281,34 @@ class FeaturedWidget extends StatelessWidget {
                   size: 20,
                 ),
               ),
-              Obx(
-    () {
-      var eventModel = eventStateManager.getEventById(eventId).value;
+              Obx(() {
+                var eventModel = eventStateManager.getEventById(eventId).value;
 
-    return  ToggleIcon(
-                      onPressed: () async {
-                        if (isGuset) {
-                          Get.dialog(const GuestPopupWidget());
-                        } else {
-                          final FeaturedListController featuredListController =
+                return ToggleIcon(
+                  onPressed: () async {
+                    if (isGuset) {
+                      Get.dialog(const GuestPopupWidget());
+                    } else {
+                      final FeaturedListController featuredListController =
                           Get.find();
-                          featuredListController.followOrUnFollowEvent(
-                              eventModel.id, modelIndex);
-                        }
-                      },
-                      value: eventModel
-                          .isFollowedByAuthUser,
-                      onIcon: Icon(
-                        Icons.favorite_sharp,
-                        color: customColors.error,
-                        size: 25,
-                      ),
-                      offIcon: Icon(
-                        Icons.favorite_border,
-                        color: customColors.secondaryText,
-                        size: 25,
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['toggleIconOnPageLoadAnimation1']!)
-                    ;
-                  })
+                      featuredListController.followOrUnFollowEvent(
+                          eventModel.id, modelIndex);
+                    }
+                  },
+                  value: eventModel.isFollowedByAuthUser,
+                  onIcon: Icon(
+                    Icons.favorite_sharp,
+                    color: customColors.error,
+                    size: 25,
+                  ),
+                  offIcon: Icon(
+                    Icons.favorite_border,
+                    color: customColors.secondaryText,
+                    size: 25,
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['toggleIconOnPageLoadAnimation1']!);
+              })
             ],
           ),
         ),

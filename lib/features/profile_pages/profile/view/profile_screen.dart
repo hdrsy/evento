@@ -147,11 +147,13 @@ List<Widget> getnormalUserOptionsCard() => [
         icon: Icons.language_outlined,
         title: tr("Language"),
       ),
-      OptionsCard(
-        targetRout: '/AccountTypeScreen',
-        icon: Icons.account_circle,
-        title: tr("Account Type"),
-      ),
+      user!.type != "normal" || user!.type != "private"
+          ? const SizedBox()
+          : OptionsCard(
+              targetRout: '/AccountTypeScreen',
+              icon: Icons.account_circle,
+              title: tr("Account Type"),
+            ),
     ];
 
 List<Widget> getOrganizerOptionsCard() => [

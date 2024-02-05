@@ -173,9 +173,7 @@ Wdding, Birthday ,anniversary......"""),
                     ),
                     // Generated code for this Button Widget...
                     ButtonWidget(
-                      showLoadingIndicator:
-                          serviceProviderCreateProfileController
-                              .isLoading.value,
+                      showLoadingIndicator: false,
                       onPressed: () async {
                         showButtonSheet(
                             context: context,
@@ -235,33 +233,33 @@ class OrganizerMediaCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Align(
-                  alignment: const AlignmentDirectional(-1, -1),
-                  child: Text(
-                    tr("Create Profile"),
-                    style: customTextStyle.bodyMedium.override(
-                      fontFamily: 'Nunito',
-                      color: customColors.primary,
-                      useGoogleFonts: true,
+            GestureDetector(
+              onTap: () {
+                showButtonSheet(
+                    context: context, widget: CreateFolder(), height: 500);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(-1, -1),
+                    child: Text(
+                      tr("Create Profile"),
+                      style: customTextStyle.bodyMedium.override(
+                        fontFamily: 'Nunito',
+                        color: customColors.primary,
+                        useGoogleFonts: true,
+                      ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    showButtonSheet(
-                        context: context, widget: CreateFolder(), height: 500);
-                  },
-                  child: const Icon(
+                  const Icon(
                     Icons.add_circle_outline,
                     color: Color(0xFF757575),
                     size: 24,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

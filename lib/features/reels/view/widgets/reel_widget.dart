@@ -1,4 +1,3 @@
-
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
@@ -19,7 +18,7 @@ import 'package:get/get.dart';
 
 class ReelsWidget extends StatelessWidget {
   ReelsWidget({super.key, required this.model, required this.modelIndex});
-  
+
   final ReelModel model;
   final int modelIndex;
 
@@ -31,39 +30,38 @@ class ReelsWidget extends StatelessWidget {
       child: SizedBox(
         width: screenWidth,
         height: MediaQuery.of(context).size.height * 0.9,
-        child: 
-        Obx(
-          ()=> reelsController.isLoading.value? const ReelsShimmer(): 
-          
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height,
-                  
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Stack(
+        child: Obx(
+          () => reelsController.isLoading.value
+              ? const ReelsShimmer()
+              : Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: MediaQuery.sizeOf(context).height,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ReelsVideoWidget(
-                              currentVideoUrl:"${ServerConstApis.baseAPI}/storage/${ model.videos[0]}",
+                            Expanded(
+                              child: Stack(
+                                children: [
+                                  ReelsVideoWidget(
+                                    currentVideoUrl:
+                                        "${ServerConstApis.baseAPI}/storage/${model.videos[0]}",
+                                  ),
+                                  videoInfo(),
+                                  commentShareLike(modelIndex),
+                                ],
+                              ),
                             ),
-                            videoInfo(),
-                            commentShareLike(modelIndex),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -94,7 +92,9 @@ class ReelsWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     userPhotoAndName(model: model),
-              model.event!=null?      followButton(modelIndex):SizedBox.shrink(),
+                    model.event != null
+                        ? followButton(modelIndex)
+                        : SizedBox.shrink(),
                   ].divide(const SizedBox(width: 10)),
                 ),
               ),
@@ -171,16 +171,15 @@ class userPhotoAndName extends StatelessWidget {
     );
   }
 }
-String getReelToname(ReelModel model){
-if(model.event!=null){
-  return model.event!.title;
-}
-else if(model.user!=null){
-  return model.user!.firstName;
-}
-else if(model.venue!=null){
-  return model.venue!.name;
-}else{
-  return "Evento";
-}
+
+String getReelToname(ReelModel model) {
+  if (model.event != null) {
+    return model.event!.title;
+  } else if (model.user != null) {
+    return model.user!.firstName;
+  } else if (model.venue != null) {
+    return model.venue!.name;
+  } else {
+    return "Evento";
+  }
 }

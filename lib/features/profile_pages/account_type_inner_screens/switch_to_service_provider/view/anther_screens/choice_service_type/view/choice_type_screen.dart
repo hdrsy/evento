@@ -92,7 +92,9 @@ class ChoiceTypeScreen extends StatelessWidget {
               padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: ButtonWidget(
                 onPressed: () async {
-                  Get.toNamed('/ServiceProviderCreateProfileScreen');
+                  if (choiceTypeController.selectedCategories.isNotEmpty) {
+                    Get.toNamed('/ServiceProviderCreateProfileScreen');
+                  }
                 },
                 text: tr("Done"),
                 options: ButtonOptions(

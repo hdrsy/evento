@@ -13,45 +13,39 @@ class FolderCard extends StatelessWidget {
   final FolderModel folder;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () async {
-        // Get.toNamed("/GalleryScreen");
-        Get.to(GalleryForLocalScreen(files: folder.mediaList,));
-      },
-      child:
-Column(
-  mainAxisSize: MainAxisSize.max,
-  children: [
-    ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.asset(
-        'assets/images/folder_card.png',
-        height: 100,
-        width: 100,
-        fit: BoxFit.contain,
-        // color: Colors.red,
-      ),
-    ),
-    Text(
-      folder.folderName,
-      style: customTextStyle.bodyMedium,
-    ),
-  ].divide(SizedBox(height: 5)),
-)
-
-    );
+    return GestureDetector(
+        onTap: () async {
+          // Get.toNamed("/GalleryScreen");
+          Get.to(GalleryForLocalScreen(
+            files: folder.mediaList,
+          ));
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/folder_card.png',
+                height: 100,
+                width: 100,
+                fit: BoxFit.contain,
+                // color: Colors.red,
+              ),
+            ),
+            Text(
+              folder.folderName,
+              style: customTextStyle.bodyMedium,
+            ),
+          ].divide(SizedBox(height: 5)),
+        ));
   }
 }
 
-
 class SeeAllFoldersCard extends StatelessWidget {
-   SeeAllFoldersCard({super.key});
-final ServiceProviderCreateProfileController serviceProviderCreateProfileController =
-      Get.find();
+  SeeAllFoldersCard({super.key});
+  final ServiceProviderCreateProfileController
+      serviceProviderCreateProfileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +55,21 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.to(SeeAllfolders(allFolders: serviceProviderCreateProfileController.foldersModel,));
+        Get.to(SeeAllfolders(
+          allFolders: serviceProviderCreateProfileController.foldersModel,
+        ));
       },
       child: Stack(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-        'assets/images/folder_card.png',
-        height: 100,
-        width: 100,
-        fit: BoxFit.contain,
-        // color: Colors.red,
-      ),
+              'assets/images/folder_card.png',
+              height: 100,
+              width: 100,
+              fit: BoxFit.contain,
+              // color: Colors.red,
+            ),
           ),
           Container(
             width: 100,
@@ -90,7 +86,7 @@ final ServiceProviderCreateProfileController serviceProviderCreateProfileControl
             child: Align(
               alignment: const AlignmentDirectional(0, 0),
               child: Text(
-                "+${serviceProviderCreateProfileController.foldersModel.length-2}",
+                "+${serviceProviderCreateProfileController.foldersModel.length - 2}",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.info,

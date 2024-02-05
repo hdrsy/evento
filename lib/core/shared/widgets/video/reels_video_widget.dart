@@ -69,7 +69,13 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
           _isBuffering = isActuallyBuffering;
         });
       }
-
+      if (videoPlayerController.value.isCompleted) {
+        final ReelsController reelsController = Get.find();
+        // reelsController.nextUser();
+        reelsController.pageController.nextPage(
+            duration: const Duration(microseconds: 100),
+            curve: Curves.bounceInOut);
+      }
       if (videoPlayerController.value.isPlaying && !_isPlaying) {
         // Video has started playing
         setState(() {
@@ -143,7 +149,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
                         colors: VideoProgressColors(
                           playedColor: customColors.primary,
                           bufferedColor: Colors.grey,
-                          backgroundColor: Colors.white,
+                          backgroundColor: Colors.grey,
                         ),
                       ),
                 Column(

@@ -1,5 +1,3 @@
-import '../../../../core/responsive/responsive.dart';
-import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../controller/home_controller.dart';
 import 'widgets/category_list.dart';
 import 'widgets/events_from_organizer.dart';
@@ -33,28 +31,67 @@ class HomeScreen extends StatelessWidget {
           onRefresh: () {
             return homeController.onrefresh();
           },
-          child: buildBody()),
+          child: buildBody(context)),
     );
   }
 
-  Widget buildBody() {
-    return SingleChildScrollView(
-      padding: padding(10, 15, 10, 15),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          CategoryList(),
-          const SearchAndNotification(),
-          FeaturedList(),
-          TrendingNow(),
-          isGuset ? const SizedBox() : FromYourCity(),
-          Offers(),
-          isGuset ? const SizedBox() : Orgnizers(),
-          isGuset ? const SizedBox() : EventsFromOrganizer(),
-          ForYou()
-        ].divide(const SizedBox(height: 10)),
-      ),
+  Widget buildBody(BuildContext context) {
+    return NotificationListener<ScrollNotification>(
+      onNotification: (ScrollNotification scrollInfo) {
+        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+          // Load more widgets if at the bottom of the list
+          homeController.loadMoreWidgets();
+        }
+        return true; // to stop propagation
+      },
+      child: Obx(() => ListView.builder(
+            padding: const EdgeInsets.all(15),
+            itemCount: homeController.loadedWidgetsCount.value +
+                (homeController.loadedWidgetsCount.value <
+                        homeController.totalWidgetsCount
+                    ? 1
+                    : 0),
+            itemBuilder: (context, index) {
+              if (index >= homeController.loadedWidgetsCount.value) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: _buildWidgetForIndex(index));
+              }
+            },
+          )),
     );
+  }
+
+  Widget _buildWidgetForIndex(int index) {
+    // Return the appropriate widget based on the index
+    // Similar to how you previously listed your widgets
+    // You might need to adjust this logic based on your actual widgets
+    switch (index) {
+      case 0:
+        return CategoryList();
+      case 1:
+        return const SearchAndNotification();
+      // Add cases for your other widgets...
+      case 2:
+        return FeaturedList();
+      case 3:
+        return TrendingNow();
+      case 4:
+        return isGuset ? const SizedBox() : FromYourCity();
+      case 5:
+        return Offers();
+      case 6:
+        return isGuset ? const SizedBox() : Orgnizers();
+      case 7:
+        return isGuset ? const SizedBox() : EventsFromOrganizer();
+      case 8:
+        return ForYou();
+
+      // Add cases for your other widgets...
+      default:
+        return const SizedBox(); // Placeholder for unhandled indexes
+    }
   }
 }

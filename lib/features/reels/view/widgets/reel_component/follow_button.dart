@@ -17,7 +17,7 @@ Widget followButton(int modelIndex) {
             reelsController.itemList[modelIndex].event!.id, modelIndex);
       },
       text: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
-          ? tr("UnFollow")
+          ? tr("Following")
           : tr("Follow"),
       options: ButtonOptions(
         width: 85,

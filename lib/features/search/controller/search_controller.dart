@@ -130,13 +130,23 @@ class SearchPageController extends GetxController {
   }
 
   void onApplyFilters(Map<String, dynamic> data) async {
+    isSearchActive.value = true;
+    update();
     // Your filter logic
-    // Assuming this returns a List<Map<String, dynamic>> representing filtered data
-    var filteredData =
-        await filter(data); // Replace with your actual filter function
-    var filteredResults =
-        filteredData.map((jsonItem) => SearchModel.fromJson(jsonItem)).toList();
-    _updateSearchResults(filteredResults);
+    var filteredData = await filter(
+        data); // Assuming this returns List<dynamic> representing filtered data
+    if (filteredData is List<dynamic>) {
+      List<SearchModel> filteredResults = filteredData.map((jsonItem) {
+        // Ensure jsonItem is a Map<String, dynamic> before converting
+        return SearchModel.fromJson(jsonItem);
+      }).toList();
+      print("filteredResults:$filteredResults");
+      _updateSearchResults(filteredResults);
+    } else {
+      // Handle the case where filteredData is not a List<dynamic>
+      // For example, log an error or show an error message
+    }
+    isSearchActive.value = false;
   }
 
   @override

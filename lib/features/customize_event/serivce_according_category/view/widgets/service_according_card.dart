@@ -125,7 +125,7 @@ class ServiceAccordingCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "4.25",
+                      serviceProvider.rating.toString(),
                       style: customTextStyle.labelMedium,
                     ),
                     Icon(

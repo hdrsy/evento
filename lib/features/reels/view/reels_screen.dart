@@ -1,3 +1,5 @@
+import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
+
 import '../controller/reels_controller.dart';
 import 'widgets/reel_widget.dart';
 
@@ -12,27 +14,29 @@ class ReelsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
-          child: GetBuilder<ReelsController>(builder: (ccontext) {
-            return PageView.builder(
-                controller: reelsController.pageController,
-                scrollDirection: Axis.vertical,
-                onPageChanged: (index) {
-                  if (index > reelsController.currentUserIndex) {
-                    // Swipe Up - Load the next video
-                    reelsController.nextUser();
-                  } else {
-                    // Swipe Down - Go back to the previous video
-                    reelsController.previousUser();
-                  }
-                },
-                itemCount: reelsController.itemList.length,
-                itemBuilder: (context, index) {
-                  return ReelsWidget(
-                    model: reelsController.itemList[index],
-                    modelIndex: index,
-                  );
-                });
-          }),
+          child: Obx(
+            () => reelsController.isLoading.value
+                ? const ReelsShimmer()
+                : PageView.builder(
+                    controller: reelsController.pageController,
+                    scrollDirection: Axis.vertical,
+                    onPageChanged: (index) {
+                      if (index > reelsController.currentUserIndex) {
+                        // Swipe Up - Load the next video
+                        reelsController.nextUser();
+                      } else {
+                        // Swipe Down - Go back to the previous video
+                        reelsController.previousUser();
+                      }
+                    },
+                    itemCount: reelsController.itemList.length,
+                    itemBuilder: (context, index) {
+                      return ReelsWidget(
+                        model: reelsController.itemList[index],
+                        modelIndex: index,
+                      );
+                    }),
+          ),
         ));
   }
 }

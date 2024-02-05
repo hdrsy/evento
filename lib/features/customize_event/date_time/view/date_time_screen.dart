@@ -19,41 +19,39 @@ class DateTimeScreen extends StatelessWidget {
   final DateTimeController dateTimeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
+    return Scaffold(
+      backgroundColor: customColors.secondaryBackground,
+      appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: customColors.secondaryBackground,
-          leading: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_rounded,
-              color: customColors.primaryText,
-              size: 30,
-            ),
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back_rounded,
+            color: customColors.primaryText,
+            size: 30,
           ),
         ),
-        body: SingleChildScrollView(
-          padding: padding(16, 16, 16, 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const StepText2(),
-              const LinearPercentIndicatorWidget(),
-              EventTitle(),
-              ContactInformationForm(),
-              const SelectPeopleDateTime(),
-              UploadMedia(),
-              NotesLabel(),
-              NextStepButton()
-            ].divide(SizedBox(
-              height: scaleHeight(10),
-            )),
-          ),
+      ),
+      body: SingleChildScrollView(
+        padding: padding(16, 16, 16, 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const StepText2(),
+            const LinearPercentIndicatorWidget(),
+            EventTitle(),
+            ContactInformationForm(),
+            const SelectPeopleDateTime(),
+            UploadMedia(),
+            NotesLabel(),
+            NextStepButton()
+          ].divide(SizedBox(
+            height: scaleHeight(10),
+          )),
         ),
       ),
     );
