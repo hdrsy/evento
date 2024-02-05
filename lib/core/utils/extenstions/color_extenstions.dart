@@ -41,6 +41,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color lineGray;
   final Color primaryBtnText;
   final Color lineColor;
+  final Color border;
   final Color noColor;
   AppColorsExtension({
     required this.rejected,
@@ -52,6 +53,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.pending,
     required this.paid,
     required this.text,
+    required this.border,
     required this.alternate,
     required this.accent4,
     required this.primaryBackground,
@@ -65,7 +67,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.success,
     required this.error,
     required this.warning,
-    
     required this.primaryText,
     required this.secondaryText,
     required this.shadow,
@@ -103,7 +104,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     Color? warning,
     Color? primaryText,
     Color? secondaryText,
-
     Color? shadow,
     Color? rejected,
     Color? delete,
@@ -122,48 +122,47 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     Color? lightCeladon,
   }) {
     return AppColorsExtension(
-      accent4: accent4 ?? this.accent4,
-      info: info,
-      alternate: alternate ?? this.alternate,
-      primary: primary ?? this.primary,
-      secondary: secondary ?? this.secondary,
-      tertiary: tertiary ?? this.tertiary,
-      accent1: accent1 ?? this.accent1,
-      accent2: accent2 ?? this.accent2,
-      accent3: accent3 ?? this.accent3,
-      success: success ?? this.success,
-      error: error ?? this.error,
-      warning: warning ?? this.warning,
-      primaryText: primaryText ?? this.primaryText,
-      secondaryText: secondaryText ?? this.secondaryText,
-      
-      shadow: shadow ?? this.shadow,
-      rejected: rejected ?? this.rejected,
-      delete: delete ?? this.delete,
-      revoke: revoke ?? this.revoke,
-      cancelled: cancelled ?? this.cancelled,
-      pending: pending ?? this.pending,
-      paid: paid ?? this.paid,
-      completed: completed,
-      text: text,
-      primaryBackground: primaryBackground,
-      secondaryBackground: secondaryBackground,
-      button: button,
-      buttonText: buttonText,
-      celadon: celadon,
-      cultured: cultured,
-      dark600: dark600,
-      darkText: darkText,
-      gray600: gray600,
-      grayIcon: grayIcon,
-      gunmetal: gunmetal,
-      lineColor: lineColor,
-      lineGray: lineGray,
-      noColor: noColor,
-      primaryBtnText: primaryBtnText,
-      redApple: redApple,
-      turquoise: turquoise
-    );
+        accent4: accent4 ?? this.accent4,
+        info: info,
+        border: border,
+        alternate: alternate ?? this.alternate,
+        primary: primary ?? this.primary,
+        secondary: secondary ?? this.secondary,
+        tertiary: tertiary ?? this.tertiary,
+        accent1: accent1 ?? this.accent1,
+        accent2: accent2 ?? this.accent2,
+        accent3: accent3 ?? this.accent3,
+        success: success ?? this.success,
+        error: error ?? this.error,
+        warning: warning ?? this.warning,
+        primaryText: primaryText ?? this.primaryText,
+        secondaryText: secondaryText ?? this.secondaryText,
+        shadow: shadow ?? this.shadow,
+        rejected: rejected ?? this.rejected,
+        delete: delete ?? this.delete,
+        revoke: revoke ?? this.revoke,
+        cancelled: cancelled ?? this.cancelled,
+        pending: pending ?? this.pending,
+        paid: paid ?? this.paid,
+        completed: completed,
+        text: text,
+        primaryBackground: primaryBackground,
+        secondaryBackground: secondaryBackground,
+        button: button,
+        buttonText: buttonText,
+        celadon: celadon,
+        cultured: cultured,
+        dark600: dark600,
+        darkText: darkText,
+        gray600: gray600,
+        grayIcon: grayIcon,
+        gunmetal: gunmetal,
+        lineColor: lineColor,
+        lineGray: lineGray,
+        noColor: noColor,
+        primaryBtnText: primaryBtnText,
+        redApple: redApple,
+        turquoise: turquoise);
   }
 
   @override
@@ -179,6 +178,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     // Interpolate between the current and other theme colors based on t
     return AppColorsExtension(
       alternate: Color.lerp(alternate, otherColors.alternate, t)!,
+      border: Color.lerp(border, otherColors.border, t)!,
       accent4: Color.lerp(accent4, otherColors.accent4, t)!,
       primary: Color.lerp(primary, otherColors.primary, t)!,
       secondary: Color.lerp(secondary, otherColors.secondary, t)!,
@@ -192,7 +192,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       primaryText: Color.lerp(primaryText, otherColors.primaryText, t)!,
       secondaryText: Color.lerp(secondaryText, otherColors.secondaryText, t)!,
       info: Color.lerp(info, otherColors.info, t)!,
-      
       shadow: Color.lerp(shadow, otherColors.shadow, t)!,
       rejected: Color.lerp(rejected, otherColors.rejected, t)!,
       delete: Color.lerp(delete, otherColors.delete, t)!,
@@ -214,11 +213,14 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       lineColor: Color.lerp(lineColor, otherColors.lineColor, t)!,
       lineGray: Color.lerp(lineGray, otherColors.lineGray, t)!,
       noColor: Color.lerp(noColor, otherColors.noColor, t)!,
-      primaryBackground: Color.lerp(primaryBackground, otherColors.primaryBackground, t)!,
-      primaryBtnText: Color.lerp(primaryBtnText, otherColors.primaryBtnText, t)!,
+      primaryBackground:
+          Color.lerp(primaryBackground, otherColors.primaryBackground, t)!,
+      primaryBtnText:
+          Color.lerp(primaryBtnText, otherColors.primaryBtnText, t)!,
       redApple: Color.lerp(redApple, otherColors.redApple, t)!,
-      secondaryBackground: Color.lerp(secondaryBackground, otherColors.secondaryBackground, t)!,
+      secondaryBackground:
+          Color.lerp(secondaryBackground, otherColors.secondaryBackground, t)!,
       turquoise: Color.lerp(turquoise, otherColors.turquoise, t)!,
-      );
+    );
   }
 }

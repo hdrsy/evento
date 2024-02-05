@@ -73,7 +73,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
         final ReelsController reelsController = Get.find();
         // reelsController.nextUser();
         reelsController.pageController.nextPage(
-            duration: const Duration(microseconds: 100),
+            duration: const Duration(microseconds: 500),
             curve: Curves.bounceInOut);
       }
       if (videoPlayerController.value.isPlaying && !_isPlaying) {

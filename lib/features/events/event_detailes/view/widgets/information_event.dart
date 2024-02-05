@@ -38,7 +38,7 @@ class InformationEvent extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                buildHeader(context, eventDetailsModel.title),
+                buildHeader(context, eventDetailsModel),
                 // _buildGoingSection(context),
                 Divider(thickness: 1, color: customColors.secondary),
                 buildEventDetails(context),
@@ -49,7 +49,6 @@ class InformationEvent extends StatelessWidget {
                 buildGallerySection(context),
                 buildLocationSection(context),
                 buildAmenitiesSection(context),
-                buildEventTimelineButton(context, eventDetailsModel),
                 LinksSection(),
                 buildMoreEventsSection(context),
               ]

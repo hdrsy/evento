@@ -1,3 +1,5 @@
+import 'package:evento/core/responsive/size_config.dart';
+
 import '../../../core/utils/extenstions/color_extenstions.dart';
 import '../../../core/utils/extenstions/text_extenstions.dart';
 import '../controller/main_bottom_navigation_controller.dart';
@@ -14,6 +16,7 @@ class MainBottomNavigationBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     customColors = Theme.of(context).extension<AppColorsExtension>()!;
     customTextStyle = Theme.of(context).extension<TextExtension>()!;
+    SizeConfig().init(context);
 
     return Theme(
       data: Theme.of(context).copyWith(

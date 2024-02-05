@@ -147,6 +147,7 @@ class SearchPageController extends GetxController {
       // For example, log an error or show an error message
     }
     isSearchActive.value = false;
+    Get.back();
   }
 
   @override

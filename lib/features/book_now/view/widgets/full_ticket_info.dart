@@ -1,3 +1,5 @@
+import 'package:evento/core/responsive/size_config.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
@@ -121,7 +123,8 @@ class FullTicketInfo extends StatelessWidget {
                   children: [
                     Text(tr("Personal Information"),
                         style: customTextStyle.bodyMedium.override(
-                            fontFamily: primaryFontFamily, fontSize: 14)),
+                            fontFamily: primaryFontFamily,
+                            fontSize: SizeConfig.safeBlockHorizontal * 4)),
                     GestureDetector(
                       onTap: () {
                         showButtonSheet(
@@ -132,7 +135,7 @@ class FullTicketInfo extends StatelessWidget {
                       child: Text(tr("Fill profile / Friend list data"),
                           style: customTextStyle.bodyMedium.override(
                               fontFamily: primaryFontFamily,
-                              fontSize: 12,
+                              fontSize: SizeConfig.safeBlockHorizontal * 2.5,
                               color: customColors.primary)),
                     ),
                   ],

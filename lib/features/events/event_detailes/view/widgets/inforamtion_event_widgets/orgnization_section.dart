@@ -20,7 +20,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
           child: Text(
             tr("Organizer"),
             style: customTextStyle.bodyMedium.copyWith(
-                fontSize: 16,
+                fontSize: 14,
                 color: customColors.primaryText,
                 fontWeight: FontWeight.w700),
           )),

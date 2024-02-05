@@ -10,13 +10,15 @@ import '../model/reels_model.dart';
 import '../../../main.dart';
 
 class ReelsController extends PaginationController<ReelModel> {
-  ReelsController() : super(fetchDataCallback: _fetchData,cacheKey: "ReelsController");
+  ReelsController()
+      : super(fetchDataCallback: _fetchData, cacheKey: "ReelsController");
   late int currentUserIndex; // Index of the current user
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ?? "";
-    String apiUrl = "${isGuset?ServerConstApis.getReelsforGuest:ServerConstApis.getReels}?page=$page";
+    String apiUrl =
+        "${isGuset ? ServerConstApis.getReelsforGuest : ServerConstApis.getReels}?page=$page";
 
     // Returning the result of the API call
     return ApiHelper.makeRequest(
@@ -28,7 +30,6 @@ class ReelsController extends PaginationController<ReelModel> {
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
-    
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
     print(categoryListJson);
     lastPageId = handlingResponse['reels']['last_page'];
@@ -36,7 +37,7 @@ class ReelsController extends PaginationController<ReelModel> {
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());
- currentUserIndex = 0;
+    currentUserIndex = 0;
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }
@@ -44,8 +45,8 @@ class ReelsController extends PaginationController<ReelModel> {
     isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
-    
   }
+
   followOrUnFollowreelEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].event!.isFollowedByAuthUser) {
@@ -63,15 +64,16 @@ class ReelsController extends PaginationController<ReelModel> {
 
       update();
     }
-   }
+  }
+
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].likedByUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.likeReel}/$eventId/like");
     } else {
-      isDoneSuccefully =
-          await followUnFollowEvent("${ServerConstApis.likeReel}/$eventId/like");
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.likeReel}/$eventId/like");
     }
     if (isDoneSuccefully == "Like added successfully") {
       itemList[modelIndex].likedByUser = true;
@@ -83,7 +85,8 @@ class ReelsController extends PaginationController<ReelModel> {
       itemList[modelIndex].likesCount -= 1;
       update();
     }
-    }
+  }
+
   void nextUser() {
     if (currentUserIndex + 1 < itemList.length) {
       currentUserIndex++;
@@ -95,10 +98,8 @@ class ReelsController extends PaginationController<ReelModel> {
     if (currentUserIndex > 0) {
       currentUserIndex--;
       update();
-     }
+    }
   }
-
-  
 }
 
 // class ReelsController extends GetxController

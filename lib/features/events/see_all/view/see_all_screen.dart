@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/animation/shimmer_animation.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -44,38 +46,43 @@ class SeeAllScreen extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : SingleChildScrollView(
-              controller: seeAllController.scrollController,
-              padding: padding(16, 16, 16, 16),
-              child: Column(
-                children: [
-                  ...List.generate(
-                      seeAllController.hasMoreData.value
-                          ? seeAllController.itemList.length + 1
-                          : seeAllController.itemList.length, (index) {
-                    return index < seeAllController.itemList.length
-                        ? SeeAllCard(
-                            eventModel: seeAllController.itemList[index],
-                            modelIndex: index,
-                          )
-                        : ShimmerLoadingWidget(
-                            loadingShimmerWidget: Container(
-                            width: 355,
-                            height: 100,
-                            // height: 330 ,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: customColors.info,
-                                ),
-                                color: customColors.info),
-                          ));
-                  })
-                ].divide(SizedBox(
-                  height: scaleHeight(15),
-                )),
-              ),
-            ),
+          : seeAllController.itemList.isEmpty
+              ? const EmptyData(
+                  icon: Icons.replay_circle_filled_outlined,
+                  message:
+                      "Looks like there are no  events available right now - check back later!")
+              : SingleChildScrollView(
+                  controller: seeAllController.scrollController,
+                  padding: padding(16, 16, 16, 16),
+                  child: Column(
+                    children: [
+                      ...List.generate(
+                          seeAllController.hasMoreData.value
+                              ? seeAllController.itemList.length + 1
+                              : seeAllController.itemList.length, (index) {
+                        return index < seeAllController.itemList.length
+                            ? SeeAllCard(
+                                eventModel: seeAllController.itemList[index],
+                                modelIndex: index,
+                              )
+                            : ShimmerLoadingWidget(
+                                loadingShimmerWidget: Container(
+                                width: 355,
+                                height: 100,
+                                // height: 330 ,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: customColors.info,
+                                    ),
+                                    color: customColors.info),
+                              ));
+                      })
+                    ].divide(SizedBox(
+                      height: scaleHeight(15),
+                    )),
+                  ),
+                ),
     );
   }
 }

@@ -8,6 +8,7 @@ getImageNetwork(
     {required String url,
     required double? width,
     required double? height,
+    Color? imgColor,
     AlignmentGeometry? alignmentGeometry}) {
   String cleanUrl = url.contains("storage") ? url : "/storage/$url";
   return Image.network(
@@ -16,6 +17,7 @@ getImageNetwork(
     alignment: alignmentGeometry ?? Alignment.center,
     height: height,
     fit: BoxFit.cover,
+    color: imgColor,
     loadingBuilder:
         (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
       if (loadingProgress == null) {

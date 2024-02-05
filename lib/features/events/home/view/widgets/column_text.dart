@@ -1,3 +1,5 @@
+import 'package:evento/core/responsive/size_config.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -27,7 +29,7 @@ class ColumnText extends StatelessWidget {
             style: customTextStyle.bodyMedium.override(
               fontFamily: breeSerif,
               color: customColors.primaryText,
-              fontSize: 20,
+              fontSize: SizeConfig.safeBlockHorizontal * 4,
               useGoogleFonts: true,
             ),
           ),
@@ -40,9 +42,7 @@ class ColumnText extends StatelessWidget {
               style: customTextStyle.labelSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.secondaryText,
-                fontSize: screenSize == ScreenSize.small
-                    ? 12
-                    : (screenSize == ScreenSize.medium ? 14 : 16),
+                fontSize: SizeConfig.safeBlockHorizontal * 3,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: true,
               ),
@@ -54,7 +54,7 @@ class ColumnText extends StatelessWidget {
                 style: customTextStyle.labelSmall.override(
                   fontFamily: breeSerif,
                   color: customColors.primary,
-                  fontSize: 13,
+                  fontSize: SizeConfig.safeBlockHorizontal * 2.5,
                   useGoogleFonts: true,
                 ),
               ).tr(),

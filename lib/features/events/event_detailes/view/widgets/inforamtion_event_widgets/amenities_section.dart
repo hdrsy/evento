@@ -65,14 +65,21 @@ Widget buildAmenitiesSection(BuildContext context) {
 
 Container amentitesIcon(String imgUrl) {
   return Container(
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
+    padding: const EdgeInsets.all(7),
     decoration: BoxDecoration(
-        border: Border.all(color: customColors.secondaryText, width: 2),
-        color: customColors.primaryBackground,
-        shape: BoxShape.circle,
-        image: DecorationImage(
-            image: getImageNetwork(url: "$imgUrl", width: null, height: null)
-                .image)),
+      border: Border.all(color: customColors.secondaryText, width: 2),
+      color: customColors.primaryBackground,
+      shape: BoxShape.circle,
+      // image: DecorationImage(
+      //     image: getImageNetwork(url: "$imgUrl", width: null, height: null)
+      // .image)
+    ),
+    child: getImageNetwork(
+        url: "$imgUrl",
+        width: null,
+        height: null,
+        imgColor: customColors.secondaryText),
   );
 }

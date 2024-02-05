@@ -29,7 +29,7 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   double price = 1000;
   double locationRange = 1;
-  SfRangeValues _values = const SfRangeValues(0.0, 1000000.0);
+  SfRangeValues _values = const SfRangeValues(1000.0, 5000000.0);
   List<String>? choiceChipsValues;
   CategoryListController categoryListController = Get.find();
   List<CategoryModel> categoryList = [];
@@ -235,17 +235,21 @@ class _FilterWidgetState extends State<FilterWidget> {
                 ),
               ),
               SfRangeSlider(
-                min: 0.0,
-                max: 1000000.0,
+                min: 1000.0,
+                max: 5000000.0,
                 values: _values,
-                interval: 200000,
+                interval: 100000,
                 showTicks: true,
-                showLabels: true,
+                showLabels: false,
                 enableTooltip: true,
+                labelPlacement: LabelPlacement.betweenTicks,
                 minorTicksPerInterval: 2,
+                numberFormat: NumberFormat.compact(),
+                stepSize: 100000,
                 activeColor: customColors.primary,
                 inactiveColor: customColors.secondaryText,
-                showDividers: true,
+                showDividers: false,
+                dragMode: SliderDragMode.both,
                 onChanged: (SfRangeValues values) {
                   setState(() {
                     _values = values;

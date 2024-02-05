@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 
 import '../../../../../core/responsive/helper_functions.dart';
@@ -116,13 +117,13 @@ class TrendingNow extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildImageSection(
-                  eventModel.images[0], eventModel.ticketPrice.toString()),
+              buildImageSection(eventModel),
               buildEventDetails(
                   eventModel.title,
                   DateFormatter.formatDate(eventModel.startDate),
                   DateFormatter.formatTime(eventModel.startDate),
-                  modelIndex),
+                  modelIndex,
+                  eventModel.id),
             ],
           ),
         ),
@@ -131,16 +132,15 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to build the image section of the card
-  Widget buildImageSection(String imagePath, String price) {
+  Widget buildImageSection(EventModel eventModel) {
     return Expanded(
       child: SizedBox(
         width: double.infinity,
         height: 340,
         child: Stack(
           children: [
-            buildImage(imagePath),
-            buildPriceTag(price),
-            buildSoundToggleButton(),
+            buildImage(eventModel),
+            buildPriceTag(eventModel.ticketPrice.toString()),
           ],
         ),
       ),
@@ -148,11 +148,20 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to build the image widget
-  Widget buildImage(String imagePath) {
+  Widget buildImage(EventModel eventModel) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: getImageNetwork(
-            url: "/storage/$imagePath", width: double.infinity, height: 240));
+        child: eventModel.videos.isNotEmpty
+            ? CardsVideoWidget(
+                currentVideoUrl:
+                    "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                videoHgiht: 240,
+                videoWidth: double.infinity,
+              )
+            : getImageNetwork(
+                url: "/storage/${eventModel.images[0]}",
+                width: double.infinity,
+                height: 240));
   }
 
 // Function to build the price tag
@@ -160,26 +169,32 @@ class TrendingNow extends StatelessWidget {
     return Align(
       alignment: const AlignmentDirectional(-1.00, 1.00),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 10),
-        child: Container(
-          width: 100,
-          height: 24,
-          decoration: BoxDecoration(
-            color: customColors.primaryBackground,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Align(
-            alignment: const AlignmentDirectional(0.00, 0.00),
-            child: Text(
-              "$price ${tr("sp")}",
-              textAlign: TextAlign.center,
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: 'BeerSerif',
-                color: customColors.primaryText,
-                useGoogleFonts: false,
+        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 100,
+              height: 24,
+              decoration: BoxDecoration(
+                color: customColors.primaryBackground,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Align(
+                alignment: const AlignmentDirectional(0.00, 0.00),
+                child: Text(
+                  "$price ${tr("sp")}",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.primaryText,
+                    useGoogleFonts: false,
+                  ),
+                ),
               ),
             ),
-          ),
+            buildSoundToggleButton(),
+          ],
         ),
       ),
     );
@@ -197,8 +212,8 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to build the event details section
-  Widget buildEventDetails(
-      String eventName, String eventDate, String eventTime, int modelIndex) {
+  Widget buildEventDetails(String eventName, String eventDate, String eventTime,
+      int modelIndex, int eventId) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       child: Column(
@@ -206,7 +221,7 @@ class TrendingNow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildEventTitle(eventName, modelIndex),
+          buildEventTitle(eventName, modelIndex, eventId),
           buildEventDate(eventDate),
           buildEventTimeAndArrow(
             eventTime,
@@ -217,7 +232,7 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to build the event title
-  Widget buildEventTitle(String eventName, int modelIndex) {
+  Widget buildEventTitle(String eventName, int modelIndex, int eventId) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,7 +243,7 @@ class TrendingNow extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        buildShareAndFavoriteIcons(modelIndex),
+        buildShareAndFavoriteIcons(modelIndex, eventId),
       ],
     );
   }
@@ -266,24 +281,28 @@ class TrendingNow extends StatelessWidget {
   }
 
 // Function to build share and favorite icons
-  Widget buildShareAndFavoriteIcons(int modelIndex) {
+  Widget buildShareAndFavoriteIcons(int modelIndex, int eventId) {
     return Row(
       children: [
-        buildShareIcon(),
+        buildShareIcon(eventId),
         buildFavoriteToggleButton(modelIndex),
       ],
     );
   }
 
 // Function to build the share icon
-  Widget buildShareIcon() {
+  Widget buildShareIcon(int eventId) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () async {
-          await Share.share(
-            tr('Check out this event in Evento'),
-          );
+          const String message = "Check out this event in Evento";
+          final String url =
+              "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
+          final String shareContent =
+              "$message\n\nFor more details, visit: $url";
+
+          await Share.share(shareContent);
         },
         child: Icon(
           Icons.share_rounded,
@@ -296,13 +315,13 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the favorite toggle button
   Widget buildFavoriteToggleButton(int modelIndex) {
-    final EventStateManager eventStateManager=Get.find();
-    return Obx(
-        (){
+    final EventStateManager eventStateManager = Get.find();
+    return Obx(() {
+      var eventModel = eventStateManager
+          .getEventById(trendingListController.itemList[modelIndex].id)
+          .value;
 
-          var eventModel = eventStateManager.getEventById( trendingListController.itemList[modelIndex].id).value;
-
-          return ToggleIcon(
+      return ToggleIcon(
         onPressed: () {
           if (isGuset) {
             Get.dialog(GuestPopupWidget());
@@ -316,7 +335,7 @@ class TrendingNow extends StatelessWidget {
             color: customColors.error, size: responsiveIcon(25, 2)),
         offIcon: Icon(Icons.favorite_border,
             color: customColors.secondaryText, size: responsiveIcon(25, 2)),
-      );}
-    );
+      );
+    });
   }
 }
