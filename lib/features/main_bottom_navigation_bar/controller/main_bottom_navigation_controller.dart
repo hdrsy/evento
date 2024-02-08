@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:evento/core/shared/widgets/guest/guest_page.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/features/customize_event/type_to_set_event/view/type_to_set_event_screen.dart';
 import 'package:evento/features/events/home/view/home_screen.dart';
 import 'package:evento/features/profile_pages/profile/view/profile_screen.dart';
@@ -9,6 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainBottomNavigationController extends GetxController {
+  @override
+  void onInit() async {
+    // await startTracking();
+
+    super.onInit();
+  }
+
   RxInt selectedPage = 0.obs;
   final List<Widget?> lazyLoadedScreens = [
     null,

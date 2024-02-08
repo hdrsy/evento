@@ -1,3 +1,6 @@
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/features/events/home/model/event_model.dart';
+
 import '../../../../../../core/responsive/responsive.dart';
 import '../../../../../../core/shared/functions/lists/carouse_options_functions.dart';
 import '../../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -40,7 +43,15 @@ Widget buildMoreEventsSection(BuildContext context) {
                     ),
                   ).tr(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/seeAll', arguments: [
+                        1,
+                        eventDetailesController.relatedEvents,
+                        ServerConstApis.getFeaturedList,
+                        "relatedEvents",
+                        "More Evenet Like This "
+                      ]);
+                    },
                     child: Text(
                       "See All",
                       style: customTextStyle.labelSmall.override(
@@ -79,7 +90,7 @@ Widget buildMoreEventsSection(BuildContext context) {
 class MoreEventsCard extends StatelessWidget {
   const MoreEventsCard(
       {super.key, required this.relatedEventModel, required this.modelId});
-  final RelatedEventModel relatedEventModel;
+  final EventModel relatedEventModel;
   final int modelId;
   @override
   Widget build(BuildContext context) {

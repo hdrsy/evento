@@ -1,3 +1,5 @@
+import 'package:evento/core/utils/services/check_internet.dart';
+
 import '../controller/home_controller.dart';
 import 'widgets/category_list.dart';
 import 'widgets/events_from_organizer.dart';
@@ -44,23 +46,25 @@ class HomeScreen extends StatelessWidget {
         }
         return true; // to stop propagation
       },
-      child: Obx(() => ListView.builder(
-            padding: const EdgeInsets.all(15),
-            itemCount: homeController.loadedWidgetsCount.value +
-                (homeController.loadedWidgetsCount.value <
-                        homeController.totalWidgetsCount
-                    ? 1
-                    : 0),
-            itemBuilder: (context, index) {
-              if (index >= homeController.loadedWidgetsCount.value) {
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    child: _buildWidgetForIndex(index));
-              }
-            },
-          )),
+      child: Obx(() {
+        return ListView.builder(
+          padding: const EdgeInsets.all(15),
+          itemCount: homeController.loadedWidgetsCount.value +
+              (homeController.loadedWidgetsCount.value <
+                      homeController.totalWidgetsCount
+                  ? 1
+                  : 0),
+          itemBuilder: (context, index) {
+            if (index >= homeController.loadedWidgetsCount.value) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: _buildWidgetForIndex(index));
+            }
+          },
+        );
+      }),
     );
   }
 

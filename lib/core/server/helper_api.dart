@@ -31,6 +31,7 @@ class ApiHelper {
       Map<String, String> headers = {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
+        // "Host": "event.sy:80"
       };
 
       // Add authorization token to headers if provided.
@@ -82,6 +83,7 @@ class ApiHelper {
 
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
+      print("response bid :$responseBody");
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {

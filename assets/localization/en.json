@@ -421,5 +421,50 @@
 
 "Logout":"Logout",
 "Are you sure you want to Logout?":"Are you sure you want to Logout?",
-"Yes, Logout":"Yes, Logout"
+"Yes, Logout":"Yes, Logout",
+"What payment methods are supported?":"What payment methods are supported?",
+"Evento supports various electronic payment methods with high-level transaction security.":
+"Evento supports various electronic payment methods with high-level transaction security.",
+"How secure is the payment process?":
+"How secure is the payment process?",
+"Transactions are secured using digital security technologies and encryption.":
+"Transactions are secured using digital security technologies and encryption.",
+"How does Evento protect my data?":
+"How does Evento protect my data?",
+"Evento applies the latest encryption and security technologies to protect personal and financial information.":
+"Evento applies the latest encryption and security technologies to protect personal and financial information.",
+"What is Evento?":
+"What is Evento?",
+"Evento is an app specialized in booking and customizing events that allows you to find and organize the perfect events to attend, such as parties, workshops, conferences, or even weddings, all easily through your mobile device.":
+"Evento is an app specialized in booking and customizing events that allows you to find and organize the perfect events to attend, such as parties, workshops, conferences, or even weddings, all easily through your mobile device.",
+"What are the main functions of Evento?":
+"What are the main functions of Evento?",
+"Its main functions include discovering events, booking tickets, direct communication with event organizers and service providers, using cloud computing infrastructure, and ensuring data security.":
+"Its main functions include discovering events, booking tickets, direct communication with event organizers and service providers, using cloud computing infrastructure, and ensuring data security.",
+"How do I register and login to Evento?":
+"How do I register and login to Evento?",
+"Users can register and login using a Syrian mobile phone number for verification, with an option to login as a guest.":
+"Users can register and login using a Syrian mobile phone number for verification, with an option to login as a guest.",
+"Can I manage my bookings?":
+"Can I manage my bookings?",
+"Yes, users can manage their bookings, track available spots and pricing.":
+"Yes, users can manage their bookings, track available spots and pricing.",
+"Can I access or delete my data on Evento?":
+"Can I access or delete my data on Evento?",
+"Users are provided options to access, correct, or delete their data.":
+"Users are provided options to access, correct, or delete their data."
+,"How can I search for events in Evento?":
+"How can I search for events in Evento?",
+
+"The app has an advanced search system that filters events by location, date, price, and other criteria.":
+"The app has an advanced search system that filters events by location, date, price, and other criteria.",
+"What is the process for booking tickets?":
+"What is the process for booking tickets?",
+"Evento offers a seamless and secure booking process with instant confirmations via text messages.":
+"Evento offers a seamless and secure booking process with instant confirmations via text messages.",
+"Is there a support system for users?":
+"Is there a support system for users?",
+"Yes, a dedicated team is available for inquiries and assistance through multiple channels.":
+"Yes, a dedicated team is available for inquiries and assistance through multiple channels."
+
 }

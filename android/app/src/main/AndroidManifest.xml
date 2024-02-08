@@ -29,7 +29,8 @@
         android:label="evento"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        >
         
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs"/>

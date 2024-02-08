@@ -29,7 +29,8 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   double price = 1000;
   double locationRange = 1;
-  SfRangeValues _values = const SfRangeValues(1000.0, 5000000.0);
+  SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
+  double _valueSlider = 1000;
   List<String>? choiceChipsValues;
   CategoryListController categoryListController = Get.find();
   List<CategoryModel> categoryList = [];
@@ -235,21 +236,33 @@ class _FilterWidgetState extends State<FilterWidget> {
                 ),
               ),
               SfRangeSlider(
-                min: 1000.0,
+                min: 100000.0,
                 max: 5000000.0,
                 values: _values,
-                interval: 100000,
-                showTicks: true,
-                showLabels: false,
+                interval: 10000,
+                showDividers: false,
+                showTicks: false,
+                showLabels: false, // Set to false to hide static labels
                 enableTooltip: true,
                 labelPlacement: LabelPlacement.betweenTicks,
                 minorTicksPerInterval: 2,
-                numberFormat: NumberFormat.compact(),
-                stepSize: 100000,
+                // numberFormat: NumberFormat.compact(),
+                stepSize: 10000,
                 activeColor: customColors.primary,
                 inactiveColor: customColors.secondaryText,
-                showDividers: false,
-                dragMode: SliderDragMode.both,
+                tooltipTextFormatterCallback:
+                    (dynamic actualValue, String formattedText) {
+                  // Check if the value is less than 1 million
+                  if (actualValue < 1000000) {
+                    // Convert to thousands (k)
+                    return '${(actualValue / 1000).toStringAsFixed(0)}k';
+                  } else {
+                    // Convert to millions (M) and round down to avoid fractional part
+                    return '+ ${(actualValue / 1000000).toStringAsFixed(0)}M';
+                  }
+                },
+                dragMode: SliderDragMode.onThumb,
+
                 onChanged: (SfRangeValues values) {
                   setState(() {
                     _values = values;
@@ -274,25 +287,31 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ).tr(),
                 ),
               ),
-              SliderTheme(
-                data: const SliderThemeData(
-                  showValueIndicator: ShowValueIndicator.always,
-                ),
-                child: Slider(
-                  activeColor: customColors.primary,
-                  inactiveColor: customColors.secondaryBackground,
-                  min: 1,
-                  max: 1000,
-                  value: locationRange,
-                  label: locationRange.toString(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      locationRange = newValue;
-                    });
-                    // newValue = double.parse(newValue.toStringAsFixed(20));
-                    // setState(() => _model.sliderValue2 = newValue);
-                  },
-                ),
+              SfSlider(
+                min: 1000,
+                max: 400000,
+                stepSize: 1000,
+                value: _valueSlider,
+                showDividers: false,
+                showTicks: false,
+                showLabels: false, // Set to false to hide static labels
+                enableTooltip: true,
+                labelPlacement: LabelPlacement.betweenTicks,
+                minorTicksPerInterval: 2,
+                activeColor: customColors.primary,
+                inactiveColor: customColors.secondaryText,
+
+                tooltipTextFormatterCallback:
+                    (dynamic actualValue, String formattedText) {
+                  // Customizing the tooltip text to show "km" unit
+                  int kmValue = (actualValue / 1000).toInt();
+                  return "$kmValue km";
+                },
+                onChanged: (dynamic newValue) {
+                  setState(() {
+                    _valueSlider = newValue;
+                  });
+                },
               ),
               Divider(
                 thickness: 2,
@@ -308,7 +327,21 @@ class _FilterWidgetState extends State<FilterWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ButtonWidget(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Resetting all filter values to their defaults
+                          setState(() {
+                            // Resetting the choice chips to null or an empty list if multiselect is true
+                            choiceChipsValueController?.value = [];
+                            // Resetting the dropdown value to null
+                            dropDownValueController?.value = null;
+                            // Resetting the slider values to their default values
+                            _values = const SfRangeValues(1000.0, 5000000.0);
+                            _valueSlider = 1000;
+                            // Resetting any other fields you have to their default values
+                            locationRange =
+                                1; // Example for resetting a simple slider
+                          });
+                        },
                         text: tr("Reset"),
                         options: ButtonOptions(
                           width: 120,

@@ -39,8 +39,7 @@ class LinksSection extends StatelessWidget {
         LinkCard(
           icon: Icons.cancel_presentation_outlined,
           title: tr("Cancellation policy"),
-          subTitle:
-              """Cancellation allowed until 4 hours.
+          subTitle: """Cancellation allowed until 4 hours.
 before your booking.""",
         ),
       ].divide(const SizedBox(
@@ -69,9 +68,7 @@ class LinkCard extends StatelessWidget {
           )
         ],
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: customColors.border,
-        ),
+        border: Border.all(color: customColors.border, width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(5),

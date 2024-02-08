@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/colors/app_colors.dart';
 
 import 'package:evento/features/reels/controller/reels_controller.dart';
 import 'package:get/get.dart';
@@ -23,8 +24,8 @@ Widget followButton(int modelIndex) {
         width: 85,
         height: 31,
         color: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
-            ? customColors.secondaryBackground
-            : customColors.primary,
+            ? AppColors.darkSecondaryBackground
+            : AppColors.darkPrimary,
         textStyle: customTextStyle.titleSmall.override(
           fontFamily: 'Nunito',
           fontSize: 14,

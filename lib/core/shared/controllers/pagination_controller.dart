@@ -20,7 +20,7 @@ class PaginationController<T> extends GetxController {
   // Reactive variables to track loading states.m
   late RxBool isLoading;
   late RxBool isLoadingMoreData;
-  
+
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
   late PageController pageController;
@@ -62,10 +62,10 @@ class PaginationController<T> extends GetxController {
       }
     });
     pageController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-              scrollController.offset &&
+      if (pageController.position.maxScrollExtent == pageController.offset &&
           hasMoreData.value) {
         isLoadingMoreData.value = true;
+        print("inside  page controller");
         fetchData();
       }
     });
@@ -88,11 +88,10 @@ class PaginationController<T> extends GetxController {
         deserializeFunction: (jsonMap) => jsonMap,
       );
       print("$cacheKey : $d");
-      if(d != null){
-
-      handleDataSuccess(d);
-      }else{
-        isLoading.value=false;
+      if (d != null) {
+        handleDataSuccess(d);
+      } else {
+        isLoading.value = false;
       }
     } else {
       Either<ErrorResponse, Map<String, dynamic>> response =
@@ -126,12 +125,15 @@ class PaginationController<T> extends GetxController {
     scrollController.dispose();
     super.onClose();
   }
+
   void handleNoCachedData() {
-  // Implement logic for handling no cached data
-  // For example, show a message to the user, update the UI, etc.
-  log("No cached data available. Unable to fetch data from the server.");
-  // You can update errorMessage or any other state variable to notify the user
-  errorMessage.value = ["No internet connection and no cached data available."];
-  // Update any other relevant state to reflect the situation
-}
+    // Implement logic for handling no cached data
+    // For example, show a message to the user, update the UI, etc.
+    log("No cached data available. Unable to fetch data from the server.");
+    // You can update errorMessage or any other state variable to notify the user
+    errorMessage.value = [
+      "No internet connection and no cached data available."
+    ];
+    // Update any other relevant state to reflect the situation
+  }
 }

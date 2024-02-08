@@ -26,7 +26,7 @@ class SeeAllController extends GetxController {
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
   late List<RxString> distances;
   late RxList<EventModel> itemList;
 
@@ -38,10 +38,9 @@ class SeeAllController extends GetxController {
   void onInit() {
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
-    distances=[];
+    distances = [];
     dataLimit = 4;
     pageId = Get.arguments[0] ?? 1;
-    hasMoreData = false.obs;
     errorMessage = <String>[].obs;
     itemList = Get.arguments[1] ?? <EventModel>[].obs;
     targetRout = Get.arguments[2];
@@ -50,18 +49,26 @@ class SeeAllController extends GetxController {
     log(pageId.toString());
     scrollController = ScrollController();
     itemList.isEmpty ? fetchData() : null;
-    itemList.isNotEmpty?(
-    distances.addAll(List.generate(itemList.length, (index) => "0 km".obs))
-    ):null;
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-              scrollController.offset &&
-          hasMoreData.value) {
-        isLoadingMoreData.value = true;
-        fetchData();
-      }
-    });
-    calculateDistance();
+    itemList.isNotEmpty
+        ? (distances
+            .addAll(List.generate(itemList.length, (index) => "0 km".obs)))
+        : null;
+
+    if (mapKey != "relatedEvents") {
+      hasMoreData = true.obs;
+      scrollController.addListener(() {
+        if (scrollController.position.maxScrollExtent ==
+                scrollController.offset &&
+            hasMoreData.value) {
+          isLoadingMoreData.value = true;
+          fetchData();
+        }
+      });
+      calculateDistance();
+    } else {
+      hasMoreData = false.obs;
+      ;
+    }
     super.onInit();
   }
 
@@ -91,18 +98,18 @@ class SeeAllController extends GetxController {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
-    var ll=categoryListJson
+    var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
-    for(int i=0;i<ll.length;i++){
+    for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
 
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
-    distances.addAll(List.generate(categoryListJson.length, (index) => "0".obs));
-
+    distances
+        .addAll(List.generate(categoryListJson.length, (index) => "0".obs));
 
     if (pageId >= lastPageId) {
       hasMoreData.value = false;
@@ -112,6 +119,7 @@ class SeeAllController extends GetxController {
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
+
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].isFollowedByAuthUser) {
@@ -119,7 +127,7 @@ class SeeAllController extends GetxController {
           "${ServerConstApis.unFollowEvent}/$eventId");
     } else {
       isDoneSuccefully =
-      await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
@@ -133,20 +141,19 @@ class SeeAllController extends GetxController {
     }
     log(itemList[modelIndex].isFollowedByAuthUser.toString());
   }
+
   calculateDistance() async {
     LocationService locationService = LocationService();
     for (var i = 0; i < itemList.length; i++) {
-      distances[i] = (await locationService.calculateDistance(
-          itemList[i].venue!.lang,
-          itemList[i].venue!.long))
-          .obs;
-
-      print("event id $i distance is ${distances[i].value}");
+      if (itemList[i].venue != null) {
+        distances[i] = (await locationService.calculateDistance(
+                itemList[i].venue!.lang, itemList[i].venue!.long))
+            .obs;
+        print("event id $i distance is ${distances[i].value}");
+      }
     }
     update();
   }
-
-
 
   @override
   void onClose() {

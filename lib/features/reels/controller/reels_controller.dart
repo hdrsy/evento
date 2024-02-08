@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/follow_unfollow_event_api.dart';
+import 'package:flutter/material.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/shared/controllers/pagination_controller.dart';
@@ -13,6 +14,8 @@ class ReelsController extends PaginationController<ReelModel> {
   ReelsController()
       : super(fetchDataCallback: _fetchData, cacheKey: "ReelsController");
   late int currentUserIndex; // Index of the current user
+  late PageController innerPageController = PageController();
+
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
@@ -32,8 +35,9 @@ class ReelsController extends PaginationController<ReelModel> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
     print(categoryListJson);
+    print("reeels response :$handlingResponse");
     lastPageId = handlingResponse['reels']['last_page'];
-
+    print("lastPageId is :$lastPageId");
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());
@@ -63,6 +67,28 @@ class ReelsController extends PaginationController<ReelModel> {
       itemList[modelIndex].event!.isFollowedByAuthUser = false;
 
       update();
+    }
+  }
+
+  playNextVideo(int userIndex, int videoIndex) {
+    if (innerPageController.page!.round() + 1 <
+        itemList[userIndex].videos.length) {
+      print("inside next video");
+      innerPageController.nextPage(
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+    } else if (innerPageController.page!.round() + 1 ==
+        itemList[userIndex].videos.length) {
+      print("inside next user");
+      pageController.nextPage(
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+    }
+  }
+
+  prevVideoInSameUser(int userIndex, int videoIndex) {
+    if (innerPageController.page!.round() + 1 > 1) {
+      print("inside next video");
+      innerPageController.previousPage(
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
   }
 

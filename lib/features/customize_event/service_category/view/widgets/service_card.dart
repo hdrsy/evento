@@ -1,3 +1,5 @@
+import 'package:evento/features/customize_event/service_category/controller/service_category_controller.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -15,6 +17,7 @@ class ServiceCard extends StatelessWidget {
       required this.serviceCategoryIndex});
   final ServiceCategoryModel serviceCategoryModel;
   final int serviceCategoryIndex;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -100,16 +103,25 @@ class ServiceCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      IconWithContainer(
-                        borderRadius: 20,
-                        buttonSize: 40,
-                        iconColor: customColors.info,
-                        backgroundColor: customColors.primary,
-                        icon: Icons.arrow_forward,
-                        onTap: () async {
-                          // context.pushNamed('Venuelist');
-                        },
-                      ),
+                      GetBuilder<ServiceCategoryController>(
+                          builder: (controller) {
+                        return IconWithContainer(
+                          borderRadius: 20,
+                          buttonSize: 40,
+                          iconColor: customColors.info,
+                          backgroundColor: customColors.primary,
+                          icon: controller
+                                      .selectedServiceProviders[
+                                          serviceCategoryIndex]
+                                      .value !=
+                                  0
+                              ? Icons.check
+                              : Icons.arrow_forward,
+                          onTap: () async {
+                            // context.pushNamed('Venuelist');
+                          },
+                        );
+                      }),
                     ].addToEnd(const SizedBox(height: 30)),
                   ),
                 ].divide(const SizedBox(width: 60)),

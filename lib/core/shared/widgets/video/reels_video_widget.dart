@@ -1,4 +1,8 @@
 import 'dart:developer';
+import 'dart:math';
+
+import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:smooth_video_progress/smooth_video_progress.dart';
 
 import '../../controllers/tween_animation_controller.dart';
 import '../../../../features/reels/controller/reels_controller.dart';
@@ -8,8 +12,16 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class ReelsVideoWidget extends StatefulWidget {
-  ReelsVideoWidget({super.key, required this.currentVideoUrl});
+  ReelsVideoWidget(
+      {super.key,
+      required this.currentVideoUrl,
+      required this.videoIndex,
+      required this.totalVideos,
+      required this.modelIndex});
   final String currentVideoUrl;
+  final int videoIndex;
+  final int modelIndex;
+  final int totalVideos;
   final ReelsController reelsController = Get.find();
   final TweenAnimationController tweenAnimationController =
       Get.put(TweenAnimationController());
@@ -60,6 +72,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
             });
           }).catchError((error) {
             // Handle the error here
+            print("error in videos: $error");
           });
     videoPlayerController.addListener(() {
       final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&
@@ -72,9 +85,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
       if (videoPlayerController.value.isCompleted) {
         final ReelsController reelsController = Get.find();
         // reelsController.nextUser();
-        reelsController.pageController.nextPage(
-            duration: const Duration(microseconds: 500),
-            curve: Curves.bounceInOut);
+        reelsController.playNextVideo(widget.modelIndex, widget.videoIndex);
       }
       if (videoPlayerController.value.isPlaying && !_isPlaying) {
         // Video has started playing
@@ -92,7 +103,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
 
   @override
   void dispose() {
-    log('disposing a controller');
+    // log('disposing a controller');
     if (mounted) {
       videoPlayerController.dispose();
     } // Dispose of the controller when done
@@ -123,7 +134,11 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
   @override
   Widget build(BuildContext context) {
     return !videoInitialized
-        ? const SizedBox()
+        ? Center(
+            child: CircularProgressIndicator(
+              color: customColors.primary,
+            ),
+          )
         : GestureDetector(
             onDoubleTap: onDoubleTap,
             onTap: () {
@@ -141,17 +156,6 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
             },
             child: Stack(
               children: [
-                !videoInitialized
-                    ? const SizedBox()
-                    : VideoProgressIndicator(
-                        videoPlayerController,
-                        allowScrubbing: true,
-                        colors: VideoProgressColors(
-                          playedColor: customColors.primary,
-                          bufferedColor: Colors.grey,
-                          backgroundColor: Colors.grey,
-                        ),
-                      ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -161,6 +165,51 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
                     ),
                   ],
                 ),
+                Positioned(
+                  top: 10,
+                  right: 5,
+                  child: Container(
+                    width: 35,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: const Color(0x5BFFFFFF),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      "${widget.videoIndex + 1}/${widget.totalVideos}",
+                      textAlign: TextAlign.center,
+                      style: customTextStyle.bodyMedium.override(
+                        fontFamily: 'Nunito',
+                        color: customColors.secondaryBackground,
+                        fontSize: 12,
+                        useGoogleFonts: false,
+                      ),
+                    ),
+                  ),
+                ),
+
+                !videoInitialized
+                    ? const SizedBox()
+                    : Positioned(
+                        top: 0,
+                        left: 5,
+                        right: 5,
+                        child: SmoothVideoProgress(
+                          controller: videoPlayerController,
+                          builder: (context, position, duration, child) {
+                            final progress = position.inMilliseconds /
+                                duration.inMilliseconds;
+                            return LinearProgressIndicator(
+                              value: position.inMilliseconds /
+                                  max(duration.inMilliseconds,
+                                      1), // Prevent division by zero
+                              backgroundColor: Colors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  customColors.primary),
+                            );
+                          },
+                        ),
+                      ),
                 //        if (_isBuffering)
                 // const CircularProgressIndicator(),
                 if (!_isPlaying)

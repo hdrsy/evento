@@ -428,6 +428,50 @@
 
 "Logout":"تسجيل الخروج",
 "Are you sure you want to Logout?":"هل أنت متأكد أنك تريد تسجيل الخروج؟",
-"Yes, Logout":"نعم، تسجيل الخروج"
+"Yes, Logout":"نعم، تسجيل الخروج",
+"What payment methods are supported?":"ما هي طرق الدفع المدعومة؟",
+"Evento supports various electronic payment methods with high-level transaction security.":
+"يدعم \"إيفينتو\" طرق دفع إلكترونية متنوعة مع تأمين عالي المستوى للمعاملات.",
+"How secure is the payment process?":
+"ما مدى أمان عملية الدفع؟",
+"Transactions are secured using digital security technologies and encryption.":
+"المعاملات مؤمنة باستخدام تقنيات الأمان الرقمي والتشفير.",
+"How does Evento protect my data?":
+"كيف يحمي \"إيفينتو\" بياناتي؟",
+"Evento applies the latest encryption and security technologies to protect personal and financial information.":
+"يطبق \"إيفينتو\" أحدث تقنيات التشفير والأمان لحماية المعلومات الشخصية والمالية.",
+"What is Evento?":
+"ما هو إيفينتو؟",
+"Evento is an app specialized in booking and customizing events that allows you to find and organize the perfect events to attend, such as parties, workshops, conferences, or even weddings, all easily through your mobile device.":
+"إيفينتو هو تطبيق متخصص في حجز وتخصيص الفعاليات يتيح لك العثور على الفعاليات المثالية لحضورها أو تنظيمها، سواء كانت حفلات، ورش عمل، مؤتمرات، أو حتى حفلات زفاف، وكل ذلك بسهولة عبر جوالك.",
+"What are the main functions of Evento?":
+"ما هي الوظائف الرئيسية لتطبيق إيفينتو?",
+"Its main functions include discovering events, booking tickets, direct communication with event organizers and service providers, using cloud computing infrastructure, and ensuring data security.":
+"يشمل اكتشاف الفعاليات، حجز التذاكر، التواصل المباشر مع منظمي الفعاليات ومزودي الخدمات، استخدام الحوسبة السحابية، وضمان أمان البيانات.",
+"How do I register and login to Evento?":
+"كيف يمكنني التسجيل والدخول إلى \"إيفينتو\"؟",
+"Users can register and login using a Syrian mobile phone number for verification, with an option to login as a guest.":
+"يمكن للمستخدمين التسجيل والدخول باستخدام رقم هاتف خلوي سوري للتحقق، مع خيار الدخول كضيف.",
+"Can I manage my bookings?":
+"هل يمكنني إدارة حجوزاتي؟",
+"Yes, users can manage their bookings, track available spots and pricing.":
+"نعم، يمكن للمستخدمين إدارة حجوزاتهم وتتبع الأماكن المتاحة والتسعير.",
+"Can I access or delete my data on Evento?":
+"هل يمكنني الوصول إلى بياناتي أو حذفها في \"إيفينتو\"؟",
+"Users are provided options to access, correct, or delete their data.":
+"يتم توفير خيارات للمستخدمين للوصول إلى بياناتهم، تصحيحها، أو حذفها."
+,"How can I search for events in Evento?":
+"كيف أبحث عن الفعاليات في \"إيفينتو\"؟",
+
+"The app has an advanced search system that filters events by location, date, price, and other criteria.":
+"التطبيق يحتوي على نظام بحث متقدم يقوم بفلترة الفعاليات حسب الموقع، التاريخ، السعر، ومعايير أخرى.",
+"What is the process for booking tickets?":
+"ما هي عملية حجز التذاكر؟",
+"Evento offers a seamless and secure booking process with instant confirmations via text messages.":
+"يوفر \"إيفينتو\" عملية حجز سلسة وآمنة مع تأكيدات فورية عبر الرسائل النصية.",
+"Is there a support system for users?":
+"هل يوجد نظام دعم للمستخدمين؟",
+"Yes, a dedicated team is available for inquiries and assistance through multiple channels.":
+"نعم، يوجد فريق متخصص للإجابة على الاستفسارات وتقديم المساعدة، متاح عبر عدة قنوات."
 
 }

@@ -20,6 +20,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: customColors.secondaryBackground,
+          title: Text(tr("Profile"),
+              style: customTextStyle.bodyMedium
+                  .copyWith(color: customColors.primary, fontSize: 20)),
+          centerTitle: true,
+        ),
         backgroundColor: customColors.secondaryBackground,
         body: SafeArea(
           child: SizedBox(
@@ -147,7 +154,7 @@ List<Widget> getnormalUserOptionsCard() => [
         icon: Icons.language_outlined,
         title: tr("Language"),
       ),
-      user!.type != "normal" || user!.type != "private"
+      user!.type != "normal" && user!.type != "private"
           ? const SizedBox()
           : OptionsCard(
               targetRout: '/AccountTypeScreen',

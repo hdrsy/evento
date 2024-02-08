@@ -1,4 +1,7 @@
 import 'package:evento/core/responsive/size_config.dart';
+import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/helper/form_field_controller.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -146,6 +149,7 @@ class FullTicketInfo extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
+                        flex: 2,
                         child: buildTextField(
                             controller:
                                 bookNowController.ticketList[index].fisrtName,
@@ -158,28 +162,12 @@ class FullTicketInfo extends StatelessWidget {
                       width: 5,
                     ),
                     Expanded(
+                        flex: 2,
                         child: buildTextField(
                             controller:
                                 bookNowController.ticketList[index].lastName,
                             hint: "",
                             label: tr("Last Name"),
-                            validator: (value) {
-                              return null;
-                            })),
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        flex: 4,
-                        child: buildTextField(
-                            controller: bookNowController
-                                .ticketList[index].couponNumber,
-                            hint: "",
-                            label: tr("Coupon Code"),
                             validator: (value) {
                               return null;
                             })),
@@ -195,6 +183,67 @@ class FullTicketInfo extends StatelessWidget {
                               return null;
                             })),
                   ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                // Generated code for this Row-password Widget...
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          "+Add",
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.primary,
+                            fontSize: 14,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                      ].divide(SizedBox(width: 10)),
+                    ),
+                    Expanded(
+                      child: FlutterFlowDropDown<String>(
+                        controller:
+                            bookNowController.dropDownValueController1 ??=
+                                FormFieldController<String>(null),
+                        options: bookNowController.userCopuns,
+                        onChanged: (val) {
+                          bookNowController.ticketList[index].selectedCoupon =
+                              val;
+                          bookNowController.update();
+                        },
+
+                        // w  idth: 322,
+                        height: 50,
+                        textStyle: customTextStyle.bodySmall.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.secondaryText,
+                          useGoogleFonts: false,
+                        ),
+                        hintText: tr("Copoun code"),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: customColors.secondaryText,
+                          size: 24,
+                        ),
+                        fillColor: customColors.secondaryBackground,
+                        elevation: 2,
+                        borderColor: customColors.primaryBackground,
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        margin: EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
+                        hidesUnderline: true,
+                        isSearchable: false,
+                        isMultiSelect: false,
+                      ),
+                    ),
+                  ].divide(SizedBox(width: 5)),
                 ),
                 const SizedBox(
                   height: 5,

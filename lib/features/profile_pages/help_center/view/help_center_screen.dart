@@ -5,6 +5,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key});
 
@@ -29,7 +30,7 @@ class HelpCenterScreen extends StatelessWidget {
           ),
         ),
       ),
-    body:   SafeArea(
+      body: SafeArea(
         top: true,
         child: DefaultTabController(
           length: 2,
@@ -52,23 +53,19 @@ class HelpCenterScreen extends StatelessWidget {
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
-                        tabs:  [
+                        tabs: [
                           Tab(
-                            text:tr( "FAQ"),
+                            text: tr("FAQ"),
                           ),
                           Tab(
-                            text:tr( "Contact Us"),
+                            text: tr("Contact Us"),
                           ),
-
                         ],
                       ),
                     ),
-                   const Expanded(
+                    Expanded(
                         child: TabBarView(
-                      children: [
-                       FAQ(),
-                       ContactUs()
-                       ],
+                      children: [FAQPage(), ContactUs()],
                     ))
                   ],
                 ),
@@ -77,6 +74,6 @@ class HelpCenterScreen extends StatelessWidget {
           ),
         ),
       ),
-      );
+    );
   }
 }

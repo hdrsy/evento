@@ -22,7 +22,7 @@ class ContactInformationForm extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 10),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Contact Information",
@@ -48,7 +48,7 @@ class ContactInformationForm extends StatelessWidget {
             child: Form(
               key: dateTimeController.formstate,
               child: Column(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFieldContactInformation(
                       labelKey: tr("First name"),

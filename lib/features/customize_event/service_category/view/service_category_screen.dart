@@ -86,7 +86,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                   child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const VenueCard(),
+                    VenueCard(),
                     ...List.generate(
                       serviceCategoryController.serviceCategoryList.length,
                       (index) => ServiceCard(

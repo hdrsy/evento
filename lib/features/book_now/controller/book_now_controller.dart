@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/helper/form_field_controller.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/error_handling/erroe_handling.dart';
@@ -17,8 +18,9 @@ class BookNowController extends GetxController {
   late RxBool isLoading;
   late RxList<String> errorMessage;
   late RxList<FreindsModel> myFreinds;
-
+  late List<String> userCopuns;
   late RxList<TicketModel> ticketList;
+  FormFieldController<String>? dropDownValueController1;
   @override
   void onInit() {
     EventDetailesController eventDetailesController = Get.find();
@@ -28,7 +30,11 @@ class BookNowController extends GetxController {
     ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
     // print(eventDetailsModel.classes[0].ticketPrice);
     myFreinds = <FreindsModel>[].obs;
-
+    userCopuns = [
+      "EVENTO2331",
+      "EVENTO2352",
+      "EVENTO2691",
+    ];
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     getMyFreinds();

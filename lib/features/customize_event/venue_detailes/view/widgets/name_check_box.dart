@@ -24,7 +24,7 @@ class NameCheckBox extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Abernathy Reynolds",
+          venue.name,
           style: customTextStyle.headlineSmall,
         ).tr(),
         GestureDetector(

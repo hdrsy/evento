@@ -32,8 +32,8 @@ class CancelledBooking {
   });
 
   factory CancelledBooking.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     var interestList = jsonDecode(json['interest']) as List<dynamic>;
     return CancelledBooking(
       id: json['id'],
@@ -51,6 +51,7 @@ class CancelledBooking {
     );
   }
 }
+
 class CancelledEventClass {
   final int id;
   final int eventId;
@@ -63,6 +64,7 @@ class CancelledEventClass {
   });
 
   factory CancelledEventClass.fromJson(Map<String, dynamic> json) {
+    print("ccc $json");
     return CancelledEventClass(
       id: json['id'],
       eventId: json['event_id'],
@@ -70,6 +72,7 @@ class CancelledEventClass {
     );
   }
 }
+
 class CancelledEvent {
   final int id;
   final String title;
@@ -78,7 +81,7 @@ class CancelledEvent {
   final int venueId;
   final bool isFollowedByAuthUser;
   final CancelledVenue venue;
-final List<String> images;
+  final List<String> images;
   CancelledEvent({
     required this.id,
     required this.title,
@@ -87,17 +90,18 @@ final List<String> images;
     required this.venueId,
     required this.images,
     required this.isFollowedByAuthUser,
-     required this.venue,
+    required this.venue,
   });
 
   factory CancelledEvent.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return CancelledEvent(
       id: json['id'],
       title: json['title'],
-         images: json['images'] != null ? List<String>.from(jsonDecode(json['images']) .map((x) => x)) : [],
-   
+      images: json['images'] != null
+          ? List<String>.from(jsonDecode(json['images']).map((x) => x))
+          : [],
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
       venueId: json['venue_id'],
@@ -106,6 +110,7 @@ final List<String> images;
     );
   }
 }
+
 class CancelledVenue {
   final int id;
   final String governorate;
@@ -118,8 +123,8 @@ class CancelledVenue {
   });
 
   factory CancelledVenue.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return CancelledVenue(
       id: json['id'],
       governorate: json['governorate'],

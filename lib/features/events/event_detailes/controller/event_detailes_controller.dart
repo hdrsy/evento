@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/features/events/home/model/event_model.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -25,17 +28,21 @@ class EventDetailesController extends GetxController {
   late int eventId;
   RxString distance = "0 km".obs;
   late RxList<String> errorMessage;
-  late List<RelatedEventModel> relatedEvents;
+  late RxList<EventModel> relatedEvents;
   late bool isOffer;
   late int offerPrecent;
+  CacheService cacheService = CacheService('eventDetailes');
+  late String cacheKey;
+
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
+    relatedEvents = <EventModel>[].obs;
     isLoading = false.obs;
     eventId = Get.arguments[0];
     isOffer = Get.arguments[1] ?? false;
     offerPrecent = Get.arguments[2] ?? 0;
-
+    cacheKey = "eventDetailes$eventId";
     await getEventDetailesModel();
     await calculateDistance();
 
@@ -47,26 +54,45 @@ class EventDetailesController extends GetxController {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     print("token $token");
-    response = await ApiHelper.makeRequest(
-        targetRout:
-            "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
-        method: "GEt",
-        token: token);
-    print(response);
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
+    if (await checkInternet()) {
+      log("from cache");
+      final d = await cacheService.getObject<Map<String, dynamic>>(
+        cacheKey: cacheKey,
+        deserializeFunction: (jsonMap) => jsonMap,
+      );
+      print("d:$d");
+      if (d != null) {
+        whenGetDataSuccess(d);
+      } else {
+        isLoading.value = false;
+      }
+      isLoading.value = false;
     } else {
-      whenGetDataSuccess(handlingResponse);
+      response = await ApiHelper.makeRequest(
+          targetRout:
+              "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
+          method: "GEt",
+          token: token);
+      print(response);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        whenGetDataSuccess(handlingResponse);
+        cacheService.cacheObject<Map<String, dynamic>>(
+          object: handlingResponse,
+          cacheKey: cacheKey,
+          serializeFunction: (data) => data,
+        );
+      }
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
-    relatedEvents = List<RelatedEventModel>.from(
-        handlingResponse['relatedEvents']
-            .map((x) => RelatedEventModel.fromJson(x)));
+    relatedEvents.value = List<EventModel>.from(
+        handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {

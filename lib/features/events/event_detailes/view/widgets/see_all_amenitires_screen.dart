@@ -37,6 +37,7 @@ class SeeAllAmenities extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               " Available  Amenities",

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/socket_servie.dart';
 import 'package:evento/core/utils/services/work_manager.dart';
 import 'package:workmanager/workmanager.dart';
@@ -6,7 +7,7 @@ import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
 import 'core/utils/extenstions/text_extenstions.dart';
-
+// import 'package:sizer/sizer.dart';
 import 'package:evento/core/utils/services/pref_service.dart';
 
 import 'package:evento/core/utils/services/user_info.dart';

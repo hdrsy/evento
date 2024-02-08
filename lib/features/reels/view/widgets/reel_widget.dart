@@ -37,26 +37,58 @@ class ReelsWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
-                        height: MediaQuery.sizeOf(context).height,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Stack(
-                                children: [
-                                  ReelsVideoWidget(
-                                    currentVideoUrl:
-                                        "${ServerConstApis.baseAPI}/storage/${model.videos[0]}",
-                                  ),
-                                  videoInfo(),
-                                  commentShareLike(modelIndex),
-                                ],
+                      child: GestureDetector(
+                        onTapUp: (TapUpDetails details) {
+                          final screenWidth = MediaQuery.of(context).size.width;
+                          final tapPositionX = details.globalPosition.dx;
+                          if (tapPositionX < screenWidth / 2) {
+                            // Tap was on the left side
+                            reelsController.prevVideoInSameUser(
+                                modelIndex,
+                                reelsController.innerPageController.page!
+                                    .round());
+                            print("Tapped on the left side");
+                          } else {
+                            reelsController.playNextVideo(
+                                modelIndex,
+                                reelsController.innerPageController.page!
+                                    .round());
+                            // Tap was on the right side
+                            print("Tapped on the right side");
+                          }
+                        },
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          height: MediaQuery.sizeOf(context).height,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    PageView.builder(
+                                        controller:
+                                            reelsController.innerPageController,
+                                        itemCount: model.videos.length,
+                                        itemBuilder: (ctx, index) {
+                                          print(
+                                              "the length of reel is :${model.videos.length}");
+                                          return ReelsVideoWidget(
+                                            modelIndex: modelIndex,
+                                            totalVideos: model.videos.length,
+                                            videoIndex: index,
+                                            currentVideoUrl:
+                                                "${ServerConstApis.baseAPI}/storage/${model.videos[index]}",
+                                          );
+                                        }),
+                                    videoInfo(),
+                                    commentShareLike(modelIndex),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
