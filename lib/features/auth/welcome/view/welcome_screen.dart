@@ -1,3 +1,7 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/features/profile_pages/profile/view/widgets/switch_language.dart';
+
 import '../../../../core/utils/extenstions/color_extenstions.dart';
 import '../../../../core/utils/extenstions/text_extenstions.dart';
 import 'widgets/build_logo_buttons.dart';
@@ -19,11 +23,11 @@ class WelcomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: _buildWelcomScreenBody(),
+      body: _buildWelcomScreenBody(context),
     );
   }
 
-  Widget _buildWelcomScreenBody() {
+  Widget _buildWelcomScreenBody(BuildContext context) {
     return Stack(
       alignment: const AlignmentDirectional(0, 1),
       children: [
@@ -33,6 +37,21 @@ class WelcomeScreen extends StatelessWidget {
         BuildPageIndecator(
           pageController: controller,
         ),
+        Positioned(
+            top: 20,
+            left: 20,
+            child: GestureDetector(
+                onTap: () {
+                  showButtonSheet(
+                      context: context,
+                      widget: LanguageSelector(),
+                      height: screenHeight * 0.2);
+                },
+                child: Icon(
+                  Icons.language_outlined,
+                  color: customColors.info,
+                  size: 25,
+                ))),
         const BuildLogoButtons()
       ],
     );

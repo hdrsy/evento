@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -72,6 +74,7 @@ class MyBookingController extends GetxController {
       completedBooking = completedJson
           .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
           .toList();
+      log(completedBooking[0].toString());
       isLoading.value = false;
       update();
     }

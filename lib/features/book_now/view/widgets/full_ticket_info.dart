@@ -2,6 +2,7 @@ import 'package:evento/core/responsive/size_config.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
+import 'package:evento/features/book_now/model/promo_code_model.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -51,20 +52,22 @@ class FullTicketInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          bookNowController.removeTicket(index);
-                        },
-                        child: Icon(
-                          Icons.cancel_outlined,
-                          color: customColors.primaryText,
-                          size: 20,
-                        ))
-                  ],
-                ),
+                index != 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                bookNowController.removeTicket(index);
+                              },
+                              child: Icon(
+                                Icons.cancel_outlined,
+                                color: customColors.primaryText,
+                                size: 20,
+                              ))
+                        ],
+                      )
+                    : const SizedBox(),
                 bookNowController.eventDetailsModel.classes.isEmpty
                     ? const SizedBox.shrink()
                     : Column(
@@ -187,7 +190,6 @@ class FullTicketInfo extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                // Generated code for this Row-password Widget...
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -209,14 +211,18 @@ class FullTicketInfo extends StatelessWidget {
                     ),
                     Expanded(
                       child: FlutterFlowDropDown<String>(
-                        controller:
-                            bookNowController.dropDownValueController1 ??=
-                                FormFieldController<String>(null),
-                        options: bookNowController.userCopuns,
+                        controller: bookNowController
+                                .ticketList[index].dropDownValueController ??=
+                            FormFieldController<String>(null),
+
+                        options:
+                            bookNowController.getcopounListforTicket(index),
                         onChanged: (val) {
-                          bookNowController.ticketList[index].selectedCoupon =
-                              val;
-                          bookNowController.update();
+                          if (val != null) {
+                            print("new val is:$val");
+                            bookNowController.changeSelectedCouponInTicket(
+                                val, index);
+                          }
                         },
 
                         // w  idth: 322,
@@ -227,10 +233,26 @@ class FullTicketInfo extends StatelessWidget {
                           useGoogleFonts: false,
                         ),
                         hintText: tr("Copoun code"),
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: customColors.secondaryText,
-                          size: 24,
+                        icon: GestureDetector(
+                          onTap: () {
+                            bookNowController.ticketList[index]
+                                        .dropDownValueController!.value ==
+                                    null
+                                ? null
+                                : bookNowController.removecopounFromticket(
+                                    bookNowController.ticketList[index]
+                                        .dropDownValueController!.value!,
+                                    index);
+                          },
+                          child: Icon(
+                            bookNowController.ticketList[index]
+                                        .dropDownValueController!.value ==
+                                    null
+                                ? Icons.keyboard_arrow_down_rounded
+                                : Icons.cancel_outlined,
+                            color: customColors.secondaryText,
+                            size: 24,
+                          ),
                         ),
                         fillColor: customColors.secondaryBackground,
                         elevation: 2,

@@ -51,6 +51,7 @@ class _FAQPageState extends State<FAQPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
             children: currentQuestions.entries
                 .map((entry) {
+                  print(entry.key);
                   return question(context, entry.key, entry.value);
                 })
                 .toList()
@@ -98,7 +99,7 @@ Row question(BuildContext context, String question, String answer) {
                             fontWeight: FontWeight.w600,
                             useGoogleFonts: true,
                           ),
-                        ),
+                        ).tr(),
                       ),
                     ],
                   ),
@@ -121,7 +122,7 @@ Row question(BuildContext context, String question, String answer) {
                           color: customColors.secondaryText,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                     ],
                   ),
                   theme: ExpandableThemeData(

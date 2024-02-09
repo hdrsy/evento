@@ -14,8 +14,8 @@ Future<void> initializeService() async {
   await service.configure(
     androidConfiguration: AndroidConfiguration(
       onStart: onStart,
-      autoStart: false,
-      isForegroundMode: true,
+      autoStart: true,
+      isForegroundMode: false,
       //  foregroundServiceNotificationId: 888,
     ),
     iosConfiguration: IosConfiguration(
@@ -41,15 +41,22 @@ void onStart(ServiceInstance service) async {
   DartPluginRegistrant.ensureInitialized();
   log("stat serr");
   if (service is AndroidServiceInstance) {
+    // if (await service.isForegroundService()) {
+    //   service.setAsForegroundService();
+    // }
+    // if(service.)
     service.on("setAsBackground").listen((event) {
       service.setAsBackgroundService();
       print("the service in backround");
     });
+
     service.on('stopService').listen((event) {
       print("stop service :$event");
       service.stopSelf();
     });
+    service.setForegroundNotificationInfo(title: "test", content: "content");
   }
+
   user = await UserInfo.getUserInfo();
 
   listenToEvents(user!.id);

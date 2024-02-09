@@ -84,6 +84,7 @@ class ApiHelper {
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       print("response bid :$responseBody");
+      print("response bid :${response.statusCode}");
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {
@@ -103,13 +104,6 @@ class ApiHelper {
   }
 }
 
-parseResponse(Map<String, dynamic> responseBody) async {
-  // if(await prefService.readString("language_code")=='en'){
-  //   return responseBody;
-  // }else{
-
-  // }
-}
 Map<String, dynamic> removeDuplicateKeysAr(Map<String, dynamic> data) {
   if (Get.locale == const Locale("en")) {
     return data;

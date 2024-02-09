@@ -242,6 +242,7 @@ class MyBookingCard extends StatelessWidget {
     return ButtonWidget(
       onPressed: () {
         final MyBookingController myBookingController = Get.find();
+        print("event booking is :$eventBooking");
         var result = myBookingController
             .createTicketModelsFromEventBookings(eventBooking!);
         Get.toNamed('/BookingDetailesForMyBookingScreen',

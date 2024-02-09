@@ -113,28 +113,26 @@ class SignInScreen extends StatelessWidget {
                 Obx(
                   () => Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ButtonWidget(
-                            showLoadingIndicator:
-                                signinController.isLoading.value,
-                            onPressed: () {
-                              signinController.onClickSignIn();
-                            },
-                            text: tr(
-                                'Sign In'), // Replace with localization if needed.
-                            options: ButtonOptions(
-                              width: 350,
-                              height: 45,
-                              color: customColors.primary,
-                              textStyle: customTextStyle.titleSmall.copyWith(
-                                color: Colors.white,
-                              ),
-                              borderRadius: BorderRadius.circular(50),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ButtonWidget(
+                          showLoadingIndicator:
+                              signinController.isLoading.value,
+                          onPressed: () {
+                            signinController.onClickSignIn();
+                          },
+                          text: tr(
+                              'Sign In'), // Replace with localization if needed.
+                          options: ButtonOptions(
+                            width: 400,
+                            height: 45,
+                            color: customColors.primary,
+                            textStyle: customTextStyle.titleSmall.copyWith(
+                              color: Colors.white,
                             ),
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                        ],
+                        ),
                       ),
                       ...List.generate(
                           signinController.errorMessage.length,

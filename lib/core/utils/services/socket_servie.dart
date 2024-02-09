@@ -1,4 +1,5 @@
 import 'package:evento/core/utils/services/notification_service.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -26,7 +27,7 @@ void listenToEvents(int userId) {
       print((data['title']).toString());
 
       NotificationService()
-          .showNotification(1, data['title'], data['description']);
+          .showNotification(112233, data['title'], data['description']);
     }
   });
 

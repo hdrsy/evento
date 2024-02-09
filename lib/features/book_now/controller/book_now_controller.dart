@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
+import 'package:evento/features/book_now/model/promo_code_model.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/error_handling/erroe_handling.dart';
@@ -16,11 +17,11 @@ import 'package:get/get.dart';
 class BookNowController extends GetxController {
   late EventDetailsModel eventDetailsModel;
   late RxBool isLoading;
+  late RxBool isLoadingCoupons;
   late RxList<String> errorMessage;
   late RxList<FreindsModel> myFreinds;
-  late List<String> userCopuns;
   late RxList<TicketModel> ticketList;
-  FormFieldController<String>? dropDownValueController1;
+  late List<PromoCode> userCopuns;
   @override
   void onInit() {
     EventDetailesController eventDetailesController = Get.find();
@@ -30,11 +31,9 @@ class BookNowController extends GetxController {
     ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
     // print(eventDetailsModel.classes[0].ticketPrice);
     myFreinds = <FreindsModel>[].obs;
-    userCopuns = [
-      "EVENTO2331",
-      "EVENTO2352",
-      "EVENTO2691",
-    ];
+    isLoadingCoupons = false.obs;
+    getMyCoupons();
+    userCopuns = [];
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     getMyFreinds();
@@ -69,6 +68,64 @@ class BookNowController extends GetxController {
 
   removeTicket(int ticketIndex) {
     ticketList.removeAt(ticketIndex);
+    for (var i = 0; i < userCopuns.length; i++) {
+      if (userCopuns[i].tiketId == ticketIndex) {
+        userCopuns[i].isSelected = false;
+        userCopuns[i].tiketId = -1;
+        break;
+      }
+    }
+    // userCopuns.map((e) {});
+    update();
+  }
+
+  removecopounFromticket(String couponCode, int ticketId) {
+    for (var i = 0; i < userCopuns.length; i++) {
+      if (userCopuns[i].tiketId == ticketId) {
+        userCopuns[i].isSelected = false;
+        userCopuns[i].tiketId = -1;
+        break;
+      }
+    }
+    ticketList[ticketId].dropDownValueController!.value = null;
+    print("removed succes");
+    update();
+  }
+
+  changeSelectedCouponInTicket(String couponCode, int ticketId) {
+    int couponeIndex = 0;
+    for (var i = 0; i < userCopuns.length; i++) {
+      /// get copun object
+      if (userCopuns[i].code == couponCode) {
+        couponeIndex = i;
+        userCopuns[i].tiketId = ticketId;
+        userCopuns[i].isSelected = true;
+        ticketList[ticketId].dropDownValueController!.value = couponCode;
+        break;
+      }
+    }
+
+    // if (!userCopuns[couponeIndex].isSelected) {
+    //   ticketList[ticketId].couponNumber = userCopuns[couponeIndex].id;
+    // }
+    update();
+  }
+
+  List<String> getcopounListforTicket(int tikcetId) {
+    List<String> newList = userCopuns
+        .where((element) {
+          if (!element.isSelected) {
+            return true;
+          } else if (element.isSelected && element.tiketId == tikcetId) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .map((e) => e.code)
+        .toList();
+    print("tiket id:$tikcetId and the list for it $newList");
+    return newList;
   }
 
   changeSelectedCalss(Class newClass, int index) {
@@ -170,6 +227,33 @@ class BookNowController extends GetxController {
     ticketList[ticketIndex].phoneNumber.text = user!.phoneNumber;
     ticketList[ticketIndex].age.text =
         calculateAge(DateTime.parse(user!.birthDate)).toString();
+  }
+
+  getMyCoupons() async {
+    // isLoadingCoupons.value = true;
+    print("start re");
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token");
+    response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.myCoupons}/${eventDetailsModel.id}",
+        method: "GEt",
+        token: token);
+    print("after re");
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
+    if (handlingResponse is ErrorResponse) {
+    } else {
+      List<dynamic> interestsJson = handlingResponse['promoCode'];
+
+      userCopuns = interestsJson
+          .map((jsonItem) => PromoCode.fromJson(jsonItem))
+          .toList();
+
+      print("user copouns:$userCopuns");
+      // userCopuns.removeLast();
+    }
+    isLoadingCoupons.value = false;
+    // update();
   }
 
   getMyFreinds() async {

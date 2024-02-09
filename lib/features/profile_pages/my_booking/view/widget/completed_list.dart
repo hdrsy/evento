@@ -1,4 +1,7 @@
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
 import 'package:evento/main.dart';
 
 import '../../../../../core/responsive/responsive.dart';
@@ -34,10 +37,27 @@ class CompletedList extends StatelessWidget {
                     ...List.generate(
                         myBookingController.completedBooking.length,
                         (index) => MyBookingCard(
+                              eventBooking: myBookingController
+                                  .completedBooking[index].bookings,
                               model: myBookingController.completedBooking[index]
                                   .bookings[0].eventClass.event,
                               isCanceldSection: false,
-                              leftButtonOnTap: () {},
+                              leftButtonOnTap: () {
+                                showButtonSheet(
+                                    context: context,
+                                    widget: ReviewEventWidget(
+                                      ratingTarget: tr("Your Event"),
+                                      id: myBookingController
+                                          .completedBooking[index]
+                                          .bookings[0]
+                                          .eventClass
+                                          .event
+                                          .id,
+                                      idKey: "event_id",
+                                      url: ServerConstApis.reviewEvent,
+                                    ),
+                                    height: 450);
+                              },
                               leftButtonTitle: tr("Leave a Review"),
                               bookingStatus: tr("Completed"),
                             ))
