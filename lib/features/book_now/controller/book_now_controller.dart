@@ -26,7 +26,7 @@ class BookNowController extends GetxController {
   void onInit() {
     EventDetailesController eventDetailesController = Get.find();
     eventDetailsModel = eventDetailesController.eventDetailsModel;
-    ticketList = <TicketModel>[TicketModel()].obs;
+    ticketList = <TicketModel>[TicketModel(ticketIndex: 0)].obs;
     // print(ticketList[0].selectedClass!.ticketPrice);
     ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
     // print(eventDetailsModel.classes[0].ticketPrice);
@@ -41,7 +41,7 @@ class BookNowController extends GetxController {
   }
 
   addnewTicket() {
-    ticketList.add(TicketModel());
+    ticketList.add(TicketModel(ticketIndex: ticketList.length));
     ticketList.last.totalPrice = eventDetailsModel.ticketPrice;
   }
 
@@ -68,64 +68,113 @@ class BookNowController extends GetxController {
 
   removeTicket(int ticketIndex) {
     ticketList.removeAt(ticketIndex);
-    for (var i = 0; i < userCopuns.length; i++) {
-      if (userCopuns[i].tiketId == ticketIndex) {
-        userCopuns[i].isSelected = false;
-        userCopuns[i].tiketId = -1;
-        break;
-      }
-    }
+
     // userCopuns.map((e) {});
     update();
   }
 
-  removecopounFromticket(String couponCode, int ticketId) {
-    for (var i = 0; i < userCopuns.length; i++) {
-      if (userCopuns[i].tiketId == ticketId) {
-        userCopuns[i].isSelected = false;
-        userCopuns[i].tiketId = -1;
-        break;
+  int calculateDiscountForTicket(int ticketIndex) {
+    if (ticketList[ticketIndex].selectedPromoCode != null) {
+      int codeDiscount =
+          int.parse(ticketList[ticketIndex].selectedPromoCode!.discount);
+      int codeLimit =
+          int.parse(ticketList[ticketIndex].selectedPromoCode!.limit);
+      int newTotal =
+          ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
+      if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
+        ticketList[ticketIndex].discount = codeLimit;
+        return codeLimit;
+      } else {
+        ticketList[ticketIndex].discount = newTotal;
+        return newTotal;
       }
+    } else {
+      return 0;
     }
+  }
+
+  removecopounFromticket(String couponCode, int ticketId) {
     ticketList[ticketId].dropDownValueController!.value = null;
+    ticketList[ticketId].selectedPromoCode = null;
+
     print("removed succes");
     update();
   }
 
+  getcopounFromCode(String copounCode) {
+    for (var i = 0; i < userCopuns.length; i++) {
+      if (userCopuns[i].code == copounCode) {
+        // userCopuns[i].isSelected = false;
+        // userCopuns[i].tiketId = -1;
+        return userCopuns[i];
+      }
+    }
+  }
+
   changeSelectedCouponInTicket(String couponCode, int ticketId) {
-    int couponeIndex = 0;
     for (var i = 0; i < userCopuns.length; i++) {
       /// get copun object
       if (userCopuns[i].code == couponCode) {
-        couponeIndex = i;
-        userCopuns[i].tiketId = ticketId;
-        userCopuns[i].isSelected = true;
+        ticketList[ticketId].selectedPromoCode = userCopuns[i];
+        ticketList[ticketId].discount = int.tryParse(userCopuns[i].discount)!;
+
         ticketList[ticketId].dropDownValueController!.value = couponCode;
         break;
       }
     }
 
-    // if (!userCopuns[couponeIndex].isSelected) {
-    //   ticketList[ticketId].couponNumber = userCopuns[couponeIndex].id;
-    // }
     update();
   }
 
-  List<String> getcopounListforTicket(int tikcetId) {
-    List<String> newList = userCopuns
-        .where((element) {
-          if (!element.isSelected) {
-            return true;
-          } else if (element.isSelected && element.tiketId == tikcetId) {
-            return true;
-          } else {
-            return false;
-          }
+  List<String> getCouponListForTicket(int ticketId) {
+    // Log the ticketId being processed
+    print('Processing ticketId: $ticketId');
+
+    // Assuming `userCoupons` is a List<PromoCode> of all promo codes
+    // And `ticketList` is a List<TicketModel>, where each TicketModel has an ID and an optional selected PromoCode
+
+    // Create a list to keep track of codes that are already selected for other tickets
+    List<String> selectedCodesForOtherTickets = [];
+
+    // Identify the promo code selected for the current ticket, if any
+    var selectedCodeForCurrentTicket = ticketList
+        .firstWhereOrNull((ticket) => ticket.ticketIndex == ticketId)
+        ?.selectedPromoCode
+        ?.code;
+
+    // Log the selected code for the current ticket
+    print(
+        'Selected code for current ticket ($ticketId): $selectedCodeForCurrentTicket');
+
+    // Populate the list of selected codes for other tickets
+    for (var ticket in ticketList) {
+      if (ticket.ticketIndex != ticketId && ticket.selectedPromoCode != null) {
+        selectedCodesForOtherTickets.add(ticket.selectedPromoCode!.code);
+      }
+    }
+
+    // Log the codes selected for other tickets
+    print('Selected codes for other tickets: $selectedCodesForOtherTickets');
+
+    // Filter the userCoupons to exclude the codes that are selected for other tickets,
+    // but include the code selected for the current ticket (if any)
+    List<String> availableCouponCodes = userCopuns
+        .where((promo) {
+          bool isAvailable =
+              !selectedCodesForOtherTickets.contains(promo.code) ||
+                  promo.code == selectedCodeForCurrentTicket;
+          // Log each promo code's availability
+          print(
+              'Checking promo code "${promo.code}": isAvailable = $isAvailable');
+          return isAvailable;
         })
-        .map((e) => e.code)
+        .map((promo) => promo.code)
         .toList();
-    print("tiket id:$tikcetId and the list for it $newList");
-    return newList;
+
+    // Log the final list of available coupon codes
+    print('Available coupon codes for ticket $ticketId: $availableCouponCodes');
+
+    return availableCouponCodes;
   }
 
   changeSelectedCalss(Class newClass, int index) {
@@ -155,10 +204,6 @@ class BookNowController extends GetxController {
     }
     update();
   }
-
-  // inCrementTicketCount() {
-  //   ticketList.add(TicketModel(selectedClass: eventDetailsModel.classes[0]));
-  // }
 
   deCrementTicketCount() {
     if (ticketList.length > 1) {

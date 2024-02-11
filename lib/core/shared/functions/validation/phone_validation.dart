@@ -1,14 +1,18 @@
 String? phoneValidation(String? value) {
+  // Preprocess to ensure consistency
+  if (value != null && value.startsWith('9') && value.length == 9) {
+    value = '0$value'; // Adjust the input for validation
+  }
+
   if (value == null || value.isEmpty) {
     return "Please enter a phone number"; // Handle null or empty input
   }
-  
-  // Check if the length is neither 9 nor 10
-  if (value.length != 10 && value.length != 9) {
-    return "Please enter a valid number"; // Phone number should be 9 or 10 digits
+
+  // Validate Syrian phone numbers (now considering the preprocessing step)
+  if (!RegExp(r'^09\d{8}$').hasMatch(value)) {
+    return "Please enter a valid Syrian phone number";
   }
 
-  // Add additional validations if needed (e.g., checking for non-numeric characters)
-
-  return null; // No error found
+  // No error found
+  return null;
 }

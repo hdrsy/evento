@@ -32,6 +32,7 @@ filter(Map<String, dynamic> data, {String? url}) async {
     return errorMessage.first;
   } else {
     List<dynamic> categoryListJson = handlingResponse['events'];
+    print("filter result :${categoryListJson}");
     return categoryListJson;
   }
 }

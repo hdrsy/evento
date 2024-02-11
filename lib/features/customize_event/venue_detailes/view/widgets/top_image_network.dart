@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,10 +11,9 @@ class TopImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return getImageNetwork(
-      url:imageUrl,
+      url: imageUrl,
       width: double.infinity,
-      height: 340,
-     
+      height: 340.h,
     );
   }
 }

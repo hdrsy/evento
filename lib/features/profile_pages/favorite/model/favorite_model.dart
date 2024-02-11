@@ -32,6 +32,7 @@ class EventWrapper {
     );
   }
 }
+
 class FavoriteEventModel {
   int id;
   int? organizerId;
@@ -45,27 +46,26 @@ class FavoriteEventModel {
   String type;
   List<String> images;
   bool isFollowedByAuthUser;
-    Venue venue;
+  Venue venue;
 
-  FavoriteEventModel({
-    required this.id,
-    this.organizerId,
-    required this.title,
-    required this.venueId,
-    required this.capacity,
-    required this.startDate,
-    required this.endDate,
-    required this.ticketPrice,
-    required this.description,
-    required this.type,
-    required this.images,
-    required this.isFollowedByAuthUser,
-    required this.venue
-  });
+  FavoriteEventModel(
+      {required this.id,
+      this.organizerId,
+      required this.title,
+      required this.venueId,
+      required this.capacity,
+      required this.startDate,
+      required this.endDate,
+      required this.ticketPrice,
+      required this.description,
+      required this.type,
+      required this.images,
+      required this.isFollowedByAuthUser,
+      required this.venue});
 
   factory FavoriteEventModel.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return FavoriteEventModel(
       id: json['id'],
       organizerId: json['organizer_id'],
@@ -77,7 +77,7 @@ class FavoriteEventModel {
       ticketPrice: json['ticket_price'],
       description: json['description'],
       type: json['type'],
-      venue: Venue.fromJson( json["venue"]),
+      venue: Venue.fromJson(json["venue"]),
       images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
     );

@@ -241,7 +241,10 @@ class Fields extends StatelessWidget {
                   editProfileController.gender.text = value;
                 },
                 validator: (value) {
-                  if (value == "Male" || value == "Female") {
+                  if (value == "Male" ||
+                      value == "Female" ||
+                      value == "male" ||
+                      value == "female") {
                     return null;
                   }
                   return "Plsease Type Your gender correctly";

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class IconWithContainer extends StatelessWidget {
    const IconWithContainer({super.key,
   required this.icon,
-  required this.onTap,
+   this.onTap,
   required this.buttonSize,
   required this.borderRadius,
   required this.backgroundColor,

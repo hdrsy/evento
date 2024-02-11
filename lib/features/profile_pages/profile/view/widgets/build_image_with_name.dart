@@ -34,7 +34,8 @@ Widget buildImageWithName() {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () {
-              Get.toNamed('/EditProfileScreen',arguments: profileController.profileModel);
+              Get.toNamed('/EditProfileScreen',
+                  arguments: profileController.profileModel);
             },
             child: Container(
               padding: padding(5, 5, 5, 5),
@@ -53,11 +54,13 @@ Widget buildImageWithName() {
       SizedBox(
         height: scaleHeight(5),
       ),
-      Text(
-        "${profileController.profileModel.firstName} ${profileController.profileModel.lastName}",
-        style: customTextStyle.bodyLarge
-            .copyWith(color: customColors.primary, fontSize: 18),
-      ),
+      GetBuilder<ProfileController>(builder: (context) {
+        return Text(
+          "${profileController.profileModel.firstName} ${profileController.profileModel.lastName}",
+          style: customTextStyle.bodyLarge
+              .copyWith(color: customColors.primary, fontSize: 18),
+        );
+      }),
       Text(
         "ID#${profileController.profileModel.id}",
         style: customTextStyle.bodyLarge

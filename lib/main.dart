@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/socket_servie.dart';
 import 'package:evento/core/utils/services/work_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workmanager/workmanager.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
@@ -76,20 +77,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     initSizes(context);
     // Messagess messagess=Messagess();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      theme: themeValue == ''
-          ? AppTheme.dark
-          : themeValue == 'dark'
-              ? AppTheme.dark
-              : AppTheme.light,
-      themeMode: ThemeMode.light,
-      getPages: appRoutes(),
-      initialRoute: targetRout,
-    );
+    return ScreenUtilInit(
+        designSize: const Size(412, 915),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: themeValue == ''
+                ? AppTheme.dark
+                : themeValue == 'dark'
+                    ? AppTheme.dark
+                    : AppTheme.light,
+            themeMode: ThemeMode.light,
+            getPages: appRoutes(),
+            initialRoute: targetRout,
+          );
+        });
   }
 }
 

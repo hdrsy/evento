@@ -98,7 +98,7 @@ class OrganizerCreateProfileController extends GetxController {
         'name': organizerName.text,
         'bio': bio.text,
         'state': selectedState!,
-        'services': choiceOrganizerCategoryController.sericeSelected.text,
+        'other_category': choiceOrganizerCategoryController.sericeSelected.text,
         // 'category_ids': choiceOrganizerCategoryController.selectedCategories
       };
 

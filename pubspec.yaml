@@ -96,6 +96,7 @@ dependencies:
   smooth_video_progress: ^0.0.4
   cached_network_image: ^3.3.1
   sizer: ^2.0.15
+  flutter_screenutil: ^5.9.0
   
   
   

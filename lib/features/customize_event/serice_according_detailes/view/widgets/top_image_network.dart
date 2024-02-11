@@ -1,5 +1,6 @@
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -8,6 +9,7 @@ class TopImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getImageNetwork(url: imageUrl, width: double.infinity, height: 340);
+    return getImageNetwork(
+        url: imageUrl, width: double.infinity, height: 340.h);
   }
 }

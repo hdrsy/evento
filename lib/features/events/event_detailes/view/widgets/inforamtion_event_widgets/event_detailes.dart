@@ -10,6 +10,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 Widget buildEventDetails(BuildContext context) {
@@ -21,7 +22,7 @@ Widget buildEventDetails(BuildContext context) {
       Text(
         tr("Date & Location"),
         style: customTextStyle.bodyMedium.copyWith(
-            fontSize: 14,
+            fontSize: 14.sp,
             color: customColors.primaryText,
             fontWeight: FontWeight.w700),
       ),
@@ -35,7 +36,7 @@ Widget buildEventDetails(BuildContext context) {
             style: customTextStyle.bodyMedium.override(
               fontFamily: primaryFontFamily,
               color: customColors.primaryText,
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
               useGoogleFonts: true,
             ),
@@ -46,15 +47,15 @@ Widget buildEventDetails(BuildContext context) {
             },
             text: "Add to My Calendar",
             options: ButtonOptions(
-              width: 170,
-              height: 25,
+              width: 170.w,
+              height: 25.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
               color: customColors.primary,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.info,
-                fontSize: 10,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),
@@ -71,14 +72,10 @@ Widget buildEventDetails(BuildContext context) {
             eventDetailesController.eventDetailsModel.startDate),
         style: customTextStyle.bodyMedium.override(
           fontFamily: breeSerif,
-          fontSize: 14,
+          fontSize: 14.sp,
           useGoogleFonts: false,
         ),
       ),
-
-      // 'Add to My Calendar' Button
-
-      // Event Location
 
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +85,7 @@ Widget buildEventDetails(BuildContext context) {
             style: customTextStyle.bodyMedium.override(
               fontFamily: primaryFontFamily,
               color: customColors.primaryText,
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
               useGoogleFonts: true,
             ),
@@ -99,15 +96,15 @@ Widget buildEventDetails(BuildContext context) {
             },
             text: "See Location on Maps",
             options: ButtonOptions(
-              width: 170,
-              height: 25,
+              width: 170.w,
+              height: 25.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
               color: customColors.primary,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.info,
-                fontSize: 10,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),
@@ -125,7 +122,7 @@ Widget buildEventDetails(BuildContext context) {
           Icon(
             Icons.location_on_outlined,
             color: customColors.primary,
-            size: 20,
+            size: 20.sp,
           ),
           Obx(
             () => Text(

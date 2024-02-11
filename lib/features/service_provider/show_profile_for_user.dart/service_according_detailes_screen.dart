@@ -91,8 +91,8 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: customColors.secondaryBackground,
           boxShadow: const [
-            BoxShadow(
-                blurRadius: 4, color: Color(0x320E151B), offset: Offset(0, -2))
+            // BoxShadow(
+            //     blurRadius: 4, color: Color(0x320E151B), offset: Offset(0, -2))
           ],
           // borderRadius: const BorderRadius.only(
           //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),

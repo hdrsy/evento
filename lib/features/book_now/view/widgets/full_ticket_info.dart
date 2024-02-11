@@ -216,7 +216,7 @@ class FullTicketInfo extends StatelessWidget {
                             FormFieldController<String>(null),
 
                         options:
-                            bookNowController.getcopounListforTicket(index),
+                            bookNowController.getCouponListForTicket(index),
                         onChanged: (val) {
                           if (val != null) {
                             print("new val is:$val");

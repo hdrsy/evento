@@ -100,9 +100,6 @@ class VenueCard extends StatelessWidget {
                               serviceCategoryController.selectedVenue.value != 0
                                   ? Icons.check
                                   : Icons.arrow_forward,
-                          onTap: () async {
-                            // context.pushNamed('Venuelist');
-                          },
                         ),
                       ),
                     ].addToEnd(const SizedBox(height: 30)),

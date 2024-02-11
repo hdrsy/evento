@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/services/user_info.dart';
+import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -104,7 +106,13 @@ class EditProfileController extends GetxController {
     }
   }
 
-  whenGetDataSuccess(handlingResponse) {
+  whenGetDataSuccess(handlingResponse) async {
+    await prefService.remove("userInfo");
+    user = await UserInfo.getUserInfo();
+    final ProfileController profileController = Get.find();
+    profileController.getProfileInfo();
+    profileController.update();
+
     Get.back();
   }
 }

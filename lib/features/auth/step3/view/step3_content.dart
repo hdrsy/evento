@@ -18,7 +18,8 @@ import 'package:easy_localization/easy_localization.dart';
 class Step3Content extends StatelessWidget {
   Step3Content({super.key});
   StepsController stepsController = Get.find();
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate =
+      DateTime.now().subtract(const Duration(days: 365 * 12 + 3));
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -104,9 +105,18 @@ class Step3Content extends StatelessWidget {
                                       ),
                                     ),
                                     child: CupertinoDatePicker(
-                                      initialDateTime:
-                                          stepsController.day ?? DateTime.now(),
+                                      initialDateTime: stepsController.day ??
+                                          DateTime.now().subtract(
+                                              const Duration(
+                                                  days: 365 * 12 + 3)),
                                       mode: CupertinoDatePickerMode.date,
+                                      minimumDate: DateTime(
+                                          1950), // Assuming you want to allow dates back to 1800
+                                      maximumDate: DateTime.now().subtract(
+                                          const Duration(
+                                              days: 365 * 12 +
+                                                  3)), // 12 years and 3 days ago to account for leap years
+
                                       onDateTimeChanged: (val) {
                                         selectedDate = val;
                                       },
@@ -149,8 +159,6 @@ class Step3Content extends StatelessWidget {
                                     ButtonWidget(
                                       onPressed: () {
                                         stepsController.day = selectedDate;
-                                        print(
-                                            "selected date is:${stepsController.day}");
                                         stepsController.update();
                                         Get.back();
                                       },

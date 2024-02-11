@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/shared/controllers/logout_controller.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 
 class LogoutWidget extends StatelessWidget {
-  const LogoutWidget({super.key});
-
+  LogoutWidget({super.key});
+  final LogOutController logOutController = Get.put(LogOutController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -96,43 +97,36 @@ class LogoutWidget extends StatelessWidget {
                         ),
                         showLoadingIndicator: false,
                       ),
-                      ButtonWidget(
-                        onPressed: () async {
-                          Get.offAllNamed('/');
-                          prefService.remove('token');
-                          prefService.remove('userInfo');
-                          prefService.remove('isCompleteProfile');
-                          FlutterBackgroundService service =
-                              FlutterBackgroundService();
-                          service.invoke("stopService");
-                          print("is running service");
-                          print(await service.isRunning());
-
-                          print(await prefService.isContainKey('userInfo'));
-                        },
-                        text: tr("Yes, Logout"),
-                        options: ButtonOptions(
-                          width: 120,
-                          height: 45,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              20, 0, 20, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.info,
-                            fontSize: 14,
-                            useGoogleFonts: false,
-                          ),
-                          elevation: 0,
-                          borderSide: BorderSide(
+                      Obx(
+                        () => ButtonWidget(
+                          onPressed: () async {
+                            logOutController.onClickSignIn();
+                          },
+                          text: tr("Yes, Logout"),
+                          options: ButtonOptions(
+                            width: 120,
+                            height: 45,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20, 0, 20, 0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 0),
                             color: customColors.primary,
-                            width: 2,
+                            textStyle: customTextStyle.titleSmall.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.info,
+                              fontSize: 14,
+                              useGoogleFonts: false,
+                            ),
+                            elevation: 0,
+                            borderSide: BorderSide(
+                              color: customColors.primary,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          borderRadius: BorderRadius.circular(10),
+                          showLoadingIndicator:
+                              logOutController.isLoading.value,
                         ),
-                        showLoadingIndicator: false,
                       ),
                     ],
                   ),

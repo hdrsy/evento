@@ -4,6 +4,7 @@ import 'package:evento/core/utils/helper/flutter_flow_choice_chips.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
+import 'package:evento/core/utils/services/location_service.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
@@ -11,6 +12,7 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 // ignore: must_be_immutable
@@ -23,6 +25,18 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
+  LocationService locationService = LocationService();
+  late LocationData userLocation;
+  @override
+  void initState() {
+    getuserlocation();
+    super.initState();
+  }
+
+  getuserlocation() async {
+    userLocation = await locationService.getCurrentLocation();
+  }
+
   FormFieldController<String>? dropDownValueController;
 
   FormFieldController<List<String>>? choiceChipsValueController;
@@ -30,7 +44,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   double price = 1000;
   double locationRange = 1;
   SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
-  double _valueSlider = 1000;
+  double _valueSlider = 400000;
   List<String>? choiceChipsValues;
   CategoryListController categoryListController = Get.find();
   List<CategoryModel> categoryList = [];
@@ -381,7 +395,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                           }
                           data['min_ticket_price'] = _values.start;
                           data['max_ticket_price'] = _values.end;
+                          data['distance'] = _valueSlider;
+                          data['latitude'] = userLocation.latitude;
+                          data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {
+                            print("sending data : $data");
                             widget.onApplyFilters(data);
                           }
                         },

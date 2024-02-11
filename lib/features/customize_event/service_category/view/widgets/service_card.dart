@@ -117,9 +117,6 @@ class ServiceCard extends StatelessWidget {
                                   0
                               ? Icons.check
                               : Icons.arrow_forward,
-                          onTap: () async {
-                            // context.pushNamed('Venuelist');
-                          },
                         );
                       }),
                     ].addToEnd(const SizedBox(height: 30)),

@@ -4,8 +4,6 @@ class PromoCode {
   final String code;
   final String discount;
   final String limit;
-  bool isSelected = false;
-  int tiketId = -1;
   PromoCode({
     required this.id,
     required this.title,

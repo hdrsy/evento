@@ -63,7 +63,6 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              EventInfoCard2(),
               ...List.generate(
                   bookingDetailesController.ticketList.length,
                   (index) => TicketDetailesCardForMyBooking(

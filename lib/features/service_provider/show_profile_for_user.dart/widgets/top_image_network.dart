@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -10,7 +11,7 @@ class TopImageWidget extends StatelessWidget {
     return Image.network(
       imageUrl,
       width: double.infinity,
-      height: 340,
+      height: 340.h,
       fit: BoxFit.cover,
     );
   }
