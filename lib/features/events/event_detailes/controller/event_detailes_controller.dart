@@ -4,7 +4,10 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/core/utils/services/connectivity_service.dart';
+import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -33,16 +36,39 @@ class EventDetailesController extends GetxController {
   late int offerPrecent;
   CacheService cacheService = CacheService('eventDetailes');
   late String cacheKey;
+  late RxBool isSomeThingError;
+  final ConnectivityService _connectivityService = Get.find();
 
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
     relatedEvents = <EventModel>[].obs;
     isLoading = false.obs;
+    isSomeThingError = false.obs;
     eventId = Get.arguments[0];
     isOffer = Get.arguments[1] ?? false;
     offerPrecent = Get.arguments[2] ?? 0;
     cacheKey = "eventDetailes$eventId";
+    _connectivityService.isConnected.listen((isConnected) {
+      if (isConnected) {
+        print("Internet connection is back!");
+        // refreshData(); // Refetch data when connection is back
+        getEventDetailesModel();
+        isSomeThingError.value = false;
+        SnackbarManager.showSnackbar(
+          "Online",
+          "You are back online.",
+          backgroundColor: Colors.green,
+        );
+      } else {
+        print("You are offline!");
+        SnackbarManager.showSnackbar(
+          "Offline",
+          "No internet connection.",
+          backgroundColor: Colors.red,
+        );
+      }
+    });
     await getEventDetailesModel();
     await calculateDistance();
 
@@ -53,39 +79,44 @@ class EventDetailesController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
-    print("token $token");
-    if (await checkInternet()) {
-      log("from cache");
-      final d = await cacheService.getObject<Map<String, dynamic>>(
-        cacheKey: cacheKey,
-        deserializeFunction: (jsonMap) => jsonMap,
-      );
-      print("d:$d");
-      if (d != null) {
-        whenGetDataSuccess(d);
+    try {
+      print("token $token");
+      if (await checkInternet()) {
+        log("from cache");
+        final d = await cacheService.getObject<Map<String, dynamic>>(
+          cacheKey: cacheKey,
+          deserializeFunction: (jsonMap) => jsonMap,
+        );
+        print("d:$d");
+        if (d != null) {
+          whenGetDataSuccess(d);
+        } else {
+          isSomeThingError.value = true;
+          isLoading.value = false;
+        }
+        isLoading.value = false;
       } else {
+        response = await ApiHelper.makeRequest(
+            targetRout:
+                "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
+            method: "GEt",
+            token: token);
+        print(response);
+        dynamic handlingResponse = response.fold((l) => l, (r) => r);
+        if (handlingResponse is ErrorResponse) {
+          errorMessage.value = handlingResponse.getErrorMessages();
+        } else {
+          whenGetDataSuccess(handlingResponse);
+          cacheService.cacheObject<Map<String, dynamic>>(
+            object: handlingResponse,
+            cacheKey: cacheKey,
+            serializeFunction: (data) => data,
+          );
+        }
         isLoading.value = false;
       }
-      isLoading.value = false;
-    } else {
-      response = await ApiHelper.makeRequest(
-          targetRout:
-              "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
-          method: "GEt",
-          token: token);
-      print(response);
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
-      } else {
-        whenGetDataSuccess(handlingResponse);
-        cacheService.cacheObject<Map<String, dynamic>>(
-          object: handlingResponse,
-          cacheKey: cacheKey,
-          serializeFunction: (data) => data,
-        );
-      }
-      isLoading.value = false;
+    } catch (e) {
+      isSomeThingError.value = true;
     }
   }
 

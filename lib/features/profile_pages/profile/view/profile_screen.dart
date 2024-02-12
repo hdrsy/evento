@@ -105,6 +105,11 @@ List<Widget> _buildUserSpecificOptions() {
 
 List<Widget> getnormalUserOptionsCard() => [
       OptionsCard(
+        targetRout: '/OrganizationProfileScreen',
+        icon: Icons.person_outline,
+        title: tr("Organaizations Profile"),
+      ),
+      OptionsCard(
         targetRout: '/MyBookingScreen',
         icon: Icons.list,
         title: tr("My Bookings"),
@@ -114,6 +119,12 @@ List<Widget> getnormalUserOptionsCard() => [
         icon: Icons.repeat,
         title: tr("My Requests"),
       ),
+      OptionsCard(
+        targetRout: '/MyEventsForOrganizerScreen',
+        icon: Icons.celebration_outlined,
+        title: tr("My Events"),
+      ),
+
       OptionsCard(
         targetRout: '/FavoriteScreen',
         icon: Icons.favorite_border,
@@ -165,7 +176,7 @@ List<Widget> getnormalUserOptionsCard() => [
 
 List<Widget> getOrganizerOptionsCard() => [
       OptionsCard(
-        targetRout: '/MyBookingScreen',
+        targetRout: '/OrganizationProfileScreen',
         icon: Icons.person_outline,
         title: tr("Organaizations Profile"),
       ),
@@ -180,7 +191,7 @@ List<Widget> getOrganizerOptionsCard() => [
         title: tr("My Requests"),
       ),
       OptionsCard(
-        targetRout: '/MyRequestScreen',
+        targetRout: '/MyEventsForOrganizerScreen',
         icon: Icons.celebration_outlined,
         title: tr("My Events"),
       ),

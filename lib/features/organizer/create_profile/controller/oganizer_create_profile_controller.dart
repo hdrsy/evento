@@ -166,4 +166,17 @@ class OrganizerCreateProfileController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  deleteFolder(int folderIndex) {
+    foldersModel.removeAt(folderIndex);
+    print("inside deleteFolder");
+  }
+
+  editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
+    print("inside media");
+    foldersModel[folderIndex].mediaList.clear();
+    foldersModel[folderIndex].mediaList.addAll(media);
+    Get.back();
+    print("editing complete");
+  }
 }

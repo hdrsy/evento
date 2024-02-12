@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:get/get.dart';
 
 checkInternet() async {
@@ -34,6 +35,7 @@ startTracking() {
     } else {
       log("Device is connected to the internet in tracking");
       // Device is connected to the internet
+      Get.find<PaginationController>().refreshData();
       connectionState.value = true;
     }
 

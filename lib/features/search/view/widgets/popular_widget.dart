@@ -17,7 +17,7 @@ class PopularWidget extends StatelessWidget {
       () => Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          controller.recentSearch.isEmpty && controller.isSearchActive.value
+          controller.recentSearch.isEmpty || controller.isSearchActive.value
               ? SizedBox.shrink()
               : RecentlyWidget(),
           Align(

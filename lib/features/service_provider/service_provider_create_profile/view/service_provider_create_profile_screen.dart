@@ -275,6 +275,7 @@ class OrganizerMediaCard extends StatelessWidget {
                               3)
                       ? SeeAllFoldersCard()
                       : FolderCard(
+                          folderIndex: index,
                           folder: organizerCreateProfileController
                               .foldersModel[index],
                         );

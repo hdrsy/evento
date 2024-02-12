@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/core/utils/services/connectivity_service.dart';
+import 'package:evento/core/utils/services/snackbar_manager.dart';
+import 'package:flutter/material.dart';
 import '../../utils/error_handling/erroe_handling.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -32,6 +35,7 @@ class PaginationController<T> extends GetxController {
   late RxBool hasMoreData;
   late CacheService cacheService;
   final String cacheKey;
+  final ConnectivityService _connectivityService = Get.find();
 
   // A reactive list to hold the items of type [T].
   late RxList<T> itemList;
@@ -69,6 +73,32 @@ class PaginationController<T> extends GetxController {
         fetchData();
       }
     });
+    _connectivityService.isConnected.listen((isConnected) {
+      if (isConnected) {
+        print("Internet connection is back!");
+        refreshData(); // Refetch data when connection is back
+        SnackbarManager.showSnackbar(
+          "Online",
+          "You are back online.",
+          backgroundColor: Colors.green,
+        );
+      } else {
+        print("You are offline!");
+        SnackbarManager.showSnackbar(
+          "Offline",
+          "No internet connection.",
+          backgroundColor: Colors.red,
+        );
+      }
+    });
+  }
+  void refreshData() async {
+    print("inside refresh");
+    pageId = 1; // Reset pagination to the first page
+    lastPageId = 1; // Reset this as well if you're using it to track pagination
+    hasMoreData.value = true; // Assume there's more data to fetch
+    itemList.clear(); // Clear existing items
+    fetchData(); // Fetch new data
   }
 
   // Called immediately after the controller is allocated memory. Initiates the first data fetch.

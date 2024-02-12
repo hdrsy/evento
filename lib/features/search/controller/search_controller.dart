@@ -39,6 +39,7 @@ class SearchPageController extends GetxController {
       } else {
         // Optionally handle empty search field case
         _fetchData("");
+        isSearchActive.value = false;
       }
     });
   }
@@ -124,6 +125,7 @@ class SearchPageController extends GetxController {
       _fetchData(query);
     } else {
       _fetchData("");
+
       update();
       // _updateSearchResults([]);
     }

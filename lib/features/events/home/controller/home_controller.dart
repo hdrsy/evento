@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
@@ -37,7 +38,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     isLoading = false.obs;
-
     super.onInit();
   }
 
@@ -61,6 +61,7 @@ class CategoryListController extends GetxController {
   late RxList<String> errorMessage;
   CacheService cacheService = CacheService('categoryListCache');
   final String cacheKey = 'categoryList';
+  final ConnectivityService _connectivityService = Get.find();
 
   @override
   void onInit() {
@@ -83,6 +84,12 @@ class CategoryListController extends GetxController {
     ].obs;
     errorMessage = <String>[].obs;
     fetchCategoryData();
+    _connectivityService.isConnected.listen((isConnected) {
+      if (isConnected) {
+        print("inside fetch data for internte");
+        // fetchCategoryData(); // Refetch data when connection is back
+      }
+    });
     super.onInit();
   }
 

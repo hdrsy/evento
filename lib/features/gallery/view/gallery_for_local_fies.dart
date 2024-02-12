@@ -7,10 +7,22 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class GalleryForLocalScreen extends StatelessWidget {
-   GalleryForLocalScreen({super.key, required this.files});
+  GalleryForLocalScreen({
+    super.key,
+    required this.files,
+    this.isEditgallery,
+    this.showEditFolderName,
+    this.deleteFolder,
+    this.editFolderMedia,
+  });
   // final GalleryController galleryController=Get.find();
   final List<MediaModel> files;
+  final bool? isEditgallery;
+  final Function()? showEditFolderName;
+  final Function()? deleteFolder;
+  final Function()? editFolderMedia;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +33,25 @@ class GalleryForLocalScreen extends StatelessWidget {
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
+          actions: isEditgallery != null && isEditgallery == true
+              ? <Widget>[
+                  PopupMenuButton<String>(
+                    onSelected: handleClick,
+                    itemBuilder: (BuildContext context) {
+                      return {
+                        'Edit Folder Name',
+                        'Edit Media in Folder',
+                        'Delete Folder'
+                      }.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                  ),
+                ]
+              : null,
           leading: InkWell(
             onTap: () {
               Get.back();
@@ -37,17 +68,17 @@ class GalleryForLocalScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: MasonryGridView.builder(
-                  gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   itemCount: files.length,
                   itemBuilder: (context, index) {
-                  return  MediaWidget(mediaItem: files[index],);
-                  
-                    
-
+                    return MediaWidget(
+                      mediaItem: files[index],
+                    );
                   },
                 ),
               )
@@ -56,6 +87,26 @@ class GalleryForLocalScreen extends StatelessWidget {
         ));
   }
 
+  void handleClick(String value) {
+    switch (value) {
+      case 'Edit Folder Name':
+        print('Edit Folder Name clicked');
+        // Implement your logic
+        showEditFolderName!();
+        break;
+      case 'Edit Media in Folder':
+        print('Edit Media in Folder clicked');
+        // Implement your logic
+        editFolderMedia!();
+        break;
+      case 'Delete Folder':
+        print('Delete Folder clicked');
+        // Implement your logic
+        deleteFolder!();
+
+        break;
+    }
+  }
 }
 
 class MediaWidget extends StatelessWidget {
@@ -116,6 +167,3 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 }
-
-
-

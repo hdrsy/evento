@@ -1,8 +1,7 @@
-
 import 'dart:io';
 
 class FolderModel {
-  final String folderName;
+  String folderName;
   List<MediaModel> mediaList;
   FolderModel({
     required this.folderName,

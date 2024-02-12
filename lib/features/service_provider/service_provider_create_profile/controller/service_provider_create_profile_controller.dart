@@ -147,4 +147,18 @@ class ServiceProviderCreateProfileController extends GetxController {
       Get.offAllNamed('/home');
     }
   }
+
+  editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
+    print("inside media");
+    foldersModel[folderIndex].mediaList.clear();
+    foldersModel[folderIndex].mediaList.addAll(media);
+    update();
+    Get.back();
+    print("editing complete");
+  }
+
+  deleteFolder(int folderIndex) {
+    foldersModel.removeAt(folderIndex);
+    print("inside deleteFolder");
+  }
 }

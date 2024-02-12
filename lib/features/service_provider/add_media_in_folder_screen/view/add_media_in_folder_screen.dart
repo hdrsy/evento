@@ -59,7 +59,20 @@ class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
                       var mediaItem =
                           addMediaInFolderController.attachedMedia[index - 1];
                       if (mediaItem.containsKey("image")) {
-                        return Image.file(mediaItem["image"]!);
+                        return Stack(
+                          children: [
+                            Image.file(mediaItem["image"]!),
+                            Positioned(
+                                top: -5,
+                                right: -5,
+                                child: IconButton(
+                                    onPressed: () {
+                                      addMediaInFolderController
+                                          .deleteMediafromList(index - 1);
+                                    },
+                                    icon: const Icon(Icons.cancel_outlined))),
+                          ],
+                        );
                       } else if (mediaItem.containsKey("video")) {
                         // Placeholder for video, adjust as necessary for your video player
                         return Stack(
@@ -71,6 +84,16 @@ class AddMediaInFolderserviceProviderScreen extends StatelessWidget {
                               size: 50,
                               color: customColors.info,
                             ), // Placeholder icon
+                            Positioned(
+                                top: -0.5,
+                                right: -0.5,
+                                child: IconButton(
+                                    onPressed: () {
+                                      addMediaInFolderController
+                                          .deleteMediafromList(index - 1);
+                                    },
+                                    icon: const Icon(Icons.cancel_outlined))),
+
                             // Implement your video player widget here
                           ],
                         );

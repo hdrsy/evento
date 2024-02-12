@@ -95,11 +95,14 @@ class ApiHelper {
         }
       } else {
         // Return Left side of Either for HTTP-level errors.
-        return Left(ErrorResponse.fromJson(responseBody));
+        // return Left(ErrorResponse.fromJson(responseBody));
+        return Left(ErrorResponse.fromJson(
+            {"message": "SomeThing Wrong !. Try again later "}));
       }
     } catch (e) {
       // Catching exceptions and returning as error responses.
-      return Left(ErrorResponse.fromJson({"message": e.toString()}));
+      return Left(ErrorResponse.fromJson(
+          {"message": "SomeThing Wrong !. Try again later "}));
     }
   }
 }

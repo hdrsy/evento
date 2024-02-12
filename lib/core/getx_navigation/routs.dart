@@ -1,3 +1,12 @@
+import 'package:evento/core/shared/controllers/screens/edit_folder.dart/view/edit_folder_screen.dart';
+import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/controller/binding/booking_detailes_in_event_for_organizer_binding.dart';
+import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/view/booking_detailes_in_event_for_organizer_screen.dart';
+import 'package:evento/features/organizer/event_request_status_for_organizer/view/event_request_status_for_organizer_screen.dart';
+import 'package:evento/features/organizer/my_events_for_organizer/controller/binding/my_events_for_organizer_binding.dart';
+import 'package:evento/features/organizer/my_events_for_organizer/view/my_events_for_organizer_screen.dart';
+import 'package:evento/features/organizer/organization_profile/controller/binding/ofganization_profile_binding.dart';
+import 'package:evento/features/organizer/organization_profile/view/organization_profile_screen.dart';
+import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/view/show_all_booking_in_event_for_organizer_screen.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
 
 import '../../features/assign_friends/view/assign_friends_screen.dart';
@@ -200,6 +209,10 @@ appRoutes() => [
           page: () => ChangePasswordScreen(),
           binding: ChangePasswordBinding()),
       GetPage(
+          name: '/OrganizationProfileScreen',
+          page: () => OrganizationProfileScreen(),
+          binding: OrganizationProfileBinding()),
+      GetPage(
           name: '/OrganizerProfileScreen',
           page: () => OrganizerProfileScreen(),
           binding: OrganizerProfileBinding()),
@@ -222,6 +235,23 @@ appRoutes() => [
       GetPage(
           name: '/SeeAllServiceCategoryScreen',
           page: () => SeeAllServiceCategoryScreen()),
+      GetPage(
+          name: '/EditMediaInFolderScreen',
+          page: () => EditMediaInFolderScreen()),
+      GetPage(
+          name: '/ShowAllBookingInEventForOrganizerScreen',
+          page: () => ShowAllBookingInEventForOrganizerScreen()),
+      GetPage(
+          name: '/EventRequestStatusForOrganizerScreen',
+          page: () => EventRequestStatusForOrganizerScreen()),
+      GetPage(
+          name: '/BookingDetailesInEventForOrganizerScreen',
+          page: () => BookingDetailesInEventForOrganizerScreen(),
+          binding: BookingDetailesInEventForOrganizerBinding()),
+      GetPage(
+          name: '/MyEventsForOrganizerScreen',
+          page: () => MyEventsForOrganizerScreen(),
+          binding: MyEventsForOrganizerBinding()),
       GetPage(
           name: '/SeeAllOrganizersScreen',
           page: () => SeeAllOrganizersScreen()),

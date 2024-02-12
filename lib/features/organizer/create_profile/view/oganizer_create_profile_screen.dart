@@ -235,6 +235,7 @@ class OrganizerMediaCard extends StatelessWidget {
                       : FolderCard(
                           folder: organizerCreateProfileController
                               .foldersModel[index],
+                          folderIndex: index,
                         );
                 })
               ].divide(const SizedBox(

@@ -1,3 +1,8 @@
+import 'package:evento/core/shared/controllers/screens/edit_folder.dart/view/widgets/edit_folder_name.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/core/shared/widgets/widget/confirm_delete_folder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/shared/models/media.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -9,17 +14,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FolderCard extends StatelessWidget {
-  const FolderCard({super.key, required this.folder});
+  const FolderCard(
+      {super.key, required this.folder, required this.folderIndex});
   final FolderModel folder;
+  final int folderIndex;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () async {
-          // Get.toNamed("/GalleryScreen");
-          Get.to(GalleryForLocalScreen(
-            files: folder.mediaList,
-          ));
-        },
+        onTap: () => _handleTap(context),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -33,12 +35,67 @@ class FolderCard extends StatelessWidget {
                 // color: Colors.red,
               ),
             ),
-            Text(
-              folder.folderName,
-              style: customTextStyle.bodyMedium,
-            ),
+            SizedBox(
+              width: 100.h,
+              child: Text(
+                folder.folderName,
+                textAlign: TextAlign.center,
+                style: customTextStyle.bodyMedium,
+                overflow: TextOverflow.clip,
+              ),
+            )
           ].divide(SizedBox(height: 5)),
         ));
+  }
+
+  void _handleTap(BuildContext context) async {
+    // Example of handling tap, you can expand this method with your logic
+    Get.to(() => GalleryForLocalScreen(
+          files: folder.mediaList,
+          isEditgallery: true,
+          deleteFolder: () => _deleteFolder(context),
+          editFolderMedia: () => _editFolderMedia(context),
+          showEditFolderName: () => _showEditFolderName(context),
+        ));
+  }
+
+  void _deleteFolder(BuildContext context) {
+    showDeleteConfirmation(context, () {
+      Get.find<ServiceProviderCreateProfileController>()
+          .deleteFolder(folderIndex);
+      Get.back();
+    });
+  }
+
+  void _editFolderMedia(BuildContext context) async {
+    final result = await Get.toNamed('/EditMediaInFolderScreen', arguments: {
+      'folderName': folder.folderName,
+      'folderIndex': folderIndex,
+      'mediaList': Get.find<ServiceProviderCreateProfileController>()
+          .foldersModel[folderIndex]
+          .mediaList,
+    });
+
+    if (result != null) {
+      Get.find<ServiceProviderCreateProfileController>().editMediaInsideFolder(
+          result['folderIndex'], result['updatedMediaList']);
+    }
+  }
+
+  void _showEditFolderName(BuildContext context) {
+    showButtonSheet(
+      context: context,
+      widget: EditFolderNameFolder(
+        onPressDone: (String newFolderName) {
+          Get.find<ServiceProviderCreateProfileController>()
+              .foldersModel[folderIndex]
+              .folderName = newFolderName;
+          folder.folderName = newFolderName;
+        },
+        folderName: TextEditingController(text: folder.folderName),
+      ),
+      height: 500.h,
+    );
   }
 }
 
@@ -49,14 +106,18 @@ class SeeAllFoldersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
         Get.to(SeeAllfolders(
-          allFolders: serviceProviderCreateProfileController.foldersModel,
+          handleOnTap: (
+            BuildContext context,
+            FolderModel files,
+            int folderIndex,
+          ) {
+            _handleTap(context, files, folderIndex);
+          },
+          allFolders: RxList<FolderModel>(
+              serviceProviderCreateProfileController.foldersModel),
         ));
       },
       child: Stack(
@@ -99,6 +160,60 @@ class SeeAllFoldersCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void _handleTap(
+      BuildContext context, FolderModel files, int folderIndex) async {
+    // Example of handling tap, you can expand this method with your logic
+    Get.to(() => GalleryForLocalScreen(
+          files: files.mediaList,
+          isEditgallery: true,
+          deleteFolder: () => _deleteFolder(context, folderIndex),
+          editFolderMedia: () => _editFolderMedia(context, files, folderIndex),
+          showEditFolderName: () =>
+              _showEditFolderName(context, files, folderIndex),
+        ));
+  }
+
+  void _deleteFolder(BuildContext context, int folderIndex) {
+    showDeleteConfirmation(context, () {
+      Get.find<ServiceProviderCreateProfileController>()
+          .deleteFolder(folderIndex);
+      Get.back();
+    });
+  }
+
+  void _editFolderMedia(
+      BuildContext context, FolderModel folder, int folderIndex) async {
+    final result = await Get.toNamed('/EditMediaInFolderScreen', arguments: {
+      'folderName': folder.folderName,
+      'folderIndex': folderIndex,
+      'mediaList': Get.find<ServiceProviderCreateProfileController>()
+          .foldersModel[folderIndex]
+          .mediaList,
+    });
+
+    if (result != null) {
+      Get.find<ServiceProviderCreateProfileController>().editMediaInsideFolder(
+          result['folderIndex'], result['updatedMediaList']);
+    }
+  }
+
+  void _showEditFolderName(
+      BuildContext context, FolderModel folder, int folderIndex) {
+    showButtonSheet(
+      context: context,
+      widget: EditFolderNameFolder(
+        onPressDone: (String newFolderName) {
+          Get.find<ServiceProviderCreateProfileController>()
+              .foldersModel[folderIndex]
+              .folderName = newFolderName;
+          folder.folderName = newFolderName;
+        },
+        folderName: TextEditingController(text: folder.folderName),
+      ),
+      height: 500.h,
     );
   }
 }

@@ -25,7 +25,7 @@ class AddMediaInFolderController extends GetxController {
   void onInit() {
     folderName = Get.arguments[0];
     folderIndex = Get.arguments[1];
-    attachedMedia = <Map<String, File>>[].obs;
+    attachedMedia = Get.arguments[2] ?? <Map<String, File>>[].obs;
     super.onInit();
   }
 
@@ -106,5 +106,13 @@ class AddMediaInFolderController extends GetxController {
           .foldersModel[folderIndex].mediaList.length
           .toString());
     }
+  }
+
+  deleteMediafromList(int mediaIndex) {
+    attachedMedia.removeAt(mediaIndex);
+    OrganizerCreateProfileController organizerCreateProfileController =
+        Get.find();
+    organizerCreateProfileController.foldersModel[folderIndex].mediaList
+        .removeAt(mediaIndex);
   }
 }
