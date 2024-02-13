@@ -22,7 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 class EventDetailesController extends GetxController {
   @override
   void onClose() {
-    LocationService().stopTracking();
+    // LocationService().();
     super.onClose();
   }
 
@@ -215,6 +215,7 @@ class EventDetailesController extends GetxController {
 
   calculateDistance() async {
     LocationService locationService = LocationService();
+    print("inside cal ");
     distance.value = await locationService.calculateDistance(
         eventDetailsModel.venue.latitude, eventDetailsModel.venue.longitude);
   }

@@ -141,6 +141,7 @@ class TrendingNow extends StatelessWidget {
           children: [
             buildImage(eventModel),
             buildPriceTag(eventModel.ticketPrice.toString()),
+            buildSoundToggleButton()
           ],
         ),
       ),
@@ -166,35 +167,27 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the price tag
   Widget buildPriceTag(String price) {
-    return Align(
-      alignment: const AlignmentDirectional(-1.00, 1.00),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 100,
-              height: 24,
-              decoration: BoxDecoration(
-                color: customColors.primaryBackground,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Align(
-                alignment: const AlignmentDirectional(0.00, 0.00),
-                child: Text(
-                  "$price ${tr("sp")}",
-                  textAlign: TextAlign.center,
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: 'BeerSerif',
-                    color: customColors.primaryText,
-                    useGoogleFonts: false,
-                  ),
-                ),
-              ),
+    return Positioned(
+      bottom: 25,
+      left: 10,
+      child: Container(
+        width: 100,
+        height: 24,
+        decoration: BoxDecoration(
+          color: customColors.primaryBackground,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Align(
+          alignment: const AlignmentDirectional(0.00, 0.00),
+          child: Text(
+            "$price ${tr("sp")}",
+            textAlign: TextAlign.center,
+            style: customTextStyle.bodyMedium.override(
+              fontFamily: 'BeerSerif',
+              color: customColors.primaryText,
+              useGoogleFonts: false,
             ),
-            buildSoundToggleButton(),
-          ],
+          ),
         ),
       ),
     );
@@ -202,12 +195,16 @@ class TrendingNow extends StatelessWidget {
 
 // Function to build the sound toggle button
   Widget buildSoundToggleButton() {
-    return ToggleIcon(
-      onPressed: () {},
-      value: false,
-      onIcon: Icon(Icons.volume_off, color: customColors.info, size: 23),
-      offIcon:
-          Icon(Icons.volume_up_outlined, color: customColors.info, size: 23),
+    return Positioned(
+      bottom: 25,
+      right: 10,
+      child: ToggleIcon(
+        onPressed: () {},
+        value: false,
+        onIcon: Icon(Icons.volume_off, color: customColors.info, size: 23),
+        offIcon:
+            Icon(Icons.volume_up_outlined, color: customColors.info, size: 23),
+      ),
     );
   }
 

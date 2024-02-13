@@ -4,6 +4,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
@@ -32,8 +33,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
 
   _getUserLocation() async {
     try {
-      LocationData currentLocation =
-          await _locationService.getCurrentLocation();
+      Position currentLocation = await _locationService.getCurrentLocation();
 
       _moveCameraTo(LatLng(
           currentLocation.latitude ?? 0.0, currentLocation.longitude ?? 0.0));

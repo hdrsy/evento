@@ -11,6 +11,7 @@ import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
@@ -26,7 +27,7 @@ class FilterWidget extends StatefulWidget {
 
 class _FilterWidgetState extends State<FilterWidget> {
   LocationService locationService = LocationService();
-  late LocationData userLocation;
+  late Position userLocation;
   @override
   void initState() {
     getuserlocation();

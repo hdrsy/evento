@@ -1,3 +1,5 @@
+import 'package:geolocator/geolocator.dart';
+
 import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import '../../../../core/utils/services/location_service.dart';
 import '../../../../main.dart';
@@ -13,11 +15,11 @@ class DirctionController extends GetxController {
   final googleMapsController = Completer<GoogleMapController>();
   late FlutterFlowMarker myMarker; // Marker for destination
   FlutterFlowMarker? userMarker; // Marker for user location
-final Set<Polyline> polylines = {};
+  final Set<Polyline> polylines = {};
   LocationService locationService = LocationService();
 
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     latitude = Get.arguments[0];
     longitude = Get.arguments[1];
@@ -35,7 +37,6 @@ final Set<Polyline> polylines = {};
           ),
         ));
       },
-    
     );
 
     // Start tracking user location
@@ -46,17 +47,20 @@ final Set<Polyline> polylines = {};
   @override
   void onClose() {
     // Stop tracking when the controller is disposed
-    locationService.stopTracking();
+    // locationService.stopTracking();
     super.onClose();
   }
+
   void updateMapView() async {
     final GoogleMapController controller = await googleMapsController.future;
-    
+
     if (userMarker != null && myMarker != null) {
-      LatLngBounds bounds = _boundsFromLatLngList([userMarker!.location, myMarker.location]);
+      LatLngBounds bounds =
+          _boundsFromLatLngList([userMarker!.location, myMarker.location]);
       controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
     }
   }
+
   LatLngBounds _boundsFromLatLngList(List<LatLng> list) {
     double? x0, x1, y0, y1;
     for (LatLng latLng in list) {
@@ -70,29 +74,33 @@ final Set<Polyline> polylines = {};
         if (latLng.longitude < y0!) y0 = latLng.longitude;
       }
     }
-    return LatLngBounds(southwest: LatLng(x0!, y0!), northeast: LatLng(x1!, y1!));
+    return LatLngBounds(
+        southwest: LatLng(x0!, y0!), northeast: LatLng(x1!, y1!));
   }
-   getUserLocation() async {
+
+  getUserLocation() async {
     // Start tracking user location
-    locationService.startTracking();
+    // locationService.startTracking();
 
     // Listen to location updates
-    locationService.location.onLocationChanged.listen((LocationData currentLocation) {
-      // Update user location marker
-      updateUserLocationMarker(currentLocation.latitude!, currentLocation.longitude!);
+    Position p = await locationService.getCurrentLocation();
 
-      // Additional handling can be added here
-      // For example, updating the map view or calculating distance
-    });
+    // Update user location marker
+    updateUserLocationMarker(p.latitude, p.longitude);
+
+    // Additional handling can be added here
+    // For example, updating the map view or calculating distance
   }
-void drawRoute() async {
+
+  void drawRoute() async {
     var currentLocation = await locationService.getCurrentLocation();
-    LatLng startLocation = LatLng(currentLocation.latitude!, currentLocation.longitude!);
+    LatLng startLocation =
+        LatLng(currentLocation.latitude!, currentLocation.longitude!);
     LatLng destinationLocation = LatLng(latitude, longitude);
 
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-"AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs", // Your API Key
+      "AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs", // Your API Key
       PointLatLng(startLocation.latitude, startLocation.longitude),
       PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
       travelMode: TravelMode.driving,
@@ -117,6 +125,7 @@ void drawRoute() async {
       update(); // Notify listeners for state update
     }
   }
+
   void updateUserLocationMarker(double latitude, double longitude) {
     userMarker = FlutterFlowMarker(
       'markerId2', // Unique ID for the user location marker
@@ -129,9 +138,8 @@ void drawRoute() async {
           ),
         ));
       },
-    
     );
- updateMapView(); 
+    updateMapView();
     update(); // Update GetX state to refresh the UI
   }
 }

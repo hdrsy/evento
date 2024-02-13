@@ -16,11 +16,12 @@ class ToggleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-     type: MaterialType.transparency, // or MaterialType.canvas for the default background
- 
-    child: IconButton(
-          onPressed: onPressed,
-          icon: value ? onIcon : offIcon,
+        type: MaterialType
+            .transparency, // or MaterialType.canvas for the default background
+
+        child: GestureDetector(
+          onTap: onPressed,
+          child: value ? onIcon : offIcon,
         ),
-  );
+      );
 }

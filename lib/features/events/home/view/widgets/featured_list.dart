@@ -1,5 +1,6 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
@@ -127,43 +128,48 @@ class FeaturedWidget extends StatelessWidget {
                   mediaStack(eventModel),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(18, 8, 18, 8),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          eventModel.title,
-                          style: customTextStyle.headlineSmall.override(
-                            fontFamily: 'BeerSerif',
-                            color: customColors.primaryText,
-                            fontSize: 18,
-                            useGoogleFonts: false,
-                          ),
-                        ),
-                        Text(
-                          DateFormatter.formatDate(eventModel.startDate),
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: 'BeerSerif',
-                            color: customColors.primary,
-                            useGoogleFonts: false,
-                          ),
-                        ),
-                        Text(
-                          DateFormatter.formatTime(eventModel.startDate),
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: 'BeerSerif',
-                            color: customColors.secondaryText,
-                            fontSize: 12,
-                            useGoogleFonts: false,
-                          ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              eventModel.title,
+                              style: customTextStyle.headlineSmall.override(
+                                fontFamily: 'BeerSerif',
+                                color: customColors.primaryText,
+                                fontSize: 18,
+                                useGoogleFonts: false,
+                              ),
+                            ),
+                            Text(
+                              DateFormatter.formatDate(eventModel.startDate),
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'BeerSerif',
+                                color: customColors.primary,
+                                useGoogleFonts: false,
+                              ),
+                            ),
+                            Text(
+                              DateFormatter.formatTime(eventModel.startDate),
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'BeerSerif',
+                                color: customColors.secondaryText,
+                                fontSize: 12,
+                                useGoogleFonts: false,
+                              ),
+                            ),
+                          ].divide(const SizedBox(height: 3)),
                         ),
                         priceIcons(
                             eventModel.ticketPrice,
                             eventModel.isFollowedByAuthUser,
                             modelIndex,
                             eventModel.id),
-                      ].divide(const SizedBox(height: 3)),
+                      ],
                     ),
                   ),
                 ],
@@ -231,88 +237,98 @@ class FeaturedWidget extends StatelessWidget {
     );
   }
 
-  Row priceIcons(
+  Widget priceIcons(
       ticketPrice, bool isFollowedByAuthUser, int modelIndex, int eventId) {
     final EventStateManager eventStateManager = Get.find();
 
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: 100,
-          // height: 20,
-          decoration: BoxDecoration(
-            color: customColors.primaryBackground,
-            borderRadius: BorderRadius.circular(20),
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            decoration: const BoxDecoration(),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    const String message = "Check out this event in Evento";
+                    final String url =
+                        "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
+                    final String shareContent =
+                        "$message\n\nFor more details, visit: $url";
+
+                    await Share.share(shareContent);
+                  },
+                  child: Icon(
+                    Icons.share_rounded,
+                    color: customColors.primaryText,
+                    size: 20,
+                  ),
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Obx(() {
+                  var eventModel =
+                      eventStateManager.getEventById(eventId).value;
+
+                  return ToggleIcon(
+                    onPressed: () async {
+                      if (isGuset) {
+                        Get.dialog(const GuestPopupWidget());
+                      } else {
+                        final FeaturedListController featuredListController =
+                            Get.find();
+                        featuredListController.followOrUnFollowEvent(
+                            eventModel.id, modelIndex);
+                      }
+                    },
+                    value: eventModel.isFollowedByAuthUser,
+                    onIcon: Icon(
+                      Icons.favorite_sharp,
+                      color: customColors.error,
+                      size: 25,
+                    ),
+                    offIcon: Icon(
+                      Icons.favorite_border,
+                      color: customColors.secondaryText,
+                      size: 25,
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['toggleIconOnPageLoadAnimation1']!);
+                })
+              ],
+            ),
           ),
-          child: Align(
-            alignment: const AlignmentDirectional(0.00, 0.00),
-            child: Text(
-              "$ticketPrice ${tr("sp")}",
-              textAlign: TextAlign.center,
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: 'BeerSerif',
-                color: customColors.primaryText,
-                useGoogleFonts: false,
+          SizedBox(
+            height: 10.h,
+          ),
+          Container(
+            width: 100,
+            // height: 20,
+            decoration: BoxDecoration(
+              color: customColors.primaryBackground,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Align(
+              alignment: const AlignmentDirectional(0.00, 0.00),
+              child: Text(
+                "$ticketPrice ${tr("sp")}",
+                textAlign: TextAlign.center,
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'BeerSerif',
+                  color: customColors.primaryText,
+                  useGoogleFonts: false,
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          decoration: const BoxDecoration(),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  const String message = "Check out this event in Evento";
-                  final String url =
-                      "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
-                  final String shareContent =
-                      "$message\n\nFor more details, visit: $url";
-
-                  await Share.share(shareContent);
-                },
-                child: Icon(
-                  Icons.share_rounded,
-                  color: customColors.primaryText,
-                  size: 20,
-                ),
-              ),
-              Obx(() {
-                var eventModel = eventStateManager.getEventById(eventId).value;
-
-                return ToggleIcon(
-                  onPressed: () async {
-                    if (isGuset) {
-                      Get.dialog(const GuestPopupWidget());
-                    } else {
-                      final FeaturedListController featuredListController =
-                          Get.find();
-                      featuredListController.followOrUnFollowEvent(
-                          eventModel.id, modelIndex);
-                    }
-                  },
-                  value: eventModel.isFollowedByAuthUser,
-                  onIcon: Icon(
-                    Icons.favorite_sharp,
-                    color: customColors.error,
-                    size: 25,
-                  ),
-                  offIcon: Icon(
-                    Icons.favorite_border,
-                    color: customColors.secondaryText,
-                    size: 25,
-                  ),
-                ).animateOnPageLoad(
-                    animationsMap['toggleIconOnPageLoadAnimation1']!);
-              })
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

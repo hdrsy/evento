@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/animation/shimmer_animation.dart';
@@ -92,9 +94,11 @@ class CategoryWidget extends StatelessWidget {
                           width: 70,
                           height: 70,
                         ).image
-                      : getImageNetwork(
-                              url: categoryModel.icon, width: 70, height: 70)
-                          .image,
+                      : getImageNetworkImageProvider(
+                          url: categoryModel.icon,
+                          width: 70,
+                          height: 70,
+                        ),
                 ),
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -117,6 +121,25 @@ class CategoryWidget extends StatelessWidget {
           ).tr(),
         ),
       ],
+    );
+  }
+}
+
+DecorationImage getDecorationImage(CategoryModel categoryModel) {
+  if (categoryModel.title == "Tonight" || categoryModel.title == "This Week") {
+    return DecorationImage(
+      image: AssetImage(categoryModel.icon),
+      fit: BoxFit.cover,
+    );
+  } else {
+    String cleanUrl = categoryModel.icon.contains("storage")
+        ? categoryModel.icon
+        : "/storage/${categoryModel.icon}";
+    final fullUrl = ServerConstApis.baseAPI + cleanUrl;
+
+    return DecorationImage(
+      image: CachedNetworkImageProvider(fullUrl),
+      fit: BoxFit.cover,
     );
   }
 }

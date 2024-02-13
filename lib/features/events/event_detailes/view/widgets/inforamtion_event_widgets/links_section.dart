@@ -61,11 +61,11 @@ class LinkCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: const [
-          BoxShadow(
-            blurRadius: 4,
-            color: Color(0x0BD6D6D6),
-            offset: Offset(0, 2),
-          )
+          // BoxShadow(
+          //   blurRadius: 4,
+          //   color: Color(0x0BD6D6D6),
+          //   offset: Offset(0, 2),
+          // )
         ],
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: customColors.border, width: 1),

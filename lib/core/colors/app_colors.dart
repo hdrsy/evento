@@ -43,7 +43,7 @@ abstract class AppColors {
   static const lightLineColor = Color(0xFFE0E3E7);
   static const lightNoColor = Color(0x00FFFFFF);
   static const lightShadow = Color(0x581A1A1A);
-  static const lightBorder = Color(0x00eee9f4);
+  static const lightBorder = Color(0xeee9f4FF);
 
   // Dark Mode
   static const darkBorder = Color(0x9621243A);
