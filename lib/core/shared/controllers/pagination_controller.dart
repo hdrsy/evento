@@ -5,6 +5,7 @@ import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
+import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import '../../utils/error_handling/erroe_handling.dart';
 import 'package:flutter/widgets.dart';
@@ -80,14 +81,16 @@ class PaginationController<T> extends GetxController {
         SnackbarManager.showSnackbar(
           "Online",
           "You are back online.",
-          backgroundColor: Colors.green,
+          icon: Icon(Icons.wifi_outlined, color: customColors.primaryText),
+          backgroundColor: customColors.primaryBackground,
         );
       } else {
         print("You are offline!");
         SnackbarManager.showSnackbar(
           "Offline",
           "No internet connection.",
-          backgroundColor: Colors.red,
+          icon: Icon(Icons.wifi_off_outlined, color: customColors.primaryText),
+          backgroundColor: customColors.primaryBackground,
         );
       }
     });

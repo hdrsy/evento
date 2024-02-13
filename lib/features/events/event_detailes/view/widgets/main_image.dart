@@ -36,7 +36,7 @@ class MainImage extends StatelessWidget {
                     tag: imgUrl[index],
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(0),
-                        child: getImageNetwork(
+                        child: getImageNetworkforCahing(
                             url: imgUrl[index],
                             width: double.infinity,
                             height: double.infinity)),

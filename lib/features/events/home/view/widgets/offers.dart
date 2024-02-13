@@ -67,7 +67,7 @@ Widget offerImage(String imgUrl, int eventId, int percent) {
     },
     child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: getImageNetwork(
+        child: getImageNetworkforCahing(
             url: imgUrl, width: screenWidth * 0.8, height: 600)),
   );
 }

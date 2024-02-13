@@ -152,7 +152,7 @@ class EventsFromOrganizer extends StatelessWidget {
       onTap: () {},
       child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: getImageNetwork(
+          child: getImageNetworkforCahing(
               url: "/storage/$imagePath", width: double.infinity, height: 240)),
     );
   }

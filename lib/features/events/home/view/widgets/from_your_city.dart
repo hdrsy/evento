@@ -129,7 +129,7 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
 Widget buildEventImage(String imageUrl) {
   return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: getImageNetwork(
+      child: getImageNetworkforCahing(
           url: "/storage/$imageUrl",
           width: double.infinity,
           height: double.infinity));

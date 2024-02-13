@@ -38,11 +38,8 @@ class ServiceCard extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 alignment: const AlignmentDirectional(0.00, 0.20),
-                image: getImageNetwork(
-                        url: serviceCategoryModel.icon,
-                        width: null,
-                        height: null)
-                    .image,
+                image: getImageNetworkImageProvider(
+                    url: serviceCategoryModel.icon, width: null, height: null),
               ),
               boxShadow: const [
                 BoxShadow(

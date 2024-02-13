@@ -58,14 +58,16 @@ class EventDetailesController extends GetxController {
         SnackbarManager.showSnackbar(
           "Online",
           "You are back online.",
-          backgroundColor: Colors.green,
+          icon: Icon(Icons.wifi_outlined, color: customColors.primaryText),
+          backgroundColor: customColors.primaryBackground,
         );
       } else {
         print("You are offline!");
         SnackbarManager.showSnackbar(
-          "Offline",
+          "",
           "No internet connection.",
-          backgroundColor: Colors.red,
+          icon: Icon(Icons.wifi_off_outlined, color: customColors.primaryText),
+          backgroundColor: customColors.primaryBackground,
         );
       }
     });

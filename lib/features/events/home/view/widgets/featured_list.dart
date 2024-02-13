@@ -196,7 +196,7 @@ class FeaturedWidget extends StatelessWidget {
               topRight: Radius.circular(20),
             ),
             child: eventModel.videos.isEmpty
-                ? getImageNetwork(
+                ? getImageNetworkforCahing(
                     url: "/storage/${eventModel.images[0]}",
                     width: double.infinity,
                     height: 190)

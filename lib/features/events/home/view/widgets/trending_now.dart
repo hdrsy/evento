@@ -159,7 +159,7 @@ class TrendingNow extends StatelessWidget {
                 videoHgiht: 240,
                 videoWidth: double.infinity,
               )
-            : getImageNetwork(
+            : getImageNetworkforCahing(
                 url: "/storage/${eventModel.images[0]}",
                 width: double.infinity,
                 height: 240));

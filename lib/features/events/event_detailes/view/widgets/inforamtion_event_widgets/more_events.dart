@@ -127,7 +127,7 @@ class MoreEventsCard extends StatelessWidget {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
                           ),
-                          child: getImageNetwork(
+                          child: getImageNetworkforCahing(
                               url: "/storage/${relatedEventModel.images[0]}",
                               width: double.infinity,
                               height: screenHeight * 0.15,

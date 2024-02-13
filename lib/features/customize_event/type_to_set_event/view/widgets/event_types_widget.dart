@@ -7,6 +7,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EventTypesWidget extends StatelessWidget {
   EventTypesWidget({super.key});
   final TypetoSetEventController typetoSetEventController = Get.find();
@@ -34,22 +35,23 @@ class EventTypesWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: screenHeight*0.56,
+            height: screenHeight * 0.56,
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              child:GridView.count(
+              child: GridView.count(
                 crossAxisCount: 3, // Number of items per row
-                crossAxisSpacing: scaleWidth(50), // Horizontal spacing between items
-                mainAxisSpacing: scaleHeight(16), // Vertical spacing between items
+                crossAxisSpacing:
+                    scaleWidth(50), // Horizontal spacing between items
+                mainAxisSpacing:
+                    scaleHeight(16), // Vertical spacing between items
                 childAspectRatio: 1, // Aspect ratio of each child
                 children: List.generate(
-                typetoSetEventController.categoryList.length,
-                (index) => IconContainerWidget(
-                  categoryModel: typetoSetEventController.categoryList[index],
-                ),
+                  typetoSetEventController.categoryList.length,
+                  (index) => IconContainerWidget(
+                    categoryModel: typetoSetEventController.categoryList[index],
+                  ),
                 ),
               ),
-              
             ),
           ),
         ],
@@ -57,6 +59,7 @@ class EventTypesWidget extends StatelessWidget {
     );
   }
 }
+
 //  SingleChildScrollView(
 //             child: Obx(
 //               ()=> Wrap(
@@ -78,31 +81,41 @@ class EventTypesWidget extends StatelessWidget {
 class IconContainerWidget extends StatelessWidget {
   final CategoryModel categoryModel;
 
-   IconContainerWidget({super.key, required this.categoryModel});
- final TypetoSetEventController typetoSetEventController = Get.find();
- 
+  IconContainerWidget({super.key, required this.categoryModel});
+  final TypetoSetEventController typetoSetEventController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        typetoSetEventController.selectedCategory.value==categoryModel.id?typetoSetEventController.selectedCategory.value=0:typetoSetEventController.selectedCategory.value=categoryModel.id;
-       },
+      onTap: () {
+        typetoSetEventController.selectedCategory.value == categoryModel.id
+            ? typetoSetEventController.selectedCategory.value = 0
+            : typetoSetEventController.selectedCategory.value =
+                categoryModel.id;
+      },
       child: Obx(
-        ()=> Column(
+        () => Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                border: Border.all(width: 2,color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground),
-                  color: typetoSetEventController.selectedCategory.value==categoryModel.id? customColors.primary:customColors.primaryBackground,
+                  border: Border.all(
+                      width: 2,
+                      color: typetoSetEventController.selectedCategory.value ==
+                              categoryModel.id
+                          ? customColors.primary
+                          : customColors.primaryBackground),
+                  color: typetoSetEventController.selectedCategory.value ==
+                          categoryModel.id
+                      ? customColors.primary
+                      : customColors.primaryBackground,
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: getImageNetwork(
-                              url: categoryModel.icon, width: null, height: null)
-                          .image)),
+                      image: getImageNetworkImageProvider(
+                          url: categoryModel.icon, width: null, height: null))),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 3),

@@ -130,7 +130,7 @@ Widget buildEventImage(EventModel eventModel, int modelIndex) {
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-          child: getImageNetwork(
+          child: getImageNetworkforCahing(
               url: "/storage/${eventModel.images[0]}",
               width: 200,
               height: 160)),

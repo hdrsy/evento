@@ -130,7 +130,7 @@ class GalleryCard extends StatelessWidget {
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: getImageNetwork(
+        child: getImageNetworkforCahing(
             url: imgUrl, width: screenWidth * 0.25, height: screenWidth * 0.25),
       ),
     );
