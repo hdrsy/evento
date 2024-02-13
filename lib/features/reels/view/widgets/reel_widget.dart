@@ -1,3 +1,7 @@
+// import 'package:evento/core/shared/widgets/video/reels_video_widget_with_caching.dart';
+
+import 'package:evento/core/shared/widgets/video/reels_video_widget_with_caching.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
@@ -29,7 +33,7 @@ class ReelsWidget extends StatelessWidget {
     return GestureDetector(
       child: SizedBox(
         width: screenWidth,
-        height: MediaQuery.of(context).size.height * 0.9,
+        // height: MediaQuery.of(context).size.height,
         child: Obx(
           () => reelsController.isLoading.value
               ? const ReelsShimmer()
@@ -58,8 +62,8 @@ class ReelsWidget extends StatelessWidget {
                           }
                         },
                         child: SizedBox(
-                          width: MediaQuery.sizeOf(context).width,
-                          height: MediaQuery.sizeOf(context).height,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +78,7 @@ class ReelsWidget extends StatelessWidget {
                                         itemBuilder: (ctx, index) {
                                           print(
                                               "the length of reel is :${model.videos.length}");
-                                          return ReelsVideoWidget(
+                                          return ReelsVideoWidgetWitCaching(
                                             modelIndex: modelIndex,
                                             totalVideos: model.videos.length,
                                             videoIndex: index,
@@ -84,6 +88,16 @@ class ReelsWidget extends StatelessWidget {
                                         }),
                                     videoInfo(),
                                     commentShareLike(modelIndex),
+                                    Obx(
+                                      () => LinearProgressIndicator(
+                                        value:
+                                            reelsController.videoProgress.value,
+                                        backgroundColor: Colors.grey,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                customColors.primary),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),

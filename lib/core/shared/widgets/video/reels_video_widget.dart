@@ -62,6 +62,7 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
     // }
     // if (mounted) {
     // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
+    print("video url is :${widget.currentVideoUrl}");
     videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(widget.currentVideoUrl))
           ..initialize().then((_) {
@@ -197,8 +198,6 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
                         child: SmoothVideoProgress(
                           controller: videoPlayerController,
                           builder: (context, position, duration, child) {
-                            final progress = position.inMilliseconds /
-                                duration.inMilliseconds;
                             return LinearProgressIndicator(
                               value: position.inMilliseconds /
                                   max(duration.inMilliseconds,

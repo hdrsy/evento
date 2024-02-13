@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/follow_unfollow_event_api.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/shared/controllers/pagination_controller.dart';
@@ -20,6 +21,7 @@ class ReelsController extends PaginationController<ReelModel> {
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token") ?? "";
+    print("page id :$page");
     String apiUrl =
         "${isGuset ? ServerConstApis.getReelsforGuest : ServerConstApis.getReels}?page=$page";
 
@@ -31,10 +33,18 @@ class ReelsController extends PaginationController<ReelModel> {
     );
   }
 
+  RxDouble videoProgress = 0.0.obs; // Tracks progress of the current video
+
+  void updateProgress(double progress) {
+    videoProgress.value = progress;
+  }
+
   @override
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
     print(categoryListJson);
+    print(
+        "reels len : ${categoryListJson.length} , ${handlingResponse['reels']['current_page']}");
     print("reeels response :$handlingResponse");
     lastPageId = handlingResponse['reels']['last_page'];
     print("lastPageId is :$lastPageId");
