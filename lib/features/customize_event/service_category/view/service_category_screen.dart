@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+////"From vision to reality: Choose your event theme with our experts and create something extraordinary."
 class ServiceCategoryScreen extends StatelessWidget {
   ServiceCategoryScreen({super.key});
   final ServiceCategoryController serviceCategoryController = Get.find();

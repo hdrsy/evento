@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:evento/core/shared/controllers/tween_animation_controller.dart';
+import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/features/reels/controller/reels_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -65,23 +69,7 @@ class _ReelsVideoWidgetState extends State<ReelsVideoWidgetWitCaching> {
           isLoading = false;
         });
       }
-      if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
-        // The progress event gives you the current position as a Duration.
-        final Duration currentPosition =
-            event.parameters!["progress"] as Duration;
-        final Duration? totalDuration =
-            _betterPlayerController.videoPlayerController!.value.duration;
-
-        // Ensure totalDuration is not null before performing calculations
-        if (totalDuration != null) {
-          final double currentProgress =
-              currentPosition.inMilliseconds.toDouble() /
-                  totalDuration.inMilliseconds.toDouble();
-          widget.reelsController.updateProgress(currentProgress);
-        }
-      } else if (event.betterPlayerEventType ==
-          BetterPlayerEventType.finished) {
-        widget.reelsController.updateProgress(0.0);
+      if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
         widget.reelsController
             .playNextVideo(widget.modelIndex, widget.videoIndex);
       }
@@ -111,15 +99,46 @@ class _ReelsVideoWidgetState extends State<ReelsVideoWidgetWitCaching> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "video controller :${_betterPlayerController.videoPlayerController!.value}");
+
     return isLoading
         ? Center(
             child: CircularProgressIndicator(
               color: customColors.primary,
             ),
           )
-        : AspectRatio(
-            aspectRatio: 9 / 16,
-            child: BetterPlayer(controller: _betterPlayerController),
+        : Column(
+            children: [
+              Row(
+                children:
+                    List.generate(widget.totalVideos, (index) => rr(index))
+                        .divide(SizedBox(
+                  width: 3,
+                )),
+              ),
+              AspectRatio(
+                aspectRatio: 9 / 16,
+                child: BetterPlayer(controller: _betterPlayerController),
+              ),
+            ],
           );
+  }
+
+  Widget rr(int index) {
+    return Expanded(
+      child: CustomSmoothVideoProgress(
+        controller: _betterPlayerController,
+        builder: (context, position, duration, child) {
+          return LinearProgressIndicator(
+            value: index == widget.videoIndex
+                ? position.inMilliseconds / max(duration.inMilliseconds, 1)
+                : 0, // Prevent division by zero
+            backgroundColor: Colors.grey,
+            valueColor: AlwaysStoppedAnimation<Color>(customColors.primary),
+          );
+        },
+      ),
+    );
   }
 }

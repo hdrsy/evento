@@ -1,6 +1,9 @@
 // import 'package:evento/core/shared/widgets/video/reels_video_widget_with_caching.dart';
 
+import 'package:evento/core/colors/app_colors.dart';
+import 'package:evento/core/shared/widgets/video/reels_video_listview.dart';
 import 'package:evento/core/shared/widgets/video/reels_video_widget_with_caching.dart';
+import 'package:intl/number_symbols_data.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/server/server_config.dart';
@@ -37,76 +40,27 @@ class ReelsWidget extends StatelessWidget {
         child: Obx(
           () => reelsController.isLoading.value
               ? const ReelsShimmer()
-              : Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTapUp: (TapUpDetails details) {
-                          final screenWidth = MediaQuery.of(context).size.width;
-                          final tapPositionX = details.globalPosition.dx;
-                          if (tapPositionX < screenWidth / 2) {
-                            // Tap was on the left side
-                            reelsController.prevVideoInSameUser(
-                                modelIndex,
-                                reelsController.innerPageController.page!
-                                    .round());
-                            print("Tapped on the left side");
-                          } else {
-                            reelsController.playNextVideo(
-                                modelIndex,
-                                reelsController.innerPageController.page!
-                                    .round());
-                            // Tap was on the right side
-                            print("Tapped on the right side");
-                          }
-                        },
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    PageView.builder(
-                                        controller:
-                                            reelsController.innerPageController,
-                                        itemCount: model.videos.length,
-                                        itemBuilder: (ctx, index) {
-                                          print(
-                                              "the length of reel is :${model.videos.length}");
-                                          return ReelsVideoWidgetWitCaching(
-                                            modelIndex: modelIndex,
-                                            totalVideos: model.videos.length,
-                                            videoIndex: index,
-                                            currentVideoUrl:
-                                                "${ServerConstApis.baseAPI}/storage/${model.videos[index]}",
-                                          );
-                                        }),
-                                    videoInfo(),
-                                    commentShareLike(modelIndex),
-                                    Obx(
-                                      () => LinearProgressIndicator(
-                                        value:
-                                            reelsController.videoProgress.value,
-                                        backgroundColor: Colors.grey,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                customColors.primary),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+              : SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            MultiVideoPlayer(
+                                videos: model.videos,
+                                eventId: model.id,
+                                modelId: modelIndex),
+                            videoInfo(),
+                            commentShareLike(modelIndex),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
         ),
       ),
@@ -187,7 +141,7 @@ Text reelDate(String reelDate) {
     reelDate,
     style: customTextStyle.bodyMedium.override(
       fontFamily: 'Nunito',
-      color: customColors.primaryText,
+      color: AppColors.darkPrimary,
       fontSize: 12,
       useGoogleFonts: true,
     ),

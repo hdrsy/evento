@@ -12,16 +12,16 @@ Widget commentShareLike(int modelIndex) {
   ReelsController reelsController = Get.find();
   return GetBuilder<ReelsController>(builder: (context) {
     return Align(
-      alignment: const AlignmentDirectional(1.00, -1.00),
+      alignment: const AlignmentDirectional(1.0, 0.8),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             decoration: const BoxDecoration(),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ToggleIcon(

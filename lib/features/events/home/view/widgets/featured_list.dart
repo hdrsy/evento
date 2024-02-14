@@ -182,6 +182,8 @@ class FeaturedWidget extends StatelessWidget {
   }
 
   Widget mediaStack(EventModel eventModel) {
+    final FeaturedListController featuredListController = Get.find();
+
     return GestureDetector(
       onTap: () {
         Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
@@ -200,11 +202,16 @@ class FeaturedWidget extends StatelessWidget {
                     url: "/storage/${eventModel.images[0]}",
                     width: double.infinity,
                     height: 190)
-                : CardsVideoWidget(
-                    currentVideoUrl:
-                        "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
-                    videoHgiht: 190,
-                    videoWidth: double.infinity,
+                : SizedBox(
+                    height: 190,
+                    child: CardsVideoWidget(
+                      soundControlCallback: () =>
+                          featuredListController.isSoundEnabled.value,
+                      currentVideoUrl:
+                          "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                      videoHgiht: 190,
+                      videoWidth: double.infinity,
+                    ),
                   ),
           ),
           eventModel.videos.isNotEmpty
@@ -221,18 +228,25 @@ class FeaturedWidget extends StatelessWidget {
   }
 
   Widget soundToggleIcon() {
-    return ToggleIcon(
-      onPressed: () async {},
-      value: false,
-      onIcon: Icon(
-        Icons.volume_off,
-        color: customColors.info,
-        size: 25,
-      ),
-      offIcon: Icon(
-        Icons.volume_up_outlined,
-        color: customColors.info,
-        size: 25,
+    final FeaturedListController featuredListController = Get.find();
+
+    return Obx(
+      () => ToggleIconWithouIconButton(
+        onPressed: () {
+          featuredListController.isSoundEnabled.value =
+              !featuredListController.isSoundEnabled.value;
+        },
+        value: featuredListController.isSoundEnabled.value,
+        onIcon: Icon(
+          Icons.volume_off,
+          color: customColors.info,
+          size: 25,
+        ),
+        offIcon: Icon(
+          Icons.volume_up_outlined,
+          color: customColors.info,
+          size: 25,
+        ),
       ),
     );
   }
@@ -276,7 +290,7 @@ class FeaturedWidget extends StatelessWidget {
                   var eventModel =
                       eventStateManager.getEventById(eventId).value;
 
-                  return ToggleIcon(
+                  return ToggleIconWithouIconButton(
                     onPressed: () async {
                       if (isGuset) {
                         Get.dialog(const GuestPopupWidget());

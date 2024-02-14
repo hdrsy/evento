@@ -1,4 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/core/utils/services/check_internet.dart';
+import 'package:evento/core/utils/services/connectivity_service.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -10,6 +13,9 @@ class TypetoSetEventController extends GetxController {
   late RxBool isLoading;
   late RxList<CategoryModel> categoryList;
   late RxInt selectedCategory;
+  CacheService cacheService = CacheService('customoze');
+  final String cacheKey = 'customoze';
+  final ConnectivityService _connectivityService = Get.find();
 
   late RxList<String> errorMessage;
   @override
@@ -34,17 +40,29 @@ class TypetoSetEventController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.getCategoryList,
-        method: "GEt",
-        token: token);
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
+    if (await checkInternet()) {
+      final d = await cacheService.getObject<Map<String, dynamic>>(
+        cacheKey: cacheKey,
+        deserializeFunction: (jsonMap) => jsonMap,
+      );
+      if (d != null) {
+        whenGetDataSuccess(d);
+      } else {
+        isLoading.value = false;
+      }
     } else {
-      whenGetDataSuccess(handlingResponse);
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.getCategoryList,
+          method: "GEt",
+          token: token);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        whenGetDataSuccess(handlingResponse);
+      }
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   whenGetDataSuccess(handlingResponse) {

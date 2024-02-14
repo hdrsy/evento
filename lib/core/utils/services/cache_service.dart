@@ -10,7 +10,7 @@ class CacheService {
       Config(
         cacheKey, // Cache key
         stalePeriod: const Duration(days: 7), // Adjust as needed
-        maxNrOfCacheObjects: 100,
+        maxNrOfCacheObjects: 4,
         repo: JsonCacheInfoRepository(databaseName: cacheKey),
         fileService: HttpFileService(),
       ),
@@ -26,7 +26,8 @@ class CacheService {
     await _cacheManager.putFile(
       cacheKey,
       Uint8List.fromList(utf8.encode(jsonString)),
-      eTag: object.toString(), // You might want to use a more unique identifier here
+      eTag: object
+          .toString(), // You might want to use a more unique identifier here
     );
   }
 

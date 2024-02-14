@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                   : 0),
           itemBuilder: (context, index) {
             if (index >= homeController.loadedWidgetsCount.value) {
-              return const Center(child: CircularProgressIndicator());
+              return const SizedBox();
             } else {
               return Container(
                   margin: const EdgeInsets.only(bottom: 10),

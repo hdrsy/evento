@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/animation/animation_def.dart';
@@ -51,16 +52,16 @@ Widget buildEventDetails(BuildContext context) {
               height: 25.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              color: customColors.primary,
+              color: customColors.primaryBackground,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
-                color: customColors.info,
+                color: customColors.primaryText,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),
               borderSide: BorderSide(
-                color: customColors.primary,
+                color: customColors.primaryBackground,
               ),
               borderRadius: BorderRadius.circular(20),
             ),
@@ -75,6 +76,11 @@ Widget buildEventDetails(BuildContext context) {
           fontSize: 14.sp,
           useGoogleFonts: false,
         ),
+      ),
+      Divider(
+        thickness: 0.5,
+        color: customColors.secondary,
+        endIndent: screenWidth * 0.5,
       ),
 
       Row(
@@ -100,16 +106,16 @@ Widget buildEventDetails(BuildContext context) {
               height: 25.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              color: customColors.primary,
+              color: customColors.primaryBackground,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
-                color: customColors.info,
+                color: customColors.primaryText,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),
               borderSide: BorderSide(
-                color: customColors.primary,
+                color: customColors.primaryBackground,
               ),
               borderRadius: BorderRadius.circular(20),
             ),

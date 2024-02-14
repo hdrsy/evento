@@ -24,10 +24,10 @@ Widget buildEventTimelineButton(
       height: SizeConfig.safeBlockHorizontal * 6,
       padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
       iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-      color: customColors.primary,
+      color: customColors.primaryBackground,
       textStyle: customTextStyle.titleSmall.override(
         fontFamily: 'Open Sans',
-        color: Colors.white,
+        color: customColors.primaryText,
         fontSize: SizeConfig.safeBlockHorizontal * 3.3,
         fontWeight: FontWeight.w500,
       ),

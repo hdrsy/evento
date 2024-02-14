@@ -2,12 +2,18 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+// Define the type for the sound control callback function.
+typedef SoundControlCallback = bool Function();
+
 class CardsVideoWidget extends StatefulWidget {
   const CardsVideoWidget(
       {super.key,
       required this.currentVideoUrl,
+      required this.soundControlCallback, // Require the callback in the constructor
+
       required this.videoHgiht,
       required this.videoWidth});
+  final SoundControlCallback soundControlCallback; // Add the callback here
   final String currentVideoUrl;
   final double videoHgiht;
   final double videoWidth;
@@ -39,21 +45,14 @@ class _VideoWidgetState extends State<CardsVideoWidget>
   }
 
   initializeController() async {
-    // var fileInfo = await kCacheManager.getFileFromCache(widget.currentVideoUrl);
-    // if (fileInfo == null) {
-    //   await kCacheManager.downloadFile(widget.currentVideoUrl);
-    //   fileInfo = await kCacheManager.getFileFromCache(widget.currentVideoUrl);
-    // }
-    // if (mounted) {
-    // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
     videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(widget.currentVideoUrl))
           ..initialize().then((_) {
             setState(() {
- videoPlayerController.setLooping(false); // Enable looping
-          videoPlayerController.setVolume(0); // Mute the video
-          videoPlayerController.pause(); // Auto-play the video
-          videoInitialized = true;
+              videoPlayerController.setLooping(false); // Enable looping
+              videoPlayerController.setVolume(0); // Mute the video
+              videoPlayerController.pause(); // Auto-play the video
+              videoInitialized = true;
             });
           }).catchError((error) {
             // Handle the error here
@@ -67,6 +66,15 @@ class _VideoWidgetState extends State<CardsVideoWidget>
       }
     });
     // }
+  }
+
+  void _setVideoSound() {
+    bool playSound = widget
+        .soundControlCallback(); // Call the callback to determine sound state
+    print(playSound);
+    videoPlayerController
+        .setVolume(playSound ? 1.0 : 0.0); // Set volume based on callback
+    print(videoPlayerController.value.volume);
   }
 
   @override
@@ -86,8 +94,8 @@ class _VideoWidgetState extends State<CardsVideoWidget>
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.resumed) {
       // App is in the foreground
-       videoPlayerController.setVolume(0);
-    videoPlayerController.pause();
+      videoPlayerController.setVolume(0);
+      videoPlayerController.pause();
     } else if (state == AppLifecycleState.inactive) {
       // App is partially obscured
       videoPlayerController.pause();
@@ -140,15 +148,6 @@ class _VideoWidgetState extends State<CardsVideoWidget>
                           ),
                         ),
                       ),
-                // if (!_isPlaying)
-                //   Align(
-                //     alignment: Alignment.center, // Center the icon
-                //     child: Icon(
-                //       Icons.play_arrow,
-                //       size: 50.0,
-                //       color: Colors.white,
-                //     ),
-                //   ),
               ],
             ),
           );

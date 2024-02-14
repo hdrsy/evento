@@ -38,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
           pageController: controller,
         ),
         Positioned(
-            top: 20,
+            top: 30,
             left: 20,
             child: GestureDetector(
                 onTap: () {

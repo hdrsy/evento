@@ -153,11 +153,15 @@ class TrendingNow extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: eventModel.videos.isNotEmpty
-            ? CardsVideoWidget(
-                currentVideoUrl:
-                    "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
-                videoHgiht: 240,
-                videoWidth: double.infinity,
+            ? SizedBox(
+                height: 240,
+                child: CardsVideoWidget(
+                  soundControlCallback: () => false,
+                  currentVideoUrl:
+                      "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                  videoHgiht: 240,
+                  videoWidth: double.infinity,
+                ),
               )
             : getImageNetworkforCahing(
                 url: "/storage/${eventModel.images[0]}",
@@ -198,7 +202,7 @@ class TrendingNow extends StatelessWidget {
     return Positioned(
       bottom: 25,
       right: 10,
-      child: ToggleIcon(
+      child: ToggleIconWithouIconButton(
         onPressed: () {},
         value: false,
         onIcon: Icon(Icons.volume_off, color: customColors.info, size: 23),
@@ -318,7 +322,7 @@ class TrendingNow extends StatelessWidget {
           .getEventById(trendingListController.itemList[modelIndex].id)
           .value;
 
-      return ToggleIcon(
+      return ToggleIconWithouIconButton(
         onPressed: () {
           if (isGuset) {
             Get.dialog(GuestPopupWidget());

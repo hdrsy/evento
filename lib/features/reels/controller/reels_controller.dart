@@ -33,12 +33,6 @@ class ReelsController extends PaginationController<ReelModel> {
     );
   }
 
-  RxDouble videoProgress = 0.0.obs; // Tracks progress of the current video
-
-  void updateProgress(double progress) {
-    videoProgress.value = progress;
-  }
-
   @override
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
@@ -85,7 +79,7 @@ class ReelsController extends PaginationController<ReelModel> {
         itemList[userIndex].videos.length) {
       print("inside next video");
       innerPageController.nextPage(
-          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+          duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
     } else if (innerPageController.page!.round() + 1 ==
         itemList[userIndex].videos.length) {
       print("inside next user");
@@ -105,9 +99,11 @@ class ReelsController extends PaginationController<ReelModel> {
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].likedByUser) {
+      itemList[modelIndex].likedByUser = false;
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.likeReel}/$eventId/like");
     } else {
+      itemList[modelIndex].likedByUser = true;
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.likeReel}/$eventId/like");
     }
@@ -126,6 +122,16 @@ class ReelsController extends PaginationController<ReelModel> {
   void nextUser() {
     if (currentUserIndex + 1 < itemList.length) {
       currentUserIndex++;
+      update();
+    }
+  }
+
+  void nextUserPage() {
+    if (currentUserIndex + 1 < itemList.length) {
+      currentUserIndex++;
+      pageController.nextPage(
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+
       update();
     }
   }

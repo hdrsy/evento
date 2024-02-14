@@ -19,7 +19,7 @@ Widget buildImageWithName() {
               shape: BoxShape.circle,
             ),
             child: profileController.profileModel.image.length > 6
-                ? getImageNetwork(
+                ? getImageNetworkforCahing(
                     url: "/storage/${profileController.profileModel.image}",
                     width: null,
                     height: null)

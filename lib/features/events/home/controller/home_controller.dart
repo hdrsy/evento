@@ -268,6 +268,7 @@ class FeaturedListController extends PaginationController<EventModel> {
   FeaturedListController()
       : super(fetchDataCallback: _fetchData, cacheKey: "FeaturedList");
   final EventStateManager eventStateManager = Get.find();
+  RxBool isSoundEnabled = false.obs;
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
