@@ -16,7 +16,6 @@ class VenueController extends PaginationController<Venue> {
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token");
     String apiUrl = "${ServerConstApis.getAllvenue}?page=$page";
-
     // Returning the result of the API call
     return ApiHelper.makeRequest(
       targetRout: apiUrl,

@@ -70,8 +70,8 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
   void _initializePlayer() {
     _betterPlayerController = BetterPlayerController(
       const BetterPlayerConfiguration(
-        aspectRatio: 9 / 16,
-        fit: BoxFit.cover,
+        // aspectRatio: 9 / 16,
+        fit: BoxFit.fill,
         autoPlay: true,
         looping: false,
         controlsConfiguration: BetterPlayerControlsConfiguration(

@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
       },
       child: Obx(() {
         return ListView.builder(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           itemCount: homeController.loadedWidgetsCount.value +
               (homeController.loadedWidgetsCount.value <
                       homeController.totalWidgetsCount

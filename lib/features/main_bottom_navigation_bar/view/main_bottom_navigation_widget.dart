@@ -18,90 +18,101 @@ class MainBottomNavigationBarWidget extends StatelessWidget {
     customTextStyle = Theme.of(context).extension<TextExtension>()!;
     SizeConfig().init(context);
 
-    return Theme(
-      data: Theme.of(context).copyWith(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+    return PopScope(
+      canPop: mainBottomNavigationController.selectedPage.value != 0,
+      onPopInvoked: (popHandled) {
+        // Check if the pop event has not been handled and the current index is not the home page
+        if (!popHandled &&
+            mainBottomNavigationController.selectedPage.value != 0) {
+          // Change to the home page index
+          mainBottomNavigationController.changePage(0);
+        }
+      },
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: Obx(() => Scaffold(
+              body: mainBottomNavigationController
+                  .getScreen(mainBottomNavigationController.selectedPage.value),
+              bottomNavigationBar: BottomNavigationBar(
+                currentIndex: mainBottomNavigationController.selectedPage.value,
+                onTap: (i) => mainBottomNavigationController.changePage(i),
+                backgroundColor:
+                    mainBottomNavigationController.selectedPage.value == 2
+                        ? Colors.black
+                        : customColors.secondaryBackground,
+                selectedItemColor: customColors.primary,
+                unselectedItemColor: customColors.grayIcon,
+                showSelectedLabels: true,
+                showUnselectedLabels: false,
+                type: BottomNavigationBarType.fixed,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: const Icon(
+                      Icons.home_outlined,
+                      size: 24.0,
+                    ),
+                    activeIcon: const Icon(
+                      Icons.home,
+                      size: 24.0,
+                    ),
+                    label: tr("Home"),
+                    tooltip: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(
+                      Icons.search,
+                      size: 20.0,
+                    ),
+                    activeIcon: const Icon(
+                      Icons.search_sharp,
+                      size: 24.0,
+                    ),
+                    label: tr("search"),
+                    tooltip: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(
+                      Icons.slow_motion_video_outlined,
+                      size: 24.0,
+                    ),
+                    activeIcon: const Icon(
+                      Icons.slow_motion_video,
+                      size: 24.0,
+                    ),
+                    label: tr("Reels"),
+                    tooltip: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(
+                      Icons.auto_awesome_outlined,
+                      size: 24.0,
+                    ),
+                    activeIcon: const Icon(
+                      Icons.auto_awesome_sharp,
+                      size: 24.0,
+                    ),
+                    label: tr("Customize"),
+                    tooltip: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(
+                      Icons.account_circle_outlined,
+                      size: 24.0,
+                    ),
+                    activeIcon: const Icon(
+                      Icons.account_circle,
+                      size: 24.0,
+                    ),
+                    label: tr("Profile"),
+                    tooltip: '',
+                  )
+                ],
+              ),
+            )),
       ),
-      child: Obx(() => Scaffold(
-            body: mainBottomNavigationController
-                .getScreen(mainBottomNavigationController.selectedPage.value),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: mainBottomNavigationController.selectedPage.value,
-              onTap: (i) => mainBottomNavigationController.changePage(i),
-              backgroundColor:
-                  mainBottomNavigationController.selectedPage.value == 2
-                      ? Colors.black
-                      : customColors.secondaryBackground,
-              selectedItemColor: customColors.primary,
-              unselectedItemColor: customColors.grayIcon,
-              showSelectedLabels: true,
-              showUnselectedLabels: false,
-              type: BottomNavigationBarType.fixed,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: const Icon(
-                    Icons.home_outlined,
-                    size: 24.0,
-                  ),
-                  activeIcon: const Icon(
-                    Icons.home,
-                    size: 24.0,
-                  ),
-                  label: tr("Home"),
-                  tooltip: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(
-                    Icons.search,
-                    size: 20.0,
-                  ),
-                  activeIcon: const Icon(
-                    Icons.search_sharp,
-                    size: 24.0,
-                  ),
-                  label: tr("search"),
-                  tooltip: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(
-                    Icons.slow_motion_video_outlined,
-                    size: 24.0,
-                  ),
-                  activeIcon: const Icon(
-                    Icons.slow_motion_video,
-                    size: 24.0,
-                  ),
-                  label: tr("Reels"),
-                  tooltip: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(
-                    Icons.auto_awesome_outlined,
-                    size: 24.0,
-                  ),
-                  activeIcon: const Icon(
-                    Icons.auto_awesome_sharp,
-                    size: 24.0,
-                  ),
-                  label: tr("Customize"),
-                  tooltip: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(
-                    Icons.account_circle_outlined,
-                    size: 24.0,
-                  ),
-                  activeIcon: const Icon(
-                    Icons.account_circle,
-                    size: 24.0,
-                  ),
-                  label: tr("Profile"),
-                  tooltip: '',
-                )
-              ],
-            ),
-          )),
     );
   }
 }

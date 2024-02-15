@@ -4,21 +4,19 @@ import 'package:flutter/material.dart';
 
 Container userPhoto(ReelModel model) {
   return Container(
-      width: 50,
-      height: 50,
-      clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
-      child:
-          // model.event != null
-          // ?
-          Image.network(
-        'https://picsum.photos/seed/913/600',
-        fit: BoxFit.cover,
-      )
-      // : getImageNetwork(url: getReelImage(model), width: null, height: null),
-      );
+    width: 50,
+    height: 50,
+    clipBehavior: Clip.antiAlias,
+    decoration: const BoxDecoration(
+      shape: BoxShape.circle,
+    ),
+    child: model.event != null
+        ? Image.network(
+            'https://picsum.photos/seed/913/600',
+            fit: BoxFit.cover,
+          )
+        : getImageNetwork(url: getReelImage(model), width: null, height: null),
+  );
 }
 
 String getReelImage(ReelModel model) {

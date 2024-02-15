@@ -65,18 +65,20 @@ class SeeAllScreen extends StatelessWidget {
                                 eventModel: seeAllController.itemList[index],
                                 modelIndex: index,
                               )
-                            : ShimmerLoadingWidget(
-                                loadingShimmerWidget: Container(
-                                width: 355,
-                                height: 100,
-                                // height: 330 ,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: customColors.info,
-                                    ),
-                                    color: customColors.info),
-                              ));
+                            : seeAllController.isLoadingMoreData.value
+                                ? ShimmerLoadingWidget(
+                                    loadingShimmerWidget: Container(
+                                    width: 355,
+                                    height: 100,
+                                    // height: 330 ,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: customColors.info,
+                                        ),
+                                        color: customColors.info),
+                                  ))
+                                : SizedBox();
                       })
                     ].divide(SizedBox(
                       height: scaleHeight(15),

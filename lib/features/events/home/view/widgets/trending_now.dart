@@ -88,7 +88,7 @@ class TrendingNow extends StatelessWidget {
                         color: customColors.info),
                   ));
           })
-        ].divide(SizedBox(
+        ].divide(const SizedBox(
           width: 13,
         )),
       ),
@@ -141,7 +141,9 @@ class TrendingNow extends StatelessWidget {
           children: [
             buildImage(eventModel),
             buildPriceTag(eventModel.ticketPrice.toString()),
-            buildSoundToggleButton()
+            eventModel.videos.isNotEmpty
+                ? buildSoundToggleButton()
+                : const SizedBox()
           ],
         ),
       ),
@@ -325,7 +327,7 @@ class TrendingNow extends StatelessWidget {
       return ToggleIconWithouIconButton(
         onPressed: () {
           if (isGuset) {
-            Get.dialog(GuestPopupWidget());
+            Get.dialog(const GuestPopupWidget());
           } else {
             trendingListController.followOrUnFollowEvent(
                 trendingListController.itemList[modelIndex].id, modelIndex);

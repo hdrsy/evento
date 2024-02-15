@@ -135,22 +135,16 @@ class User {
 
 class Organizer {
   final int id;
-  final String firstName;
-  final String lastName;
-  final OrganizerInfo organizerInfo;
+  final OrganizerInfo? organizerInfo;
 
   Organizer({
     required this.id,
-    required this.firstName,
-    required this.lastName,
     required this.organizerInfo,
   });
 
   factory Organizer.fromJson(Map<String, dynamic> json) {
     return Organizer(
       id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
       organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
     );
   }

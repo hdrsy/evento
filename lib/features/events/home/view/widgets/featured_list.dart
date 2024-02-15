@@ -206,7 +206,7 @@ class FeaturedWidget extends StatelessWidget {
                     height: 190,
                     child: CardsVideoWidget(
                       soundControlCallback: () =>
-                          featuredListController.isSoundEnabled.value,
+                          featuredListController.sound(),
                       currentVideoUrl:
                           "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
                       videoHgiht: 190,
@@ -232,10 +232,7 @@ class FeaturedWidget extends StatelessWidget {
 
     return Obx(
       () => ToggleIconWithouIconButton(
-        onPressed: () {
-          featuredListController.isSoundEnabled.value =
-              !featuredListController.isSoundEnabled.value;
-        },
+        onPressed: () => featuredListController.sound(),
         value: featuredListController.isSoundEnabled.value,
         onIcon: Icon(
           Icons.volume_off,

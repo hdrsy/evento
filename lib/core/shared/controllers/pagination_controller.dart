@@ -114,7 +114,7 @@ class PaginationController<T> extends GetxController {
   // Method to fetch data using the provided callback. It handles the response and updates the controller's state.
   fetchData() async {
     isLoading.value = itemList.isNotEmpty ? false : true;
-    if (await checkInternet()) {
+    if (!_connectivityService.isConnected.value) {
       log("from cache");
       final d = await cacheService.getObject<Map<String, dynamic>>(
         cacheKey: cacheKey,

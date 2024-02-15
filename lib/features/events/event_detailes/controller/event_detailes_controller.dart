@@ -51,8 +51,6 @@ class EventDetailesController extends GetxController {
     cacheKey = "eventDetailes$eventId";
     _connectivityService.isConnected.listen((isConnected) {
       if (isConnected) {
-        print("Internet connection is back!");
-        // refreshData(); // Refetch data when connection is back
         getEventDetailesModel();
         isSomeThingError.value = false;
         SnackbarManager.showSnackbar(
@@ -118,12 +116,15 @@ class EventDetailesController extends GetxController {
         isLoading.value = false;
       }
     } catch (e) {
+      print(e);
       isSomeThingError.value = true;
+      isLoading.value = false;
     }
   }
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
+    print("objectrrrrr:${eventDetailsModel.organizer}");
     relatedEvents.value = List<EventModel>.from(
         handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
   }
@@ -217,9 +218,12 @@ class EventDetailesController extends GetxController {
 
   calculateDistance() async {
     LocationService locationService = LocationService();
-    print("inside cal ");
-    distance.value = await locationService.calculateDistance(
-        eventDetailsModel.venue.latitude, eventDetailsModel.venue.longitude);
+    try {
+      distance.value = await locationService.calculateDistance(
+          eventDetailsModel.venue.latitude, eventDetailsModel.venue.longitude);
+    } catch (e) {
+      distance.value = "0 km";
+    }
   }
 
   followAndUnFollowOrganizer() async {

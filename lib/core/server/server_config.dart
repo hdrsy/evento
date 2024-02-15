@@ -30,6 +30,7 @@ class ServerConstApis {
   static String unFollowOrganizer = '$baseAPI/api/unfollow';
   static String becomeOrganizer = '$baseAPI/api/become_organizer';
   static String organizerProfile = '$baseAPI/api/organizer_profile';
+  static String organizationProfile = '$baseAPI/api/organizerProfile';
   ///// service provider
 
   static String becomeServiceProvider = '$baseAPI/api/become_service_provider';

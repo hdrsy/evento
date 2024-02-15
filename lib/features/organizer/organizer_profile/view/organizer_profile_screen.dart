@@ -345,6 +345,8 @@ class MyTabBarWidget extends StatelessWidget {
         ),
         unselectedLabelStyle: const TextStyle(),
         indicatorColor: customColors.primary,
+        indicatorSize: TabBarIndicatorSize.tab,
+        dividerColor: customColors.secondaryBackground,
         padding: const EdgeInsets.all(4),
         tabs: [
           Tab(text: tr('Bio')),

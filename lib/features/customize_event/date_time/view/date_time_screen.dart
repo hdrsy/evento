@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -22,6 +23,10 @@ class DateTimeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        title: Text(tr("Customize Your Event"),
+            style: customTextStyle.bodyMedium
+                .copyWith(color: customColors.primary, fontSize: 20)),
+        centerTitle: true,
         backgroundColor: customColors.secondaryBackground,
         leading: GestureDetector(
           onTap: () {
@@ -45,7 +50,7 @@ class DateTimeScreen extends StatelessWidget {
             const LinearPercentIndicatorWidget(),
             EventTitle(),
             ContactInformationForm(),
-            const SelectPeopleDateTime(),
+            SelectPeopleDateTime(),
             UploadMedia(),
             NotesLabel(),
             NextStepButton()

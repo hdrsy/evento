@@ -27,18 +27,21 @@ class GalleryController extends GetxController {
     super.onInit();
   }
 
-  List<GalleryItem> _mixImagesAndVideos(List<String> images, List<String> videos) {
+  List<GalleryItem> _mixImagesAndVideos(
+      List<String> images, List<String> videos) {
     List<GalleryItem> mixedItems = [];
-    int maxLength = max(images.length, videos.length);
+    int maxLength = images.length + videos.length;
 
     for (int i = 0; i < maxLength; i++) {
       if (i < images.length) {
         mixedItems.add(GalleryItem(url: images[i]));
-      }
-      if (i < videos.length) {
-        mixedItems.add(GalleryItem(url: videos[i], isVideo: true));
+      } else {
+        int videoIndex = i - images.length;
+
+        mixedItems.add(GalleryItem(url: videos[videoIndex], isVideo: true));
       }
     }
+    print("mixed lenght is :${mixedItems.length}");
     return mixedItems;
   }
 }

@@ -10,7 +10,8 @@ class ShowInFullScreen extends StatelessWidget {
   final GalleryItem imageUrl;
   final String tag;
 
-const  ShowInFullScreen({super.key, required this.imageUrl, required this.tag});
+  const ShowInFullScreen(
+      {super.key, required this.imageUrl, required this.tag});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,11 @@ const  ShowInFullScreen({super.key, required this.imageUrl, required this.tag});
         onTap: () => Get.back(),
         child: Center(
           child: Hero(
-            tag: tag,
-            child:  GalleryMediaWidget(galleryItem: imageUrl,)), // Replace with your image or video widget
-          ),
-        
+              tag: tag,
+              child: GalleryMediaWidget(
+                galleryItem: imageUrl,
+              )), // Replace with your image or video widget
+        ),
       ),
     );
   }
@@ -36,10 +38,13 @@ class GalleryMediaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return galleryItem.isVideo?VideoWidget(video: galleryItem.url):getImageNetwork(url: "/storage/${galleryItem.url}", width: null, height: null);
-   
+    return galleryItem.isVideo
+        ? VideoWidget(video: galleryItem.url)
+        : getImageNetworkforCahing(
+            url: "/storage/${galleryItem.url}", width: null, height: null);
   }
 }
+
 class VideoWidget extends StatefulWidget {
   final String video;
 
@@ -55,7 +60,8 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse("${ServerConstApis.baseAPI}/storage/${widget.video}") )
+    _controller = VideoPlayerController.networkUrl(
+        Uri.parse("${ServerConstApis.baseAPI}/storage/${widget.video}"))
       ..initialize().then((_) {
         _controller.setVolume(100);
         _controller.play();
@@ -68,10 +74,14 @@ class _VideoWidgetState extends State<VideoWidget> {
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
         ? AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
-            )
-        : Center(child:CircularProgressIndicator(color: customColors.info,) ,); // Placeholder while the video loads
+            aspectRatio: _controller.value.aspectRatio,
+            child: VideoPlayer(_controller),
+          )
+        : Center(
+            child: CircularProgressIndicator(
+              color: customColors.info,
+            ),
+          ); // Placeholder while the video loads
   }
 
   @override
@@ -80,6 +90,3 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 }
-
-
-

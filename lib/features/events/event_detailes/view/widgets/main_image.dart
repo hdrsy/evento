@@ -1,3 +1,5 @@
+import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
 import 'package:evento/features/gallery/controller/gallery_controller.dart';
 import 'package:evento/features/gallery/view/show_on_fullscreen.dart';
 
@@ -11,11 +13,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 
 class MainImage extends StatelessWidget {
-  MainImage({super.key, required this.imgUrl});
+  MainImage({super.key, required this.imgUrl, required this.videosUrl});
   final List<String> imgUrl;
+  final List<String> videosUrl;
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
+    print("videos lenght ${videosUrl.length}");
     return Stack(
       children: [
         SizedBox(
@@ -24,24 +28,56 @@ class MainImage extends StatelessWidget {
               alignment: const AlignmentDirectional(0.00, 0.00),
               child: PageView.builder(
                 controller: pageController,
-                itemCount: imgUrl.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () async {
-                    Get.to(ShowInFullScreen(
-                        imageUrl:
-                            GalleryItem(url: imgUrl[index], isVideo: false),
-                        tag: imgUrl[index]));
-                  },
-                  child: Hero(
-                    tag: imgUrl[index],
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(0),
-                        child: getImageNetworkforCahing(
-                            url: imgUrl[index],
-                            width: double.infinity,
-                            height: double.infinity)),
-                  ),
-                ),
+                itemCount: imgUrl.length + videosUrl.length,
+                itemBuilder: (context, index) {
+                  // Check if the index is within the range of imgUrl
+                  if (index < imgUrl.length) {
+                    // Handle image display
+                    return GestureDetector(
+                      onTap: () async {
+                        Get.to(ShowInFullScreen(
+                            imageUrl:
+                                GalleryItem(url: imgUrl[index], isVideo: false),
+                            tag: "image$index")); // Ensure unique tag for Hero
+                      },
+                      child: Hero(
+                        tag: "image$index", // Ensure unique tag for Hero
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(0),
+                            child: getImageNetworkforCahing(
+                                url: imgUrl[index],
+                                width: double.infinity,
+                                height: double.infinity)),
+                      ),
+                    );
+                  } else {
+                    // Adjust index for videosUrl
+                    int videoIndex = index - imgUrl.length;
+                    print("vv:${videosUrl[videoIndex]}");
+                    // Handle video display
+                    return GestureDetector(
+                      onTap: () async {
+                        Get.to(ShowInFullScreen(
+                            imageUrl: GalleryItem(
+                                url: videosUrl[videoIndex], isVideo: true),
+                            tag:
+                                "video$videoIndex")); // Ensure unique tag for Hero
+                      },
+                      child: Hero(
+                        tag: "video$videoIndex", // Ensure unique tag for Hero
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(0),
+                            child: CardsVideoWidget(
+                                autoPlay: true,
+                                currentVideoUrl:
+                                    "${ServerConstApis.baseAPI}/storage/${videosUrl[videoIndex]}",
+                                soundControlCallback: () => true,
+                                videoHgiht: double.infinity,
+                                videoWidth: double.infinity)),
+                      ),
+                    );
+                  }
+                },
               )
 
               // ),
@@ -51,7 +87,7 @@ class MainImage extends StatelessWidget {
             right: 20,
             top: screenHeight * 0.3,
             child: BuildPageIndecator(
-              itemCount: imgUrl.length,
+              itemCount: imgUrl.length + videosUrl.length,
               pageController: pageController,
             )),
         Align(

@@ -45,7 +45,8 @@ class GalleryScreen extends StatelessWidget {
                   ),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  itemCount: galleryController.images.length,
+                  itemCount: galleryController.images.length +
+                      galleryController.videos.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {

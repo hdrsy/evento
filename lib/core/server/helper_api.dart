@@ -99,6 +99,7 @@ class ApiHelper {
         return Left(ErrorResponse.fromJson(responseBody));
       }
     } catch (e) {
+      print(e);
       // Catching exceptions and returning as error responses.
       return Left(ErrorResponse.fromJson(
           {"message": "SomeThing Wrong !. Try again later "}));

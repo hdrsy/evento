@@ -42,16 +42,7 @@ class HomeController extends GetxController {
   }
 
   Future onrefresh() async {
-    // CategoryListController().onInit();
-    // FeaturedListController featuredListController=Get.find();
-    // featuredListController.pageId=1;
-    // featuredListController.onInit();
-    // featuredListController.update();
-
-    // EventInYourCityListController().onInit();
-    // OrganizerController().onInit();
-    // JustForYouController().onInit();
-    // TrendingListController().onInit();
+    Get.find<PaginationController>().refreshData();
   }
 }
 
@@ -269,6 +260,11 @@ class FeaturedListController extends PaginationController<EventModel> {
       : super(fetchDataCallback: _fetchData, cacheKey: "FeaturedList");
   final EventStateManager eventStateManager = Get.find();
   RxBool isSoundEnabled = false.obs;
+  bool sound() {
+    isSoundEnabled.value = !isSoundEnabled.value;
+    return isSoundEnabled.value;
+  }
+
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {

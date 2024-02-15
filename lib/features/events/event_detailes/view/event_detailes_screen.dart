@@ -38,7 +38,10 @@ class EventDetailesScreen extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        MainImage(imgUrl: eventDetailesController.eventDetailsModel.images),
+        MainImage(
+          imgUrl: eventDetailesController.eventDetailsModel.images,
+          videosUrl: eventDetailesController.eventDetailsModel.videos,
+        ),
         eventDetailesController.isOffer
             ? Positioned(top: screenHeight * 0.25, child: Offerprice())
             : SizedBox.shrink(),

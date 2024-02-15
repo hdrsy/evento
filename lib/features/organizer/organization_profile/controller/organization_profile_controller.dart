@@ -13,7 +13,7 @@ class OrganizationProfileController extends GetxController {
   late OrganizationProfileModel organizerProfileModel;
   late RxList<String> errorMessage;
   late RxBool isLoading;
-  late int orgnizerId;
+  // late int orgnizerId;
 // late bool isorganizerEditProfile;
 
   @override
@@ -24,7 +24,7 @@ class OrganizationProfileController extends GetxController {
     // isorganizerEditProfile = Get.arguments[1]??false;
     organizerProfileModel =
         OrganizationProfileModel.fromJson(fakeOrganizationProfileData);
-    // getOrganizerProfile();
+    getOrganizerProfile();
     // TODO: implement onInit
     super.onInit();
   }
@@ -34,7 +34,7 @@ class OrganizationProfileController extends GetxController {
     isLoading.value = true;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
+        targetRout: ServerConstApis.organizationProfile,
         method: "GEt",
         token: token);
 
@@ -43,9 +43,10 @@ class OrganizationProfileController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      final interestsJson = handlingResponse['organizer'];
+      print("handling :$handlingResponse");
+      // final interestsJson = handlingResponse['organizer'];
 
-      organizerProfileModel = OrganizationProfileModel.fromJson(interestsJson);
+      // organizerProfileModel = OrganizationProfileModel.fromJson(interestsJson);
       update();
     }
     isLoading.value = false;

@@ -19,7 +19,7 @@ class TypeToSetEventScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          title: Text(tr("Customize Event"),
+          title: Text(tr("Customize Your Event"),
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,

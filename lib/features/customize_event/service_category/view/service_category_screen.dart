@@ -22,6 +22,10 @@ class ServiceCategoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        title: Text(tr("Customize Your Event"),
+            style: customTextStyle.bodyMedium
+                .copyWith(color: customColors.primary, fontSize: 20)),
+        centerTitle: true,
         backgroundColor: customColors.secondaryBackground,
         leading: InkWell(
           onTap: () {
@@ -45,13 +49,27 @@ class ServiceCategoryScreen extends StatelessWidget {
               alignment: Alignment.center,
               width: double.infinity,
               child: Text(
-                "Customize Your Event",
+                "From vision to reality",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: primaryFontFamily,
                   color: customColors.primaryText,
                   fontSize: 18,
                   useGoogleFonts: true,
                 ),
+              ).tr(),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              child: Text(
+                "Choose your event theme with our experts and create something extraordinary.",
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: primaryFontFamily,
+                  color: customColors.primaryText,
+                  fontSize: 14,
+                  useGoogleFonts: true,
+                ),
+                textAlign: TextAlign.center,
               ).tr(),
             ),
             SizedBox(
@@ -105,7 +123,7 @@ class ServiceCategoryScreen extends StatelessWidget {
             const NextStepButton()
           ]
               .divide(SizedBox(
-                height: scaleHeight(15),
+                height: scaleHeight(5),
               ))
               .addToEnd(const SizedBox(
                 height: 15,

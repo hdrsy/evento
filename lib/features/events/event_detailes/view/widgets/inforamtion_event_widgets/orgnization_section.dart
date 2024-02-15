@@ -31,8 +31,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
           } else {
             eventDetailesController.eventDetailsModel.organizer != null
                 ? Get.toNamed('/OrganizerProfileScreen',
-                    arguments: eventDetailesController
-                        .eventDetailsModel.organizer!.organizerInfo.id)
+                    arguments: eventDetailesController.eventDetailsModel
+                        .organizer!.organizerInfo!.mobileUserId)
                 : null;
           }
         },
@@ -54,7 +54,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                           null
                       ? getImageNetwork(
                           url: eventDetailesController.eventDetailsModel
-                              .organizer!.organizerInfo.profile,
+                              .organizer!.organizerInfo!.profile,
                           width: null,
                           height: null)
                       : Image.asset(
@@ -68,7 +68,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                   children: [
                     Text(
                       organizer != null
-                          ? "${organizer.organizerInfo.name} "
+                          ? "${organizer.organizerInfo!.name} "
                           : "Evento",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'BeerSerif',

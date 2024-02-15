@@ -61,9 +61,9 @@ class OrganizerInfo {
 
     return OrganizerInfo(
       id: json['id'],
-      name: json['name'],
-      bio: json['bio'],
-      services: json['services'],
+      name: json['name'] ?? "Unknown",
+      bio: json['bio'] ?? "",
+      services: json['services'] ?? "",
       state: json['state'],
       categories: List<Category>.from(
           json['categories'].map((x) => Category.fromJson(x))),

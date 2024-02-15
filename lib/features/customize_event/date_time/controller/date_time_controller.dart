@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+
 import '../../../../main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -53,6 +55,12 @@ class DateTimeController extends GetxController {
   }
 
   onPressedNext() {
+    if (date > DateTime.now() &&
+        (adultNumber > 0 || childrenNumber > 0) &&
+        startTime != "00:00 Am" &&
+        endTime != "00:00 Am") {
+      isUserEnterDateInfo = true;
+    }
     FormState? formdata = formstate.currentState;
     if (formdata!.validate() && isUserEnterDateInfo) {
       formdata.save();

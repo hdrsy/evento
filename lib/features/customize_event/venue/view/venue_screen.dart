@@ -32,6 +32,7 @@ class VenueScreen extends StatelessWidget {
           width: double.infinity,
           child: Obx(
             () => SingleChildScrollView(
+                controller: venueController.scrollController,
                 padding: padding(16, 20, 16, 20),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,8 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/server/server_config.dart';
@@ -160,7 +162,10 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
         children: serviceAccordingDetailesController.serviceProvider.albums
             .where((album) => album.images.isNotEmpty)
             .map((album) => FolderCard(album: album))
-            .toList(),
+            .toList()
+            .divide(SizedBox(
+              height: 5.h,
+            )),
       ),
     );
   }

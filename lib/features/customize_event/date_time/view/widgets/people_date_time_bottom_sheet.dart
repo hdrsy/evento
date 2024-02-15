@@ -215,7 +215,7 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      rowHeight: screenHeight * 0.05,
+      rowHeight: screenHeight * 0.04,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: focusedDay,
