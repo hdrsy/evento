@@ -42,8 +42,8 @@ class ProfileScreen extends StatelessWidget {
                     height: scaleHeight(30),
                   ),
                   ThemeSwicth(),
-                  ...List.generate(getnormalUserOptionsCard().length,
-                      (index) => getnormalUserOptionsCard()[index]),
+                  ...List.generate(_buildUserSpecificOptions().length,
+                      (index) => _buildUserSpecificOptions()[index]),
                   const SizedBox(
                     height: 12,
                   ),
@@ -105,11 +105,6 @@ List<Widget> _buildUserSpecificOptions() {
 
 List<Widget> getnormalUserOptionsCard() => [
       OptionsCard(
-        targetRout: '/OrganizationProfileScreen',
-        icon: Icons.person_outline,
-        title: tr("Organaizations Profile"),
-      ),
-      OptionsCard(
         targetRout: '/MyBookingScreen',
         icon: Icons.list,
         title: tr("My Bookings"),
@@ -119,12 +114,6 @@ List<Widget> getnormalUserOptionsCard() => [
         icon: Icons.repeat,
         title: tr("My Requests"),
       ),
-      OptionsCard(
-        targetRout: '/MyEventsForOrganizerScreen',
-        icon: Icons.celebration_outlined,
-        title: tr("My Events"),
-      ),
-
       OptionsCard(
         targetRout: '/FavoriteScreen',
         icon: Icons.favorite_border,
@@ -165,13 +154,11 @@ List<Widget> getnormalUserOptionsCard() => [
         icon: Icons.language_outlined,
         title: tr("Language"),
       ),
-      user!.type == "normal"
-          ? OptionsCard(
-              targetRout: '/AccountTypeScreen',
-              icon: Icons.account_circle,
-              title: tr("Account Type"),
-            )
-          : const SizedBox(),
+      OptionsCard(
+        targetRout: '/AccountTypeScreen',
+        icon: Icons.account_circle,
+        title: tr("Account Type"),
+      )
     ];
 
 List<Widget> getOrganizerOptionsCard() => [
@@ -210,16 +197,16 @@ List<Widget> getOrganizerOptionsCard() => [
         icon: Icons.password_outlined,
         title: tr("Change Password"),
       ),
-      OptionsCard(
-        targetRout: '/FreindsScreen',
-        icon: Icons.group_outlined,
-        title: tr("Friends"),
-      ),
-      OptionsCard(
-        targetRout: '/InviteFreindsScreen',
-        icon: Icons.groups_2_outlined,
-        title: tr("Invite friends"),
-      ),
+      // OptionsCard(
+      //   targetRout: '/FreindsScreen',
+      //   icon: Icons.group_outlined,
+      //   title: tr("Friends"),
+      // ),
+      // OptionsCard(
+      //   targetRout: '/InviteFreindsScreen',
+      //   icon: Icons.groups_2_outlined,
+      //   title: tr("Invite friends"),
+      // ),
       OptionsCard(
         targetRout: '/SeeAllServiceCategoryScreen',
         icon: Icons.miscellaneous_services_outlined,
@@ -235,10 +222,10 @@ List<Widget> getOrganizerOptionsCard() => [
         icon: Icons.language_outlined,
         title: tr("Language"),
       ),
-      OptionsCard(
-        targetRout: const EventVerificationCondidtionsBottomSheet(),
-        bottomSheetHeight: screenHeight * 0.8,
-        icon: Icons.account_circle,
-        title: tr("Become Evento Verified "),
-      ),
+      // OptionsCard(
+      //   targetRout: const EventVerificationCondidtionsBottomSheet(),
+      //   bottomSheetHeight: screenHeight * 0.8,
+      //   icon: Icons.account_circle,
+      //   title: tr("Become Evento Verified "),
+      // ),
     ];

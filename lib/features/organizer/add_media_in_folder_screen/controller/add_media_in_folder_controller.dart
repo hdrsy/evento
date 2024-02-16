@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 class AddMediaInFolderController extends GetxController {
   @override
   void onClose() {
-    addAtatchedMediaToFolder();
+    attachedMediaCallBack(attachedMedia);
     super.onClose();
   }
 
@@ -20,12 +20,15 @@ class AddMediaInFolderController extends GetxController {
   late int folderIndex;
   // late RxList<File> attachedMedia;
   // late RxList<File> attachedVideos;
-  late RxList<Map<String, File>> attachedMedia;
+  late RxList<MediaModel> attachedMedia;
+  late Function(RxList<MediaModel> media) attachedMediaCallBack;
+
   @override
   void onInit() {
     folderName = Get.arguments[0];
     folderIndex = Get.arguments[1];
-    attachedMedia = Get.arguments[2] ?? <Map<String, File>>[].obs;
+    attachedMedia = Get.arguments[2] ?? <MediaModel>[].obs;
+    attachedMediaCallBack = Get.arguments[3];
     super.onInit();
   }
 
@@ -76,43 +79,19 @@ class AddMediaInFolderController extends GetxController {
   }
 
   Future<void> _processSelectedVideo(File videoFile) async {
-    attachedMedia.add({"video": await generateThumbnail(videoFile)});
-    OrganizerCreateProfileController organizerCreateProfileController =
-        Get.find();
-    organizerCreateProfileController.foldersModel[folderIndex].mediaList
-        .add(MediaModel(mediaType: "video", media: videoFile));
+    attachedMedia.add(MediaModel(
+        mediaType: "video", media: await generateThumbnail(videoFile)));
   }
 
   void pickNewMedia(ImageSource imageSource) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-      attachedMedia.add({"image": File(pickedImage.path)});
-      OrganizerCreateProfileController organizerCreateProfileController =
-          Get.find();
-      organizerCreateProfileController.foldersModel[folderIndex].mediaList
+      attachedMedia
           .add(MediaModel(mediaType: "image", media: File(pickedImage.path)));
-
-      // }
-    }
-  }
-
-  addAtatchedMediaToFolder() {
-    OrganizerCreateProfileController organizerCreateProfileController =
-        Get.find();
-    if (attachedMedia.isEmpty) {
-      organizerCreateProfileController.foldersModel.removeAt(folderIndex);
-    } else {
-      log(organizerCreateProfileController
-          .foldersModel[folderIndex].mediaList.length
-          .toString());
     }
   }
 
   deleteMediafromList(int mediaIndex) {
     attachedMedia.removeAt(mediaIndex);
-    OrganizerCreateProfileController organizerCreateProfileController =
-        Get.find();
-    organizerCreateProfileController.foldersModel[folderIndex].mediaList
-        .removeAt(mediaIndex);
   }
 }

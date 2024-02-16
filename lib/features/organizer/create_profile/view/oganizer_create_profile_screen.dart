@@ -1,4 +1,9 @@
+import 'package:evento/core/const/states.dart';
+import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
+import 'package:evento/core/utils/helper/form_field_controller.dart';
+import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/view/widget/confirm_switch_to_organizer_account_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -254,53 +259,86 @@ class OrganizerMediaCard extends StatelessWidget {
 }
 
 //// for select the state of organizer
-class SelectStates extends StatelessWidget {
-  const SelectStates({
-    super.key,
-    required this.organizerCreateProfileController,
-  });
+// class SelectStates extends StatelessWidget {
+//   const SelectStates({
+//     super.key,
+//     required this.organizerCreateProfileController,
+//   });
 
+//   final OrganizerCreateProfileController organizerCreateProfileController;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       onTap: () async {
+//         await showButtonSheet(
+//             context: context, widget: SelectState(), height: 300);
+//       },
+//       child: GetBuilder<OrganizerCreateProfileController>(builder: (ccontext) {
+//         return Container(
+//           width: double.infinity,
+//           height: scaleHeight(50),
+//           padding: padding(0, 10, 0, 10),
+//           decoration: BoxDecoration(
+//             border: Border.all(color: customColors.primaryBackground, width: 2),
+//             borderRadius: const BorderRadius.all(Radius.circular(30)),
+//             // color: customColors.primaryBackground
+//           ),
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Text(
+//                 organizerCreateProfileController.selectedState ??
+//                     "Covering Areas",
+//                 style: customTextStyle.bodyMedium.override(
+//                   fontFamily: 'Nunito',
+//                   color: customColors.primary,
+//                   useGoogleFonts: true,
+//                 ),
+//               ).tr(),
+//               Icon(
+//                 Icons.keyboard_arrow_down_rounded,
+//                 color: customColors.secondaryText,
+//                 size: 15,
+//               )
+//             ],
+//           ),
+//         );
+//       }),
+//     );
+//   }
+// }
+
+class SelectStates extends StatefulWidget {
+  const SelectStates(
+      {super.key, required this.organizerCreateProfileController});
   final OrganizerCreateProfileController organizerCreateProfileController;
 
   @override
+  State<SelectStates> createState() => _SelectStates();
+}
+
+class _SelectStates extends State<SelectStates> {
+  late FormFieldController<String>? dropDownValueController;
+  @override
+  initState() {
+    super.initState();
+    dropDownValueController = FormFieldController(null);
+  }
+
+  List<String> selectedOptions = [];
+
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await showButtonSheet(
-            context: context, widget: SelectState(), height: 300);
+    return MultiSelectDropDown(
+      options: states,
+      selectedValues: selectedOptions,
+      onSelectionChanged: (newSelection) {
+        setState(() {
+          selectedOptions = newSelection;
+        });
       },
-      child: GetBuilder<OrganizerCreateProfileController>(builder: (ccontext) {
-        return Container(
-          width: double.infinity,
-          height: scaleHeight(50),
-          padding: padding(0, 10, 0, 10),
-          decoration: BoxDecoration(
-            border: Border.all(color: customColors.primaryBackground, width: 2),
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            // color: customColors.primaryBackground
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                organizerCreateProfileController.selectedState ??
-                    "Covering Areas",
-                style: customTextStyle.bodyMedium.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.primary,
-                  useGoogleFonts: true,
-                ),
-              ).tr(),
-              Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: customColors.secondaryText,
-                size: 15,
-              )
-            ],
-          ),
-        );
-      }),
     );
   }
 }

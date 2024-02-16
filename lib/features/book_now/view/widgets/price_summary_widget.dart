@@ -57,7 +57,7 @@ class PriceSummaryWidget extends StatelessWidget {
                       bookNowController.ticketList[index]
                           .selectedAminiteds[innerIndex].title,
                       bookNowController.ticketList[index]
-                          .selectedAminiteds[innerIndex].price!)),
+                          .selectedAminiteds[innerIndex].pivot.price!)),
               priceElement("Taxes", 0),
               priceElement("Discount",
                   bookNowController.calculateDiscountForTicket(index)),

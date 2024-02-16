@@ -50,8 +50,8 @@ class BookNowController extends GetxController {
 
     for (var element in eventDetailsModel.amenities) {
       if (element.id == title.id) {
-        aminityPrice = element.price!;
-        title.price != aminityPrice;
+        aminityPrice = element.pivot.price!;
+        title.pivot.price != aminityPrice;
       }
     }
     if (ticketList[index].selectedAminiteds.contains(title)) {
@@ -61,7 +61,7 @@ class BookNowController extends GetxController {
     } else {
       ticketList[index].selectedAminiteds.add(title);
       ticketList[index].totalPrice += aminityPrice;
-      title.price = aminityPrice;
+      title.pivot.price = aminityPrice;
     }
     update();
   }

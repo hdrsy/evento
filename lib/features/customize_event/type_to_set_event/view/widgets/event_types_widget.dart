@@ -41,7 +41,7 @@ class EventTypesWidget extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 3, // Number of items per row
                 crossAxisSpacing:
-                    scaleWidth(50), // Horizontal spacing between items
+                    scaleWidth(45), // Horizontal spacing between items
                 mainAxisSpacing:
                     scaleHeight(16), // Vertical spacing between items
                 childAspectRatio: 1, // Aspect ratio of each child
@@ -78,49 +78,97 @@ class EventTypesWidget extends StatelessWidget {
 //               ),
 //             ),
 //           ),
-class IconContainerWidget extends StatelessWidget {
+class IconContainerWidget extends StatefulWidget {
   final CategoryModel categoryModel;
 
-  IconContainerWidget({super.key, required this.categoryModel});
+  IconContainerWidget({Key? key, required this.categoryModel})
+      : super(key: key);
+
+  @override
+  _IconContainerWidgetState createState() => _IconContainerWidgetState();
+}
+
+class _IconContainerWidgetState extends State<IconContainerWidget> {
+  bool showRipple = false;
   final TypetoSetEventController typetoSetEventController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        typetoSetEventController.selectedCategory.value == categoryModel.id
-            ? typetoSetEventController.selectedCategory.value = 0
-            : typetoSetEventController.selectedCategory.value =
-                categoryModel.id;
+        setState(() {
+          showRipple = !showRipple;
+        });
+        if (typetoSetEventController.selectedCategory.value ==
+            widget.categoryModel.id) {
+          typetoSetEventController.selectedCategory.value = 0;
+        } else {
+          typetoSetEventController.selectedCategory.value =
+              widget.categoryModel.id;
+        }
       },
       child: Obx(
         () => Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      width: 2,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                // Ripple effect
+                AnimatedContainer(
+                  onEnd: () {
+                    setState(() {
+                      showRipple = false;
+                    });
+                  },
+                  width: showRipple ? 65 : 0,
+                  height: showRipple ? 65 : 0,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeOutQuart,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                    boxShadow: showRipple
+                        ? [
+                            for (var i = 0; i < 2; i += 1)
+                              BoxShadow(
+                                  spreadRadius: i * 5.0,
+                                  color: customColors.primary
+                                      .withAlpha(255 ~/ (i + 2)))
+                          ]
+                        : [],
+                  ),
+                ),
+                // Icon Container
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 2,
+                          color:
+                              typetoSetEventController.selectedCategory.value ==
+                                      widget.categoryModel.id
+                                  ? customColors.primary
+                                  : customColors.primaryBackground),
                       color: typetoSetEventController.selectedCategory.value ==
-                              categoryModel.id
+                              widget.categoryModel.id
                           ? customColors.primary
-                          : customColors.primaryBackground),
-                  color: typetoSetEventController.selectedCategory.value ==
-                          categoryModel.id
-                      ? customColors.primary
-                      : customColors.primaryBackground,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: getImageNetworkImageProvider(
-                          url: categoryModel.icon, width: null, height: null))),
+                          : customColors.primaryBackground,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: getImageNetworkImageProvider(
+                              url: widget.categoryModel.icon,
+                              width: null,
+                              height: null))),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: 3),
               child: Text(
-                categoryModel.title,
+                widget.categoryModel.title,
                 style: customTextStyle.bodyMedium,
               ),
             ),

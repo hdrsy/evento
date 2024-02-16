@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import '../../../create_profile/view/widgets/camera_icon.dart';
 import '../../controller/edit_profile_controller.dart';
@@ -5,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EditImageWidget extends StatelessWidget {
-  EditImageWidget({super.key});
+class EditImageWidgetOrganizer extends StatelessWidget {
+  EditImageWidgetOrganizer({super.key});
   final EditProfileOrganizerController controller = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,17 @@ class EditImageWidget extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               ///// cover image
-              image: controller.coverImage != null
-                  ? FileImage(controller.coverImage!) as ImageProvider<Object>
-                  : const AssetImage('assets/images/image.jpg'),
+              image: controller.profileModel.organizerInfo.cover != null
+                  ? getImageNetwork(
+                          url:
+                              "/storage/${controller.profileModel.organizerInfo.cover}",
+                          width: double.infinity,
+                          height: null)
+                      .image
+                  : controller.coverImage != null
+                      ? FileImage(controller.coverImage!)
+                          as ImageProvider<Object>
+                      : const AssetImage('assets/images/image.jpg'),
               fit: BoxFit.cover)),
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.2,
@@ -60,16 +70,22 @@ class EditImageWidget extends StatelessWidget {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: controller.profileImage != null
-                        ? Image.file(
-                            controller.profileImage!,
-                            alignment: const Alignment(0, 0),
-                          )
-                        : Image.asset(
-                            'assets/images/faceBookProfile.jfif',
-                            // fit: BoxFit.,
-                            alignment: const Alignment(0, 0),
-                          ),
+                    child: controller.profileModel.organizerInfo.profile != null
+                        ? getImageNetwork(
+                            url:
+                                "/storage/${controller.profileModel.organizerInfo.profile}",
+                            width: null,
+                            height: null)
+                        : controller.profileImage != null
+                            ? Image.file(
+                                controller.profileImage!,
+                                alignment: const Alignment(0, 0),
+                              )
+                            : Image.asset(
+                                'assets/images/faceBookProfile.jfif',
+                                // fit: BoxFit.,
+                                alignment: const Alignment(0, 0),
+                              ),
                   ),
                   Positioned(
                     //// camera icon to change the profile image

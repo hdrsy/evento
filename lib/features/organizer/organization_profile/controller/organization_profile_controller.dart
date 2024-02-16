@@ -34,7 +34,7 @@ class OrganizationProfileController extends GetxController {
     isLoading.value = true;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.organizationProfile,
+        targetRout: "${ServerConstApis.organizerProfile}/1",
         method: "GEt",
         token: token);
 
@@ -44,9 +44,10 @@ class OrganizationProfileController extends GetxController {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       print("handling :$handlingResponse");
-      // final interestsJson = handlingResponse['organizer'];
+      final interestsJson = handlingResponse['organizer'];
 
-      // organizerProfileModel = OrganizationProfileModel.fromJson(interestsJson);
+      organizerProfileModel = OrganizationProfileModel.fromJson(interestsJson);
+      print("organization: ${organizerProfileModel.organizedEvents}");
       update();
     }
     isLoading.value = false;

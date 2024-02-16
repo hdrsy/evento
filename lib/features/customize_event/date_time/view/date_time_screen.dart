@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -53,9 +54,12 @@ class DateTimeScreen extends StatelessWidget {
             SelectPeopleDateTime(),
             UploadMedia(),
             NotesLabel(),
+            SizedBox(
+              height: 10.h,
+            ),
             NextStepButton()
           ].divide(SizedBox(
-            height: scaleHeight(10),
+            height: scaleHeight(0),
           )),
         ),
       ),

@@ -13,30 +13,34 @@ class ReelsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        body: SafeArea(
-          child: Obx(
-            () => reelsController.isLoading.value
-                ? const ReelsShimmer()
-                : PageView.builder(
-                    controller: reelsController.pageController,
-                    scrollDirection: Axis.vertical,
-                    onPageChanged: (index) {
-                      if (index > reelsController.currentUserIndex) {
-                        // Swipe Up - Load the next video
-                        reelsController.nextUser();
-                      } else {
-                        // Swipe Down - Go back to the previous video
-                        reelsController.previousUser();
-                      }
-                    },
-                    itemCount: reelsController.itemList.length,
-                    itemBuilder: (context, index) {
-                      return ReelsWidget(
-                        model: reelsController.itemList[index],
-                        modelIndex: index,
-                      );
-                    }),
-          ),
-        ));
+        body: RefreshIndicator(
+            onRefresh: () {
+              return reelsController.refreshScreen();
+            },
+            child: SafeArea(
+              child: Obx(
+                () => reelsController.isLoading.value
+                    ? const ReelsShimmer()
+                    : PageView.builder(
+                        controller: reelsController.pageController,
+                        scrollDirection: Axis.vertical,
+                        onPageChanged: (index) {
+                          if (index > reelsController.currentUserIndex) {
+                            // Swipe Up - Load the next video
+                            reelsController.nextUser();
+                          } else {
+                            // Swipe Down - Go back to the previous video
+                            reelsController.previousUser();
+                          }
+                        },
+                        itemCount: reelsController.itemList.length,
+                        itemBuilder: (context, index) {
+                          return ReelsWidget(
+                            model: reelsController.itemList[index],
+                            modelIndex: index,
+                          );
+                        }),
+              ),
+            )));
   }
 }

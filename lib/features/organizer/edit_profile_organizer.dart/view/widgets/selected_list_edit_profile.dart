@@ -1,3 +1,5 @@
+import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/edit_profile_controller.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -9,123 +11,132 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // ignore: must_be_immutable
-class SelectStateEditProfile extends StatelessWidget {
-   SelectStateEditProfile({super.key});
-EditProfileServiceProviderController editProfileController=Get.find();
-String selectedState='';
+class SelectStateEditOrganizerProfile extends StatelessWidget {
+  SelectStateEditOrganizerProfile({super.key});
+  EditProfileOrganizerController editProfileController = Get.find();
+  String selectedState = '';
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: Container(
         // height: scaleHeight(200), // Height of the picker
-        padding: padding(0,40,0,40),
-          decoration: BoxDecoration(
-        color: customColors.secondaryBackground,
-        borderRadius:const BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+        padding: padding(0, 40, 0, 40),
+        decoration: BoxDecoration(
+          color: customColors.secondaryBackground,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
         ),
-      ),  
         child: Column(
-           mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-            width: 50,
-            child: Divider(
-              thickness: 3,
-              color: customColors.secondary,
+              width: 50,
+              child: Divider(
+                thickness: 3,
+                color: customColors.secondary,
+              ),
             ),
-          ),
             Expanded(
               child: CupertinoPicker(
-                
                 itemExtent: 32.0, // Height of each item
                 backgroundColor: customColors.secondaryBackground,
                 onSelectedItemChanged: (index) {
-                 selectedState= editProfileController.states[ index];
+                  selectedState = editProfileController.states[index];
                 },
-                children: List<Widget>.generate(editProfileController.states.length, (index) {
-                  return Center(child: Text(editProfileController.states[index],style: customTextStyle.titleSmall.override(
-                                  fontFamily: 'BeerSerif',
-                                  color: customColors.primaryText,
-                                  fontSize: 16,
-                                  useGoogleFonts: false,
-                                ),),);
+                children: List<Widget>.generate(
+                    editProfileController.states.length, (index) {
+                  return Center(
+                    child: Text(
+                      editProfileController.states[index],
+                      style: customTextStyle.titleSmall.override(
+                        fontFamily: 'BeerSerif',
+                        color: customColors.primaryText,
+                        fontSize: 16,
+                        useGoogleFonts: false,
+                      ),
+                    ),
+                  );
                 }),
               ),
             ),
             Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ButtonWidget(
-                      onPressed: () async {
-                        Get.back();
-                      },
-                      text:tr( "Cancel"),
-                      options: ButtonOptions(
-                        width: 120,
-                        height: 45,
-                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.secondaryBackground,
-                        textStyle: customTextStyle
-                            .titleSmall
-                            .override(
-                              fontFamily: 'BeerSerif',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              useGoogleFonts: false,
-                            ),
-                        elevation: 0,
-                        borderSide: BorderSide(
-                          color: customColors.primary,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ButtonWidget(
+                    onPressed: () async {
+                      Get.back();
+                    },
+                    text: tr("Cancel"),
+                    options: ButtonOptions(
+                      width: 120,
+                      height: 45,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: customColors.secondaryBackground,
+                      textStyle: customTextStyle.titleSmall.override(
+                        fontFamily: 'BeerSerif',
+                        color: customColors.primaryText,
+                        fontSize: 14,
+                        useGoogleFonts: false,
                       ),
-                      showLoadingIndicator: false,
-                    ),
-                    ButtonWidget(
-                      onPressed: () async {
-                    editProfileController.selectedState=selectedState;
-                    editProfileController.update();
-                    Get.back();
-                      },
-                      text:tr ( "Done") ,
-                      options: ButtonOptions(
-                        width: 120,
-                        height: 45,
-                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      elevation: 0,
+                      borderSide: BorderSide(
                         color: customColors.primary,
-                        textStyle:
-                            customTextStyle.titleSmall.override(
-                                  fontFamily: 'BeerSerif',
-                                  color: customColors.info,
-                                  fontSize: 14,
-                                  useGoogleFonts: false,
-                                ),
-                        elevation: 0,
-                        borderSide: BorderSide(
-                          color: customColors.primary,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
+                        width: 2,
                       ),
-                      showLoadingIndicator: false,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
-                ),
+                    showLoadingIndicator: false,
+                  ),
+                  ButtonWidget(
+                    onPressed: () async {
+                      editProfileController.selectedState = selectedState;
+                      editProfileController.update();
+                      Get.back();
+                    },
+                    text: tr("Done"),
+                    options: ButtonOptions(
+                      width: 120,
+                      height: 45,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: customColors.primary,
+                      textStyle: customTextStyle.titleSmall.override(
+                        fontFamily: 'BeerSerif',
+                        color: customColors.info,
+                        fontSize: 14,
+                        useGoogleFonts: false,
+                      ),
+                      elevation: 0,
+                      borderSide: BorderSide(
+                        color: customColors.primary,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    showLoadingIndicator: false,
+                  ),
+                ],
               ),
-          ].divide(SizedBox(height: scaleHeight(8),)),
+            ),
+          ].divide(SizedBox(
+            height: scaleHeight(8),
+          )),
         ),
       ),
     );

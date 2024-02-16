@@ -6,10 +6,11 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EventTitle extends StatelessWidget {
-   EventTitle({super.key});
- final DateTimeController dateTimeController = Get.find();
- 
+  EventTitle({super.key});
+  final DateTimeController dateTimeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +35,7 @@ class EventTitle extends StatelessWidget {
         ),
         Container(
           width: 360,
-          height: 50,
+          height: 45,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
@@ -46,16 +47,16 @@ class EventTitle extends StatelessWidget {
             child: Form(
               // key: dateTimeController.formstate,
               child: TextFieldContactInformation(
-                      labelKey:tr( "Event title"),
-                      hintTextKey:tr( 'Label here...'),
-                      controller: dateTimeController.eventTitle,
-                      onChanged: (value) {
-                        dateTimeController.eventTitle.text = value;
-                      },
-                      validator: (value) {
-                        return nameValidation(value);
-                      }),
-                 
+                  labelKey: tr("Event title"),
+                  iconVisible: false,
+                  hintTextKey: tr('Label here...'),
+                  controller: dateTimeController.eventTitle,
+                  onChanged: (value) {
+                    dateTimeController.eventTitle.text = value;
+                  },
+                  validator: (value) {
+                    return nameValidation(value);
+                  }),
             ),
           ),
         ),

@@ -32,11 +32,12 @@ class _FAQPageState extends State<FAQPage> {
         Wrap(
           children: allQuestions.keys
               .map((category) => ChoiceChip(
+                    showCheckmark: false,
                     selectedColor: customColors.primary,
                     labelStyle: customTextStyle.bodyMedium.copyWith(
                         color: selectedCategory == category
                             ? customColors.info
-                            : customColors.primaryText),
+                            : customColors.secondaryText),
                     label: Text(category).tr(),
                     selected: selectedCategory == category,
                     onSelected: (_) => updateQuestions(category),

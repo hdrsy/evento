@@ -67,7 +67,7 @@ class DateTimeController extends GetxController {
       if (isEdit.value) {
         Get.back();
       } else {
-        Get.toNamed('/ServiceCategoryScreen');
+        Get.toNamed('/EventReviewScreen');
       }
     } else {
       Get.snackbar("Uncomplete data", "Please fill all the required data",
@@ -75,5 +75,11 @@ class DateTimeController extends GetxController {
           backgroundColor: customColors.primaryBackground,
           colorText: customColors.primaryText);
     }
+  }
+
+  fillContactInfo() {
+    phoneNumber.text = user!.phoneNumber;
+    firstName.text = user!.firstName;
+    lastName.text = user!.lastName;
   }
 }

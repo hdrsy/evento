@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/shared/models/media.dart';
+import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -15,22 +17,30 @@ class EditProfileOrganizerController extends GetxController {
   late RxBool isImageSelected;
   late TextEditingController firstName;
   late TextEditingController bio;
+  late TextEditingController createFolderName;
+
   late TextEditingController sepecialities;
   late String selectedState;
-  late ProfileModel profileModel;
+  late OrganizationProfileModel profileModel;
   late RxList<String> errorMessage;
   late GlobalKey<FormState> formstate;
   late List<String> states;
   late RxBool isLoading;
   late File? profileImage;
   late File? coverImage;
+  late RxList<FolderModel> foldersModel;
   @override
   void onInit() {
-    profileModel = Get.arguments[0];
+    profileModel = Get.arguments;
     isImageSelected = false.obs;
-    firstName = TextEditingController(text: profileModel.firstName);
-    selectedState = profileModel.state;
+    firstName = TextEditingController(text: profileModel.organizerInfo.name);
+    createFolderName = TextEditingController();
+    selectedState = profileModel.organizerInfo.state;
+    bio = TextEditingController(text: profileModel.organizerInfo.bio);
+    sepecialities =
+        TextEditingController(text: profileModel.organizerInfo.services);
     isLoading = false.obs;
+    foldersModel = <FolderModel>[].obs;
     formstate = GlobalKey<FormState>();
     errorMessage = <String>[].obs;
     states = [
@@ -51,6 +61,14 @@ class EditProfileOrganizerController extends GetxController {
     ];
 
     super.onInit();
+  }
+
+  addMedia(RxList<MediaModel> newmedia) {
+    if (newmedia.isEmpty) {
+      foldersModel.removeLast();
+    } else {
+      foldersModel.last.mediaList.addAll(newmedia);
+    }
   }
 
   final imagePicker = ImagePicker();
@@ -91,6 +109,26 @@ class EditProfileOrganizerController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
+    Get.back();
+  }
+
+  editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
+    print("inside media");
+    foldersModel[folderIndex].mediaList.clear();
+    foldersModel[folderIndex].mediaList.addAll(media);
+    Get.back();
+    print("editing complete");
+  }
+
+  deleteFolder(int folderIndex) {
+    foldersModel.removeAt(folderIndex);
+    print("inside deleteFolder");
+  }
+
+  onPressCreateFolder() {
+    foldersModel
+        .add(FolderModel(folderName: createFolderName.text, mediaList: []));
+    createFolderName.clear();
     Get.back();
   }
 }

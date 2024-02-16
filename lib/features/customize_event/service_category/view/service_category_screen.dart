@@ -77,25 +77,16 @@ class ServiceCategoryScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Selected",
-                    style: customTextStyle.bodyMedium.override(
-                      fontFamily: primaryFontFamily,
-                      color: customColors.primaryText,
-                      fontSize: 12,
-                      useGoogleFonts: true,
-                    ),
-                  ).tr(),
                   Obx(
                     () => Text(
-                      "${serviceCategoryController.selectedServiceProvidersNumbers()}/${serviceCategoryController.serviceCategoryList.length + 1}",
+                      "${serviceCategoryController.selectedServiceProvidersNumbers()} Selected",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: primaryFontFamily,
                         color: customColors.primaryText,
                         fontSize: 12,
                         useGoogleFonts: true,
                       ),
-                    ),
+                    ).tr(),
                   ),
                 ],
               ),

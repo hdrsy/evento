@@ -22,7 +22,7 @@ class ContactInformationForm extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 10),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Contact Information",
@@ -32,6 +32,20 @@ class ContactInformationForm extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ).tr(),
+              GestureDetector(
+                onTap: () {
+                  dateTimeController.fillContactInfo();
+                },
+                child: Text(
+                  "Fill My Data",
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: 'Roboto',
+                    fontSize: 12,
+                    color: customColors.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ).tr(),
+              ),
             ],
           ),
         ),
@@ -51,6 +65,7 @@ class ContactInformationForm extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFieldContactInformation(
+                      iconVisible: false,
                       labelKey: tr("First name"),
                       hintTextKey: tr('Label here...'),
                       controller: dateTimeController.firstName,
@@ -65,6 +80,7 @@ class ContactInformationForm extends StatelessWidget {
                     color: customColors.secondaryBackground,
                   ),
                   TextFieldContactInformation(
+                      iconVisible: false,
                       labelKey: tr("Last name"),
                       hintTextKey: tr('Label here...'),
                       controller: dateTimeController.lastName,
@@ -79,6 +95,7 @@ class ContactInformationForm extends StatelessWidget {
                     color: customColors.secondaryBackground,
                   ),
                   TextFieldContactInformation(
+                      iconVisible: false,
                       keyboardType: TextInputType.phone,
                       labelKey: tr("Phone Number"),
                       hintTextKey: tr('Label here...'),

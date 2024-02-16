@@ -92,10 +92,11 @@ class EventReviewController extends GetxController {
       "end_time": formattedEndTime,
       "title": dateTimeController.eventTitle.text
     };
-    List<int> serviceProviderIds = serviceCategoryController
-        .selectedServiceProviders
-        .map((rxInt) => rxInt.value)
-        .toList();
+    List<int> serviceProviderIds =
+        serviceCategoryController.selectedServiceProviders
+            .map((rxInt) => rxInt.value)
+            .where((value) => value != 0) // Exclude items with a value of 0
+            .toList();
 
     // for (int i = 0; i < serviceProviderIds.length; i++) {
     //   print(serviceProviderIds[i]);
@@ -104,7 +105,9 @@ class EventReviewController extends GetxController {
     //         serviceProviderIds[i].toString();
     //   }
     // }
+
     dataRequest['service_provider_id'] = serviceProviderIds;
+    print(dataRequest.containsKey('service_provider_id'));
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];

@@ -1,3 +1,5 @@
+import 'package:expandable/expandable.dart';
+
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -63,25 +65,68 @@ class SeeAllAmenities extends StatelessWidget {
   }
 }
 
-class AmenitiesCard extends StatelessWidget {
+class AmenitiesCard extends StatefulWidget {
   const AmenitiesCard({super.key, required this.amenity});
   final Amenity amenity;
+
+  @override
+  State<AmenitiesCard> createState() => _AmenitiesCardState();
+}
+
+class _AmenitiesCardState extends State<AmenitiesCard> {
+  late ExpandableController expandableController1;
+  @override
+  initState() {
+    expandableController1 = ExpandableController(initialExpanded: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          amenity.title,
-          style: customTextStyle.bodyMedium.override(
-              fontSize: 14,
+    return ExpandableNotifier(
+        controller: expandableController1,
+        child: ExpandablePanel(
+          theme: const ExpandableThemeData(
+            tapHeaderToExpand: true,
+            tapBodyToExpand: false,
+            // useInkWell: false,
+
+            tapBodyToCollapse: false,
+            headerAlignment: ExpandablePanelHeaderAlignment.center,
+            hasIcon: false,
+          ),
+          expanded: Text(
+            widget.amenity.pivot.description,
+            style: customTextStyle.bodyMedium.override(
+              fontFamily: 'Nunito',
               color: customColors.secondaryText,
-              fontWeight: FontWeight.w500,
-              fontFamily: primaryFontFamily,
-              useGoogleFonts: true),
-        ),
-        amentitesIcon(amenity.icon)
-      ],
-    );
+              useGoogleFonts: false,
+            ),
+          ),
+          collapsed: Container(
+            width: MediaQuery.sizeOf(context).width * 0,
+            height: 0,
+            decoration: BoxDecoration(
+              color: customColors.secondaryBackground,
+            ),
+          ),
+          header: SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.amenity.title,
+                  style: customTextStyle.bodyMedium.override(
+                      fontSize: 14,
+                      color: customColors.secondaryText,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: primaryFontFamily,
+                      useGoogleFonts: true),
+                ),
+                amentitesIcon(widget.amenity.icon)
+              ],
+            ),
+          ),
+        ));
   }
 }

@@ -10,12 +10,13 @@ Container userPhoto(ReelModel model) {
     decoration: const BoxDecoration(
       shape: BoxShape.circle,
     ),
-    child: model.event != null
+    child: model.event == null
         ? Image.network(
             'https://picsum.photos/seed/913/600',
             fit: BoxFit.cover,
           )
-        : getImageNetwork(url: getReelImage(model), width: null, height: null),
+        : getImageNetworkforCahing(
+            url: getReelImage(model), width: null, height: null),
   );
 }
 

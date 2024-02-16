@@ -49,14 +49,14 @@ Widget buildEventDetails(BuildContext context) {
             text: "Add to My Calendar",
             options: ButtonOptions(
               width: 170.w,
-              height: 25.h,
+              height: 30.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
               color: customColors.primaryBackground,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.primaryText,
-                fontSize: 10.sp,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),
@@ -103,14 +103,14 @@ Widget buildEventDetails(BuildContext context) {
             text: "See Location on Maps",
             options: ButtonOptions(
               width: 170.w,
-              height: 25.h,
+              height: 30.h,
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
               iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
               color: customColors.primaryBackground,
               textStyle: customTextStyle.titleSmall.override(
                 fontFamily: breeSerif,
                 color: customColors.primaryText,
-                fontSize: 10.sp,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
               ),

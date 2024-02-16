@@ -68,10 +68,14 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
   }
 
   void _initializePlayer() {
+    // Placeholder for aspect ratio determination logic
+    // double aspectRatio = 16 / 9; // Default to a common aspect ratio
+
     _betterPlayerController = BetterPlayerController(
       const BetterPlayerConfiguration(
         // aspectRatio: 9 / 16,
-        fit: BoxFit.fill,
+        // fit: BoxFit.contain,
+        // autoDetectFullscreenAspectRatio: true,
         autoPlay: true,
         looping: false,
         controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -95,6 +99,8 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
         setState(() {
           _isPlayerInitialized = true;
           isLoading = false;
+          _betterPlayerController.setOverriddenAspectRatio(
+              _betterPlayerController.videoPlayerController!.value.aspectRatio);
         });
       }
       if (event.betterPlayerEventType == BetterPlayerEventType.finished) {

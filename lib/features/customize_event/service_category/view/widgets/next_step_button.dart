@@ -17,11 +17,11 @@ class NextStepButton extends StatelessWidget {
         ButtonWidget(
       onPressed: () async {
         ServiceCategoryController serviceCategoryController = Get.find();
-        if (serviceCategoryController.selectedVenue.value != 0  && serviceCategoryController.selectedServiceProviders.isNotEmpty) {
-          Get.toNamed('/EventReviewScreen');
+        if (serviceCategoryController.selectedVenue.value != 0 &&
+            serviceCategoryController.selectedServiceProviders.isNotEmpty) {
+          Get.toNamed('/dateTimeScreen');
         } else {
-snakBarForError(tr("Please Select Your Venue First"));
-
+          snakBarForError(tr("Please Select Your Venue First"));
         }
       },
       text: "Next ",

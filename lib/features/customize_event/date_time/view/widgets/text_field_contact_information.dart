@@ -10,6 +10,7 @@ class TextFieldContactInformation extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   Function(String)? onChanged;
+  final bool iconVisible;
 
   TextFieldContactInformation({
     super.key,
@@ -19,12 +20,13 @@ class TextFieldContactInformation extends StatelessWidget {
     this.onChanged,
     this.keyboardType,
     required this.validator,
+    this.iconVisible = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -65,14 +67,16 @@ class TextFieldContactInformation extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-          child: Icon(
-            Icons.edit_outlined,
-            color: customColors.secondaryText,
-            size: 24,
-          ),
-        )
+        iconVisible
+            ? Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                child: Icon(
+                  Icons.edit_outlined,
+                  color: customColors.secondaryText,
+                  size: 20,
+                ),
+              )
+            : const SizedBox()
       ],
     );
   }

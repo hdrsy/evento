@@ -53,6 +53,8 @@ class HelpCenterScreen extends StatelessWidget {
                         unselectedLabelStyle: const TextStyle(),
                         indicatorColor: customColors.primary,
                         indicatorWeight: 4,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: customColors.secondaryBackground,
                         tabs: [
                           Tab(
                             text: tr("FAQ"),

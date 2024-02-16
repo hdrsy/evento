@@ -154,7 +154,7 @@ class _SelectPeopleDateTimeState extends State<SelectPeopleDateTime>
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Contact Information",
+                "Select Options Below",
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Roboto',
                   fontSize: 16,

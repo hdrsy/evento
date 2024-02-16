@@ -6,6 +6,7 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import 'package:evento/main.dart';
@@ -18,6 +19,8 @@ class OrganizerCreateProfileController extends GetxController {
   late TextEditingController bio;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  FormFieldController<String> dropDownValueController =
+      FormFieldController(null);
 
   late TextEditingController createFolderName;
   late List<String> states;
@@ -67,6 +70,14 @@ class OrganizerCreateProfileController extends GetxController {
     Get.back();
   }
 
+  addMedia(RxList<MediaModel> newmedia) {
+    if (newmedia.isEmpty) {
+      foldersModel.removeLast();
+    } else {
+      foldersModel.last.mediaList.addAll(newmedia);
+    }
+  }
+
   final imagePicker = ImagePicker();
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -98,7 +109,7 @@ class OrganizerCreateProfileController extends GetxController {
         'name': organizerName.text,
         'bio': bio.text,
         'state': selectedState!,
-        // 'services': choiceOrganizerCategoryController.sericeSelected.text,
+        'services': choiceOrganizerCategoryController.sericeSelected.text,
         'other_category': choiceOrganizerCategoryController.sericeSelected.text,
         // 'category_ids': choiceOrganizerCategoryController.selectedCategories
       };

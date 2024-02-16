@@ -139,13 +139,11 @@ class NameAndFollow extends StatelessWidget {
             fontSize: 24,
           ),
           GetBuilder<OrganizationProfileController>(builder: (context) {
-            return
-
-                // !organizerProfileController.isorganizerEditProfile?
-                ButtonWidget(
+            return ButtonWidget(
               onPressed: () async {
-                // organizerProfileController.followOrUnFollowOrganizer(
-                //     organizerProfileController.orgnizerId);
+                Get.toNamed('/EditProfileOrganizerScreen',
+                    arguments:
+                        organizerProfileController.organizerProfileModel);
               },
               text: "Edit profile",
               icon: const Icon(

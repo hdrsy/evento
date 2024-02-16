@@ -147,7 +147,7 @@ class TicketDetailesCard extends StatelessWidget {
                               title: ticketModel
                                   .selectedAminiteds[innerIndex].title,
                               subTitle: ticketModel
-                                  .selectedAminiteds[innerIndex].price!
+                                  .selectedAminiteds[innerIndex].pivot.price!
                                   .toString())),
                       const SinglePriceElement(title: "Tax", subTitle: ""),
                       const SinglePriceElement(title: "Discount", subTitle: ""),

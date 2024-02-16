@@ -1,18 +1,18 @@
 import 'dart:io';
 
 import 'package:evento/core/shared/models/media.dart';
+import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/edit_profile_controller.dart';
 
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
-import '../../controller/oganizer_create_profile_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class CreateFolder extends StatelessWidget {
-  CreateFolder({super.key});
-  final OrganizerCreateProfileController organizerCreateProfileController =
+class CreateFolderEditOrganizer extends StatelessWidget {
+  CreateFolderEditOrganizer({super.key});
+  final EditProfileOrganizerController organizerCreateProfileController =
       Get.find();
   @override
   Widget build(BuildContext context) {

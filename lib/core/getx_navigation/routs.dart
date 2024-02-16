@@ -1,6 +1,8 @@
 import 'package:evento/core/shared/controllers/screens/edit_folder.dart/view/edit_folder_screen.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/controller/binding/booking_detailes_in_event_for_organizer_binding.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/view/booking_detailes_in_event_for_organizer_screen.dart';
+import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/binding/edit_profile_binding.dart';
+import 'package:evento/features/organizer/edit_profile_organizer.dart/view/edit_profile_screen.dart';
 import 'package:evento/features/organizer/event_request_status_for_organizer/view/event_request_status_for_organizer_screen.dart';
 import 'package:evento/features/organizer/my_events_for_organizer/controller/binding/my_events_for_organizer_binding.dart';
 import 'package:evento/features/organizer/my_events_for_organizer/view/my_events_for_organizer_screen.dart';
@@ -135,6 +137,10 @@ appRoutes() => [
           name: '/ServiceAccordingDetailesScreen',
           page: () => ServiceAccordingDetailesScreen(),
           binding: ServiceAccordingDetailesBinding()),
+      GetPage(
+          name: '/EditProfileOrganizerScreen',
+          page: () => EditProfileOrganizerScreen(),
+          binding: EditProfileOrganizerBinding()),
       GetPage(
           name: '/GalleryScreen',
           page: () => GalleryScreen(),

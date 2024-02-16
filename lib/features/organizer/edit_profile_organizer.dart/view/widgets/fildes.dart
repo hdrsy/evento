@@ -10,8 +10,9 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
-class Fields extends StatelessWidget {
-  Fields({super.key});
+
+class FieldsOrganizer extends StatelessWidget {
+  FieldsOrganizer({super.key});
   final EditProfileOrganizerController editProfileController = Get.find();
 
   @override
@@ -25,8 +26,8 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.person_outline,
                 controller: editProfileController.firstName,
-                hintText:tr ("Mohammad"),
-                labelText:tr( "First Name"),
+                hintText: tr("Spark"),
+                labelText: tr("Organization/Name"),
                 onChanged: (value) {
                   editProfileController.firstName.text = value;
                 },
@@ -36,8 +37,10 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.person_outline,
                 controller: editProfileController.bio,
-                hintText:tr( "Crweted Events"),
-                labelText:tr( "Bio"),
+                hintText: tr(
+                    """Event organizer specialist in decoration ,lighting and flowers .
+Wdding, Birthday ,anniversary......"""),
+                labelText: "Bio",
                 onChanged: (value) {
                   editProfileController.bio.text = value;
                 },
@@ -47,16 +50,14 @@ class Fields extends StatelessWidget {
             EditProfileField(
                 suffixIcon: Icons.calendar_month,
                 controller: editProfileController.sepecialities,
-                hintText:tr( "Decoration"),
-                labelText:tr( "Sepecialities"),
+                hintText: tr("Decoration"),
+                labelText: tr("Sepecialities"),
                 onChanged: (value) {
                   editProfileController.sepecialities.text = value;
                 },
                 validator: (value) {
                   return null;
                 }),
-           
-        
             InkWell(
               onTap: () async {
                 await showButtonSheet(
@@ -64,7 +65,8 @@ class Fields extends StatelessWidget {
                     widget: SelectStateEditProfile(),
                     height: 300);
               },
-              child: GetBuilder<EditProfileController>(builder: (ccontext) {
+              child: GetBuilder<EditProfileOrganizerController>(
+                  builder: (ccontext) {
                 return Container(
                   width: double.infinity,
                   height: scaleHeight(50),
@@ -95,8 +97,7 @@ class Fields extends StatelessWidget {
                 );
               }),
             ),
-
-            ].divide(SizedBox(
+          ].divide(SizedBox(
             height: scaleHeight(10),
           )),
         ),

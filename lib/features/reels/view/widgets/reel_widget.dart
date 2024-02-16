@@ -128,9 +128,11 @@ Align description(String description) {
         style: customTextStyle.bodyMedium.override(
           fontFamily: 'Nunito',
           color: Colors.white,
-          fontSize: 16,
+          fontSize: 14,
           useGoogleFonts: true,
         ),
+        maxLines: 2,
+        overflow: TextOverflow.fade,
       ),
     ),
   );

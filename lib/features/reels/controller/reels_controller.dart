@@ -74,6 +74,10 @@ class ReelsController extends PaginationController<ReelModel> {
     }
   }
 
+  Future<void> refreshScreen() async {
+    await refreshData();
+  }
+
   playNextVideo(int userIndex, int videoIndex) {
     if (innerPageController.page!.round() + 1 <
         itemList[userIndex].videos.length) {

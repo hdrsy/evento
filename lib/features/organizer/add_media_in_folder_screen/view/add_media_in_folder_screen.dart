@@ -54,10 +54,10 @@ class AddMediaInFolderScreen extends StatelessWidget {
                     } else {
                       var mediaItem =
                           addMediaInFolderController.attachedMedia[index - 1];
-                      if (mediaItem.containsKey("image")) {
+                      if (mediaItem.mediaType == ("image")) {
                         return Stack(
                           children: [
-                            Image.file(mediaItem["image"]!),
+                            Image.file(mediaItem.media),
                             Positioned(
                                 top: -5,
                                 right: -5,
@@ -69,12 +69,12 @@ class AddMediaInFolderScreen extends StatelessWidget {
                                     icon: const Icon(Icons.cancel_outlined))),
                           ],
                         );
-                      } else if (mediaItem.containsKey("video")) {
+                      } else if (mediaItem.mediaType == ("video")) {
                         // Placeholder for video, adjust as necessary for your video player
                         return Stack(
                           alignment: Alignment.center,
                           children: [
-                            Image.file(mediaItem["video"]!),
+                            Image.file(mediaItem.media),
                             Icon(
                               Icons.play_circle_fill,
                               size: 50,

@@ -309,21 +309,47 @@ class Amenity {
   final int id;
   final String title;
   final String icon;
-  int? price;
+  final Pivot pivot;
   Amenity({
     required this.id,
     required this.title,
     required this.icon,
-    required this.price,
+    required this.pivot,
   });
 
   factory Amenity.fromJson(Map<String, dynamic> oldJson) {
+    // print("aminity is:$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return Amenity(
       id: json['id'],
       title: json['title'],
       icon: json['icon'],
-      price: json['pivot']['price'] ?? 0,
+      pivot: Pivot.fromJson(json['pivot']),
+    );
+  }
+}
+
+class Pivot {
+  final int eventId;
+  final int aminityId;
+  int? price;
+  final String description;
+  Pivot({
+    required this.description,
+    required this.aminityId,
+    required this.eventId,
+    required this.price,
+  });
+
+  factory Pivot.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+    print("aminity is:$json");
+
+    return Pivot(
+      eventId: json['event_id'] ?? 0,
+      aminityId: json['interest_id'] ?? 0,
+      description: json['description'] ?? "",
+      price: json['price'] ?? 0,
     );
   }
 }
