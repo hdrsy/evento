@@ -320,25 +320,26 @@ class SelectStates extends StatefulWidget {
 }
 
 class _SelectStates extends State<SelectStates> {
-  late FormFieldController<String>? dropDownValueController;
   @override
   initState() {
     super.initState();
-    dropDownValueController = FormFieldController(null);
   }
 
-  List<String> selectedOptions = [];
+  List<String> _selectedValues = [];
+
+  void _handleSelectionChange(List<String> newSelections) {
+    setState(() {
+      _selectedValues = newSelections;
+    });
+    Get.find<OrganizerCreateProfileController>().selectedState =
+        newSelections.join(', ');
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiSelectDropDown(
-      options: states,
-      selectedValues: selectedOptions,
-      onSelectionChanged: (newSelection) {
-        setState(() {
-          selectedOptions = newSelection;
-        });
-      },
-    );
+        options: states,
+        selectedValues: _selectedValues,
+        onSelectionChanged: _handleSelectionChange);
   }
 }

@@ -25,7 +25,7 @@ Widget followButton(int modelIndex) {
         height: 31,
         color: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
             ? AppColors.darkSecondaryBackground
-            : AppColors.darkPrimary,
+            : AppColors.darkSecondaryBackground,
         textStyle: customTextStyle.titleSmall.override(
           fontFamily: 'Nunito',
           fontSize: 14,

@@ -1,10 +1,12 @@
 // Defining the OrganizerCreateProfileScreen as a StatelessWidget.
+import 'package:evento/core/const/states.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/text_fields/edit_profile_field.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/view/widget/service_provider_account_widget.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/camera_icon.dart';
@@ -128,9 +130,7 @@ Wdding, Birthday ,anniversary......"""),
                       suffixIcon: Icons.description_outlined,
                     ),
 
-                    SelectStates(
-                        serviceProviderCreateProfileController:
-                            serviceProviderCreateProfileController),
+                    SelectStates(),
                     GestureDetector(
                       onTap: () {
                         Get.to(LocationPickerScreen());
@@ -296,55 +296,36 @@ class OrganizerMediaCard extends StatelessWidget {
 }
 
 //// for select the state of organizer
-class SelectStates extends StatelessWidget {
+class SelectStates extends StatefulWidget {
   const SelectStates({
     super.key,
-    required this.serviceProviderCreateProfileController,
   });
 
-  final ServiceProviderCreateProfileController
-      serviceProviderCreateProfileController;
+  @override
+  State<SelectStates> createState() => _SelectStates();
+}
+
+class _SelectStates extends State<SelectStates> {
+  @override
+  initState() {
+    super.initState();
+  }
+
+  List<String> _selectedValues = [];
+
+  void _handleSelectionChange(List<String> newSelections) {
+    setState(() {
+      _selectedValues = newSelections;
+    });
+    Get.find<ServiceProviderCreateProfileController>().selectedState =
+        newSelections.join(', ');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await showButtonSheet(
-            context: context, widget: SelectState(), height: 300);
-      },
-      child: GetBuilder<ServiceProviderCreateProfileController>(
-          builder: (ccontext) {
-        return Container(
-          width: double.infinity,
-          height: scaleHeight(50),
-          padding: padding(0, 10, 0, 10),
-          decoration: BoxDecoration(
-            border: Border.all(color: customColors.primaryBackground, width: 2),
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            // color: customColors.primaryBackground
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                serviceProviderCreateProfileController.selectedState ??
-                    " Covering Areas",
-                style: customTextStyle.bodyMedium.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.primary,
-                  useGoogleFonts: true,
-                ),
-              ).tr(),
-              Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: customColors.secondaryText,
-                size: 15,
-              )
-            ],
-          ),
-        );
-      }),
-    );
+    return MultiSelectDropDown(
+        options: states,
+        selectedValues: _selectedValues,
+        onSelectionChanged: _handleSelectionChange);
   }
 }

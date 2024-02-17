@@ -20,7 +20,7 @@ class SignupController extends GetxController {
     phone = TextEditingController();
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
-    isAgreedOn=false.obs;
+    isAgreedOn = false.obs;
     // statuseRequest = StatuseRequest.init;
     errorMessage = <String>[].obs;
     super.onInit();
@@ -42,29 +42,25 @@ class SignupController extends GetxController {
             "first_name": firstName.text,
             "last_name": lastName.text
           });
-          
+
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
 
       if (handlingResponse is ErrorResponse) {
-     
         errorMessage.value = handlingResponse.getErrorMessages();
         for (var i = 0; i < errorMessage.length; i++) {
-          if(errorMessage[i]=="please complete your data"){
-            Get.toNamed('/steps',arguments: [2,phone.text]);
-  
+          if (errorMessage[i] == "please complete your data") {
+            Get.toNamed('/steps', arguments: [1, phone.text]);
           }
         }
       } else {
-        
         whenSignUpSuccess(handlingResponse);
       }
     }
-    
+
     isLoading.value = false;
   }
 
   whenSignUpSuccess(handlingResponse) {
-    
-    Get.toNamed('/steps',arguments: [1,phone.text]);
+    Get.toNamed('/steps', arguments: [1, phone.text]);
   }
 }

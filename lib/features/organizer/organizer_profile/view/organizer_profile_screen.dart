@@ -139,81 +139,48 @@ class NameAndFollow extends StatelessWidget {
             fontSize: 24,
           ),
           GetBuilder<OrganizerProfileController>(builder: (context) {
-            return
-
-                // !organizerProfileController.isorganizerEditProfile?
-                ButtonWidget(
-              onPressed: () async {
-                organizerProfileController.followOrUnFollowOrganizer(
-                    organizerProfileController.orgnizerId);
-              },
-              text: organizerProfileController
-                      .organizerProfileModel.organizerInfo.isFollowedByAuthUser
-                  ? "Following"
-                  : "Follow",
-              icon: const Icon(
-                Icons.person_add_outlined,
-                size: 20,
-              ),
-              options: ButtonOptions(
-                width: 150,
-                height: 35,
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: organizerProfileController.organizerProfileModel
-                        .organizerInfo.isFollowedByAuthUser
-                    ? customColors.secondaryBackground
-                    : customColors.primary,
-                textStyle: customTextStyle.titleSmall.override(
-                  fontFamily: secondaryFontFamily,
-                  color: organizerProfileController.organizerProfileModel
-                          .organizerInfo.isFollowedByAuthUser
-                      ? customColors.primary
-                      : customColors.info,
-                  fontSize: 10,
-                  fontWeight: FontWeight.normal,
-                  useGoogleFonts: true,
-                ),
-                borderSide: BorderSide(
-                  color: customColors.primary,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            );
-            // :        ButtonWidget(
-            //       onPressed: () async {
-            //        Get.toNamed('/EditProfileOrganizerScreen');
-            //        },
-            //       text: "Edit Profile",
-            //       icon: const Icon(
-            //         Icons.edit,
-            //         size: 20,
-            //       ),
-            //       options: ButtonOptions(
-            //         width: 150,
-            //         height: 35,
-            //         padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
-            //         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-            //         color: organizerProfileController.organizerProfileModel
-            //                 .organizerInfo.isFollowedByAuthUser
-            //             ? customColors.secondaryBackground
-            //             : customColors.primary,
-            //         textStyle: customTextStyle.titleSmall.override(
-            //           fontFamily: secondaryFontFamily,
-            //           color: organizerProfileController.organizerProfileModel
-            //                   .organizerInfo.isFollowedByAuthUser
-            //               ? customColors.primary
-            //               : customColors.info,
-            //           fontSize: 10,
-            //           fontWeight: FontWeight.normal,
-            //           useGoogleFonts: true,
-            //         ),
-            //         borderSide: BorderSide(
-            //           color: customColors.primary,
-            //         ),
-            //         borderRadius: BorderRadius.circular(20),
-            //       ),
-            //     );
+            return !organizerProfileController.isSameUser
+                ? ButtonWidget(
+                    onPressed: () async {
+                      organizerProfileController.followOrUnFollowOrganizer(
+                          organizerProfileController.orgnizerId);
+                    },
+                    text: organizerProfileController.organizerProfileModel
+                            .organizerInfo.isFollowedByAuthUser
+                        ? "Following"
+                        : "Follow",
+                    icon: const Icon(
+                      Icons.person_add_outlined,
+                      size: 20,
+                    ),
+                    options: ButtonOptions(
+                      width: 150,
+                      height: 35,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: organizerProfileController.organizerProfileModel
+                              .organizerInfo.isFollowedByAuthUser
+                          ? customColors.secondaryBackground
+                          : customColors.primary,
+                      textStyle: customTextStyle.titleSmall.override(
+                        fontFamily: secondaryFontFamily,
+                        color: organizerProfileController.organizerProfileModel
+                                .organizerInfo.isFollowedByAuthUser
+                            ? customColors.primary
+                            : customColors.info,
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        useGoogleFonts: true,
+                      ),
+                      borderSide: BorderSide(
+                        color: customColors.primary,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  )
+                : SizedBox();
           }),
         ],
       ),
@@ -399,16 +366,25 @@ class MyTabBarWidget extends StatelessWidget {
   }
 
   Widget _buildFollowersTab(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: [
-          ...List.generate(3, (index) => const OrganizerFolloersCard())
-        ].divide(const SizedBox(
-          height: 10,
-        )),
-      ),
-    );
+    return GetBuilder<OrganizerProfileController>(
+        builder: (organizerProfileController) {
+      return SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          children: [
+            ...List.generate(
+                organizerProfileController.rganizerFollowers.length,
+                (index) => OrganizerFolloersCard(
+                      organizerFollowersModel:
+                          organizerProfileController.rganizerFollowers[index],
+                      modelId: index,
+                    ))
+          ].divide(const SizedBox(
+            height: 10,
+          )),
+        ),
+      );
+    });
   }
 
   Widget _buildGalleryTab(BuildContext context) {

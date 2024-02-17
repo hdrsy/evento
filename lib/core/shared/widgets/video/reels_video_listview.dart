@@ -7,6 +7,7 @@ import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/features/reels/controller/reels_controller.dart';
 import 'package:evento/main.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +34,6 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
   bool _isPlayerInitialized = false;
   late AnimationController _animationController;
   late Animation<double> _heartScaleAnimation;
-
   bool isLoading = true;
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // Heart animation is completed, reset animation after a delay
-        Future.delayed(Duration(milliseconds: 500), () {
+        Future.delayed(const Duration(milliseconds: 500), () {
           _animationController.reset();
         });
       }
@@ -110,7 +110,6 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
             _currentIndex++;
             _betterPlayerController.dispose();
             _initializePlayer();
-            print("playing next video");
           });
         } else {
           widget.reelsController.nextUserPage();
@@ -178,18 +177,23 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        onLongPressStart: (longPressDownDetails) {
+          _betterPlayerController.pause();
+        },
+        onLongPressEnd: (d) {
+          _betterPlayerController.play();
+        },
         onDoubleTap: () {
           _showHeartAnimation();
         },
         onTapUp: (TapUpDetails details) {
           final screenWidth = MediaQuery.of(context).size.width;
           final tapPositionX = details.globalPosition.dx;
+
           if (tapPositionX < screenWidth / 3) {
             _playPrevious();
-            print("Tapped on the left side");
           } else if (tapPositionX > screenWidth * 2 / 3) {
             _playNext();
-            print("Tapped on the right side");
           }
         },
         child: Stack(
@@ -207,7 +211,7 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
             ),
             isLoading
                 ? Align(
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Center(
                       child: CircularProgressIndicator(
                         color: customColors.primary,
@@ -229,7 +233,8 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
                   );
                 },
               ),
-            ),
+            )
+            // : SizedBox(),
           ],
         ));
   }

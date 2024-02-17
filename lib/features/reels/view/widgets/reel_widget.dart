@@ -33,36 +33,34 @@ class ReelsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        width: screenWidth,
-        // height: MediaQuery.of(context).size.height,
-        child: Obx(
-          () => reelsController.isLoading.value
-              ? const ReelsShimmer()
-              : SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Stack(
-                          children: [
-                            MultiVideoPlayer(
-                                videos: model.videos,
-                                eventId: model.id,
-                                modelId: modelIndex),
-                            videoInfo(),
-                            commentShareLike(modelIndex),
-                          ],
-                        ),
+    return SizedBox(
+      width: screenWidth,
+      // height: MediaQuery.of(context).size.height,
+      child: Obx(
+        () => reelsController.isLoading.value
+            ? const ReelsShimmer()
+            : SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          MultiVideoPlayer(
+                              videos: model.videos,
+                              eventId: model.id,
+                              modelId: modelIndex),
+                          videoInfo(),
+                          commentShareLike(modelIndex),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-        ),
+              ),
       ),
     );
   }
@@ -127,8 +125,8 @@ Align description(String description) {
         description,
         style: customTextStyle.bodyMedium.override(
           fontFamily: 'Nunito',
-          color: Colors.white,
-          fontSize: 14,
+          color: AppColors.darkSecondaryText,
+          fontSize: 12,
           useGoogleFonts: true,
         ),
         maxLines: 2,

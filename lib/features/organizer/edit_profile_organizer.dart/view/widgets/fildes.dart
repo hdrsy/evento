@@ -1,3 +1,6 @@
+import 'package:evento/core/const/states.dart';
+import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/functions/validation/name_validation.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -58,50 +61,46 @@ Wdding, Birthday ,anniversary......"""),
                 validator: (value) {
                   return null;
                 }),
-            InkWell(
-              onTap: () async {
-                await showButtonSheet(
-                    context: context,
-                    widget: SelectStateEditProfile(),
-                    height: 300);
-              },
-              child: GetBuilder<EditProfileOrganizerController>(
-                  builder: (ccontext) {
-                return Container(
-                  width: double.infinity,
-                  height: scaleHeight(50),
-                  padding: padding(0, 10, 0, 10),
-                  margin: EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      border: Border.all(
-                        color: customColors.primaryBackground,
-                        width: 2,
-                      ),
-                      color: customColors.secondaryBackground),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        editProfileController.selectedState,
-                        style: customTextStyle.bodyMedium,
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: customColors.secondaryText,
-                        size: 15,
-                      )
-                    ],
-                  ),
-                );
-              }),
-            ),
+            SelectStates()
           ].divide(SizedBox(
             height: scaleHeight(10),
           )),
         ),
       ),
     );
+  }
+}
+
+class SelectStates extends StatefulWidget {
+  const SelectStates({
+    super.key,
+  });
+
+  @override
+  State<SelectStates> createState() => _SelectStates();
+}
+
+class _SelectStates extends State<SelectStates> {
+  @override
+  initState() {
+    super.initState();
+  }
+
+  List<String> _selectedValues = [];
+
+  void _handleSelectionChange(List<String> newSelections) {
+    setState(() {
+      _selectedValues = newSelections;
+    });
+    Get.find<EditProfileOrganizerController>().selectedState =
+        newSelections.join(', ');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiSelectDropDown(
+        options: states,
+        selectedValues: _selectedValues,
+        onSelectionChanged: _handleSelectionChange);
   }
 }

@@ -1,3 +1,6 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
 class MultiSelectDropDown extends StatefulWidget {
@@ -23,37 +26,60 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Select Options'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: widget.options.map((String option) {
-                return CheckboxListTile(
-                  value: selectedValues.contains(option),
-                  title: Text(option),
-                  onChanged: (bool? value) {
-                    setState(() {
-                      if (value == true) {
-                        selectedValues.add(option);
-                      } else {
-                        selectedValues.remove(option);
-                      }
-                      print("new length is :${selectedValues.length}");
-                    });
+        return StatefulBuilder(
+          // Use StatefulBuilder to manage state inside the dialog
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: customColors.secondaryBackground,
+              title: Text(
+                'Select Options',
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  color: customColors.primaryText,
+                  useGoogleFonts: true,
+                ),
+              ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: widget.options.map((String option) {
+                    return CheckboxListTile(
+                      value: selectedValues.contains(option),
+                      title: Text(
+                        option,
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.secondaryText,
+                          useGoogleFonts: true,
+                        ),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          // This setState refers to the StatefulBuilder's setState
+                          if (value == true) {
+                            if (!selectedValues.contains(option)) {
+                              selectedValues.add(option);
+                            }
+                          } else {
+                            selectedValues.remove(option);
+                          }
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Done'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    widget.onSelectionChanged(
+                        selectedValues); // Ensure this updates the state outside the dialog
                   },
-                );
-              }).toList(),
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Done'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                widget.onSelectionChanged(selectedValues);
-              },
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         );
       },
     );
@@ -64,22 +90,34 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
     return GestureDetector(
       onTap: _showMultiSelectDialog,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        width: double.infinity,
+        height: scaleHeight(50),
+        padding: padding(0, 10, 0, 10),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: customColors.primaryBackground, width: 2),
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Text(
-                widget.selectedValues.join(', '),
-                style: TextStyle(fontSize: 16),
+                widget.selectedValues.isEmpty
+                    ? "Covering Areas"
+                    : widget.selectedValues.join(', '),
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  color: customColors.primary,
+                  useGoogleFonts: true,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Icon(Icons.arrow_drop_down),
+            Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: customColors.secondaryText,
+              size: 15,
+            ),
           ],
         ),
       ),
