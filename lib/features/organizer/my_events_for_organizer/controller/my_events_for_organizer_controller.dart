@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -8,82 +9,41 @@ import '../model/my_events_for_organizer_model.dart';
 import '../../../../main.dart';
 import 'package:get/get.dart';
 
-class MyEventsForOrganizerController extends GetxController {
-  late List<MyEventsForOrganizerModel> myRequestsList;
-  late RxList<String> errorMessage;
-  late RxBool isLoading;
-  @override
-  void onInit() {
-    myRequestsList = [];
-    errorMessage = <String>[].obs;
-    isLoading = false.obs;
-    getMyEventRequests();
-    super.onInit();
+class MyEventsForOrganizerController
+    extends PaginationController<OrganizationEvent> {
+  MyEventsForOrganizerController()
+      : super(fetchDataCallback: _fetchData, cacheKey: "OrganizationEvent");
+
+  // Updated _fetchData to match the new signature
+  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
+      String url, int page, Map<String, dynamic> additionalParams) async {
+    String token = await prefService.readString("token");
+    String apiUrl = "${ServerConstApis.organizationMyEvents}?page=$page";
+
+    // Returning the result of the API call
+    return ApiHelper.makeRequest(
+      targetRout: apiUrl,
+      method: "GET",
+      token: token,
+    );
   }
 
-  getMyEventRequests() async {
-    // isLoading.value = true;
-    // Either<ErrorResponse, Map<String, dynamic>> response;
-    // String token = await prefService.readString("token") ?? "";
-    // response = await ApiHelper.makeRequest(
-    //     targetRout: ServerConstApis.myEventRequest,
-    //     method: "GEt",
-    //     token: token);
+  @override
+  handleDataSuccess(dynamic handlingResponse) {
+    List<dynamic> categoryListJson = handlingResponse['events']['data'];
+    lastPageId = handlingResponse['events']['last_page'];
+    dataLimit = handlingResponse['events']['per_page'];
+    print("categoryListJson:$categoryListJson");
+    itemList.addAll(categoryListJson
+        .map((jsonItem) => OrganizationEvent.fromJson(jsonItem))
+        .toList());
 
-    // dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    // if (handlingResponse is ErrorResponse) {
-    //   errorMessage.value = handlingResponse.getErrorMessages();
-    // } else {
-    // List<dynamic> interestsJson = handlingResponse['data'];
-
-    myRequestsList = fakeEventsJson
-        .map((jsonItem) => MyEventsForOrganizerModel.fromJson(jsonItem))
-        .toList();
-    //   isLoading.value = false;
-    //   update();
-    // }
+    if (pageId == lastPageId) {
+      hasMoreData.value = false;
+    }
+    pageId++;
+    isLoading.value = false;
+    isLoadingMoreData.value = false;
+    update();
   }
 }
-
-// Simulating JSON data as a Dart object
-List<Map<String, dynamic>> fakeEventsJson = [
-  {
-    "id": 1,
-    "title": "Annual Tech Expo",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone_number": "123456789",
-    "date": "2023-10-15",
-    "start_time": "09:00",
-    "end_time": "17:00",
-    "adults": 150,
-    "child": 50,
-    "images": jsonEncode(
-        ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]),
-    "description": "A gathering of tech enthusiasts.",
-    "additional_notes": "Bring your gadgets.",
-    "status": "Confirmed",
-    "category_id": 1,
-    "category": {
-      "title": "Technology",
-    },
-    "service_providers": [
-      {
-        "id": 101,
-        "category_id": 2,
-        "category": {
-          "title": "Catering",
-        },
-        "user": {
-          "first_name": "Alice",
-          "last_name": "Johnson",
-        },
-      }
-    ],
-    "venue": {
-      "id": 201,
-      "name": "Convention Center",
-    },
-  },
-  // Add more events as needed
-];

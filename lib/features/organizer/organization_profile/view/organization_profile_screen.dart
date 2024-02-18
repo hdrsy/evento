@@ -198,7 +198,7 @@ class StaticSection extends StatelessWidget {
                     1000
                 ? """${organizerProfileController.organizerProfileModel.followersCount / 1000} K"""
                 : organizerProfileController
-                    .organizerProfileModel.organizedEventsCount
+                    .organizerProfileModel.followersCount
                     .toString()),
         // statisticSingleElement(
         //     title: tr("Following"),
@@ -354,16 +354,23 @@ class MyTabBarWidget extends StatelessWidget {
   }
 
   Widget _buildFollowersTab(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: [
-          ...List.generate(3, (index) => const OrganizationFolloersCard())
-        ].divide(const SizedBox(
-          height: 10,
-        )),
-      ),
-    );
+    return GetBuilder<OrganizationProfileController>(builder: (controller) {
+      return SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          children: [
+            ...List.generate(
+                controller.rganizerFollowers.length,
+                (index) => OrganizationFolloersCard(
+                      organizerFollowersModel:
+                          controller.rganizerFollowers[index],
+                    ))
+          ].divide(const SizedBox(
+            height: 10,
+          )),
+        ),
+      );
+    });
   }
 
   Widget _buildGalleryTab(BuildContext context) {

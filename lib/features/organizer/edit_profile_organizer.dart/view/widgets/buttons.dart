@@ -57,7 +57,7 @@ class ButtonsOrganizer extends StatelessWidget {
               showLoadingIndicator:
                   editProfileOrganizerController.isLoading.value,
               onPressed: () async {
-                editProfileOrganizerController.onPressSaveChanging();
+                editProfileOrganizerController.onPressDone();
               },
               text: tr("Save Changes"),
               options: ButtonOptions(

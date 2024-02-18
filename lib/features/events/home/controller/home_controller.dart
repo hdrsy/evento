@@ -62,16 +62,13 @@ class CategoryListController extends GetxController {
       CategoryModel(
           id: 0,
           title: "Tonight",
-          icon: Get.isDarkMode
-              ? "assets/images/Asset_35.png"
-              : "assets/images/Asset_50.png"),
+          icon: "assets/images/Asset_50.png",
+          iconlight: "assets/images/Asset_50_light.png"),
       CategoryModel(
-        id: 0,
-        title: "This Week",
-        icon: Get.isDarkMode
-            ? "assets/images/Asset_28.png"
-            : "assets/images/Asset_47.png",
-      ),
+          id: 0,
+          title: "This Week",
+          icon: "assets/images/Asset_47.png",
+          iconlight: "assets/images/Asset_47_light.png"),
     ].obs;
     errorMessage = <String>[].obs;
     fetchCategoryData();

@@ -89,7 +89,9 @@ class CategoryWidget extends StatelessWidget {
                   image: categoryModel.title == "Tonight" ||
                           categoryModel.title == "This Week"
                       ? Image.asset(
-                          categoryModel.icon,
+                          Get.isDarkMode
+                              ? categoryModel.iconlight!
+                              : categoryModel.icon,
                           fit: BoxFit.cover,
                           width: 70,
                           height: 70,

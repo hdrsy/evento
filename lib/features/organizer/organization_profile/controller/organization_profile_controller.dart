@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/features/organizer/organizer_profile/model/organizer_profile_followers_model.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -13,18 +14,22 @@ class OrganizationProfileController extends GetxController {
   late OrganizationProfileModel organizerProfileModel;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  late List<OrganizerFollowersModel> rganizerFollowers;
+
   // late int orgnizerId;
 // late bool isorganizerEditProfile;
 
   @override
-  void onInit() {
+  void onInit() async {
     errorMessage = <String>[].obs;
     isLoading = false.obs;
+    rganizerFollowers = [];
     // orgnizerId = Get.arguments;
     // isorganizerEditProfile = Get.arguments[1]??false;
-    organizerProfileModel =
-        OrganizationProfileModel.fromJson(fakeOrganizationProfileData);
-    getOrganizerProfile();
+    // organizerProfileModel =
+    //     OrganizationProfileModel.fromJson(fakeOrganizationProfileData);
+    await getOrganizerProfile();
+    getOrganizerFollowers();
     // TODO: implement onInit
     super.onInit();
   }
@@ -34,7 +39,7 @@ class OrganizationProfileController extends GetxController {
     isLoading.value = true;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.organizerProfile}/1",
+        targetRout: ServerConstApis.organizationProfile,
         method: "GEt",
         token: token);
 
@@ -51,6 +56,29 @@ class OrganizationProfileController extends GetxController {
       update();
     }
     isLoading.value = false;
+  }
+
+  getOrganizerFollowers() async {
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token");
+    response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.organizerFollowers}/${user!.id}",
+        method: "GEt",
+        token: token);
+
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print(handlingResponse);
+    if (handlingResponse is ErrorResponse) {
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      final List<dynamic> interestsJson =
+          handlingResponse['followers']['followers'];
+      rganizerFollowers
+          .addAll(interestsJson.map<OrganizerFollowersModel>((jsonItem) {
+        return OrganizerFollowersModel.fromJson(jsonItem);
+      }).toList());
+      update();
+    }
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {

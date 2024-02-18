@@ -11,7 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class MyEventsForOrganizerCard extends StatelessWidget {
   const MyEventsForOrganizerCard({super.key, required this.myRequestModel});
-  final MyEventsForOrganizerModel myRequestModel;
+  final OrganizationEvent myRequestModel;
   @override
   Widget build(BuildContext context) {
     return // Generated code for this Stack Widget...
@@ -98,7 +98,7 @@ class MyEventsForOrganizerCard extends StatelessWidget {
                       Align(
                         alignment: const AlignmentDirectional(-1.00, 0.00),
                         child: Text(
-                          "${myRequestModel.categoryTitle} / ${DateFormatter.formatDate(myRequestModel.date)}",
+                          "${fillCategoryString(myRequestModel)} / ${DateFormatter.formatDate(myRequestModel.startDate)}",
                           style: customTextStyle.bodyMedium.override(
                             fontFamily: 'Nunito',
                             color: customColors.info,
@@ -116,7 +116,7 @@ class MyEventsForOrganizerCard extends StatelessWidget {
                       Align(
                         alignment: const AlignmentDirectional(-1.00, 0.00),
                         child: Text(
-                          "${myRequestModel.startTime} , ${myRequestModel.endTime}",
+                          "${DateFormatter.formatTime(myRequestModel.startDate)} , ${DateFormatter.formatTime(myRequestModel.endDate)}",
                           style: customTextStyle.bodyMedium.override(
                             fontFamily: 'Nunito',
                             color: customColors.info,
@@ -162,4 +162,8 @@ class MyEventsForOrganizerCard extends StatelessWidget {
       ],
     );
   }
+}
+
+String fillCategoryString(OrganizationEvent model) {
+  return model.categoriesEvents.isEmpty ? "" : model.categoriesEvents[0].title;
 }

@@ -49,7 +49,7 @@ class OrganizerProfileController extends GetxController {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       final interestsJson = handlingResponse['organizer'];
-
+      print("orrr:$interestsJson");
       organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
       update();
     }

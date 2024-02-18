@@ -15,7 +15,7 @@ class UserInfo {
   String state;
   String image;
   String type;
- 
+
   UserInfo({
     required this.id,
     required this.firstName,
@@ -38,7 +38,7 @@ class UserInfo {
         'state': state,
         'image': image,
         'type': type,
-         };
+      };
 
   factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
         id: json['id'],
@@ -58,41 +58,33 @@ class UserInfo {
   }
 
   static Future<UserInfo?> getUserInfo() async {
-     bool userInfoJson =await  prefService.isContainKey('userInfo');
+    bool userInfoJson = await prefService.isContainKey('userInfo');
 
-      print("iscontainuserInfoJson:$userInfoJson");
-      print("userInfoJson");
-    if (userInfoJson ) {
-      final userInfo=jsonDecode( await prefService.readString('userInfo'));
+    print("iscontainuserInfoJson:$userInfoJson");
+    print("userInfoJson");
+    if (userInfoJson) {
+      final userInfo = jsonDecode(await prefService.readString('userInfo'));
       print("userInfofrom storage:$userInfo");
       return UserInfo.fromJson(userInfo);
-    }
-    else{
+    } else {
       print("userInfoJson");
       return getUserInfoFromApi();
     }
-   
   }
-  static Future<UserInfo?> getUserInfoFromApi()async{
-      
+
+  static Future<UserInfo?> getUserInfoFromApi() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ;
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.getprofile,
-        method: "GEt",
-        token: token);
+        targetRout: ServerConstApis.getprofile, method: "GEt", token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
-     } else {
+    } else {
       storeUserInfo(UserInfo.fromJson(handlingResponse["user"]));
-       
-     
+
       return UserInfo.fromJson(handlingResponse["user"]);
-      
     }
     return null;
-    
-  
   }
 }

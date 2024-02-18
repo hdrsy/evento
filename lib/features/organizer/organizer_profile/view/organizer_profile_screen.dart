@@ -210,7 +210,7 @@ class StaticSection extends StatelessWidget {
                     1000
                 ? """${organizerProfileController.organizerProfileModel.followersCount / 1000} K"""
                 : organizerProfileController
-                    .organizerProfileModel.organizedEventsCount
+                    .organizerProfileModel.followersCount
                     .toString()),
         statisticSingleElement(
             title: tr("Following"),

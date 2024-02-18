@@ -9,6 +9,7 @@ import 'package:evento/features/organizer/my_events_for_organizer/view/my_events
 import 'package:evento/features/organizer/organization_profile/controller/binding/ofganization_profile_binding.dart';
 import 'package:evento/features/organizer/organization_profile/view/organization_profile_screen.dart';
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/view/show_all_booking_in_event_for_organizer_screen.dart';
+import 'package:evento/features/organizer/ticket_in_event_for_organization/view/ticket_in_event_for_organization_screen.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
 
 import '../../features/assign_friends/view/assign_friends_screen.dart';
@@ -290,5 +291,8 @@ appRoutes() => [
       GetPage(
           name: '/AddMediaInFolderserviceProviderScreen',
           page: () => AddMediaInFolderserviceProviderScreen()),
+      GetPage(
+          name: '/TicketsInEventForOrganizerScreen',
+          page: () => TicketsInEventForOrganizerScreen()),
       // GetPage(name: '/vedioReels', page:()=> VedioReels()) ,
     ];

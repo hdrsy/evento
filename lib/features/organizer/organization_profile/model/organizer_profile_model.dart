@@ -153,13 +153,7 @@ class OrganizationProfileEvent {
   int organizerId;
   String title;
   int venueId;
-  int capacity;
   DateTime startDate;
-  DateTime endDate;
-  int ticketPrice;
-  String description;
-  String type;
-  dynamic videos;
   List<dynamic> images;
   bool isFollowedByAuthUser;
   OrganizationProfileEvent({
@@ -167,33 +161,29 @@ class OrganizationProfileEvent {
     required this.organizerId,
     required this.title,
     required this.venueId,
-    required this.capacity,
     required this.startDate,
-    required this.endDate,
-    required this.ticketPrice,
-    required this.description,
-    required this.type,
-    this.videos,
     required this.images,
     required this.isFollowedByAuthUser,
   });
 
   factory OrganizationProfileEvent.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+    print("event category:${json['categories_events']}");
+    List<String> imageList = [];
 
+    if (json['images'] != null) {
+      var imagesJson = jsonDecode(json['images']);
+      if (imagesJson is List) {
+        imageList = List<String>.from(imagesJson);
+      }
+    }
     return OrganizationProfileEvent(
       id: json['id'],
       organizerId: json['organizer_id'],
       title: json['title'],
       venueId: json['venue_id'],
-      capacity: json['capacity'],
       startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
-      ticketPrice: json['ticket_price'],
-      description: json['description'],
-      type: json['type'],
-      videos: json['videos'],
-      images: jsonDecode(json['images']),
+      images: imageList,
       isFollowedByAuthUser: json['is_followed_by_auth_user'],
     );
   }

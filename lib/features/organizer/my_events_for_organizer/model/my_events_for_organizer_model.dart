@@ -1,121 +1,103 @@
 import 'dart:convert';
 
-import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/features/events/home/model/category_model.dart';
 
-class MyEventsForOrganizerModel {
-  final int id;
-  final String title;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final DateTime date;
-  final String startTime;
-  final String endTime;
-  final int adults;
-  final int child;
-  final List<String> images;
-  final String? description;
-  final String? additionalNotes;
-  final String status;
-  final int categoryId;
-  final String categoryTitle;
-  final List<MyRequestServiceProvider> serviceProviders;
-  final MyRequestVenue venue;
+class OrganizationEvent {
+  String title;
+  String titleAr;
+  int venueId;
+  DateTime startDate;
+  DateTime endDate;
+  List<String> images;
+  bool isFollowedByAuthUser;
+  Venue venue;
+  int capacity;
+  int id;
+  int bookingCount;
+  List<CategoryModel> categoriesEvents;
 
-  MyEventsForOrganizerModel({
-    required this.id,
+  OrganizationEvent({
     required this.title,
-    required this.firstName,
-    required this.lastName,
-    required this.phoneNumber,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
-    required this.adults,
-    required this.child,
-    required this.images,
-    this.description,
-    this.additionalNotes,
-    required this.status,
-    required this.categoryId,
-    required this.categoryTitle,
-    required this.serviceProviders,
-    required this.venue,
-  });
-
-  factory MyEventsForOrganizerModel.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    var imageList = jsonDecode(json['images']) as List<dynamic>;
-    List<String> images = imageList.map((e) => e as String).toList();
-    var serviceProvidersList = json['service_providers'] as List;
-    List<MyRequestServiceProvider> serviceProviders = serviceProvidersList
-        .map((i) => MyRequestServiceProvider.fromJson(i))
-        .toList();
-    return MyEventsForOrganizerModel(
-      id: json['id'],
-      title: json['title'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      phoneNumber: json['phone_number'],
-      date: DateTime.parse(json['date']),
-      startTime: json['start_time'],
-      endTime: json['end_time'],
-      adults: json['adults'],
-      child: json['child'],
-      images: images,
-      description: json['description'],
-      additionalNotes: json['additional_notes'],
-      status: json['status'],
-      categoryId: json['category_id'],
-      categoryTitle: json['category']['title'],
-      serviceProviders: serviceProviders,
-      venue: MyRequestVenue.fromJson(json['venue']),
-    );
-  }
-}
-
-class MyRequestServiceProvider {
-  final int id;
-  final int categoryId;
-  final String categoryTitle;
-  final String firstName;
-  final String lastName;
-
-  MyRequestServiceProvider({
+    required this.titleAr,
+    required this.capacity,
+    required this.bookingCount,
+    required this.venueId,
+    required this.startDate,
+    required this.endDate,
     required this.id,
-    required this.categoryId,
-    required this.categoryTitle,
-    required this.firstName,
-    required this.lastName,
+    required this.images,
+    required this.isFollowedByAuthUser,
+    required this.venue,
+    required this.categoriesEvents,
   });
 
-  factory MyRequestServiceProvider.fromJson(Map<String, dynamic> json) {
-    return MyRequestServiceProvider(
+  factory OrganizationEvent.fromJson(Map<String, dynamic> json) {
+    print("event category:${json['categories_events']}");
+    List<String> imageList = [];
+
+    if (json['images'] != null) {
+      var imagesJson = jsonDecode(json['images']);
+      if (imagesJson is List) {
+        imageList = List<String>.from(imagesJson);
+      }
+    }
+    return OrganizationEvent(
+      title: json['title'],
+      titleAr: json['title_ar'],
+      capacity: json['capacity'] ?? 0,
+      bookingCount: json['bookings_count'] ?? 0,
+      venueId: json['venue_id'],
       id: json['id'],
-      categoryId: json['category_id'],
-      categoryTitle: json['category']['title'],
-      firstName: json['user']['first_name'],
-      lastName: json['user']['last_name'],
+      startDate: DateTime.parse(json['start_date']),
+      endDate: DateTime.parse(json['end_date']),
+      images: imageList,
+      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      venue: Venue.fromJson(json['venue']),
+      categoriesEvents: List<CategoryModel>.from(
+          json['categories_events'].map((x) => CategoryModel.fromJson(x))),
     );
   }
 }
 
-class MyRequestVenue {
-  final int id;
-  final String name;
+class Venue {
+  int id;
+  String name;
+  String nameAr;
+  dynamic averageRating;
 
-  MyRequestVenue({
+  Venue({
     required this.id,
     required this.name,
+    required this.nameAr,
+    required this.averageRating,
   });
 
-  factory MyRequestVenue.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return MyRequestVenue(
+  factory Venue.fromJson(Map<String, dynamic> json) {
+    return Venue(
       id: json['id'],
       name: json['name'],
+      nameAr: json['name_ar'],
+      averageRating: json['average_rating'],
+    );
+  }
+}
+
+class EventLink {
+  String? url;
+  String label;
+  bool active;
+
+  EventLink({
+    required this.url,
+    required this.label,
+    required this.active,
+  });
+
+  factory EventLink.fromJson(Map<String, dynamic> json) {
+    return EventLink(
+      url: json['url'],
+      label: json['label'],
+      active: json['active'],
     );
   }
 }
