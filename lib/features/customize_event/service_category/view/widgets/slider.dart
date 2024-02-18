@@ -7,31 +7,21 @@ class LinearPercentIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-Row(
-  mainAxisAlignment: MainAxisAlignment.center,
- children:  [ LinearPercentIndicator(
-  
-    percent: 0.6,
-  
-    width: 120,
-  
-    lineHeight: 8,
-  
-    animation: true,
-  
-    animateFromLastPercent: true,
-  
-    progressColor: customColors.primary,
-  
-    backgroundColor: customColors.primaryBackground,
-  
-    barRadius: const Radius.circular(12),
-  
-    padding: EdgeInsets.zero,
-  
-  )],
-)
-;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        LinearPercentIndicator(
+          percent: 0.3,
+          width: 120,
+          lineHeight: 8,
+          animation: true,
+          animateFromLastPercent: true,
+          progressColor: customColors.primary,
+          backgroundColor: customColors.primaryBackground,
+          barRadius: const Radius.circular(12),
+          padding: EdgeInsets.zero,
+        )
+      ],
+    );
   }
 }
