@@ -33,12 +33,20 @@ class ChoiceTypeSuggestList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ...List.generate(
-                    choiceTypeController.serviceCategoryList.length,
+                    choiceTypeController.isSearchActive.value
+                        ? choiceTypeController.searchserviceCategoryList.length
+                        : choiceTypeController.serviceCategoryList.length,
                     (index) => SuggestServiceCard(
-                          title: choiceTypeController
-                              .serviceCategoryList[index].title,
-                          id: choiceTypeController
-                              .serviceCategoryList[index].id,
+                          title: choiceTypeController.isSearchActive.value
+                              ? choiceTypeController
+                                  .searchserviceCategoryList[index].title
+                              : choiceTypeController
+                                  .serviceCategoryList[index].title,
+                          id: choiceTypeController.isSearchActive.value
+                              ? choiceTypeController
+                                  .searchserviceCategoryList[index].id
+                              : choiceTypeController
+                                  .serviceCategoryList[index].id,
                         )).divide(const SizedBox(
                   height: 10,
                 ))

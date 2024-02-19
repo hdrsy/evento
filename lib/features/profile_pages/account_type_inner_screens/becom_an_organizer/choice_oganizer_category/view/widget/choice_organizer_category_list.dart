@@ -12,60 +12,70 @@ class ChoiceOrganizerCategoryList extends StatelessWidget {
       Get.find();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Align(
-          alignment: const AlignmentDirectional(-1, -1),
-          child: Text(
-            "Suggested ",
-            style: customTextStyle.bodyMedium.override(
-              fontFamily: 'Nunito',
-              color: customColors.primaryText,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              useGoogleFonts: true,
-            ),
-          ).tr(),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ...List.generate(
-                choiceOrganizerCategoryController.choiceServiceList.length,
-                (index) => OrganizerCategoryCard(
-                      choiceOrganizerCategoryTypeModel:
-                          choiceOrganizerCategoryController
-                              .choiceServiceList[index],
-                    )).divide(const SizedBox(
-              height: 10,
-            )),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  "Other",
-                  style: customTextStyle.bodyMedium.override(
-                    fontFamily: 'Nunito',
-                    color: customColors.primaryText,
-                    fontSize: 16,
-                    useGoogleFonts: true,
-                  ),
-                ).tr(),
-              ].divide(const SizedBox(width: 5)),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            OtherTextField()
-          ],
-        )
-      ].divide(const SizedBox(
-        height: 5,
-      )),
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: const AlignmentDirectional(-1, -1),
+            child: Text(
+              "Suggested ",
+              style: customTextStyle.bodyMedium.override(
+                fontFamily: 'Nunito',
+                color: customColors.primaryText,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                useGoogleFonts: true,
+              ),
+            ).tr(),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ...List.generate(
+                  choiceOrganizerCategoryController.isSearchActive.value
+                      ? choiceOrganizerCategoryController
+                          .searchchoiceServiceList.length
+                      : choiceOrganizerCategoryController
+                          .choiceServiceList.length,
+                  (index) => OrganizerCategoryCard(
+                        choiceOrganizerCategoryTypeModel:
+                            choiceOrganizerCategoryController
+                                    .isSearchActive.value
+                                ? choiceOrganizerCategoryController
+                                    .searchchoiceServiceList[index]
+                                : choiceOrganizerCategoryController
+                                    .choiceServiceList[index],
+                      )).divide(const SizedBox(
+                height: 10,
+              )),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    "Other",
+                    style: customTextStyle.bodyMedium.override(
+                      fontFamily: 'Nunito',
+                      color: customColors.primaryText,
+                      fontSize: 16,
+                      useGoogleFonts: true,
+                    ),
+                  ).tr(),
+                ].divide(const SizedBox(width: 5)),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              OtherTextField()
+            ],
+          )
+        ].divide(const SizedBox(
+          height: 5,
+        )),
+      ),
     );
   }
 }

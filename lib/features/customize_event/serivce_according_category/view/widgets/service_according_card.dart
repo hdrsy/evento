@@ -1,3 +1,6 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:marquee/marquee.dart';
+
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -50,6 +53,32 @@ class ServiceAccordingCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: screenWidth * 0.60,
+                    height: screenHeight * 0.03,
+                    child: serviceProvider.user.firstName.length +
+                                serviceProvider.user.lastName.length >
+                            30
+                        ? Marquee(
+                            text: serviceProvider.user.firstName +
+                                serviceProvider.user.lastName,
+                            scrollAxis: Axis.horizontal,
+                            blankSpace: 20.0,
+                            velocity: 70.0,
+                            pauseAfterRound: const Duration(seconds: 3),
+                            style: customTextStyle.bodyMedium.override(
+                                useGoogleFonts: false,
+                                color: customColors.primaryText,
+                                fontFamily: secondaryFontFamily,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400),
+                          )
+                        : Text(
+                            serviceProvider.user.firstName +
+                                serviceProvider.user.lastName,
+                            style: customTextStyle.headlineSmall,
+                          ),
+                  ),
                   Text(
                     serviceProvider.user.firstName +
                         serviceProvider.user.lastName,

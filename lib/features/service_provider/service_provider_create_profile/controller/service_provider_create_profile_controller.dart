@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/shared/models/media.dart';
+import 'package:evento/core/shared/widgets/uploding/error_in_uploading.dart';
+import 'package:evento/core/shared/widgets/uploding/start_uploading_data.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/switch_to_service_provider/view/anther_screens/choice_service_type/controller/choice_type_controller.dart';
@@ -21,6 +23,7 @@ class ServiceProviderCreateProfileController extends GetxController {
   late TextEditingController description;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  late GlobalKey<FormState> formstate;
 
   late TextEditingController createFolderName;
   late List<String> states;
@@ -41,6 +44,7 @@ class ServiceProviderCreateProfileController extends GetxController {
     selectedState = null;
     isLoading = false.obs;
     errorMessage = <String>[].obs;
+    formstate = GlobalKey<FormState>();
 
     states = [
       'Aleppo',
@@ -69,6 +73,17 @@ class ServiceProviderCreateProfileController extends GetxController {
     Get.back();
   }
 
+  bool checkIfSelectedState() {
+    if (selectedState != null && selectedState!.length > 2) {
+      return true;
+    } else {
+      Get.dialog(const ErrorInUploading(
+        errorMessaging: ["Please select your covering erea"],
+      ));
+      return false;
+    }
+  }
+
   final imagePicker = ImagePicker();
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -83,68 +98,80 @@ class ServiceProviderCreateProfileController extends GetxController {
   }
 
   onPressDone() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    ChoiceTypeController choiceTypeController = Get.find();
-    String token = await prefService.readString("token");
-    Map<String, dynamic> dataRequest = {
-      'name': organizerName.text,
-      'bio': bio.text,
-      'location_work_governorate': selectedState!,
-      'description': description.text,
-      'category_id': choiceTypeController.selectedCategories[0],
-    };
-    locationData != null
-        ? dataRequest['latitude'] = locationData!.latitude
-        : null;
-    locationData != null
-        ? dataRequest['longitude'] = locationData!.longitude
-        : null;
-    Map<String, File> fileMap = {};
-    if (profileImage != null) {
-      fileMap['profile'] = profileImage!;
-    }
-    if (coverImage != null) {
-      fileMap['cover'] = coverImage!;
-    }
+    try {
+      isLoading.value = true;
+      Get.dialog(startUploadingdata());
 
-    for (var i = 0; i < foldersModel.length; i++) {
-      dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
-      for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
-        if (foldersModel[i].mediaList[j].mediaType == 'image') {
-          fileMap['album-${i + 1}-images[$j]'] =
-              foldersModel[i].mediaList[j].media;
-        } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
-          File? compressedVideo =
-              await compressVideo(foldersModel[i].mediaList[j].media);
-          if (compressedVideo != null) {
-            fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
-          } else {
-            // Handle the case where video compression fails
-            // For example, you might choose to skip this file, log an error, or use the original file
-            print(
-                "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      ChoiceTypeController choiceTypeController = Get.find();
+      String token = await prefService.readString("token");
+      Map<String, dynamic> dataRequest = {
+        'name': organizerName.text,
+        'bio': bio.text,
+        'location_work_governorate': selectedState!,
+        'description': description.text,
+        'category_id': choiceTypeController.selectedCategories[0],
+      };
+      locationData != null
+          ? dataRequest['latitude'] = locationData!.latitude
+          : null;
+      locationData != null
+          ? dataRequest['longitude'] = locationData!.longitude
+          : null;
+      Map<String, File> fileMap = {};
+      if (profileImage != null) {
+        fileMap['profile'] = profileImage!;
+      }
+      if (coverImage != null) {
+        fileMap['cover'] = coverImage!;
+      }
+
+      for (var i = 0; i < foldersModel.length; i++) {
+        dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
+        for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
+          if (foldersModel[i].mediaList[j].mediaType == 'image') {
+            fileMap['album-${i + 1}-images[$j]'] =
+                foldersModel[i].mediaList[j].media;
+          } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
+            File? compressedVideo =
+                await compressVideo(foldersModel[i].mediaList[j].media);
+            if (compressedVideo != null) {
+              fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
+            } else {
+              // Handle the case where video compression fails
+              // For example, you might choose to skip this file, log an error, or use the original file
+              print(
+                  "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
+            }
           }
         }
       }
-    }
-    print(fileMap.length);
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.becomeServiceProvider,
-        method: "POST",
-        token: token,
-        data: dataRequest,
-        files: fileMap);
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-      isLoading.value = false;
-      print("object");
-    } else {
-      isLoading.value = false;
+      print(fileMap.length);
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.becomeServiceProvider,
+          method: "POST",
+          token: token,
+          data: dataRequest,
+          files: fileMap);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
       print(handlingResponse);
-      Get.offAllNamed('/home');
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isLoading.value = false;
+        Get.back();
+        Get.dialog(ErrorInUploading(
+          errorMessaging: errorMessage,
+        ));
+        print("object");
+      } else {
+        isLoading.value = false;
+        print(handlingResponse);
+        Get.offAllNamed('/home');
+      }
+    } catch (e) {
+      print("ecption $e");
+      Get.back();
+      isLoading.value = false;
     }
   }
 

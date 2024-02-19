@@ -26,7 +26,10 @@ class TypeToSetEventScreen extends StatelessWidget {
         ),
         body: Obx(
           () => typetoSetEventController.isLoading.value
-              ? SizedBox()
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ))
               : Container(
                   padding: padding(16, 16, 16, 16),
                   width: double.infinity,

@@ -2,7 +2,7 @@ import 'package:evento/core/const/states.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
-import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/view/widget/confirm_switch_to_organizer_account_widget.dart';
+import 'package:evento/features/organizer/create_profile/view/widgets/confirm_switch_to_organizer_account_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -92,80 +92,82 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-                child: Column(
-                  children: [
-                    EditProfileField(
-                      controller: controller.organizerName,
-                      hintText: tr("Spark"),
-                      labelText: tr("Organization/Name"),
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      suffixIcon: Icons.reduce_capacity_outlined,
-                    ),
-                    EditProfileField(
-                      controller: controller.bio,
-                      hintText: tr(
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......"""),
-                      labelText: "Bio",
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      suffixIcon: Icons.description_outlined,
-                    ),
-                    SelectStates(
-                        organizerCreateProfileController:
-                            organizerCreateProfileController),
-                    OrganizerMediaCard(),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Obx(
-                      () => Column(
-                        children: [
-                          LinearProgressIndicator(
-                            value: controller.uploadProgress.value,
-                            backgroundColor: customColors.secondaryBackground,
-                            color: customColors.primary,
+                child: Form(
+                  key: controller.formstate,
+                  child: Column(
+                    children: [
+                      EditProfileField(
+                        controller: controller.organizerName,
+                        hintText: tr("Spark"),
+                        labelText: tr("Organization/Name"),
+                        onChanged: (value) {},
+                        validator: (value) {
+                          return value!.length < 2
+                              ? tr("Please type your organization name")
+                              : null;
+                        },
+                        suffixIcon: Icons.reduce_capacity_outlined,
+                      ),
+                      EditProfileField(
+                        controller: controller.bio,
+                        hintText: tr(
+                            """Event organizer specialist in decoration ,lighting and flowers .
+                  Wdding, Birthday ,anniversary......"""),
+                        labelText: "Bio",
+                        onChanged: (value) {},
+                        validator: (value) {
+                          return value!.length < 2
+                              ? tr("Please type your bio")
+                              : null;
+                        },
+                        suffixIcon: Icons.description_outlined,
+                      ),
+                      SelectStates(
+                          organizerCreateProfileController:
+                              organizerCreateProfileController),
+                      OrganizerMediaCard(),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      ButtonWidget(
+                        showLoadingIndicator: false,
+                        onPressed: () {
+                          FormState? formdata =
+                              controller.formstate.currentState;
+                          if (formdata!.validate() &&
+                              controller.checkIfSelectedState()) {
+                            formdata.save();
+                            showButtonSheet(
+                                context: context,
+                                widget: SwitchToOrganizerAccounWidget(),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.6);
+                          }
+                        },
+                        text: tr("Done"),
+                        options: ButtonOptions(
+                          width: screenWidth * 0.3,
+                          height: 40,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              32, 0, 32, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: customColors.primary,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            useGoogleFonts: true,
                           ),
-                          Text(controller.currentUploadingFile.value),
-                        ],
-                      ),
-                    ),
-                    ButtonWidget(
-                      showLoadingIndicator: false,
-                      onPressed: () {
-                        showButtonSheet(
-                            context: context,
-                            widget: SwitchToOrganizerAccounWidget(),
-                            height: MediaQuery.of(context).size.height * 0.6);
-                      },
-                      text: tr("Done"),
-                      options: ButtonOptions(
-                        width: screenWidth * 0.3,
-                        height: 40,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
-                        textStyle: customTextStyle.titleSmall.override(
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          useGoogleFonts: true,
+                          elevation: 3,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        elevation: 3,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

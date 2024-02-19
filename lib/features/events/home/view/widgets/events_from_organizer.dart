@@ -98,7 +98,7 @@ class EventsFromOrganizer extends StatelessWidget {
       {required EventModel eventModel, required int modelIndex}) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: eventModel.id);
+        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Container(
         width: 355,

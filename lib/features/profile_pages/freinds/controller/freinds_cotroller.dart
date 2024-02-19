@@ -53,6 +53,7 @@ class FreindsController extends GetxController {
   }
 
   getSendRequest() async {
+    sentFreinds.clear();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(

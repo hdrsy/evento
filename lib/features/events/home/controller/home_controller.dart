@@ -72,12 +72,7 @@ class CategoryListController extends GetxController {
     ].obs;
     errorMessage = <String>[].obs;
     fetchCategoryData();
-    _connectivityService.isConnected.listen((isConnected) {
-      if (isConnected) {
-        print("inside fetch data for internte");
-        // fetchCategoryData(); // Refetch data when connection is back
-      }
-    });
+
     super.onInit();
   }
 

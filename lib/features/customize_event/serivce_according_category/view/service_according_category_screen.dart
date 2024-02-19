@@ -30,32 +30,39 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
         body: SizedBox(
           width: double.infinity,
           child: Obx(
-            () => SingleChildScrollView(
-                padding: padding(16, 20, 16, 20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        serviceAccordingCategoryController.serviceCategoryType,
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primaryText,
-                          fontSize: 25,
-                          useGoogleFonts: true,
-                        ),
-                      ),
-                      ...List.generate(
-                          serviceAccordingCategoryController
-                              .serviceProviderList.length,
-                          (index) => ServiceAccordingCard(
-                                serviceProvider:
-                                    serviceAccordingCategoryController
-                                        .serviceProviderList[index],
-                                serviceCategoryIndex:
-                                    serviceAccordingCategoryController
-                                        .serviceCategoryIndex,
-                              ))
-                    ])),
+            () => serviceAccordingCategoryController.isLoading.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: customColors.primary,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    padding: padding(16, 20, 16, 20),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            serviceAccordingCategoryController
+                                .serviceCategoryType,
+                            style: customTextStyle.bodyMedium.override(
+                              fontFamily: 'Nunito',
+                              color: customColors.primaryText,
+                              fontSize: 25,
+                              useGoogleFonts: true,
+                            ),
+                          ),
+                          ...List.generate(
+                              serviceAccordingCategoryController
+                                  .serviceProviderList.length,
+                              (index) => ServiceAccordingCard(
+                                    serviceProvider:
+                                        serviceAccordingCategoryController
+                                            .serviceProviderList[index],
+                                    serviceCategoryIndex:
+                                        serviceAccordingCategoryController
+                                            .serviceCategoryIndex,
+                                  ))
+                        ])),
           ),
         ));
   }

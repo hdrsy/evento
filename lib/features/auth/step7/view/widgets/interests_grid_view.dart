@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/images/network_image.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
 import '../../controller/step7_controller.dart';
@@ -80,39 +82,8 @@ class CategoryGridItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Center(
-                    child: Image.network(
-                      ServerConstApis.baseAPI + item.icon,
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child; // Image has finished loading
-                        }
-                        return Shimmer.fromColors(
-                          baseColor:
-                              Colors.grey[300]!, // Replace with your base color
-                          highlightColor: Colors
-                              .grey[100]!, // Replace with your highlight color
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            color: Colors.white,
-                          ),
-                        );
-                      },
-                      errorBuilder: (BuildContext context, Object error,
-                          StackTrace? stackTrace) {
-                        return const Center(
-                          child:    Icon(
-                            Icons.error, // or any other icon or widget
-                            // size: 1,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                      child: getImageNetwork(
+                          url: item.icon, width: 100, height: 100)),
                 ),
               ),
               Text(

@@ -1,8 +1,8 @@
 import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
 
-import '../../../../../../../core/shared/widgets/buttons/general_button.dart';
-import '../../../../../../../core/utils/theme/text_theme.dart';
-import '../../../../../../../main.dart';
+import '../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -93,35 +93,33 @@ class SwitchToOrganizerAccounWidget extends StatelessWidget {
                       ),
                       showLoadingIndicator: false,
                     ),
-                    Obx(
-                      () => ButtonWidget(
-                        showLoadingIndicator:
-                            organizerCreateProfileController.isLoading.value,
-                        onPressed: () async {
-                          organizerCreateProfileController.onPressDone();
-                        },
-                        text: tr("Ok"),
-                        options: ButtonOptions(
-                          width: 150,
-                          height: 45,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              20, 0, 20, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.info,
-                            fontSize: 14,
-                            useGoogleFonts: true,
-                          ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: customColors.primary,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                    ButtonWidget(
+                      showLoadingIndicator: false,
+                      onPressed: () async {
+                        Get.back();
+                        organizerCreateProfileController.onPressDone();
+                      },
+                      text: tr("Ok"),
+                      options: ButtonOptions(
+                        width: 150,
+                        height: 45,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.info,
+                          fontSize: 14,
+                          useGoogleFonts: true,
                         ),
+                        elevation: 0,
+                        borderSide: BorderSide(
+                          color: customColors.primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ],

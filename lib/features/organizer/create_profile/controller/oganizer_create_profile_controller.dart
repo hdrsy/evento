@@ -5,6 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/models/media.dart';
+import 'package:evento/core/shared/widgets/uploding/error_in_uploading.dart';
+import 'package:evento/core/shared/widgets/uploding/start_uploading_data.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
@@ -21,6 +23,7 @@ class OrganizerCreateProfileController extends GetxController {
   late RxBool isLoading;
   FormFieldController<String> dropDownValueController =
       FormFieldController(null);
+  late GlobalKey<FormState> formstate;
 
   late TextEditingController createFolderName;
   late List<String> states;
@@ -37,6 +40,8 @@ class OrganizerCreateProfileController extends GetxController {
     createFolderName = TextEditingController();
     coverImage = null;
     profileImage = null;
+    formstate = GlobalKey<FormState>();
+
     selectedState = null;
     isLoading = false.obs;
     uploadProgress = 0.0.obs;
@@ -78,6 +83,17 @@ class OrganizerCreateProfileController extends GetxController {
     }
   }
 
+  bool checkIfSelectedState() {
+    if (selectedState != null && selectedState!.length > 2) {
+      return true;
+    } else {
+      Get.dialog(const ErrorInUploading(
+        errorMessaging: ["Please select your covering erea"],
+      ));
+      return false;
+    }
+  }
+
   final imagePicker = ImagePicker();
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -98,8 +114,8 @@ class OrganizerCreateProfileController extends GetxController {
   onPressDone() async {
     try {
       isLoading.value = true;
+      Get.dialog(startUploadingdata());
       // Before starting upload
-      isLoading.value = true;
       uploadProgress.value = 0.0; // Reset progress
       Either<ErrorResponse, Map<String, dynamic>> response;
       ChoiceOrganizerCategoryController choiceOrganizerCategoryController =
@@ -109,7 +125,7 @@ class OrganizerCreateProfileController extends GetxController {
         'name': organizerName.text,
         'bio': bio.text,
         'state': selectedState!,
-        'services': choiceOrganizerCategoryController.sericeSelected.text,
+        'services': "UnKnown",
         'other_category': choiceOrganizerCategoryController.sericeSelected.text,
         // 'category_ids': choiceOrganizerCategoryController.selectedCategories
       };
@@ -163,6 +179,10 @@ class OrganizerCreateProfileController extends GetxController {
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         isLoading.value = false;
+        Get.back();
+        Get.dialog(ErrorInUploading(
+          errorMessaging: errorMessage,
+        ));
         currentUploadingFile.value = "uplading media field";
         print("object");
       } else {
@@ -173,8 +193,9 @@ class OrganizerCreateProfileController extends GetxController {
         Get.offAllNamed('/home');
       }
       isLoading.value = false;
-      isLoading.value = false;
     } catch (e) {
+      print("ecption $e");
+      Get.back();
       isLoading.value = false;
     }
   }

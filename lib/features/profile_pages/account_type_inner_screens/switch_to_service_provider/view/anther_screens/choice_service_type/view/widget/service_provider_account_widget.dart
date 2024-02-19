@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ServiceProviderAccounWidget extends StatelessWidget {
-   ServiceProviderAccounWidget({super.key});
+  ServiceProviderAccounWidget({super.key});
   final ServiceProviderCreateProfileController
       serviceProviderCreateProfileController = Get.find();
   @override
@@ -93,35 +93,34 @@ class ServiceProviderAccounWidget extends StatelessWidget {
                       ),
                       showLoadingIndicator: false,
                     ),
-                    Obx(
-                      ()=> ButtonWidget(
-                        onPressed: () {
-                          serviceProviderCreateProfileController.onPressDone();
-                        },
-                        text: tr("Ok"),
-                        options: ButtonOptions(
-                          width: 150,
-                          height: 45,
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.info,
-                            fontSize: 14,
-                            useGoogleFonts: true,
-                          ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: customColors.primary,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                    ButtonWidget(
+                      onPressed: () {
+                        Get.back();
+                        serviceProviderCreateProfileController.onPressDone();
+                      },
+                      text: tr("Ok"),
+                      options: ButtonOptions(
+                        width: 150,
+                        height: 45,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.info,
+                          fontSize: 14,
+                          useGoogleFonts: true,
                         ),
-                        showLoadingIndicator: serviceProviderCreateProfileController.isLoading.value,
+                        elevation: 0,
+                        borderSide: BorderSide(
+                          color: customColors.primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      showLoadingIndicator: false,
                     ),
                   ],
                 ),

@@ -93,116 +93,133 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-                child: Column(
-                  children: [
-                    EditProfileField(
-                      controller: controller.organizerName,
-                      hintText: tr("Spark"),
-                      labelText: tr("ServiceProviderName"),
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      suffixIcon: Icons.reduce_capacity_outlined,
-                    ),
-                    EditProfileField(
-                      controller: controller.bio,
-                      hintText: tr(
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......"""),
-                      labelText: tr("Bio"),
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      suffixIcon: Icons.description_outlined,
-                    ),
-                    EditProfileField(
-                      controller: controller.description,
-                      hintText: tr(
-                          """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......"""),
-                      labelText: tr("Description"),
-                      onChanged: (value) {},
-                      validator: (value) {
-                        return null;
-                      },
-                      suffixIcon: Icons.description_outlined,
-                    ),
-
-                    SelectStates(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(LocationPickerScreen());
-                      },
-                      child: GetBuilder<ServiceProviderCreateProfileController>(
-                          builder: (context) {
-                        return Container(
-                          width: double.infinity,
-                          height: scaleHeight(50),
-                          margin: EdgeInsets.only(top: 12),
-                          padding: padding(0, 10, 0, 10),
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: customColors.primaryBackground,
-                                width: 2),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(30)),
-                            // color: customColors.primaryBackground
-                          ),
-                          child: Text(
-                            serviceProviderCreateProfileController
-                                        .locationData ==
-                                    null
-                                ? "Location"
-                                : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primary,
-                              useGoogleFonts: true,
-                            ),
-                          ).tr(),
-                        );
-                      }),
-                    ),
-
-                    OrganizerMediaCard(),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    // Generated code for this Button Widget...
-                    ButtonWidget(
-                      showLoadingIndicator: false,
-                      onPressed: () async {
-                        showButtonSheet(
-                            context: context,
-                            widget: ServiceProviderAccounWidget(),
-                            height: MediaQuery.sizeOf(context).height * 0.6);
-                      },
-                      text: tr("Done"),
-                      options: ButtonOptions(
-                        width: screenWidth * 0.3,
-                        height: 40,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
-                        textStyle: customTextStyle.titleSmall.override(
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          useGoogleFonts: true,
-                        ),
-                        elevation: 3,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
+                child: Form(
+                  key: controller.formstate,
+                  child: Column(
+                    children: [
+                      EditProfileField(
+                        controller: controller.organizerName,
+                        hintText: tr("Spark"),
+                        labelText: tr("ServiceProviderName"),
+                        onChanged: (value) {},
+                        validator: (value) {
+                          return value!.length < 2
+                              ? tr("Please type your name")
+                              : null;
+                        },
+                        suffixIcon: Icons.reduce_capacity_outlined,
                       ),
-                    ),
-                  ],
+                      EditProfileField(
+                        controller: controller.bio,
+                        hintText: tr(
+                            """Event organizer specialist in decoration ,lighting and flowers .
+                  Wdding, Birthday ,anniversary......"""),
+                        labelText: tr("Bio"),
+                        onChanged: (value) {},
+                        validator: (value) {
+                          return value!.length < 2
+                              ? tr("Please type your bio")
+                              : null;
+                        },
+                        suffixIcon: Icons.description_outlined,
+                      ),
+                      EditProfileField(
+                        controller: controller.description,
+                        hintText: tr(
+                            """Event organizer specialist in decoration ,lighting and flowers .
+                  Wdding, Birthday ,anniversary......"""),
+                        labelText: tr("Description"),
+                        onChanged: (value) {},
+                        validator: (value) {
+                          return value!.length < 2
+                              ? tr("Please type your organization name")
+                              : null;
+                        },
+                        suffixIcon: Icons.description_outlined,
+                      ),
+
+                      SelectStates(),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(LocationPickerScreen());
+                        },
+                        child:
+                            GetBuilder<ServiceProviderCreateProfileController>(
+                                builder: (context) {
+                          return Container(
+                            width: double.infinity,
+                            height: scaleHeight(50),
+                            margin: EdgeInsets.only(top: 12),
+                            padding: padding(0, 10, 0, 10),
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: customColors.primaryBackground,
+                                  width: 2),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(30)),
+                              // color: customColors.primaryBackground
+                            ),
+                            child: Text(
+                              serviceProviderCreateProfileController
+                                          .locationData ==
+                                      null
+                                  ? "Location"
+                                  : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'Nunito',
+                                color: customColors.primary,
+                                useGoogleFonts: true,
+                              ),
+                            ).tr(),
+                          );
+                        }),
+                      ),
+
+                      OrganizerMediaCard(),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      // Generated code for this Button Widget...
+                      ButtonWidget(
+                        showLoadingIndicator: false,
+                        onPressed: () async {
+                          FormState? formdata =
+                              controller.formstate.currentState;
+                          if (formdata!.validate() &&
+                              controller.checkIfSelectedState()) {
+                            formdata.save();
+                            showButtonSheet(
+                                context: context,
+                                widget: ServiceProviderAccounWidget(),
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.6);
+                          }
+                        },
+                        text: tr("Done"),
+                        options: ButtonOptions(
+                          width: screenWidth * 0.3,
+                          height: 40,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              32, 0, 32, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: customColors.primary,
+                          textStyle: customTextStyle.titleSmall.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            useGoogleFonts: true,
+                          ),
+                          elevation: 3,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

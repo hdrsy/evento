@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/log_out_button_sheet.dart';
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/widget/term_of_use.dart';
 import '../../../../core/responsive/responsive.dart';
 
-import '../../account_type_inner_screens/evento_verification_bottom_sheet/view/evento_verification_conditions_bottom_sheet.dart';
 import '../controller/profile_controller.dart';
 import 'widgets/build_image_with_name.dart';
 import 'widgets/options_card.dart';

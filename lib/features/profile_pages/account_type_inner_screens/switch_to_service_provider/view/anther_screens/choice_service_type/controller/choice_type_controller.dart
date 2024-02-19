@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import '../../../../../../../../core/server/helper_api.dart';
 import '../../../../../../../../core/server/server_config.dart';
 import '../../../../../../../../core/utils/error_handling/erroe_handling.dart';
@@ -9,17 +12,48 @@ import 'package:get/get.dart';
 class ChoiceTypeController extends GetxController {
   late RxList<String> errorMessage;
   late RxList<ServiceCategoryModel> serviceCategoryList;
+  late RxList<ServiceCategoryModel> searchserviceCategoryList;
   late RxList<int> selectedCategories;
+  TextEditingController searchController = TextEditingController();
+
   late RxBool isLoading;
+  late ScrollController scrollController;
+  var isSearchActive = false.obs;
+
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
     selectedCategories = <int>[].obs;
     isLoading = false.obs;
+    searchController.addListener(_onSearchChanged);
+    searchserviceCategoryList = <ServiceCategoryModel>[].obs;
+
     serviceCategoryList = <ServiceCategoryModel>[].obs;
     await fetchCategoryData();
 
     super.onInit();
+  }
+
+  Timer? _debounce;
+
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (searchController.text.isNotEmpty) {
+        // onPressSearch(searchField.text);
+        isSearchActive.value = true;
+        searchserviceCategoryList.assignAll(serviceCategoryList
+            .where((event) => event.title
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+            .toList());
+        print("inisde the timer ");
+      } else {
+        // Optionally handle empty search field case
+        // _fetchData("");
+        isSearchActive.value = false;
+      }
+    });
   }
 
   changeSelectedService(int categoryId) {
@@ -27,6 +61,20 @@ class ChoiceTypeController extends GetxController {
         ? selectedCategories.remove(categoryId)
         : selectedCategories.add(categoryId);
     update();
+  }
+
+  onPressDone() {
+    if (selectedCategories.isEmpty) {
+      errorMessage.add("Please select at least one category");
+      Future.delayed(const Duration(milliseconds: 500))
+          .then((value) => scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: const Duration(milliseconds: 50),
+                curve: Curves.easeInOut,
+              ));
+    } else {
+      Get.toNamed('/ServiceProviderCreateProfileScreen');
+    }
   }
 
   fetchCategoryData() async {

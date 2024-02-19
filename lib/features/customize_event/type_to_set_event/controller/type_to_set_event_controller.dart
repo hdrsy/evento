@@ -60,6 +60,11 @@ class TypetoSetEventController extends GetxController {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
         whenGetDataSuccess(handlingResponse);
+        cacheService.cacheObject<Map<String, dynamic>>(
+          object: handlingResponse,
+          cacheKey: cacheKey,
+          serializeFunction: (data) => data,
+        );
       }
       isLoading.value = false;
     }
