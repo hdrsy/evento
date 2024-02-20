@@ -5,7 +5,8 @@ import 'valdation_errors.dart';
 class ErrorResponse {
   bool? status; // Status indicating the success or failure of the API call
   String? message; // General message describing the error
-  ValidationError? validationErrors; // Object holding detailed validation errors
+  ValidationError?
+      validationErrors; // Object holding detailed validation errors
 
   /// Constructor for creating an ErrorResponse instance.
   /// It initializes the instance with an optional status, message, and detailed error data.
@@ -16,6 +17,7 @@ class ErrorResponse {
       errorData.forEach((key, value) {
         if (value is List) {
           // Ensure that the value is a list and cast it to List<String>.
+
           castedErrorData[key] = List<String>.from(value);
         }
       });
@@ -28,9 +30,11 @@ class ErrorResponse {
   /// This is commonly used to parse the JSON response from an API call.
   factory ErrorResponse.fromJson(Map<String, dynamic> json) {
     return ErrorResponse(
-      status: json['status'] ?? json['Status'], // Handle both 'status' and 'Status' keys.
+      status: json['status'] ??
+          json['Status'], // Handle both 'status' and 'Status' keys.
       message: json['message'], // General error message from the API response.
-      errorData: json['Validation Error'], // Specific validation error data, if any.
+      errorData:
+          json['Validation Error'], // Specific validation error data, if any.
     );
   }
 

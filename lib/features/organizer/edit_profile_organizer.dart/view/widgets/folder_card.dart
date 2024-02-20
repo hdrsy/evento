@@ -54,7 +54,7 @@ class FolderCardEditOrganizerProfile extends StatelessWidget {
   void _handleTap(BuildContext context) async {
     // Example of handling tap, you can expand this method with your logic
     Get.to(() => GalleryForLocalScreen(
-          files: folder.mediaList,
+          files: RxList<MediaModel>(folder.mediaList),
           isEditgallery: true,
           deleteFolder: () => _deleteFolder(context),
           editFolderMedia: () => _editFolderMedia(context),
@@ -163,7 +163,7 @@ class SeeAllFoldersCardEditOrganizerProfile extends StatelessWidget {
       BuildContext context, FolderModel files, int folderIndex) async {
     // Example of handling tap, you can expand this method with your logic
     Get.to(() => GalleryForLocalScreen(
-          files: files.mediaList,
+          files: RxList<MediaModel>(files.mediaList),
           isEditgallery: true,
           deleteFolder: () => _deleteFolder(context, folderIndex),
           editFolderMedia: () => _editFolderMedia(context, files, folderIndex),

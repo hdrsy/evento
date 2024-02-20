@@ -24,10 +24,13 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                 color: customColors.primaryText,
                 fontWeight: FontWeight.w700),
           )),
+      const SizedBox(
+        height: 10,
+      ),
       GestureDetector(
         onTap: () async {
           if (isGuset) {
-            Get.dialog(GuestPopupWidget());
+            Get.dialog(const GuestPopupWidget());
           } else {
             eventDetailesController.eventDetailsModel.organizer != null
                 ? Get.toNamed('/OrganizerProfileScreen',
@@ -91,7 +94,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
               ].divide(const SizedBox(width: 5)),
             ),
             eventDetailesController.eventDetailsModel.organizer == null
-                ? SizedBox.shrink()
+                ? const SizedBox.shrink()
                 : GetBuilder<EventDetailesController>(builder: (context) {
                     return ButtonWidget(
                       onPressed: () {

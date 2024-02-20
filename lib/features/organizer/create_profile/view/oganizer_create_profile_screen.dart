@@ -205,7 +205,7 @@ class OrganizerMediaCard extends StatelessWidget {
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),
                   child: Text(
-                    "Create Profile",
+                    "Create Folder",
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
                       color: customColors.primary,

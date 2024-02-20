@@ -9,18 +9,19 @@ class Pin extends StatelessWidget {
       {super.key,
       required this.onChanged,
       required this.textEditingController,
+      this.lenght = 4,
       required this.validator});
   Function(String)? onChanged;
   TextEditingController textEditingController;
   String? Function(String?)? validator;
+  int lenght;
   @override
   Widget build(BuildContext context) {
-    return 
-        PinCodeTextField(
+    return PinCodeTextField(
       autoDisposeControllers: false,
       appContext: context,
-keyboardType: TextInputType.number,
-      length: 4,
+      keyboardType: TextInputType.number,
+      length: lenght,
       textStyle: customTextStyle.titleSmall.copyWith(
         fontFamily: 'BeerSerif',
         color: customColors.primaryText,

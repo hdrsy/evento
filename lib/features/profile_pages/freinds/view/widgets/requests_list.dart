@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -142,7 +143,7 @@ class RequestsCard extends StatelessWidget {
                                 },
                                 text: tr("Confirm"),
                                 options: ButtonOptions(
-                                  width: 120,
+                                  width: 120.w,
                                   height: 21,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       10, 0, 10, 0),
@@ -173,7 +174,7 @@ class RequestsCard extends StatelessWidget {
                                 },
                                 text: tr("Delete"),
                                 options: ButtonOptions(
-                                  width: 120,
+                                  width: 120.w,
                                   height: 21,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       10, 0, 10, 0),

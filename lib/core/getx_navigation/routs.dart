@@ -294,5 +294,6 @@ appRoutes() => [
       GetPage(
           name: '/TicketsInEventForOrganizerScreen',
           page: () => TicketsInEventForOrganizerScreen()),
+      GetPage(name: '/PaymentScreen', page: () => PaymentScreen()),
       // GetPage(name: '/vedioReels', page:()=> VedioReels()) ,
     ];

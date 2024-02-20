@@ -11,6 +11,11 @@ class EventDetailsModel {
   final int ticketPrice;
   final String description;
   final String type;
+  final String? webSite;
+  final String? instagram;
+  final String? facebook;
+  final String? refundPlicy;
+  final String? cancellationPolicy;
   final List<String> images;
   final List<String> videos;
   final bool isFollowedByAuthUser;
@@ -29,6 +34,11 @@ class EventDetailsModel {
   EventDetailsModel({
     required this.bookings,
     required this.id,
+    required this.instagram,
+    required this.facebook,
+    required this.webSite,
+    required this.refundPlicy,
+    required this.cancellationPolicy,
     required this.capacity,
     required this.organizerId,
     this.organizer,
@@ -67,6 +77,11 @@ class EventDetailsModel {
       ticketPrice: json['ticket_price'],
       description: json['description'],
       type: json['type'],
+      instagram: json['instagram'],
+      facebook: json['facebook'],
+      refundPlicy: json['refund_policy'],
+      cancellationPolicy: json['cancellation_policy'],
+      webSite: json['website'],
       images: jsonDecode(json['images']).cast<String>() ?? [],
       videos: json['videos'] != null
           ? jsonDecode(json['videos']).cast<String>()

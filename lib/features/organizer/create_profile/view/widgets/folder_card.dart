@@ -52,7 +52,7 @@ class FolderCard extends StatelessWidget {
   void _handleTap(BuildContext context) async {
     // Example of handling tap, you can expand this method with your logic
     Get.to(() => GalleryForLocalScreen(
-          files: folder.mediaList,
+          files: folder.mediaList.obs,
           isEditgallery: true,
           deleteFolder: () => _deleteFolder(context),
           editFolderMedia: () => _editFolderMedia(context),
@@ -108,11 +108,11 @@ class SeeAllFoldersCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Get.to(SeeAllfolders(
-          handleOnTap: _handleTap,
-          allFolders: RxList<FolderModel>(
-              organizerCreateProfileController.foldersModel),
-        ));
+        Get.to(() => SeeAllfolders(
+              handleOnTap: _handleTap,
+              allFolders: RxList<FolderModel>(
+                  organizerCreateProfileController.foldersModel),
+            ));
       },
       child: Stack(
         children: [
@@ -161,7 +161,7 @@ class SeeAllFoldersCard extends StatelessWidget {
       BuildContext context, FolderModel files, int folderIndex) async {
     // Example of handling tap, you can expand this method with your logic
     Get.to(() => GalleryForLocalScreen(
-          files: files.mediaList,
+          files: files.mediaList.obs,
           isEditgallery: true,
           deleteFolder: () => _deleteFolder(context, folderIndex),
           editFolderMedia: () => _editFolderMedia(context, files, folderIndex),

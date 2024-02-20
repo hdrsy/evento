@@ -18,7 +18,7 @@ class GalleryForLocalScreen extends StatelessWidget {
     this.editFolderMedia,
   });
   // final GalleryController galleryController=Get.find();
-  final List<MediaModel> files;
+  final RxList<MediaModel> files;
   final bool? isEditgallery;
   final Function()? showEditFolderName;
   final Function()? deleteFolder;

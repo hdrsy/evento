@@ -1,4 +1,3 @@
-
 import '../../../../../core/shared/models/media.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -7,6 +6,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SeeAllfolders extends StatelessWidget {
   const SeeAllfolders({super.key, required this.allFolders});
   final List<FolderModel> allFolders;
@@ -39,7 +39,9 @@ class SeeAllfolders extends StatelessWidget {
                 (index) => SeeAllFolderCard(
                       folderModel: allFolders[index],
                     ))
-          ].divide(SizedBox(height: 10,)),
+          ].divide(SizedBox(
+            height: 10,
+          )),
         ),
       ),
     );
@@ -51,15 +53,12 @@ class SeeAllFolderCard extends StatelessWidget {
   final FolderModel folderModel;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
         // Get.toNamed('/GalleryScreen', arguments: album.images);
-          Get.to(GalleryForLocalScreen(files: folderModel.mediaList,));
-      
+        Get.to(GalleryForLocalScreen(
+          files: RxList<MediaModel>(folderModel.mediaList),
+        ));
       },
       child: SizedBox(
         width: double.infinity,

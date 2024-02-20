@@ -82,12 +82,12 @@ class TermOfUse extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('10. Booking and Payment'),
+              middelTitle('Booking and Payment'),
               normalDescription(amendmentsToTheTerms),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('11. Cancellation and Refund'),
+              middelTitle('Cancellation and Refund'),
               normalDescription(disclaimerAndLimitations),
               const SizedBox(
                 height: 10,
@@ -133,25 +133,17 @@ String unfriendMessage =
     'Please remember that unfriending someone will remove them from your friend list, and you won\'t be able to see their private posts or interact as friends on this platform.';
 String introduction =
     '"Evento" is a digital platform specialized in marketing and booking community events. Please read these terms of use carefully before using the app to ensure your understanding and agreement with these terms.';
-String accountRegistrationAndSecurity =
-    """•	Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.
-•	Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.""";
+String accountRegistrationAndSecurity = "Account Creation body";
 String acceptanceOfTerms =
     'By using the "Evento" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.';
-String useOfTheApp =
-    """•	Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.
-•	Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.""";
+String useOfTheApp = "Use of the App body";
 String intellectualPropertyRights = "intellectualPropertyRights";
 String registrationAsServiceProvider = "registrationAsServiceProvider";
 String restaurantBookingPayment = "restaurantBookingPayment";
 String cancellationAndRefund = "cancellationAndRefund";
 String privacyAndDataProtection = "privacyAndDataProtection";
 
-String amendmentsToTheTerms =
-    """•	Booking Process: Tickets are booked through the app, and users must verify the booking details accurately before completing the process.
-•	Inviting Attendees: Attendees can be invited to the event by selecting them from the friends list only.
-•	Payment Methods: Ticket prices are paid using approved and secure electronic payment methods.
-•	Ticket Resale: Resale of a ticket for a specific event is allowed only once, and the app charges a commission for the resale process.""";
+String amendmentsToTheTerms = "amendmentsToTheTermsbody";
 String disclaimerAndLimitations =
     """•	Cancellation Policy: Cancellation operations are subject to the cancellation policy set by the event organizer and may be subject to fees or restrictions.
 •	Refunds: In case of approval of cancellation, refunds are made according to the specified terms, after deducting any applicable fees.""";

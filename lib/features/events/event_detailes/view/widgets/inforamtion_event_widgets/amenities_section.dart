@@ -11,56 +11,60 @@ import 'package:easy_localization/easy_localization.dart';
 
 Widget buildAmenitiesSection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
-  return Column(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 8),
-        child: Row(
+  return eventDetailesController.eventDetailsModel.amenities.isEmpty
+      ? const SizedBox.shrink()
+      : Column(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Amenities",
-              style: customTextStyle.bodySmall.override(
-                  fontFamily: primaryFontFamily,
-                  color: customColors.primaryText,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts: true),
-            ).tr(),
-            GestureDetector(
-              onTap: () async {
-                // context.pushNamed('Amenities');
-                Get.toNamed('/SeeAllAmenities');
-              },
-              child: Text(
-                "See All",
-                style: customTextStyle.labelSmall.copyWith(
-                  color: customColors.primary,
-                  fontSize: 10,
-                ),
-              ).tr(),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Amenities",
+                    style: customTextStyle.bodySmall.override(
+                        fontFamily: primaryFontFamily,
+                        color: customColors.primaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: true),
+                  ).tr(),
+                  GestureDetector(
+                    onTap: () async {
+                      // context.pushNamed('Amenities');
+                      Get.toNamed('/SeeAllAmenities');
+                    },
+                    child: Text(
+                      "See All",
+                      style: customTextStyle.labelSmall.copyWith(
+                        color: customColors.primary,
+                        fontSize: 10,
+                      ),
+                    ).tr(),
+                  ),
+                ],
+              ),
             ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...List.generate(
+                    eventDetailesController.eventDetailsModel.amenities.length >
+                            5
+                        ? 5
+                        : eventDetailesController
+                            .eventDetailsModel.amenities.length,
+                    (index) => amentitesIcon(eventDetailesController
+                        .eventDetailsModel.amenities[index].icon))
+              ].divide(SizedBox(
+                width: scaleWidth(5),
+              )),
+            )
           ],
-        ),
-      ),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ...List.generate(
-              eventDetailesController.eventDetailsModel.amenities.length > 5
-                  ? 5
-                  : eventDetailesController.eventDetailsModel.amenities.length,
-              (index) => amentitesIcon(eventDetailesController
-                  .eventDetailsModel.amenities[index].icon))
-        ].divide(SizedBox(
-          width: scaleWidth(5),
-        )),
-      )
-    ],
-  );
+        );
 }
 
 Container amentitesIcon(String imgUrl) {

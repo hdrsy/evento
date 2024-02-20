@@ -400,9 +400,9 @@
   "2. Acceptance of Terms": "2. Acceptance of Terms",
   "By using the \"Evento\" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.": "By using the \"Evento\" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.",
   "3. Account Registration and Security": "3. Account Registration and Security",
-  "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.":  "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.",
+  "Account Creation body":  "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.",
   "4. Use of the App": "4. Use of the App",
-  "•Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.•Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.": "•Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.•Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.",
+  "Use of the App body": "•Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.•Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.",
   "5. Intellectual Property Rights": "5. Intellectual Property Rights",
 "intellectualPropertyRights":"• App Rights: All content on the app, including texts, graphics, and logos, is protected by intellectual property rights and belongs to the \"Evento\" app or to registered and accredited content and service providers on the app.",
 "6. Event Advertising":"6. Event Advertising",
@@ -413,9 +413,10 @@
 "cancellationAndRefund": "• Event Approval: The app does not advertise any event before studying and approving the organization request.• Contractual Relations: Contractual relations arising from the event are valid only upon the app's approval of the event.",
 "9. Selection of Service Providers by Event Organizers":"9. Selection of Service Providers by Event Organizers",
 "privacyAndDataProtection":"• Organizer's Choice: The event organizer's choice of a service provider for organizing an event is the organizer's responsibility.Contractual Relationship: The contractual relationship for executing a service or event lies between the event organizer and the service provider.• App/'s Responsibility: The app is not responsible for executing events and does not guarantee the commitments of service providers. The app may only follow up with the service provider upon the organizer's request.",
-"10. Booking and Payment":"10. Booking and Payment",
+"Booking and Payment":"10. Booking and Payment",
+"amendmentsToTheTermsbody":"• Booking Process: Tickets are booked through the app, and users must verify the booking details accurately before completing the process.• Inviting Attendees: Attendees can be invited to the event by selecting them from the friends list only.• Payment Methods: Ticket prices are paid using approved and secure electronic payment methods.• Ticket Resale: Resale of a ticket for a specific event is allowed only once, and the app charges a commission for the resale process.",
 
-
+"Cancellation and Refund":"11. Cancellation and Refund",
 
 
 

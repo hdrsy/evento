@@ -33,24 +33,16 @@ class SeeAllfolders extends StatelessWidget {
           ),
         ),
       ),
-      body: Obx(
-        () => SingleChildScrollView(
-          child: Column(
-            children: [
-              ...List.generate(
-                  allFolders.length,
-                  (index) => SeeAllFolderCard(
-                        handleOnTap: () =>
-                            handleOnTap(context, allFolders[index], index),
-                        folderIndex: index,
-                        folderModel: allFolders[index],
-                      ))
-            ].divide(const SizedBox(
-              height: 10,
-            )),
-          ),
-        ),
-      ),
+      body: Obx(() => GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemCount: allFolders.length,
+          itemBuilder: (ctx, index) => SeeAllFolderCard(
+                handleOnTap: () =>
+                    handleOnTap(context, allFolders[index], index),
+                folderIndex: index,
+                folderModel: allFolders[index],
+              ))),
     );
   }
 }

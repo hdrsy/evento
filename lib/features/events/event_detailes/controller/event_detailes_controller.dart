@@ -216,6 +216,16 @@ class EventDetailesController extends GetxController {
     }
   }
 
+  Future<void> openLink(String link) async {
+    try {
+      if (!await launchUrl(Uri.parse(link))) {
+        throw Exception('Could not launch $link');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   calculateDistance() async {
     LocationService locationService = LocationService();
     try {

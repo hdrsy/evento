@@ -408,9 +408,9 @@
   "2. Acceptance of Terms": "2. قبول الشروط",
   "By using the \"Evento\" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.": "باستخدامك لتطبيق \"إيفينتو\"، أنت توافق على الالتزام بشروط الاستخدام هذه. إذا كنت لا توافق على هذه الشروط، يجب عليك التوقف فورًا عن استخدام التطبيق.",
   "3. Account Registration and Security": "3. تسجيل الحساب والأمان",
-  "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.": "• إنشاء الحساب: يجب تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. يشمل ذلك اسمك، سنك، ورقم الهاتف الخلوي.\n• أمان الحساب: المستخدم مسؤول عن الحفاظ على سرية كلمة المرور وأي معلومات تسجيل أخرى. يجب إبلاغ الإدارة فورًا عن أي استخدام غير مصرح به لحسابك.",
+  "Account Creation body": "• إنشاء الحساب: يجب تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. يشمل ذلك اسمك، سنك، ورقم الهاتف الخلوي.\n• أمان الحساب: المستخدم مسؤول عن الحفاظ على سرية كلمة المرور وأي معلومات تسجيل أخرى. يجب إبلاغ الإدارة فورًا عن أي استخدام غير مصرح به لحسابك.",
   "4. Use of the App": "4. استخدام التطبيق",
-  "•Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.•Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.": "• الاستخدام القانوني: يجب استخدام التطبيق بطريقة قانونية ومسؤولة. يُحظر استخدام التطبيق لأي أغراض غير قانونية أو محظورة.\n• المحتوى المحظور: يُمنع نشر أو تحميل محتوى ينتهك حقوق الآخرين، يحتوي على تهديدات، فحش أو إخلال بالآداب أو الأخلاق العامة، أو يخالف القوانين المحلية والدولية.",
+  "Use of the App body": "• الاستخدام القانوني: يجب استخدام التطبيق بطريقة قانونية ومسؤولة. يُحظر استخدام التطبيق لأي أغراض غير قانونية أو محظورة.\n• المحتوى المحظور: يُمنع نشر أو تحميل محتوى ينتهك حقوق الآخرين، يحتوي على تهديدات، فحش أو إخلال بالآداب أو الأخلاق العامة، أو يخالف القوانين المحلية والدولية.",
   "5. Intellectual Property Rights": "5. حقوق الملكية الفكرية",
   "intellectualPropertyRights":"• حقوق التطبيق: جميع المحتويات الموجودة على التطبيق، بما في ذلك النصوص، الرسومات، والشعارات، محمية بحقوق الملكية الفكرية وتعود ملكيتها لتطبيق \"إيفينتو\" أو لمزودي المحتوى ومزودي الخدمة المسجلين والمعتمدين في التطبيق",
 "6. Event Advertising":"6. التسجيل كمزود خدمة",
@@ -421,7 +421,9 @@
 "cancellationAndRefund":"• اختيار منظم الفعالية لأحد مزودي الخدمة عند تنظيم فعالية ما هو مسؤولية منظم الفعالية.• تنحصر العلاقة التعاقدية لتنفيذ خدمة ما أو فعالية ما بين منظم الفعالية ومزود الخدمة.• التطبيق غير مسؤول عن تنفيذ الفعاليات ولا يضمن التزامات مزودي الخدمة. ويمكن للتطبيق متابعة التواصل مع مزود الخدمة فقط عند طلب منظم الفعالية.",
 "9. Selection of Service Providers by Event Organizers":"9. الحجز والدفع",
 "privacyAndDataProtection":"• عملية الحجز: يتم حجز التذاكر عبر التطبيق، ويجب على المستخدمين التحقق من تفاصيل الحجز بدقة قبل إتمام العملية. • طرق الدفع: يتم دفع ثمن التذاكر باستخدام وسائل الدفع الإلكتروني المعتمدة والآمنة.",
-"10. Booking and Payment":"",
+"Booking and Payment":"10. الإلغاء واسترداد الأموال",
+"amendmentsToTheTermsbody":"• سياسة الإلغاء: تخضع عمليات الإلغاء لسياسة الإلغاء المحددة من قبل منظم الفعالية وقد تخضع لرسوم أو قيود. •استرداد الأموال: في حالة الموافقة على الإلغاء، يتم استرداد الأموال وفقًا للشروط المحددة، بعد خصم أي رسوم مطبقة.",
+"Cancellation and Refund":"11. Cancellation and Refund",
 
 
 

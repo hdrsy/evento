@@ -27,7 +27,7 @@ class ProfileController extends GetxController {
       await NotificationService().init();
       final service = FlutterBackgroundService();
       service.startService();
-      // service.invoke("setAsBackground");
+      service.invoke("setAsBackground");
       // listenToEvents(2);
       // initWorkManager();
       // registertask();
