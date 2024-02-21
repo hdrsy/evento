@@ -99,7 +99,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                         fontSize: 12,
                         useGoogleFonts: false,
                       ),
-                    ),
+                    ).tr(),
                   ],
                 ),
               ].divide(const SizedBox(width: 5)),
@@ -117,8 +117,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                       },
                       text: eventDetailesController
                               .eventDetailsModel.isOrganizerFollowedByAuthUser
-                          ? "Un Follow"
-                          : "Follow",
+                          ? tr("Un Follow")
+                          : tr("Follow"),
                       options: ButtonOptions(
                         width: 85,
                         height: 21,

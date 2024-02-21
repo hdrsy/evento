@@ -25,7 +25,7 @@ class SeeAllOrganizersController extends GetxController {
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
-  late RxBool isSearchActive;
+  RxBool isSearchActive = false.obs;
 
   late RxList<OrganizerHome> itemList;
   late RxList<OrganizerHome> searchItemList;

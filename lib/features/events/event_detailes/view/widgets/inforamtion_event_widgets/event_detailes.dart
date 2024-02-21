@@ -46,7 +46,7 @@ Widget buildEventDetails(BuildContext context) {
             onPressed: () {
               eventDetailesController.createAndAddReminderEvents();
             },
-            text: "Add to My Calendar",
+            text: tr("Add to My Calendar"),
             options: ButtonOptions(
               width: 170.w,
               height: 30.h,
@@ -95,12 +95,12 @@ Widget buildEventDetails(BuildContext context) {
               fontWeight: FontWeight.bold,
               useGoogleFonts: true,
             ),
-          ),
+          ).tr(),
           ButtonWidget(
             onPressed: () {
               eventDetailesController.openMap();
             },
-            text: "See Location on Maps",
+            text: tr("See Location on Maps"),
             options: ButtonOptions(
               width: 170.w,
               height: 30.h,

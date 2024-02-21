@@ -11,6 +11,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
   final ChangePasswordController changePasswordController = Get.find();
@@ -32,7 +33,7 @@ class ChangePasswordScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        ()=> Container(
+        () => Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           width: screenWidth,
           height: screenHeight,
@@ -67,22 +68,21 @@ class ChangePasswordScreen extends StatelessWidget {
                   height: 15,
                 ),
                 EditProfileField(
-                  isPasswordSecure: true,
+                    isPasswordSecure: true,
                     controller: changePasswordController.oldPassword,
                     hintText: "",
-                    labelText:tr( "Current pssword"),
+                    labelText: tr("Current pssword"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
                     validator: (value) {
                       return passwordValidation(value);
-                      
                     }),
                 EditProfileField(
-                                    isPasswordSecure: true,
+                    isPasswordSecure: true,
                     controller: changePasswordController.newPassword,
                     hintText: "",
-                    labelText:tr( "New pssword"),
+                    labelText: tr("New pssword"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
@@ -90,10 +90,10 @@ class ChangePasswordScreen extends StatelessWidget {
                       return passwordValidation(value);
                     }),
                 EditProfileField(
-                                    isPasswordSecure: true,
+                    isPasswordSecure: true,
                     controller: changePasswordController.retypePassword,
                     hintText: "",
-                    labelText:tr( "Re-type new password"),
+                    labelText: tr("Re-type new password"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
@@ -104,20 +104,22 @@ class ChangePasswordScreen extends StatelessWidget {
                       }
                       return null;
                     }),
-      
+
                 const Spacer(),
                 // Generated code for this Button Widget...
                 ButtonWidget(
-                  showLoadingIndicator: changePasswordController.isLoading.value,
+                  showLoadingIndicator:
+                      changePasswordController.isLoading.value,
                   onPressed: () async {
                     changePasswordController.onPressDone();
                   },
-                  text:tr( "Save"),
+                  text: tr("Save"),
                   options: ButtonOptions(
                     width: 200,
                     height: 40,
                     padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     color: customColors.primary,
                     textStyle: customTextStyle.titleSmall.override(
                       fontFamily: 'Nunito',
@@ -132,7 +134,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                
+
                 ...List.generate(
                     changePasswordController.errorMessage.length,
                     (index) => ErrorMessages(

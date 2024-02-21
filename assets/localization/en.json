@@ -479,5 +479,29 @@
   "typeSpecialist": "Please type your specialist",
   "typeBioAgain": "Please type your bio",
   "noServiceProvidersAvailable": "No service providers available. Services will appear here as they become available."
-
+  ,
+    "Date & Location": "Date & Location",
+    "From vision to reality": "From vision to reality",
+    "Choose your event theme with our experts and create something extraordinary.": "Choose your event theme with our experts and create something extraordinary.",
+    "New password": "New password",
+    "Current password": "Current password",
+    
+      "Aleppo": "Aleppo",
+      "Al-Ḥasakah": "Al-Ḥasakah",
+      "Al-Qamishli": "Al-Qamishli",
+      "Al-Qunayṭirah": "Al-Qunayṭirah",
+      "Al-Raqqah": "Al-Raqqah",
+      "Al-Suwayda": "Al-Suwayda",
+      "Damascus": "Damascus",
+      "Daraa": "Daraa",
+      "Dayr al-Zawr": "Dayr al-Zawr",
+      "Ḥamah": "Ḥamah",
+      "Homs": "Homs",
+      "Idlib": "Idlib",
+      "Latakia": "Latakia",
+      "Rif Dimashq": "Rif Dimashq"
+    
+    
+  
+  
 }

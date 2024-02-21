@@ -95,7 +95,10 @@ class VenueCard extends StatelessWidget {
                           borderRadius: 20,
                           buttonSize: 40,
                           iconColor: customColors.info,
-                          backgroundColor: customColors.primary,
+                          backgroundColor:
+                              serviceCategoryController.selectedVenue.value != 0
+                                  ? customColors.success
+                                  : customColors.primary,
                           icon:
                               serviceCategoryController.selectedVenue.value != 0
                                   ? Icons.check

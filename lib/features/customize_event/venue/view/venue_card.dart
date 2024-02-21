@@ -124,7 +124,7 @@ class VenueCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "Location: ${venue.governorate}",
+                        "${tr("Location")}: ${venue.governorate}",
                         style: customTextStyle.labelMedium.override(
                             fontFamily: secondaryFontFamily,
                             useGoogleFonts: true,

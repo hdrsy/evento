@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/images/network_image.dart';
@@ -138,8 +140,8 @@ class OrganizerSeeAllCard extends StatelessWidget {
                         },
                         text:
                             organizerHome.organizerHomeInfo.isFollowedByAuthUser
-                                ? "Following"
-                                : "Follow",
+                                ? tr("Un Follow")
+                                : tr("Follow"),
                         options: ButtonOptions(
                           width: 100,
                           height: 21,

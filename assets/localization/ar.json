@@ -487,5 +487,28 @@
   "typeSpecialist": "الرجاء كتابة اختصاصك",
   "typeBioAgain": "الرجاء كتابة سيرتك الذاتية",
   "noServiceProvidersAvailable": "لا تتوفر مقدمو خدمات. ستظهر الخدمات هنا عند توفرها."
-
+  ,
+    "Date & Location": "التاريخ والموقع",
+    "From vision to reality": "من الرؤية إلى الواقع",
+    "Choose your event theme with our experts and create something extraordinary.": "اختر موضوع حدثك مع خبرائنا وأنشئ شيئًا غير عادي.",
+    "New password": "كلمة المرور الجديدة",
+    "Current password": "كلمة المرور الحالية"
+  
+    ,
+      "Aleppo": "حلب",
+      "Al-Ḥasakah": "الحسكة",
+      "Al-Qamishli": "القامشلي",
+      "Al-Qunayṭirah": "القنيطرة",
+      "Al-Raqqah": "الرقة",
+      "Al-Suwayda": "السويداء",
+      "Damascus": "دمشق",
+      "Daraa": "درعا",
+      "Dayr al-Zawr": "دير الزور",
+      "Ḥamah": "حماة",
+      "Homs": "حمص",
+      "Idlib": "إدلب",
+      "Latakia": "اللاذقية",
+      "Rif Dimashq": "ريف دمشق"
+    
+    
 }

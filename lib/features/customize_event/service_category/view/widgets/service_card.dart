@@ -106,7 +106,13 @@ class ServiceCard extends StatelessWidget {
                           borderRadius: 20,
                           buttonSize: 40,
                           iconColor: customColors.info,
-                          backgroundColor: customColors.primary,
+                          backgroundColor: controller
+                                      .selectedServiceProviders[
+                                          serviceCategoryIndex]
+                                      .value !=
+                                  0
+                              ? customColors.success
+                              : customColors.primary,
                           icon: controller
                                       .selectedServiceProviders[
                                           serviceCategoryIndex]
