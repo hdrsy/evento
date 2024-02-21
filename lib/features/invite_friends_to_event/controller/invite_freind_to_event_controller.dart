@@ -12,6 +12,8 @@ class InviteFreindsToEventController extends GetxController {
   late List<bool> initedList;
   late int eventId;
   late String eventNAme;
+  RxBool isLoading = false.obs;
+  RxBool isError = false.obs;
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
@@ -23,23 +25,30 @@ class InviteFreindsToEventController extends GetxController {
   }
 
   getMyFreinds() async {
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['friends'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['friends'];
 
-      myFreinds.value = interestsJson
-          .map((jsonItem) => FreindsModel.fromJson(jsonItem))
-          .toList();
-      initedList = List.generate(myFreinds.length, (index) => false);
+        myFreinds.value = interestsJson
+            .map((jsonItem) => FreindsModel.fromJson(jsonItem))
+            .toList();
+        initedList = List.generate(myFreinds.length, (index) => false);
+      }
+      update();
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    update();
   }
 
   onPressInviteFriend(int freindId, int modelId) async {

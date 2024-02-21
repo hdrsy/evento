@@ -42,16 +42,16 @@ class OrganizationEvent {
       }
     }
     return OrganizationEvent(
-      title: json['title'],
-      titleAr: json['title_ar'],
+      title: json['title'] ?? '',
+      titleAr: json['title_ar'] ?? '',
       capacity: json['capacity'] ?? 0,
       bookingCount: json['bookings_count'] ?? 0,
-      venueId: json['venue_id'],
-      id: json['id'],
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
+      venueId: json['venue_id'] ?? 0,
+      id: json['id'] ?? 0,
+      startDate: DateTime.parse(json['start_date'] ?? ''),
+      endDate: DateTime.parse(json['end_date'] ?? ''),
       images: imageList,
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
       venue: Venue.fromJson(json['venue']),
       categoriesEvents: List<CategoryModel>.from(
           json['categories_events'].map((x) => CategoryModel.fromJson(x))),
@@ -74,9 +74,9 @@ class Venue {
 
   factory Venue.fromJson(Map<String, dynamic> json) {
     return Venue(
-      id: json['id'],
-      name: json['name'],
-      nameAr: json['name_ar'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      nameAr: json['name_ar'] ?? '',
       averageRating: json['average_rating'],
     );
   }
@@ -95,9 +95,9 @@ class EventLink {
 
   factory EventLink.fromJson(Map<String, dynamic> json) {
     return EventLink(
-      url: json['url'],
-      label: json['label'],
-      active: json['active'],
+      url: json['url'] ?? '',
+      label: json['label'] ?? '',
+      active: json['active'] ?? false,
     );
   }
 }

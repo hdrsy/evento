@@ -18,8 +18,8 @@ class SearchModel {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return SearchModel(
         id: json['id'] ?? 0,
-        title: json['title'],
-        startDate: DateTime.parse(json['start_date']),
+        title: json['title'] ?? '',
+        startDate: DateTime.parse(json['start_date'] ?? ''),
         images: json['images'] != null
             ? List<String>.from(jsonDecode(json['images']).map((x) => x))
             : []);

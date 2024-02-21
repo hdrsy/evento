@@ -467,5 +467,17 @@
 "Is there a support system for users?",
 "Yes, a dedicated team is available for inquiries and assistance through multiple channels.":
 "Yes, a dedicated team is available for inquiries and assistance through multiple channels."
+,
+  "editFolderName": "Edit Folder Name",
+  "tickets": "Tickets",
+  "selectOptionsBelow": "Select Options Below",
+  "selectAtLeastOneCategory": "Please select at least one category",
+  "typeOrganizationName": "Please type your organization name",
+  "typeBio": "Please type your bio",
+  "selectCoveringArea": "Please select your covering area",
+  "typeName": "Please type your name",
+  "typeSpecialist": "Please type your specialist",
+  "typeBioAgain": "Please type your bio",
+  "noServiceProvidersAvailable": "No service providers available. Services will appear here as they become available."
 
 }

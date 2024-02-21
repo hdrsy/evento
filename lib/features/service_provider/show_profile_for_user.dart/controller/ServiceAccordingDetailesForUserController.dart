@@ -10,44 +10,49 @@ import 'package:get/get.dart';
 class ServiceAccordingDetailesForUserController extends GetxController {
   late ServiceProvider serviceProvider;
   late RxList<String> errorMessage;
-late RxBool isLoading;
-late int serviceProviderId;
+  late RxBool isLoading;
+  RxBool isError = false.obs;
+  late int serviceProviderId;
 // late bool isorganizerEditProfile;
-  
+
   @override
   void onInit() {
     errorMessage = <String>[].obs;
-    isLoading=false.obs;
-    serviceProviderId=Get.arguments;
-      // isorganizerEditProfile = Get.arguments[1]??false;
-  
+    isLoading = false.obs;
+    serviceProviderId = Get.arguments;
+    // isorganizerEditProfile = Get.arguments[1]??false;
+
     getOrganizerProfile();
     // TODO: implement onInit
     super.onInit();
   }
 
   getOrganizerProfile() async {
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    isLoading.value=true;
-    String token = await prefService.readString("token") ;
-    response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.serviceProfileForUser}/$serviceProviderId",
-        method: "GEt",
-        token: token);
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      isLoading.value = true;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout:
+              "${ServerConstApis.serviceProfileForUser}/$serviceProviderId",
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      final interestsJson = handlingResponse['message'];
-print(interestsJson); 
-      serviceProvider = ServiceProvider.fromJson(interestsJson);
-      
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
+      if (handlingResponse is ErrorResponse) {
+        isError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        final interestsJson = handlingResponse['message'];
+        print(interestsJson);
+        serviceProvider = ServiceProvider.fromJson(interestsJson);
+      }
+      isLoading.value = false;
+      update();
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    isLoading.value=false;
-    update();
   }
-  
- 
 }

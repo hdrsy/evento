@@ -1,4 +1,3 @@
-
 class SentRequest {
   int id;
   int senderId;
@@ -19,9 +18,9 @@ class SentRequest {
   });
 
   factory SentRequest.fromJson(Map<String, dynamic> json) => SentRequest(
-        id: json['id'],
-        senderId: json['sender_id'],
-        receiverId: json['receiver_id'],
+        id: json['id'] ?? 0,
+        senderId: json['sender_id'] ?? 0,
+        receiverId: json['receiver_id'] ?? 0,
         status: json['status'],
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
@@ -45,10 +44,11 @@ class Receiver {
   });
 
   factory Receiver.fromJson(Map<String, dynamic> json) => Receiver(
-        id: json['id'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        image: json['image'],
-        friendRequestStatusWithAuthUser: json['friend_request_status_with_auth_user'],
+        id: json['id'] ?? 0,
+        firstName: json['first_name'] ?? '',
+        lastName: json['last_name'] ?? '',
+        image: json['image'] ?? '',
+        friendRequestStatusWithAuthUser:
+            json['friend_request_status_with_auth_user'],
       );
 }

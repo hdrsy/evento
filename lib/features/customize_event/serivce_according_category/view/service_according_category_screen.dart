@@ -38,38 +38,44 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
                       color: customColors.primary,
                     ),
                   )
-                : serviceAccordingCategoryController.serviceProviderList.isEmpty
+                : serviceAccordingCategoryController.isError.value
                     ? EmptyData(
-                        icon: Icons.miscellaneous_services,
-                        message:
-                            "No service providers available. Services will appear here as they become available.")
-                    : SingleChildScrollView(
-                        padding: padding(16, 20, 16, 20),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                serviceAccordingCategoryController
-                                    .serviceCategoryType,
-                                style: customTextStyle.bodyMedium.override(
-                                  fontFamily: 'Nunito',
-                                  color: customColors.primaryText,
-                                  fontSize: 25,
-                                  useGoogleFonts: true,
-                                ),
-                              ),
-                              ...List.generate(
-                                  serviceAccordingCategoryController
-                                      .serviceProviderList.length,
-                                  (index) => ServiceAccordingCard(
-                                        serviceProvider:
-                                            serviceAccordingCategoryController
-                                                .serviceProviderList[index],
-                                        serviceCategoryIndex:
-                                            serviceAccordingCategoryController
-                                                .serviceCategoryIndex,
-                                      ))
-                            ])),
+                        icon: Icons.error_outline_outlined,
+                        message: "SomeThing Wrong!!",
+                      )
+                    : serviceAccordingCategoryController
+                            .serviceProviderList.isEmpty
+                        ? EmptyData(
+                            icon: Icons.miscellaneous_services,
+                            message:
+                                "No service providers available. Services will appear here as they become available.")
+                        : SingleChildScrollView(
+                            padding: padding(16, 20, 16, 20),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    serviceAccordingCategoryController
+                                        .serviceCategoryType,
+                                    style: customTextStyle.bodyMedium.override(
+                                      fontFamily: 'Nunito',
+                                      color: customColors.primaryText,
+                                      fontSize: 25,
+                                      useGoogleFonts: true,
+                                    ),
+                                  ),
+                                  ...List.generate(
+                                      serviceAccordingCategoryController
+                                          .serviceProviderList.length,
+                                      (index) => ServiceAccordingCard(
+                                            serviceProvider:
+                                                serviceAccordingCategoryController
+                                                    .serviceProviderList[index],
+                                            serviceCategoryIndex:
+                                                serviceAccordingCategoryController
+                                                    .serviceCategoryIndex,
+                                          ))
+                                ])),
           ),
         ));
   }

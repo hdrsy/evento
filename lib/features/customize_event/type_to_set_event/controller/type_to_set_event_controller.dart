@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 class TypetoSetEventController extends GetxController {
   late RxBool isLoading;
+  RxBool IsErrorExist = false.obs;
   late RxList<CategoryModel> categoryList;
   late RxInt selectedCategory;
   CacheService cacheService = CacheService('customoze');
@@ -37,36 +38,42 @@ class TypetoSetEventController extends GetxController {
   //  return selectedCategory.contains(categoryModel);
   // }
   fetchCategoryData() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    if (await checkInternet()) {
-      final d = await cacheService.getObject<Map<String, dynamic>>(
-        cacheKey: cacheKey,
-        deserializeFunction: (jsonMap) => jsonMap,
-      );
-      if (d != null) {
-        whenGetDataSuccess(d);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      if (await checkInternet()) {
+        final d = await cacheService.getObject<Map<String, dynamic>>(
+          cacheKey: cacheKey,
+          deserializeFunction: (jsonMap) => jsonMap,
+        );
+        if (d != null) {
+          whenGetDataSuccess(d);
+        } else {
+          isLoading.value = false;
+        }
       } else {
+        response = await ApiHelper.makeRequest(
+            targetRout: ServerConstApis.getCategoryList,
+            method: "GEt",
+            token: token);
+        dynamic handlingResponse = response.fold((l) => l, (r) => r);
+        if (handlingResponse is ErrorResponse) {
+          errorMessage.value = handlingResponse.getErrorMessages();
+          IsErrorExist.value = true;
+        } else {
+          whenGetDataSuccess(handlingResponse);
+          cacheService.cacheObject<Map<String, dynamic>>(
+            object: handlingResponse,
+            cacheKey: cacheKey,
+            serializeFunction: (data) => data,
+          );
+        }
         isLoading.value = false;
       }
-    } else {
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.getCategoryList,
-          method: "GEt",
-          token: token);
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
-      } else {
-        whenGetDataSuccess(handlingResponse);
-        cacheService.cacheObject<Map<String, dynamic>>(
-          object: handlingResponse,
-          cacheKey: cacheKey,
-          serializeFunction: (data) => data,
-        );
-      }
+    } catch (e) {
       isLoading.value = false;
+      IsErrorExist.value = true;
     }
   }
 

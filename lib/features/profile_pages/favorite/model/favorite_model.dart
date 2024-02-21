@@ -23,11 +23,11 @@ class EventWrapper {
 
   factory EventWrapper.fromJson(Map<String, dynamic> json) {
     return EventWrapper(
-      id: json['id'],
-      eventId: json['event_id'],
-      userId: json['user_id'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] ?? 0,
+      eventId: json['event_id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      createdAt: DateTime.parse(json['created_at'] ?? ''),
+      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
       event: FavoriteEventModel.fromJson(json['event']),
     );
   }
@@ -67,19 +67,19 @@ class FavoriteEventModel {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return FavoriteEventModel(
-      id: json['id'],
-      organizerId: json['organizer_id'],
-      title: json['title'],
-      venueId: json['venue_id'],
-      capacity: json['capacity'],
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
-      ticketPrice: json['ticket_price'],
-      description: json['description'],
+      id: json['id'] ?? 0,
+      organizerId: json['organizer_id'] ?? 0,
+      title: json['title'] ?? '',
+      venueId: json['venue_id'] ?? 0,
+      capacity: json['capacity'] ?? 0,
+      startDate: DateTime.parse(json['start_date'] ?? ''),
+      endDate: DateTime.parse(json['end_date'] ?? ''),
+      ticketPrice: json['ticket_price'] ?? 0,
+      description: json['description'] ?? '',
       type: json['type'],
       venue: Venue.fromJson(json["venue"]),
       images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
 }

@@ -18,6 +18,7 @@ class TicketsInEventForOrganizerController extends GetxController {
   late CancelledEvent eventDetailsModel;
 
   late RxBool isLoading;
+  RxBool isError = false.obs;
   @override
   void onInit() {
     eventId = Get.arguments[0];
@@ -53,24 +54,30 @@ class TicketsInEventForOrganizerController extends GetxController {
   }
 
   getOrganizerFollowers() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout:
-            "${ServerConstApis.organizationMyEventsBookings}/${eventId}",
-        method: "GEt",
-        token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout:
+              "${ServerConstApis.organizationMyEventsBookings}/${eventId}",
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
-    } else {
-      bookingResponse = BookingResponse.fromJson(handlingResponse);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
+      if (handlingResponse is ErrorResponse) {
+        isError.value = true;
+      } else {
+        bookingResponse = BookingResponse.fromJson(handlingResponse);
 
-      print("booking detailes:${bookingResponse.booking}");
-      update();
+        print("booking detailes:${bookingResponse.booking}");
+        update();
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    isLoading.value = false;
   }
 }

@@ -20,8 +20,10 @@ class Step7Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
+      // height: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
@@ -39,7 +41,7 @@ class Step7Content extends StatelessWidget {
             ).tr(),
           ),
           SizedBox(
-              height: scaleHeight(400),
+              height: scaleHeight(500),
               child: Obx(() => step7controller.isLoading.value
                   ? interestShimmerGridView()
                   : MyGridView())),

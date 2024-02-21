@@ -40,52 +40,58 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : myRequestController.itemList.isEmpty
-              ? const EmptyData(
-                  icon: Icons.email_rounded,
-                  message:
-                      "You haven't made any requests. Start by searching for events you're interested in!",
+          : myRequestController.isError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
                 )
-              : SingleChildScrollView(
-                  controller: myRequestController.scrollController,
-                  padding: padding(16, 20, 10, 20),
-                  child: Column(
-                    children: [
-                      searchTextField(onChanged: (value) {}),
-                      // Generated code for this Row Widget...
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
+              : myRequestController.itemList.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.email_rounded,
+                      message:
+                          "You haven't made any requests. Start by searching for events you're interested in!",
+                    )
+                  : SingleChildScrollView(
+                      controller: myRequestController.scrollController,
+                      padding: padding(16, 20, 10, 20),
+                      child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16, 12, 0, 0),
-                            child: Text(
-                              myRequestController.itemList.length.toString(),
-                              style: customTextStyle.labelMedium,
-                            ),
+                          searchTextField(onChanged: (value) {}),
+                          // Generated code for this Row Widget...
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16, 12, 0, 0),
+                                child: Text(
+                                  myRequestController.itemList.length
+                                      .toString(),
+                                  style: customTextStyle.labelMedium,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    4, 12, 16, 0),
+                                child: Text(
+                                  tr("Event"),
+                                  style: customTextStyle.bodyMedium,
+                                ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                4, 12, 16, 0),
-                            child: Text(
-                              tr("Event"),
-                              style: customTextStyle.bodyMedium,
-                            ),
-                          ),
-                        ],
+                          ...List.generate(
+                            myRequestController.itemList.length,
+                            (index) => MyEventsForOrganizerCard(
+                                myRequestModel:
+                                    myRequestController.itemList[index]),
+                          )
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
                       ),
-                      ...List.generate(
-                        myRequestController.itemList.length,
-                        (index) => MyEventsForOrganizerCard(
-                            myRequestModel:
-                                myRequestController.itemList[index]),
-                      )
-                    ].divide(const SizedBox(
-                      height: 10,
                     )),
-                  ),
-                )),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:evento/core/server/helper_api.dart';
 
 import 'my_cancel_booking_model.dart';
 
-
 class UpComingBooking {
   int userId;
   int eventId;
@@ -16,13 +15,13 @@ class UpComingBooking {
     required this.bookings,
   });
 
-  factory UpComingBooking.fromJson(Map<String, dynamic> json) => UpComingBooking(
-        userId: json['user_id'],
-        eventId: json['event_id'],
-        bookings: List<EventBooking>.from(json['bookings'].map((x) => EventBooking.fromJson(x))),
+  factory UpComingBooking.fromJson(Map<String, dynamic> json) =>
+      UpComingBooking(
+        userId: json['user_id'] ?? 0,
+        eventId: json['event_id'] ?? 0,
+        bookings: List<EventBooking>.from(
+            json['bookings'].map((x) => EventBooking.fromJson(x))),
       );
-
-
 }
 
 class EventBooking {
@@ -48,23 +47,19 @@ class EventBooking {
     required this.eventClass,
   });
 
-  factory EventBooking.fromJson(Map<String, dynamic> oldJson)  {
-    
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+  factory EventBooking.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return EventBooking(
-        id: json['id'],
-        userId: json['user_id'],
-        classId: json['class_id'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        age: json['age'],
-        phoneNumber: json['phone_number'],
-        interest: List<String>.from(jsonDecode(json['interest'])),
-        eventClass: CancelledEventClass.fromJson(json['event_class']),
-      );}
-
-  
+      id: json['id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      classId: json['class_id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      age: json['age'] ?? 0,
+      phoneNumber: json['phone_number'] ?? 0,
+      interest: List<String>.from(jsonDecode(json['interest'])),
+      eventClass: CancelledEventClass.fromJson(json['event_class']),
+    );
+  }
 }
-
-

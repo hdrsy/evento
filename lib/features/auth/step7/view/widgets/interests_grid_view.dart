@@ -43,57 +43,152 @@ class MyGridView extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
-class CategoryGridItem extends StatelessWidget {
+class CategoryGridItem extends StatefulWidget {
+  CategoryGridItem(
+      {super.key,
+      required this.item,
+      required this.isSelected,
+      required this.onTap});
   final InterestItem item;
   RxBool isSelected;
   Function() onTap;
-  CategoryGridItem(
-      {Key? key,
-      required this.item,
-      required this.isSelected,
-      required this.onTap})
-      : super(key: key);
+
+  @override
+  State<CategoryGridItem> createState() => _CategoryGridItemState();
+}
+
+class _CategoryGridItemState extends State<CategoryGridItem> {
+  bool showRipple = false;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: scaleHeight(100),
-          height: scaleHeight(100),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(0),
-            shape: BoxShape.rectangle,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 84,
-                height: 74,
-                decoration: BoxDecoration(
-                  color: isSelected.value
-                      ? customColors.primary
-                      : customColors.primaryBackground,
-                  borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          showRipple = !showRipple;
+        });
+        widget.onTap();
+      },
+      child: Obx(
+        () => Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                // Ripple effect
+                AnimatedContainer(
+                  onEnd: () {
+                    setState(() {
+                      showRipple = false;
+                    });
+                  },
+                  width: showRipple ? 65 : 0,
+                  height: showRipple ? 65 : 0,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeOutQuart,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                    boxShadow: showRipple
+                        ? [
+                            for (var i = 0; i < 2; i += 1)
+                              BoxShadow(
+                                  spreadRadius: i * 5.0,
+                                  color: customColors.primary
+                                      .withAlpha(255 ~/ (i + 2)))
+                          ]
+                        : [],
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Center(
-                      child: getImageNetwork(
-                          url: item.icon, width: 100, height: 100)),
+                // Icon Container
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 2,
+                          color: widget.isSelected.value
+                              ? customColors.primary
+                              : customColors.primaryBackground),
+                      color: widget.isSelected.value
+                          ? customColors.primary
+                          : customColors.primaryBackground,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: getImageNetworkImageProvider(
+                              url: widget.item.icon,
+                              width: null,
+                              height: null))),
                 ),
-              ),
-              Text(
-                item.title,
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(
+                widget.item.title,
                 style: customTextStyle.bodyMedium,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+// ignore: must_be_immutable
+// class CategoryGridItem extends StatelessWidget {
+//   final InterestItem item;
+//   RxBool isSelected;
+//   Function() onTap;
+//   CategoryGridItem(
+//       {Key? key,
+//       required this.item,
+//       required this.isSelected,
+//       required this.onTap})
+//       : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Obx(
+//       () => GestureDetector(
+//         onTap: onTap,
+//         child: Container(
+//           width: scaleHeight(100),
+//           height: scaleHeight(100),
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(0),
+//             shape: BoxShape.rectangle,
+//           ),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.max,
+//             children: [
+//               Container(
+//                 width: 84,
+//                 height: 74,
+//                 decoration: BoxDecoration(
+//                   color: isSelected.value
+//                       ? customColors.primary
+//                       : customColors.primaryBackground,
+//                   borderRadius: BorderRadius.circular(10),
+//                 ),
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(20),
+//                   child: Center(
+//                       child: getImageNetwork(
+//                           url: item.icon, width: 100, height: 100)),
+//                 ),
+//               ),
+//               Text(
+//                 item.title,
+//                 style: customTextStyle.bodyMedium,
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

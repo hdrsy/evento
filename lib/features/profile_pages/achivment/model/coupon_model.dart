@@ -1,4 +1,3 @@
-
 class PromoCode {
   final int id;
   final String title;
@@ -30,24 +29,24 @@ class PromoCode {
 
   factory PromoCode.fromJson(Map<String, dynamic> json) {
     var eventList = json['events'] as List;
-    List<PromoCodeEvent> events = eventList.map((i) => PromoCodeEvent.fromJson(i)).toList();
+    List<PromoCodeEvent> events =
+        eventList.map((i) => PromoCodeEvent.fromJson(i)).toList();
     return PromoCode(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      image: json['image'],
-      code: json['code'],
-      discount: json['discount'],
-      limit: json['limit'],
-      startDate: DateTime.parse(json['start-date']),
-      endDate: DateTime.parse(json['end-date']),
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      image: json['image'] ?? '',
+      code: json['code'] ?? '',
+      discount: json['discount'] ?? "",
+      limit: json['limit'] ?? '',
+      startDate: DateTime.parse(json['start-date'] ?? ''),
+      endDate: DateTime.parse(json['end-date'] ?? ''),
+      createdAt: DateTime.parse(json['created_at'] ?? ''),
+      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
       events: events,
     );
   }
-
- }
+}
 
 class PromoCodeEvent {
   final int id;
@@ -68,16 +67,14 @@ class PromoCodeEvent {
 
   factory PromoCodeEvent.fromJson(Map<String, dynamic> json) {
     return PromoCodeEvent(
-      id: json['id'],
-      eventId: json['event_id'],
-      promoCodeId: json['promo_code_id'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] ?? 0,
+      eventId: json['event_id'] ?? 0,
+      promoCodeId: json['promo_code_id'] ?? 0,
+      createdAt: DateTime.parse(json['created_at'] ?? ''),
+      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
       eventDetails: PromoCodeEventDetails.fromJson(json['event']),
     );
   }
-
-  
 }
 
 class PromoCodeEventDetails {
@@ -95,12 +92,10 @@ class PromoCodeEventDetails {
 
   factory PromoCodeEventDetails.fromJson(Map<String, dynamic> json) {
     return PromoCodeEventDetails(
-      id: json['id'],
-      title: json['title'],
-      titleAr: json['title_ar'],
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      titleAr: json['title_ar'] ?? '',
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
-
-
 }

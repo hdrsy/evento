@@ -14,6 +14,7 @@ class OrganizerProfileController extends GetxController {
   late RxList<String> errorMessage;
   late List<OrganizerFollowersModel> rganizerFollowers;
   late RxBool isLoading;
+  RxBool isError = false.obs;
   late RxBool isLoadingFollowers;
   late int orgnizerId;
   late bool isSameUser;
@@ -35,25 +36,31 @@ class OrganizerProfileController extends GetxController {
   }
 
   getOrganizerProfile() async {
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    isLoading.value = true;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
-        method: "GEt",
-        token: token);
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      isLoading.value = true;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      final interestsJson = handlingResponse['organizer'];
-      print("orrr:$interestsJson");
-      organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
-      update();
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
+      if (handlingResponse is ErrorResponse) {
+        isError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        final interestsJson = handlingResponse['organizer'];
+        print("orrr:$interestsJson");
+        organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
+        update();
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    isLoading.value = false;
   }
 
   getOrganizerFollowers() async {
@@ -157,7 +164,7 @@ class OrganizerProfileController extends GetxController {
 
   followOrUnFollowOrganizer(int organizerId) async {
     late String isDoneSuccefully;
-    if (organizerProfileModel.organizerInfo.isFollowedByAuthUser) {
+    if (organizerProfileModel.organizerInfo!.isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
@@ -165,11 +172,11 @@ class OrganizerProfileController extends GetxController {
           "${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      organizerProfileModel.organizerInfo.isFollowedByAuthUser = true;
+      organizerProfileModel.organizerInfo!.isFollowedByAuthUser = true;
       organizerProfileModel.followersCount++;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      organizerProfileModel.organizerInfo.isFollowedByAuthUser = false;
+      organizerProfileModel.organizerInfo!.isFollowedByAuthUser = false;
       organizerProfileModel.followersCount--;
 
       update();

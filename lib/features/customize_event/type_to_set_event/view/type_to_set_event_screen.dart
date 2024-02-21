@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../controller/type_to_set_event_controller.dart';
@@ -30,7 +32,13 @@ class TypeToSetEventScreen extends StatelessWidget {
                   child: CircularProgressIndicator(
                   color: customColors.primary,
                 ))
-              : Container(
+              : typetoSetEventController.IsErrorExist.value?EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
+                ):
+              
+              
+              Container(
                   padding: padding(16, 16, 16, 16),
                   width: double.infinity,
                   child: Column(

@@ -70,13 +70,13 @@ class EventDetailsModel {
       bookings:
           List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x))),
       id: json['id'],
-      title: json['title'],
-      capacity: json['capacity'],
+      title: json['title'] ?? "UnKnown",
+      capacity: json['capacity'] ?? 0,
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
-      ticketPrice: json['ticket_price'],
-      description: json['description'],
-      type: json['type'],
+      ticketPrice: json['ticket_price'] ?? 0,
+      description: json['description'] ?? "",
+      type: json['type'] ?? "UnKnown",
       instagram: json['instagram'],
       facebook: json['facebook'],
       refundPlicy: json['refund_policy'],
@@ -122,8 +122,8 @@ class Booking {
   factory Booking.fromJson(Map<String, dynamic> json) {
     return Booking(
       id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      firstName: json['first_name'] ?? "",
+      lastName: json['last_name'] ?? '',
     );
   }
 }
@@ -132,18 +132,21 @@ class User {
   final int id;
   final String firstName;
   final String lastName;
+  final String image;
 
   User({
     required this.id,
+    required this.image,
     required this.firstName,
     required this.lastName,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      id: json['id'] ?? 0,
+      firstName: json['first_name'] ?? "",
+      image: json['image'] ?? "",
+      lastName: json['last_name'] ?? '',
     );
   }
 }
@@ -159,7 +162,7 @@ class Organizer {
 
   factory Organizer.fromJson(Map<String, dynamic> json) {
     return Organizer(
-      id: json['id'],
+      id: json['id'] ?? "",
       organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
     );
   }
@@ -209,15 +212,11 @@ class CategoryEvent {
   final int id;
   final String title;
   final String icon;
-  final DateTime createdAt;
-  final DateTime updatedAt;
 
   CategoryEvent({
     required this.id,
     required this.title,
     required this.icon,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory CategoryEvent.fromJson(Map<String, dynamic> oldJson) {
@@ -225,10 +224,8 @@ class CategoryEvent {
 
     return CategoryEvent(
       id: json['id'],
-      title: json['title'],
-      icon: json['icon'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      title: json['title'] ?? "",
+      icon: json['icon'] ?? '',
     );
   }
 }
@@ -252,11 +249,11 @@ class Class {
 
   factory Class.fromJson(Map<String, dynamic> json) {
     return Class(
-      id: json['id'],
-      eventId: json['event_id'],
-      code: json['code'],
-      ticketPrice: json['ticket_price'],
-      ticketNumber: json['ticket_number'],
+      id: json['id'] ?? 0,
+      eventId: json['event_id'] ?? 0,
+      code: json['code'] ?? '',
+      ticketPrice: json['ticket_price'] ?? 0,
+      ticketNumber: json['ticket_number'] ?? 0,
       interests:
           List<Amenity>.from(json['interests'].map((x) => Amenity.fromJson(x))),
     );
@@ -283,10 +280,10 @@ class EventTrip {
 
     return EventTrip(
       id: json['id'],
-      eventId: json['event_id'],
+      eventId: json['event_id'] ?? 0,
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
-      description: json['description'],
+      description: json['description'] ?? "",
     );
   }
 }
@@ -294,6 +291,7 @@ class EventTrip {
 class Venue {
   final int id;
   final String name;
+  final String? profile;
 
   final String governorate;
   final double latitude;
@@ -304,6 +302,7 @@ class Venue {
     required this.name,
     required this.governorate,
     required this.latitude,
+    required this.profile,
     required this.longitude,
   });
 
@@ -311,11 +310,12 @@ class Venue {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return Venue(
-      id: json['id'],
-      name: json['name'],
-      governorate: json['governorate'],
-      latitude: json['latitude'].toDouble(),
-      longitude: json['longitude'].toDouble(),
+      id: json['id'] ?? 0,
+      name: json['name'] ?? "UnKnown",
+      profile: json['profile'] ?? "",
+      governorate: json['governorate'] ?? "UnKnown",
+      latitude: json['latitude'].toDouble() ?? 0.0,
+      longitude: json['longitude'].toDouble() ?? 0.0,
     );
   }
 }
@@ -336,9 +336,9 @@ class Amenity {
     // print("aminity is:$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return Amenity(
-      id: json['id'],
-      title: json['title'],
-      icon: json['icon'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      icon: json['icon'] ?? '',
       pivot: Pivot.fromJson(json['pivot']),
     );
   }

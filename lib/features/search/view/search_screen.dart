@@ -35,31 +35,36 @@ class SearchScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Obx(
-        () => SingleChildScrollView(
-          padding: padding(16, 24, 16, 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  searchPageController.isSearchActive.value = true;
-                },
-                child: SearchFieldWithFiltering(
-                    controller: searchPageController.searchField,
-                    onChanged: (value) {
-                      // searchPageController.onPressSearch(value!);
-                    },
-                    onApplyFilters: (filters) {
-                      searchPageController.onApplyFilters(filters);
-                    }),
+        () => searchPageController.isError.value
+            ? EmptyData(
+                icon: Icons.error_outline_outlined,
+                message: "SomeThing Wrong!!",
+              )
+            : SingleChildScrollView(
+                padding: padding(16, 24, 16, 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        searchPageController.isSearchActive.value = true;
+                      },
+                      child: SearchFieldWithFiltering(
+                          controller: searchPageController.searchField,
+                          onChanged: (value) {
+                            // searchPageController.onPressSearch(value!);
+                          },
+                          onApplyFilters: (filters) {
+                            searchPageController.onApplyFilters(filters);
+                          }),
+                    ),
+                    // RecentlyWidget(),
+                    searchPageController.isSearchActive.value
+                        ? SearchResult()
+                        : PopularWidget()
+                  ],
+                ),
               ),
-              // RecentlyWidget(),
-              searchPageController.isSearchActive.value
-                  ? SearchResult()
-                  : PopularWidget()
-            ],
-          ),
-        ),
       ),
     );
   }

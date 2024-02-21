@@ -9,6 +9,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class MyrequestScreen extends StatelessWidget {
   MyrequestScreen({super.key});
   final MyRequestController myRequestController = Get.find();
@@ -34,47 +35,63 @@ class MyrequestScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder<MyRequestController>(builder: (context) {
-        return   myRequestController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
-            myRequestController.myRequestsList.isEmpty?const EmptyData(icon:Icons.email_rounded ,message:"You haven't made any requests. Start by searching for events you're interested in!" ,):
-            
-        
-        
-        SingleChildScrollView(
-          padding: padding(16, 20, 10, 20),
-          child: Column(
-            children: [
-              searchTextField(onChanged: (value) {}),
-              // Generated code for this Row Widget...
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 0, 0),
-                    child: Text(
-                      myRequestController.myRequestsList.length.toString(),
-                      style: customTextStyle.labelMedium,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(4, 12, 16, 0),
-                    child: Text(
-                      tr("Event"),
-                      style: customTextStyle.bodyMedium,
-                    ),
-                  ),
-                ],
-              ),
-              ...List.generate(
-                myRequestController.myRequestsList.length,
-                (index) => RequestCard(
-                    myRequestModel: myRequestController.myRequestsList[index]),
+        return myRequestController.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ),
               )
-            ].divide(const SizedBox(
-              height: 10,
-            )),
-          ),
-        );
+            : myRequestController.isError.value
+                ? EmptyData(
+                    icon: Icons.error_outline_outlined,
+                    message: "SomeThing Wrong!!",
+                  )
+                : myRequestController.myRequestsList.isEmpty
+                    ? const EmptyData(
+                        icon: Icons.email_rounded,
+                        message:
+                            "You haven't made any requests. Start by searching for events you're interested in!",
+                      )
+                    : SingleChildScrollView(
+                        padding: padding(16, 20, 10, 20),
+                        child: Column(
+                          children: [
+                            searchTextField(onChanged: (value) {}),
+                            // Generated code for this Row Widget...
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16, 12, 0, 0),
+                                  child: Text(
+                                    myRequestController.myRequestsList.length
+                                        .toString(),
+                                    style: customTextStyle.labelMedium,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      4, 12, 16, 0),
+                                  child: Text(
+                                    tr("Event"),
+                                    style: customTextStyle.bodyMedium,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ...List.generate(
+                              myRequestController.myRequestsList.length,
+                              (index) => RequestCard(
+                                  myRequestModel: myRequestController
+                                      .myRequestsList[index]),
+                            )
+                          ].divide(const SizedBox(
+                            height: 10,
+                          )),
+                        ),
+                      );
       }),
     );
   }

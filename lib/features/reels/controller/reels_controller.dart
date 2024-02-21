@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/follow_unfollow_event_api.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/shared/controllers/pagination_controller.dart';

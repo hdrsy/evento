@@ -24,67 +24,73 @@ class SentList extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : freindsController.sentFreinds.isEmpty
-              ? const EmptyData(
-                  icon: Icons.person_add,
-                  message:
-                      "You haven't sent any friend requests yet. Find friends and expand your network!",
+          : freindsController.isSentFreindsError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
                 )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              textScaleFactor:
-                                  MediaQuery.of(context).textScaleFactor,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: tr("Sent requests"),
-                                    style: customTextStyle.bodyMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.primaryText,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: true,
-                                    ),
+              : freindsController.sentFreinds.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.person_add,
+                      message:
+                          "You haven't sent any friend requests yet. Find friends and expand your network!",
+                    )
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24, 0, 24, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  textScaleFactor:
+                                      MediaQuery.of(context).textScaleFactor,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: tr("Sent requests"),
+                                        style:
+                                            customTextStyle.bodyMedium.override(
+                                          fontFamily: 'Nunito',
+                                          color: customColors.primaryText,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: true,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            "${freindsController.sentFreinds.length}",
+                                        style: TextStyle(
+                                          color: customColors.primary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                    style: customTextStyle.bodyMedium,
                                   ),
-                                  TextSpan(
-                                    text:
-                                        "${freindsController.sentFreinds.length}",
-                                    style: TextStyle(
-                                      color: customColors.primary,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                ],
-                                style: customTextStyle.bodyMedium,
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          ...List.generate(
+                              freindsController.sentFreinds.length,
+                              (index) => SentCard(
+                                    sentRequest:
+                                        freindsController.sentFreinds[index],
+                                    modelId: index,
+                                  ))
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
                       ),
-                      ...List.generate(
-                          freindsController.sentFreinds.length,
-                          (index) => SentCard(
-                                sentRequest:
-                                    freindsController.sentFreinds[index],
-                                modelId: index,
-                              ))
-                    ].divide(const SizedBox(
-                      height: 10,
-                    )),
-                  ),
-                );
+                    );
     });
   }
 }

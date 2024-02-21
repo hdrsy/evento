@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -22,69 +23,77 @@ class AddFriendsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: customColors.secondaryBackground,
-      appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
-        title: Text(tr("Add Friends"),
-            style: customTextStyle.bodyMedium
-                .copyWith(color: customColors.primary, fontSize: 20)),
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: Icon(
-            Icons.arrow_back_rounded,
-            color: customColors.primaryText,
-            size: 30,
+        appBar: AppBar(
+          backgroundColor: customColors.secondaryBackground,
+          title: Text(tr("Add Friends"),
+              style: customTextStyle.bodyMedium
+                  .copyWith(color: customColors.primary, fontSize: 20)),
+          centerTitle: true,
+          leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.arrow_back_rounded,
+              color: customColors.primaryText,
+              size: 30,
+            ),
           ),
         ),
-      ),
-      body: Obx(() {
-        if (addFriendsController.isLoading.value &&
-            addFriendsController.itemList.isEmpty) {
-          // Show loading indicator while initial data is loading
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return SingleChildScrollView(
-            controller: addFriendsController.scrollController,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Column(
-              children: [
-                searchTextField(
-                  controller: addFriendsController.friendsSearch,
-                  onChanged: (value) {
-                    // Search logic is handled by the controller
-                  },
-                ),
-                const SizedBox(height: 15),
-                ...List.generate(
-                  addFriendsController.itemList.length +
-                      (addFriendsController.hasMoreData.value ? 1 : 0),
-                  (index) {
-                    if (index >= addFriendsController.itemList.length) {
-                      // If hasMoreData is false, don't show the ShimmerFriendCard
-                      return addFriendsController.hasMoreData.value
-                          ? Container()
-                          : Container();
-                    } else {
-                      // Return the actual friend card for this index
-                      return AddFriendCard(
-                        addFriendsModel: addFriendsController.itemList[index],
-                        modelId: index,
-                      );
-                    }
-                  },
-                ).toList(),
-                if (addFriendsController.isLoadingMoreData.value)
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-              ],
-            ),
-          );
-        }
-      }),
-    );
+        body: Obx(
+          () => (addFriendsController.isLoading.value &&
+                  addFriendsController.itemList.isEmpty)
+              ?
+              // Show loading indicator while initial data is loading
+              const Center(child: CircularProgressIndicator())
+              : addFriendsController.isError.value
+                  ? EmptyData(
+                      icon: Icons.error_outline_outlined,
+                      message: "SomeThing Wrong!!",
+                    )
+                  : SingleChildScrollView(
+                      controller: addFriendsController.scrollController,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
+                      child: Column(
+                        children: [
+                          searchTextField(
+                            controller: addFriendsController.friendsSearch,
+                            onChanged: (value) {
+                              // Search logic is handled by the controller
+                            },
+                          ),
+                          const SizedBox(height: 15),
+                          ...List.generate(
+                            addFriendsController.itemList.length +
+                                (addFriendsController.hasMoreData.value
+                                    ? 1
+                                    : 0),
+                            (index) {
+                              if (index >=
+                                  addFriendsController.itemList.length) {
+                                // If hasMoreData is false, don't show the ShimmerFriendCard
+                                return addFriendsController.hasMoreData.value
+                                    ? Container()
+                                    : Container();
+                              } else {
+                                // Return the actual friend card for this index
+                                return AddFriendCard(
+                                  addFriendsModel:
+                                      addFriendsController.itemList[index],
+                                  modelId: index,
+                                );
+                              }
+                            },
+                          ).toList(),
+                          if (addFriendsController.isLoadingMoreData.value)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                        ],
+                      ),
+                    ),
+        ));
   }
 }
 

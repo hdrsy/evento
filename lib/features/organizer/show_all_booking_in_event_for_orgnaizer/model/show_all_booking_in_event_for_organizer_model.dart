@@ -14,10 +14,10 @@ class ShowAllBookingInEventForOrganizerModel {
   factory ShowAllBookingInEventForOrganizerModel.fromJson(
       Map<String, dynamic> json) {
     return ShowAllBookingInEventForOrganizerModel(
-      id: json['id'],
-      profile: json['profile'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      id: json['id'] ?? 0,
+      profile: json['profile'] ?? '',
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
     );
   }
 }

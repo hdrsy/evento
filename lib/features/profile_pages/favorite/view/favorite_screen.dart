@@ -9,9 +9,10 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class FavoriteScreen extends StatelessWidget {
-   FavoriteScreen({super.key});
-final FavoriteController controller=Get.find();
+  FavoriteScreen({super.key});
+  final FavoriteController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,37 +34,54 @@ final FavoriteController controller=Get.find();
           ),
         ),
       ),
-      body: Obx(()=> 
-       controller.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
-            controller.favoriteEvents.isEmpty?const EmptyData(icon:Icons.add_circle ,message:"No favorites saved. Add your most loved events here." ,):
-            
-      
-      
-      SingleChildScrollView(
-            padding: padding(10,16,0,16),
-            child: Column(children: [
-               GestureDetector(
-                onTap: (){
-                  controller.isSearchActive.value=true;
-                },
-                 child: SearchFieldWithFiltering(
-                  controller: controller.searchField,
-                  onChanged: (value){
-                    controller.onPressSearch(value);
-                  },
-                  onApplyFilters: (fiter){
-                  controller.onApplyFilters(fiter);
-                 }),
-               ),
-               
-              ...List.generate(controller.isSearchActive.value?controller.searchResultSearch.length:controller.favoriteEvents.length, (index) =>  FavoriteCard(eventWrapper:controller.isSearchActive.value? controller.searchResultSearch[index]:controller.favoriteEvents[index],modelId:  index))
-              ,
-              
-            ].divide(const SizedBox(height: 15,))
-            ,),
-      )
-        
-      ),
+      body: Obx(() => controller.isLoading.value
+          ? Center(
+              child: CircularProgressIndicator(
+                color: customColors.primary,
+              ),
+            )
+          : controller.isError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
+                )
+              : controller.favoriteEvents.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.add_circle,
+                      message:
+                          "No favorites saved. Add your most loved events here.",
+                    )
+                  : SingleChildScrollView(
+                      padding: padding(10, 16, 0, 16),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              controller.isSearchActive.value = true;
+                            },
+                            child: SearchFieldWithFiltering(
+                                controller: controller.searchField,
+                                onChanged: (value) {
+                                  controller.onPressSearch(value);
+                                },
+                                onApplyFilters: (fiter) {
+                                  controller.onApplyFilters(fiter);
+                                }),
+                          ),
+                          ...List.generate(
+                              controller.isSearchActive.value
+                                  ? controller.searchResultSearch.length
+                                  : controller.favoriteEvents.length,
+                              (index) => FavoriteCard(
+                                  eventWrapper: controller.isSearchActive.value
+                                      ? controller.searchResultSearch[index]
+                                      : controller.favoriteEvents[index],
+                                  modelId: index)),
+                        ].divide(const SizedBox(
+                          height: 15,
+                        )),
+                      ),
+                    )),
     );
   }
 }

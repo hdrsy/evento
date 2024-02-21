@@ -47,13 +47,13 @@ class BookingO {
 
   factory BookingO.fromJson(Map<String, dynamic> json) {
     return BookingO(
-      id: json['id'],
-      userId: json['user_id'],
-      classId: json['class_id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      age: json['age'],
-      phoneNumber: json['phone_number'],
+      id: json['id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      classId: json['class_id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      age: json['age'] ?? 0,
+      phoneNumber: json['phone_number'] ?? '',
       // interest: List<String>.from(json['interest'].map((x) => x)),
       user: User.fromJson(json['user']),
     );
@@ -77,10 +77,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      image: json['image'],
+      id: json['id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      image: json['image'] ?? '',
       friendRequestStatusWithAuthUser:
           json['friend_request_status_with_auth_user'],
     );

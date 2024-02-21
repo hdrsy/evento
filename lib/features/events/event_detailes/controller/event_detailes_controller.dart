@@ -79,51 +79,51 @@ class EventDetailesController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
-    // try {
-    print("token $token");
-    if (await checkInternet()) {
-      log("from cache");
-      final d = await cacheService.getObject<Map<String, dynamic>>(
-        cacheKey: cacheKey,
-        deserializeFunction: (jsonMap) => jsonMap,
-      );
-      print("d:$d");
-      if (d != null) {
-        whenGetDataSuccess(d);
+    try {
+      print("token $token");
+      if (await checkInternet()) {
+        log("from cache");
+        final d = await cacheService.getObject<Map<String, dynamic>>(
+          cacheKey: cacheKey,
+          deserializeFunction: (jsonMap) => jsonMap,
+        );
+        print("d:$d");
+        if (d != null) {
+          whenGetDataSuccess(d);
+        } else {
+          isSomeThingError.value = true;
+          isLoading.value = false;
+        }
+        isLoading.value = false;
       } else {
-        isSomeThingError.value = true;
+        response = await ApiHelper.makeRequest(
+            targetRout:
+                "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
+            method: "GEt",
+            token: token);
+        print("the event detials response: $response");
+        dynamic handlingResponse = response.fold((l) => l, (r) => r);
+        if (handlingResponse is ErrorResponse) {
+          errorMessage.value = handlingResponse.getErrorMessages();
+          isSomeThingError.value = true;
+          print(
+              "the event detials response: ${handlingResponse.getErrorMessages()}");
+        } else {
+          whenGetDataSuccess(handlingResponse);
+
+          cacheService.cacheObject<Map<String, dynamic>>(
+            object: handlingResponse,
+            cacheKey: cacheKey,
+            serializeFunction: (data) => data,
+          );
+        }
         isLoading.value = false;
       }
-      isLoading.value = false;
-    } else {
-      response = await ApiHelper.makeRequest(
-          targetRout:
-              "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
-          method: "GEt",
-          token: token);
-      print("the event detials response: $response");
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
-        isSomeThingError.value = true;
-        print(
-            "the event detials response: ${handlingResponse.getErrorMessages()}");
-      } else {
-        whenGetDataSuccess(handlingResponse);
-
-        cacheService.cacheObject<Map<String, dynamic>>(
-          object: handlingResponse,
-          cacheKey: cacheKey,
-          serializeFunction: (data) => data,
-        );
-      }
+    } catch (e) {
+      print(e);
+      isSomeThingError.value = true;
       isLoading.value = false;
     }
-    // } catch (e) {
-    //   print(e);
-    //   isSomeThingError.value = true;
-    //   isLoading.value = false;
-    // }
   }
 
   whenGetDataSuccess(handlingResponse) {

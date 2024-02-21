@@ -19,28 +19,34 @@ class CanceledList extends StatelessWidget {
               color: customColors.primary,
             ),
           )
-        : myBookingController.cancelledBooking.isEmpty
-            ? const EmptyData(
-                icon: Icons.calendar_today,
-                message:
-                    "No canceled bookings! Explore events to find your next great experience.",
+        : myBookingController.isErrorCanceled.value
+            ? EmptyData(
+                icon: Icons.error_outline_outlined,
+                message: "SomeThing Wrong!!",
               )
-            : SingleChildScrollView(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 10),
-                child: Column(
-                  children: [
-                    ...List.generate(
-                        myBookingController.cancelledBooking.length,
-                        (index) => MyBookingCard(
-                              isCanceldSection: true,
-                              bookingStatus: tr("Canceled"),
-                              model: myBookingController
-                                  .cancelledBooking[index].eventClass.event,
-                            ))
-                  ].divide(const SizedBox(
-                    height: 10,
-                  )),
-                ),
-              ));
+            : myBookingController.cancelledBooking.isEmpty
+                ? const EmptyData(
+                    icon: Icons.calendar_today,
+                    message:
+                        "No canceled bookings! Explore events to find your next great experience.",
+                  )
+                : SingleChildScrollView(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 10),
+                    child: Column(
+                      children: [
+                        ...List.generate(
+                            myBookingController.cancelledBooking.length,
+                            (index) => MyBookingCard(
+                                  isCanceldSection: true,
+                                  bookingStatus: tr("Canceled"),
+                                  model: myBookingController
+                                      .cancelledBooking[index].eventClass.event,
+                                ))
+                      ].divide(const SizedBox(
+                        height: 10,
+                      )),
+                    ),
+                  ));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -42,25 +43,30 @@ class OrganizationProfileScreen extends StatelessWidget {
                   color: customColors.primary,
                 ),
               )
-            : Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  _buildTopSection(context),
-                  NameAndFollow(),
-                  Divider(
-                    height: 30,
-                    thickness: 1,
-                    color: customColors.secondary,
+            : organizerProfileController.isError.value
+                ? EmptyData(
+                    icon: Icons.error_outline_outlined,
+                    message: "SomeThing Wrong!!",
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      _buildTopSection(context),
+                      NameAndFollow(),
+                      Divider(
+                        height: 30,
+                        thickness: 1,
+                        color: customColors.secondary,
+                      ),
+                      StaticSection(),
+                      Divider(
+                        height: 30,
+                        thickness: 1,
+                        color: customColors.secondary,
+                      ),
+                      const MyTabBarWidget()
+                    ],
                   ),
-                  StaticSection(),
-                  Divider(
-                    height: 30,
-                    thickness: 1,
-                    color: customColors.secondary,
-                  ),
-                  const MyTabBarWidget()
-                ],
-              ),
       ),
     );
   }

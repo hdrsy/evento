@@ -10,34 +10,42 @@ class MyRequestController extends GetxController {
   late List<MyRequestModel> myRequestsList;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  RxBool isError = false.obs;
   @override
   void onInit() {
     myRequestsList = [];
     errorMessage = <String>[].obs;
-    isLoading=false.obs;
+    isLoading = false.obs;
     getMyEventRequests();
     super.onInit();
   }
 
   getMyEventRequests() async {
-    isLoading.value=true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myEventRequest,
-        method: "GEt",
-        token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token") ?? "";
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myEventRequest,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['data'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['data'];
 
-      myRequestsList = interestsJson
-          .map((jsonItem) => MyRequestModel.fromJson(jsonItem))
-          .toList();
-    isLoading.value=false;
+        myRequestsList = interestsJson
+            .map((jsonItem) => MyRequestModel.fromJson(jsonItem))
+            .toList();
+        isLoading.value = false;
+        update();
+      }
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
       update();
     }
   }

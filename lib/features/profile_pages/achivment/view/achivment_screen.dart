@@ -38,13 +38,18 @@ class AchivmentScreen extends StatelessWidget {
                         color: customColors.primary,
                       ),
                     )
-                  : achivmentController.notificationList.isEmpty
-                      ? const EmptyData(
-                          icon: Icons.discount_outlined,
-                          message:
-                              "No current coupons. Exclusive offers will be featured here as they're available.",
+                  : achivmentController.isError.value
+                      ? EmptyData(
+                          icon: Icons.error_outline_outlined,
+                          message: "SomeThing Wrong!!",
                         )
-                      : CouponseList()
+                      : achivmentController.notificationList.isEmpty
+                          ? const EmptyData(
+                              icon: Icons.discount_outlined,
+                              message:
+                                  "No current coupons. Exclusive offers will be featured here as they're available.",
+                            )
+                          : CouponseList()
 
               // DefaultTabController(
               //   length: 2,

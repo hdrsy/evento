@@ -14,6 +14,7 @@ class OrganizationProfileController extends GetxController {
   late OrganizationProfileModel organizerProfileModel;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  RxBool isError = false.obs;
   late List<OrganizerFollowersModel> rganizerFollowers;
 
   // late int orgnizerId;
@@ -35,27 +36,34 @@ class OrganizationProfileController extends GetxController {
   }
 
   getOrganizerProfile() async {
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    isLoading.value = true;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.organizationProfile,
-        method: "GEt",
-        token: token);
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      isLoading.value = true;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.organizationProfile,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      print("handling :$handlingResponse");
-      final interestsJson = handlingResponse['organizer'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isError.value = true;
+      } else {
+        print("handling :$handlingResponse");
+        final interestsJson = handlingResponse['organizer'];
 
-      organizerProfileModel = OrganizationProfileModel.fromJson(interestsJson);
-      print("organization: ${organizerProfileModel.organizedEvents}");
-      update();
+        organizerProfileModel =
+            OrganizationProfileModel.fromJson(interestsJson);
+        print("organization: ${organizerProfileModel.organizedEvents}");
+        update();
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    isLoading.value = false;
   }
 
   getOrganizerFollowers() async {

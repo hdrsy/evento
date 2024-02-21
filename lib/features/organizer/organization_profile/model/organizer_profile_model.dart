@@ -21,10 +21,10 @@ class OrganizationProfileModel {
   factory OrganizationProfileModel.fromJson(Map<String, dynamic> json) {
     print(json['followers_count']);
     return OrganizationProfileModel(
-      id: json['id'],
-      followersCount: json['followers_count'],
-      followingCount: json['following_count'],
-      organizedEventsCount: json['organized_events_count'],
+      id: json['id'] ?? 0,
+      followersCount: json['followers_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
+      organizedEventsCount: json['organized_events_count'] ?? 0,
       organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
       organizedEvents: List<OrganizationProfileEvent>.from(
           json['organized_events']
@@ -60,7 +60,7 @@ class OrganizerInfo {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return OrganizerInfo(
-      id: json['id'],
+      id: json['id'] ?? 0,
       name: json['name'] ?? "Unknown",
       bio: json['bio'] ?? "",
       services: json['services'] ?? "",
@@ -141,9 +141,9 @@ class Category {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return Category(
-      id: json['id'],
-      title: json['title'],
-      icon: json['icon'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      icon: json['icon'] ?? '',
     );
   }
 }
@@ -178,13 +178,13 @@ class OrganizationProfileEvent {
       }
     }
     return OrganizationProfileEvent(
-      id: json['id'],
-      organizerId: json['organizer_id'],
-      title: json['title'],
-      venueId: json['venue_id'],
-      startDate: DateTime.parse(json['start_date']),
+      id: json['id'] ?? 0,
+      organizerId: json['organizer_id'] ?? 0,
+      title: json['title'] ?? '',
+      venueId: json['venue_id'] ?? 0,
+      startDate: DateTime.parse(json['start_date'] ?? ''),
       images: imageList,
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
 }

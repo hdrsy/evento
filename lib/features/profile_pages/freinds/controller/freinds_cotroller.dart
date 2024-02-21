@@ -13,9 +13,12 @@ class FreindsController extends GetxController {
   late RxList<ReceiveRequest> recivedFreinds;
   late RxList<SentRequest> sentFreinds;
   late RxList<String> errorMessage;
-  late RxBool isMyFriendsLoading;
   late RxBool isSentFreindsLoading;
+  late RxBool isMyFriendsLoading;
   late RxBool isRecivedFreindsLoading;
+  RxBool isSentFreindsError = false.obs;
+  RxBool isMyFriendsError = false.obs;
+  RxBool isRecivedFreindsError = false.obs;
   @override
   void onInit() {
     myFreinds = <FreindsModel>[].obs;
@@ -32,67 +35,89 @@ class FreindsController extends GetxController {
   }
 
   getMyFreinds() async {
-    isMyFriendsLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
+    try {
+      isMyFriendsLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myFreinds, method: "GEt", token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['friends'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isMyFriendsError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['friends'];
 
-      myFreinds.value = interestsJson
-          .map((jsonItem) => FreindsModel.fromJson(jsonItem))
-          .toList();
+        myFreinds.value = interestsJson
+            .map((jsonItem) => FreindsModel.fromJson(jsonItem))
+            .toList();
+      }
+      update();
+      isMyFriendsLoading.value = false;
+    } catch (e) {
+      isMyFriendsLoading.value = false;
+      isMyFriendsError.value = true;
     }
-    update();
-    isMyFriendsLoading.value = false;
   }
 
   getSendRequest() async {
-    sentFreinds.clear();
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.mySentRequests,
-        method: "GEt",
-        token: token);
+    try {
+      isSentFreindsLoading.value = true;
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['Sent_request'];
+      sentFreinds.clear();
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.mySentRequests,
+          method: "GEt",
+          token: token);
 
-      sentFreinds.value = interestsJson
-          .map((jsonItem) => SentRequest.fromJson(jsonItem))
-          .toList();
-      update();
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isSentFreindsError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['Sent_request'];
+
+        sentFreinds.value = interestsJson
+            .map((jsonItem) => SentRequest.fromJson(jsonItem))
+            .toList();
+        update();
+      }
+      isSentFreindsLoading.value = false;
+    } catch (e) {
+      isSentFreindsLoading.value = false;
+      isSentFreindsError.value = true;
     }
   }
 
   getRecivedRequest() async {
-    // isRecivedFreindsLoading.value=true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myReciviedRequests,
-        method: "GEt",
-        token: token);
+    try {
+      isRecivedFreindsLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myReciviedRequests,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['receive_request'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isRecivedFreindsError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['receive_request'];
 
-      recivedFreinds.value = interestsJson
-          .map((jsonItem) => ReceiveRequest.fromJson(jsonItem))
-          .toList();
-      update();
+        recivedFreinds.value = interestsJson
+            .map((jsonItem) => ReceiveRequest.fromJson(jsonItem))
+            .toList();
+        update();
+      }
+      isRecivedFreindsLoading.value = false;
+    } catch (e) {
+      isRecivedFreindsLoading.value = false;
+      isRecivedFreindsError.value = true;
     }
     // isRecivedFreindsLoading.value=false;
   }

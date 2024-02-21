@@ -13,8 +13,8 @@ class RelatedEventModel {
   final String type;
   final List<String>? videos;
   final List<String> images;
-   bool isFollowedByAuthUser;
-   
+  bool isFollowedByAuthUser;
+
   RelatedEventModel({
     required this.id,
     this.organizerId,
@@ -29,23 +29,29 @@ class RelatedEventModel {
     this.videos,
     required this.images,
     required this.isFollowedByAuthUser,
-   });
+  });
 
   factory RelatedEventModel.fromJson(Map<String, dynamic> json) {
     return RelatedEventModel(
-      id: json['id'],
-      organizerId: json['organizer_id'],
-      title: json['title'],
-      venueId: json['venue_id'],
-      capacity: json['capacity'],
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
-      ticketPrice: json['ticket_price'].toDouble(),
-      description: json['description'],
-      type: json['type'],
-      videos: json['videos'] != null ? List<String>.from(jsonDecode(json['videos']).cast<String>().map((image) => image.toString())) : null,
-      images: List<String>.from(jsonDecode(json['images']).cast<String>().map((image) => image.toString())),
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      id: json['id'] ?? 0,
+      organizerId: json['organizer_id'] ?? 0,
+      title: json['title'] ?? '',
+      venueId: json['venue_id'] ?? 0,
+      capacity: json['capacity'] ?? 0,
+      startDate: DateTime.parse(json['start_date'] ?? ''),
+      endDate: DateTime.parse(json['end_date'] ?? ""),
+      ticketPrice: json['ticket_price'].toDouble() ?? 0,
+      description: json['description'] ?? '',
+      type: json['type'] ?? "",
+      videos: json['videos'] != null
+          ? List<String>.from(jsonDecode(json['videos'])
+              .cast<String>()
+              .map((image) => image.toString()))
+          : null,
+      images: List<String>.from(jsonDecode(json['images'])
+          .cast<String>()
+          .map((image) => image.toString())),
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
 }

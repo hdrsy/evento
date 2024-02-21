@@ -29,10 +29,15 @@ class ErrorResponse {
   /// Factory constructor to create an ErrorResponse instance from a JSON map.
   /// This is commonly used to parse the JSON response from an API call.
   factory ErrorResponse.fromJson(Map<String, dynamic> json) {
+    String parseMessage(String value) {
+      return value.contains("SQL") ? "SomeThing Wrong !!!" : value;
+    }
+
     return ErrorResponse(
       status: json['status'] ??
           json['Status'], // Handle both 'status' and 'Status' keys.
-      message: json['message'], // General error message from the API response.
+      message: parseMessage(json['message'] ??
+          ""), // General error message from the API response.
       errorData:
           json['Validation Error'], // Specific validation error data, if any.
     );

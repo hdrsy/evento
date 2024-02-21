@@ -17,10 +17,10 @@ class AddFriendsModel {
   factory AddFriendsModel.fromJson(Map<String, dynamic> json) {
     print(json["image"]);
     return AddFriendsModel(
-      id: json['id'],
+      id: json['id'] ?? 0,
       friendRequestStatus: json['friend_request_status_with_auth_user'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
       image: json['image'] ?? "1",
       type: json['type'],
     );

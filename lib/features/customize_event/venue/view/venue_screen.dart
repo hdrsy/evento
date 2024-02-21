@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/animation/shimmer_animation.dart';
 import '../../../../core/utils/theme/text_theme.dart';
@@ -31,43 +33,56 @@ class VenueScreen extends StatelessWidget {
         body: SizedBox(
           width: double.infinity,
           child: Obx(
-            () => SingleChildScrollView(
-                controller: venueController.scrollController,
-                padding: padding(16, 20, 16, 20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Venue",
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primaryText,
-                          fontSize: 25,
-                          useGoogleFonts: true,
-                        ),
-                      ).tr(),
-                      ...List.generate(
-                          venueController.hasMoreData.value
-                              ? venueController.itemList.length + 1
-                              : venueController.itemList.length, (index) {
-                        return index < venueController.itemList.length
-                            ? VenueCard(
-                                venue: venueController.itemList[index],
-                              )
-                            : ShimmerLoadingWidget(
-                                loadingShimmerWidget: Container(
-                                width: double.infinity,
-                                height: 300,
-                                // height: 330 ,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: customColors.info,
-                                    ),
-                                    color: customColors.info),
-                              ));
-                      })
-                    ])),
+            () => venueController.isLoading.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: customColors.primary,
+                    ),
+                  )
+                : venueController.isError.value
+                    ? EmptyData(
+                        icon: Icons.error_outline_outlined,
+                        message: "SomeThing Wrong!!",
+                      )
+                    : SingleChildScrollView(
+                        controller: venueController.scrollController,
+                        padding: padding(16, 20, 16, 20),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Venue",
+                                style: customTextStyle.bodyMedium.override(
+                                  fontFamily: 'Nunito',
+                                  color: customColors.primaryText,
+                                  fontSize: 25,
+                                  useGoogleFonts: true,
+                                ),
+                              ).tr(),
+                              ...List.generate(
+                                  venueController.hasMoreData.value
+                                      ? venueController.itemList.length + 1
+                                      : venueController.itemList.length,
+                                  (index) {
+                                return index < venueController.itemList.length
+                                    ? VenueCard(
+                                        venue: venueController.itemList[index],
+                                      )
+                                    : ShimmerLoadingWidget(
+                                        loadingShimmerWidget: Container(
+                                        width: double.infinity,
+                                        height: 300,
+                                        // height: 330 ,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                              color: customColors.info,
+                                            ),
+                                            color: customColors.info),
+                                      ));
+                              })
+                            ])),
           ),
         ));
   }

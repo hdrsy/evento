@@ -25,8 +25,8 @@ class ErrorInUploading extends StatelessWidget {
         ),
       ),
       actions: [
-        TextButton(
-            onPressed: () {
+        GestureDetector(
+            onTap: () {
               Get.back();
             },
             child: Text(

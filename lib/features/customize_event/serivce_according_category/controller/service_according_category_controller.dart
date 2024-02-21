@@ -12,6 +12,7 @@ class ServiceAccordingCategoryController extends GetxController {
   late RxList<ServiceProvider> serviceProviderList;
   late int serviceAccordingCategoryIndex;
   late RxBool isLoading;
+  RxBool isError = false.obs;
   late String serviceCategoryType;
   late RxList<String> errorMessage;
   late int serviceCategoryIndex;
@@ -34,21 +35,27 @@ class ServiceAccordingCategoryController extends GetxController {
   }
 
   fetchData() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout:
-            "${ServerConstApis.serviceAccordingCategory}/$serviceAccordingCategoryIndex",
-        method: "GEt",
-        token: token);
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      whenGetDataSuccess(handlingResponse);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout:
+              "${ServerConstApis.serviceAccordingCategory}/$serviceAccordingCategoryIndex",
+          method: "GEt",
+          token: token);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isError.value = true;
+      } else {
+        whenGetDataSuccess(handlingResponse);
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = true;
     }
-    isLoading.value = false;
   }
 
   whenGetDataSuccess(handlingResponse) {

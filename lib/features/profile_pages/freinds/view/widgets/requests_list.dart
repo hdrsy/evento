@@ -24,66 +24,72 @@ class RequestsList extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : controller.recivedFreinds.isEmpty
-              ? const EmptyData(
-                  icon: Icons.person,
-                  message:
-                      "No new friend requests. Send out some invites to get connected!",
+          : controller.isRecivedFreindsError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
                 )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: tr("Friend requests"),
-                                    style: TextStyle(
-                                      color: customColors.primaryText,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+              : controller.recivedFreinds.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.person,
+                      message:
+                          "No new friend requests. Send out some invites to get connected!",
+                    )
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24, 0, 24, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: tr("Friend requests"),
+                                        style: TextStyle(
+                                          color: customColors.primaryText,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: controller.recivedFreinds.length
+                                            .toString(),
+                                        style:
+                                            customTextStyle.bodyMedium.override(
+                                          fontFamily: 'Nunito',
+                                          color: customColors.primary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: true,
+                                        ),
+                                      ),
+                                    ],
+                                    style: customTextStyle.bodyMedium,
                                   ),
-                                  TextSpan(
-                                    text: controller.recivedFreinds.length
-                                        .toString(),
-                                    style: customTextStyle.bodyMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.primary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: true,
-                                    ),
-                                  ),
-                                ],
-                                style: customTextStyle.bodyMedium,
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          ...List.generate(
+                              controller.recivedFreinds.length,
+                              (index) => RequestsCard(
+                                    receiveRequest:
+                                        controller.recivedFreinds[index],
+                                    modelId: index,
+                                  ))
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
                       ),
-                      ...List.generate(
-                          controller.recivedFreinds.length,
-                          (index) => RequestsCard(
-                                receiveRequest:
-                                    controller.recivedFreinds[index],
-                                modelId: index,
-                              ))
-                    ].divide(const SizedBox(
-                      height: 10,
-                    )),
-                  ),
-                );
+                    );
     });
   }
 }

@@ -42,20 +42,20 @@ class ServiceProvider {
         albumList.map((album) => Album.fromJson(album)).toList();
     print(json);
     return ServiceProvider(
-      id: json['id'],
+      id: json['id'] ?? 0,
       latitude: json['latitude'] != null ? json['latitude'].toDouble() : null,
       longitude:
           json['longitude'] != null ? json['longitude'].toDouble() : null,
-      userId: json['user_id'],
-      categoryId: json['category_id'],
-      locationWorkGovernorate: json['location_work_governorate'],
-      address: json['address'],
-      profile: json['profile'],
-      cover: json['cover'],
+      userId: json['user_id'] ?? 0,
+      categoryId: json['category_id'] ?? 0,
+      locationWorkGovernorate: json['location_work_governorate'] ?? '',
+      address: json['address'] ?? '',
+      profile: json['profile'] ?? '',
+      cover: json['cover'] ?? "",
       rating: json['average_rating'] != null
           ? double.parse(json['average_rating'])
           : 0,
-      description: json['description'],
+      description: json['description'] ?? "",
       user: User.fromJson(json['user']),
       albums: albums,
     );
@@ -77,10 +77,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      phoneNumber: json['phone_number'],
+      id: json['id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      phoneNumber: json['phone_number'] ?? '',
     );
   }
 }
@@ -131,8 +131,8 @@ class Album {
     }
 
     return Album(
-      id: json['id'],
-      serviceProviderId: json['service_provider_id'],
+      id: json['id'] ?? 0,
+      serviceProviderId: json['service_provider_id'] ?? 0,
       name: json['name'],
       images:
           json['images'] != null ? parseImages(json['images'] as String) : [],

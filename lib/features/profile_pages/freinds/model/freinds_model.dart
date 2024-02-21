@@ -14,13 +14,12 @@ class FreindsModel {
   });
 
   factory FreindsModel.fromJson(Map<String, dynamic> json) {
-    
     return FreindsModel(
-      id: json['id'],
-      lastName: json['last_name'],
-      image: json['image'],
+      id: json['id'] ?? 0,
+      lastName: json['last_name'] ?? '',
+      image: json['image'] ?? '',
       status: json['friend_request_status_with_auth_user'],
-      firstName: json['first_name'],
+      firstName: json['first_name'] ?? '',
     );
   }
 }

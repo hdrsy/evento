@@ -43,7 +43,7 @@ class EventDetailesScreen extends StatelessWidget {
           videosUrl: eventDetailesController.eventDetailsModel.videos,
         ),
         eventDetailesController.isOffer
-            ? Positioned(top: screenHeight * 0.25, child: Offerprice())
+            ? Positioned(top: screenHeight * 0.26, child: Offerprice())
             : SizedBox.shrink(),
         Positioned(
             top: screenHeight * 0.32,

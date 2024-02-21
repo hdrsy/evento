@@ -17,6 +17,7 @@ class SearchPageController extends GetxController {
   var searchResults = <SearchModel>[].obs;
   var recentSearch = <SearchModel>[].obs;
   var isSearchActive = false.obs;
+  var isError = false.obs;
   TextEditingController searchField = TextEditingController();
   Timer? _debounce;
   CacheService cacheService = CacheService('searchRecent');
@@ -88,20 +89,25 @@ class SearchPageController extends GetxController {
   }
 
   void _fetchData(String query) async {
-    String token = await prefService.readString("token");
-    var response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.eventSearch,
-        method: "post",
-        data: {"Search": query},
-        token: token);
+    try {
+      String token = await prefService.readString("token");
+      var response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.eventSearch,
+          method: "post",
+          data: {"Search": query},
+          token: token);
 
-    response.fold(
-      (error) => _handleError(error),
-      (result) => _handleSuccess(result),
-    );
+      response.fold(
+        (error) => _handleError(error),
+        (result) => _handleSuccess(result),
+      );
+    } catch (e) {
+      isError.value = true;
+    }
   }
 
   void _handleError(ErrorResponse error) {
+    isError.value = true;
     // Handle your error, maybe show a snackbar or log it
     // Get.snackbar("Error", error.message); // Example
   }

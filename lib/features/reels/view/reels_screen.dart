@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
 
 import '../controller/reels_controller.dart';
@@ -21,25 +22,30 @@ class ReelsScreen extends StatelessWidget {
               child: Obx(
                 () => reelsController.isLoading.value
                     ? const ReelsShimmer()
-                    : PageView.builder(
-                        controller: reelsController.pageController,
-                        scrollDirection: Axis.vertical,
-                        onPageChanged: (index) {
-                          if (index > reelsController.currentUserIndex) {
-                            // Swipe Up - Load the next video
-                            reelsController.nextUser();
-                          } else {
-                            // Swipe Down - Go back to the previous video
-                            reelsController.previousUser();
-                          }
-                        },
-                        itemCount: reelsController.itemList.length,
-                        itemBuilder: (context, index) {
-                          return ReelsWidget(
-                            model: reelsController.itemList[index],
-                            modelIndex: index,
-                          );
-                        }),
+                    : reelsController.isError.value
+                        ? EmptyData(
+                            icon: Icons.error_outline_outlined,
+                            message: "SomeThing Wrong!!",
+                          )
+                        : PageView.builder(
+                            controller: reelsController.pageController,
+                            scrollDirection: Axis.vertical,
+                            onPageChanged: (index) {
+                              if (index > reelsController.currentUserIndex) {
+                                // Swipe Up - Load the next video
+                                reelsController.nextUser();
+                              } else {
+                                // Swipe Down - Go back to the previous video
+                                reelsController.previousUser();
+                              }
+                            },
+                            itemCount: reelsController.itemList.length,
+                            itemBuilder: (context, index) {
+                              return ReelsWidget(
+                                model: reelsController.itemList[index],
+                                modelIndex: index,
+                              );
+                            }),
               ),
             )));
   }

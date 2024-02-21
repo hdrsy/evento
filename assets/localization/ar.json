@@ -475,5 +475,17 @@
 "هل يوجد نظام دعم للمستخدمين؟",
 "Yes, a dedicated team is available for inquiries and assistance through multiple channels.":
 "نعم، يوجد فريق متخصص للإجابة على الاستفسارات وتقديم المساعدة، متاح عبر عدة قنوات."
+,
+  "editFolderName": "تحرير اسم المجلد",
+  "tickets": "تذاكر",
+  "selectOptionsBelow": "حدد الخيارات أدناه",
+  "selectAtLeastOneCategory": "يرجى اختيار فئة واحدة على الأقل",
+  "typeOrganizationName": "الرجاء كتابة اسم منظمتك",
+  "typeBio": "الرجاء كتابة سيرتك الذاتية",
+  "selectCoveringArea": "الرجاء اختيار منطقتك المغطاة",
+  "typeName": "الرجاء كتابة اسمك",
+  "typeSpecialist": "الرجاء كتابة اختصاصك",
+  "typeBioAgain": "الرجاء كتابة سيرتك الذاتية",
+  "noServiceProvidersAvailable": "لا تتوفر مقدمو خدمات. ستظهر الخدمات هنا عند توفرها."
 
 }

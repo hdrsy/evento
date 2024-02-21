@@ -33,30 +33,38 @@ class NotificationScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        ()=> 
-         notificationController.isLoading.value?Center(child: CircularProgressIndicator(color: customColors.primary,),):
-            notificationController.notificationList.isEmpty?const EmptyData(icon:Icons.notifications_sharp ,message:"All caught up! No new notifications right now." ,):
-            
-        
-        
-        SingleChildScrollView(
-          
-          child: 
-          
-          Column(
-            children: [
-              ...List.generate(
-                  notificationController.notificationList.length,
-                  (index) => NotificationCard(
-                        notificationModel:
-                            notificationController.notificationList[index],
-                      ))
-            ].divide(Divider(
-              thickness: 1,
-              color: customColors.secondary,
-            )),
-          ),
-        ),
+        () => notificationController.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ),
+              )
+            : notificationController.isError.value
+                ? EmptyData(
+                    icon: Icons.error_outline_outlined,
+                    message: "SomeThing Wrong!!",
+                  )
+                : notificationController.notificationList.isEmpty
+                    ? const EmptyData(
+                        icon: Icons.notifications_sharp,
+                        message:
+                            "All caught up! No new notifications right now.",
+                      )
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ...List.generate(
+                                notificationController.notificationList.length,
+                                (index) => NotificationCard(
+                                      notificationModel: notificationController
+                                          .notificationList[index],
+                                    ))
+                          ].divide(Divider(
+                            thickness: 1,
+                            color: customColors.secondary,
+                          )),
+                        ),
+                      ),
       ),
     );
   }

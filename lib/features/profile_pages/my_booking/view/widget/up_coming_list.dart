@@ -24,43 +24,49 @@ class UpComingList extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : myBookingController.upComingBooking.isEmpty
-              ? const EmptyData(
-                  icon: Icons.calendar_today,
-                  message:
-                      "No upcoming bookings! Explore events to find your next great experience.",
+          : myBookingController.isErrorUpComing.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
                 )
-              : SingleChildScrollView(
-                  padding: padding(10, 10, 10, 10),
-                  child: Column(
-                    children: [
-                      ...List.generate(
-                          myBookingController.upComingBooking.length,
-                          (index) => MyBookingCard(
-                                isCanceldSection: false,
-                                eventBooking: myBookingController
-                                    .upComingBooking[index].bookings,
-                                leftButtonOnTap: () async {
-                                  await showButtonSheet(
-                                      context: context,
-                                      widget: ChoiceTicketForCancalWidget(
-                                          bookings: myBookingController
-                                              .upComingBooking[index].bookings),
-                                      height: screenHeight * 0.7);
-                                },
-                                leftButtonTitle: tr("Cancel Booking"),
-                                bookingStatus: tr("Paid"),
-                                model: myBookingController
-                                    .upComingBooking[index]
-                                    .bookings[0]
-                                    .eventClass
-                                    .event,
-                              ))
-                    ].divide(const SizedBox(
-                      height: 10,
-                    )),
-                  ),
-                );
+              : myBookingController.upComingBooking.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.calendar_today,
+                      message:
+                          "No upcoming bookings! Explore events to find your next great experience.",
+                    )
+                  : SingleChildScrollView(
+                      padding: padding(10, 10, 10, 10),
+                      child: Column(
+                        children: [
+                          ...List.generate(
+                              myBookingController.upComingBooking.length,
+                              (index) => MyBookingCard(
+                                    isCanceldSection: false,
+                                    eventBooking: myBookingController
+                                        .upComingBooking[index].bookings,
+                                    leftButtonOnTap: () async {
+                                      await showButtonSheet(
+                                          context: context,
+                                          widget: ChoiceTicketForCancalWidget(
+                                              bookings: myBookingController
+                                                  .upComingBooking[index]
+                                                  .bookings),
+                                          height: screenHeight * 0.7);
+                                    },
+                                    leftButtonTitle: tr("Cancel Booking"),
+                                    bookingStatus: tr("Paid"),
+                                    model: myBookingController
+                                        .upComingBooking[index]
+                                        .bookings[0]
+                                        .eventClass
+                                        .event,
+                                  ))
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
+                      ),
+                    );
     });
   }
 }

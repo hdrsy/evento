@@ -14,6 +14,7 @@ class AddFriendsController extends GetxController {
   Timer? _debounce;
   var isSearchActive = false.obs;
   var isLoading = false.obs;
+  RxBool isError = false.obs;
   var isLoadingMoreData = false.obs;
   var pageId = 1;
   var lastPageId = 1;
@@ -58,27 +59,35 @@ class AddFriendsController extends GetxController {
   }
 
   Future<void> fetchData() async {
-    if (isLoading.value || !hasMoreData.value) return;
-    isLoading.value = isSearchActive.value ? false : true;
-    isLoadingMoreData.value = pageId > 1;
-    String token = await prefService.readString("token");
-    var response = await ApiHelper.makeRequest(
-      targetRout: "${ServerConstApis.freindSearch}?page=$pageId",
-      method: "post",
-      token: token,
-      data: {"Search": friendsSearch.text},
-    );
+    try {
+      if (isLoading.value || !hasMoreData.value) return;
+      isLoading.value = isSearchActive.value ? false : true;
+      isLoadingMoreData.value = pageId > 1;
+      String token = await prefService.readString("token");
+      var response = await ApiHelper.makeRequest(
+        targetRout: "${ServerConstApis.freindSearch}?page=$pageId",
+        method: "post",
+        token: token,
+        data: {"Search": friendsSearch.text},
+      );
 
-    response.fold(
-      (error) => _handleError(error),
-      (result) => _handleDataSuccess(result),
-    );
-    isLoading.value = false;
-    isLoadingMoreData.value = false;
+      response.fold(
+        (error) => _handleError(error),
+        (result) => _handleDataSuccess(result),
+      );
+      isLoading.value = false;
+      isLoadingMoreData.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      isLoadingMoreData.value = false;
+
+      isError.value = true;
+    }
   }
 
   void _handleError(ErrorResponse error) {
     errorMessage.add(error.message ?? "");
+    isError.value = true;
     update(); // Trigger UI update
   }
 

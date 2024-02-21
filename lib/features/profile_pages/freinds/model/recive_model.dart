@@ -18,15 +18,16 @@ class ReceiveRequest {
   });
 
   factory ReceiveRequest.fromJson(Map<String, dynamic> json) => ReceiveRequest(
-        id: json['id'],
-        senderId: json['sender_id'],
-        receiverId: json['receiver_id'],
+        id: json['id'] ?? 0,
+        senderId: json['sender_id'] ?? 0,
+        receiverId: json['receiver_id'] ?? 0,
         status: json['status'],
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
         sender: Sender.fromJson(json['sender']),
       );
 }
+
 class Sender {
   int id;
   String firstName;
@@ -43,10 +44,11 @@ class Sender {
   });
 
   factory Sender.fromJson(Map<String, dynamic> json) => Sender(
-        id: json['id'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        image: json['image'],
-        friendRequestStatusWithAuthUser: json['friend_request_status_with_auth_user'],
+        id: json['id'] ?? 0,
+        firstName: json['first_name'] ?? '',
+        lastName: json['last_name'] ?? '',
+        image: json['image'] ?? '',
+        friendRequestStatusWithAuthUser:
+            json['friend_request_status_with_auth_user'],
       );
 }

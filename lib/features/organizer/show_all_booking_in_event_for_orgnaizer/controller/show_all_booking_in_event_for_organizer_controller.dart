@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class ShowAllBookingInEventForOrganizerController extends GetxController {
   late RxBool isLoading;
   late RxBool hasMoreData;
+  RxBool isError = false.obs;
   late ScrollController scrollController;
   late RxList<ShowAllBookingInEventForOrganizerModel> itemList;
   @override

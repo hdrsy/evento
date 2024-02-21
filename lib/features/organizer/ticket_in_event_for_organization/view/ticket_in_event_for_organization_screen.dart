@@ -42,27 +42,35 @@ class TicketsInEventForOrganizerScreen extends StatelessWidget {
                     color: customColors.primary,
                   ),
                 )
-              : goingController.bookingResponse.booking.isEmpty
-                  ? const EmptyData(
-                      icon: Icons.people_rounded,
-                      message:
-                          "It looks like no one has confirmed attendance yet. Be the first to join!",
+              : goingController.isError.value
+                  ? EmptyData(
+                      icon: Icons.error_outline_outlined,
+                      message: "SomeThing Wrong!!",
                     )
-                  : SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 16),
-                      child: Column(
-                          children: goingController.bookingResponse.booking.keys
-                              .map((e) => TicketsInEventForOrganizerCard(
-                                    goingModel: goingController
-                                        .bookingResponse.booking[e]![0].user,
-                                    modelId: e,
-                                  ))
-                              .toList()
-                              .divide(SizedBox(
-                                height: 10,
-                              ))),
-                    ),
+                  : goingController.bookingResponse.booking.isEmpty
+                      ? const EmptyData(
+                          icon: Icons.people_rounded,
+                          message:
+                              "It looks like no one has confirmed attendance yet. Be the first to join!",
+                        )
+                      : SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 16),
+                          child: Column(
+                              children: goingController
+                                  .bookingResponse.booking.keys
+                                  .map((e) => TicketsInEventForOrganizerCard(
+                                        goingModel: goingController
+                                            .bookingResponse
+                                            .booking[e]![0]
+                                            .user,
+                                        modelId: e,
+                                      ))
+                                  .toList()
+                                  .divide(SizedBox(
+                                    height: 10,
+                                  ))),
+                        ),
         ));
   }
 }

@@ -36,17 +36,17 @@ class CancelledBooking {
 
     var interestList = jsonDecode(json['interest']) as List<dynamic>;
     return CancelledBooking(
-      id: json['id'],
-      userId: json['user_id'],
-      classId: json['class_id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      age: json['age'],
-      phoneNumber: json['phone_number'],
+      id: json['id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      classId: json['class_id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      age: json['age'] ?? 0,
+      phoneNumber: json['phone_number'] ?? 0,
       interest: interestList.map((e) => e.toString()).toList(),
-      reason: json['reason'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      reason: json['reason'] ?? 0,
+      createdAt: DateTime.parse(json['created_at'] ?? ''),
+      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
       eventClass: CancelledEventClass.fromJson(json['event_class']),
     );
   }
@@ -64,10 +64,9 @@ class CancelledEventClass {
   });
 
   factory CancelledEventClass.fromJson(Map<String, dynamic> json) {
-    print("ccc $json");
     return CancelledEventClass(
-      id: json['id'],
-      eventId: json['event_id'],
+      id: json['id'] ?? 0,
+      eventId: json['event_id'] ?? 0,
       event: CancelledEvent.fromJson(json['event']),
     );
   }
@@ -97,15 +96,15 @@ class CancelledEvent {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return CancelledEvent(
-      id: json['id'],
-      title: json['title'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
       images: json['images'] != null
           ? List<String>.from(jsonDecode(json['images']).map((x) => x))
           : [],
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
-      venueId: json['venue_id'],
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      startDate: DateTime.parse(json['start_date'] ?? ''),
+      endDate: DateTime.parse(json['end_date'] ?? ''),
+      venueId: json['venue_id'] ?? 0,
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
       venue: CancelledVenue.fromJson(json['venue']),
     );
   }
@@ -126,9 +125,9 @@ class CancelledVenue {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return CancelledVenue(
-      id: json['id'],
-      governorate: json['governorate'],
-      locationDescription: json['location_description'],
+      id: json['id'] ?? 0,
+      governorate: json['governorate'] ?? '',
+      locationDescription: json['location_description'] ?? "",
     );
   }
 }

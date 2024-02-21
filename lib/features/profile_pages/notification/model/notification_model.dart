@@ -6,7 +6,6 @@ class NotificationModel {
   final String type;
   final DateTime createdAt;
 
-  
   NotificationModel({
     required this.id,
     required this.title,
@@ -14,19 +13,16 @@ class NotificationModel {
     required this.userId,
     required this.type,
     required this.createdAt,
-   });
+  });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
     print(json['created_at'] is String);
     return NotificationModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      userId: json['user_id'],
-      type: json['type'],
-      createdAt: DateTime.parse(json['created_at'])
-    );
+        id: json['id'] ?? 0,
+        title: json['title'] ?? '',
+        description: json['description'] ?? '',
+        userId: json['user_id'] ?? 0,
+        type: json['type'] ?? '',
+        createdAt: DateTime.parse(json['created_at'] ?? ''));
   }
-
-
 }

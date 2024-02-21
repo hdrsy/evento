@@ -44,45 +44,53 @@ class GoingScreen extends StatelessWidget {
                     color: customColors.primary,
                   ),
                 )
-              : goingController.itemList.isEmpty
-                  ? const EmptyData(
-                      icon: Icons.people_rounded,
-                      message:
-                          "It looks like no one has confirmed attendance yet. Be the first to join!",
+              : goingController.isError.value
+                  ? EmptyData(
+                      icon: Icons.error_outline_outlined,
+                      message: "SomeThing Wrong!!",
                     )
-                  : SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 16),
-                      controller: goingController.scrollController,
-                      child: Column(
-                        children: [
-                          ...List.generate(
-                              goingController.hasMoreData.value
-                                  ? goingController.itemList.length + 1
-                                  : goingController.itemList.length, (index) {
-                            return index < goingController.itemList.length
-                                ? GoingCard(
-                                    goingModel: goingController.itemList[index],
-                                    modelId: index,
-                                  )
-                                : ShimmerLoadingWidget(
-                                    loadingShimmerWidget: Container(
-                                    width: double.infinity,
-                                    height: screenHeight * 0.1,
-                                    // height: 330 ,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          color: customColors.info,
-                                        ),
-                                        color: customColors.info),
-                                  ));
-                          })
-                        ].divide(const SizedBox(
-                          height: 10,
-                        )),
-                      ),
-                    ),
+                  : goingController.itemList.isEmpty
+                      ? const EmptyData(
+                          icon: Icons.people_rounded,
+                          message:
+                              "It looks like no one has confirmed attendance yet. Be the first to join!",
+                        )
+                      : SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 16),
+                          controller: goingController.scrollController,
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                  goingController.hasMoreData.value
+                                      ? goingController.itemList.length + 1
+                                      : goingController.itemList.length,
+                                  (index) {
+                                return index < goingController.itemList.length
+                                    ? GoingCard(
+                                        goingModel:
+                                            goingController.itemList[index],
+                                        modelId: index,
+                                      )
+                                    : ShimmerLoadingWidget(
+                                        loadingShimmerWidget: Container(
+                                        width: double.infinity,
+                                        height: screenHeight * 0.1,
+                                        // height: 330 ,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                              color: customColors.info,
+                                            ),
+                                            color: customColors.info),
+                                      ));
+                              })
+                            ].divide(const SizedBox(
+                              height: 10,
+                            )),
+                          ),
+                        ),
         ));
   }
 }

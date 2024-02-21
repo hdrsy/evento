@@ -16,12 +16,13 @@ import 'package:get/get.dart';
 class FavoriteController extends GetxController {
   late RxList<EventWrapper> favoriteEvents;
   late List<RxString> distances;
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
 
   late RxList<String> errorMessage;
   RxList<EventWrapper> searchResultSearch = <EventWrapper>[].obs;
   RxBool isSearchActive = false.obs;
   RxBool isLoading = false.obs;
+  RxBool isError = false.obs;
   late TextEditingController searchField = TextEditingController();
 
   @override
@@ -36,26 +37,31 @@ class FavoriteController extends GetxController {
   }
 
   getMyFavoriteEvents() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myFavoriteEvents,
-        method: "GEt",
-        token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myFavoriteEvents,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['events'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isError.value = true;
+      } else {
+        List<dynamic> interestsJson = handlingResponse['events'];
 
-
-      favoriteEvents.value = interestsJson
-          .map((jsonItem) => EventWrapper.fromJson(jsonItem))
-          .toList();
-      distances = List.generate(favoriteEvents.length, (index) => "0 Km".obs);
+        favoriteEvents.value = interestsJson
+            .map((jsonItem) => EventWrapper.fromJson(jsonItem))
+            .toList();
+        distances = List.generate(favoriteEvents.length, (index) => "0 Km".obs);
+        isLoading.value = false;
+      }
+    } catch (e) {
       isLoading.value = false;
+      isError.value = true;
     }
   }
 
@@ -76,7 +82,6 @@ class FavoriteController extends GetxController {
     } else if (isDoneSuccefully == "removed successfully") {
       favoriteEvents[modelIndex].event.isFollowedByAuthUser = false;
       eventStateManager.toggleFavorite(eventId);
-
 
       update();
     }

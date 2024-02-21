@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/shared/widgets/images/network_image.dart';
@@ -37,23 +39,42 @@ class InviteFreindsToEventScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        () => SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Column(
-            children: [
-              // searchTextField(onChanged: (c) {}),
-              ...List.generate(
-                  inviteFreindsToEventController.myFreinds.length,
-                  (index) => InviteFreindsCard(
-                        freindsModel:
-                            inviteFreindsToEventController.myFreinds[index],
-                        modelIndex: index,
-                      ))
-            ].divide(const SizedBox(
-              height: 10,
-            )),
-          ),
-        ),
+        () => inviteFreindsToEventController.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ),
+              )
+            : inviteFreindsToEventController.isError.value
+                ? EmptyData(
+                    icon: Icons.error_outline_outlined,
+                    message: "SomeThing Wrong!!",
+                  )
+                : inviteFreindsToEventController.myFreinds.isEmpty
+                    ? EmptyData(
+                        icon: Icons.person_add,
+                        message:
+                            "Your friends list is looking a bit lonely. Go ahead and connect with people!",
+                      )
+                    : SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 16),
+                        child: Column(
+                          children: [
+                            // searchTextField(onChanged: (c) {}),
+                            ...List.generate(
+                                inviteFreindsToEventController.myFreinds.length,
+                                (index) => InviteFreindsCard(
+                                      freindsModel:
+                                          inviteFreindsToEventController
+                                              .myFreinds[index],
+                                      modelIndex: index,
+                                    ))
+                          ].divide(const SizedBox(
+                            height: 10,
+                          )),
+                        ),
+                      ),
       ),
     );
   }

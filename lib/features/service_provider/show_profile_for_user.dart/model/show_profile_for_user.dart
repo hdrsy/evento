@@ -37,7 +37,7 @@ class ServiceProvider {
     List<Album> albums = albumsList.map((i) => Album.fromJson(i)).toList();
 
     return ServiceProvider(
-      id: json['id'],
+      id: json['id'] ?? 0,
       userId: json['user_id'] ?? '',
       name: json['name'] ?? '',
       bio: json['bio'] ?? '',

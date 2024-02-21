@@ -14,6 +14,8 @@ class MyBookingController extends GetxController {
   late List<UpComingBooking> completedBooking;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  RxBool isErrorUpComing = false.obs;
+  RxBool isErrorCanceled = false.obs;
   List<TicketModel> generatedTicketModel = [];
   @override
   void onInit() async {
@@ -29,50 +31,62 @@ class MyBookingController extends GetxController {
   }
 
   getCalceledBooking() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myCancelledBookings,
-        method: "GEt",
-        token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myCancelledBookings,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['cancelled_bookings'];
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isErrorCanceled.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['cancelled_bookings'];
 
-      cancelledBooking = interestsJson
-          .map((jsonItem) => CancelledBooking.fromJson(jsonItem))
-          .toList();
+        cancelledBooking = interestsJson
+            .map((jsonItem) => CancelledBooking.fromJson(jsonItem))
+            .toList();
+        isLoading.value = false;
+        update();
+      }
+    } catch (e) {
       isLoading.value = false;
-      update();
+      isErrorCanceled.value = true;
     }
   }
 
   getUpComingAndCompletedBooking() async {
-    isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.myBooking, method: "GEt", token: token);
+    try {
+      isLoading.value = true;
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.myBooking, method: "GEt", token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['bookings'];
-      List<dynamic> completedJson = handlingResponse['completed_bookings'];
-      upComingBooking = interestsJson
-          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
-          .toList();
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isErrorUpComing.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['bookings'];
+        List<dynamic> completedJson = handlingResponse['completed_bookings'];
+        upComingBooking = interestsJson
+            .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
+            .toList();
 
-      completedBooking = completedJson
-          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
-          .toList();
+        completedBooking = completedJson
+            .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
+            .toList();
+        isLoading.value = false;
+        update();
+      }
+    } catch (e) {
       isLoading.value = false;
-      update();
+      isErrorUpComing.value = true;
     }
   }
 

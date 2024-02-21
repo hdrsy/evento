@@ -1,4 +1,5 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +29,18 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
       body: SafeArea(
         child: Obx(() => serviceAccordingDetailesController.isLoading.value
             ? const Center(child: CircularProgressIndicator())
-            : Column(children: [
-                _buildTopSection(context),
-                // SizedBox(
-                //   height: 50,
-                // ),
-                _buildContentSection(),
-              ])),
+            : serviceAccordingDetailesController.isError.value
+                ? EmptyData(
+                    icon: Icons.error_outline_outlined,
+                    message: "SomeThing Wrong!!",
+                  )
+                : Column(children: [
+                    _buildTopSection(context),
+                    // SizedBox(
+                    //   height: 50,
+                    // ),
+                    _buildContentSection(),
+                  ])),
       ),
     );
   }

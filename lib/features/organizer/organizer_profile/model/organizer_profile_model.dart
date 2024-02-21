@@ -7,7 +7,7 @@ class OrganizerProfileModel {
   int followingCount;
   int followersCount;
   int organizedEventsCount;
-  OrganizerInfo organizerInfo;
+  OrganizerInfo? organizerInfo;
   List<OrganizerProfileEvent> organizedEvents;
 
   OrganizerProfileModel(
@@ -22,10 +22,12 @@ class OrganizerProfileModel {
     print(json['followers_count']);
     return OrganizerProfileModel(
       id: json['id'],
-      followersCount: json['followers_count'],
-      followingCount: json['following_count'],
-      organizedEventsCount: json['organized_events_count'],
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
+      followersCount: json['followers_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
+      organizedEventsCount: json['organized_events_count'] ?? 0,
+      organizerInfo: json['organizer_info'] != null
+          ? OrganizerInfo.fromJson(json['organizer_info'])
+          : null,
       organizedEvents: List<OrganizerProfileEvent>.from(json['organized_events']
           .map((x) => OrganizerProfileEvent.fromJson(x))),
     );
@@ -116,8 +118,8 @@ class OrganizerProfileAlbum {
     }
 
     return OrganizerProfileAlbum(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
       images:
           json['images'] != null ? parseImages(json['images'] as String) : [],
       videos:
@@ -140,9 +142,9 @@ class Category {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return Category(
-      id: json['id'],
-      title: json['title'],
-      icon: json['icon'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      icon: json['icon'] ?? '',
     );
   }
 }
@@ -182,18 +184,18 @@ class OrganizerProfileEvent {
     print("ddddddddddddd$json");
     return OrganizerProfileEvent(
       id: json['id'] ?? 0,
-      organizerId: json['organizer_id'],
-      title: json['title'],
-      venueId: json['venue_id'],
+      organizerId: json['organizer_id'] ?? 0,
+      title: json['title'] ?? '',
+      venueId: json['venue_id'] ?? 0,
       capacity: json['capacity'] ?? 0,
-      startDate: DateTime.parse(json['start_date']),
+      startDate: DateTime.parse(json['start_date'] ?? ''),
       // endDate: DateTime.parse(json['end_date']) ?? DateTime.now(),
       ticketPrice: json['ticket_price'] ?? 0,
       description: json['description'] ?? "",
       type: json['type'] ?? "",
       videos: json['videos'] ?? "",
       images: jsonDecode(json['images']),
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
 }

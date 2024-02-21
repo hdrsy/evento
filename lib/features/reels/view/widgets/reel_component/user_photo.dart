@@ -10,27 +10,24 @@ Container userPhoto(ReelModel model) {
     decoration: const BoxDecoration(
       shape: BoxShape.circle,
     ),
-    child: model.event == null
+    child: getReelImage(model) == null
         ? Image.network(
             'https://picsum.photos/seed/913/600',
             fit: BoxFit.cover,
           )
         : getImageNetworkforCahing(
-            url: getReelImage(model), width: null, height: null),
+            url: getReelImage(model)!, width: null, height: null),
   );
 }
 
-String getReelImage(ReelModel model) {
+String? getReelImage(ReelModel model) {
   if (model.event != null) {
     return model.event!.images[0];
-  }
-// else if(model.user!=null){
-//   return model.user!.;
-// }
-// else if(model.venue!=null){
-//   return model.venue!.;
-// }
-  else {
-    return "https://picsum.photos/seed/913/600";
+  } else if (model.user != null) {
+    return model.user!.image;
+  } else if (model.venue != null) {
+    return model.venue!.profile!;
+  } else {
+    return null;
   }
 }

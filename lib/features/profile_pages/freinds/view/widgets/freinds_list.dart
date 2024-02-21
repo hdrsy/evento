@@ -26,77 +26,83 @@ class FreindsList extends StatelessWidget {
                 color: customColors.primary,
               ),
             )
-          : freindsController.myFreinds.isEmpty
-              ? const EmptyData(
-                  icon: Icons.person_add,
-                  message:
-                      "Your friends list is looking a bit lonely. Go ahead and connect with people!",
+          : freindsController.isMyFriendsError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
                 )
-              : SingleChildScrollView(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: tr("Friends"),
-                                    style: TextStyle(
-                                      color: customColors.primaryText,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+              : freindsController.myFreinds.isEmpty
+                  ? const EmptyData(
+                      icon: Icons.person_add,
+                      message:
+                          "Your friends list is looking a bit lonely. Go ahead and connect with people!",
+                    )
+                  : SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 5),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24, 0, 24, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: tr("Friends"),
+                                        style: TextStyle(
+                                          color: customColors.primaryText,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: freindsController.myFreinds.length
+                                            .toString(),
+                                        style:
+                                            customTextStyle.bodyMedium.override(
+                                          fontFamily: 'Nunito',
+                                          color: customColors.primary,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: true,
+                                        ),
+                                      ),
+                                    ],
+                                    style: customTextStyle.bodyMedium,
                                   ),
-                                  TextSpan(
-                                    text: freindsController.myFreinds.length
-                                        .toString(),
-                                    style: customTextStyle.bodyMedium.override(
-                                      fontFamily: 'Nunito',
-                                      color: customColors.primary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: true,
-                                    ),
-                                  ),
-                                ],
-                                style: customTextStyle.bodyMedium,
-                              ),
+                                ),
+                                // Text(
+                                //   "Manage",
+                                //   style: customTextStyle.bodyMedium.override(
+                                //     fontFamily: 'Nunito',
+                                //     color: customColors.primary,
+                                //     fontSize: 12,
+                                //     useGoogleFonts: false,
+                                //   ),
+                                // ),
+                              ],
                             ),
-                            // Text(
-                            //   "Manage",
-                            //   style: customTextStyle.bodyMedium.override(
-                            //     fontFamily: 'Nunito',
-                            //     color: customColors.primary,
-                            //     fontSize: 12,
-                            //     useGoogleFonts: false,
-                            //   ),
-                            // ),
-                          ],
-                        ),
+                          ),
+                          ...List.generate(
+                              freindsController.myFreinds.length,
+                              (index) => FreindsCard(
+                                    freindsModel:
+                                        freindsController.myFreinds[index],
+                                    modelId: index,
+                                  ))
+                        ].divide(const SizedBox(
+                          height: 10,
+                        )),
                       ),
-                      ...List.generate(
-                          freindsController.myFreinds.length,
-                          (index) => FreindsCard(
-                                freindsModel:
-                                    freindsController.myFreinds[index],
-                                modelId: index,
-                              ))
-                    ].divide(const SizedBox(
-                      height: 10,
-                    )),
-                  ),
-                );
+                    );
     });
   }
 }

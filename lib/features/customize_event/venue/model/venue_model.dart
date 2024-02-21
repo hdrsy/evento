@@ -11,7 +11,7 @@ class Venue {
   final String description;
   final double latitude;
   final double longitude;
-   final String profile;
+  final String profile;
   final String contactNumber;
   final List<VenueAlbum> venueAlbums;
 
@@ -30,22 +30,23 @@ class Venue {
   });
 
   factory Venue.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     var albumList = json['albums'] as List;
-    List<VenueAlbum> albums = albumList.map((album) => VenueAlbum.fromJson(album)).toList();
+    List<VenueAlbum> albums =
+        albumList.map((album) => VenueAlbum.fromJson(album)).toList();
 
     return Venue(
-      id: json['id'],
-      name: json['name'],
-      capacity: json['capacity'],
-      profile: json['profile'],
-      governorate: json['governorate'],
-      locationDescription: json['location_description'],
-      description: json['description'],
-      latitude: json['latitude'].toDouble(),
-      longitude: json['longitude'].toDouble(),
-      contactNumber: json['contact_number'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      capacity: json['capacity'] ?? 0,
+      profile: json['profile'] ?? '',
+      governorate: json['governorate'] ?? '',
+      locationDescription: json['location_description'] ?? '',
+      description: json['description'] ?? '',
+      latitude: json['latitude'].toDouble() ?? 0.0,
+      longitude: json['longitude'].toDouble() ?? 0.0,
+      contactNumber: json['contact_number'] ?? '',
       venueAlbums: albums,
     );
   }
@@ -63,34 +64,32 @@ class VenueAlbum {
     required this.venueId,
     required this.name,
     required this.images,
-   required this.videos,
+    required this.videos,
   });
 
- factory VenueAlbum.fromJson(Map<String, dynamic> oldJson) {
-  Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
-  List<String> parseImages(String? imagesJson) {
-    if (imagesJson == null || imagesJson.isEmpty) {
-      return [];
+  factory VenueAlbum.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
+    List<String> parseImages(String? imagesJson) {
+      if (imagesJson == null || imagesJson.isEmpty) {
+        return [];
+      }
+      try {
+        // Decode the string to a List<dynamic>, then cast each element to String
+        var decodedList = jsonDecode(imagesJson) as List;
+        return decodedList.map((item) => item.toString()).toList();
+      } catch (e) {
+        print('Error decoding images JSON: $e');
+        return [];
+      }
     }
-    try {
-      // Decode the string to a List<dynamic>, then cast each element to String
-      var decodedList = jsonDecode(imagesJson) as List;
-      return decodedList.map((item) => item.toString()).toList();
-    } catch (e) {
-      print('Error decoding images JSON: $e');
-      return [];
-    }
+
+    return VenueAlbum(
+      id: json['id'],
+      venueId: json['venue_id'],
+      name: json['name'],
+      images: parseImages(json['images']),
+      videos: parseImages(json['videos']),
+    );
   }
-
-
-
-  return VenueAlbum(
-    id: json['id'],
-    venueId: json['venue_id'],
-    name: json['name'],
-    images: parseImages(json['images']),
-    videos: parseImages(json['videos']),
-  );
-}
 }

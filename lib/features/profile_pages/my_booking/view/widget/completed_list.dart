@@ -24,47 +24,55 @@ class CompletedList extends StatelessWidget {
               color: customColors.primary,
             ),
           )
-        : myBookingController.completedBooking.isEmpty
-            ? const EmptyData(
-                icon: Icons.calendar_today,
-                message:
-                    "No completed bookings! Explore events to find your next great experience.",
+        : myBookingController.isErrorUpComing.value
+            ? EmptyData(
+                icon: Icons.error_outline_outlined,
+                message: "SomeThing Wrong!!",
               )
-            : SingleChildScrollView(
-                padding: padding(10, 24, 10, 24),
-                child: Column(
-                  children: [
-                    ...List.generate(
-                        myBookingController.completedBooking.length,
-                        (index) => MyBookingCard(
-                              eventBooking: myBookingController
-                                  .completedBooking[index].bookings,
-                              model: myBookingController.completedBooking[index]
-                                  .bookings[0].eventClass.event,
-                              isCanceldSection: false,
-                              leftButtonOnTap: () {
-                                showButtonSheet(
-                                    context: context,
-                                    widget: ReviewEventWidget(
-                                      ratingTarget: tr("Your Event"),
-                                      id: myBookingController
-                                          .completedBooking[index]
-                                          .bookings[0]
-                                          .eventClass
-                                          .event
-                                          .id,
-                                      idKey: "event_id",
-                                      url: ServerConstApis.reviewEvent,
-                                    ),
-                                    height: 450);
-                              },
-                              leftButtonTitle: tr("Leave a Review"),
-                              bookingStatus: tr("Completed"),
-                            ))
-                  ].divide(const SizedBox(
-                    height: 10,
-                  )),
-                ),
-              ));
+            : myBookingController.completedBooking.isEmpty
+                ? const EmptyData(
+                    icon: Icons.calendar_today,
+                    message:
+                        "No completed bookings! Explore events to find your next great experience.",
+                  )
+                : SingleChildScrollView(
+                    padding: padding(10, 24, 10, 24),
+                    child: Column(
+                      children: [
+                        ...List.generate(
+                            myBookingController.completedBooking.length,
+                            (index) => MyBookingCard(
+                                  eventBooking: myBookingController
+                                      .completedBooking[index].bookings,
+                                  model: myBookingController
+                                      .completedBooking[index]
+                                      .bookings[0]
+                                      .eventClass
+                                      .event,
+                                  isCanceldSection: false,
+                                  leftButtonOnTap: () {
+                                    showButtonSheet(
+                                        context: context,
+                                        widget: ReviewEventWidget(
+                                          ratingTarget: tr("Your Event"),
+                                          id: myBookingController
+                                              .completedBooking[index]
+                                              .bookings[0]
+                                              .eventClass
+                                              .event
+                                              .id,
+                                          idKey: "event_id",
+                                          url: ServerConstApis.reviewEvent,
+                                        ),
+                                        height: 450);
+                                  },
+                                  leftButtonTitle: tr("Leave a Review"),
+                                  bookingStatus: tr("Completed"),
+                                ))
+                      ].divide(const SizedBox(
+                        height: 10,
+                      )),
+                    ),
+                  ));
   }
 }
