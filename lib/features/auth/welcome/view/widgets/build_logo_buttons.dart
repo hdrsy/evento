@@ -25,14 +25,19 @@ class BuildLogoButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 37, 0, 0),
-            child: Image.asset(
-              'assets/images/Artboard_1.png',
-              width: 300,
-              height: 100,
-              fit: BoxFit.cover,
-            ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
+          SizedBox(
+            height: Get.size.width * .32,
+            width: Get.size.width * .32,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 37, 0, 0),
+              child: Image.asset(
+                // 'assets/images/Artboard_1.png',
+                'assets/images/تيست 1.png',
+                width: 300,
+                height: 100,
+                fit: BoxFit.contain,
+              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
+            ),
           ),
           Column(
             mainAxisSize: MainAxisSize.max,

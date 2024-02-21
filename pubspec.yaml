@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -98,16 +98,39 @@ dependencies:
   flutter_screenutil: ^5.9.0
   geolocator: ^10.1.1
   better_player_plus: ^1.0.5
-  
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: 
   
   
   
   # video_compress: ^3.1.2
   
 
+flutter_native_splash:
+  image: "assets/images/تيست 222.png"
+  
+
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/تيست 1.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/تيست 1.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

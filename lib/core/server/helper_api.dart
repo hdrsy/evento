@@ -63,6 +63,9 @@ class ApiHelper {
         // Sending the multipart request and getting the response.
         var streamedResponse = await request.send();
         response = await http.Response.fromStream(streamedResponse);
+        print("response bid mmm:$response");
+        print("response bid mmm :${response.statusCode}");
+
         // print(response.body);
       } else {
         // Standard handling for non-file-upload requests (GET, POST, etc.).

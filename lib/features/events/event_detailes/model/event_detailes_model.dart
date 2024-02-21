@@ -192,15 +192,15 @@ class OrganizerInfo {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return OrganizerInfo(
-      id: json['id'],
-      mobileUserId: json['mobile_user_id'],
+      id: json['id'] ?? 1,
+      mobileUserId: json['mobile_user_id'] ?? '',
       categoryId: json['category_id'] ?? 1,
-      name: json['name'],
-      profile: json['profile'],
-      bio: json['bio'],
-      services: json['services'],
-      state: json['state'],
-      images: json['images'],
+      name: json['name'] ?? '',
+      profile: json['profile'] ?? '',
+      bio: json['bio'] ?? '',
+      services: json['services'] ?? '',
+      state: json['state'] ?? '',
+      images: json['images'] ?? '',
     );
   }
 }
