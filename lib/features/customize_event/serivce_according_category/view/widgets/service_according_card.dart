@@ -79,11 +79,6 @@ class ServiceAccordingCard extends StatelessWidget {
                             style: customTextStyle.headlineSmall,
                           ),
                   ),
-                  Text(
-                    serviceProvider.user.firstName +
-                        serviceProvider.user.lastName,
-                    style: customTextStyle.headlineSmall,
-                  ),
                   serviceAccordingCategoryController.isInCustomuzEvent
                       ? Row(
                           mainAxisSize: MainAxisSize.max,

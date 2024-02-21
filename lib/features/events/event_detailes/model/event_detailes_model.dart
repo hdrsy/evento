@@ -399,17 +399,17 @@ class ServiceProvider {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return ServiceProvider(
-      id: json['id'],
-      userId: json['user_id'],
-      name: json['name'],
-      bio: json['bio'],
-      services: json['services'],
-      locationWorkGovernorate: json['location_work_governorate'],
-      address: json['address'],
-      categoryId: json['category_id'],
+      id: json['id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      name: json['name'] ?? "",
+      bio: json['bio'] ?? "",
+      services: json['services'] ?? '',
+      locationWorkGovernorate: json['location_work_governorate'] ?? '',
+      address: json['address'] ?? '',
+      categoryId: json['category_id'] ?? 0,
       description: json['description'],
-      profile: json['profile'],
-      cover: json['cover'],
+      profile: json['profile'] ?? "",
+      cover: json['cover'] ?? "",
     );
   }
 }

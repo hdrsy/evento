@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
@@ -17,15 +18,18 @@ class SeeAllOrganizersController extends GetxController {
 
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
+  TextEditingController searchController = TextEditingController();
 
   // Variables for managing pagination.
   late int dataLimit;
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
+  late RxBool isSearchActive;
 
   late RxList<OrganizerHome> itemList;
-
+  late RxList<OrganizerHome> searchItemList;
+  Timer? _debounce;
   late RxList<String> errorMessage;
   late String targetRout;
   late String mapKey;
@@ -44,6 +48,9 @@ class SeeAllOrganizersController extends GetxController {
     mapKey = Get.arguments[3];
     pageTitle = Get.arguments[4];
     log(pageId.toString());
+    searchController.addListener(_onSearchChanged);
+    searchItemList = <OrganizerHome>[].obs;
+
     scrollController = ScrollController();
     itemList.isEmpty
         ? fetchData()
@@ -61,6 +68,26 @@ class SeeAllOrganizersController extends GetxController {
       }
     });
     super.onInit();
+  }
+
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (searchController.text.isNotEmpty) {
+        // onPressSearch(searchField.text);
+        isSearchActive.value = true;
+        searchItemList.assignAll(itemList
+            .where((event) => event.organizerHomeInfo.name
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+            .toList());
+        print("inisde the timer ");
+      } else {
+        // Optionally handle empty search field case
+        // _fetchData("");
+        isSearchActive.value = false;
+      }
+    });
   }
 
   fetchData() async {

@@ -106,17 +106,25 @@ Widget buildOrganizerItem(
 Widget buildEventImage(String imagePath) {
   return ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: imagePath.length > 6
-          ? getImageNetworkforCahing(
-              url: '/storage/$imagePath',
+      child: imagePath == ''
+          ? Image.asset(
+              'assets/images/faceBookProfile.jfif',
+              // fit: BoxFit.,
+              alignment: const Alignment(0, 0),
               width: 150,
               height: 150,
             )
-          : Image.asset(
-              'assets/images/${imagePath.substring(imagePath.length - 1)}.png',
-              width: 150,
-              height: 150,
-            ));
+          : imagePath.length > 6
+              ? getImageNetworkforCahing(
+                  url: '/storage/$imagePath',
+                  width: 150,
+                  height: 150,
+                )
+              : Image.asset(
+                  'assets/images/${imagePath.substring(imagePath.length - 1)}.png',
+                  width: 150,
+                  height: 150,
+                ));
 }
 
 // Function to build the event title

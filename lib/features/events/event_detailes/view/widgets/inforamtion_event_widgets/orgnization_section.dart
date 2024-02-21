@@ -47,24 +47,35 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  width: 50,
-                  height: 50,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: eventDetailesController.eventDetailsModel.organizer !=
-                          null
-                      ? getImageNetwork(
-                          url: eventDetailesController.eventDetailsModel
-                              .organizer!.organizerInfo!.profile,
-                          width: null,
-                          height: null)
-                      : Image.asset(
-                          'assets/images/Artboard_1.png',
-                          fit: BoxFit.cover,
-                        ),
-                ),
+                    width: 50,
+                    height: 50,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child:
+                        eventDetailesController.eventDetailsModel.organizer ==
+                                null
+                            ? Image.asset(
+                                'assets/images/Artboard_1.png',
+                                fit: BoxFit.cover,
+                              )
+                            : eventDetailesController.eventDetailsModel
+                                        .organizer!.organizerInfo!.profile ==
+                                    ''
+                                ? Image.asset(
+                                    'assets/images/faceBookProfile.jfif',
+                                    // fit: BoxFit.,
+                                    alignment: const Alignment(0, 0),
+                                  )
+                                : getImageNetwork(
+                                    url: eventDetailesController
+                                        .eventDetailsModel
+                                        .organizer!
+                                        .organizerInfo!
+                                        .profile,
+                                    width: null,
+                                    height: null)),
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -33,7 +33,8 @@ class ServerConstApis {
   static String organizerFollowers = '$baseAPI/api/organizer_followers';
   static String organizationProfile = '$baseAPI/api/organizer/profile';
   static String organizationMyEvents = '$baseAPI/api/organizer/my-events';
-  static String organizationUpdateProfile = '$baseAPI/api/organizer/updateProfile';
+  static String organizationUpdateProfile =
+      '$baseAPI/api/organizer/updateProfile';
   static String organizationMyEventsBookings =
       '$baseAPI/api/organizer/event-booking';
   ///// service provider

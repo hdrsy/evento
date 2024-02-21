@@ -43,16 +43,22 @@ class SeeAllOrganizersScreen extends StatelessWidget {
         child: Obx(
           () => Column(
             children: [
-              searchTextField(onChanged: (c) {}),
+              searchTextField(
+                  controller: seeAllOrganizersController.searchController,
+                  onChanged: (c) {}),
               ...List.generate(
-                  seeAllOrganizersController.hasMoreData.value
-                      ? seeAllOrganizersController.itemList.length + 1
-                      : seeAllOrganizersController.itemList.length,
+                  seeAllOrganizersController.isSearchActive.value
+                      ? seeAllOrganizersController.searchItemList.length
+                      : seeAllOrganizersController.hasMoreData.value
+                          ? seeAllOrganizersController.itemList.length + 1
+                          : seeAllOrganizersController.itemList.length,
                   (index) => index < seeAllOrganizersController.itemList.length
                       ? OrganizerSeeAllCard(
                           modelId: index,
-                          organizerHome:
-                              seeAllOrganizersController.itemList[index],
+                          organizerHome: seeAllOrganizersController
+                                  .isSearchActive.value
+                              ? seeAllOrganizersController.searchItemList[index]
+                              : seeAllOrganizersController.itemList[index],
                         )
                       : Column(
                           children: [
@@ -99,13 +105,19 @@ class OrganizerSeeAllCard extends StatelessWidget {
                   children: [
                     ClipRRect(
                         borderRadius: BorderRadius.circular(40),
-                        child: organizerHome.imageUrl.length > 6
-                            ? getImageNetwork(
-                                url: '/storage/${organizerHome.imageUrl}',
+                        child: organizerHome.organizerHomeInfo.profile == ''
+                            ? Image.asset(
+                                'assets/images/faceBookProfile.jfif',
+                                // fit: BoxFit.,
+                                alignment: const Alignment(0, 0),
                                 width: 90,
-                                height: 90)
-                            : Image.asset(
-                                'assets/images/${organizerHome.imageUrl.substring(organizerHome.imageUrl.length - 1)}.png')),
+                                height: 90,
+                              )
+                            : getImageNetwork(
+                                url:
+                                    '/storage/${organizerHome.organizerHomeInfo.profile}',
+                                width: 90,
+                                height: 90)),
                     SizedBox(
                       width: 12,
                     ),

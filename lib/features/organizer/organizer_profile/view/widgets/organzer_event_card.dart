@@ -8,6 +8,7 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class OrganizerEventCard extends StatelessWidget {
   const OrganizerEventCard(
       {super.key,
@@ -23,7 +24,8 @@ class OrganizerEventCard extends StatelessWidget {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        Get.toNamed('/eventDetailes', arguments: organizerProfileEvent.id);
+        Get.toNamed('/eventDetailes',
+            arguments: [organizerProfileEvent.id, false, 0]);
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,

@@ -62,12 +62,20 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
                     width: 2,
                   ),
                   image: DecorationImage(
-                      image: getImageNetwork(
-                              url:
-                                  "/storage/${serviceAccordingDetailesController.serviceProvider.profile}",
-                              width: double.infinity,
-                              height: null)
-                          .image)),
+                      image: serviceAccordingDetailesController
+                                  .serviceProvider.profile ==
+                              ''
+                          ? Image.asset(
+                              'assets/images/faceBookProfile.jfif',
+                              // fit: BoxFit.,
+                              alignment: const Alignment(0, 0),
+                            ).image
+                          : getImageNetwork(
+                                  url:
+                                      "/storage/${serviceAccordingDetailesController.serviceProvider.profile}",
+                                  width: double.infinity,
+                                  height: null)
+                              .image)),
             ),
           ),
           Positioned(

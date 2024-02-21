@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/theme/text_theme.dart';
 import '../controller/service_according_category_controller.dart';
@@ -36,33 +38,38 @@ class ServiceAccordingCategoryScreen extends StatelessWidget {
                       color: customColors.primary,
                     ),
                   )
-                : SingleChildScrollView(
-                    padding: padding(16, 20, 16, 20),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            serviceAccordingCategoryController
-                                .serviceCategoryType,
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 25,
-                              useGoogleFonts: true,
-                            ),
-                          ),
-                          ...List.generate(
-                              serviceAccordingCategoryController
-                                  .serviceProviderList.length,
-                              (index) => ServiceAccordingCard(
-                                    serviceProvider:
-                                        serviceAccordingCategoryController
-                                            .serviceProviderList[index],
-                                    serviceCategoryIndex:
-                                        serviceAccordingCategoryController
-                                            .serviceCategoryIndex,
-                                  ))
-                        ])),
+                : serviceAccordingCategoryController.serviceProviderList.isEmpty
+                    ? EmptyData(
+                        icon: Icons.miscellaneous_services,
+                        message:
+                            "No service providers available. Services will appear here as they become available.")
+                    : SingleChildScrollView(
+                        padding: padding(16, 20, 16, 20),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                serviceAccordingCategoryController
+                                    .serviceCategoryType,
+                                style: customTextStyle.bodyMedium.override(
+                                  fontFamily: 'Nunito',
+                                  color: customColors.primaryText,
+                                  fontSize: 25,
+                                  useGoogleFonts: true,
+                                ),
+                              ),
+                              ...List.generate(
+                                  serviceAccordingCategoryController
+                                      .serviceProviderList.length,
+                                  (index) => ServiceAccordingCard(
+                                        serviceProvider:
+                                            serviceAccordingCategoryController
+                                                .serviceProviderList[index],
+                                        serviceCategoryIndex:
+                                            serviceAccordingCategoryController
+                                                .serviceCategoryIndex,
+                                      ))
+                            ])),
           ),
         ));
   }

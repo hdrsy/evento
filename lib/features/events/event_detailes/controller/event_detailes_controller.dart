@@ -32,8 +32,8 @@ class EventDetailesController extends GetxController {
   RxString distance = "0 km".obs;
   late RxList<String> errorMessage;
   late RxList<EventModel> relatedEvents;
-  late bool isOffer;
-  late int offerPrecent;
+  bool isOffer = false;
+  int offerPrecent = 0;
   CacheService cacheService = CacheService('eventDetailes');
   late String cacheKey;
   late RxBool isSomeThingError;
@@ -105,7 +105,7 @@ class EventDetailesController extends GetxController {
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
-
+        isSomeThingError.value = true;
         print(
             "the event detials response: ${handlingResponse.getErrorMessages()}");
       } else {

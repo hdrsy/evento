@@ -108,12 +108,20 @@ class OrganizerProfileScreen extends StatelessWidget {
               width: 2,
             ),
             image: DecorationImage(
-                image: getImageNetwork(
-                        url:
-                            "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
-                        width: double.infinity,
-                        height: null)
-                    .image)),
+                image: organizerProfileController
+                            .organizerProfileModel.organizerInfo.profile ==
+                        ''
+                    ? Image.asset(
+                        'assets/images/faceBookProfile.jfif',
+                        // fit: BoxFit.,
+                        alignment: const Alignment(0, 0),
+                      ).image
+                    : getImageNetwork(
+                            url:
+                                "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
+                            width: double.infinity,
+                            height: null)
+                        .image)),
       ),
     );
   }

@@ -38,8 +38,8 @@ class OrganizerInfo {
   String bio;
   String services;
   String state;
-  String? profile;
-  String? cover;
+  String profile;
+  String cover;
   bool isFollowedByAuthUser;
   List<OrganizerProfileAlbum> albums;
   List<Category> categories;
@@ -59,16 +59,16 @@ class OrganizerInfo {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return OrganizerInfo(
-      id: json['id'],
-      name: json['name'],
-      bio: json['bio'],
-      services: json['services'],
-      state: json['state'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      bio: json['bio'] ?? '',
+      services: json['services'] ?? '',
+      state: json['state'] ?? '',
       categories: List<Category>.from(
           json['categories'].map((x) => Category.fromJson(x))),
-      profile: json['profile'],
-      cover: json['cover'],
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
+      profile: json['profile'] ?? '',
+      cover: json['cover'] ?? '',
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
       albums: List<OrganizerProfileAlbum>.from(
           json['albums'].map((x) => OrganizerProfileAlbum.fromJson(x))),
     );
