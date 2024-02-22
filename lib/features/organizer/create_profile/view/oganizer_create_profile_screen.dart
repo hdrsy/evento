@@ -1,10 +1,6 @@
 import 'package:evento/core/const/states.dart';
-import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
-import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
 import 'package:evento/features/organizer/create_profile/view/widgets/confirm_switch_to_organizer_account_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
@@ -17,7 +13,6 @@ import 'widgets/camera_icon.dart';
 import 'widgets/create_folder.dart';
 import 'widgets/folder_card.dart';
 import 'widgets/profile_image.dart';
-import 'widgets/selected_list.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,7 +54,7 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                         ///// cover image
                         image: controller.coverImage != null
                             ? FileImage(controller.coverImage!)
-                            : const AssetImage('assets/images/image.jpg')
+                            : const AssetImage('assets/images/first_cover.jpg')
                                 as ImageProvider<Object>,
                         fit: BoxFit.cover)),
                 child: Stack(children: [

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:evento/core/server/filter.dart';
 import 'package:evento/core/server/helper_api.dart';
@@ -10,7 +9,6 @@ import 'package:evento/features/search/model/search_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dartz/dartz.dart';
 // Add your other necessary imports here
 
 class SearchPageController extends GetxController {

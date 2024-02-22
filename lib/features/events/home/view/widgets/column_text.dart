@@ -1,6 +1,5 @@
 import 'package:evento/core/responsive/size_config.dart';
 
-import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';

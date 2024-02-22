@@ -1,6 +1,5 @@
 import 'package:evento/core/utils/services/back_ground_service.dart';
 import 'package:evento/core/utils/services/notification_service.dart';
-import 'package:evento/core/utils/services/work_manager.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 
 import '../../../../core/utils/services/user_info.dart';

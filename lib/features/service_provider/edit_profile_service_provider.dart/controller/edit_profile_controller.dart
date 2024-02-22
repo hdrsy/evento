@@ -81,7 +81,7 @@ class EditProfileServiceProviderController extends GetxController {
       errorMessage.clear();
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token") ?? "";
+      String token = await prefService.readString("token") ;
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.updateProfile,
           method: "post",

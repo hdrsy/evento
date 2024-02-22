@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/model/show_profile_for_user.dart';
-import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -23,7 +22,6 @@ class ServiceAccordingDetailesForUserController extends GetxController {
     // isorganizerEditProfile = Get.arguments[1]??false;
 
     getOrganizerProfile();
-    // TODO: implement onInit
     super.onInit();
   }
 

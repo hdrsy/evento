@@ -1,6 +1,5 @@
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
-import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
 import '../../controller/edit_profile_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';

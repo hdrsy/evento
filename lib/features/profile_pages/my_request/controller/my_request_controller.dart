@@ -24,7 +24,7 @@ class MyRequestController extends GetxController {
     try {
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token") ?? "";
+      String token = await prefService.readString("token");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.myEventRequest,
           method: "GEt",

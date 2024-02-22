@@ -10,7 +10,6 @@ import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widge
 import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widgets/edit_image_widget.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widgets/fildes.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widgets/folder_card.dart';
-import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widgets/see_all_folders.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

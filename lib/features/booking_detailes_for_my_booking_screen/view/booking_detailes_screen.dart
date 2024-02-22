@@ -8,7 +8,6 @@ import '../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../core/shared/widgets/widget/total_widget.dart';
 import '../../../core/utils/helper/expanded_image_view.dart';
 import '../../../core/utils/theme/text_theme.dart';
-import '../../booking_detailes/view/widget/ticket_detailes_card.dart';
 import '../controller/booking_detailes_controller.dart';
 import '../../../main.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:get/get.dart';
 
@@ -26,10 +24,8 @@ class EventStateManager {
   // Toggle the favorite state of an event
   void toggleFavorite(int eventId) {
     var event = getEventById(eventId).value;
-    if (event != null) {
-      event.isFollowedByAuthUser = !event.isFollowedByAuthUser;
-      addOrUpdateEvent(event);
-    }
+    event.isFollowedByAuthUser = !event.isFollowedByAuthUser;
+    addOrUpdateEvent(event);
   }
 
   // Retrieve all events

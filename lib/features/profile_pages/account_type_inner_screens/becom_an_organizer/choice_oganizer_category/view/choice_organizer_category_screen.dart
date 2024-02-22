@@ -1,5 +1,4 @@
 // Importing necessary packages and widgets.
-import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/shared/widgets/text_fields/search_filed.dart';
@@ -9,7 +8,6 @@ import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/view/widget/choice_organizer_category_list.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/confirm_switch_to_organizer_account_widget.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

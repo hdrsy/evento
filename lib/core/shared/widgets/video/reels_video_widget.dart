@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:evento/core/utils/theme/text_theme.dart';

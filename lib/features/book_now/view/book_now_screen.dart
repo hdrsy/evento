@@ -6,7 +6,6 @@ import '../../../core/shared/widgets/images/network_image.dart';
 import '../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../core/utils/theme/text_theme.dart';
 import '../controller/book_now_controller.dart';
-import '../model/ticket_model.dart';
 import 'widgets/full_ticket_info.dart';
 import 'widgets/price_summary_widget.dart';
 import '../../../main.dart';

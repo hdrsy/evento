@@ -1,8 +1,4 @@
-import '../../../../../core/responsive/responsive.dart';
-import '../../../../../core/shared/widgets/text_fields/search_filed.dart';
-import '../../../../../core/utils/helper/flutter_flow_choice_chips.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
-import '../../../../../core/utils/helper/form_field_controller.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
 import 'package:expandable/expandable.dart';

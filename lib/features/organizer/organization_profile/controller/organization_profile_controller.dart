@@ -31,7 +31,6 @@ class OrganizationProfileController extends GetxController {
     //     OrganizationProfileModel.fromJson(fakeOrganizationProfileData);
     await getOrganizerProfile();
     getOrganizerFollowers();
-    // TODO: implement onInit
     super.onInit();
   }
 

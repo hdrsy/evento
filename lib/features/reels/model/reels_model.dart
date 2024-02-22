@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:evento/core/server/helper_api.dart';
-
 import '../../events/event_detailes/model/event_detailes_model.dart';
 import '../../events/home/model/event_model.dart';
 

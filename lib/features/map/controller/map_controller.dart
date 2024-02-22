@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:evento/core/server/filter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
@@ -14,46 +12,46 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
   List<EventModel> events = [];
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
 
-  TextEditingController searchController=TextEditingController();
+  TextEditingController searchController = TextEditingController();
   final googleMapsController = Completer<GoogleMapController>();
   late FlutterFlowMarker myMarker;
-  RxList<EventModel> searchResultSearch=<EventModel>[].obs;
-   RxBool isSearchActive=false.obs;
-  TextEditingController searchField =TextEditingController();
-late LatLng currentPosition;
+  RxList<EventModel> searchResultSearch = <EventModel>[].obs;
+  RxBool isSearchActive = false.obs;
+  TextEditingController searchField = TextEditingController();
+  late LatLng currentPosition;
   @override
   void onInit() async {
     await getSuggestModels();
-    // TODO: implement on
     // Init
     // googleMapsCenter
-   
+
     super.onInit();
   }
-   void onPressSearch(String query) {
-  if (query.isEmpty) {
-    isSearchActive.value = false;
-    searchResultSearch.clear();
-  } else {
-    isSearchActive.value = true;
-    searchResultSearch.assignAll(
-      events.where(
-        (event) => event.title.toLowerCase().contains(query.toLowerCase())
-      ).toList()
-    );
-  }
-}
-void onApplyFilters(Map<String ,dynamic> data)async{
-  isSearchActive.value=true;
-  final d=await  filter( data);
-  print(d);
-Get.back();
-    var eventModels = d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
-  searchResultSearch.addAll(eventModels.cast<EventModel>());
 
-}
+  void onPressSearch(String query) {
+    if (query.isEmpty) {
+      isSearchActive.value = false;
+      searchResultSearch.clear();
+    } else {
+      isSearchActive.value = true;
+      searchResultSearch.assignAll(events
+          .where((event) =>
+              event.title.toLowerCase().contains(query.toLowerCase()))
+          .toList());
+    }
+  }
+
+  void onApplyFilters(Map<String, dynamic> data) async {
+    isSearchActive.value = true;
+    final d = await filter(data);
+    print(d);
+    Get.back();
+    var eventModels =
+        d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
+    searchResultSearch.addAll(eventModels.cast<EventModel>());
+  }
 
   late LatLng? googleMapsCenter = const LatLng(13.106061, -59.613158);
   CarouselController? carouselController;
@@ -64,14 +62,15 @@ Get.back();
   // PageController? paggooeViewController1;
   getSuggestModels() {
 // final TrendingListController trendingListController=Get.find();
-    final TrendingListController eventInYourCityListController = Get.put(TrendingListController());
+    final TrendingListController eventInYourCityListController =
+        Get.put(TrendingListController());
     events.assignAll(eventInYourCityListController.itemList);
 
     print(events.length);
-     carouselCurrentIndex = 0;
+    carouselCurrentIndex = 0;
     print(events.length);
     print(events[0]);
-    currentPosition=LatLng(events[carouselCurrentIndex].venue!.lang,
+    currentPosition = LatLng(events[carouselCurrentIndex].venue!.lang,
         events[carouselCurrentIndex].venue!.long);
     googleMapsCenter = currentPosition;
 
@@ -87,41 +86,42 @@ Get.back();
         ));
       },
     );
-
   }
+
   void updateMarkerAndPosition(int carouselIndex) {
-  if (carouselIndex < 0 || carouselIndex >= events.length) return;
+    if (carouselIndex < 0 || carouselIndex >= events.length) return;
 
-  currentPosition = LatLng(events[carouselIndex].venue!.lang,
-                           events[carouselIndex].venue!.long);
-  googleMapsCenter = currentPosition;
+    currentPosition = LatLng(
+        events[carouselIndex].venue!.lang, events[carouselIndex].venue!.long);
+    googleMapsCenter = currentPosition;
 
-  // Update marker
-  myMarker = FlutterFlowMarker(
-    'markerId$carouselIndex', // Unique ID for the marker
-    currentPosition, // New position
-    (controller) async {
-      controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: currentPosition,
-          zoom: 14.0,
-        ),
-      ));
-    },
-  );
-  print("fffffffffffffffffffff");
-  print("fffffffffffffffffffff");
-  print(myMarker.markerId);
-  print("fffffffffffffffffffff");
+    // Update marker
+    myMarker = FlutterFlowMarker(
+      'markerId$carouselIndex', // Unique ID for the marker
+      currentPosition, // New position
+      (controller) async {
+        controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: currentPosition,
+            zoom: 14.0,
+          ),
+        ));
+      },
+    );
+    print("fffffffffffffffffffff");
+    print("fffffffffffffffffffff");
+    print(myMarker.markerId);
+    print("fffffffffffffffffffff");
 
-  // Update camera position
-  googleMapsController.future.then((controller) {
-    controller.animateCamera(CameraUpdate.newLatLng(currentPosition));
-  });
+    // Update camera position
+    googleMapsController.future.then((controller) {
+      controller.animateCamera(CameraUpdate.newLatLng(currentPosition));
+    });
 
-  update(); // Call update to refresh the UI if needed
-}
-followOrUnFollowEvent(int eventId, int modelIndex) async {
+    update(); // Call update to refresh the UI if needed
+  }
+
+  followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (events[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
@@ -138,12 +138,7 @@ followOrUnFollowEvent(int eventId, int modelIndex) async {
       events[modelIndex].isFollowedByAuthUser = false;
       eventStateManager.toggleFavorite(eventId);
 
-
       update();
     }
-   }
-
-   
-
-
+  }
 }

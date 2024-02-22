@@ -1,6 +1,3 @@
-import 'package:evento/core/utils/services/socket_servie.dart';
-import 'package:evento/core/utils/services/user_info.dart';
-import 'package:evento/main.dart';
 import 'package:workmanager/workmanager.dart';
 
 void registertask() {

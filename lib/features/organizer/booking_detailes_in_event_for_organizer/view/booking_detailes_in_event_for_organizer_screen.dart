@@ -5,8 +5,6 @@ import 'package:evento/core/shared/widgets/widget/total_widget.dart';
 import 'package:evento/core/utils/helper/expanded_image_view.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/build_buttons.dart';
-import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/event_info_card.dart';
-import 'package:evento/features/booking_detailes_for_my_booking_screen/view/widget/ticket_detailes_card.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/view/widget/event_info_card.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/view/widget/ticket_detailes_card.dart';
 import 'package:evento/main.dart';

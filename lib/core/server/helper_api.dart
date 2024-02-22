@@ -83,6 +83,8 @@ class ApiHelper {
             throw UnimplementedError('HTTP method $method not supported');
         }
       }
+      print(response.statusCode);
+      print(response.body);
 
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);

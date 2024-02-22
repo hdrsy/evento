@@ -2,8 +2,8 @@ class PromoCode {
   final int id;
   final String title;
   final String code;
-  final String discount;
-  final String limit;
+  final int discount;
+  final int limit;
   PromoCode({
     required this.id,
     required this.title,

@@ -10,6 +10,7 @@ import 'package:evento/features/organizer/organization_profile/controller/bindin
 import 'package:evento/features/organizer/organization_profile/view/organization_profile_screen.dart';
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/view/show_all_booking_in_event_for_organizer_screen.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/view/ticket_in_event_for_organization_screen.dart';
+import 'package:evento/features/payment/view/payment_screen.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
 
 import '../../features/assign_friends/view/assign_friends_screen.dart';
@@ -263,7 +264,7 @@ appRoutes() => [
           name: '/SeeAllOrganizersScreen',
           page: () => SeeAllOrganizersScreen()),
       GetPage(name: '/SeeAllOffersScreen', page: () => SeeAllOffersScreen()),
-      GetPage(name: '/PaymentScreen', page: () => PaymentScreen()),
+      // GetPage(name: '/PaymentScreen', page: () => PaymentScreen()),
       GetPage(
           name: '/AccountPrivacyScreen', page: () => AccountPrivacyScreen()),
       GetPage(name: '/AchivmentScreen', page: () => AchivmentScreen()),
@@ -294,6 +295,8 @@ appRoutes() => [
       GetPage(
           name: '/TicketsInEventForOrganizerScreen',
           page: () => TicketsInEventForOrganizerScreen()),
-      GetPage(name: '/PaymentScreen', page: () => PaymentScreen()),
+      GetPage(
+          name: '/PaymentScreenInBooking',
+          page: () => PaymentScreenInBooking()),
       // GetPage(name: '/vedioReels', page:()=> VedioReels()) ,
     ];

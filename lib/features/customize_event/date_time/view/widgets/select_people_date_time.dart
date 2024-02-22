@@ -1,8 +1,6 @@
 import 'package:evento/core/utils/helper/flutter_flow_button_tabbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/responsive/responsive.dart';
-import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import 'people_date_time_bottom_sheet.dart';
 import '../../../../../main.dart';

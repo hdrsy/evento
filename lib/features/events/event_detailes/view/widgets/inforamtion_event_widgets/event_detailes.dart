@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/animation/animation_def.dart';
 import 'package:evento/core/utils/animation/animation_util.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';

@@ -15,7 +15,6 @@ class ShowAllBookingInEventForOrganizerController extends GetxController {
     itemList = <ShowAllBookingInEventForOrganizerModel>[].obs;
     scrollController = ScrollController();
     getdata();
-    // TODO: implement onInit
     super.onInit();
   }
 

@@ -319,23 +319,6 @@ class MyTabBarWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildBioTab(BuildContext context) {
-    final OrganizationProfileController organizerProfileController = Get.find();
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Text(
-            organizerProfileController.organizerProfileModel.organizerInfo.bio,
-            style: customTextStyle.bodyMedium,
-          ),
-          const SizedBox(height: 16),
-        ],
-      ),
-    );
-  }
 
   Widget _buildEventsTab(BuildContext context) {
     final OrganizationProfileController organizerProfileController = Get.find();

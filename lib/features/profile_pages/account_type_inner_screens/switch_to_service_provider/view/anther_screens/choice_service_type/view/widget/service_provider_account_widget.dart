@@ -1,4 +1,3 @@
-import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/controller/service_provider_create_profile_controller.dart';
 
 import '../../../../../../../../../core/shared/widgets/buttons/general_button.dart';

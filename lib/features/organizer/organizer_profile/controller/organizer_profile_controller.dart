@@ -31,7 +31,7 @@ class OrganizerProfileController extends GetxController {
     // isorganizerEditProfile = Get.arguments[1]??false;
     checkIfSameUser();
     await getOrganizerProfile();
-    getOrganizerFollowers(); // TODO: implement onInit
+    getOrganizerFollowers();
     super.onInit();
   }
 

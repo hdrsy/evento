@@ -3,13 +3,9 @@ import 'package:evento/core/utils/helper/multy_selected_dropdown.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/functions/validation/name_validation.dart';
-import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import '../../../../../core/shared/widgets/text_fields/edit_profile_field.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../controller/edit_profile_controller.dart';
-import '../../../../profile_pages/edit_profile/controller/edit_profile_controller.dart';
-import '../../../../profile_pages/edit_profile/view/widgets/selected_list_edit_profile.dart';
-import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';

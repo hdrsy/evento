@@ -36,22 +36,22 @@ class TermOfUse extends StatelessWidget {
                 height: 10,
               ),
               middelTitle('1. Introduction'),
-              normalDescription(introduction),
+              normalDescription('introduction_body'),
               const SizedBox(
                 height: 10,
               ),
               middelTitle('2. Acceptance of Terms'),
-              normalDescription(acceptanceOfTerms),
+              normalDescription('Acceptance of Terms body'),
               const SizedBox(
                 height: 10,
               ),
               middelTitle('3. Account Registration and Security'),
-              normalDescription(accountRegistrationAndSecurity),
+              normalDescription('Account Registration and Security body'),
               const SizedBox(
                 height: 10,
               ),
               middelTitle('4. Use of the App'),
-              normalDescription(useOfTheApp),
+              normalDescription('Use of the App body'),
               const SizedBox(
                 height: 10,
               ),

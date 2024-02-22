@@ -7,7 +7,6 @@ import 'package:evento/features/organizer/organization_profile/model/organizer_p
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
-import '../../../profile_pages/profile/model/profile_model.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -93,7 +92,7 @@ class EditProfileOrganizerController extends GetxController {
       Map<String, dynamic> dataRequest = {
         'name': firstName.text,
         'bio': bio.text,
-        'state': selectedState!,
+        'state': selectedState,
         // 'services': choiceOrganizerCategoryController.sericeSelected.text,
         // 'other_category': choiceOrganizerCategoryController.sericeSelected.text,
         // 'category_ids': choiceOrganizerCategoryController.selectedCategories

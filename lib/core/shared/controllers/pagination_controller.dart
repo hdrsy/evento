@@ -2,13 +2,11 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/cache_service.dart';
-import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import '../../utils/error_handling/erroe_handling.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 /// PaginationController is a generic class for managing paginated data.

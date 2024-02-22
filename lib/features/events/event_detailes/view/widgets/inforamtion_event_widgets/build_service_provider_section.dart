@@ -124,7 +124,7 @@ class ServiceProviderCard extends StatelessWidget {
                     // fit: BoxFit.,
                     alignment: const Alignment(0, 0),
                   )
-                : getImageNetwork(
+                : getImageNetworkforCahing(
                     url: "/storage/${serviceProvider.profile}",
                     width: 100,
                     height: 100),

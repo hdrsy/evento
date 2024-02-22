@@ -14,7 +14,6 @@ import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
 import '../../../../core/utils/services/location_service.dart';
 import '../model/event_detailes_model.dart';
-import '../model/related_event_model.dart';
 import '../../../../main.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';

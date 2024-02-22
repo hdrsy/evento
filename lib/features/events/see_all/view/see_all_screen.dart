@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -19,8 +20,9 @@ class SeeAllScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: customColors.secondaryBackground,
         title: Text(seeAllController.pageTitle,
-            style: customTextStyle.bodyMedium
-                .copyWith(color: customColors.primary, fontSize: 20)),
+                style: customTextStyle.bodyMedium
+                    .copyWith(color: customColors.primary, fontSize: 20))
+            .tr(),
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {

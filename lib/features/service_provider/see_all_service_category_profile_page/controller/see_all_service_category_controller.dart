@@ -18,15 +18,14 @@ class SeeAllServiceCategoryController extends GetxController {
     errorMessage = <String>[].obs;
     serviceCategoryList = <ServiceCategoryModel>[].obs;
     await fetchCategoryData();
-    
+
     super.onInit();
   }
 
-  
   fetchCategoryData() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.serviceCategory,
         method: "GEt",

@@ -1,45 +1,139 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import '../../../../core/utils/services/location_service.dart';
 import '../../../../main.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+const LatLng SOURCE_LOCATION = LatLng(42.7477863, -71.1699932);
+const LatLng DEST_LOCATION = LatLng(42.744421, -71.1698939);
+const double CAMERA_ZOOM = 16;
+const double CAMERA_TILT = 80;
+const double CAMERA_BEARING = 30;
+const double PIN_VISIBLE_POSITION = 20;
+const double PIN_INVISIBLE_POSITION = -220;
+
+class Dd extends GetxController {
+  Completer<GoogleMapController> controller = Completer();
+  // late BitmapDescriptor sourceIcon;
+  // late BitmapDescriptor destinationIcon;
+  Set<Marker> markers = Set<Marker>();
+  double pinPillPosition = 20;
+  late LatLng currentLocation;
+  late LatLng destinationLocation;
+  bool userBadgeSelected = false;
+
+  Set<Polyline> polylines = Set<Polyline>();
+  List<LatLng> polylineCoordinates = [];
+  late PolylinePoints polylinePoints;
+  @override
+  void onInit() async {
+    polylinePoints = PolylinePoints();
+    // setSourceAndDestinationMarkerIcons();
+    setInitialLocation();
+    super.onInit();
+  }
+
+  void setSourceAndDestinationMarkerIcons() async {
+    // String parentCat = widget.subCategory!.imgName!.split("_")[0];
+
+    // sourceIcon = await BitmapDescriptor.fromAssetImage(
+    //     ImageConfiguration(devicePixelRatio: 2.0), 'assets/images/تيست 1.png');
+
+    // destinationIcon = await BitmapDescriptor.fromAssetImage(
+    //     ImageConfiguration(devicePixelRatio: 2.0), 'assets/images/تيست 1.png');
+    // print("inisde setSourceAndDestinationMarkerIcons");
+  }
+
+  void setInitialLocation() {
+    currentLocation =
+        LatLng(SOURCE_LOCATION.latitude, SOURCE_LOCATION.longitude);
+
+    destinationLocation =
+        LatLng(DEST_LOCATION.latitude, DEST_LOCATION.longitude);
+  }
+
+  CameraPosition initialCameraPosition = CameraPosition(
+      zoom: CAMERA_ZOOM,
+      tilt: CAMERA_TILT,
+      bearing: CAMERA_BEARING,
+      target: SOURCE_LOCATION);
+
+  void showPinsOnMap() {
+    markers.add(Marker(
+        markerId: MarkerId('sourcePin'),
+        position: currentLocation,
+        // icon: sourceIcon,
+        infoWindow: InfoWindow(title: "sourcePin", snippet: "Sssssssss"),
+        onTap: () {
+          this.userBadgeSelected = true;
+          update();
+        }));
+
+    markers.add(Marker(
+        markerId: MarkerId('destinationPin'),
+        position: destinationLocation,
+        // icon: destinationIcon,
+        onTap: () {
+          this.pinPillPosition = PIN_VISIBLE_POSITION;
+          update();
+        }));
+    print(markers.first.markerId);
+    update();
+  }
+
+  void setPolylines() async {
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        "AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs",
+        PointLatLng(currentLocation.latitude, currentLocation.longitude),
+        PointLatLng(
+            destinationLocation.latitude, destinationLocation.longitude));
+
+    if (result.status == 'OK') {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+
+      polylines.add(Polyline(
+          width: 10,
+          polylineId: PolylineId('polyLine'),
+          color: Color(0xFF08A5CB),
+          points: polylineCoordinates));
+      update();
+    }
+  }
+}
+
 class DirctionController extends GetxController {
   late double latitude;
   late double longitude;
-  late LatLng googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
-  late FlutterFlowMarker myMarker; // Marker for destination
-  FlutterFlowMarker? userMarker; // Marker for user location
+  LatLng userLocation = LatLng(0, 0);
+  late CameraPosition googleMapsCenter;
+  late Marker myMarker; // Marker for destination
+  Marker? userMarker; // Marker for user location
   final Set<Polyline> polylines = {};
   LocationService locationService = LocationService();
-
+  Completer<GoogleMapController> _controller = Completer();
   @override
   void onInit() async {
     super.onInit();
     latitude = Get.arguments[0];
     longitude = Get.arguments[1];
-    googleMapsCenter = LatLng(latitude, longitude);
+    await getUserLocation();
+    googleMapsCenter = CameraPosition(target: LatLng(latitude, longitude));
 
     // Marker for destination
-    myMarker = FlutterFlowMarker(
-      'markerId1',
-      googleMapsCenter,
-      (controller) async {
-        controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(latitude, longitude),
-            zoom: 14.0,
-          ),
-        ));
-      },
+    myMarker = Marker(
+      markerId: MarkerId('markerId1'),
+      position: LatLng(latitude, longitude),
+      infoWindow: InfoWindow(),
     );
 
     // Start tracking user location
-    await getUserLocation();
     drawRoute();
   }
 
@@ -51,12 +145,9 @@ class DirctionController extends GetxController {
   }
 
   void updateMapView() async {
-    final GoogleMapController controller = await googleMapsController.future;
-
     if (userMarker != null && myMarker != null) {
       LatLngBounds bounds =
-          _boundsFromLatLngList([userMarker!.location, myMarker.location]);
-      controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+          _boundsFromLatLngList([userMarker!.position, myMarker.position]);
     }
   }
 
@@ -86,7 +177,7 @@ class DirctionController extends GetxController {
 
     // Update user location marker
     updateUserLocationMarker(p.latitude, p.longitude);
-
+    userLocation = LatLng(p.latitude, p.longitude);
     // Additional handling can be added here
     // For example, updating the map view or calculating distance
   }
@@ -126,17 +217,9 @@ class DirctionController extends GetxController {
   }
 
   void updateUserLocationMarker(double latitude, double longitude) {
-    userMarker = FlutterFlowMarker(
-      'markerId2', // Unique ID for the user location marker
-      LatLng(latitude, longitude),
-      (controller) async {
-        controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(latitude, longitude),
-            zoom: 14.0,
-          ),
-        ));
-      },
+    userMarker = Marker(
+      markerId: MarkerId('markerId2'), // Unique ID for the user location marker
+      position: LatLng(latitude, longitude),
     );
     updateMapView();
     update(); // Update GetX state to refresh the UI

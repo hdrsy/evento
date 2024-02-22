@@ -2,7 +2,6 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../core/utils/theme/theme_controller.dart';
-import '../../../../main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';

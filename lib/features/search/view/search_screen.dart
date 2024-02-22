@@ -2,14 +2,12 @@ import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 
 import '../../../core/responsive/responsive.dart';
-import '../../../core/shared/widgets/text_fields/search_filed.dart';
 import '../../../core/shared/widgets/text_fields/search_filed_with_filtering.dart';
 import '../../../core/utils/animation/animation_def.dart';
 import '../../../core/utils/animation/animation_util.dart';
 import '../../../core/utils/theme/text_theme.dart';
 import '../controller/search_controller.dart';
 import 'widgets/popular_widget.dart';
-import 'widgets/recently_widget.dart';
 import 'widgets/search_event_card.dart';
 import '../../../main.dart';
 import 'package:flutter/material.dart';

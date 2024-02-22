@@ -80,7 +80,7 @@ Container amentitesIcon(String imgUrl) {
       //     image: getImageNetwork(url: "$imgUrl", width: null, height: null)
       // .image)
     ),
-    child: getImageNetwork(
+    child: getImageNetworkforCahing(
         url: "$imgUrl",
         width: null,
         height: null,

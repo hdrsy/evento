@@ -2,7 +2,6 @@ import 'package:evento/core/responsive/size_config.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
-import 'package:evento/features/book_now/model/promo_code_model.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';

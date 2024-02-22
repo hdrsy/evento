@@ -1,5 +1,4 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
-import 'package:evento/core/utils/services/check_internet.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';

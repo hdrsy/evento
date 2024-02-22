@@ -5,7 +5,6 @@ import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 
-import '../../../../service_provider/edit_profile_service_provider.dart/controller/edit_profile_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

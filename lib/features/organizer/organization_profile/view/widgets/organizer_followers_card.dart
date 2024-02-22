@@ -1,8 +1,5 @@
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/features/organizer/organizer_profile/model/organizer_profile_followers_model.dart';
-
-import '../../../../../core/shared/widgets/buttons/general_button.dart';
-import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';

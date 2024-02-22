@@ -3,8 +3,6 @@ import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart'
 import 'package:evento/core/shared/widgets/widget/confirm_delete_folder.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/gallery/view/gallery_for_local_fies.dart';
-import 'package:evento/features/organizer/create_profile/controller/oganizer_create_profile_controller.dart';
-import 'package:evento/features/organizer/create_profile/view/widgets/see_all_folders.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/edit_profile_controller.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/view/widgets/see_all_folders.dart';
 import 'package:evento/main.dart';

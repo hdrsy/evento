@@ -15,9 +15,17 @@ class ConnectivityService extends GetxService {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       bool previousState = isConnected.value;
       isConnected.value = result != ConnectivityResult.none;
-
+      if (_firstCheck && result == ConnectivityResult.none) {
+        SnackbarManager.showSnackbar(
+          "Offline",
+          "No internet connection.",
+          icon: Icon(Icons.wifi_off_outlined, color: customColors.primaryText),
+          backgroundColor: customColors.primaryBackground,
+        );
+        _firstCheck = false;
+      }
       // Only show snackbar if it's not the first check and there was a change
-      if (!_firstCheck && previousState != isConnected.value) {
+      else if (!_firstCheck && previousState != isConnected.value) {
         if (isConnected.value) {
           SnackbarManager.showSnackbar(
             "Online",

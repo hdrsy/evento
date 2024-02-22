@@ -1,13 +1,15 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../../core/responsive/responsive.dart';
-import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import '../controller/dirction_controller.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class DirctionScreen extends StatelessWidget {
-   DirctionScreen({super.key});
-final DirctionController dirctionController=Get.put(DirctionController());
+  DirctionScreen({super.key});
+  final DirctionController dirctionController = Get.put(DirctionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,37 +31,27 @@ final DirctionController dirctionController=Get.put(DirctionController());
           ),
         ),
       ),
-      body: GetBuilder<DirctionController>(
-        builder: (context) {
-          return SizedBox(
+      body: GetBuilder<DirctionController>(builder: (context) {
+        return SizedBox(
             width: double.infinity,
-            height:screenHeight*0.8 ,
-            child:  FlutterFlowGoogleMap(
+            height: screenHeight,
+            child: GoogleMap(
+              myLocationEnabled: true,
+              compassEnabled: true,
+              initialCameraPosition: dirctionController.googleMapsCenter,
               polylines: dirctionController.polylines,
-    controller: dirctionController.googleMapsController,
-    onCameraIdle: (latLng) => dirctionController.googleMapsCenter = latLng,
-    initialLocation: dirctionController.googleMapsCenter ,
-            
-markers: [
-    if (dirctionController.userMarker != null) dirctionController.userMarker!,
-    dirctionController.myMarker,
-  ],
-    markerColor: GoogleMarkerColor.red,
-    mapType: MapType.normal,
-    style: GoogleMapStyle.standard,
-    initialZoom: 18,
-    allowInteraction: true,
-    allowZoom: true,
-    showZoomControls: true,
-    showLocation: true,
-    showCompass: true,
-    showMapToolbar: false,
-    showTraffic: false,
-    centerMapOnMarkerTap: true,
-  ),
-          );
-        }
-      ),
+              onCameraIdle: () => dirctionController.googleMapsCenter,
+              markers: {
+                if (dirctionController.userMarker != null)
+                  dirctionController.userMarker!,
+                dirctionController.myMarker,
+              },
+              mapType: MapType.normal,
+              zoomControlsEnabled: true,
+              zoomGesturesEnabled: true,
+              trafficEnabled: true,
+            ));
+      }),
     );
   }
 }

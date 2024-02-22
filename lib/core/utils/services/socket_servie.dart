@@ -1,5 +1,4 @@
 import 'package:evento/core/utils/services/notification_service.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/web_socket_channel.dart';

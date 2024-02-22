@@ -6,7 +6,6 @@ import 'inforamtion_event_widgets/about_event_section.dart';
 import 'inforamtion_event_widgets/amenities_section.dart';
 import 'inforamtion_event_widgets/build_service_provider_section.dart';
 import 'inforamtion_event_widgets/event_detailes.dart';
-import 'inforamtion_event_widgets/event_time_line_button.dart';
 import 'inforamtion_event_widgets/gallery_section.dart';
 import 'inforamtion_event_widgets/header.dart';
 import 'inforamtion_event_widgets/links_section.dart';

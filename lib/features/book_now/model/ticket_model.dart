@@ -17,6 +17,7 @@ class TicketModel {
   FormFieldController<String>? dropDownValueController;
   PromoCode? selectedPromoCode;
   int discount = 0;
+  int tax = 0;
   // String? selectedCoupon = null;
   TicketModel({this.ticketIndex = 0});
 }

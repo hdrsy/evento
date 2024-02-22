@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
-import 'package:evento/core/utils/services/connectivity_service.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -16,7 +15,7 @@ class TypetoSetEventController extends GetxController {
   late RxInt selectedCategory;
   CacheService cacheService = CacheService('customoze');
   final String cacheKey = 'customoze';
-  final ConnectivityService _connectivityService = Get.find();
+  // final ConnectivityService _connectivityService = Get.find();
 
   late RxList<String> errorMessage;
   @override

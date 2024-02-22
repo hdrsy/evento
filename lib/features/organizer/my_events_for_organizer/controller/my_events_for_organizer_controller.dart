@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/shared/controllers/pagination_controller.dart';
@@ -7,7 +6,6 @@ import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
 import '../model/my_events_for_organizer_model.dart';
 import '../../../../main.dart';
-import 'package:get/get.dart';
 
 class MyEventsForOrganizerController
     extends PaginationController<OrganizationEvent> {

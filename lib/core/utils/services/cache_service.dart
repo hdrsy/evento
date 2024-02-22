@@ -10,7 +10,7 @@ class CacheService {
       Config(
         cacheKey, // Cache key
         stalePeriod: const Duration(days: 7), // Adjust as needed
-        maxNrOfCacheObjects: 4,
+        maxNrOfCacheObjects: 1,
         repo: JsonCacheInfoRepository(databaseName: cacheKey),
         fileService: HttpFileService(),
       ),

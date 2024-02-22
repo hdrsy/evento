@@ -17,7 +17,7 @@ class ReelsController extends PaginationController<ReelModel> {
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token") ?? "";
+    String token = await prefService.readString("token") ;
     print("page id :$page");
     String apiUrl =
         "${isGuset ? ServerConstApis.getReelsforGuest : ServerConstApis.getReels}?page=$page";

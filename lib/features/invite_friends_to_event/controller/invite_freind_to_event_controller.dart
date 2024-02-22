@@ -54,9 +54,6 @@ class InviteFreindsToEventController extends GetxController {
   onPressInviteFriend(int freindId, int modelId) async {
     String token = await prefService.readString("token");
 
-    // A list to store error messages.
-    List<String> errorMessage = [];
-
     // The response from the API call, wrapped in Either to handle both success and error cases.
     Either<ErrorResponse, Map<String, dynamic>> response;
     Map<String, dynamic> data = {
@@ -77,7 +74,6 @@ class InviteFreindsToEventController extends GetxController {
     // Check if the handlingResponse is an error.
     if (handlingResponse is ErrorResponse) {
       // If it's an error, extract the error messages.
-      errorMessage = handlingResponse.getErrorMessages();
 
       // Return the first error message.
     } else {

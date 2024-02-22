@@ -162,8 +162,8 @@ class NameAndFollow extends StatelessWidget {
                     },
                     text: organizerProfileController.organizerProfileModel
                             .organizerInfo!.isFollowedByAuthUser
-                        ? "Following"
-                        : "Follow",
+                        ? tr("Un Follow")
+                        : tr("Follow"),
                     icon: const Icon(
                       Icons.person_add_outlined,
                       size: 20,

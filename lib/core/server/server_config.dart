@@ -125,4 +125,9 @@ class ServerConstApis {
       '$baseAPI/api/eventAccordingCategory-guest';
   static String getReelsforGuest = '$baseAPI/api/reels-guest';
   static String getEventDetailesforGuest = '$baseAPI/api/event-guest';
+
+  //// payment
+  ///
+  static String getInvoice = '$baseAPI/api/invoice/create';
+  static String confirmPayment = '$baseAPI/api/invoice/confirmPayment';
 }

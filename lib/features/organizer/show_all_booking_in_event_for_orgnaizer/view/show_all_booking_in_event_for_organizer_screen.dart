@@ -5,7 +5,6 @@ import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/widgets/event_types_widget.dart';
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/controller/show_all_booking_in_event_for_organizer_controller.dart';
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/model/show_all_booking_in_event_for_organizer_model.dart';
 import 'package:evento/main.dart';

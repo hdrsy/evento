@@ -1,5 +1,3 @@
-import 'package:evento/core/utils/services/check_internet.dart';
-
 import '../controller/home_controller.dart';
 import 'widgets/category_list.dart';
 import 'widgets/events_from_organizer.dart';

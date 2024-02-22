@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class PaymentScreen extends StatelessWidget {
-  PaymentScreen({super.key});
+class PaymentScreenInBooking extends StatelessWidget {
+  PaymentScreenInBooking({super.key});
   final PaymentController paymentController = Get.put(PaymentController());
   @override
   Widget build(BuildContext context) {
@@ -36,19 +36,25 @@ class PaymentScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            const InvoiceSection(),
-            const FullName(),
-            const PaymentDetailes(),
-            const TabBarSection(),
-            PhonePayment(),
-            OtpSection()
-          ].divide(SizedBox(
-            height: 16.h,
-          )),
+      body: Obx(
+        () => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Column(
+            children: [
+              const TabBarSection(),
+              PhonePayment(),
+              const PaymentDetailes(),
+              paymentController.isPhoneCorrect.value
+                  ? const InvoiceSection()
+                  : SizedBox.shrink(),
+              // const FullName(),
+              paymentController.isIvoiceCreated.value
+                  ? OtpSection()
+                  : SizedBox.shrink()
+            ].divide(SizedBox(
+              height: 16.h,
+            )),
+          ),
         ),
       ),
     );
@@ -179,7 +185,7 @@ class PhonePayment extends StatelessWidget {
           height: 10.h,
         ),
         Container(
-          height: 50.h,
+          // height: 50.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
@@ -242,7 +248,8 @@ class PhonePayment extends StatelessWidget {
                 useGoogleFonts: false,
               ),
               validator: (value) {
-                return phoneValidation(value);
+                return null;
+                // return phoneValidation(value);
               },
             ),
           ),
@@ -254,28 +261,32 @@ class PhonePayment extends StatelessWidget {
           alignment: const AlignmentDirectional(0, -1),
           child: Padding(
             padding: const EdgeInsets.all(15),
-            child: ButtonWidget(
-              onPressed: () async {
-                // context.pushNamed('QR-Ticket');
-              },
-              text: "Confirm",
-              options: ButtonOptions(
-                width: 200,
-                height: 40,
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: customColors.primary,
-                textStyle: customTextStyle.titleSmall.override(
-                  fontFamily: 'Nunito',
-                  color: Colors.white,
-                  useGoogleFonts: false,
+            child: Obx(
+              () => ButtonWidget(
+                showLoadingIndicator:
+                    Get.find<PaymentController>().isLoadingPhone.value,
+                onPressed: () async {
+                  Get.find<PaymentController>().getInvoice();
+                },
+                text: "Confirm",
+                options: ButtonOptions(
+                  width: 200,
+                  height: 40,
+                  padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  color: customColors.primary,
+                  textStyle: customTextStyle.titleSmall.override(
+                    fontFamily: 'Nunito',
+                    color: Colors.white,
+                    useGoogleFonts: false,
+                  ),
+                  elevation: 3,
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                elevation: 3,
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
@@ -458,14 +469,14 @@ class InvoiceSection extends StatelessWidget {
             ),
           ],
         ),
-        IconWithContainer(
-          borderRadius: 20,
-          buttonSize: 40,
-          backgroundColor: customColors.primary,
-          icon: Icons.qr_code,
-          onTap: () {},
-          iconColor: customColors.info,
-        )
+        // IconWithContainer(
+        //   borderRadius: 20,
+        //   buttonSize: 40,
+        //   backgroundColor: customColors.primary,
+        //   icon: Icons.qr_code,
+        //   onTap: () {},
+        //   iconColor: customColors.info,
+        // )
       ],
     );
   }

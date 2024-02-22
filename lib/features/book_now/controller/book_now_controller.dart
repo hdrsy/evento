@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:evento/core/utils/helper/form_field_controller.dart';
 import 'package:evento/features/book_now/model/promo_code_model.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
@@ -29,6 +28,7 @@ class BookNowController extends GetxController {
     ticketList = <TicketModel>[TicketModel(ticketIndex: 0)].obs;
     // print(ticketList[0].selectedClass!.ticketPrice);
     ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
+    updateTotalPrice(0);
     // print(eventDetailsModel.classes[0].ticketPrice);
     myFreinds = <FreindsModel>[].obs;
     isLoadingCoupons = false.obs;
@@ -40,9 +40,57 @@ class BookNowController extends GetxController {
     super.onInit();
   }
 
+  getTaxForTicket(int ticketId) {
+    int totalPriceInTicket = ticketList[ticketId].totalPrice;
+    if (totalPriceInTicket < 1000) {
+      ticketList[ticketId].tax = 75;
+    } else if (totalPriceInTicket > 1000 && totalPriceInTicket < 10000) {
+      ticketList[ticketId].tax = 100;
+    }
+    if (totalPriceInTicket >= 10000 && totalPriceInTicket < 20000) {
+      ticketList[ticketId].tax = 150;
+    } else {
+      ticketList[ticketId].tax = 200;
+    }
+
+    print("totla pri${ticketList[ticketId].tax}");
+    return ticketList[ticketId].tax;
+    // update();
+  }
+
   addnewTicket() {
     ticketList.add(TicketModel(ticketIndex: ticketList.length));
     ticketList.last.totalPrice = eventDetailsModel.ticketPrice;
+    print("the i${ticketList.length}");
+    updateTotalPrice(ticketList.length - 1);
+  }
+
+  updateTotalPrice(int ticketIndex) {
+    int ticketPrice = eventDetailsModel.ticketPrice;
+    int totalAminityPrice = 0;
+    int totalClassPrice = 0;
+    int discount = 0;
+    int tax = 0;
+    int total = 0;
+    if (ticketList[ticketIndex].selectedClass != null) {
+      totalClassPrice = ticketList[ticketIndex].selectedClass!.ticketPrice;
+    }
+    for (var i = 0; i < ticketList[ticketIndex].selectedAminiteds.length; i++) {
+      for (var element in eventDetailsModel.amenities) {
+        if (element.id == ticketList[ticketIndex].selectedAminiteds[i].id) {
+          totalAminityPrice += element.pivot.price!;
+        }
+      }
+    }
+    discount = ticketList[ticketIndex].discount;
+    tax = getTaxForTicket(ticketIndex);
+    total =
+        (ticketPrice + totalAminityPrice + totalClassPrice + tax) - discount;
+    print(
+        "the totla is :${ticketPrice + totalAminityPrice + totalClassPrice + tax}");
+    print("the totla is :${discount}");
+    ticketList[ticketIndex].totalPrice = total;
+    update();
   }
 
   addOrRemoveAminitesFromCladd(Amenity title, int index) {
@@ -56,13 +104,11 @@ class BookNowController extends GetxController {
     }
     if (ticketList[index].selectedAminiteds.contains(title)) {
       ticketList[index].selectedAminiteds.remove(title);
-
-      ticketList[index].totalPrice -= aminityPrice;
     } else {
       ticketList[index].selectedAminiteds.add(title);
-      ticketList[index].totalPrice += aminityPrice;
       title.pivot.price = aminityPrice;
     }
+    updateTotalPrice(index);
     update();
   }
 
@@ -74,17 +120,19 @@ class BookNowController extends GetxController {
   }
 
   int calculateDiscountForTicket(int ticketIndex) {
+    print(ticketList[ticketIndex].totalPrice);
+    print(ticketList[ticketIndex].discount);
     if (ticketList[ticketIndex].selectedPromoCode != null) {
-      int codeDiscount =
-          int.parse(ticketList[ticketIndex].selectedPromoCode!.discount);
-      int codeLimit =
-          int.parse(ticketList[ticketIndex].selectedPromoCode!.limit);
+      int codeDiscount = (ticketList[ticketIndex].selectedPromoCode!.discount);
+      int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
       int newTotal =
           ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
       if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
+        print("total discount :${ticketList[ticketIndex].discount}");
         return codeLimit;
       } else {
+        print("total discount :${ticketList[ticketIndex].discount}");
         ticketList[ticketIndex].discount = newTotal;
         return newTotal;
       }
@@ -96,8 +144,10 @@ class BookNowController extends GetxController {
   removecopounFromticket(String couponCode, int ticketId) {
     ticketList[ticketId].dropDownValueController!.value = null;
     ticketList[ticketId].selectedPromoCode = null;
+    ticketList[ticketId].discount = 0;
 
-    print("removed succes");
+    updateTotalPrice(ticketId);
+    // print("removed succes");
     update();
   }
 
@@ -116,13 +166,12 @@ class BookNowController extends GetxController {
       /// get copun object
       if (userCopuns[i].code == couponCode) {
         ticketList[ticketId].selectedPromoCode = userCopuns[i];
-        ticketList[ticketId].discount = int.tryParse(userCopuns[i].discount)!;
-
+        ticketList[ticketId].discount = calculateDiscountForTicket(ticketId);
         ticketList[ticketId].dropDownValueController!.value = couponCode;
         break;
       }
     }
-
+    updateTotalPrice(ticketId);
     update();
   }
 
@@ -143,8 +192,8 @@ class BookNowController extends GetxController {
         ?.code;
 
     // Log the selected code for the current ticket
-    print(
-        'Selected code for current ticket ($ticketId): $selectedCodeForCurrentTicket');
+    // print(
+    //     'Selected code for current ticket ($ticketId): $selectedCodeForCurrentTicket');
 
     // Populate the list of selected codes for other tickets
     for (var ticket in ticketList) {
@@ -154,7 +203,7 @@ class BookNowController extends GetxController {
     }
 
     // Log the codes selected for other tickets
-    print('Selected codes for other tickets: $selectedCodesForOtherTickets');
+    // print('Selected codes for other tickets: $selectedCodesForOtherTickets');
 
     // Filter the userCoupons to exclude the codes that are selected for other tickets,
     // but include the code selected for the current ticket (if any)
@@ -164,15 +213,15 @@ class BookNowController extends GetxController {
               !selectedCodesForOtherTickets.contains(promo.code) ||
                   promo.code == selectedCodeForCurrentTicket;
           // Log each promo code's availability
-          print(
-              'Checking promo code "${promo.code}": isAvailable = $isAvailable');
+          // print(
+          //     'Checking promo code "${promo.code}": isAvailable = $isAvailable');
           return isAvailable;
         })
         .map((promo) => promo.code)
         .toList();
 
     // Log the final list of available coupon codes
-    print('Available coupon codes for ticket $ticketId: $availableCouponCodes');
+    // print('Available coupon codes for ticket $ticketId: $availableCouponCodes');
 
     return availableCouponCodes;
   }
@@ -180,28 +229,20 @@ class BookNowController extends GetxController {
   changeSelectedCalss(Class newClass, int index) {
     //// check if there no class selecte yet
     if (ticketList[index].selectedClass == null) {
-      ticketList[index].totalPrice += newClass.ticketPrice;
       ticketList[index].selectedClass = newClass;
       ticketList[index].selectedAminiteds = [];
     } else {
       //// check if the selected class same the prev selected one unselected the current calss
       if (ticketList[index].selectedClass == newClass) {
-        log("unselected calss");
         ticketList[index].selectedClass == null;
-        ticketList[index].totalPrice -=
-            ticketList[index].selectedClass!.ticketPrice;
         ticketList[index].selectedAminiteds = [];
       } else {
         /// then select new calss and selete the prev one data
-        log("last else");
-        ticketList[index].totalPrice -=
-            ticketList[index].selectedClass!.ticketPrice;
-
-        ticketList[index].totalPrice += newClass.ticketPrice;
         ticketList[index].selectedClass = newClass;
         ticketList[index].selectedAminiteds = [];
       }
     }
+    updateTotalPrice(index);
     update();
   }
 
@@ -214,6 +255,7 @@ class BookNowController extends GetxController {
   void onPressBookNow() async {
     isLoading.value = true;
     errorMessage = <String>[].obs;
+
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -233,8 +275,14 @@ class BookNowController extends GetxController {
 
   whenBookingSuccefly(handlingResponse) {
     handlingResponse['message'] == "Booking successful"
-        ? Get.toNamed('/BookingDetailesScreen',
-            arguments: [eventDetailsModel, ticketList])
+        ?
+        // Get.toNamed('/BookingDetailesScreen',
+        //     arguments: [eventDetailsModel, ticketList])
+        Get.toNamed('/PaymentScreenInBooking', arguments: [
+            eventDetailsModel,
+            ticketList,
+            createBookingJson(ticketList)
+          ])
         : null;
   }
 
@@ -276,16 +324,16 @@ class BookNowController extends GetxController {
 
   getMyCoupons() async {
     // isLoadingCoupons.value = true;
-    print("start re");
+    // print("start re");
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.myCoupons}/${eventDetailsModel.id}",
         method: "GEt",
         token: token);
-    print("after re");
+    // print("after re");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
+    print("coupun :$handlingResponse");
     if (handlingResponse is ErrorResponse) {
     } else {
       List<dynamic> interestsJson = handlingResponse['promoCode'];
@@ -294,7 +342,7 @@ class BookNowController extends GetxController {
           .map((jsonItem) => PromoCode.fromJson(jsonItem))
           .toList();
 
-      print("user copouns:$userCopuns");
+      // print("user copouns:$userCopuns");
       // userCopuns.removeLast();
     }
     isLoadingCoupons.value = false;

@@ -2,6 +2,7 @@ import 'package:evento/core/responsive/size_config.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/inforamtion_event_widgets/event_time_line_button.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../../../../core/responsive/responsive.dart';
 import '../../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -38,11 +39,24 @@ Widget buildHeader(BuildContext context, EventDetailsModel eventDetailsModel) {
       ),
       Align(
         alignment: const AlignmentDirectional(-1.00, -1.00),
-        child: Text(
-          eventDetailsModel.title,
-          style: customTextStyle.displaySmall
-              .copyWith(fontSize: SizeConfig.safeBlockHorizontal * 6),
-        ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
+        child: eventDetailsModel.title.length > 15
+            ? SizedBox(
+                width: screenWidth * 0.5,
+                height: screenHeight * 0.03,
+                child: Marquee(
+                    text: eventDetailsModel.title,
+                    scrollAxis: Axis.horizontal,
+                    blankSpace: 20.0,
+                    velocity: 70.0,
+                    pauseAfterRound: const Duration(seconds: 3),
+                    style: customTextStyle.displaySmall.copyWith(
+                        fontSize: SizeConfig.safeBlockHorizontal * 6)),
+              )
+            : Text(
+                eventDetailsModel.title,
+                style: customTextStyle.displaySmall
+                    .copyWith(fontSize: SizeConfig.safeBlockHorizontal * 6),
+              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
       ),
       NumberOfGoingAndInviteFriendsButton()
     ],

@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:evento/core/shared/widgets/widget/users_shimmer_card.dart';
 import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -7,6 +6,7 @@ import 'package:video_player/video_player.dart';
 // Define the type for the sound control callback function.
 typedef SoundControlCallback = bool Function();
 
+// ignore: must_be_immutable
 class CardsVideoWidget extends StatefulWidget {
   CardsVideoWidget(
       {super.key,

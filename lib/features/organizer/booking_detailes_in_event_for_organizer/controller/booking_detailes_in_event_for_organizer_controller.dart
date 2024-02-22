@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:evento/features/book_now/model/ticket_model.dart';
 import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';

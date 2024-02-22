@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/edit_profile_controller.dart';
 

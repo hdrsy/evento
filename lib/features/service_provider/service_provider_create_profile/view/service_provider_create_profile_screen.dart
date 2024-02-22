@@ -13,7 +13,6 @@ import 'package:evento/features/service_provider/service_provider_create_profile
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/create_folder.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/folder_card.dart';
 import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/profile_image.dart';
-import 'package:evento/features/service_provider/service_provider_create_profile/view/widgets/selected_list.dart';
 import 'package:evento/features/service_provider/set_location_on_maps/view/set_location_on_maps_screen_for_service_provider.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +57,7 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                         image: controller.coverImage != null
                             ? FileImage(controller.coverImage!)
                                 as ImageProvider<Object>
-                            : const AssetImage('assets/images/image.jpg')
+                            : const AssetImage('assets/images/first_cover.jpg')
                                 as ImageProvider<Object>,
                         fit: BoxFit.cover)),
                 width: double.infinity,
