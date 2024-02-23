@@ -37,8 +37,7 @@ class FieldsOrganizer extends StatelessWidget {
                 suffixIcon: Icons.person_outline,
                 controller: editProfileController.bio,
                 hintText: tr(
-                    """Event organizer specialist in decoration ,lighting and flowers .
-Wdding, Birthday ,anniversary......"""),
+                    """Event organizer specialist in decoration ,lighting and flowers .Wdding, Birthday ,anniversary......"""),
                 labelText: "Bio",
                 onChanged: (value) {
                   editProfileController.bio.text = value;

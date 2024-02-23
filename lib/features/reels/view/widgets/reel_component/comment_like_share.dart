@@ -1,3 +1,4 @@
+import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -81,13 +82,7 @@ Widget commentShareLike(int modelIndex) {
 
           GestureDetector(
             onTap: () async {
-              const String message = "Check out this event in Evento";
-              const String url =
-                  "http://94.141.219.13:8003/#/eventDetailes/"; // Replace with your event link
-              const String shareContent =
-                  "$message\n\nFor more details, visit: $url";
-
-              await Share.share(shareContent);
+              await shareApp(null);
             },
             child: Container(
               decoration: const BoxDecoration(),

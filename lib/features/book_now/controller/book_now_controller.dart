@@ -26,10 +26,8 @@ class BookNowController extends GetxController {
     EventDetailesController eventDetailesController = Get.find();
     eventDetailsModel = eventDetailesController.eventDetailsModel;
     ticketList = <TicketModel>[TicketModel(ticketIndex: 0)].obs;
-    // print(ticketList[0].selectedClass!.ticketPrice);
     ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
     updateTotalPrice(0);
-    // print(eventDetailsModel.classes[0].ticketPrice);
     myFreinds = <FreindsModel>[].obs;
     isLoadingCoupons = false.obs;
     getMyCoupons();
@@ -53,7 +51,6 @@ class BookNowController extends GetxController {
       ticketList[ticketId].tax = 200;
     }
 
-    print("totla pri${ticketList[ticketId].tax}");
     return ticketList[ticketId].tax;
     // update();
   }
@@ -61,7 +58,6 @@ class BookNowController extends GetxController {
   addnewTicket() {
     ticketList.add(TicketModel(ticketIndex: ticketList.length));
     ticketList.last.totalPrice = eventDetailsModel.ticketPrice;
-    print("the i${ticketList.length}");
     updateTotalPrice(ticketList.length - 1);
   }
 
@@ -86,9 +82,6 @@ class BookNowController extends GetxController {
     tax = getTaxForTicket(ticketIndex);
     total =
         (ticketPrice + totalAminityPrice + totalClassPrice + tax) - discount;
-    print(
-        "the totla is :${ticketPrice + totalAminityPrice + totalClassPrice + tax}");
-    print("the totla is :${discount}");
     ticketList[ticketIndex].totalPrice = total;
     update();
   }
@@ -120,8 +113,6 @@ class BookNowController extends GetxController {
   }
 
   int calculateDiscountForTicket(int ticketIndex) {
-    print(ticketList[ticketIndex].totalPrice);
-    print(ticketList[ticketIndex].discount);
     if (ticketList[ticketIndex].selectedPromoCode != null) {
       int codeDiscount = (ticketList[ticketIndex].selectedPromoCode!.discount);
       int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
@@ -129,11 +120,10 @@ class BookNowController extends GetxController {
           ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
       if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
-        print("total discount :${ticketList[ticketIndex].discount}");
         return codeLimit;
       } else {
-        print("total discount :${ticketList[ticketIndex].discount}");
-        ticketList[ticketIndex].discount = newTotal;
+        ticketList[ticketIndex].discount =
+            ticketList[ticketIndex].totalPrice - newTotal;
         return newTotal;
       }
     } else {
@@ -147,7 +137,6 @@ class BookNowController extends GetxController {
     ticketList[ticketId].discount = 0;
 
     updateTotalPrice(ticketId);
-    // print("removed succes");
     update();
   }
 
@@ -176,9 +165,6 @@ class BookNowController extends GetxController {
   }
 
   List<String> getCouponListForTicket(int ticketId) {
-    // Log the ticketId being processed
-    print('Processing ticketId: $ticketId');
-
     // Assuming `userCoupons` is a List<PromoCode> of all promo codes
     // And `ticketList` is a List<TicketModel>, where each TicketModel has an ID and an optional selected PromoCode
 
@@ -324,16 +310,13 @@ class BookNowController extends GetxController {
 
   getMyCoupons() async {
     // isLoadingCoupons.value = true;
-    // print("start re");
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.myCoupons}/${eventDetailsModel.id}",
         method: "GEt",
         token: token);
-    // print("after re");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print("coupun :$handlingResponse");
     if (handlingResponse is ErrorResponse) {
     } else {
       List<dynamic> interestsJson = handlingResponse['promoCode'];

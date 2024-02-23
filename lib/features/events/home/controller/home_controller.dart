@@ -41,7 +41,15 @@ class HomeController extends GetxController {
   }
 
   Future onrefresh() async {
-    Get.find<PaginationController>().refreshData();
+    // Get.find<PaginationController>().refreshData();
+    Get.find<FeaturedListController>().refreshData();
+    Get.find<TrendingListController>().refreshData();
+    Get.find<EventsforOrganizerListController>().refreshData();
+    Get.find<OffersController>().refreshData();
+    Get.find<EventInYourCityListController>().refreshData();
+    Get.find<OrganizerController>().refreshData();
+    Get.find<HomeOrganizerController>().refreshData();
+    Get.find<JustForYouController>().refreshData();
   }
 }
 

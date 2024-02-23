@@ -174,6 +174,7 @@ class SeeAllFoldersCard extends StatelessWidget {
     showDeleteConfirmation(context, () {
       Get.find<OrganizerCreateProfileController>().deleteFolder(folderIndex);
       Get.back();
+      Get.back();
     });
   }
 

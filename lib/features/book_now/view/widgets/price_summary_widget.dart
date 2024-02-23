@@ -113,7 +113,7 @@ class PriceSummaryWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "${bookNowController.ticketList[index].totalPrice - bookNowController.ticketList[index].discount} sp",
+                      "${bookNowController.ticketList[index].totalPrice} sp",
                       style: customTextStyle.displaySmall,
                     ),
                   ],

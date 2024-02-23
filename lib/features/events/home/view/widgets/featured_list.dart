@@ -1,3 +1,4 @@
+import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -266,13 +267,14 @@ class FeaturedWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    const String message = "Check out this event in Evento";
-                    final String url =
-                        "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
-                    final String shareContent =
-                        "$message\n\nFor more details, visit: $url";
+                    // const String message = "Check out this event in Evento";
+                    // final String url =
+                    //     "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
+                    // final String shareContent =
+                    //     "$message\n\nFor more details, visit: $url";
 
-                    await Share.share(shareContent);
+                    // await Share.share(shareContent);
+                    await shareApp(eventId);
                   },
                   child: Icon(
                     Icons.share_rounded,

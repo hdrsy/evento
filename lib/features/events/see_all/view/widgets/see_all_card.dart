@@ -1,6 +1,7 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:evento/features/events/see_all/controller/see_all_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -33,7 +34,8 @@ class SeeAllCard extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0x33000000),
+                  // color: Color(0x33000000),
+                  color: Colors.red,
                   blurRadius: 4,
                   offset: Offset(0, 2)),
             ]),
@@ -200,10 +202,10 @@ class SeeAllCard extends StatelessWidget {
           child: getImageNetwork(
               url: "/storage/${eventModel.images[0]}",
               width: double.infinity,
-              height: scaleHeight(210))),
+              height: 210.h)),
       Container(
         width: double.infinity,
-        height: 200,
+        height: 200.h,
         decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -236,8 +238,8 @@ class SeeAllCard extends StatelessWidget {
               ),
             ),
             Container(
-              width: 80,
-              height: 24,
+              width: 80.w,
+              height: 24.h,
               decoration: BoxDecoration(
                 color: customColors.secondaryBackground,
                 borderRadius: BorderRadius.circular(20),

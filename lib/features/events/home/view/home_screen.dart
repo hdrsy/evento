@@ -27,11 +27,7 @@ class HomeScreen extends StatelessWidget {
                 .copyWith(color: customColors.primary, fontSize: 20)),
         centerTitle: true,
       ),
-      body: RefreshIndicator(
-          onRefresh: () {
-            return homeController.onrefresh();
-          },
-          child: buildBody(context)),
+      body: buildBody(context),
     );
   }
 
@@ -45,23 +41,27 @@ class HomeScreen extends StatelessWidget {
         return true; // to stop propagation
       },
       child: Obx(() {
-        return ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          itemCount: homeController.loadedWidgetsCount.value +
-              (homeController.loadedWidgetsCount.value <
-                      homeController.totalWidgetsCount
-                  ? 1
-                  : 0),
-          itemBuilder: (context, index) {
-            if (index >= homeController.loadedWidgetsCount.value) {
-              return const SizedBox();
-            } else {
-              return Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: _buildWidgetForIndex(index));
-            }
-          },
-        );
+        return RefreshIndicator(
+            onRefresh: () {
+              return homeController.onrefresh();
+            },
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              itemCount: homeController.loadedWidgetsCount.value +
+                  (homeController.loadedWidgetsCount.value <
+                          homeController.totalWidgetsCount
+                      ? 1
+                      : 0),
+              itemBuilder: (context, index) {
+                if (index >= homeController.loadedWidgetsCount.value) {
+                  return const SizedBox();
+                } else {
+                  return Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: _buildWidgetForIndex(index));
+                }
+              },
+            ));
       }),
     );
   }

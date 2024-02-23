@@ -111,8 +111,7 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                       EditProfileField(
                         controller: controller.bio,
                         hintText: tr(
-                            """Event organizer specialist in decoration ,lighting and flowers .
-                  Wdding, Birthday ,anniversary......"""),
+                            """Event organizer specialist in decoration ,lighting and flowers . Wdding, Birthday ,anniversary......"""),
                         labelText: tr("Bio"),
                         onChanged: (value) {},
                         validator: (value) {
@@ -125,8 +124,7 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                       EditProfileField(
                         controller: controller.description,
                         hintText: tr(
-                            """Event organizer specialist in decoration ,lighting and flowers .
-                  Wdding, Birthday ,anniversary......"""),
+                            """Event organizer specialist in decoration ,lighting and flowers . Wdding, Birthday ,anniversary......"""),
                         labelText: tr("Description"),
                         onChanged: (value) {},
                         validator: (value) {

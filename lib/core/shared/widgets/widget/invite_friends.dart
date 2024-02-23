@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class InviteFreinds extends StatelessWidget {
   const InviteFreinds({super.key});
 
@@ -45,12 +46,17 @@ class InviteFreinds extends StatelessWidget {
                     children: [
                       ButtonWidget(
                         onPressed: () async {
-                          final EventDetailesController eventDetailesController = Get.find();
-  
+                          final EventDetailesController
+                              eventDetailesController = Get.find();
+
                           // context.pushNamed('Invite-friends-to-event');
-                          Get.toNamed('/InviteFreindsToEventScreen',arguments: [eventDetailesController.eventId,eventDetailesController.eventDetailsModel.title]);
+                          Get.toNamed('/InviteFreindsToEventScreen',
+                              arguments: [
+                                eventDetailesController.eventId,
+                                eventDetailesController.eventDetailsModel.title
+                              ]);
                         },
-                        text:tr( "From Friends list"),
+                        text: tr("From Friends list"),
                         options: ButtonOptions(
                           width: 200,
                           height: 40,
@@ -75,16 +81,19 @@ class InviteFreinds extends StatelessWidget {
                       Builder(
                         builder: (context) => ButtonWidget(
                           onPressed: () async {
-                            final EventDetailesController eventDetailesController = Get.find();
-  
-                             const String message = "Check out this event in Evento";
-          final String url = "http://94.141.219.13:8003/#/eventDetailes/${eventDetailesController.eventId}";  // Replace with your event link
-          final String shareContent = "$message\n\nFor more details, visit: $url";
+                            final EventDetailesController
+                                eventDetailesController = Get.find();
 
-        await   Share.share(shareContent);
-                            
+                            const String message =
+                                "Check out this event in Evento";
+                            final String url =
+                                "www.evento.sy/#/eventDetailes/${eventDetailesController.eventId}"; // Replace with your event link
+                            final String shareContent =
+                                "$message\n\nFor more details, visit: $url";
+
+                            await Share.share(shareContent);
                           },
-                          text:tr( "External Share"),
+                          text: tr("External Share"),
                           options: ButtonOptions(
                             width: 200,
                             height: 40,

@@ -35,121 +35,89 @@ class TermOfUse extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('1. Introduction'),
-              normalDescription('introduction_body'),
+              middelTitle('Introduction'),
+              normalDescription('Introduction_body'),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('2. Acceptance of Terms'),
-              normalDescription('Acceptance of Terms body'),
+              middelTitle('Acceptance_of_Terms'),
+              normalDescription('Acceptance_of_Terms_body'),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('3. Account Registration and Security'),
-              normalDescription('Account Registration and Security body'),
+              middelTitle('Account_Registration_and_Security'),
+              normalDescription('Account_Registration_and_Security_body'),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('4. Use of the App'),
-              normalDescription('Use of the App body'),
+              middelTitle('Use_of_the_App'),
+              normalDescription('Use_of_the_App_body'),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('5. Intellectual Property Rights'),
-              normalDescription(intellectualPropertyRights),
+              middelTitle('Intellectual_Property_Rights'),
+              normalDescription("Intellectual_Property_Rights_body"),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('6. Event Advertising'),
-              normalDescription(registrationAsServiceProvider),
+              middelTitle('Event_Advertising'),
+              normalDescription("Event_Advertising_body"),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('7. Registration as a Service Provider'),
-              normalDescription(restaurantBookingPayment),
+              middelTitle('Registration_as_a_Service_Provider'),
+              normalDescription("Registration_as_a_Service_Provider_body"),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle(
-                  '8. Request to Organize and Advertise Events via the App'),
-              normalDescription(cancellationAndRefund),
-              const SizedBox(
-                height: 10,
-              ),
-              middelTitle(
-                  '9. Selection of Service Providers by Event Organizers'),
-              normalDescription(privacyAndDataProtection),
-              const SizedBox(
-                height: 10,
-              ),
-              middelTitle('Booking and Payment'),
-              normalDescription(amendmentsToTheTerms),
-              const SizedBox(
-                height: 10,
-              ),
-              middelTitle('Cancellation and Refund'),
-              normalDescription(disclaimerAndLimitations),
-              const SizedBox(
-                height: 10,
-              ),
-              middelTitle('12. Privacy and Data Protection'),
-              normalDescription(contactAndSupportPartOne),
-              const SizedBox(
-                height: 10,
-              ),
-              middelTitle('13. Amendments to the Terms'),
+              middelTitle('Organizing_and_Advertising_Events_via_the_App'),
               normalDescription(
-                  """•	Changes to Terms: The app reserves the right to modify the terms of use at any time. Continued use of the app after any modifications constitutes agreement to these changes."""),
+                  "Organizing_and_Advertising_Events_via_the_App_body"),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('14. Disclaimer and Limitations'),
+              middelTitle('Selecting_Service_Providers_by_Event_Organizers'),
               normalDescription(
-                  """•	Disclaimer: The app provides its services "as is" without any warranties. The app is not responsible for any damages resulting from the use or inability to use the app."""),
+                  "Selecting_Service_Providers_by_Event_Organizers_body"),
               const SizedBox(
                 height: 10,
               ),
-              middelTitle('15. Contact and Support'),
-              normalDescription(
-                  """•	Support: For any inquiries or concerns regarding the terms of use, please contact the app's support team."""),
+              middelTitle('Booking_and_Payment'),
+              normalDescription("Booking_and_Payment_body"),
               const SizedBox(
                 height: 10,
               ),
-              normalDescription(
-                  """By using the "Evento" app, you acknowledge and agree to comply with these terms."""),
+              middelTitle('Cancellation_and_Refund'),
+              normalDescription("Cancellation_and_Refund_body"),
+              const SizedBox(
+                height: 10,
+              ),
+              middelTitle('Privacy_and_Data_Protection'),
+              normalDescription("Privacy_and_Data_Protection_body"),
+              const SizedBox(
+                height: 10,
+              ),
+              middelTitle('Amendments_to_the_Terms'),
+              normalDescription("Amendments_to_the_Terms_body"),
+              const SizedBox(
+                height: 10,
+              ),
+              middelTitle('Disclaimer_and_Limitations'),
+              normalDescription("Disclaimer_and_Limitations_body"),
+              const SizedBox(
+                height: 10,
+              ),
+              middelTitle('Contact_and_Support'),
+              normalDescription("Contact_and_Support_body"),
+              const SizedBox(
+                height: 10,
+              ),
+              normalDescription("Acceptance_of_Terms_final")
             ],
           ),
         )));
   }
 }
-
-String youCanSelectPhoto =
-    "You can select photo from one of this emoji or add your own photo as profile picture";
-String longRestaurantDEscription =
-    "You can select photo from one of this emoji or add your own photo as profile pictureYou can select photo from one of this emoji or add your own photo as profile pictureYou can select photo from one of this emoji or add your own photo as profile pictureYou can select photo from one of this emoji or add your own photo as profile pictureYou can select photo from one of this emoji or add your own photo as profile pictureYou can select photo from one of this emoji or add your own photo as profile picture";
-String changePasswordTitle =
-    'Your passowrd should be at least 6 characters and should include a combination of numbers, letters and special characters (!\$@%)';
-String unfriendMessage =
-    'Please remember that unfriending someone will remove them from your friend list, and you won\'t be able to see their private posts or interact as friends on this platform.';
-String introduction =
-    '"Evento" is a digital platform specialized in marketing and booking community events. Please read these terms of use carefully before using the app to ensure your understanding and agreement with these terms.';
-String accountRegistrationAndSecurity = "Account Creation body";
-String acceptanceOfTerms =
-    'By using the "Evento" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.';
-String useOfTheApp = "Use of the App body";
-String intellectualPropertyRights = "intellectualPropertyRights";
-String registrationAsServiceProvider = "registrationAsServiceProvider";
-String restaurantBookingPayment = "restaurantBookingPayment";
-String cancellationAndRefund = "cancellationAndRefund";
-String privacyAndDataProtection = "privacyAndDataProtection";
-
-String amendmentsToTheTerms = "amendmentsToTheTermsbody";
-String disclaimerAndLimitations =
-    """•	Cancellation Policy: Cancellation operations are subject to the cancellation policy set by the event organizer and may be subject to fees or restrictions.
-•	Refunds: In case of approval of cancellation, refunds are made according to the specified terms, after deducting any applicable fees.""";
-String contactAndSupportPartOne =
-    """•	Data Protection: The app is committed to protecting the privacy and personal data of users.
-•	Data Use: Collected data is used to improve the experience on the app and provide personalized services.""";
 
 Widget middelTitle(String title) {
   return SizedBox(

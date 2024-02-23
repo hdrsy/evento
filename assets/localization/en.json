@@ -395,30 +395,59 @@
  "Freinds":"Freinds",
  "Search...":"Search...",
   "\"Evento\" App Usage Policy": "\"Evento\" App Usage Policy",
-  "1. Introduction": "1. Introduction",
-  "introduction_body": "\"Evento\" is a digital platform specialized in marketing and booking community events. Please read these terms of use carefully before using the app to ensure your understanding and agreement with these terms.",
-  "2. Acceptance of Terms": "2. Acceptance of Terms",
-  "Acceptance of Terms body": "By using the \"Evento\" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app.",
-  "3. Account Registration and Security": "3. Account Registration and Security",
-  "Account Registration and Security body":  "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number.Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account.",
-  "4. Use of the App": "4. Use of the App",
-  "Use of the App body": "•Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden.•Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws.",
-  "5. Intellectual Property Rights": "5. Intellectual Property Rights",
-"intellectualPropertyRights":"• App Rights: All content on the app, including texts, graphics, and logos, is protected by intellectual property rights and belongs to the \"Evento\" app or to registered and accredited content and service providers on the app.",
-"6. Event Advertising":"6. Event Advertising",
-"registrationAsServiceProvider":"• Event Announcement: The app announces events after studying and approving the advertisement request submitted by the advertiser.• Advertiser's Responsibility: The advertiser is responsible for all legal responsibilities related to the event, such as obtaining licenses and ensuring that the event does not violate the law, public morals, and ethics."
-,"7. Registration as a Service Provider":"7. Registration as a Service Provider"
-,"restaurantBookingPayment": "Registration as a Service Provider• Service Provider Registration: Registration as a service provider requires compliance with all national laws and regulations governing consumer protection, commercial competition, and other relevant laws.• Service Provider Agreement: Registration as a service provider on the app requires a separate usage agreement with the app.",
-"8. Request to Organize and Advertise Events via the App":"8. Request to Organize and Advertise Events via the App",
-"cancellationAndRefund": "• Event Approval: The app does not advertise any event before studying and approving the organization request.• Contractual Relations: Contractual relations arising from the event are valid only upon the app's approval of the event.",
-"9. Selection of Service Providers by Event Organizers":"9. Selection of Service Providers by Event Organizers",
-"privacyAndDataProtection":"• Organizer's Choice: The event organizer's choice of a service provider for organizing an event is the organizer's responsibility.Contractual Relationship: The contractual relationship for executing a service or event lies between the event organizer and the service provider.• App/'s Responsibility: The app is not responsible for executing events and does not guarantee the commitments of service providers. The app may only follow up with the service provider upon the organizer's request.",
-"Booking and Payment":"10. Booking and Payment",
-"amendmentsToTheTermsbody":"• Booking Process: Tickets are booked through the app, and users must verify the booking details accurately before completing the process.• Inviting Attendees: Attendees can be invited to the event by selecting them from the friends list only.• Payment Methods: Ticket prices are paid using approved and secure electronic payment methods.• Ticket Resale: Resale of a ticket for a specific event is allowed only once, and the app charges a commission for the resale process.",
-
-"Cancellation and Refund":"11. Cancellation and Refund",
-
-
+  
+    "Introduction": "1. Introduction",
+    "Introduction_body": "\"Evento\" is a digital platform specialized in marketing and booking community events. Please read these terms of use carefully before using the app to ensure your understanding and agreement with these terms."
+  ,
+  
+    "Acceptance_of_Terms": "2. Acceptance of Terms",
+    "Acceptance_of_Terms_body": "By using the \"Evento\" app, you agree to comply with these terms of use. If you do not agree to these terms, you must immediately stop using the app."
+  
+  ,  "Account_Registration_and_Security": "3. Account Registration and Security",
+    "Account_Registration_and_Security_body": "Account Creation: Accurate and complete information must be provided when creating your account. This includes your name, age, and mobile phone number. Account Security: The user is responsible for maintaining the confidentiality of the password and any other registration information. The administration must be immediately informed of any unauthorized use of your account."
+  
+  
+  
+  ,  "Use_of_the_App": "4. Use of the App",
+    "Use_of_the_App_body": "Legal Use: The app must be used in a legal and responsible manner. The use of the app for any illegal or prohibited purposes is forbidden. Prohibited Content: It is prohibited to post or upload content that violates the rights of others, contains threats, obscenity, or breaches of public morals or ethics, or violates local and international laws."
+  
+    ,
+      "Intellectual_Property_Rights": "5. Intellectual Property Rights",
+      "Intellectual_Property_Rights_body": "App Rights: All content on the app, including texts, graphics, and logos, is protected by intellectual property rights and belongs to the \"Evento\" app or to registered and accredited content and service providers on the app."
+   ,
+      "Event_Advertising": "6. Event Advertising",
+      "Event_Advertising_body": "Event Announcement: The app announces events after studying and approving the advertisement request submitted by the advertiser. Advertiser's Responsibility: The advertiser is responsible for all legal responsibilities related to the event, such as obtaining licenses and ensuring that the event does not violate the law, public morals, and ethics."
+   ,
+      "Registration_as_a_Service_Provider": "7. Registration as a Service Provider",
+      "Registration_as_a_Service_Provider_body": "Service Provider Registration: Registration as a service provider requires compliance with all national laws and regulations governing consumer protection, commercial competition, and other relevant laws. Service Provider Agreement: Registration as a service provider on the app requires a separate usage agreement with the app."
+    ,
+      "Organizing_and_Advertising_Events_via_the_App": "8. Organizing and Advertising Events via the App",
+      "Organizing_and_Advertising_Events_via_the_App_body": "Event Approval: The app does not advertise any event before studying and approving the organization request. Contractual Relations: Contractual relations arising from the event are valid only upon the app's approval of the event."
+   ,
+      "Selecting_Service_Providers_by_Event_Organizers": "9. Selecting Service Providers by Event Organizers",
+      "Selecting_Service_Providers_by_Event_Organizers_body": "Organizer's Choice: The event organizer's choice of a service provider for organizing an event is the organizer's responsibility. Contractual Relationship: The contractual relationship for executing a service or event lies between the event organizer and the service provider. App's Responsibility: The app is not responsible for executing events and does not guarantee the commitments of service providers. The app may only follow up with the service provider upon the organizer's request."
+   ,
+      "Booking_and_Payment": "10. Booking and Payment",
+      "Booking_and_Payment_body": "Booking Process: Tickets are booked through the app, and users must verify the booking details accurately before completing the process. Inviting Attendees: Attendees can be invited to the event by selecting them from the friends list only. Payment Methods: Ticket prices are paid using approved and secure electronic payment methods. Ticket Resale: Resale of a ticket for a specific event is allowed only once, and the app charges a commission for the resale process."
+   ,
+      "Cancellation_and_Refund": "11. Cancellation and Refund",
+      "Cancellation_and_Refund_body": "Cancellation Policy: Cancellation operations are subject to the cancellation policy set by the event organizer and may be subject to fees or restrictions. Refunds: In case of approval of cancellation, refunds are made according to the specified terms, after deducting any applicable fees."
+    ,
+      "Privacy_and_Data_Protection": "12. Privacy and Data Protection",
+      "Privacy_and_Data_Protection_body": "Data Protection: The app is committed to protecting the privacy and personal data of users. Data Use: Collected data is used to improve the experience on the app and provide personalized services."
+    ,
+      "Amendments_to_the_Terms": "13. Amendments to the Terms",
+      "Amendments_to_the_Terms_body": "Changes to Terms: The app reserves the right to modify the terms of use at any time. Continued use of the app after any modifications constitutes agreement to these changes."
+   ,
+      "Disclaimer_and_Limitations": "14. Disclaimer and Limitations",
+      "Disclaimer_and_Limitations_body": "Disclaimer: The app provides its services \"as is\" without any warranties. The app is not responsible for any damages resulting from the use or inability to use the app."
+    ,
+      "Contact_and_Support": "15. Contact and Support",
+      "Contact_and_Support_body": "Support: For any inquiries or concerns regarding the terms of use, please contact the app's support team."
+   ,
+      "Acceptance_of_Terms_final": "By using the \"Evento\" app, you acknowledge and agree to comply with these terms."
+   , 
+  
 
 "Logout":"Logout",
 "Are you sure you want to Logout?":"Are you sure you want to Logout?",

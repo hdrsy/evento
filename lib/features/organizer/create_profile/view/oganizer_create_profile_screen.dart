@@ -106,8 +106,7 @@ class OrganizerCreateProfileScreen extends StatelessWidget {
                       EditProfileField(
                         controller: controller.bio,
                         hintText: tr(
-                            """Event organizer specialist in decoration ,lighting and flowers .
-                  Wdding, Birthday ,anniversary......"""),
+                            """Event organizer specialist in decoration ,lighting and flowers . Wdding, Birthday ,anniversary......"""),
                         labelText: "Bio",
                         onChanged: (value) {},
                         validator: (value) {
