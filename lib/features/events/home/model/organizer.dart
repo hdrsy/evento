@@ -27,10 +27,12 @@ class OrganizerEvent {
       title: json['title'] ?? "UnKnown",
       startDate: DateTime.parse(json['start_date']),
       ticketPrice: json['ticket_price'] ?? 0,
-      images: (jsonDecode(json['images']) as List<dynamic>)
-          .map((e) => e.toString())
-          .toList(),
-      venue: Venue.fromJson(json['venue']),
+      images: json['images'] != null
+          ? (jsonDecode(json['images']) as List<dynamic>)
+              .map((e) => e.toString())
+              .toList()
+          : [],
+      venue: Venue.fromJson(json['venue'] ?? {}),
     );
   }
 }

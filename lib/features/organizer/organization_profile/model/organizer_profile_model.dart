@@ -25,10 +25,11 @@ class OrganizationProfileModel {
       followersCount: json['followers_count'] ?? 0,
       followingCount: json['following_count'] ?? 0,
       organizedEventsCount: json['organized_events_count'] ?? 0,
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
-      organizedEvents: List<OrganizationProfileEvent>.from(
-          json['organized_events']
-              .map((x) => OrganizationProfileEvent.fromJson(x))),
+      organizerInfo: OrganizerInfo.fromJson(json['organizer_info'] ?? {}),
+      organizedEvents: json['organized_events'] != null
+          ? List<OrganizationProfileEvent>.from(json['organized_events']
+              .map((x) => OrganizationProfileEvent.fromJson(x)))
+          : [],
     );
   }
 }
@@ -64,14 +65,18 @@ class OrganizerInfo {
       name: json['name'] ?? "Unknown",
       bio: json['bio'] ?? "",
       services: json['services'] ?? "",
-      state: json['state'],
-      categories: List<Category>.from(
-          json['categories'].map((x) => Category.fromJson(x))),
-      profile: json['profile'],
-      cover: json['cover'],
-      isFollowedByAuthUser: json['is_followed_by_auth_user'],
-      albums: List<OrganizationProfileAlbum>.from(
-          json['albums'].map((x) => OrganizationProfileAlbum.fromJson(x))),
+      state: json['state'] ?? '',
+      categories: json['categories'] != null
+          ? List<Category>.from(
+              json['categories'].map((x) => Category.fromJson(x)))
+          : [],
+      profile: json['profile'] ?? '',
+      cover: json['cover'] ?? '',
+      isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
+      albums: json['albums'] != null
+          ? List<OrganizationProfileAlbum>.from(
+              json['albums'].map((x) => OrganizationProfileAlbum.fromJson(x)))
+          : [],
     );
   }
 }

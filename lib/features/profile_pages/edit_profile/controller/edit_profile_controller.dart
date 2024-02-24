@@ -23,12 +23,12 @@ class EditProfileController extends GetxController {
   late DateTime day;
   // late TextEditingController location;
   late String selectedState;
-  late TextEditingController gender;
   late ProfileModel profileModel;
   late RxList<String> errorMessage;
   late GlobalKey<FormState> formstate;
   late List<String> states;
   late RxBool isLoading;
+  late RxString genderSelected;
   @override
   void onInit() {
     profileModel = Get.arguments;
@@ -38,7 +38,7 @@ class EditProfileController extends GetxController {
     day = profileModel.birthDate;
     phone = TextEditingController(text: profileModel.phoneNumber);
     // location = TextEditingController(text: profileModel.state);
-    gender = TextEditingController(text: profileModel.gender);
+    genderSelected = profileModel.gender.obs;
     selectedState = profileModel.state;
     isLoading = false.obs;
     formstate = GlobalKey<FormState>();
@@ -90,7 +90,7 @@ class EditProfileController extends GetxController {
             "first_name": firstName.text,
             "last_name": lastName.text,
             "phone_number": phone.text,
-            "gender": gender.text,
+            "gender": genderSelected.value,
             "birth_date": DateFormat('yyyy/M/d').format(day),
             "state": selectedState
           },

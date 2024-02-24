@@ -140,7 +140,7 @@ class ServiceAccordingCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "${tr("Location")}: ${serviceProvider.address}",
+                        "${tr("Location")}: ${tr(serviceProvider.address)}",
                         style: customTextStyle.labelMedium.override(
                             fontFamily: secondaryFontFamily,
                             useGoogleFonts: true,

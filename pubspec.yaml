@@ -107,7 +107,10 @@ dependencies:
   
 
 flutter_native_splash:
-  image: "assets/images/تيست 222.png"
+  image: "assets/images/logo.png"
+  color: "#ffffff"
+  android: true
+  ios: true
   
 
 

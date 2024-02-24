@@ -33,15 +33,17 @@ class OfferEvent {
     return OfferEvent(
       id: json['id'] ?? 0,
       title: json['title'] ?? "UnKnown",
-      startDate: DateTime.parse(json['start_date']),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
       ticketPrice: json['ticket_price'] ?? 0,
       images: json['images'] != null
           ? List<String>.from(jsonDecode(json['images']))
           : [],
       venueId: json['venue_id'] ?? 0,
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
-      venue: Venue.fromJson(json['venue']),
-      offer: Offer.fromJson(json['offer']),
+      venue: Venue.fromJson(json['venue'] ?? {}),
+      offer: Offer.fromJson(json['offer'] ?? {}),
     );
   }
 }

@@ -40,7 +40,7 @@ class NameCheckBox extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          " Add To Event",
+                          "Add To Event",
                           style: customTextStyle.bodyMedium.override(
                             fontFamily: 'Nunito',
                             color: customColors.primary,

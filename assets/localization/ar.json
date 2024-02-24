@@ -327,6 +327,17 @@
 "Account": "الحساب",
 "organizer": "منظم",
 "guest": "ضيف",
+"Fill My Data":
+"املأ بياناتي"
+,
+"My Events":
+"فعالياتي"
+,
+"SomeThing Wrong!!":
+"هناك شيء خاطئ!!",
+"Organaizations Profile":
+"ملف المنظمة"
+,
 "service provider": "مزود الخدمة",
 "Number of Adults": "عدد البالغين",
 "Number of Children": "عدد الأطفال",
@@ -353,11 +364,19 @@
 "19/7/1999": "١٩/٧/١٩٩٩",
 "Date of Birth": "تاريخ الميلاد",
 "+963 900000000": "+٩٦٣ ٩٠٠٠٠٠٠٠٠",
-"Male": "ذكر",
-"Female": "أنثى",
+"male": "ذكر",
+"female": "أنثى",
 "Gender": "الجنس",
 "Edit Profile": "تعديل الملف الشخصي",
 "Venue": "المكان",
+"Skip":"تخطي",
+"Available  Amenities":
+"المرافق المتاحة",
+"Capacity":
+"السعة",
+"Personalised program":"برنامج شخصي",
+"Do you want to turn on notification?":
+"هل ترغب في تفعيل الإشعارات؟",
 "Select a picturesque setting for your special day": "اختر مكانًا ذا مناظر خلابة ليومك الخاص",
 "Service Provider's": "مزودي الخدمة",
 "Create folder": "إنشاء مجلد",
@@ -531,7 +550,15 @@
           ,  "Acceptance_of_Terms_final": "باستخدامك لتطبيق \"إيفينتو\"، فإنك تقر وتوافق على الالتزام بهذه الشروط."
           
           
-          
-        
+,          "Feature not available with a private account. Please switch to a public setting to use this feature.":"لميزة غير متاحة مع حساب خاص. يرجى التحويل إلى إعدادات عامة لاستخدام هذه الميزة."
+
+ , "confirmDelete": "هل أنت متأكد أنك تريد حذف حسابك؟",
+  "deleteAccount": "حذف الحساب",
+  "somethingWrong": "هناك شيء خاطئ!!"
+,"Delete Account":
+"حذف الحساب",
+"Yes, Delete":
+"نعم، حذف"
+
       
 }

@@ -221,7 +221,7 @@ class Fields extends StatelessWidget {
                       Text(
                         editProfileController.selectedState,
                         style: customTextStyle.bodyMedium,
-                      ),
+                      ).tr(),
                       Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: customColors.secondaryText,
@@ -232,23 +232,6 @@ class Fields extends StatelessWidget {
                 );
               }),
             ),
-            EditProfileField(
-                suffixIcon: Icons.people_alt_outlined,
-                controller: editProfileController.gender,
-                hintText: tr("Male"),
-                labelText: tr("Gender"),
-                onChanged: (value) {
-                  editProfileController.gender.text = value;
-                },
-                validator: (value) {
-                  if (value == "Male" ||
-                      value == "Female" ||
-                      value == "male" ||
-                      value == "female") {
-                    return null;
-                  }
-                  return "Plsease Type Your gender correctly";
-                }),
           ].divide(SizedBox(
             height: scaleHeight(10),
           )),

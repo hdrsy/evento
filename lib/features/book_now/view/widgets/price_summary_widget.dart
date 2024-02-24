@@ -58,7 +58,7 @@ class PriceSummaryWidget extends StatelessWidget {
                           .selectedAminiteds[innerIndex].title,
                       bookNowController.ticketList[index]
                           .selectedAminiteds[innerIndex].pivot.price!)),
-              priceElement("Taxes", bookNowController.ticketList[index].tax),
+              // priceElement("Taxes", bookNowController.ticketList[index].tax),
               priceElement(
                   "Discount", bookNowController.ticketList[index].discount),
               Divider(
@@ -113,7 +113,7 @@ class PriceSummaryWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "${bookNowController.ticketList[index].totalPrice} sp",
+                      "${bookNowController.ticketList[index].totalPrice} ${tr("sp")}",
                       style: customTextStyle.displaySmall,
                     ),
                   ],

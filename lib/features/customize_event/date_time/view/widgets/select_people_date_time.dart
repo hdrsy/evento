@@ -227,7 +227,7 @@ class _SelectPeopleDateTimeState extends State<SelectPeopleDateTime>
                           ),
                         ),
                         Tab(
-                          text: tr("Guests"),
+                          text: tr("guest"),
                         ),
                       ],
                     ),

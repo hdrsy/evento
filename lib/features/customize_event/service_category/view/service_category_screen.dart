@@ -79,7 +79,7 @@ class ServiceCategoryScreen extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      "${serviceCategoryController.selectedServiceProvidersNumbers()} Selected",
+                      "${serviceCategoryController.selectedServiceProvidersNumbers()} ${tr("Selected")}",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: primaryFontFamily,
                         color: customColors.primaryText,

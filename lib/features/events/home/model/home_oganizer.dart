@@ -41,14 +41,17 @@ class OrganizerHome {
       phoneNumber: json['phone_number'] ?? 00,
       emailVerifiedAt: json['email_verified_at'],
       gender: json['gender'] ?? 'female',
-      birthDate: DateTime.parse(json['birth_date']),
+      birthDate: json['birth_date'] != null
+          ? DateTime.parse(json['birth_date'])
+          : DateTime.now(),
       state: json['state'] ?? '',
       imageUrl: json['image'] ?? '',
       type: json['type'] ?? '',
       followersCount: json['followers_count'] ?? 0,
       friendRequestStatusWithAuthUser:
           json['friend_request_status_with_auth_user'] ?? "",
-      organizerHomeInfo: OrganizerHomeInfo.fromJson(json['organizer_info']),
+      organizerHomeInfo:
+          OrganizerHomeInfo.fromJson(json['organizer_info'] ?? {}),
     );
   }
 }

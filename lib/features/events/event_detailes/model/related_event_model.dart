@@ -38,9 +38,14 @@ class RelatedEventModel {
       title: json['title'] ?? '',
       venueId: json['venue_id'] ?? 0,
       capacity: json['capacity'] ?? 0,
-      startDate: DateTime.parse(json['start_date'] ?? ''),
-      endDate: DateTime.parse(json['end_date'] ?? ""),
-      ticketPrice: json['ticket_price'].toDouble() ?? 0,
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
+      ticketPrice:
+          json['ticket_price'] != null ? json['ticket_price'].toDouble() : 0,
       description: json['description'] ?? '',
       type: json['type'] ?? "",
       videos: json['videos'] != null
@@ -48,9 +53,11 @@ class RelatedEventModel {
               .cast<String>()
               .map((image) => image.toString()))
           : null,
-      images: List<String>.from(jsonDecode(json['images'])
-          .cast<String>()
-          .map((image) => image.toString())),
+      images: json['images'] != null
+          ? List<String>.from(jsonDecode(json['images'])
+              .cast<String>()
+              .map((image) => image.toString()))
+          : [],
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }

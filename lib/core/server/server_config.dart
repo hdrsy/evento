@@ -10,6 +10,7 @@ class ServerConstApis {
   static String signUpStep2 = '$baseAPI/api/signup_step2';
   static String signIn = '$baseAPI/api/login';
   static String logout = '$baseAPI/api/logout';
+  static String deteAccount = '$baseAPI/api/user/delete';
 
   /////Otp
   static String verifyotp = '$baseAPI/api/checkOTP';

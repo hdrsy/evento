@@ -67,13 +67,18 @@ class EventDetailsModel {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return EventDetailsModel(
-      bookings:
-          List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x))),
+      bookings: json['bookings'] != null
+          ? List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x)))
+          : [],
       id: json['id'],
       title: json['title'] ?? "UnKnown",
       capacity: json['capacity'] ?? 0,
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       ticketPrice: json['ticket_price'] ?? 0,
       description: json['description'] ?? "",
       type: json['type'] ?? "UnKnown",
@@ -82,27 +87,39 @@ class EventDetailsModel {
       refundPlicy: json['refund_policy'],
       cancellationPolicy: json['cancellation_policy'],
       webSite: json['website'],
-      images: jsonDecode(json['images']).cast<String>() ?? [],
+      images: json['images'] != null
+          ? jsonDecode(json['images']).cast<String>()
+          : [],
       videos: json['videos'] != null
           ? jsonDecode(json['videos']).cast<String>()
           : [],
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
       isOrganizerFollowedByAuthUser:
           json['organizer_is_followed_by_auth_user'] ?? false,
-      eventTrips: List<EventTrip>.from(
-          json['event_trips'].map((x) => EventTrip.fromJson(x))),
-      venue: Venue.fromJson(json['venue']),
-      amenities:
-          List<Amenity>.from(json['interests'].map((x) => Amenity.fromJson(x))),
+      eventTrips: json['event_trips'] != null
+          ? List<EventTrip>.from(
+              json['event_trips'].map((x) => EventTrip.fromJson(x)))
+          : [],
+      venue: Venue.fromJson(json['venue'] ?? {}),
+      amenities: json['interests'] != null
+          ? List<Amenity>.from(
+              json['interests'].map((x) => Amenity.fromJson(x)))
+          : [],
       // Parse other fields...
       organizer: json['organizer'] != null
           ? Organizer.fromJson(json['organizer'])
           : null,
-      categoriesEvents: List<CategoryEvent>.from(
-          json['categories_events'].map((x) => CategoryEvent.fromJson(x))),
-      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
-      serviceProvider: List<ServiceProvider>.from(
-          json['service_providers'].map((x) => ServiceProvider.fromJson(x))),
+      categoriesEvents: json['categories_events'] != null
+          ? List<CategoryEvent>.from(
+              json['categories_events'].map((x) => CategoryEvent.fromJson(x)))
+          : [],
+      classes: json['classes'] != null
+          ? List<Class>.from(json['classes'].map((x) => Class.fromJson(x)))
+          : [],
+      serviceProvider: json['service_providers'] != null
+          ? List<ServiceProvider>.from(json['service_providers']
+              .map((x) => ServiceProvider.fromJson(x ?? {})))
+          : [],
       organizerId: json['organizer_id'] ?? 0,
     );
   }
@@ -163,7 +180,7 @@ class Organizer {
   factory Organizer.fromJson(Map<String, dynamic> json) {
     return Organizer(
       id: json['id'] ?? "",
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
+      organizerInfo: OrganizerInfo.fromJson(json['organizer_info'] ?? {}),
     );
   }
 }
@@ -254,8 +271,10 @@ class Class {
       code: json['code'] ?? '',
       ticketPrice: json['ticket_price'] ?? 0,
       ticketNumber: json['ticket_number'] ?? 0,
-      interests:
-          List<Amenity>.from(json['interests'].map((x) => Amenity.fromJson(x))),
+      interests: json['interests'] != null
+          ? List<Amenity>.from(
+              json['interests'].map((x) => Amenity.fromJson(x)))
+          : [],
     );
   }
 }
@@ -281,8 +300,12 @@ class EventTrip {
     return EventTrip(
       id: json['id'],
       eventId: json['event_id'] ?? 0,
-      startDate: DateTime.parse(json['start_date']),
-      endDate: DateTime.parse(json['end_date']),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       description: json['description'] ?? "",
     );
   }
@@ -314,8 +337,8 @@ class Venue {
       name: json['name'] ?? "UnKnown",
       profile: json['profile'] ?? "",
       governorate: json['governorate'] ?? "UnKnown",
-      latitude: json['latitude'].toDouble() ?? 0.0,
-      longitude: json['longitude'].toDouble() ?? 0.0,
+      latitude: json['latitude'] != null ? json['latitude'].toDouble() : 0.0,
+      longitude: json['longitude'] != null ? json['longitude'].toDouble() : 0.0,
     );
   }
 }
@@ -339,7 +362,7 @@ class Amenity {
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
       icon: json['icon'] ?? '',
-      pivot: Pivot.fromJson(json['pivot']),
+      pivot: Pivot.fromJson(json['pivot'] ?? {}),
     );
   }
 }

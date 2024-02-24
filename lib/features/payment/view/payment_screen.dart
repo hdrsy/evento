@@ -3,6 +3,7 @@ import 'package:evento/core/shared/functions/validation/phone_validation.dart';
 import 'package:evento/core/shared/functions/validation/pin.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
+import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/shared/widgets/text_fields/pin.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -41,11 +42,11 @@ class PaymentScreenInBooking extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: [
-              const TabBarSection(),
-              PhonePayment(),
+              // const TabBarSection(),
               const PaymentDetailes(),
-              paymentController.isPhoneCorrect.value
-                  ? const InvoiceSection()
+              PhonePayment(),
+              paymentController.isIvoiceCreated.value
+                  ? InvoiceSection()
                   : SizedBox.shrink(),
               // const FullName(),
               paymentController.isIvoiceCreated.value
@@ -87,6 +88,7 @@ class OtpSection extends StatelessWidget {
           lenght: 6,
           onChanged: (value) {
             paymentController.otp.text = value;
+            paymentController.isSentOtpActive.value = value.length == 6;
           },
           textEditingController: paymentController.otp,
           validator: (value) {
@@ -110,14 +112,56 @@ class OtpSection extends StatelessWidget {
           alignment: const AlignmentDirectional(0, -1),
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-            child: Text(
-              "Send code again",
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: 'Nunito',
-                color: customColors.primary,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                useGoogleFonts: false,
+            child: GestureDetector(
+              onTap: () {
+                paymentController.getInvoice();
+              },
+              child: Text(
+                "Send code again",
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  color: customColors.primary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  useGoogleFonts: false,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: const AlignmentDirectional(0, -1),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Obx(
+              () => ButtonWidget(
+                showLoadingIndicator: paymentController.isLoadingotp.value,
+                onPressed: () async {
+                  paymentController.isSentOtpActive.value
+                      ? paymentController.sentOtp()
+                      : null;
+                },
+                text: "Confirm",
+                options: ButtonOptions(
+                  width: 200,
+                  height: 40,
+                  padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  color: paymentController.isSentOtpActive.value
+                      ? customColors.primary
+                      : customColors.secondary,
+                  textStyle: customTextStyle.titleSmall.override(
+                    fontFamily: 'Nunito',
+                    color: Colors.white,
+                    useGoogleFonts: false,
+                  ),
+                  elevation: 3,
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ),
@@ -168,130 +212,142 @@ class PhonePayment extends StatelessWidget {
   final PaymentController paymentController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Payment Details",
-          style: customTextStyle.bodyMedium.override(
-            fontFamily: 'Nunito',
-            color: customColors.primaryText,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            useGoogleFonts: false,
-          ),
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-        Container(
-          // height: 50.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: customColors.primaryBackground,
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
-            child: TextFormField(
-              controller: paymentController.phone,
-              obscureText: false,
-              decoration: InputDecoration(
-                labelText: "+963    Mobile Phone",
-                labelStyle: customTextStyle.bodyMedium.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.secondaryText,
-                  fontSize: 12,
-                  useGoogleFonts: false,
-                ),
-                hintStyle: customTextStyle.bodyMedium.override(
-                  fontFamily: 'Nunito',
-                  color: customColors.primaryText,
-                  useGoogleFonts: false,
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: customColors.primary,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x00000000),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                errorBorder: UnderlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x00000000),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                focusedErrorBorder: UnderlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x00000000),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                filled: true,
-                fillColor: customColors.secondaryBackground,
-                contentPadding: const EdgeInsets.all(16),
-              ),
-              style: customTextStyle.bodySmall.override(
+    return Obx(
+      () => Form(
+        key: paymentController.formstate,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Payment Details",
+              style: customTextStyle.bodyMedium.override(
                 fontFamily: 'Nunito',
-                color: customColors.secondaryText,
+                color: customColors.primaryText,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold,
                 useGoogleFonts: false,
               ),
-              validator: (value) {
-                return null;
-                // return phoneValidation(value);
-              },
             ),
-          ),
-        ),
-        SizedBox(
-          height: 15.h,
-        ),
-        Align(
-          alignment: const AlignmentDirectional(0, -1),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Obx(
-              () => ButtonWidget(
-                showLoadingIndicator:
-                    Get.find<PaymentController>().isLoadingPhone.value,
-                onPressed: () async {
-                  Get.find<PaymentController>().getInvoice();
-                },
-                text: "Confirm",
-                options: ButtonOptions(
-                  width: 200,
-                  height: 40,
-                  padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  color: customColors.primary,
-                  textStyle: customTextStyle.titleSmall.override(
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              // height: 50.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: customColors.primaryBackground,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                child: TextFormField(
+                  controller: paymentController.phone,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    labelText: "+963    Mobile Phone",
+                    labelStyle: customTextStyle.bodyMedium.override(
+                      fontFamily: 'Nunito',
+                      color: customColors.secondaryText,
+                      fontSize: 12,
+                      useGoogleFonts: false,
+                    ),
+                    hintStyle: customTextStyle.bodyMedium.override(
+                      fontFamily: 'Nunito',
+                      color: customColors.primaryText,
+                      useGoogleFonts: false,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: customColors.primary,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    errorBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    focusedErrorBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    filled: true,
+                    fillColor: customColors.secondaryBackground,
+                    contentPadding: const EdgeInsets.all(16),
+                  ),
+                  style: customTextStyle.bodySmall.override(
                     fontFamily: 'Nunito',
-                    color: Colors.white,
+                    color: customColors.secondaryText,
                     useGoogleFonts: false,
                   ),
-                  elevation: 3,
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
+                  validator: (value) {
+                    // return null;
+                    return phoneValidation(value);
+                  },
                 ),
               ),
             ),
-          ),
-        )
-      ],
+            SizedBox(
+              height: 15.h,
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0, -1),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Obx(
+                  () => ButtonWidget(
+                    showLoadingIndicator:
+                        Get.find<PaymentController>().isLoadingPhone.value,
+                    onPressed: () async {
+                      Get.find<PaymentController>().getInvoice();
+                    },
+                    text: "Confirm",
+                    options: ButtonOptions(
+                      width: 200,
+                      height: 40,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: customColors.primary,
+                      textStyle: customTextStyle.titleSmall.override(
+                        fontFamily: 'Nunito',
+                        color: Colors.white,
+                        useGoogleFonts: false,
+                      ),
+                      elevation: 3,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            paymentController.errorMessageInInvoice != ''
+                ? ErrorMessages(
+                    message: paymentController.errorMessageInInvoice.value,
+                  )
+                : SizedBox.shrink()
+          ],
+        ),
+      ),
     );
   }
 }
@@ -305,7 +361,7 @@ class PaymentDetailes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Full Name",
+          "Payment Summary",
           style: customTextStyle.bodyMedium.override(
             fontFamily: 'Nunito',
             color: customColors.primaryText,
@@ -322,13 +378,13 @@ class PaymentDetailes extends StatelessWidget {
               border: Border.all(color: customColors.primaryBackground)),
           child: Column(
             children: [
-              const SingleRowInPayment(
-                title: "Amount",
-                subtitle: "165.000",
-              ),
-              const SingleRowInPayment(
+              SingleRowInPayment(
+                  title: "Amount",
+                  subtitle:
+                      Get.find<PaymentController>().totalAmount.toString()),
+              SingleRowInPayment(
                 title: "Taxes",
-                subtitle: "24.000",
+                subtitle: Get.find<PaymentController>().invoiceTax.toString(),
               ),
               Divider(
                 thickness: 1,
@@ -355,7 +411,7 @@ class PaymentDetailes extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "180.000 ${tr("sp")}",
+                    "${(Get.find<PaymentController>().totalAmount + Get.find<PaymentController>().invoiceTax).toString()} ${tr("sp")}",
                     style: customTextStyle.displaySmall,
                   ),
                 ],
@@ -439,8 +495,8 @@ class FullName extends StatelessWidget {
 }
 
 class InvoiceSection extends StatelessWidget {
-  const InvoiceSection({super.key});
-
+  InvoiceSection({super.key});
+  final PaymentController paymentController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -459,12 +515,14 @@ class InvoiceSection extends StatelessWidget {
                 useGoogleFonts: false,
               ),
             ),
-            Text(
-              "#1382764",
-              style: customTextStyle.bodyMedium.override(
-                fontFamily: 'Nunito',
-                fontSize: 14.sp,
-                useGoogleFonts: false,
+            Obx(
+              () => Text(
+                "#${paymentController.invoiceId.value}",
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: 'Nunito',
+                  fontSize: 14.sp,
+                  useGoogleFonts: false,
+                ),
               ),
             ),
           ],

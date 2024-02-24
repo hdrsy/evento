@@ -22,13 +22,14 @@ class EventWrapper {
   });
 
   factory EventWrapper.fromJson(Map<String, dynamic> json) {
+    print(json['event']);
     return EventWrapper(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
       userId: json['user_id'] ?? 0,
       createdAt: DateTime.parse(json['created_at'] ?? ''),
       updatedAt: DateTime.parse(json['updated_at'] ?? ''),
-      event: FavoriteEventModel.fromJson(json['event']),
+      event: FavoriteEventModel.fromJson(json['event'] ?? {}),
     );
   }
 }
@@ -72,12 +73,16 @@ class FavoriteEventModel {
       title: json['title'] ?? '',
       venueId: json['venue_id'] ?? 0,
       capacity: json['capacity'] ?? 0,
-      startDate: DateTime.parse(json['start_date'] ?? ''),
-      endDate: DateTime.parse(json['end_date'] ?? ''),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       ticketPrice: json['ticket_price'] ?? 0,
       description: json['description'] ?? '',
-      type: json['type'],
-      venue: Venue.fromJson(json["venue"]),
+      type: json['type'] ?? '',
+      venue: Venue.fromJson(json["venue"] ?? {}),
       images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );

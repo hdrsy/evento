@@ -210,7 +210,7 @@ appRoutes() => [
           binding: ServiceProviderCreateProfileBinding()),
       GetPage(
           name: '/AccountTypeScreen',
-          page: () => const AccountTypeScreen(),
+          page: () => AccountTypeScreen(),
           binding: AccountTypeBinding()),
       GetPage(
           name: '/ChangePasswordScreen',

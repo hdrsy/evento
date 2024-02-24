@@ -42,7 +42,7 @@ class SeeAllAmenities extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              " Available  Amenities",
+              "Available  Amenities",
               style: customTextStyle.bodyMedium.override(
                   fontSize: 16,
                   color: customColors.primaryText,

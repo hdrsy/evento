@@ -22,9 +22,9 @@ class ReceiveRequest {
         senderId: json['sender_id'] ?? 0,
         receiverId: json['receiver_id'] ?? 0,
         status: json['status'],
-        createdAt: json['created_at'],
-        updatedAt: json['updated_at'],
-        sender: Sender.fromJson(json['sender']),
+        createdAt: json['created_at'] ?? "",
+        updatedAt: json['updated_at'] ?? "",
+        sender: Sender.fromJson(json['sender'] ?? {}),
       );
 }
 

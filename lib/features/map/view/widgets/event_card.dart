@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../core/shared/widgets/images/network_image.dart';
@@ -38,44 +40,41 @@ class EventCard extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: double.infinity,
-              child: Stack(
+              child: Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: 130,
-                    decoration: const BoxDecoration(),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 500,
-                      child: PageView(
-                        controller: PageController(initialPage: 0),
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          ...List.generate(
-                              eventModel.images.length > 3
-                                  ? 3
-                                  : eventModel.images.length,
-                              (index) => imageGridView(
-                                  context,
-                                  eventModel.images[index],
-                                  index,
-                                  eventModel.id,
-                                  modelIndex))
-                        ],
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 130.h,
+                        decoration: const BoxDecoration(),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 500.h,
+                          child: PageView(
+                            controller: PageController(initialPage: 0),
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              ...List.generate(
+                                  eventModel.images.length > 3
+                                      ? 3
+                                      : eventModel.images.length,
+                                  (index) => imageGridView(
+                                      context,
+                                      eventModel.images[index],
+                                      index,
+                                      eventModel.id,
+                                      modelIndex))
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 24,
+                      Positioned(
+                        right: 10.w,
+                        bottom: 10.w,
+                        child: Container(
+                          width: 100.w,
+                          height: 24.h,
                           decoration: BoxDecoration(
                             color: customColors.primaryBackground,
                             borderRadius: BorderRadius.circular(20),
@@ -93,35 +92,34 @@ class EventCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                eventModel.title,
-                                style: customTextStyle.headlineSmall.override(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 16,
-                                  useGoogleFonts: false,
-                                ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              eventModel.title,
+                              style: customTextStyle.headlineSmall.override(
+                                fontFamily: 'Nunito',
+                                fontSize: 16,
+                                useGoogleFonts: false,
                               ),
-                              // Row(
-                              //   mainAxisSize: MainAxisSize.max,
-                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //   children: [
-                              //     Icon(
-                              //       Icons.play_arrow_outlined,
-                              //       color: customColors.primaryText,
-                              //       size: 25,
-                              //     ),
-                              //   ],
-                              // ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,

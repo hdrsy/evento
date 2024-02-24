@@ -78,6 +78,9 @@ class ApiHelper {
           case 'GET':
             response = await http.get(url, headers: headers);
             break;
+          case 'DELETE':
+            response = await http.delete(url, headers: headers);
+            break;
           default:
             // Handling for unsupported HTTP methods.
             throw UnimplementedError('HTTP method $method not supported');

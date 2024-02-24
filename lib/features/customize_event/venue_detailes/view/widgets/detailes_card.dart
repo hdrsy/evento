@@ -51,7 +51,7 @@ class VenueDetailesCard extends StatelessWidget {
                 color: customColors.primaryText,
                 useGoogleFonts: true,
               ),
-            ),
+            ).tr(),
           ],
         ),
         const SizedBox(height: 5),

@@ -27,7 +27,9 @@ class EventModel {
     return EventModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? "UnKnown",
-        startDate: DateTime.parse(json['start_date']),
+        startDate: json['start_date'] != null
+            ? DateTime.parse(json['start_date'])
+            : DateTime.now(),
         ticketPrice: json['ticket_price'] ?? 0,
         images: json['images'] != null
             ? List<String>.from(jsonDecode(json['images']).map((x) => x))
@@ -69,10 +71,10 @@ class EventHomeVenue {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     return EventHomeVenue(
-        id: json['id'],
-        long: json['longitude'],
-        lang: json['latitude'],
-        governorate: json["governorate"]);
+        id: json['id'] ?? 0,
+        long: json['longitude'] ?? 0.0,
+        lang: json['latitude'] ?? 0.0,
+        governorate: json["governorate"] ?? "");
   }
   Map<String, dynamic> toJson() {
     return {

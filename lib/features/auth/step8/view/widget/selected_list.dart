@@ -18,6 +18,7 @@ class SelectState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String selectedState = states[0];
+    int selectedStateindex = 0;
     return Center(
       child: Container(
         // height: scaleHeight(200), // Height of the picker
@@ -49,6 +50,7 @@ class SelectState extends StatelessWidget {
                 backgroundColor: customColors.secondaryBackground,
                 onSelectedItemChanged: (index) {
                   selectedState = states[index];
+                  selectedStateindex = index;
                 },
                 children: List<Widget>.generate(states.length, (index) {
                   return Center(
@@ -102,6 +104,7 @@ class SelectState extends StatelessWidget {
                   ButtonWidget(
                     onPressed: () async {
                       step8controller.selectedState = selectedState;
+                      step8controller.stateindex = selectedStateindex;
                       step8controller.update();
                       Get.back();
                     },

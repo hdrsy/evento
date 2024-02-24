@@ -26,10 +26,12 @@ class OrganizerProfileModel {
       followingCount: json['following_count'] ?? 0,
       organizedEventsCount: json['organized_events_count'] ?? 0,
       organizerInfo: json['organizer_info'] != null
-          ? OrganizerInfo.fromJson(json['organizer_info'])
+          ? OrganizerInfo.fromJson(json['organizer_info'] ?? {})
           : null,
-      organizedEvents: List<OrganizerProfileEvent>.from(json['organized_events']
-          .map((x) => OrganizerProfileEvent.fromJson(x))),
+      organizedEvents: json['organized_events'] != null
+          ? List<OrganizerProfileEvent>.from(json['organized_events']
+              .map((x) => OrganizerProfileEvent.fromJson(x)))
+          : [],
     );
   }
 }
@@ -188,7 +190,9 @@ class OrganizerProfileEvent {
       title: json['title'] ?? '',
       venueId: json['venue_id'] ?? 0,
       capacity: json['capacity'] ?? 0,
-      startDate: DateTime.parse(json['start_date'] ?? ''),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
       // endDate: DateTime.parse(json['end_date']) ?? DateTime.now(),
       ticketPrice: json['ticket_price'] ?? 0,
       description: json['description'] ?? "",

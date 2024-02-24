@@ -48,13 +48,19 @@ class OrganizationEvent {
       bookingCount: json['bookings_count'] ?? 0,
       venueId: json['venue_id'] ?? 0,
       id: json['id'] ?? 0,
-      startDate: DateTime.parse(json['start_date'] ?? ''),
-      endDate: DateTime.parse(json['end_date'] ?? ''),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       images: imageList,
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
-      venue: Venue.fromJson(json['venue']),
-      categoriesEvents: List<CategoryModel>.from(
-          json['categories_events'].map((x) => CategoryModel.fromJson(x))),
+      venue: Venue.fromJson(json['venue'] ?? {}),
+      categoriesEvents: json['categories_events'] != null
+          ? List<CategoryModel>.from(
+              json['categories_events'].map((x) => CategoryModel.fromJson(x)))
+          : [],
     );
   }
 }
@@ -77,7 +83,7 @@ class Venue {
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
       nameAr: json['name_ar'] ?? '',
-      averageRating: json['average_rating'],
+      averageRating: json['average_rating'] ?? 0,
     );
   }
 }

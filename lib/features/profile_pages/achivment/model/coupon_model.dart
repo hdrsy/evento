@@ -4,8 +4,8 @@ class PromoCode {
   final String description;
   final String image;
   final String code;
-  final String discount;
-  final String limit;
+  final int discount;
+  final int limit;
   final DateTime startDate;
   final DateTime endDate;
   final DateTime createdAt;
@@ -28,7 +28,7 @@ class PromoCode {
   });
 
   factory PromoCode.fromJson(Map<String, dynamic> json) {
-    var eventList = json['events'] as List;
+    var eventList = json['events'] != null ? json['events'] as List : [];
     List<PromoCodeEvent> events =
         eventList.map((i) => PromoCodeEvent.fromJson(i)).toList();
     return PromoCode(
@@ -37,12 +37,20 @@ class PromoCode {
       description: json['description'] ?? '',
       image: json['image'] ?? '',
       code: json['code'] ?? '',
-      discount: json['discount'] ?? "",
-      limit: json['limit'] ?? '',
-      startDate: DateTime.parse(json['start-date'] ?? ''),
-      endDate: DateTime.parse(json['end-date'] ?? ''),
-      createdAt: DateTime.parse(json['created_at'] ?? ''),
-      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
+      discount: json['discount'] ?? 0,
+      limit: json['limit'] ?? 0,
+      startDate: json['start-date'] != null
+          ? DateTime.parse(json['start-date'])
+          : DateTime.now(),
+      endDate: json['end-date'] != null
+          ? DateTime.parse(json['end-date'])
+          : DateTime.now(),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : DateTime.now(),
       events: events,
     );
   }
@@ -54,7 +62,7 @@ class PromoCodeEvent {
   final int promoCodeId;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final PromoCodeEventDetails eventDetails;
+  final PromoCodeEventDetails? eventDetails;
 
   PromoCodeEvent({
     required this.id,
@@ -66,13 +74,16 @@ class PromoCodeEvent {
   });
 
   factory PromoCodeEvent.fromJson(Map<String, dynamic> json) {
+    print(json['promo_code_id'] is int);
     return PromoCodeEvent(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
       promoCodeId: json['promo_code_id'] ?? 0,
       createdAt: DateTime.parse(json['created_at'] ?? ''),
       updatedAt: DateTime.parse(json['updated_at'] ?? ''),
-      eventDetails: PromoCodeEventDetails.fromJson(json['event']),
+      eventDetails: json['event'] != null
+          ? PromoCodeEventDetails.fromJson(json['event'])
+          : null,
     );
   }
 }

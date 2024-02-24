@@ -53,7 +53,7 @@ class DetailesCard extends StatelessWidget {
                 color: customColors.primaryText,
                 useGoogleFonts: true,
               ),
-            ),
+            ).tr(),
           ],
         ),
         const SizedBox(height: 5),

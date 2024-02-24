@@ -32,7 +32,7 @@ class BuildLogoButtons extends StatelessWidget {
               padding: const EdgeInsetsDirectional.fromSTEB(0, 37, 0, 0),
               child: Image.asset(
                 // 'assets/images/Artboard_1.png',
-                'assets/images/تيست 1.png',
+                'assets/images/logo.png',
                 width: 300,
                 height: 100,
                 fit: BoxFit.contain,

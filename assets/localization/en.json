@@ -125,12 +125,13 @@
   "Personalised program": "Personalised program",
   "Do you want to turn on notification?": "Do you want to turn on notification?",
   "Activate": "Activate",
-  "Female": "Female",
+  "female": "Female",
   "Enter your location": "Enter your location",
   "Please enter where do you live": "Please enter where do you live",
-
+"Capacity":"Capacity",
   "Select State": "Select State",
       "Skip":"Skip",
+      "Available  Amenities":"Available  Amenities",
     "Join":"Join",
      "Continue as guest":"Continue as guest",
 "Unearth Upcoming Events":"Unearth Upcoming Events",
@@ -319,6 +320,7 @@
 "Account": "Account",
 "organizer": "organizer",
 "guest": "guest",
+"Fill My Data":"Fill My Data",
 "service provider": "service provider",
 "Status": "Status",
 "Full Name": "Full Name",
@@ -328,7 +330,10 @@
 "Start Time": "Start Time",
 "End Time": "End Time",
 "Date": "Date",
+"SomeThing Wrong!!":"SomeThing Wrong!!",
+"Organaizations Profile":"Organaizations Profile",
 "Venue Name": "Venue Name",
+"My Events":"My Events",
 "Pending": "Pending",
 "In Review": "In Review",
 "Contacted": "Contacted",
@@ -351,7 +356,7 @@
 "Date of Birth": "Date of Birth",
 "+963 900000000": "+963 900000000",
 "Phone Number": "Phone Number",
-"Male": "Male",
+"male": "Male",
 "Gender": "Gender",
 "Edit Profile": "Edit Profile",
 "Select a picturesque setting for your special day": "Select a picturesque setting for your special day",
@@ -447,7 +452,7 @@
    ,
       "Acceptance_of_Terms_final": "By using the \"Evento\" app, you acknowledge and agree to comply with these terms."
    , 
-  
+  "Feature not available with a private account. Please switch to a public setting to use this feature.":"Feature not available with a private account. Please switch to a public setting to use this feature.",
 
 "Logout":"Logout",
 "Are you sure you want to Logout?":"Are you sure you want to Logout?",
@@ -531,6 +536,12 @@
       "Rif Dimashq": "Rif Dimashq"
     
     
-  
+      
+     ,   "confirmDelete": "Are you sure you want to delete your account?",
+        "deleteAccount": "Delete Account",
+        "somethingWrong": "Something Wrong!!"
+      ,"Delete Account":"Delete Account",
+      "Yes, Delete":"Yes, Delete"
+      
   
 }

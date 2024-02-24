@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 class Step8Controller extends GetxController {
   late List<String> states;
   late String? selectedState;
+  late int? stateindex;
   late RxBool isLoading;
   late RxList<String> errorMessage;
   @override
@@ -35,6 +36,7 @@ class Step8Controller extends GetxController {
     isLoading = false.obs;
     errorMessage = <String>[].obs;
     selectedState = null;
+    stateindex = null;
     super.onInit();
   }
 
@@ -129,7 +131,7 @@ class Step8Controller extends GetxController {
         "cD_ZqzqnQsG0dmy1dTUA8A:APA91bHH-fJ36YMpdkQa9hzuLavBzInsLQ0ew-MKhLE2tjhCemjYQ3IVQgDyR7B7Q1hGriK-FZAEonIcPXzlXzL4rKUrfns0m6fp33B6ejMreYTEtqlq-jNhhHkbfE1NbzbFd9wGia9L";
     data['birth_date'] =
         DateFormat('yyyy/M/d', 'en').format(stepsController.day!);
-    data['state'] = selectedState!;
+    data['state'] = states[stateindex!];
     stepsController.avatarList[stepsController.selectedProfileindex] is String
         ? data['image'] = stepsController.selectedProfileindex.toString()
         : null;

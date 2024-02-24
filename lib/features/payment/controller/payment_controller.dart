@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/core/server/payment_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/book_now/model/ticket_model.dart';
@@ -13,6 +14,7 @@ class PaymentController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController otp = TextEditingController();
   late RxInt _totalSeconds;
+
   late RxBool _isRunning;
   late RxInt _hours;
   late RxInt _minutes;
@@ -23,61 +25,136 @@ class PaymentController extends GetxController {
   bool get isRunning => _isRunning.value;
   Timer? timer;
 
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
+
   RxBool isIvoiceCreated = false.obs;
   RxBool isPhoneCorrect = false.obs;
+  RxBool isSentOtpActive = false.obs;
   RxBool isLoadingPhone = false.obs;
-  RxList<String> errorMessage = <String>[].obs;
+  RxBool isLoadingotp = false.obs;
+  RxString errorMessageInInvoice = "".obs;
   late Map<String, dynamic> booking;
   late List<TicketModel> ticketList;
   late EventDetailsModel eventDetailsModel;
-
+  int totalAmount = 0;
+  int invoiceTax = 0;
+  RxInt invoiceId = 0.obs;
+  List bookingIds = [];
   @override
   void onInit() {
-    _totalSeconds = 60.obs;
+    _totalSeconds = 360.obs;
     _isRunning = false.obs;
     _hours = 00.obs;
-    _minutes = 1.obs;
+    _minutes = 6.obs;
     _seconds = 00.obs;
 
     eventDetailsModel = Get.arguments[0];
     ticketList = Get.arguments[1];
     booking = Get.arguments[2];
+
+    totalAmount = calculateIvoiceAmount();
+    getTaxInvoice(totalAmount);
     // TODO: implement onInit
     super.onInit();
   }
 
+  getTaxInvoice(int amount) {
+    int totalPriceInTicket = totalAmount;
+    if (totalPriceInTicket < 1000) {
+      invoiceTax = 75;
+    } else if (totalPriceInTicket > 1000 && totalPriceInTicket < 10000) {
+      invoiceTax = 100;
+    }
+    if (totalPriceInTicket >= 10000 && totalPriceInTicket < 20000) {
+      invoiceTax = 150;
+    } else {
+      invoiceTax = 200;
+    }
+
+    // update();
+  }
+
   void getInvoice() async {
-    isLoadingPhone.value = true;
-    errorMessage = <String>[].obs;
-    print(booking['bookings']);
+    isIvoiceCreated.value = false;
+    FormState? formdata = formstate.currentState;
+    if (formdata!.validate()) {
+      formdata.save();
+
+      isLoadingPhone.value = true;
+      errorMessageInInvoice.value = '';
+      print(booking['bookings']);
+      Map<String, dynamic> data = {
+        // "invoice_amount": calculateIvoiceAmount(),
+        "invoice_amount": 100,
+        "customer_phone": phone.text.startsWith("0", 0)
+            ? "963${phone.text.substring(1)}"
+            : "963${phone.text}",
+        "bookings": booking['bookings']
+      };
+      print(data);
+      Either<String, List> response;
+      String token = await prefService.readString("token");
+      response = await PaymentApi.makeRequest(
+          targetRout: ServerConstApis.getInvoice,
+          method: "post",
+          token: token,
+          data: data);
+      print("response for invoice is:$response");
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is String) {
+        errorMessageInInvoice.value = handlingResponse;
+        // errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        isIvoiceCreated.value = true;
+        startTimer();
+        invoiceId.value =
+            handlingResponse[0]['original']['message']['Receipt']['Invoice'];
+        bookingIds = handlingResponse[1];
+        print("invoice id:$invoiceId");
+        // whenBookingSuccefly(handlingResponse);
+      }
+      isLoadingPhone.value = false;
+    }
+  }
+
+  sentOtp() async {
+    isLoadingotp.value = true;
     Map<String, dynamic> data = {
-      "invoice_amount": calculateIvoiceAmount(),
+      // "invoice_amount": calculateIvoiceAmount(),
+      "invoice_id": invoiceId.value,
       "customer_phone": phone.text,
-      "bookings": booking['bookings']
+      "amount": 100,
+      "ids": bookingIds
     };
-    print(data);
-    Either<ErrorResponse, Map<String, dynamic>> response;
+    Either<String, List> response;
     String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.getInvoice,
+    response = await PaymentApi.makeRequest(
+        targetRout: ServerConstApis.confirmPayment,
         method: "post",
         token: token,
         data: data);
     print("response for invoice is:$response");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
+    if (handlingResponse is String) {
+      isIvoiceCreated.value = false;
+      errorMessageInInvoice.value = handlingResponse;
+      _totalSeconds = 360.obs;
+      _isRunning = false.obs;
+      _hours = 00.obs;
+      _minutes = 6.obs;
+      _seconds = 00.obs;
+      timer!.cancel();
+      otp.clear();
     } else {
-      isIvoiceCreated.value = true;
-      // whenBookingSuccefly(handlingResponse);
+      print("success create:$handlingResponse");
     }
-    isLoadingPhone.value = false;
+    isLoadingotp.value = false;
   }
 
   int calculateIvoiceAmount() {
     int amount = 0;
     for (var i = 0; i < ticketList.length; i++) {
-      amount += ticketList[i].totalPrice;
+      amount += (ticketList[i].totalPrice - ticketList[i].tax);
     }
     return amount;
   }
@@ -96,6 +173,7 @@ class PaymentController extends GetxController {
           _totalSeconds.value--;
           updateTimerDisplay();
         } else {
+          isSentOtpActive.value = false;
           timer!.cancel();
         }
       });

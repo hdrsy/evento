@@ -55,7 +55,7 @@ class BookingO {
       age: json['age'] ?? 0,
       phoneNumber: json['phone_number'] ?? '',
       // interest: List<String>.from(json['interest'].map((x) => x)),
-      user: User.fromJson(json['user']),
+      user: User.fromJson(json['user'] ?? {}),
     );
   }
 }
