@@ -22,7 +22,7 @@ class AddFriendsModel {
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       image: json['image'] ?? "1",
-      type: json['type'],
+      type: json['type'] ?? "",
     );
   }
 }

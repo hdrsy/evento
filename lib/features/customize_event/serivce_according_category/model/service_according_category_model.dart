@@ -37,9 +37,9 @@ class ServiceProvider {
   factory ServiceProvider.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
-    var albumList = json['albums'] as List;
+    var albumList = json['albums'] == null ? [] : json['albums'] as List;
     List<Album> albums =
-        albumList.map((album) => Album.fromJson(album)).toList();
+        albumList.map((album) => Album.fromJson(album ?? {})).toList();
     print(json);
     return ServiceProvider(
       id: json['id'] ?? 0,
@@ -92,8 +92,6 @@ class Album {
   final List<String> images;
   final List<String>
       videos; // Can be further defined based on actual data structure
-  final String createdAt;
-  final String updatedAt;
 
   Album({
     required this.id,
@@ -101,8 +99,6 @@ class Album {
     required this.name,
     required this.images,
     required this.videos,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory Album.fromJson(Map<String, dynamic> oldJson) {
@@ -138,8 +134,6 @@ class Album {
           json['images'] != null ? parseImages(json['images'] as String) : [],
       videos:
           json['videos'] != null ? parseVideos(json['videos'] as String) : [],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
     );
   }
 }

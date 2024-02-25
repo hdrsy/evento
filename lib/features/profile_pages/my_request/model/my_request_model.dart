@@ -58,7 +58,8 @@ class MyRequestModel {
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       phoneNumber: json['phone_number'] ?? 0,
-      date: DateTime.parse(json['date'] ?? ''),
+      date:
+          json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
       startTime: json['start_time'] ?? '',
       endTime: json['end_time'] ?? '',
       adults: json['adults'] ?? 0,
@@ -70,7 +71,7 @@ class MyRequestModel {
       categoryId: json['category_id'] ?? 0,
       categoryTitle: json['category']['title'] ?? '',
       serviceProviders: serviceProviders,
-      venue: MyRequestVenue.fromJson(json['venue']),
+      venue: MyRequestVenue.fromJson(json['venue'] ?? {}),
     );
   }
 }

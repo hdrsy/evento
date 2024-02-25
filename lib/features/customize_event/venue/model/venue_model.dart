@@ -32,9 +32,9 @@ class Venue {
   factory Venue.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
-    var albumList = json['albums'] as List;
+    var albumList = json['albums'] == null ? json['albums'] as List : [];
     List<VenueAlbum> albums =
-        albumList.map((album) => VenueAlbum.fromJson(album)).toList();
+        albumList.map((album) => VenueAlbum.fromJson(album ?? {})).toList();
 
     return Venue(
       id: json['id'] ?? 0,
@@ -85,9 +85,9 @@ class VenueAlbum {
     }
 
     return VenueAlbum(
-      id: json['id'],
-      venueId: json['venue_id'],
-      name: json['name'],
+      id: json['id'] ?? 0,
+      venueId: json['venue_id'] ?? 0,
+      name: json['name'] ?? '',
       images: parseImages(json['images']),
       videos: parseImages(json['videos']),
     );

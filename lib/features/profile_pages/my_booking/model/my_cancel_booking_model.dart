@@ -34,7 +34,9 @@ class CancelledBooking {
   factory CancelledBooking.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
-    var interestList = jsonDecode(json['interest']) as List<dynamic>;
+    var interestList = json['interest'] != null
+        ? jsonDecode(json['interest']) as List<dynamic>
+        : [];
     return CancelledBooking(
       id: json['id'] ?? 0,
       userId: json['user_id'] ?? 0,
@@ -45,9 +47,13 @@ class CancelledBooking {
       phoneNumber: json['phone_number'] ?? 0,
       interest: interestList.map((e) => e.toString()).toList(),
       reason: json['reason'] ?? 0,
-      createdAt: DateTime.parse(json['created_at'] ?? ''),
-      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
-      eventClass: CancelledEventClass.fromJson(json['event_class']),
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : DateTime.now(),
+      eventClass: CancelledEventClass.fromJson(json['event_class'] ?? {}),
     );
   }
 }
@@ -67,7 +73,7 @@ class CancelledEventClass {
     return CancelledEventClass(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
-      event: CancelledEvent.fromJson(json['event']),
+      event: CancelledEvent.fromJson(json['event'] ?? {}),
     );
   }
 }
@@ -98,14 +104,16 @@ class CancelledEvent {
     return CancelledEvent(
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
-      images: json['images'] != null
-          ? List<String>.from(jsonDecode(json['images']).map((x) => x))
-          : [],
-      startDate: DateTime.parse(json['start_date'] ?? ''),
-      endDate: DateTime.parse(json['end_date'] ?? ''),
+      images: List<String>.from(jsonDecode(json['images']).map((x) => x)),
+      startDate: json['start_date'] != null
+          ? DateTime.parse(json['start_date'])
+          : DateTime.now(),
+      endDate: json['end_date'] != null
+          ? DateTime.parse(json['end_date'])
+          : DateTime.now(),
       venueId: json['venue_id'] ?? 0,
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
-      venue: CancelledVenue.fromJson(json['venue']),
+      venue: CancelledVenue.fromJson(json['venue'] ?? {}),
     );
   }
 }

@@ -14,10 +14,10 @@ class OrganizerFollowersModel {
 
   factory OrganizerFollowersModel.fromJson(Map<String, dynamic> json) {
     return OrganizerFollowersModel(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      profile: json['image'],
+      id: json['id'] ?? 0,
+      firstName: json['first_name'] ?? "",
+      lastName: json['last_name'] ?? '',
+      profile: json['image'] ?? "",
       friendRequestStatusWithAuthUser:
           json['friend_request_status_with_auth_user'],
     );

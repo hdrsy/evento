@@ -34,8 +34,7 @@ class SeeAllCard extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(
-                  // color: Color(0x33000000),
-                  color: Colors.red,
+                  color: Color(0x33000000),
                   blurRadius: 4,
                   offset: Offset(0, 2)),
             ]),
@@ -144,14 +143,14 @@ class SeeAllCard extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                    child: Icon(
-                      Icons.play_arrow_outlined,
-                      color: customColors.primaryText,
-                      size: 20,
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                  //   child: Icon(
+                  //     Icons.play_arrow_outlined,
+                  //     color: customColors.primaryText,
+                  //     size: 20,
+                  //   ),
+                  // ),
                   Obx(
                     () {
                       var eventModell =

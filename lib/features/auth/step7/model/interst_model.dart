@@ -8,12 +8,12 @@ class InterestItem {
   InterestItem({required this.id, required this.icon, required this.title});
 
   factory InterestItem.fromJson(Map<String, dynamic> oldJson) {
-    Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
- 
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return InterestItem(
-      id: json['id'],
-      icon: json['icon'],
-      title: json['title'],
+      id: json['id'] ?? 0,
+      icon: json['icon'] ?? '',
+      title: json['title'] ?? '',
     );
   }
 }

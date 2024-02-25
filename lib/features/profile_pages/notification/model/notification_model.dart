@@ -23,6 +23,8 @@ class NotificationModel {
         description: json['description'] ?? '',
         userId: json['user_id'] ?? 0,
         type: json['type'] ?? '',
-        createdAt: DateTime.parse(json['created_at'] ?? ''));
+        createdAt: json['created_at'] != null
+            ? DateTime.parse(json['created_at'])
+            : DateTime.now());
   }
 }

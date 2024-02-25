@@ -83,7 +83,7 @@ class FavoriteEventModel {
       description: json['description'] ?? '',
       type: json['type'] ?? '',
       venue: Venue.fromJson(json["venue"] ?? {}),
-      images: List<String>.from(jsonDecode(json['images'] ?? '[]')),
+      images: List<String>.from(jsonDecode(json['images'])),
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }

@@ -21,7 +21,7 @@ class Step1Controller extends GetxController {
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
     errorMessage = <String>[].obs;
-getOtp();
+    getOtp();
     super.onInit();
   }
 
@@ -38,10 +38,10 @@ getOtp();
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       pin.text = extractOtpFromMessage(handlingResponse['message']);
-      Get.snackbar(handlingResponse['message'], "",
-          // duration: Duration(minutes: 1),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: customColors.primaryBackground,colorText: customColors.primaryText);
+      // Get.snackbar(handlingResponse['message'], "",
+      //     // duration: Duration(minutes: 1),
+      //     snackPosition: SnackPosition.TOP,
+      //     backgroundColor: customColors.primaryBackground,colorText: customColors.primaryText);
     }
   }
 

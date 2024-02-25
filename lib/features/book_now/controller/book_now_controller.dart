@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/book_now/model/promo_code_model.dart';
+import 'package:flutter/material.dart';
 import '../../../core/server/helper_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/error_handling/erroe_handling.dart';
@@ -21,6 +22,8 @@ class BookNowController extends GetxController {
   late RxList<FreindsModel> myFreinds;
   late RxList<TicketModel> ticketList;
   late List<PromoCode> userCopuns;
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
+  ScrollController scrollController = ScrollController();
   @override
   void onInit() {
     EventDetailesController eventDetailesController = Get.find();
@@ -79,7 +82,7 @@ class BookNowController extends GetxController {
       }
     }
     discount = ticketList[ticketIndex].discount;
-    tax = getTaxForTicket(ticketIndex);
+    // tax = getTaxForTicket(ticketIndex);
     total =
         (ticketPrice + totalAminityPrice + totalClassPrice + tax) - discount;
     ticketList[ticketIndex].totalPrice = total;
@@ -239,32 +242,44 @@ class BookNowController extends GetxController {
   }
 
   void onPressBookNow() async {
-    isLoading.value = true;
-    errorMessage = <String>[].obs;
+    FormState? formdata = formstate.currentState;
+    if (formdata!.validate()) {
+      formdata.save();
+      Get.toNamed('/PaymentScreenInBooking', arguments: [
+        eventDetailsModel,
+        ticketList,
+        createBookingJson(ticketList)
+      ]);
+      // errorMessage = <String>[].obs;
+      // isLoading.value = true;
 
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.bookNow,
-        method: "post",
-        token: token,
-        data: createBookingJson(ticketList));
+      // Either<ErrorResponse, Map<String, dynamic>> response;
+      // String token = await prefService.readString("token");
+      // response = await ApiHelper.makeRequest(
+      //     targetRout: ServerConstApis.bookNow,
+      //     method: "post",
+      //     token: token,
+      //     data: createBookingJson(ticketList));
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      whenBookingSuccefly(handlingResponse);
+      // dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      // if (handlingResponse is ErrorResponse) {
+      //   errorMessage.value = handlingResponse.getErrorMessages();
+      //   Future.delayed(const Duration(milliseconds: 500))
+      //       .then((value) => scrollController.animateTo(
+      //             scrollController.position.maxScrollExtent,
+      //             duration: const Duration(milliseconds: 50),
+      //             curve: Curves.easeInOut,
+      //           ));
+      // } else {
+      //   whenBookingSuccefly(handlingResponse);
+      // }
+      // isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   whenBookingSuccefly(handlingResponse) {
     handlingResponse['message'] == "Booking successful"
-        ?
-        // Get.toNamed('/BookingDetailesScreen',
-        //     arguments: [eventDetailsModel, ticketList])
-        Get.toNamed('/PaymentScreenInBooking', arguments: [
+        ? Get.toNamed('/PaymentScreenInBooking', arguments: [
             eventDetailsModel,
             ticketList,
             createBookingJson(ticketList)

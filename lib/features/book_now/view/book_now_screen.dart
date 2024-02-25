@@ -1,4 +1,6 @@
 import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
+import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/buttons/general_button.dart';
@@ -31,110 +33,117 @@ class BookNowScreen extends StatelessWidget {
         ),
       ),
       child: Obx(
-        () => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 50,
-              child: Divider(
-                thickness: 3,
-                color: customColors.secondary,
+        () => Form(
+          key: bookNowController.formstate,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 50,
+                child: Divider(
+                  thickness: 3,
+                  color: customColors.secondary,
+                ),
               ),
-            ),
-            Expanded(
-                child: SingleChildScrollView(
-              padding: padding(0, 24, 0, 24),
-              child: Column(
-                children: [
-                  image(context),
-                  EventName(
-                    /////name
-                    eventName: bookNowController.eventDetailsModel.title,
-                  ),
-                  EventLocation(
-                    ///// show location
-                    eventLocation:
-                        bookNowController.eventDetailsModel.venue.governorate,
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 1,
-                    color: customColors.secondary,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // const TicketCount(),
-                  ...List.generate(
-                      bookNowController.ticketList.length,
-                      (index) => TicketCard(
-                            index: index,
-                          )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          BookNowController bookNowController = Get.find();
-                          bookNowController.addnewTicket();
+              Expanded(
+                  child: SingleChildScrollView(
+                controller: bookNowController.scrollController,
+                padding: padding(0, 24, 0, 24),
+                child: Column(
+                  children: [
+                    image(context),
+                    EventName(
+                      /////name
+                      eventName: bookNowController.eventDetailsModel.title,
+                    ),
+                    EventLocation(
+                      ///// show location
+                      eventLocation:
+                          bookNowController.eventDetailsModel.venue.governorate,
+                    ),
+                    Divider(
+                      height: 2,
+                      thickness: 1,
+                      color: customColors.secondary,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    // const TicketCount(),
+                    ...List.generate(
+                        bookNowController.ticketList.length,
+                        (index) => TicketCard(
+                              index: index,
+                            )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            BookNowController bookNowController = Get.find();
+                            bookNowController.addnewTicket();
+                          },
+                          child: Text(
+                            tr("Add Ticket"),
+                            style: customTextStyle.bodyMedium.override(
+                                fontFamily: primaryFontFamily,
+                                useGoogleFonts: true,
+                                fontSize: 14,
+                                color: customColors.primary),
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ],
+                    ),
+                    // const PaymontInformation(),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                      child: ButtonWidget(
+                        showLoadingIndicator: bookNowController.isLoading.value,
+                        onPressed: () async {
+                          bookNowController.ticketList.isNotEmpty
+                              ? bookNowController.onPressBookNow()
+                              : null;
                         },
-                        child: Text(
-                          tr("Add Ticket"),
-                          style: customTextStyle.bodyMedium.override(
-                              fontFamily: primaryFontFamily,
-                              useGoogleFonts: true,
-                              fontSize: 14,
-                              color: customColors.primary),
-                          textAlign: TextAlign.end,
+                        text: tr("Confirm Booking"),
+                        options: ButtonOptions(
+                          width: 300,
+                          height: 40,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              32, 0, 32, 0),
+                          iconPadding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: bookNowController.ticketList.isNotEmpty
+                              ? customColors.primary
+                              : customColors.alternate,
+                          textStyle: customTextStyle.displaySmall.override(
+                            fontFamily: 'Lexend Deca',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          elevation: 0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                      ),
-                    ],
-                  ),
-                  // const PaymontInformation(),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                    child: ButtonWidget(
-                      showLoadingIndicator: bookNowController.isLoading.value,
-                      onPressed: () async {
-                        bookNowController.ticketList.isNotEmpty
-                            ? bookNowController.onPressBookNow()
-                            : null;
-                      },
-                      text: tr("Confirm Booking"),
-                      options: ButtonOptions(
-                        width: 300,
-                        height: 40,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: bookNowController.ticketList.isNotEmpty
-                            ? customColors.primary
-                            : customColors.alternate,
-                        textStyle: customTextStyle.displaySmall.override(
-                          fontFamily: 'Lexend Deca',
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        elevation: 0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                  ),
-                  ...List.generate(
-                      bookNowController.errorMessage.length,
-                      (index) => ErrorMessages(
-                            message: bookNowController.errorMessage[index],
-                          )),
-                ],
-              ),
-            ))
-          ],
+                    ...List.generate(
+                        bookNowController.errorMessage.length,
+                        (index) => ErrorMessages(
+                              message: bookNowController.errorMessage[index],
+                            )),
+                  ].addToEnd(SizedBox(
+                    height: 15.h,
+                  )),
+                ),
+              ))
+            ],
+          ),
         ),
       ),
     );

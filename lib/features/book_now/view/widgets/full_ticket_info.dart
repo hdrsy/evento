@@ -1,4 +1,6 @@
 import 'package:evento/core/responsive/size_config.dart';
+import 'package:evento/core/shared/functions/validation/name_validation.dart';
+import 'package:evento/core/shared/functions/validation/phone_validation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
@@ -158,7 +160,7 @@ class FullTicketInfo extends StatelessWidget {
                             hint: "",
                             label: tr("First Name"),
                             validator: (value) {
-                              return null;
+                              return nameValidation(value);
                             })),
                     const SizedBox(
                       width: 5,
@@ -171,7 +173,7 @@ class FullTicketInfo extends StatelessWidget {
                             hint: "",
                             label: tr("Last Name"),
                             validator: (value) {
-                              return null;
+                              return nameValidation(value);
                             })),
                     const SizedBox(
                       width: 5,
@@ -182,7 +184,10 @@ class FullTicketInfo extends StatelessWidget {
                             hint: "",
                             label: tr("Age"),
                             validator: (value) {
-                              return null;
+                              int? age = int.tryParse(value!);
+                              return age != null && age < 12
+                                  ? "The Age must be greater than 12 year"
+                                  : null;
                             })),
                   ],
                 ),
@@ -274,7 +279,7 @@ class FullTicketInfo extends StatelessWidget {
                     hint: "",
                     label: tr("Phone Number"),
                     validator: (value) {
-                      return null;
+                      return phoneValidation(value);
                     })
               ],
             ),

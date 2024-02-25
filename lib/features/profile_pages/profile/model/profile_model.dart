@@ -8,7 +8,7 @@ class ProfileModel {
   final String state;
   final String image;
   final String type;
- 
+
   ProfileModel({
     required this.id,
     required this.firstName,
@@ -23,15 +23,17 @@ class ProfileModel {
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      phoneNumber: json['phone_number'],
-      gender: json['gender'],
-      birthDate: DateTime.parse(json['birth_date']),
-      state: json['state'],
-      image: json['image'],
-      type: json['type'],
+      id: json['id'] ?? 0,
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      phoneNumber: json['phone_number'] ?? '',
+      gender: json['gender'] ?? "",
+      birthDate: json['birth_date'] != null
+          ? DateTime.parse(json['birth_date'])
+          : DateTime.now(),
+      state: json['state'] ?? "",
+      image: json['image'] ?? '',
+      type: json['type'] ?? "",
     );
   }
 
@@ -46,6 +48,6 @@ class ProfileModel {
       'state': state,
       'image': image,
       'type': type,
-     };
+    };
   }
 }

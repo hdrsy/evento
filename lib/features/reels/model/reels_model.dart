@@ -53,14 +53,20 @@ class ReelModel {
           ? List<String>.from(jsonDecode(json['images']).map((x) => x))
           : [],
       description: json['description'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-      likesCount: json['likes_count'],
-      commentsCount: json['comments_count'],
-      likedByUser: json['liked_by_user'],
-      event: json['event'] != null ? EventModel.fromJson(json['event']) : null,
-      venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
-      user: json['user'] != null ? User.fromJson(json['user']) : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : DateTime.now(),
+      likesCount: json['likes_count'] ?? 0,
+      commentsCount: json['comments_count'] ?? 0,
+      likedByUser: json['liked_by_user'] ?? false,
+      event: json['event'] != null
+          ? EventModel.fromJson(json['event'] ?? {})
+          : null,
+      venue: json['venue'] != null ? Venue.fromJson(json['venue'] ?? {}) : null,
+      user: json['user'] != null ? User.fromJson(json['user'] ?? {}) : null,
     );
   }
 }

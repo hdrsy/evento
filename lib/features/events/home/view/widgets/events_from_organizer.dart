@@ -139,7 +139,7 @@ class EventsFromOrganizer extends StatelessWidget {
           children: [
             buildImage(imagePath),
             buildPriceTag(price),
-            buildSoundToggleButton(),
+            // buildSoundToggleButton(),
           ],
         ),
       ),

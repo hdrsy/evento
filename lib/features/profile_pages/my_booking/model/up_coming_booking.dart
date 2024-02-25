@@ -19,8 +19,10 @@ class UpComingBooking {
       UpComingBooking(
         userId: json['user_id'] ?? 0,
         eventId: json['event_id'] ?? 0,
-        bookings: List<EventBooking>.from(
-            json['bookings'].map((x) => EventBooking.fromJson(x))),
+        bookings: json['bookings'] != null
+            ? List<EventBooking>.from(
+                json['bookings'].map((x) => EventBooking.fromJson(x)))
+            : [],
       );
 }
 
@@ -58,8 +60,10 @@ class EventBooking {
       lastName: json['last_name'] ?? '',
       age: json['age'] ?? 0,
       phoneNumber: json['phone_number'] ?? 0,
-      interest: List<String>.from(jsonDecode(json['interest'])),
-      eventClass: CancelledEventClass.fromJson(json['event_class']),
+      interest: json['interest'] != null
+          ? List<String>.from(jsonDecode(json['interest']))
+          : [],
+      eventClass: CancelledEventClass.fromJson(json['event_class'] ?? {}),
     );
   }
 }

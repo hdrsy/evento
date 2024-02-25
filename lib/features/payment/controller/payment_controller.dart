@@ -122,22 +122,25 @@ class PaymentController extends GetxController {
     Map<String, dynamic> data = {
       // "invoice_amount": calculateIvoiceAmount(),
       "invoice_id": invoiceId.value,
-      "customer_phone": phone.text,
-      "amount": 100,
+      "customer_phone": phone.text.startsWith("0", 0)
+          ? "963${phone.text.substring(1)}"
+          : "963${phone.text}",
+      "code": otp.text,
       "ids": bookingIds
     };
-    Either<String, List> response;
+    print("the request data is :${data}");
+    Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
-    response = await PaymentApi.makeRequest(
+    response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.confirmPayment,
         method: "post",
         token: token,
         data: data);
     print("response for invoice is:$response");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is String) {
+    if (handlingResponse is ErrorResponse) {
       isIvoiceCreated.value = false;
-      errorMessageInInvoice.value = handlingResponse;
+      errorMessageInInvoice.value = handlingResponse.getErrorMessages()[0];
       _totalSeconds = 360.obs;
       _isRunning = false.obs;
       _hours = 00.obs;
@@ -147,6 +150,8 @@ class PaymentController extends GetxController {
       otp.clear();
     } else {
       print("success create:$handlingResponse");
+      Get.offAndToNamed('/BookingDetailesScreen',
+          arguments: [eventDetailsModel, ticketList]);
     }
     isLoadingotp.value = false;
   }

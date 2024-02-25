@@ -3,8 +3,6 @@ class SentRequest {
   int senderId;
   int receiverId;
   String status;
-  String createdAt;
-  String updatedAt;
   Receiver receiver;
 
   SentRequest({
@@ -12,8 +10,6 @@ class SentRequest {
     required this.senderId,
     required this.receiverId,
     required this.status,
-    required this.createdAt,
-    required this.updatedAt,
     required this.receiver,
   });
 
@@ -21,9 +17,7 @@ class SentRequest {
         id: json['id'] ?? 0,
         senderId: json['sender_id'] ?? 0,
         receiverId: json['receiver_id'] ?? 0,
-        status: json['status'],
-        createdAt: json['created_at'],
-        updatedAt: json['updated_at'],
+        status: json['status'] ?? "",
         receiver: Receiver.fromJson(json['receiver']),
       );
 }

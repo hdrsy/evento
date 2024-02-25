@@ -19,18 +19,15 @@ class OrganizerProfileModel {
       required this.organizedEvents});
 
   factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
-    print(json['followers_count']);
     return OrganizerProfileModel(
-      id: json['id'],
+      id: json['id'] ?? 0,
       followersCount: json['followers_count'] ?? 0,
       followingCount: json['following_count'] ?? 0,
       organizedEventsCount: json['organized_events_count'] ?? 0,
-      organizerInfo: json['organizer_info'] != null
-          ? OrganizerInfo.fromJson(json['organizer_info'] ?? {})
-          : null,
+      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
       organizedEvents: json['organized_events'] != null
           ? List<OrganizerProfileEvent>.from(json['organized_events']
-              .map((x) => OrganizerProfileEvent.fromJson(x)))
+              .map((x) => OrganizerProfileEvent.fromJson(x ?? {})))
           : [],
     );
   }
@@ -68,13 +65,17 @@ class OrganizerInfo {
       bio: json['bio'] ?? '',
       services: json['services'] ?? '',
       state: json['state'] ?? '',
-      categories: List<Category>.from(
-          json['categories'].map((x) => Category.fromJson(x))),
+      categories: json['categories'] != null
+          ? List<Category>.from(
+              json['categories'].map((x) => Category.fromJson(x ?? {})))
+          : [],
       profile: json['profile'] ?? '',
       cover: json['cover'] ?? '',
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
-      albums: List<OrganizerProfileAlbum>.from(
-          json['albums'].map((x) => OrganizerProfileAlbum.fromJson(x))),
+      albums: json['albums'] != null
+          ? List<OrganizerProfileAlbum>.from(json['albums']
+              .map((x) => OrganizerProfileAlbum.fromJson(x ?? [])))
+          : [],
     );
   }
 }

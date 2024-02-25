@@ -37,8 +37,8 @@ class PromoCode {
       description: json['description'] ?? '',
       image: json['image'] ?? '',
       code: json['code'] ?? '',
-      discount: json['discount'] ?? 0,
-      limit: json['limit'] ?? 0,
+      discount: json['discount'],
+      limit: json['limit'],
       startDate: json['start-date'] != null
           ? DateTime.parse(json['start-date'])
           : DateTime.now(),
@@ -60,16 +60,12 @@ class PromoCodeEvent {
   final int id;
   final int eventId;
   final int promoCodeId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
   final PromoCodeEventDetails? eventDetails;
 
   PromoCodeEvent({
     required this.id,
     required this.eventId,
     required this.promoCodeId,
-    required this.createdAt,
-    required this.updatedAt,
     required this.eventDetails,
   });
 
@@ -79,8 +75,6 @@ class PromoCodeEvent {
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
       promoCodeId: json['promo_code_id'] ?? 0,
-      createdAt: DateTime.parse(json['created_at'] ?? ''),
-      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
       eventDetails: json['event'] != null
           ? PromoCodeEventDetails.fromJson(json['event'])
           : null,

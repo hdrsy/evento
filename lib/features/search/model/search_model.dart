@@ -19,10 +19,10 @@ class SearchModel {
     return SearchModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? '',
-        startDate: DateTime.parse(json['start_date'] ?? ''),
-        images: json['images'] != null
-            ? List<String>.from(jsonDecode(json['images']).map((x) => x))
-            : []);
+        startDate: json['start_date'] != null
+            ? DateTime.parse(json['start_date'])
+            : DateTime.now(),
+        images: List<String>.from(jsonDecode(json['images']).map((x) => x)));
   }
 
   Map<String, dynamic> toJson() {

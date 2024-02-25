@@ -39,7 +39,7 @@ class EventModel {
             : [],
         isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
         venue: json.containsKey('venue')
-            ? EventHomeVenue.fromJson(json['venue'])
+            ? EventHomeVenue.fromJson(json['venue'] ?? {})
             : null);
   }
   Map<String, dynamic> toJson() {

@@ -113,9 +113,7 @@ class EventDetailsModel {
           ? List<CategoryEvent>.from(
               json['categories_events'].map((x) => CategoryEvent.fromJson(x)))
           : [],
-      classes: json['classes'] != null
-          ? List<Class>.from(json['classes'].map((x) => Class.fromJson(x)))
-          : [],
+      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
       serviceProvider: json['service_providers'] != null
           ? List<ServiceProvider>.from(json['service_providers']
               .map((x) => ServiceProvider.fromJson(x ?? {})))
