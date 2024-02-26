@@ -3,7 +3,6 @@ import 'package:evento/features/events/home/controller/event_state_manager.dart'
 import 'package:evento/features/events/see_all/controller/see_all_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/helper/date_formatter.dart';

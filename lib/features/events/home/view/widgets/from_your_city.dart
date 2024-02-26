@@ -1,3 +1,5 @@
+import 'package:marquee/marquee.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -169,15 +171,30 @@ Widget buildEventText(String category, String dateTime) {
       children: [
         Align(
           alignment: const AlignmentDirectional(-1.00, 1.00),
-          child: Text(
-            category,
-            style: customTextStyle.bodyMedium.override(
-              fontFamily: 'BeerSerif',
-              color: customColors.info,
-              fontSize: 18,
-              useGoogleFonts: false,
-            ),
-          ),
+          child: category.length > 15
+              ? SizedBox(
+                  width: screenWidth * 0.5,
+                  height: screenHeight * 0.03,
+                  child: Marquee(
+                    text: category,
+                    scrollAxis: Axis.horizontal,
+                    blankSpace: 20.0,
+                    velocity: 70.0,
+                    pauseAfterRound: const Duration(seconds: 3),
+                    style: customTextStyle.headlineSmall.copyWith(
+                      fontSize: 18,
+                    ),
+                  ),
+                )
+              : Text(
+                  category,
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.info,
+                    fontSize: 18,
+                    useGoogleFonts: false,
+                  ),
+                ),
         ),
         Align(
           alignment: const AlignmentDirectional(-1.00, 1.00),

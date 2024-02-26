@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/book_now/model/promo_code_model.dart';
 import 'package:flutter/material.dart';

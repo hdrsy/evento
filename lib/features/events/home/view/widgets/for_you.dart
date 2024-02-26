@@ -1,3 +1,5 @@
+import 'package:marquee/marquee.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -221,16 +223,35 @@ Widget buildEventText(String title, String dateTime) {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: customTextStyle.bodyMedium.override(
-            fontFamily: breeSerif,
-            color: customColors.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            useGoogleFonts: true,
-          ),
-        ),
+        title.length > 20
+            ? SizedBox(
+                width: screenWidth * 0.5,
+                height: screenHeight * 0.03,
+                child: Marquee(
+                  text: title,
+                  scrollAxis: Axis.horizontal,
+                  blankSpace: 20.0,
+                  velocity: 70.0,
+                  pauseAfterRound: const Duration(seconds: 3),
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: breeSerif,
+                    color: customColors.primary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    useGoogleFonts: true,
+                  ),
+                ),
+              )
+            : Text(
+                title,
+                style: customTextStyle.bodyMedium.override(
+                  fontFamily: breeSerif,
+                  color: customColors.primary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts: true,
+                ),
+              ),
         Text(
           dateTime,
           style: customTextStyle.bodySmall.override(

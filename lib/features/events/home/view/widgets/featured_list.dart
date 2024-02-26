@@ -2,6 +2,7 @@ import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
@@ -21,7 +22,6 @@ import 'home_loading_widget.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class FeaturedList extends StatelessWidget {
@@ -137,15 +137,36 @@ class FeaturedWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              eventModel.title,
-                              style: customTextStyle.headlineSmall.override(
-                                fontFamily: 'BeerSerif',
-                                color: customColors.primaryText,
-                                fontSize: 18,
-                                useGoogleFonts: false,
-                              ),
-                            ),
+                            eventModel.title.length > 20
+                                ? SizedBox(
+                                    width: screenWidth * 0.5,
+                                    height: screenHeight * 0.03,
+                                    child: Marquee(
+                                      text: eventModel.title,
+                                      scrollAxis: Axis.horizontal,
+                                      blankSpace: 20.0,
+                                      velocity: 70.0,
+                                      pauseAfterRound:
+                                          const Duration(seconds: 3),
+                                      style: customTextStyle.headlineSmall
+                                          .override(
+                                        fontFamily: 'BeerSerif',
+                                        color: customColors.primaryText,
+                                        fontSize: 18,
+                                        useGoogleFonts: false,
+                                      ),
+                                    ),
+                                  )
+                                : Text(
+                                    eventModel.title,
+                                    style:
+                                        customTextStyle.headlineSmall.override(
+                                      fontFamily: 'BeerSerif',
+                                      color: customColors.primaryText,
+                                      fontSize: 18,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
                             Text(
                               DateFormatter.formatDate(eventModel.startDate),
                               style: customTextStyle.bodyMedium.override(

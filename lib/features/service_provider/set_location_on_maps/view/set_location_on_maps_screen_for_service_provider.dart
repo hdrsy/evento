@@ -34,8 +34,8 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
     try {
       Position currentLocation = await _locationService.getCurrentLocation();
 
-      _moveCameraTo(LatLng(
-          currentLocation.latitude ?? 0.0, currentLocation.longitude ?? 0.0));
+      _moveCameraTo(
+          LatLng(currentLocation.latitude, currentLocation.longitude));
     } catch (e) {
       // Handle the exception (e.g., show an error message)
       print('Error getting location: $e');

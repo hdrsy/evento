@@ -185,7 +185,7 @@ class DirctionController extends GetxController {
   void drawRoute() async {
     var currentLocation = await locationService.getCurrentLocation();
     LatLng startLocation =
-        LatLng(currentLocation.latitude!, currentLocation.longitude!);
+        LatLng(currentLocation.latitude, currentLocation.longitude);
     LatLng destinationLocation = LatLng(latitude, longitude);
 
     PolylinePoints polylinePoints = PolylinePoints();

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/shared/functions/validation/phone_validation.dart';
 import 'package:evento/core/shared/functions/validation/pin.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/shared/widgets/text_fields/pin.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
@@ -219,7 +218,7 @@ class PhonePayment extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Payment Details",
+              "MTN Payment Number",
               style: customTextStyle.bodyMedium.override(
                 fontFamily: 'Nunito',
                 color: customColors.primaryText,
@@ -227,7 +226,7 @@ class PhonePayment extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 useGoogleFonts: false,
               ),
-            ),
+            ).tr(),
             SizedBox(
               height: 10.h,
             ),

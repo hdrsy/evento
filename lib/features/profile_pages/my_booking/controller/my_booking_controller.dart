@@ -26,7 +26,6 @@ class MyBookingController extends GetxController {
     isLoading = false.obs;
     await getUpComingAndCompletedBooking();
     await getCalceledBooking();
-    // TODO: implement onInit
     super.onInit();
   }
 

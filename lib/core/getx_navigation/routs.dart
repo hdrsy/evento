@@ -19,7 +19,6 @@ import '../../features/auth/forget_password_pages/set_new_password/view/set_new_
 import '../../features/auth/forget_password_pages/verify_forget_password/view/verify_forget_password.dart';
 import '../../features/booking_detailes_for_my_booking_screen/controller/binding/booking_detailes_binding.dart';
 import '../../features/booking_detailes_for_my_booking_screen/view/booking_detailes_screen.dart';
-import '../../features/customize_event/payment/view/payment_screen.dart';
 import '../../features/customize_event/venue/controller/binding/venue_binding.dart';
 import '../../features/customize_event/venue/view/venue_screen.dart';
 import '../../features/customize_event/venue_detailes/controller/binding/venue_detailes_binding.dart';

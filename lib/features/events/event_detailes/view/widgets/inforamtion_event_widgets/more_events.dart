@@ -195,11 +195,11 @@ class MoreEventsCard extends StatelessWidget {
                           height: 20,
                           child: marqueeTitle(relatedEventModel.title),
                         ),
-                        Icon(
-                          Icons.play_arrow_outlined,
-                          color: customColors.primaryText,
-                          size: 25,
-                        ),
+                        // Icon(
+                        //   Icons.play_arrow_outlined,
+                        //   color: customColors.primaryText,
+                        //   size: 25,
+                        // ),
                       ],
                     ),
                   ),

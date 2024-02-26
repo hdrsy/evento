@@ -3,7 +3,6 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/model/ticket_in_event_for_organization_model.dart';
 import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
@@ -11,7 +10,7 @@ import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
 class TicketsInEventForOrganizerController extends GetxController {
-  late BookingResponse bookingResponse;
+  BookingResponse bookingResponse = BookingResponse(booking: {});
   late OrganizationProfileEvent organizationProfileEvent;
   late int eventId;
   List<TicketModel> generatedTicketModel = [];
@@ -25,7 +24,6 @@ class TicketsInEventForOrganizerController extends GetxController {
     organizationProfileEvent = Get.arguments[1];
     isLoading = false.obs;
     getOrganizerFollowers();
-    // TODO: implement onInit
     super.onInit();
   }
 

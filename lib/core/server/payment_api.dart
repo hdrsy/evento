@@ -6,7 +6,6 @@ import 'dart:ui';
 import 'package:dartz/dartz.dart';
 
 import 'package:get/get.dart';
-import '../utils/error_handling/erroe_handling.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 

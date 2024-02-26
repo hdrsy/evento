@@ -104,7 +104,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                 ),
               ].divide(const SizedBox(width: 5)),
             ),
-            eventDetailesController.eventDetailsModel.organizer == null
+            eventDetailesController.eventDetailsModel.organizer == null ||
+                    eventDetailesController.isSameUser
                 ? const SizedBox.shrink()
                 : GetBuilder<EventDetailesController>(builder: (context) {
                     return ButtonWidget(

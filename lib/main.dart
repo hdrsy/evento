@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/socket_servie.dart';
-import 'package:evento/core/utils/services/work_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workmanager/workmanager.dart';
 import 'core/getx_navigation/routs.dart';

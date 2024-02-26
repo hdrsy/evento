@@ -114,12 +114,21 @@ class OrganizationProfileScreen extends StatelessWidget {
               width: 2,
             ),
             image: DecorationImage(
-                image: getImageNetwork(
-                        url:
-                            "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
-                        width: double.infinity,
-                        height: null)
-                    .image)),
+              image: organizerProfileController
+                          .organizerProfileModel.organizerInfo.profile !=
+                      null
+                  ? getImageNetwork(
+                          url:
+                              "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
+                          width: double.infinity,
+                          height: null)
+                      .image
+                  : Image.asset(
+                      'assets/images/faceBookProfile.jfif',
+                      // fit: BoxFit.,
+                      alignment: const Alignment(0, 0),
+                    ),
+            )),
       ),
     );
   }
@@ -318,7 +327,6 @@ class MyTabBarWidget extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildEventsTab(BuildContext context) {
     final OrganizationProfileController organizerProfileController = Get.find();

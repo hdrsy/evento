@@ -1,6 +1,3 @@
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -11,9 +8,9 @@ import 'package:get/get.dart';
 import '../controller/ServiceAccordingDetailesForUserController.dart';
 
 class DetailesCard extends StatelessWidget {
-   DetailesCard({super.key});
-final ServiceAccordingDetailesForUserController serviceAccordingDetailesController =
-      Get.find();
+  DetailesCard({super.key});
+  final ServiceAccordingDetailesForUserController
+      serviceAccordingDetailesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +18,14 @@ final ServiceAccordingDetailesForUserController serviceAccordingDetailesControll
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-           _buildIconTextRow(context, Icons.description_outlined, 'Description', serviceAccordingDetailesController.serviceProvider.description),
-            // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
-            _buildIconTextRow(context, Icons.location_on_outlined, 'Location', serviceAccordingDetailesController.serviceProvider.address),
-            // _buildLocationButton(context),
-        ].divide(const SizedBox(height: 20))
+          _buildIconTextRow(context, Icons.description_outlined, 'Description',
+              serviceAccordingDetailesController.serviceProvider.description),
+          // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
+          _buildIconTextRow(context, Icons.location_on_outlined, 'Location',
+              serviceAccordingDetailesController.serviceProvider.address),
+          // _buildLocationButton(context),
+        ]
+            .divide(const SizedBox(height: 20))
             .addToStart(const SizedBox(height: 16))
             .addToEnd(const SizedBox(height: 16)),
       ),

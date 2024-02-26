@@ -1,9 +1,7 @@
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
-import '../../../customize_event/service_category/view/widgets/next_step_button.dart';
 import '../controller/see_all_service_category_controller.dart';
 import 'widget/service_card.dart';
-import 'widget/venue_card.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,5 @@
 import 'package:evento/core/utils/services/notification_service.dart';
+import 'package:evento/main.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -24,7 +25,7 @@ void listenToEvents(int userId) {
       var data = json.decode(decodedMessage['data']);
 
       print((data['title']).toString());
-
+      isThereNotification.value = true;
       NotificationService()
           .showNotification(112233, data['title'], data['description']);
     }

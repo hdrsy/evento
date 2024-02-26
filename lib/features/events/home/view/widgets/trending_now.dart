@@ -2,6 +2,7 @@ import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../../../core/responsive/helper_functions.dart';
 import '../../../../../core/responsive/responsive.dart';
@@ -19,7 +20,6 @@ import 'home_loading_widget.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class TrendingNow extends StatelessWidget {
@@ -241,12 +241,27 @@ class TrendingNow extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          eventName,
-          style: customTextStyle.headlineSmall.copyWith(
-            fontSize: 18,
-          ),
-        ),
+        eventName.length > 20
+            ? SizedBox(
+                width: screenWidth * 0.5,
+                height: screenHeight * 0.03,
+                child: Marquee(
+                  text: eventName,
+                  scrollAxis: Axis.horizontal,
+                  blankSpace: 20.0,
+                  velocity: 70.0,
+                  pauseAfterRound: const Duration(seconds: 3),
+                  style: customTextStyle.headlineSmall.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            : Text(
+                eventName,
+                style: customTextStyle.headlineSmall.copyWith(
+                  fontSize: 18,
+                ),
+              ),
         buildShareAndFavoriteIcons(modelIndex, eventId),
       ],
     );

@@ -100,7 +100,7 @@ class EventCard extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -119,7 +119,7 @@ class EventCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 10.h,
+                          height: 8.h,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,

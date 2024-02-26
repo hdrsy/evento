@@ -535,13 +535,15 @@
       "Latakia": "Latakia",
       "Rif Dimashq": "Rif Dimashq"
     
-    
+,      "MTN Payment Number":"MTN Payment Number"
+
+
       
      ,   "confirmDelete": "Are you sure you want to delete your account?",
         "deleteAccount": "Delete Account",
         "somethingWrong": "Something Wrong!!"
       ,"Delete Account":"Delete Account",
-      "Yes, Delete":"Yes, Delete"
-      
-  
+      "Yes, Delete":"Yes, Delete",
+      "Booked Successfully":"Booked Successfully",
+  "You have booked 1 Tickets Successfully in event":"You have booked 1 Tickets Successfully in event"
 }

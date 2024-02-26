@@ -37,7 +37,7 @@ class EventDetailesController extends GetxController {
   late String cacheKey;
   late RxBool isSomeThingError;
   final ConnectivityService _connectivityService = Get.find();
-
+  bool isSameUser = false;
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
@@ -128,6 +128,9 @@ class EventDetailesController extends GetxController {
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
     print("objectrrrrr:${eventDetailsModel.organizer}");
+    isSameUser = eventDetailsModel.organizer != null
+        ? user!.id == eventDetailsModel.organizer!.id
+        : false;
     relatedEvents.value = List<EventModel>.from(
         handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
   }

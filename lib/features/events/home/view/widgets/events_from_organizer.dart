@@ -1,3 +1,5 @@
+import 'package:marquee/marquee.dart';
+
 import '../../../../../core/responsive/helper_functions.dart';
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/server/server_config.dart';
@@ -231,12 +233,27 @@ class EventsFromOrganizer extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          eventName,
-          style: customTextStyle.headlineSmall.copyWith(
-            fontSize: 18,
-          ),
-        ),
+        eventName.length > 20
+            ? SizedBox(
+                width: screenWidth * 0.5,
+                height: screenHeight * 0.03,
+                child: Marquee(
+                  text: eventName,
+                  scrollAxis: Axis.horizontal,
+                  blankSpace: 20.0,
+                  velocity: 70.0,
+                  pauseAfterRound: const Duration(seconds: 3),
+                  style: customTextStyle.headlineSmall.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            : Text(
+                eventName,
+                style: customTextStyle.headlineSmall.copyWith(
+                  fontSize: 18,
+                ),
+              ),
         buildShareAndFavoriteIcons(modelIndex),
       ],
     );

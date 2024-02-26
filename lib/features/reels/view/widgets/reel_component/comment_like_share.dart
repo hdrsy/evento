@@ -1,6 +1,4 @@
 import 'package:evento/core/const/share_event_and_app.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';

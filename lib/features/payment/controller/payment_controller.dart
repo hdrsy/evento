@@ -76,6 +76,7 @@ class PaymentController extends GetxController {
 
   void getInvoice() async {
     isIvoiceCreated.value = false;
+    otp.clear();
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
