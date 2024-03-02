@@ -24,7 +24,7 @@ class EventCard extends StatelessWidget {
         Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
       },
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 10),
+        padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 20),
         child: Container(
           width: screenWidth * 0.7,
           height: screenHeight * 0.2,
@@ -119,7 +119,7 @@ class EventCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 8.h,
+                          height: 5.h,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,

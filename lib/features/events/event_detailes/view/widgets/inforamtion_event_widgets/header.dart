@@ -42,7 +42,7 @@ Widget buildHeader(BuildContext context, EventDetailsModel eventDetailsModel) {
         child: eventDetailsModel.title.length > 15
             ? SizedBox(
                 width: screenWidth * 0.5,
-                height: screenHeight * 0.03,
+                height: screenHeight * 0.04,
                 child: Marquee(
                     text: eventDetailsModel.title,
                     scrollAxis: Axis.horizontal,

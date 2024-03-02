@@ -14,9 +14,7 @@ class CardsVideoWidget extends StatefulWidget {
       required this.soundControlCallback, // Require the callback in the constructor
       this.autoPlay = false,
       required this.videoHgiht,
-      required this.videoWidth}) {
-    // TODO: implement CardsVideoWidget
-  }
+      required this.videoWidth}) {}
   final SoundControlCallback soundControlCallback; // Add the callback here
   final String currentVideoUrl;
   final double videoHgiht;
@@ -74,15 +72,6 @@ class _VideoWidgetState extends State<CardsVideoWidget>
       }
     });
     // }
-  }
-
-  void _setVideoSound() {
-    bool playSound = widget
-        .soundControlCallback(); // Call the callback to determine sound state
-    print(playSound);
-    videoPlayerController
-        .setVolume(playSound ? 1.0 : 0.0); // Set volume based on callback
-    print(videoPlayerController.value.volume);
   }
 
   @override

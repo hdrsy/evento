@@ -117,7 +117,7 @@ class DirctionController extends GetxController {
   Marker? userMarker; // Marker for user location
   final Set<Polyline> polylines = {};
   LocationService locationService = LocationService();
-  Completer<GoogleMapController> _controller = Completer();
+  // Completer<GoogleMapController> _controller = Completer();
   @override
   void onInit() async {
     super.onInit();
@@ -145,13 +145,13 @@ class DirctionController extends GetxController {
   }
 
   void updateMapView() async {
-    if (userMarker != null && myMarker != null) {
-      LatLngBounds bounds =
-          _boundsFromLatLngList([userMarker!.position, myMarker.position]);
+    if (userMarker != null) {
+      // LatLngBounds bounds =
+      //     _boundsFromLatLngList([userMarker!.position, myMarker.position]);
     }
   }
 
-  LatLngBounds _boundsFromLatLngList(List<LatLng> list) {
+  LatLngBounds boundsFromLatLngList(List<LatLng> list) {
     double? x0, x1, y0, y1;
     for (LatLng latLng in list) {
       if (x0 == null) {

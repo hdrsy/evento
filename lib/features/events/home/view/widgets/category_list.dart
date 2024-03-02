@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:evento/core/utils/theme/theme_controller.dart';
 
 import '../../../../../core/server/server_config.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -39,8 +40,9 @@ class CategoryList extends StatelessWidget {
 }
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({super.key, required this.categoryModel});
+  CategoryWidget({super.key, required this.categoryModel});
   final CategoryModel categoryModel;
+  final ThemeController themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     double fontSize = 12;
@@ -80,32 +82,35 @@ class CategoryWidget extends StatelessWidget {
                 categoryModel.title
               ]);
             },
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: customColors.primaryBackground,
-                image: DecorationImage(
-                  image: categoryModel.title == "Tonight" ||
-                          categoryModel.title == "This Week"
-                      ? Image.asset(
-                          Get.isDarkMode
-                              ? categoryModel.iconlight!
-                              : categoryModel.icon,
-                          fit: BoxFit.cover,
-                          width: 70,
-                          height: 70,
-                        ).image
-                      : getImageNetworkImageProvider(
-                          url: categoryModel.icon,
-                          width: 70,
-                          height: 70,
-                        ),
-                ),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              alignment: const AlignmentDirectional(0.00, 0.00),
-            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: categoryModel.title == "Tonight" ||
+                        categoryModel.title == "This Week"
+                    ? Image.asset(
+                        Get.isDarkMode
+                            ? categoryModel.iconlight!
+                            : categoryModel.icon,
+                        fit: BoxFit.cover,
+                        width: 70,
+                        height: 70,
+                      )
+                    : Obx(
+                        () => Stack(children: [
+                          Image.asset(
+                            themeController.theThemeIsDark.value
+                                ? 'assets/images/bdark.png'
+                                : 'assets/images/blight.png',
+                            fit: BoxFit.cover,
+                            width: 70,
+                            height: 70,
+                          ),
+                          getImageNetwork(
+                            url: categoryModel.icon,
+                            width: 70,
+                            height: 70,
+                          ),
+                        ]),
+                      )),
           ),
         ),
         Padding(

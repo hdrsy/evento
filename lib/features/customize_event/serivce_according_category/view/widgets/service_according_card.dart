@@ -149,7 +149,7 @@ class ServiceAccordingCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      serviceProvider.rating.toString(),
+                      serviceProvider.rating!.toStringAsFixed(1),
                       style: customTextStyle.labelMedium,
                     ),
                     Icon(

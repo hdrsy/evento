@@ -128,9 +128,11 @@ class EventDetailesController extends GetxController {
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
     print("objectrrrrr:${eventDetailsModel.organizer}");
-    isSameUser = eventDetailsModel.organizer != null
-        ? user!.id == eventDetailsModel.organizer!.id
-        : false;
+    isSameUser = isGuset
+        ? true
+        : eventDetailsModel.organizer != null
+            ? user!.id == eventDetailsModel.organizer!.id
+            : false;
     relatedEvents.value = List<EventModel>.from(
         handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
   }

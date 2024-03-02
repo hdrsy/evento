@@ -54,7 +54,6 @@ class PaymentController extends GetxController {
 
     totalAmount = calculateIvoiceAmount();
     getTaxInvoice(totalAmount);
-    // TODO: implement onInit
     super.onInit();
   }
 

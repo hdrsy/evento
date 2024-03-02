@@ -52,9 +52,9 @@ class ServiceProvider {
       address: json['address'] ?? '',
       profile: json['profile'] ?? '',
       cover: json['cover'] ?? "",
-      rating: json['average_rating'] != null
-          ? double.parse(json['average_rating'])
-          : 0,
+      rating: json['average_rating'] == null
+          ? 0
+          : double.parse(json['average_rating']),
       description: json['description'] ?? "",
       user: User.fromJson(json['user']),
       albums: albums,

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -120,15 +119,13 @@ class EventReviewController extends GetxController {
         data: dataRequest,
         files: fileMap);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    log("Ggggggggggggggggggggggggggggggggggg");
-    log("Ggggggggggggggggggggggggggggggggggg");
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
       isLoading.value = false;
     } else {
       isLoading.value = false;
 
-      Get.toNamed('/PaymentScreen');
+      Get.offAllNamed('/home');
     }
   }
 }

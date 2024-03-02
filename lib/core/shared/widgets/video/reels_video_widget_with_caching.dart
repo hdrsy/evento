@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:evento/core/shared/controllers/tween_animation_controller.dart';
 import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';

@@ -25,7 +25,7 @@ class OrganizationProfileModel {
       followersCount: json['followers_count'] ?? 0,
       followingCount: json['following_count'] ?? 0,
       organizedEventsCount: json['organized_events_count'] ?? 0,
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
+      organizerInfo: OrganizerInfo.fromJson(json['organizer_info'] ?? {}),
       organizedEvents: json['organized_events'] != null
           ? List<OrganizationProfileEvent>.from(json['organized_events']
               .map((x) => OrganizationProfileEvent.fromJson(x)))

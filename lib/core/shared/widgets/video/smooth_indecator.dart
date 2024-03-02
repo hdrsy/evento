@@ -38,12 +38,14 @@ class CustomSmoothVideoProgress extends HookWidget {
     final animationController = useAnimationController(
         duration: value.duration, keys: [value.duration]);
 
-    final targetRelativePosition =
-        value.position.inMilliseconds / value.duration!.inMilliseconds;
+    final targetRelativePosition = value.duration == null
+        ? 0.0
+        : (value.position.inMilliseconds / value.duration!.inMilliseconds);
 
     final currentPosition = Duration(
-        milliseconds:
-            (animationController.value * value.duration!.inMilliseconds)
+        milliseconds: value.duration == null
+            ? 0
+            : (animationController.value * value.duration!.inMilliseconds)
                 .round());
 
     final offset = value.position - currentPosition;
@@ -78,8 +80,9 @@ class CustomSmoothVideoProgress extends HookWidget {
     return AnimatedBuilder(
       animation: animationController,
       builder: (context, child) {
-        final millis =
-            animationController.value * value.duration!.inMilliseconds;
+        final millis = value.duration == null
+            ? 0
+            : animationController.value * value.duration!.inMilliseconds;
         return builder(
           context,
           Duration(milliseconds: millis.round()),

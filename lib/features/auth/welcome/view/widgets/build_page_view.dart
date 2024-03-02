@@ -22,15 +22,13 @@ class BuildPageView extends StatelessWidget {
               title: tr("Unearth Upcoming Events"),
               smallTitle: tr(
                   "Dive deep into a curated list of events, workshops, and festivals happening around you or anywhere in the world."),
-              imagePath:
-                  "assets/images/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space.jpg"),
+              imagePath: "assets/images/pexels-annam-w-1120162.jpg"),
           buildTextAndImageInBackGround(
               context: context,
               title: tr("Tailored Just for You"),
               smallTitle: tr(
                   "Based on your interests and preferences, get personalized event recommendations that match your vibe."),
-              imagePath:
-                  "assets/images/Encore_EventType_TheatreConcertandSpecialEvents_4.jpg"),
+              imagePath: "assets/images/dark-2574089_640.jpg"),
           buildTextAndImageInBackGround(
               context: context,
               title: tr("Never Miss a Moment"),

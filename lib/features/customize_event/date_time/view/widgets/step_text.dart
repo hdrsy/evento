@@ -11,7 +11,6 @@ class StepText2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return // Generated code for this RichText Widget...
         RichText(
-      textScaleFactor: MediaQuery.of(context).textScaleFactor,
       text: TextSpan(
         children: [
           TextSpan(

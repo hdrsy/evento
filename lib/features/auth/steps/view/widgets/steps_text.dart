@@ -11,11 +11,10 @@ class StepsText extends StatelessWidget {
   Widget build(BuildContext context) {
     return // Generated code for this RichText Widget...
         RichText(
-      textScaleFactor: MediaQuery.of(context).textScaleFactor,
       text: TextSpan(
         children: [
           TextSpan(
-            text:tr( "STEP"),
+            text: tr("STEP"),
             style: GoogleFonts.getFont(
               'Rubik',
               color: const Color(0xFF4B39EF),

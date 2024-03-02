@@ -106,6 +106,7 @@ Widget floatingActionButton() {
         Get.toNamed('/MapScreen');
       }
     },
+    // shape: ShapeBorder(),
     backgroundColor: customColors.primary,
     icon: Icon(
       Icons.location_on,
@@ -113,6 +114,7 @@ Widget floatingActionButton() {
       size: 20,
     ),
     elevation: 8,
+    // isExtended: false,
     label: Text(
       tr("VIEW MAP"),
       style: customTextStyle.titleSmall.override(

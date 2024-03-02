@@ -99,18 +99,18 @@ dependencies:
   geolocator: ^10.1.1
   better_player_plus: ^1.0.5
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: 
+  # flutter_native_splash: 
   
   
   
   # video_compress: ^3.1.2
   
 
-flutter_native_splash:
-  image: "assets/images/logo.png"
-  color: "#ffffff"
-  android: true
-  ios: true
+# flutter_native_splash:
+#   image: "assets/images/logowithtext.png"
+#   color: "#825BA5"
+#   android: true
+#   ios: true
   
 
 

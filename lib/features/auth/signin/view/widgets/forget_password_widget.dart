@@ -15,7 +15,6 @@ class FogetPasswordWidget extends StatelessWidget {
         Get.toNamed('/EnterNumberScreen');
       },
       child: RichText(
-        textScaleFactor: MediaQuery.of(context).textScaleFactor,
         text: TextSpan(
           children: [
             TextSpan(
