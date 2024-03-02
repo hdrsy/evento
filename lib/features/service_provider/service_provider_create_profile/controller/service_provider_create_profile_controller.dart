@@ -110,7 +110,7 @@ class ServiceProviderCreateProfileController extends GetxController {
         'bio': bio.text,
         'location_work_governorate': selectedState!,
         'description': description.text,
-        'category_id': choiceTypeController.selectedCategories[0],
+        'category_id': choiceTypeController.selectedService.value,
       };
       locationData != null
           ? dataRequest['latitude'] = locationData!.latitude

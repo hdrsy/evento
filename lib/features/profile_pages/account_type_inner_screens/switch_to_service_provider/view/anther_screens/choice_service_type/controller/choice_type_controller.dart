@@ -13,7 +13,8 @@ class ChoiceTypeController extends GetxController {
   late RxList<String> errorMessage;
   late RxList<ServiceCategoryModel> serviceCategoryList;
   late RxList<ServiceCategoryModel> searchserviceCategoryList;
-  late RxList<int> selectedCategories;
+  // late RxList<int> selectedCategories;
+  RxInt selectedService = 0.obs;
   TextEditingController searchController = TextEditingController();
 
   late RxBool isLoading;
@@ -23,7 +24,7 @@ class ChoiceTypeController extends GetxController {
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
-    selectedCategories = <int>[].obs;
+    // selectedCategories = <int>[].obs;
     isLoading = false.obs;
     searchController.addListener(_onSearchChanged);
     searchserviceCategoryList = <ServiceCategoryModel>[].obs;
@@ -57,14 +58,16 @@ class ChoiceTypeController extends GetxController {
   }
 
   changeSelectedService(int categoryId) {
-    selectedCategories.contains(categoryId)
-        ? selectedCategories.remove(categoryId)
-        : selectedCategories.add(categoryId);
+    selectedService.value =
+        categoryId == selectedService.value ? 0 : categoryId;
+    // selectedCategories.contains(categoryId)
+    //     ? selectedCategories.remove(categoryId)
+    //     : selectedCategories.add(categoryId);
     update();
   }
 
   onPressDone() {
-    if (selectedCategories.isEmpty) {
+    if (selectedService.value == 0) {
       errorMessage.add("Please select at least one category");
       Future.delayed(const Duration(milliseconds: 500))
           .then((value) => scrollController.animateTo(

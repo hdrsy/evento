@@ -101,7 +101,7 @@ class SuggestServiceCard extends StatelessWidget {
               unselectedWidgetColor: customColors.secondaryText,
             ),
             child: Checkbox(
-              value: choiceTypeController.selectedCategories.contains(id),
+              value: choiceTypeController.selectedService.value == id,
               onChanged: (value) {
                 choiceTypeController.changeSelectedService(id);
               },
