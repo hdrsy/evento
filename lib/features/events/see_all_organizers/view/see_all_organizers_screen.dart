@@ -107,7 +107,7 @@ class OrganizerSeeAllCard extends StatelessWidget {
                   children: [
                     ClipRRect(
                         borderRadius: BorderRadius.circular(40),
-                        child: organizerHome.organizerHomeInfo.profile == ''
+                        child: organizerHome.profile == ''
                             ? Image.asset(
                                 'assets/images/faceBookProfile.jfif',
                                 // fit: BoxFit.,
@@ -116,15 +116,14 @@ class OrganizerSeeAllCard extends StatelessWidget {
                                 height: 90,
                               )
                             : getImageNetwork(
-                                url:
-                                    '/storage/${organizerHome.organizerHomeInfo.profile}',
+                                url: '/storage/${organizerHome.profile}',
                                 width: 90,
                                 height: 90)),
                     SizedBox(
                       width: 12,
                     ),
                     Text(
-                      "${organizerHome.organizerHomeInfo.name} ",
+                      "${organizerHome.name} ",
                       style: customTextStyle.bodyLarge.override(
                           fontSize: 16,
                           fontFamily: secondaryFontFamily,
@@ -138,23 +137,20 @@ class OrganizerSeeAllCard extends StatelessWidget {
                           controller.followOrUnFollowOrganizer(
                               organizerHome.id, modelId);
                         },
-                        text:
-                            organizerHome.organizerHomeInfo.isFollowedByAuthUser
-                                ? tr("Un Follow")
-                                : tr("Follow"),
+                        text: organizerHome.isFollowedByAuthUser
+                            ? tr("Un Follow")
+                            : tr("Follow"),
                         options: ButtonOptions(
                           width: 100,
                           height: 21,
                           iconPadding:
                               const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: organizerHome
-                                  .organizerHomeInfo.isFollowedByAuthUser
+                          color: organizerHome.isFollowedByAuthUser
                               ? customColors.secondaryBackground
                               : customColors.primary,
                           textStyle: customTextStyle.titleSmall.override(
                             fontFamily: 'Nunito',
-                            color: organizerHome
-                                    .organizerHomeInfo.isFollowedByAuthUser
+                            color: organizerHome.isFollowedByAuthUser
                                 ? customColors.primary
                                 : customColors.info,
                             fontSize: 12,

@@ -8,34 +8,7 @@ class EventWrapper {
   int id;
   int eventId;
   int userId;
-  DateTime createdAt;
-  DateTime updatedAt;
-  FavoriteEventModel event;
-
-  EventWrapper({
-    required this.id,
-    required this.eventId,
-    required this.userId,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.event,
-  });
-
-  factory EventWrapper.fromJson(Map<String, dynamic> json) {
-    print(json['event']);
-    return EventWrapper(
-      id: json['id'] ?? 0,
-      eventId: json['event_id'] ?? 0,
-      userId: json['user_id'] ?? 0,
-      createdAt: DateTime.parse(json['created_at'] ?? ''),
-      updatedAt: DateTime.parse(json['updated_at'] ?? ''),
-      event: FavoriteEventModel.fromJson(json['event'] ?? {}),
-    );
-  }
-}
-
-class FavoriteEventModel {
-  int id;
+  // FavoriteEventModel event;
   int? organizerId;
   String title;
   int venueId;
@@ -49,26 +22,30 @@ class FavoriteEventModel {
   bool isFollowedByAuthUser;
   Venue venue;
 
-  FavoriteEventModel(
-      {required this.id,
-      this.organizerId,
-      required this.title,
-      required this.venueId,
-      required this.capacity,
-      required this.startDate,
-      required this.endDate,
-      required this.ticketPrice,
-      required this.description,
-      required this.type,
-      required this.images,
-      required this.isFollowedByAuthUser,
-      required this.venue});
+  EventWrapper({
+    required this.id,
+    required this.eventId,
+    this.organizerId,
+    required this.title,
+    required this.venueId,
+    required this.capacity,
+    required this.startDate,
+    required this.endDate,
+    required this.ticketPrice,
+    required this.description,
+    required this.type,
+    required this.images,
+    required this.isFollowedByAuthUser,
+    required this.venue,
+    required this.userId,
+  });
 
-  factory FavoriteEventModel.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return FavoriteEventModel(
+  factory EventWrapper.fromJson(Map<String, dynamic> json) {
+    print(json['event']);
+    return EventWrapper(
       id: json['id'] ?? 0,
+      eventId: json['event_id'] ?? 0,
+      userId: json['user_id'] ?? 0,
       organizerId: json['organizer_id'] ?? 0,
       title: json['title'] ?? '',
       venueId: json['venue_id'] ?? 0,
@@ -83,7 +60,9 @@ class FavoriteEventModel {
       description: json['description'] ?? '',
       type: json['type'] ?? '',
       venue: Venue.fromJson(json["venue"] ?? {}),
-      images: List<String>.from(jsonDecode(json['images'])),
+      images: json['images'] != null
+          ? List<String>.from(jsonDecode(json['images']).map((x) => x))
+          : [],
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }

@@ -13,17 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FavoriteCard extends StatelessWidget {
-  const FavoriteCard({super.key, required this.eventWrapper,required this.modelId});
-final EventWrapper eventWrapper;
-final int modelId;
+  const FavoriteCard(
+      {super.key, required this.eventWrapper, required this.modelId});
+  final EventWrapper eventWrapper;
+  final int modelId;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-onTap: ()  {
-
-               Get.toNamed('/eventDetailes', arguments: [eventWrapper.event.id,false,0]);
-                  
-               },
+      onTap: () {
+        Get.toNamed('/eventDetailes', arguments: [eventWrapper.id, false, 0]);
+      },
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -31,12 +30,14 @@ onTap: ()  {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 2)),
+                  color: Color(0x33000000),
+                  blurRadius: 4,
+                  offset: Offset(0, 2)),
             ]),
         child: Column(
           children: [
-            _buildImage(eventWrapper.event),
-            _dateWithPlayVedio(eventWrapper.event,modelId),
+            _buildImage(eventWrapper),
+            _dateWithPlayVedio(eventWrapper, modelId),
             // Generated code for this Divider Widget...
             Divider(
               thickness: 1,
@@ -44,18 +45,17 @@ onTap: ()  {
               endIndent: 12,
               color: customColors.secondary,
             ),
-            _locationWithDistance(eventWrapper.event.venue,modelId)
+            _locationWithDistance(eventWrapper.venue, modelId)
           ],
         ),
       ),
     );
   }
 
-  Widget _locationWithDistance(Venue venue,int index) {
-   final FavoriteController favoriteController=Get.find();
-           
-    return 
-        Padding(
+  Widget _locationWithDistance(Venue venue, int index) {
+    final FavoriteController favoriteController = Get.find();
+
+    return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -81,7 +81,7 @@ onTap: ()  {
             ],
           ),
           Obx(
-            ()=> Text(
+            () => Text(
               favoriteController.distances[index].value,
               style: customTextStyle.bodyMedium.override(
                 fontFamily: breeSerif,
@@ -95,7 +95,7 @@ onTap: ()  {
     );
   }
 
-  Widget _dateWithPlayVedio(FavoriteEventModel favoriteEventModel,int modelIndex) {
+  Widget _dateWithPlayVedio(EventWrapper favoriteEventModel, int modelIndex) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
       child: Row(
@@ -145,28 +145,25 @@ onTap: ()  {
                       size: 20,
                     ),
                   ),
-                  GetBuilder<FavoriteController>(
-                    builder: (controller) {
-                      return ToggleIcon(
-                        onPressed: ()  {
-
-                  controller.followOrUnFollowEvent(
-                      favoriteEventModel.id, modelIndex);
-                        },
-                        value: favoriteEventModel.isFollowedByAuthUser,
-                        onIcon: Icon(
-                          Icons.favorite_sharp,
-                          color: customColors.error,
-                          size: 25,
-                        ),
-                        offIcon: Icon(
-                          Icons.favorite_border,
-                          color: customColors.secondaryText,
-                          size: 20,
-                        ),
-                      );
-                    }
-                  ),
+                  GetBuilder<FavoriteController>(builder: (controller) {
+                    return ToggleIcon(
+                      onPressed: () {
+                        controller.followOrUnFollowEvent(
+                            favoriteEventModel.id, modelIndex);
+                      },
+                      value: favoriteEventModel.isFollowedByAuthUser,
+                      onIcon: Icon(
+                        Icons.favorite_sharp,
+                        color: customColors.error,
+                        size: 25,
+                      ),
+                      offIcon: Icon(
+                        Icons.favorite_border,
+                        color: customColors.secondaryText,
+                        size: 20,
+                      ),
+                    );
+                  }),
                 ],
               ),
             ],
@@ -176,7 +173,7 @@ onTap: ()  {
     );
   }
 
-  Widget _buildImage(FavoriteEventModel favoriteEventModel) {
+  Widget _buildImage(EventWrapper favoriteEventModel) {
     return Stack(alignment: const AlignmentDirectional(0, 1), children: [
       ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -185,15 +182,19 @@ onTap: ()  {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        child:favoriteEventModel.images.isEmpty?
-         Image.asset(
-          'assets/images/alumni2.webp',
-          width: double.infinity,
-          height: scaleHeight(200),
-          fit: BoxFit.cover,
-          alignment: const Alignment(0.00, 1.00),
-        ):getImageNetwork(url: "/storage/${favoriteEventModel.images[0]}", width: double.infinity,
-          height: scaleHeight(200),alignmentGeometry:const Alignment(0.00, 1.00)),
+        child: favoriteEventModel.images.isEmpty
+            ? Image.asset(
+                'assets/images/alumni2.webp',
+                width: double.infinity,
+                height: scaleHeight(200),
+                fit: BoxFit.cover,
+                alignment: const Alignment(0.00, 1.00),
+              )
+            : getImageNetwork(
+                url: "/storage/${favoriteEventModel.images[0]}",
+                width: double.infinity,
+                height: scaleHeight(200),
+                alignmentGeometry: const Alignment(0.00, 1.00)),
       ),
       Container(
         width: double.infinity,

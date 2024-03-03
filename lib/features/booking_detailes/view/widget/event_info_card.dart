@@ -66,8 +66,8 @@ class EventInfoCard extends StatelessWidget {
                     subTitle:
                         bookingDetailesController.eventDetailsModel.organizer !=
                                 null
-                            ? bookingDetailesController.eventDetailsModel
-                                .organizer!.organizerInfo!.name
+                            ? bookingDetailesController
+                                .eventDetailsModel.organizer!.name
                             : "Evento",
                   ),
                 ].divide(const SizedBox(height: 18)),

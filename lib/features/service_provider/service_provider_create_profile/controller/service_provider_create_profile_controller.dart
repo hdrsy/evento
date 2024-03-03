@@ -107,9 +107,12 @@ class ServiceProviderCreateProfileController extends GetxController {
       String token = await prefService.readString("token");
       Map<String, dynamic> dataRequest = {
         'name': organizerName.text,
+        'name_ar': organizerName.text,
         'bio': bio.text,
+        'bio_ar': bio.text,
         'location_work_governorate': selectedState!,
         'description': description.text,
+        'description_ar': description.text,
         'category_id': choiceTypeController.selectedService.value,
       };
       locationData != null

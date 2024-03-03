@@ -77,7 +77,7 @@ class SeeAllOrganizersController extends GetxController {
         // onPressSearch(searchField.text);
         isSearchActive.value = true;
         searchItemList.assignAll(itemList
-            .where((event) => event.organizerHomeInfo.name
+            .where((event) => event.name
                 .toLowerCase()
                 .contains(searchController.text.toLowerCase()))
             .toList());
@@ -132,7 +132,7 @@ class SeeAllOrganizersController extends GetxController {
 
   followOrUnFollowOrganizer(int organizerId, int modelIndex) async {
     late String isDoneSuccefully;
-    if (itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser) {
+    if (itemList[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
@@ -140,14 +140,14 @@ class SeeAllOrganizersController extends GetxController {
           "${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser = true;
+      itemList[modelIndex].isFollowedByAuthUser = true;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser = false;
+      itemList[modelIndex].isFollowedByAuthUser = false;
 
       update();
     }
-    log(itemList[modelIndex].organizerHomeInfo.isFollowedByAuthUser.toString());
+    log(itemList[modelIndex].isFollowedByAuthUser.toString());
   }
 
   @override

@@ -101,9 +101,9 @@ class EventDetailsModel {
               json['event_trips'].map((x) => EventTrip.fromJson(x)))
           : [],
       venue: Venue.fromJson(json['venue'] ?? {}),
-      amenities: json['interests'] != null
+      amenities: json['amenities'] != null
           ? List<Amenity>.from(
-              json['interests'].map((x) => Amenity.fromJson(x)))
+              json['amenities'].map((x) => Amenity.fromJson(x)))
           : [],
       // Parse other fields...
       organizer: json['organizer'] != null
@@ -168,23 +168,6 @@ class User {
 
 class Organizer {
   final int id;
-  final OrganizerInfo? organizerInfo;
-
-  Organizer({
-    required this.id,
-    required this.organizerInfo,
-  });
-
-  factory Organizer.fromJson(Map<String, dynamic> json) {
-    return Organizer(
-      id: json['id'] ?? "",
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info'] ?? {}),
-    );
-  }
-}
-
-class OrganizerInfo {
-  final int id;
   final int mobileUserId;
   final int categoryId;
   final String name;
@@ -194,7 +177,7 @@ class OrganizerInfo {
   final String state;
   final String? images; // Assuming images can be null
 
-  OrganizerInfo({
+  Organizer({
     required this.id,
     required this.mobileUserId,
     required this.categoryId,
@@ -206,12 +189,10 @@ class OrganizerInfo {
     this.images,
   });
 
-  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return OrganizerInfo(
-      id: json['id'] ?? 1,
-      mobileUserId: json['mobile_user_id'] ?? '',
+  factory Organizer.fromJson(Map<String, dynamic> json) {
+    return Organizer(
+      id: json['id'] ?? "",
+      mobileUserId: json['mobile_user_id'] ?? 0,
       categoryId: json['category_id'] ?? 1,
       name: json['name'] ?? '',
       profile: json['profile'] ?? '',

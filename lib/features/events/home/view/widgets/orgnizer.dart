@@ -95,8 +95,8 @@ Widget buildOrganizerItem(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildEventImage(organizerHome.organizerHomeInfo.profile),
-          buildEventTitle(organizerHome.organizerHomeInfo.name),
+          buildEventImage(organizerHome.profile),
+          buildEventTitle(organizerHome.name),
           // buildEventDateTime( "${DateFormatter.formatDate(organizerEvent.startDate)},${DateFormatter.formatTime(organizerEvent.startDate)}"),
         ],
       ));

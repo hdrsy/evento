@@ -124,8 +124,8 @@ class OrganizerCreateProfileController extends GetxController {
       Map<String, dynamic> dataRequest = {
         'name': organizerName.text,
         'bio': bio.text,
-        'state': selectedState!,
-        'services': "UnKnown",
+
+        'covering_area': selectedState!,
         'other_category': choiceOrganizerCategoryController.sericeSelected.text,
         // 'category_ids': choiceOrganizerCategoryController.selectedCategories
       };

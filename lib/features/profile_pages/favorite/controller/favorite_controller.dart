@@ -67,7 +67,7 @@ class FavoriteController extends GetxController {
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
-    if (favoriteEvents[modelIndex].event.isFollowedByAuthUser) {
+    if (favoriteEvents[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowEvent}/$eventId");
     } else {
@@ -75,25 +75,25 @@ class FavoriteController extends GetxController {
           await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      favoriteEvents[modelIndex].event.isFollowedByAuthUser = true;
+      favoriteEvents[modelIndex].isFollowedByAuthUser = true;
       eventStateManager.toggleFavorite(eventId);
 
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      favoriteEvents[modelIndex].event.isFollowedByAuthUser = false;
+      favoriteEvents[modelIndex].isFollowedByAuthUser = false;
       eventStateManager.toggleFavorite(eventId);
 
       update();
     }
-    log(favoriteEvents[modelIndex].event.isFollowedByAuthUser.toString());
+    log(favoriteEvents[modelIndex].isFollowedByAuthUser.toString());
   }
 
   calculateDistance() async {
     LocationService locationService = LocationService();
     for (var i = 0; i < favoriteEvents.length; i++) {
       distances[i] = (await locationService.calculateDistance(
-              favoriteEvents[i].event.venue.latitude,
-              favoriteEvents[i].event.venue.longitude))
+              favoriteEvents[i].venue.latitude,
+              favoriteEvents[i].venue.longitude))
           .obs;
     }
   }
@@ -106,7 +106,7 @@ class FavoriteController extends GetxController {
       isSearchActive.value = true;
       searchResultSearch.assignAll(favoriteEvents
           .where((event) =>
-              event.event.title.toLowerCase().contains(query.toLowerCase()))
+              event.title.toLowerCase().contains(query.toLowerCase()))
           .toList());
     }
   }

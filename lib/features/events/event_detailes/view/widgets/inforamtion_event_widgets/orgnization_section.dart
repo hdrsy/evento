@@ -34,8 +34,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
           } else {
             eventDetailesController.eventDetailsModel.organizer != null
                 ? Get.toNamed('/OrganizerProfileScreen',
-                    arguments: eventDetailesController.eventDetailsModel
-                        .organizer!.organizerInfo!.mobileUserId)
+                    arguments: eventDetailesController
+                        .eventDetailsModel.organizer!.mobileUserId)
                 : null;
           }
         },
@@ -60,8 +60,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                                 'assets/images/Artboard_1.png',
                                 fit: BoxFit.cover,
                               )
-                            : eventDetailesController.eventDetailsModel
-                                        .organizer!.organizerInfo!.profile ==
+                            : eventDetailesController
+                                        .eventDetailsModel.organizer!.profile ==
                                     ''
                                 ? Image.asset(
                                     'assets/images/faceBookProfile.jfif',
@@ -70,10 +70,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                                   )
                                 : getImageNetwork(
                                     url: eventDetailesController
-                                        .eventDetailsModel
-                                        .organizer!
-                                        .organizerInfo!
-                                        .profile,
+                                        .eventDetailsModel.organizer!.profile,
                                     width: null,
                                     height: null)),
                 Column(
@@ -81,9 +78,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      organizer != null
-                          ? "${organizer.organizerInfo!.name} "
-                          : "Evento",
+                      organizer != null ? "${organizer.name} " : "Evento",
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'BeerSerif',
                         color: customColors.primaryText,
