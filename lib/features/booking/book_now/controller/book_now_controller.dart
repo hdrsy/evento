@@ -27,7 +27,8 @@ class BookNowController extends GetxController {
     EventDetailesController eventDetailesController = Get.find();
     eventDetailsModel = eventDetailesController.eventDetailsModel;
     ticketList = <TicketModel>[TicketModel(ticketIndex: 0)].obs;
-    ticketList[0].totalPrice = eventDetailsModel.ticketPrice;
+    ticketList[0].selectedClass = eventDetailsModel.classes[0];
+
     updateTotalPrice(0);
     myFreinds = <FreindsModel>[].obs;
     isLoadingCoupons = false.obs;
@@ -58,12 +59,11 @@ class BookNowController extends GetxController {
 
   addnewTicket() {
     ticketList.add(TicketModel(ticketIndex: ticketList.length));
-    ticketList.last.totalPrice = eventDetailsModel.ticketPrice;
+    ticketList.last.selectedClass = eventDetailsModel.classes[0];
     updateTotalPrice(ticketList.length - 1);
   }
 
   updateTotalPrice(int ticketIndex) {
-    int ticketPrice = eventDetailsModel.ticketPrice;
     int totalAminityPrice = 0;
     int totalClassPrice = 0;
     int discount = 0;
@@ -81,8 +81,7 @@ class BookNowController extends GetxController {
     }
     discount = ticketList[ticketIndex].discount;
     // tax = getTaxForTicket(ticketIndex);
-    total =
-        (ticketPrice + totalAminityPrice + totalClassPrice + tax) - discount;
+    total = (totalAminityPrice + totalClassPrice + tax) - discount;
     ticketList[ticketIndex].totalPrice = total;
     update();
   }
@@ -214,6 +213,7 @@ class BookNowController extends GetxController {
   }
 
   changeSelectedCalss(Class newClass, int index) {
+    print("the selected class is :${newClass.interests.length}");
     //// check if there no class selecte yet
     if (ticketList[index].selectedClass == null) {
       ticketList[index].selectedClass = newClass;

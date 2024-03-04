@@ -244,15 +244,16 @@ class Class {
   });
 
   factory Class.fromJson(Map<String, dynamic> json) {
+    print("the calss is :$json");
     return Class(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
       code: json['code'] ?? '',
       ticketPrice: json['ticket_price'] ?? 0,
       ticketNumber: json['ticket_number'] ?? 0,
-      interests: json['interests'] != null
+      interests: json['amenities'] != null
           ? List<Amenity>.from(
-              json['interests'].map((x) => Amenity.fromJson(x)))
+              json['amenities'].map((x) => Amenity.fromJson(x)))
           : [],
     );
   }
@@ -335,7 +336,7 @@ class Amenity {
   });
 
   factory Amenity.fromJson(Map<String, dynamic> oldJson) {
-    // print("aminity is:$oldJson");
+    print("aminity is:$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return Amenity(
       id: json['id'] ?? 0,

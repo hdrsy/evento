@@ -86,7 +86,7 @@ class EventReviewController extends GetxController {
       "description": dateTimeController.description.text,
       "venue_id": serviceCategoryController.selectedVenue.value,
       "additional_notes": notes.text,
-      "category_id": typetoSetEventController.selectedCategory.value,
+      "event_category_id": typetoSetEventController.selectedCategory.value,
       "start_time": formattedStartTime,
       "end_time": formattedEndTime,
       "title": dateTimeController.eventTitle.text
@@ -97,15 +97,15 @@ class EventReviewController extends GetxController {
             .where((value) => value != 0) // Exclude items with a value of 0
             .toList();
 
-    // for (int i = 0; i < serviceProviderIds.length; i++) {
-    //   print(serviceProviderIds[i]);
-    //   if (serviceProviderIds[i] != 0) {
-    //     dataRequest['service_provider_id[$i]'] =
-    //         serviceProviderIds[i].toString();
-    //   }
-    // }
+    for (int i = 0; i < serviceProviderIds.length; i++) {
+      print(serviceProviderIds[i]);
+      if (serviceProviderIds[i] != 0) {
+        dataRequest['service_provider_id[$i]'] =
+            serviceProviderIds[i].toString();
+      }
+    }
 
-    dataRequest['service_provider_id'] = serviceProviderIds;
+    // dataRequest['service_provider_id'] = serviceProviderIds;
     print(dataRequest.containsKey('service_provider_id'));
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {

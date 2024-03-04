@@ -68,8 +68,9 @@ class MyRequestModel {
       description: json['description'],
       additionalNotes: json['additional_notes'],
       status: json['status'],
-      categoryId: json['category_id'] ?? 0,
-      categoryTitle: json['category']['title'] ?? '',
+      categoryId: json['event_category_id'] ?? 0,
+      categoryTitle:
+          json['category'] != null ? "" : json['category']['title'] ?? '',
       serviceProviders: serviceProviders,
       venue: MyRequestVenue.fromJson(json['venue'] ?? {}),
     );

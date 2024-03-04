@@ -78,7 +78,7 @@ class FreindsController extends GetxController {
         isSentFreindsError.value = true;
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
-        List<dynamic> interestsJson = handlingResponse['Sent_request'];
+        List<dynamic> interestsJson = handlingResponse['sentRequest'];
 
         sentFreinds.value = interestsJson
             .map((jsonItem) => SentRequest.fromJson(jsonItem))
@@ -107,7 +107,7 @@ class FreindsController extends GetxController {
         isRecivedFreindsError.value = true;
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
-        List<dynamic> interestsJson = handlingResponse['receive_request'];
+        List<dynamic> interestsJson = handlingResponse['receiveRequest'];
 
         recivedFreinds.value = interestsJson
             .map((jsonItem) => ReceiveRequest.fromJson(jsonItem))

@@ -94,7 +94,7 @@ class OrganizerProfileScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(0),
           child: getImageNetwork(
               url:
-                  "/storage/${organizerProfileController.organizerProfileModel.organizerInfo!.cover}",
+                  "/storage/${organizerProfileController.organizerProfileModel.cover}",
               width: double.infinity,
               height: null)),
     );
@@ -115,7 +115,7 @@ class OrganizerProfileScreen extends StatelessWidget {
             ),
             image: DecorationImage(
                 image: organizerProfileController
-                            .organizerProfileModel.organizerInfo!.profile ==
+                            .organizerProfileModel.profile ==
                         ''
                     ? Image.asset(
                         'assets/images/faceBookProfile.jfif',
@@ -124,7 +124,7 @@ class OrganizerProfileScreen extends StatelessWidget {
                       ).image
                     : getImageNetwork(
                             url:
-                                "/storage/${organizerProfileController.organizerProfileModel.organizerInfo!.profile}",
+                                "/storage/${organizerProfileController.organizerProfileModel.profile}",
                             width: double.infinity,
                             height: null)
                         .image)),
@@ -146,8 +146,7 @@ class NameAndFollow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           marqueeTitle(
-            organizerProfileController
-                .organizerProfileModel.organizerInfo!.name,
+            organizerProfileController.organizerProfileModel.name,
             heigthFromTheScreen: 0.04,
             widthFromTheScreen: 0.4,
             fontFamily: 'Plus Jakarta Sans',
@@ -160,8 +159,8 @@ class NameAndFollow extends StatelessWidget {
                       organizerProfileController.followOrUnFollowOrganizer(
                           organizerProfileController.orgnizerId);
                     },
-                    text: organizerProfileController.organizerProfileModel
-                            .organizerInfo!.isFollowedByAuthUser
+                    text: organizerProfileController
+                            .organizerProfileModel.isFollowedByAuthUser
                         ? tr("Un Follow")
                         : tr("Follow"),
                     icon: const Icon(
@@ -175,14 +174,14 @@ class NameAndFollow extends StatelessWidget {
                           const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: organizerProfileController.organizerProfileModel
-                              .organizerInfo!.isFollowedByAuthUser
+                      color: organizerProfileController
+                              .organizerProfileModel.isFollowedByAuthUser
                           ? customColors.secondaryBackground
                           : customColors.primary,
                       textStyle: customTextStyle.titleSmall.override(
                         fontFamily: secondaryFontFamily,
-                        color: organizerProfileController.organizerProfileModel
-                                .organizerInfo!.isFollowedByAuthUser
+                        color: organizerProfileController
+                                .organizerProfileModel.isFollowedByAuthUser
                             ? customColors.primary
                             : customColors.info,
                         fontSize: 10,
@@ -349,7 +348,7 @@ class MyTabBarWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            organizerProfileController.organizerProfileModel.organizerInfo!.bio,
+            organizerProfileController.organizerProfileModel.bio,
             style: customTextStyle.bodyMedium,
           ),
           const SizedBox(height: 16),
@@ -404,18 +403,16 @@ class MyTabBarWidget extends StatelessWidget {
 
   Widget _buildGalleryTab(BuildContext context) {
     final OrganizerProfileController organizerProfileController = Get.find();
-    print(
-        organizerProfileController.organizerProfileModel.organizerInfo!.albums);
+    print(organizerProfileController.organizerProfileModel.albums);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         children: [
           ...List.generate(
-              organizerProfileController
-                  .organizerProfileModel.organizerInfo!.albums.length,
+              organizerProfileController.organizerProfileModel.albums.length,
               (index) => OrganizerFolderCard(
                     album: organizerProfileController
-                        .organizerProfileModel.organizerInfo!.albums[index],
+                        .organizerProfileModel.albums[index],
                   ))
         ].divide(const SizedBox(
           height: 10,

@@ -95,7 +95,6 @@ class PaginationController<T> extends GetxController {
     });
   }
   Future refreshData() async {
-    print("inside refresh");
     pageId = 1; // Reset pagination to the first page
     lastPageId = 1; // Reset this as well if you're using it to track pagination
     hasMoreData.value = true; // Assume there's more data to fetch

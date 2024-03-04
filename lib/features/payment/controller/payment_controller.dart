@@ -89,7 +89,8 @@ class PaymentController extends GetxController {
         "customer_phone": phone.text.startsWith("0", 0)
             ? "963${phone.text.substring(1)}"
             : "963${phone.text}",
-        "bookings": booking['bookings']
+        "bookings": booking['bookings'],
+        "event_id": eventDetailsModel.id
       };
       print(data);
       Either<String, List> response;

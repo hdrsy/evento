@@ -59,34 +59,34 @@ class MyBookingController extends GetxController {
   }
 
   getUpComingAndCompletedBooking() async {
-    try {
-      isLoading.value = true;
-      Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token");
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.myBooking, method: "GEt", token: token);
+    // try {
+    isLoading.value = true;
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token");
+    response = await ApiHelper.makeRequest(
+        targetRout: ServerConstApis.myBooking, method: "GEt", token: token);
 
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        isErrorUpComing.value = true;
-        errorMessage.value = handlingResponse.getErrorMessages();
-      } else {
-        List<dynamic> interestsJson = handlingResponse['bookings'];
-        List<dynamic> completedJson = handlingResponse['completed_bookings'];
-        upComingBooking = interestsJson
-            .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
-            .toList();
-
-        completedBooking = completedJson
-            .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
-            .toList();
-        isLoading.value = false;
-        update();
-      }
-    } catch (e) {
-      isLoading.value = false;
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
       isErrorUpComing.value = true;
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      List<dynamic> interestsJson = handlingResponse['bookings'];
+      List<dynamic> completedJson = handlingResponse['completed_bookings'];
+      upComingBooking = interestsJson
+          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
+          .toList();
+
+      completedBooking = completedJson
+          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
+          .toList();
+      isLoading.value = false;
+      update();
     }
+    // } catch (e) {
+    //   isLoading.value = false;
+    //   isErrorUpComing.value = true;
+    // }
   }
 
   createTicketModelsFromEventBookings(List<EventBooking> bookings) {

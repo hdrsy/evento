@@ -43,8 +43,6 @@ class PriceSummaryWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              priceElement(
-                  "Ticket", bookNowController.eventDetailsModel.ticketPrice),
               bookNowController.ticketList[index].selectedClass == null
                   ? SizedBox.shrink()
                   : priceElement(

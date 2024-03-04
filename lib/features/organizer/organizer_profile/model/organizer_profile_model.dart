@@ -7,34 +7,6 @@ class OrganizerProfileModel {
   int followingCount;
   int followersCount;
   int organizedEventsCount;
-  OrganizerInfo? organizerInfo;
-  List<OrganizerProfileEvent> organizedEvents;
-
-  OrganizerProfileModel(
-      {required this.id,
-      required this.organizerInfo,
-      required this.followersCount,
-      required this.followingCount,
-      required this.organizedEventsCount,
-      required this.organizedEvents});
-
-  factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
-    return OrganizerProfileModel(
-      id: json['id'] ?? 0,
-      followersCount: json['followers_count'] ?? 0,
-      followingCount: json['following_count'] ?? 0,
-      organizedEventsCount: json['organized_events_count'] ?? 0,
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info']),
-      organizedEvents: json['organized_events'] != null
-          ? List<OrganizerProfileEvent>.from(json['organized_events']
-              .map((x) => OrganizerProfileEvent.fromJson(x ?? {})))
-          : [],
-    );
-  }
-}
-
-class OrganizerInfo {
-  int id;
   String name;
   String bio;
   String services;
@@ -44,9 +16,15 @@ class OrganizerInfo {
   bool isFollowedByAuthUser;
   List<OrganizerProfileAlbum> albums;
   List<Category> categories;
-  OrganizerInfo(
+  
+  List<OrganizerProfileEvent> organizedEvents;
+
+  OrganizerProfileModel(
       {required this.id,
-      required this.name,
+      required this.followersCount,
+      required this.followingCount,
+      required this.organizedEventsCount,
+          required this.name,
       required this.profile,
       required this.cover,
       required this.categories,
@@ -54,14 +32,16 @@ class OrganizerInfo {
       required this.services,
       required this.state,
       required this.isFollowedByAuthUser,
-      required this.albums});
+      required this.albums,
+      required this.organizedEvents});
 
-  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return OrganizerInfo(
+  factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
+    return OrganizerProfileModel(
       id: json['id'] ?? 0,
-      name: json['name'] ?? '',
+      followersCount: json['followers_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
+      organizedEventsCount: json['organized_events_count'] ?? 0,
+       name: json['name'] ?? '',
       bio: json['bio'] ?? '',
       services: json['services'] ?? '',
       state: json['state'] ?? '',
@@ -75,6 +55,11 @@ class OrganizerInfo {
       albums: json['albums'] != null
           ? List<OrganizerProfileAlbum>.from(json['albums']
               .map((x) => OrganizerProfileAlbum.fromJson(x ?? [])))
+          : [],
+    
+      organizedEvents: json['organized_events'] != null
+          ? List<OrganizerProfileEvent>.from(json['organized_events']
+              .map((x) => OrganizerProfileEvent.fromJson(x ?? {})))
           : [],
     );
   }

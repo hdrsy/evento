@@ -62,7 +62,7 @@ class DateTimeController extends GetxController {
       isUserEnterDateInfo = true;
     }
     FormState? formdata = formstate.currentState;
-    if (formdata!.validate() && isUserEnterDateInfo) {
+    if (formdata!.validate() && isUserEnterDateInfo && media.isNotEmpty) {
       formdata.save();
       if (isEdit.value) {
         Get.back();

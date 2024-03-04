@@ -74,20 +74,28 @@ class FullTicketInfo extends StatelessWidget {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            tr("class"),
-                            style: customTextStyle.bodyMedium.override(
-                                fontFamily: primaryFontFamily, fontSize: 14),
-                          ),
-                          Wrap(
-                            children: [
-                              ...List.generate(
-                                  bookNowController
-                                      .eventDetailsModel.classes.length,
-                                  (index) => _buildRadioOption(bookNowController
-                                      .eventDetailsModel.classes[index]))
-                            ],
-                          ),
+                          bookNowController.eventDetailsModel.classes.length ==
+                                  1
+                              ? SizedBox.shrink()
+                              : Text(
+                                  tr("class"),
+                                  style: customTextStyle.bodyMedium.override(
+                                      fontFamily: primaryFontFamily,
+                                      fontSize: 14),
+                                ),
+                          bookNowController.eventDetailsModel.classes.length ==
+                                  1
+                              ? SizedBox.shrink()
+                              : Wrap(
+                                  children: [
+                                    ...List.generate(
+                                        bookNowController
+                                            .eventDetailsModel.classes.length,
+                                        (index) => _buildRadioOption(
+                                            bookNowController.eventDetailsModel
+                                                .classes[index]))
+                                  ],
+                                ),
                           bookNowController.ticketList[index].selectedClass ==
                                   null
                               ? const SizedBox.shrink()

@@ -12,12 +12,13 @@ class NextStepButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this Button Widget...
-        ButtonWidget(
+    return ButtonWidget(
       onPressed: () async {
         ServiceCategoryController serviceCategoryController = Get.find();
-        if (serviceCategoryController.selectedVenue.value != 0 &&
-            serviceCategoryController.selectedServiceProviders.isNotEmpty) {
+        bool isDoneone = serviceCategoryController.selectedServiceProviders
+            .any((element) => element.value != 0);
+        print("the result is:$isDoneone");
+        if (serviceCategoryController.selectedVenue.value != 0 && isDoneone) {
           Get.toNamed('/dateTimeScreen');
         } else {
           snakBarForError(tr("Please Select Your Venue First"));
