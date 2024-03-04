@@ -1,20 +1,18 @@
-
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/am_pm.dart';
 import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/build_buttons.dart';
 import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/hours.dart';
 import 'package:evento/core/shared/widgets/widget/list_wheel/build_list_wheel_scroll/minutes.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
-import 'package:evento/features/customize_event/date_time/controller/date_time_controller.dart';
+import 'package:evento/features/events/customize_event/date_time/controller/date_time_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ListWheelBody extends StatefulWidget {
-  const ListWheelBody({super.key,required this.isStartTime });
-  
-final bool isStartTime;
+  const ListWheelBody({super.key, required this.isStartTime});
+
+  final bool isStartTime;
   @override
   State<ListWheelBody> createState() => _ListWheelBodyState();
 }
@@ -70,21 +68,28 @@ class _ListWheelBodyState extends State<ListWheelBody> {
           SizedBox(
               height: scaleHeight(200),
               child: buildbodywheels(itemHeight, context)),
-              buildButtons(context: context,onPressedSubmit: () {
-           final DateTimeController dateTimeController=Get.find();
-            // String selectedTime =
-            //       "${_hoursController.selectedItem + 1}:${_minutesController.selectedItem} ${_ampmController.selectedItem==0?"Am":"Pm"} ";
-            int selectedHour = _hoursController.selectedItem + 1; // Hours are 1-12
-int selectedMinute = _minutesController.selectedItem; // Minutes are 0-59
-bool isAm = _ampmController.selectedItem == 0;
-DateTime now = DateTime.now();
-DateTime selectedDateTime = DateTime(now.year, now.month, now.day, selectedHour, selectedMinute);
+          buildButtons(
+            context: context,
+            onPressedSubmit: () {
+              final DateTimeController dateTimeController = Get.find();
+              // String selectedTime =
+              //       "${_hoursController.selectedItem + 1}:${_minutesController.selectedItem} ${_ampmController.selectedItem==0?"Am":"Pm"} ";
+              int selectedHour =
+                  _hoursController.selectedItem + 1; // Hours are 1-12
+              int selectedMinute =
+                  _minutesController.selectedItem; // Minutes are 0-59
+              bool isAm = _ampmController.selectedItem == 0;
+              DateTime now = DateTime.now();
+              DateTime selectedDateTime = DateTime(
+                  now.year, now.month, now.day, selectedHour, selectedMinute);
 
-if (!isAm && selectedHour != 12) { // PM and not 12 PM
-  selectedHour += 12;
-} else if (isAm && selectedHour == 12) { // 12 AM
-  selectedHour = 0;
-}
+              if (!isAm && selectedHour != 12) {
+                // PM and not 12 PM
+                selectedHour += 12;
+              } else if (isAm && selectedHour == 12) {
+                // 12 AM
+                selectedHour = 0;
+              }
 
               if (widget.isStartTime) {
                 dateTimeController.startTime = selectedDateTime;
@@ -93,9 +98,9 @@ if (!isAm && selectedHour != 12) { // PM and not 12 PM
               }
               dateTimeController.update();
               Get.back();
-         },)
-         ],
-         
+            },
+          )
+        ],
       ),
     );
   }
@@ -164,7 +169,6 @@ if (!isAm && selectedHour != 12) { // PM and not 12 PM
             controller: _minutesController,
             physics: const FixedExtentScrollPhysics(),
             onSelectedItemChanged: (index) {
-              
               setState(() {});
             },
             childDelegate: ListWheelChildBuilderDelegate(
@@ -192,7 +196,6 @@ if (!isAm && selectedHour != 12) { // PM and not 12 PM
             physics: const FixedExtentScrollPhysics(),
             controller: _ampmController,
             onSelectedItemChanged: (index) {
-              
               setState(() {});
             },
             childDelegate: ListWheelChildBuilderDelegate(

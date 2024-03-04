@@ -4,7 +4,7 @@ import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/widget/confirm_cancale_booking.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/profile_pages/my_booking/controller/cancel_booking_controller.dart';
+import 'package:evento/features/booking/my_booking/controller/cancel_booking_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

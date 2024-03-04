@@ -96,13 +96,12 @@ class CategoryWidget extends StatelessWidget {
                       )
                     : Obx(
                         () => Stack(children: [
-                          Image.asset(
-                            themeController.theThemeIsDark.value
-                                ? 'assets/images/bdark.png'
-                                : 'assets/images/blight.png',
-                            fit: BoxFit.cover,
+                          Container(
                             width: 70,
                             height: 70,
+                            color: themeController.theThemeIsDark.value
+                                ? Colors.black
+                                : Colors.white,
                           ),
                           getImageNetwork(
                             url: categoryModel.icon,

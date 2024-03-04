@@ -275,8 +275,6 @@
 "Add Friends": "إضافة أصدقاء",
 "Change password": "تغيير كلمة المرور",
 "Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!$@%)": "يجب أن تتكون كلمة المرور الخاصة بك من 6 أحرف على الأقل وتتضمن مزيجًا من الأرقام والحروف والرموز الخاصة (!$@%)",
-"Current password": "كلمة المرور الحالية",
-"New password": "كلمة المرور الجديدة",
 "Re-type new password": "أعد كتابة كلمة المرور الجديدة",
 "Not Matching the new password": "لا تتطابق مع كلمة المرور الجديدة",
 "Save": "حفظ",
@@ -563,5 +561,12 @@
 "MTN Payment Number":
 "رقم الدفع من MTN"
 ,"You have booked 1 Tickets Successfully in event":"لقد حجزت تذكرة واحدة بنجاح في الحدث",
-"Booked Successfully":"تم الحجز بنجاح"
+"Booked Successfully":"تم الحجز بنجاح",
+
+
+  "selectProfileImage": "الرجاء اختيار صورة الملف الشخصي",
+  "selectCoverImage": "الرجاء اختيار صورة الغلاف",
+  "selectLocation": "الرجاء اختيار موقعك"
+
+
 }

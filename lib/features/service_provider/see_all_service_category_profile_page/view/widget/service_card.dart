@@ -1,9 +1,10 @@
+import 'package:evento/features/events/customize_event/service_category/model/service_category_model.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
-import '../../../../customize_event/service_category/model/service_category_model.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,4 @@
-import '../../../features/book_now/model/ticket_model.dart';
+import '../../../features/booking/book_now/model/ticket_model.dart';
 import '../../../main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;

@@ -1,4 +1,4 @@
-import 'package:evento/features/customize_event/serivce_according_category/model/service_according_category_model.dart';
+import 'package:evento/features/events/customize_event/serivce_according_category/model/service_according_category_model.dart';
 
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/theme/text_theme.dart';

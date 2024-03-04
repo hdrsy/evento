@@ -3,7 +3,7 @@ import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
+import 'package:evento/features/booking/book_now/model/ticket_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';

@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/features/events/customize_event/service_category/model/service_category_model.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
-import '../../../customize_event/service_category/model/service_category_model.dart';
 import '../../../../main.dart';
 import 'package:get/get.dart';
 

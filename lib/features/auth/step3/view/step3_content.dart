@@ -198,19 +198,22 @@ class Step3Content extends StatelessWidget {
                     children: [
                       DayMonthYear(
                         value: stepsController.day != null
-                            ? DateFormat.MMMM(Get.locale == 'en' ? "en" : 'ar')
+                            ? DateFormat.MMMM(
+                                    Get.locale == Locale('en') ? "en" : 'ar')
                                 .format(stepsController.day!)
                             : tr("Month"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
-                            ? DateFormat.d(Get.locale == 'en' ? "en" : 'ar')
+                            ? DateFormat.d(
+                                    Get.locale == Locale('en') ? "en" : 'ar')
                                 .format(stepsController.day!)
                             : tr("Day"),
                       ),
                       DayMonthYear(
                         value: stepsController.day != null
-                            ? DateFormat.y(Get.locale == 'en' ? "en" : 'ar')
+                            ? DateFormat.y(
+                                    Get.locale == Locale('en') ? "en" : 'ar')
                                 .format(stepsController.day!)
                             : tr("Year"),
                       ),

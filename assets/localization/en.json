@@ -268,8 +268,6 @@
 "Add Friends": "Add Friends",
 "Change password": "Change password",
 "Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!$@%)": "Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!$@%)",
-"Current password": "Current password",
-"New password": "New password",
 "Re-type new password": "Re-type new password",
 "Not Matching the new password": "Not Matching the new password",
 "Save": "Save",
@@ -536,6 +534,11 @@
       "Rif Dimashq": "Rif Dimashq"
     
 ,      "MTN Payment Number":"MTN Payment Number"
+
+,
+  "selectProfileImage": "Please select your profile image",
+  "selectCoverImage": "Please select your cover image",
+  "selectLocation": "Please select your location"
 
 
       

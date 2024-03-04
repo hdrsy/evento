@@ -1,5 +1,5 @@
 import 'package:evento/core/shared/widgets/guest/guest_page.dart';
-import 'package:evento/features/customize_event/type_to_set_event/view/type_to_set_event_screen.dart';
+import 'package:evento/features/events/customize_event/type_to_set_event/view/type_to_set_event_screen.dart';
 import 'package:evento/features/events/home/view/home_screen.dart';
 import 'package:evento/features/profile_pages/profile/view/profile_screen.dart';
 import 'package:evento/features/reels/view/reels_screen.dart';

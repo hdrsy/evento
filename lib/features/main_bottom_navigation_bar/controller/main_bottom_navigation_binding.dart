@@ -1,7 +1,7 @@
 import 'package:evento/core/utils/theme/theme_controller.dart';
+import 'package:evento/features/events/customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 
-import '../../customize_event/type_to_set_event/controller/type_to_set_event_controller.dart';
 import '../../events/home/controller/home_controller.dart';
 import 'main_bottom_navigation_controller.dart';
 import '../../profile_pages/profile/controller/profile_controller.dart';
@@ -28,7 +28,7 @@ class MainBottomNavigationBinding implements Bindings {
     Get.lazyPut<EventsforOrganizerListController>(
         () => EventsforOrganizerListController());
     Get.lazyPut<OffersController>(() => OffersController());
-Get.put<EventStateManager>(EventStateManager());
+    Get.put<EventStateManager>(EventStateManager());
     Get.lazyPut<ReelsController>(() => ReelsController());
     Get.lazyPut<TypetoSetEventController>(() => TypetoSetEventController());
     Get.lazyPut<SearchController>(() => SearchController());

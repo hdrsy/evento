@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'ticket_pdf_layout.dart';
-import '../../../features/book_now/model/ticket_model.dart';
+import '../../../features/booking/book_now/model/ticket_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:open_file/open_file.dart';
@@ -47,9 +47,7 @@ Future<void> saveAndOpenFile(List<int> bytes, String filename) async {
     if (status.isGranted) {
       path = await ExternalPath.getExternalStoragePublicDirectory(
           ExternalPath.DIRECTORY_DOWNLOADS);
-          
     } else {
-          
       // Handle permission denied
       return;
     }
@@ -60,9 +58,8 @@ Future<void> saveAndOpenFile(List<int> bytes, String filename) async {
     // Handle other platforms (optional)
     return;
   }
-  
+
   final file = File('$path/$filename');
   await file.writeAsBytes(bytes, flush: true);
   OpenFile.open(file.path);
 }
-

@@ -1,7 +1,6 @@
-
-import 'package:evento/features/book_now/model/ticket_model.dart';
-import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
-import 'package:evento/features/profile_pages/my_booking/model/up_coming_booking.dart';
+import 'package:evento/features/booking/book_now/model/ticket_model.dart';
+import 'package:evento/features/booking/my_booking/model/my_cancel_booking_model.dart';
+import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
 import 'package:get/get.dart';
 
 class BookingDetailesInEventForOrganizerController extends GetxController {

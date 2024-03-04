@@ -74,11 +74,25 @@ class ServiceProviderCreateProfileController extends GetxController {
   }
 
   bool checkIfSelectedState() {
-    if (selectedState != null && selectedState!.length > 2) {
+    List<String> errorList = [];
+    if (selectedState == null && selectedState!.length < 2) {
+      errorList.add("Please select your covering erea");
+    }
+    if (coverImage == null) {
+      errorList.add("Please select your cover image");
+    }
+    if (profileImage == null) {
+      errorList.add("Please select your profile image");
+    }
+    if (locationData == null) {
+      errorList.add("Please select your location");
+    }
+
+    if (errorList.isEmpty) {
       return true;
     } else {
-      Get.dialog(const ErrorInUploading(
-        errorMessaging: ["Please select your covering erea"],
+      Get.dialog(ErrorInUploading(
+        errorMessaging: errorList,
       ));
       return false;
     }

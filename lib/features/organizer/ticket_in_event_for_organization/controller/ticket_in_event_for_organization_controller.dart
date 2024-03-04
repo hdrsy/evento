@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
-import 'package:evento/features/book_now/model/ticket_model.dart';
+import 'package:evento/features/booking/book_now/model/ticket_model.dart';
+import 'package:evento/features/booking/my_booking/model/my_cancel_booking_model.dart';
 import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/model/ticket_in_event_for_organization_model.dart';
-import 'package:evento/features/profile_pages/my_booking/model/my_cancel_booking_model.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
