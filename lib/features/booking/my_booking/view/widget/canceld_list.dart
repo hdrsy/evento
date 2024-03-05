@@ -35,14 +35,15 @@ class CanceledList extends StatelessWidget {
                         const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 10),
                     child: Column(
                       children: [
-                        ...List.generate(
-                            myBookingController.cancelledBooking.length,
-                            (index) => MyBookingCard(
-                                  isCanceldSection: true,
-                                  bookingStatus: tr("Canceled"),
-                                  model: myBookingController
-                                      .cancelledBooking[index].eventClass.event,
-                                ))
+                        Text("data")
+                        // ...List.generate(
+                        //     myBookingController.cancelledBooking.length,
+                        //     (index) => MyBookingCard(
+                        //           isCanceldSection: true,
+                        //           bookingStatus: tr("Canceled"),
+                        //           model: myBookingController
+                        //               .cancelledBooking[index].eventClass.event,
+                        //         ))
                       ].divide(const SizedBox(
                         height: 10,
                       )),

@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 class MyBookingController extends GetxController {
   late List<CancelledBooking> cancelledBooking;
-  late List<UpComingBooking> upComingBooking;
-  late List<UpComingBooking> completedBooking;
+  late List<BookingResponse> upComingBooking;
+  late List<BookingResponse> completedBooking;
   late RxList<String> errorMessage;
   late RxBool isLoading;
   RxBool isErrorUpComing = false.obs;
@@ -71,15 +71,13 @@ class MyBookingController extends GetxController {
       isErrorUpComing.value = true;
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      List<dynamic> interestsJson = handlingResponse['bookings'];
-      List<dynamic> completedJson = handlingResponse['completed_bookings'];
-      upComingBooking = interestsJson
-          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
+      upComingBooking = (handlingResponse['upcomingBookings'] as List)
+          .map((jsonItem) => BookingResponse.fromJson(jsonItem))
+          .toList();
+      completedBooking = (handlingResponse['completedBookings'] as List)
+          .map((jsonItem) => BookingResponse.fromJson(jsonItem))
           .toList();
 
-      completedBooking = completedJson
-          .map((jsonItem) => UpComingBooking.fromJson(jsonItem))
-          .toList();
       isLoading.value = false;
       update();
     }
@@ -89,7 +87,7 @@ class MyBookingController extends GetxController {
     // }
   }
 
-  createTicketModelsFromEventBookings(List<EventBooking> bookings) {
+  createTicketModelsFromEventBookings(List<Booking> bookings) {
     generatedTicketModel.clear();
 
     for (var i = 0; i < bookings.length; i++) {

@@ -14,7 +14,6 @@ import '../model/category_model.dart';
 import '../model/event_model.dart';
 import '../model/home_oganizer.dart';
 import '../model/offer_model.dart';
-import '../model/organizer.dart';
 import '../../../../main.dart';
 
 import 'package:get/get.dart';
@@ -47,7 +46,6 @@ class HomeController extends GetxController {
     Get.find<EventsforOrganizerListController>().refreshData();
     Get.find<OffersController>().refreshData();
     Get.find<EventInYourCityListController>().refreshData();
-    Get.find<OrganizerController>().refreshData();
     Get.find<HomeOrganizerController>().refreshData();
     Get.find<JustForYouController>().refreshData();
   }
@@ -394,48 +392,6 @@ class EventInYourCityListController extends PaginationController<EventModel> {
   }
 }
 
-class OrganizerController extends PaginationController<OrganizerEvent> {
-  OrganizerController()
-      : super(fetchDataCallback: _fetchData, cacheKey: "Organizer");
-
-  // Updated _fetchData to match the new signature
-  static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
-      String url, int page, Map<String, dynamic> additionalParams) async {
-    String token = await prefService.readString("token");
-    String apiUrl = "${ServerConstApis.getOrganizerEventList}?page=$page";
-
-    // Returning the result of the API call
-    return ApiHelper.makeRequest(
-      targetRout: apiUrl,
-      method: "GET",
-      token: token,
-    );
-  }
-
-  @override
-  handleDataSuccess(dynamic handlingResponse) {
-    List<dynamic> categoryListJson =
-        handlingResponse['organizer_event']['data'];
-    lastPageId = handlingResponse['organizer_event']['last_page'];
-
-    itemList.addAll(categoryListJson
-        .map((jsonItem) => OrganizerEvent.fromJson(jsonItem))
-        .toList());
-    if (pageId == lastPageId) {
-      hasMoreData.value = false;
-    }
-    pageId++;
-    isLoading.value = false;
-    isLoading.value = false;
-    isLoadingMoreData.value = false;
-    cacheService.cacheObject<Map<String, dynamic>>(
-      object: handlingResponse,
-      cacheKey: cacheKey,
-      serializeFunction: (data) => data,
-    );
-  }
-}
-
 class HomeOrganizerController extends PaginationController<OrganizerHome> {
   HomeOrganizerController()
       : super(fetchDataCallback: _fetchData, cacheKey: "HomeOrganizer");
@@ -456,6 +412,7 @@ class HomeOrganizerController extends PaginationController<OrganizerHome> {
 
   @override
   handleDataSuccess(dynamic handlingResponse) {
+    log("the organizer executed");
     List<dynamic> categoryListJson = handlingResponse['organizers']['data'];
     lastPageId = handlingResponse['organizers']['last_page'];
     itemList.addAll(categoryListJson

@@ -41,27 +41,28 @@ class UpComingList extends StatelessWidget {
                         children: [
                           ...List.generate(
                               myBookingController.upComingBooking.length,
-                              (index) => MyBookingCard(
-                                    isCanceldSection: false,
-                                    eventBooking: myBookingController
-                                        .upComingBooking[index].bookings,
-                                    leftButtonOnTap: () async {
-                                      await showButtonSheet(
-                                          context: context,
-                                          widget: ChoiceTicketForCancalWidget(
-                                              bookings: myBookingController
-                                                  .upComingBooking[index]
-                                                  .bookings),
-                                          height: screenHeight * 0.7);
-                                    },
-                                    leftButtonTitle: tr("Cancel Booking"),
-                                    bookingStatus: tr("Paid"),
-                                    model: myBookingController
-                                        .upComingBooking[index]
-                                        .bookings[0]
-                                        .eventClass
-                                        .event,
-                                  ))
+                              (index) {
+                            return MyBookingCard(
+                                isCanceldSection: false,
+                                eventBooking:
+                                    myBookingController.upComingBooking[index],
+                                leftButtonOnTap: () async {
+                                  await showButtonSheet(
+                                      context: context,
+                                      widget: ChoiceTicketForCancalWidget(
+                                        bookings: myBookingController
+                                            .upComingBooking[index]
+                                            .upcomingBookings,
+                                      ),
+                                      height: screenHeight * 0.7);
+                                },
+                                leftButtonTitle: tr("Cancel Booking"),
+                                bookingStatus: tr("Paid"),
+                                model: myBookingController
+                                    .upComingBooking[index]
+                                    .upcomingBookings[0]
+                                    .event);
+                          })
                         ].divide(const SizedBox(
                           height: 10,
                         )),

@@ -23,7 +23,6 @@ class MainBottomNavigationBinding implements Bindings {
         () => EventInYourCityListController());
     Get.lazyPut<JustForYouController>(() => JustForYouController());
     Get.lazyPut<TrendingListController>(() => TrendingListController());
-    Get.lazyPut<OrganizerController>(() => OrganizerController());
     Get.lazyPut<HomeOrganizerController>(() => HomeOrganizerController());
     Get.lazyPut<EventsforOrganizerListController>(
         () => EventsforOrganizerListController());

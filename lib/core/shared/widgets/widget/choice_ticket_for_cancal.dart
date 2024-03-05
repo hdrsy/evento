@@ -14,12 +14,12 @@ import 'package:easy_localization/easy_localization.dart';
 class ChoiceTicketForCancalWidget extends StatelessWidget {
   ChoiceTicketForCancalWidget({Key? key, required this.bookings})
       : super(key: key);
-  final List<EventBooking> bookings;
+  final List<Booking> bookings;
   final CancelBookingController cancelBookingController =
       Get.put(CancelBookingController());
   @override
   Widget build(BuildContext context) {
-    cancelBookingController.bookings = bookings;
+    cancelBookingController.bookings = [];
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -104,7 +104,7 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
 }
 
 class RadioButtonList extends StatefulWidget {
-  final List<EventBooking> bookings;
+  final List<Booking> bookings;
   const RadioButtonList({Key? key, required this.bookings}) : super(key: key);
 
   @override
@@ -130,7 +130,7 @@ class _RadioButtonListState extends State<RadioButtonList> {
 
 class ddd extends StatelessWidget {
   const ddd({super.key, required this.eventBooking, required this.index});
-  final EventBooking eventBooking;
+  final Booking eventBooking;
   final int index;
   @override
   Widget build(BuildContext context) {

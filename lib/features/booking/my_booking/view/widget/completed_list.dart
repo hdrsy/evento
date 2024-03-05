@@ -42,12 +42,11 @@ class CompletedList extends StatelessWidget {
                         ...List.generate(
                             myBookingController.completedBooking.length,
                             (index) => MyBookingCard(
-                                  eventBooking: myBookingController
-                                      .completedBooking[index].bookings,
+                                  // eventBooking: myBookingController
+                                  //     .completedBooking[index],
                                   model: myBookingController
                                       .completedBooking[index]
-                                      .bookings[0]
-                                      .eventClass
+                                      .upcomingBookings[0]
                                       .event,
                                   isCanceldSection: false,
                                   leftButtonOnTap: () {
@@ -57,8 +56,7 @@ class CompletedList extends StatelessWidget {
                                           ratingTarget: tr("Your Event"),
                                           id: myBookingController
                                               .completedBooking[index]
-                                              .bookings[0]
-                                              .eventClass
+                                              .upcomingBookings[0]
                                               .event
                                               .id,
                                           idKey: "event_id",

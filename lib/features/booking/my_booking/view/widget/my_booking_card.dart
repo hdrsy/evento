@@ -25,12 +25,12 @@ class MyBookingCard extends StatelessWidget {
       this.eventBooking,
       this.leftButtonTitle,
       required this.bookingStatus});
-  final List<EventBooking>? eventBooking;
+  final BookingResponse? eventBooking;
   final Function()? leftButtonOnTap;
   final String? leftButtonTitle;
   final bool isCanceldSection;
   final String bookingStatus;
-  final CancelledEvent model;
+  final Event model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +52,7 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImageSection(BuildContext context, CancelledEvent model) {
+  Widget _buildImageSection(BuildContext context, Event model) {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(),
@@ -83,7 +83,7 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildEventDetails(BuildContext context, CancelledEvent model) {
+  Widget _buildEventDetails(BuildContext context, Event model) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +109,7 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildEventTime(BuildContext context, CancelledEvent model) {
+  Widget _buildEventTime(BuildContext context, Event model) {
     return Text(
       "${DateFormatter.formatDate(model.startDate)} - ${DateFormatter.formatTime(model.startDate)} - ${DateFormatter.formatTime(model.endDate)}",
       style: customTextStyle.bodyMedium.override(
@@ -121,7 +121,7 @@ class MyBookingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationAndPrice(BuildContext context, CancelledEvent model) {
+  Widget _buildLocationAndPrice(BuildContext context, Event model) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,8 +243,8 @@ class MyBookingCard extends StatelessWidget {
       onPressed: () {
         final MyBookingController myBookingController = Get.find();
         print("event booking is :$eventBooking");
-        var result = myBookingController
-            .createTicketModelsFromEventBookings(eventBooking!);
+        var result = myBookingController.createTicketModelsFromEventBookings(
+            eventBooking!.upcomingBookings);
         Get.toNamed('/BookingDetailesForMyBookingScreen',
             arguments: [model, result]);
       },
