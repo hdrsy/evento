@@ -241,12 +241,8 @@ class MyBookingCard extends StatelessWidget {
   Widget _buildViewTicketButton(BuildContext context) {
     return ButtonWidget(
       onPressed: () {
-        final MyBookingController myBookingController = Get.find();
-        print("event booking is :$eventBooking");
-        var result = myBookingController.createTicketModelsFromEventBookings(
-            eventBooking!.upcomingBookings);
         Get.toNamed('/BookingDetailesForMyBookingScreen',
-            arguments: [model, result]);
+            arguments: [model, eventBooking]);
       },
       text: tr("View E-Ticket"),
       options: ButtonOptions(

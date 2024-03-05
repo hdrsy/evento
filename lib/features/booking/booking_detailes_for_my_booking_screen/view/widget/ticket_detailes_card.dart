@@ -1,4 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
@@ -11,7 +12,7 @@ import 'package:easy_localization/easy_localization.dart';
 class TicketDetailesCardForMyBooking extends StatelessWidget {
   const TicketDetailesCardForMyBooking(
       {super.key, required this.ticketModel, required this.modelIndex});
-  final TicketModel ticketModel;
+  final Booking ticketModel;
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: customColors.secondaryBackground,
               boxShadow: const [
@@ -77,27 +79,41 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                 ),
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                    child: Text(
-                      "Attendee Information",
-                      style: customTextStyle.headlineMedium,
-                    ).tr(),
-                  ),
+                  child: Text(
+                    "Attendee Information",
+                    style: customTextStyle.headlineMedium,
+                  ).tr(),
                 ),
+                SinglePriceElement(
+                  title: "firstName",
+                  subTitle: ticketModel.firstName,
+                ),
+                SinglePriceElement(
+                  title: "lastName",
+                  subTitle: ticketModel.lastName,
+                ),
+                SinglePriceElement(
+                  title: "phoneNumber",
+                  subTitle: ticketModel.phoneNumber,
+                ),
+                SinglePriceElement(
+                  title: "age",
+                  subTitle: ticketModel.age.toString(),
+                ),
+                // SinglePriceElement(
+                //   title: "age",
+                //   subTitle: ticketModel.,
+                // ),
                 Divider(
                   thickness: 1,
                   color: customColors.secondary,
                 ),
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                    child: Text(
-                      " Payment Summary",
-                      style: customTextStyle.headlineMedium,
-                    ).tr(),
-                  ),
+                  child: Text(
+                    "Payment Summary",
+                    style: customTextStyle.headlineMedium,
+                  ).tr(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
@@ -105,140 +121,26 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Coupon code",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            " EventoR7",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            " Ticket",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "100,000 sp",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Tax",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "20,000 sp",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Discount",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "20%",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ),
-                        ],
-                      ),
+                      ...List.generate(
+                          ticketModel.amenities.length,
+                          (index) => SinglePriceElement(
+                                title: ticketModel.amenities[index].title,
+                                subTitle: ticketModel
+                                    .amenities[index].pivot.price
+                                    .toString(),
+                              )),
                       Divider(
                         thickness: 1,
                         indent: 50,
                         endIndent: 50,
                         color: customColors.secondary,
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            " Total",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "120,000 sp",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                        ],
-                      ),
+                      // SinglePriceElement(
+                      //           title: ticketModel.,
+                      //           subTitle: ticketModel
+                      //               .amenities[index].pivot.price
+                      //               .toString(),
+                      //         )
                     ].divide(const SizedBox(height: 8)),
                   ),
                 ),
@@ -246,115 +148,48 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                   thickness: 1,
                   color: customColors.secondary,
                 ),
-                Align(
-                  alignment: const AlignmentDirectional(-1, -1),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                    child: Text(
-                      " Payment Confirmation",
-                      style: customTextStyle.headlineMedium,
-                    ).tr(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Payment Methods",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "Order ID",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "Status",
-                            style: customTextStyle.labelMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.secondaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                        ].divide(const SizedBox(height: 8)),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "MasterCard",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ).tr(),
-                          Text(
-                            "75849302938",
-                            style: customTextStyle.bodyMedium.override(
-                              fontFamily: 'Nunito',
-                              color: customColors.primaryText,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              useGoogleFonts: false,
-                            ),
-                          ),
-                          ButtonWidget(
-                            onPressed: () {
-                              print(tr('Button pressed ...'));
-                            },
-                            text: tr("Paid"),
-                            options: ButtonOptions(
-                              height: 22,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  10, 0, 10, 0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 0, 0, 0),
-                              color: customColors.secondaryBackground,
-                              textStyle: customTextStyle.titleSmall.override(
-                                fontFamily: 'Nunito',
-                                color: customColors.primary,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
-                                useGoogleFonts: false,
-                              ),
-                              borderSide: BorderSide(
-                                color: customColors.alternate,
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                        ].divide(const SizedBox(height: 8)),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class SinglePriceElement extends StatelessWidget {
+  const SinglePriceElement({
+    super.key,
+    required this.title,
+    required this.subTitle,
+  });
+  final String title;
+  final String subTitle;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: customTextStyle.labelMedium.override(
+            fontFamily: 'Nunito',
+            color: customColors.secondaryText,
+            fontSize: 14,
+            useGoogleFonts: false,
+          ),
+        ).tr(),
+        Text(
+          subTitle,
+          style: customTextStyle.bodyMedium.override(
+            fontFamily: 'Nunito',
+            color: customColors.primaryText,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            useGoogleFonts: false,
+          ),
+        ).tr(),
       ],
     );
   }

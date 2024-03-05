@@ -65,15 +65,15 @@ class CategoryListController extends GetxController {
     categoryList = <CategoryModel>[
       //// the tonight and this week is fixed in the list becuase this always exist
       CategoryModel(
-          id: 0,
-          title: "Tonight",
-          icon: "assets/images/Asset_50.png",
-          iconlight: "assets/images/Asset_50_light.png"),
+        id: 0,
+        title: "Tonight",
+        icon: "assets/images/Asset_48.png",
+      ),
       CategoryModel(
-          id: 0,
-          title: "This Week",
-          icon: "assets/images/Asset_47.png",
-          iconlight: "assets/images/Asset_47_light.png"),
+        id: 0,
+        title: "This Week",
+        icon: "assets/images/Asset_51.png",
+      ),
     ].obs;
     errorMessage = <String>[].obs;
     fetchCategoryData();

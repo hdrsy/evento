@@ -82,34 +82,29 @@ class CategoryWidget extends StatelessWidget {
                 categoryModel.title
               ]);
             },
-            child: ClipRRect(
+            child: Obx(() => ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(15)),
-                child: categoryModel.title == "Tonight" ||
-                        categoryModel.title == "This Week"
-                    ? Image.asset(
-                        Get.isDarkMode
-                            ? categoryModel.iconlight!
-                            : categoryModel.icon,
-                        fit: BoxFit.cover,
-                        width: 70,
-                        height: 70,
-                      )
-                    : Obx(
-                        () => Stack(children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            color: themeController.theThemeIsDark.value
-                                ? Colors.black
-                                : Colors.white,
-                          ),
-                          getImageNetwork(
-                            url: categoryModel.icon,
-                            width: 70,
-                            height: 70,
-                          ),
-                        ]),
-                      )),
+                child: Stack(children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    color: themeController.theThemeIsDark.value
+                        ? Colors.black
+                        : Colors.white,
+                  ),
+                  categoryModel.title == "Tonight" ||
+                          categoryModel.title == "This Week"
+                      ? Image.asset(
+                          categoryModel.icon,
+                          width: 70,
+                          height: 70,
+                        )
+                      : getImageNetwork(
+                          url: categoryModel.icon,
+                          width: 70,
+                          height: 70,
+                        ),
+                ]))),
           ),
         ),
         Padding(

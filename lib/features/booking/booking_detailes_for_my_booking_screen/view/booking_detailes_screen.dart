@@ -63,10 +63,10 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                 height: 16,
               ),
               ...List.generate(
-                  bookingDetailesController.ticketList.length,
+                  bookingDetailesController.ticketList.upcomingBookings.length,
                   (index) => TicketDetailesCardForMyBooking(
-                        ticketModel:
-                            bookingDetailesController.ticketList[index],
+                        ticketModel: bookingDetailesController
+                            .ticketList.upcomingBookings[index],
                         modelIndex: index,
                       )),
               Padding(

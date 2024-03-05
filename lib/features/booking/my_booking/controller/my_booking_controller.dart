@@ -16,7 +16,6 @@ class MyBookingController extends GetxController {
   late RxBool isLoading;
   RxBool isErrorUpComing = false.obs;
   RxBool isErrorCanceled = false.obs;
-  List<TicketModel> generatedTicketModel = [];
   @override
   void onInit() async {
     errorMessage = <String>[].obs;
@@ -85,19 +84,5 @@ class MyBookingController extends GetxController {
     //   isLoading.value = false;
     //   isErrorUpComing.value = true;
     // }
-  }
-
-  createTicketModelsFromEventBookings(List<Booking> bookings) {
-    generatedTicketModel.clear();
-
-    for (var i = 0; i < bookings.length; i++) {
-      generatedTicketModel.add(TicketModel());
-      generatedTicketModel[i].age.text = bookings[i].age.toString();
-      generatedTicketModel[i].fisrtName.text = bookings[i].firstName.toString();
-      generatedTicketModel[i].lastName.text = bookings[i].lastName.toString();
-      generatedTicketModel[i].phoneNumber.text =
-          bookings[i].phoneNumber.toString();
-    }
-    return generatedTicketModel;
   }
 }

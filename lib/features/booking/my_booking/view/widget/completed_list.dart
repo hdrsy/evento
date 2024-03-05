@@ -42,8 +42,8 @@ class CompletedList extends StatelessWidget {
                         ...List.generate(
                             myBookingController.completedBooking.length,
                             (index) => MyBookingCard(
-                                  // eventBooking: myBookingController
-                                  //     .completedBooking[index],
+                                  eventBooking: myBookingController
+                                      .completedBooking[index],
                                   model: myBookingController
                                       .completedBooking[index]
                                       .upcomingBookings[0]
