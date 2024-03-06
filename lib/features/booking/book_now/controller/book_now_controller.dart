@@ -230,36 +230,37 @@ class BookNowController extends GetxController {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      // Get.toNamed('/PaymentScreenInBooking', arguments: [
-      //   eventDetailsModel,
-      //   ticketList,
-      //   createBookingJson(ticketList)
-      // ]);
-      errorMessage = <String>[].obs;
-      isLoading.value = true;
-
-      Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token");
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.bookNow,
-          method: "post",
-          token: token,
-          data: createBookingJson(ticketList));
-
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
-        Future.delayed(const Duration(milliseconds: 500))
-            .then((value) => scrollController.animateTo(
-                  scrollController.position.maxScrollExtent,
-                  duration: const Duration(milliseconds: 50),
-                  curve: Curves.easeInOut,
-                ));
-      } else {
-        whenBookingSuccefly(handlingResponse);
-      }
-      isLoading.value = false;
+      Get.toNamed('/PaymentScreenInBooking', arguments: [
+        eventDetailsModel,
+        ticketList,
+        createBookingJson(ticketList)
+      ]);
     }
+    //   errorMessage = <String>[].obs;
+    //   isLoading.value = true;
+
+    //   Either<ErrorResponse, Map<String, dynamic>> response;
+    //   String token = await prefService.readString("token");
+    //   response = await ApiHelper.makeRequest(
+    //       targetRout: ServerConstApis.bookNow,
+    //       method: "post",
+    //       token: token,
+    //       data: createBookingJson(ticketList));
+
+    //   dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    //   if (handlingResponse is ErrorResponse) {
+    //     errorMessage.value = handlingResponse.getErrorMessages();
+    //     Future.delayed(const Duration(milliseconds: 500))
+    //         .then((value) => scrollController.animateTo(
+    //               scrollController.position.maxScrollExtent,
+    //               duration: const Duration(milliseconds: 50),
+    //               curve: Curves.easeInOut,
+    //             ));
+    //   } else {
+    //     whenBookingSuccefly(handlingResponse);
+    //   }
+    //   isLoading.value = false;
+    // }
   }
 
   whenBookingSuccefly(handlingResponse) {
