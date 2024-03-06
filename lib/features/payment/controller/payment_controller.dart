@@ -90,7 +90,7 @@ class PaymentController extends GetxController {
             ? "963${phone.text.substring(1)}"
             : "963${phone.text}",
         "bookings": booking['bookings'],
-        "event_id": eventDetailsModel.id
+        "event_id": eventDetailsModel.id,
       };
       print(data);
       Either<String, List> response;
@@ -184,5 +184,16 @@ class PaymentController extends GetxController {
         }
       });
     }
+  }
+
+  reSet() {
+    isIvoiceCreated.value = false;
+    _totalSeconds = 360.obs;
+    _isRunning = false.obs;
+    _hours = 00.obs;
+    _minutes = 6.obs;
+    _seconds = 00.obs;
+    timer!.cancel();
+    otp.clear();
   }
 }

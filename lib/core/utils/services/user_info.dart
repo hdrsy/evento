@@ -40,28 +40,29 @@ class UserInfo {
         'type': type,
       };
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
-        id: json['id'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        phoneNumber: json['phone_number'],
-        gender: json['gender'],
-        birthDate: json['birth_date'],
-        state: json['state'],
-        image: json['image'],
-        type: json['type'],
-      );
+  factory UserInfo.fromJson(Map<String, dynamic> json) {
+    return UserInfo(
+      id: json["user"]['id'] ?? 0,
+      firstName: json["user"]['first_name'] ?? "",
+      lastName: json["user"]['last_name'] ?? "",
+      phoneNumber: json["user"]['phone_number'] ?? "",
+      gender: json["user"]['gender'] ?? "",
+      birthDate: json["user"]['birth_date'] ?? "",
+      state: json["user"]['state'] ?? "",
+      image: json["user"]['image'] ?? "",
+      type: json["type"] ?? "",
+    );
+  }
 
-  static Future<void> storeUserInfo(UserInfo userInfo) async {
-    String userInfoJson = jsonEncode(userInfo.toJson());
+  static Future<void> storeUserInfo(userInfo) async {
+    print(userInfo);
+    String userInfoJson = jsonEncode(userInfo);
     await prefService.createString('userInfo', userInfoJson);
   }
 
   static Future<UserInfo?> getUserInfo() async {
     bool userInfoJson = await prefService.isContainKey('userInfo');
-
-    print("iscontainuserInfoJson:$userInfoJson");
-    print("userInfoJson");
+    print("is from storagte:$userInfoJson");
     if (userInfoJson) {
       final userInfo = jsonDecode(await prefService.readString('userInfo'));
       print("userInfofrom storage:$userInfo");
@@ -79,11 +80,12 @@ class UserInfo {
         targetRout: ServerConstApis.getprofile, method: "GEt", token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    print("handling respo");
     if (handlingResponse is ErrorResponse) {
     } else {
-      storeUserInfo(UserInfo.fromJson(handlingResponse["user"]));
+      storeUserInfo(handlingResponse);
 
-      return UserInfo.fromJson(handlingResponse["user"]);
+      return UserInfo.fromJson(handlingResponse);
     }
     return null;
   }

@@ -84,4 +84,8 @@ class TypetoSetEventController extends GetxController {
 
     isLoading.value = false;
   }
+
+  resetController() {
+    selectedCategory.value = 0;
+  }
 }

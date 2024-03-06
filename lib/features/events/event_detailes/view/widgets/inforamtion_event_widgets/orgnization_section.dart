@@ -34,8 +34,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
           } else {
             eventDetailesController.eventDetailsModel.organizer != null
                 ? Get.toNamed('/OrganizerProfileScreen',
-                    arguments: eventDetailesController
-                        .eventDetailsModel.organizer!.mobileUserId)
+                    arguments:
+                        eventDetailesController.eventDetailsModel.organizer!.id)
                 : null;
           }
         },
@@ -113,7 +113,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                       },
                       text: eventDetailesController
                               .eventDetailsModel.isOrganizerFollowedByAuthUser
-                          ? tr("Un Follow")
+                          ? tr("UnFollow")
                           : tr("Follow"),
                       options: ButtonOptions(
                         width: 85,

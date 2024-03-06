@@ -45,7 +45,7 @@ class AchivmentController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
-    List<dynamic> categoryListJson = handlingResponse['promoCodes '];
+    List<dynamic> categoryListJson = handlingResponse['promoCodes'];
 
     notificationList.addAll(
         categoryListJson.map((jsonItem) => PromoCode.fromJson(jsonItem)));

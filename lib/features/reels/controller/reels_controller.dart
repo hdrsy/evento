@@ -100,11 +100,11 @@ class ReelsController extends PaginationController<ReelModel> {
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].likedByUser) {
-      itemList[modelIndex].likedByUser = false;
+      // itemList[modelIndex].likedByUser = false;
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.likeReel}/$eventId/like");
     } else {
-      itemList[modelIndex].likedByUser = true;
+      // itemList[modelIndex].likedByUser = true;
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.likeReel}/$eventId/like");
     }

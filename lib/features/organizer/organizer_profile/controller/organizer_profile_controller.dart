@@ -36,31 +36,31 @@ class OrganizerProfileController extends GetxController {
   }
 
   getOrganizerProfile() async {
-    // try {
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    isLoading.value = true;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
-        method: "GEt",
-        token: token);
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      isLoading.value = true;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: "${ServerConstApis.organizerProfile}/$orgnizerId",
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
-    if (handlingResponse is ErrorResponse) {
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print(handlingResponse);
+      if (handlingResponse is ErrorResponse) {
+        isError.value = true;
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        final interestsJson = handlingResponse['organizer'];
+        print("orrr:$interestsJson");
+        organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
+        update();
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
       isError.value = true;
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      final interestsJson = handlingResponse['organizer'];
-      print("orrr:$interestsJson");
-      organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
-      update();
     }
-    isLoading.value = false;
-    // } catch (e) {
-    //   isLoading.value = false;
-    //   isError.value = true;
-    // }
   }
 
   getOrganizerFollowers() async {

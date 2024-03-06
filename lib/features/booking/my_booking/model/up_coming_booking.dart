@@ -75,12 +75,8 @@ class BookingResponse {
   BookingResponse({required this.upcomingBookings});
 
   factory BookingResponse.fromJson(List<dynamic> json) {
-    // List<Booking> bookingsList = [];
-    // for (var bookingList in json) {
     List<Booking> bookings = List<Booking>.from(
         json.map((eventBooking) => Booking.fromJson(eventBooking)));
-    // bookingsList.add(bookings);
-    // }
 
     return BookingResponse(upcomingBookings: bookings);
   }

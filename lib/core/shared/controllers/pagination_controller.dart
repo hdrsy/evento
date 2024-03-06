@@ -65,6 +65,7 @@ class PaginationController<T> extends GetxController {
         fetchData();
       }
     });
+
     pageController.addListener(() {
       if (pageController.position.maxScrollExtent == pageController.offset &&
           hasMoreData.value) {

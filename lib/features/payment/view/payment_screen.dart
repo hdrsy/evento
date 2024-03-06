@@ -49,7 +49,7 @@ class PaymentScreenInBooking extends StatelessWidget {
                   : SizedBox.shrink(),
               // const FullName(),
               paymentController.isIvoiceCreated.value
-                  ? OtpSection()
+                  ? OtpSection(isenabled: !paymentController.isLoadingotp.value)
                   : SizedBox.shrink()
             ].divide(SizedBox(
               height: 16.h,
@@ -61,10 +61,11 @@ class PaymentScreenInBooking extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class OtpSection extends StatelessWidget {
-  OtpSection({super.key});
+  OtpSection({super.key, required this.isenabled});
   final PaymentController paymentController = Get.find();
-
+  bool isenabled;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -84,6 +85,7 @@ class OtpSection extends StatelessWidget {
           height: 4,
         ),
         Pin(
+          enabled: isenabled,
           lenght: 6,
           onChanged: (value) {
             paymentController.otp.text = value;
@@ -113,6 +115,7 @@ class OtpSection extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
             child: GestureDetector(
               onTap: () {
+                paymentController.reSet();
                 paymentController.getInvoice();
               },
               child: Text(
@@ -243,6 +246,7 @@ class PhonePayment extends StatelessWidget {
                 child: TextFormField(
                   controller: paymentController.phone,
                   obscureText: false,
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                     labelText: "+963    Mobile Phone",
                     labelStyle: customTextStyle.bodyMedium.override(

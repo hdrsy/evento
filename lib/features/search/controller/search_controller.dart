@@ -159,6 +159,12 @@ class SearchPageController extends GetxController {
     Get.back();
   }
 
+  resetController() {
+    searchField.clear();
+    isSearchActive.value = false;
+    isError.value = false;
+  }
+
   @override
   void onClose() {
     searchField.dispose();

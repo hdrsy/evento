@@ -138,7 +138,7 @@ class OrganizerSeeAllCard extends StatelessWidget {
                               organizerHome.id, modelId);
                         },
                         text: organizerHome.isFollowedByAuthUser
-                            ? tr("Un Follow")
+                            ? tr("UnFollow")
                             : tr("Follow"),
                         options: ButtonOptions(
                           width: 100,

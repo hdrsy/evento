@@ -3,10 +3,8 @@ import 'package:evento/main.dart';
 
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../controller/my_booking_controller.dart';
-import 'my_booking_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class CanceledList extends StatelessWidget {
   CanceledList({super.key});

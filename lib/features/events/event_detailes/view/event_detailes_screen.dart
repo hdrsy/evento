@@ -16,7 +16,6 @@ class EventDetailesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       backgroundColor: customColors.primaryBackground,
       body: Obx(() => eventDetailesController.isLoading.value
           ? Center(

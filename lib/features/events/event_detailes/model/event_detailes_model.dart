@@ -361,7 +361,7 @@ class Pivot {
 
   factory Pivot.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("aminity is:$json");
+    print("pivot is:$json");
 
     return Pivot(
       eventId: json['event_id'] ?? 0,

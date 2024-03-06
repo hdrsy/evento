@@ -177,19 +177,12 @@ class BookNowController extends GetxController {
         ?.selectedPromoCode
         ?.code;
 
-    // Log the selected code for the current ticket
-    // print(
-    //     'Selected code for current ticket ($ticketId): $selectedCodeForCurrentTicket');
-
     // Populate the list of selected codes for other tickets
     for (var ticket in ticketList) {
       if (ticket.ticketIndex != ticketId && ticket.selectedPromoCode != null) {
         selectedCodesForOtherTickets.add(ticket.selectedPromoCode!.code);
       }
     }
-
-    // Log the codes selected for other tickets
-    // print('Selected codes for other tickets: $selectedCodesForOtherTickets');
 
     // Filter the userCoupons to exclude the codes that are selected for other tickets,
     // but include the code selected for the current ticket (if any)
@@ -198,16 +191,10 @@ class BookNowController extends GetxController {
           bool isAvailable =
               !selectedCodesForOtherTickets.contains(promo.code) ||
                   promo.code == selectedCodeForCurrentTicket;
-          // Log each promo code's availability
-          // print(
-          //     'Checking promo code "${promo.code}": isAvailable = $isAvailable');
           return isAvailable;
         })
         .map((promo) => promo.code)
         .toList();
-
-    // Log the final list of available coupon codes
-    // print('Available coupon codes for ticket $ticketId: $availableCouponCodes');
 
     return availableCouponCodes;
   }
@@ -243,35 +230,35 @@ class BookNowController extends GetxController {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      Get.toNamed('/PaymentScreenInBooking', arguments: [
-        eventDetailsModel,
-        ticketList,
-        createBookingJson(ticketList)
-      ]);
-      // errorMessage = <String>[].obs;
-      // isLoading.value = true;
+      // Get.toNamed('/PaymentScreenInBooking', arguments: [
+      //   eventDetailsModel,
+      //   ticketList,
+      //   createBookingJson(ticketList)
+      // ]);
+      errorMessage = <String>[].obs;
+      isLoading.value = true;
 
-      // Either<ErrorResponse, Map<String, dynamic>> response;
-      // String token = await prefService.readString("token");
-      // response = await ApiHelper.makeRequest(
-      //     targetRout: ServerConstApis.bookNow,
-      //     method: "post",
-      //     token: token,
-      //     data: createBookingJson(ticketList));
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.bookNow,
+          method: "post",
+          token: token,
+          data: createBookingJson(ticketList));
 
-      // dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      // if (handlingResponse is ErrorResponse) {
-      //   errorMessage.value = handlingResponse.getErrorMessages();
-      //   Future.delayed(const Duration(milliseconds: 500))
-      //       .then((value) => scrollController.animateTo(
-      //             scrollController.position.maxScrollExtent,
-      //             duration: const Duration(milliseconds: 50),
-      //             curve: Curves.easeInOut,
-      //           ));
-      // } else {
-      //   whenBookingSuccefly(handlingResponse);
-      // }
-      // isLoading.value = false;
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        Future.delayed(const Duration(milliseconds: 500))
+            .then((value) => scrollController.animateTo(
+                  scrollController.position.maxScrollExtent,
+                  duration: const Duration(milliseconds: 50),
+                  curve: Curves.easeInOut,
+                ));
+      } else {
+        whenBookingSuccefly(handlingResponse);
+      }
+      isLoading.value = false;
     }
   }
 
@@ -303,6 +290,7 @@ class BookNowController extends GetxController {
           'last_name': booking.lastName.text,
           'age': int.tryParse(booking.age.text) ?? 0,
           'phone_number': booking.phoneNumber.text,
+          "class_ticket_price": booking.selectedClass!.ticketPrice,
           'options':
               booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
         });
@@ -337,12 +325,8 @@ class BookNowController extends GetxController {
       userCopuns = interestsJson
           .map((jsonItem) => PromoCode.fromJson(jsonItem))
           .toList();
-
-      // print("user copouns:$userCopuns");
-      // userCopuns.removeLast();
     }
     isLoadingCoupons.value = false;
-    // update();
   }
 
   getMyFreinds() async {

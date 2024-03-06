@@ -1,10 +1,8 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
-import '../../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
-import '../../../book_now/model/ticket_model.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
