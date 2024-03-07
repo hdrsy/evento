@@ -10,6 +10,7 @@ class ServiceProvider {
   final String address;
   final String profile;
   final String cover;
+  final String name;
   final String description;
   final double? latitude;
   final double? longitude;
@@ -24,6 +25,7 @@ class ServiceProvider {
     required this.categoryId,
     required this.locationWorkGovernorate,
     required this.address,
+    required this.name,
     required this.profile,
     required this.cover,
     required this.description,
@@ -42,6 +44,7 @@ class ServiceProvider {
         albumList.map((album) => Album.fromJson(album ?? {})).toList();
     print(json);
     return ServiceProvider(
+      name: json['name'] ?? "",
       id: json['id'] ?? 0,
       latitude: json['latitude'] != null ? json['latitude'].toDouble() : null,
       longitude:

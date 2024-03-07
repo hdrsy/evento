@@ -94,7 +94,7 @@ class OrganizationProfileScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(0),
           child: getImageNetwork(
               url:
-                  "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.cover}",
+                  "/storage/${organizerProfileController.organizerProfileModel.cover}",
               width: double.infinity,
               height: null)),
     );
@@ -114,12 +114,11 @@ class OrganizationProfileScreen extends StatelessWidget {
               width: 2,
             ),
             image: DecorationImage(
-              image: organizerProfileController
-                          .organizerProfileModel.organizerInfo.profile !=
+              image: organizerProfileController.organizerProfileModel.profile !=
                       null
                   ? getImageNetwork(
                           url:
-                              "/storage/${organizerProfileController.organizerProfileModel.organizerInfo.profile}",
+                              "/storage/${organizerProfileController.organizerProfileModel.profile}",
                           width: double.infinity,
                           height: null)
                       .image
@@ -147,7 +146,7 @@ class NameAndFollow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           marqueeTitle(
-            organizerProfileController.organizerProfileModel.organizerInfo.name,
+            organizerProfileController.organizerProfileModel.name,
             heigthFromTheScreen: 0.04,
             widthFromTheScreen: 0.4,
             fontFamily: 'Plus Jakarta Sans',
@@ -372,18 +371,16 @@ class MyTabBarWidget extends StatelessWidget {
 
   Widget _buildGalleryTab(BuildContext context) {
     final OrganizationProfileController organizerProfileController = Get.find();
-    print(
-        organizerProfileController.organizerProfileModel.organizerInfo.albums);
+    print(organizerProfileController.organizerProfileModel.albums);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         children: [
           ...List.generate(
-              organizerProfileController
-                  .organizerProfileModel.organizerInfo.albums.length,
+              organizerProfileController.organizerProfileModel.albums.length,
               (index) => OrganizationFolderCard(
                     album: organizerProfileController
-                        .organizerProfileModel.organizerInfo.albums[index],
+                        .organizerProfileModel.albums[index],
                   ))
         ].divide(const SizedBox(
           height: 10,

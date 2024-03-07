@@ -142,6 +142,7 @@ class EventsforOrganizerListController
   EventsforOrganizerListController()
       : super(
             fetchDataCallback: _fetchData, cacheKey: "EventsforOrganizerList");
+  final EventStateManager eventStateManager = Get.find();
 
   // Updated _fetchData to match the new signature
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
@@ -186,9 +187,12 @@ class EventsforOrganizerListController
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }
@@ -481,9 +485,12 @@ class TrendingListController extends PaginationController<EventModel> {
     }
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
+      eventStateManager.toggleFavorite(eventId);
+
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }

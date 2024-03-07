@@ -92,10 +92,8 @@ List<Widget> _buildUserSpecificOptions() {
       return [
         // Options specific to organizer
       ];
-    case "service provider":
-      return [
-        // Options specific to guest
-      ];
+    case "service_provider":
+      return getServiceProviderOptionsCard();
     default:
       return [];
   }
@@ -205,6 +203,56 @@ List<Widget> getOrganizerOptionsCard() => [
       //   icon: Icons.groups_2_outlined,
       //   title: tr("Invite friends"),
       // ),
+      OptionsCard(
+        targetRout: '/SeeAllServiceCategoryScreen',
+        icon: Icons.miscellaneous_services_outlined,
+        title: tr("Service Provider"),
+      ),
+      OptionsCard(
+        targetRout: '/AchivmentScreen',
+        icon: Icons.code_sharp,
+        title: tr("Achievements"),
+      ),
+      OptionsCard(
+        targetRout: LanguageSelector(),
+        icon: Icons.language_outlined,
+        title: tr("Language"),
+      ),
+      // OptionsCard(
+      //   targetRout: const EventVerificationCondidtionsBottomSheet(),
+      //   bottomSheetHeight: screenHeight * 0.8,
+      //   icon: Icons.account_circle,
+      //   title: tr("Become Evento Verified "),
+      // ),
+    ];
+
+List<Widget> getServiceProviderOptionsCard() => [
+      OptionsCard(
+        targetRout: '/MyBookingScreen',
+        icon: Icons.list,
+        title: tr("My Bookings"),
+      ),
+      OptionsCard(
+        targetRout: '/MyRequestScreen',
+        icon: Icons.repeat,
+        title: tr("My Requests"),
+      ),
+
+      OptionsCard(
+        targetRout: '/FavoriteScreen',
+        icon: Icons.favorite_border,
+        title: tr("Favorite"),
+      ),
+      OptionsCard(
+        targetRout: '/NotificationScreen',
+        icon: Icons.notification_add_outlined,
+        title: tr("Notifications"),
+      ),
+      OptionsCard(
+        targetRout: '/ChangePasswordScreen',
+        icon: Icons.password_outlined,
+        title: tr("Change Password"),
+      ),
       OptionsCard(
         targetRout: '/SeeAllServiceCategoryScreen',
         icon: Icons.miscellaneous_services_outlined,

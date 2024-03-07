@@ -96,11 +96,14 @@ class PaginationController<T> extends GetxController {
     });
   }
   Future refreshData() async {
-    pageId = 1; // Reset pagination to the first page
-    lastPageId = 1; // Reset this as well if you're using it to track pagination
-    hasMoreData.value = true; // Assume there's more data to fetch
-    itemList.clear(); // Clear existing items
-    fetchData(); // Fetch new data
+    if (itemList.isNotEmpty) {
+      pageId = 1; // Reset pagination to the first page
+      lastPageId =
+          1; // Reset this as well if you're using it to track pagination
+      hasMoreData.value = true; // Assume there's more data to fetch
+      itemList.clear(); // Clear existing items
+      fetchData(); // Fetch new data
+    }
   }
 
   // Called immediately after the controller is allocated memory. Initiates the first data fetch.

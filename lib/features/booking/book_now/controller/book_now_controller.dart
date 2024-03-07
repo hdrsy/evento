@@ -277,25 +277,16 @@ class BookNowController extends GetxController {
     List<Map<String, dynamic>> bookingList = [];
 
     for (var booking in bookings) {
-      if (booking.selectedClass == null) {
-        bookingList.add({
-          'first_name': booking.fisrtName.text,
-          'last_name': booking.lastName.text,
-          'age': int.tryParse(booking.age.text) ?? 0,
-          'phone_number': booking.phoneNumber.text,
-        });
-      } else {
-        bookingList.add({
-          'class_id': booking.selectedClass!.id,
-          'first_name': booking.fisrtName.text,
-          'last_name': booking.lastName.text,
-          'age': int.tryParse(booking.age.text) ?? 0,
-          'phone_number': booking.phoneNumber.text,
-          "class_ticket_price": booking.selectedClass!.ticketPrice,
-          'options':
-              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
-        });
-      }
+      bookingList.add({
+        'class_id': booking.selectedClass!.id,
+        'first_name': booking.fisrtName.text,
+        'last_name': booking.lastName.text,
+        'age': int.tryParse(booking.age.text) ?? 0,
+        'phone_number': booking.phoneNumber.text,
+        "class_ticket_price": booking.selectedClass!.ticketPrice,
+        'options':
+            booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+      });
     }
 
     Map<String, dynamic> jsonMap = {'bookings': bookingList};

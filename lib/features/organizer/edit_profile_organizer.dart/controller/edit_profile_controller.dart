@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/shared/models/media.dart';
+import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -32,12 +33,11 @@ class EditProfileOrganizerController extends GetxController {
   void onInit() {
     profileModel = Get.arguments;
     isImageSelected = false.obs;
-    firstName = TextEditingController(text: profileModel.organizerInfo.name);
+    firstName = TextEditingController(text: profileModel.name);
     createFolderName = TextEditingController();
-    selectedState = profileModel.organizerInfo.state;
-    bio = TextEditingController(text: profileModel.organizerInfo.bio);
-    sepecialities =
-        TextEditingController(text: profileModel.organizerInfo.services);
+    selectedState = profileModel.state;
+    bio = TextEditingController(text: profileModel.bio);
+    sepecialities = TextEditingController(text: profileModel.services);
     isLoading = false.obs;
     foldersModel = <FolderModel>[].obs;
     formstate = GlobalKey<FormState>();
@@ -91,10 +91,7 @@ class EditProfileOrganizerController extends GetxController {
       Map<String, dynamic> dataRequest = {
         'name': firstName.text,
         'bio': bio.text,
-        'state': selectedState,
-        // 'services': choiceOrganizerCategoryController.sericeSelected.text,
-        // 'other_category': choiceOrganizerCategoryController.sericeSelected.text,
-        // 'category_ids': choiceOrganizerCategoryController.selectedCategories
+        'covering_area': selectedState,
       };
 
       // for (int i = 0;
@@ -104,7 +101,7 @@ class EditProfileOrganizerController extends GetxController {
       //       choiceOrganizerCategoryController.selectedCategories[i];
       // }
       print(dataRequest);
-      // Map<String, File> fileMap = {};
+      Map<String, File> fileMap = {};
       // if (profileImage != null) {
       //   fileMap['profile'] = profileImage!;
       // }
@@ -135,12 +132,11 @@ class EditProfileOrganizerController extends GetxController {
       // }
       // print("before sending request ");
       response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.organizationUpdateProfile,
-        method: "POST",
-        token: token,
-        data: dataRequest,
-        // files: fileMap
-      );
+          targetRout: ServerConstApis.organizationUpdateProfile,
+          method: "POST",
+          token: token,
+          data: dataRequest,
+          files: fileMap);
       print("the response is :$response");
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is ErrorResponse) {

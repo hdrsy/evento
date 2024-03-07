@@ -125,9 +125,11 @@ class Booking {
       lastName: json['last_name'],
       age: json['age'],
       phoneNumber: json['phone_number'],
-      amenities: (json['amenities'] as List<dynamic>)
-          .map((amenity) => Amenity.fromJson(amenity))
-          .toList(),
+      amenities: json['amenities'] is String
+          ? []
+          : (json['amenities'] as List<dynamic>)
+              .map((amenity) => Amenity.fromJson(amenity))
+              .toList(),
       status: json['status'],
       event: Event.fromJson(json['event']),
     );

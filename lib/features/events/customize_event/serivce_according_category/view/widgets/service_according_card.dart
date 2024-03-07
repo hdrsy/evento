@@ -55,12 +55,9 @@ class ServiceAccordingCard extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.60,
                     height: screenHeight * 0.03,
-                    child: serviceProvider.user.firstName.length +
-                                serviceProvider.user.lastName.length >
-                            30
+                    child: serviceProvider.name.length > 30
                         ? Marquee(
-                            text: serviceProvider.user.firstName +
-                                serviceProvider.user.lastName,
+                            text: serviceProvider.name,
                             scrollAxis: Axis.horizontal,
                             blankSpace: 20.0,
                             velocity: 70.0,
@@ -73,8 +70,7 @@ class ServiceAccordingCard extends StatelessWidget {
                                 fontWeight: FontWeight.w400),
                           )
                         : Text(
-                            serviceProvider.user.firstName +
-                                serviceProvider.user.lastName,
+                            serviceProvider.name,
                             style: customTextStyle.headlineSmall,
                           ),
                   ),

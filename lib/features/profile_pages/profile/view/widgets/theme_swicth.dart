@@ -1,12 +1,11 @@
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import '../../../../../core/responsive/responsive.dart';
+import 'package:evento/features/profile_pages/profile/view/widgets/account_text.dart';
+
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../core/utils/theme/theme_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ThemeSwicth extends StatelessWidget {
   ThemeSwicth({super.key});
@@ -17,26 +16,15 @@ class ThemeSwicth extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Align(
-          alignment: const AlignmentDirectional(-1.00, -1.00),
-          child: Text(
-            tr("Account"),
-            style: customTextStyle.titleSmall.override(
-              fontFamily: 'Nunito',
-              color: customColors.primaryText,
-              fontWeight: FontWeight.normal,
-              useGoogleFonts: true,
-            ),
-          ),
-        ),
+        AccountText(),
         // const ThemeToggleSwitch()
-        themeSwitcher()
+        themeSwitcher(context)
       ],
     );
   }
 }
 
-Widget themeSwitcher() {
+Widget themeSwitcher(BuildContext context) {
   ThemeController themeController = Get.find();
   final switchController =
       ValueNotifier<bool>(themeController.theThemeIsDark.value);
@@ -58,8 +46,12 @@ Widget themeSwitcher() {
       width: 70,
       controller: switchController,
 
-      activeChild: activeChild(themeController.theThemeIsDark.value),
-      inactiveChild: inactiveChild(themeController.theThemeIsDark.value),
+      activeChild: themeController.theThemeIsDark.value
+          ? darkModeIcon(themeController.theThemeIsDark.value, context)
+          : lightModeIcon(themeController.theThemeIsDark.value, context),
+      inactiveChild: !themeController.theThemeIsDark.value
+          ? lightModeIcon(themeController.theThemeIsDark.value, context)
+          : darkModeIcon(themeController.theThemeIsDark.value, context),
       activeColor:
           customColors.primaryBackground, //the background color of the moon
       inactiveColor:
@@ -68,10 +60,12 @@ Widget themeSwitcher() {
   );
 }
 
-Widget inactiveChild(bool isDarkMode) {
+Widget lightModeIcon(bool isDarkMode, BuildContext context) {
   return !isDarkMode
       ? Padding(
-          padding: const EdgeInsets.only(right: 5),
+          padding: isRTL(context)
+              ? const EdgeInsets.only(left: 70)
+              : const EdgeInsets.only(right: 15),
           child: Icon(
             color: customColors.secondaryText,
             Icons.wb_sunny_rounded,
@@ -81,10 +75,12 @@ Widget inactiveChild(bool isDarkMode) {
       : const SizedBox();
 }
 
-Widget activeChild(bool isDarkMode) {
+Widget darkModeIcon(bool isDarkMode, BuildContext context) {
   return isDarkMode
       ? Padding(
-          padding: const EdgeInsets.only(left: 5),
+          padding: isRTL(context)
+              ? const EdgeInsets.only(left: 5)
+              : const EdgeInsets.only(left: 5),
           child: Icon(
             color: customColors.secondaryText,
             Icons.nightlight_round_outlined,
@@ -94,33 +90,5 @@ Widget activeChild(bool isDarkMode) {
       : const SizedBox();
 }
 
-class ThemeToggleSwitch extends StatelessWidget {
-  const ThemeToggleSwitch({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Assuming 'isDarkMode' is a reactive variable in your ThemeController
-    // that determines the current theme mode.
-    final ThemeController themeController = Get.find<ThemeController>();
-
-    return Container(
-      padding: padding(0, 1, 0, 1),
-      width: 70,
-      child: Obx(() => AnimatedToggleSwitch<bool>.dual(
-            current: themeController.theThemeIsDark.value,
-            first: false,
-            second: true,
-            borderWidth: 0,
-            height: 40,
-            spacing: 0,
-            onChanged: (isDarkMode) async {
-              await themeController.changeTheme(); // Trigger the theme change
-            },
-            style: ToggleStyle(indicatorColor: customColors.primary),
-            textBuilder: (value) => value
-                ? Icon(Icons.dark_mode, color: customColors.secondaryText)
-                : Icon(Icons.light_mode, color: customColors.secondaryText),
-          )),
-    );
-  }
-}
+bool isRTL(BuildContext context) =>
+    Directionality.of(context) == TextDirection.rtl;

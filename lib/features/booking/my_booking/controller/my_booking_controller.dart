@@ -8,11 +8,12 @@ import '../../../../main.dart';
 import 'package:get/get.dart';
 
 class MyBookingController extends GetxController {
-  late List<CancelledBooking> cancelledBooking;
+  late List<Booking> cancelledBooking;
   late List<BookingResponse> upComingBooking;
   late List<BookingResponse> completedBooking;
   late RxList<String> errorMessage;
   late RxBool isLoading;
+  late RxBool isLoadingCancall;
   RxBool isErrorUpComing = false.obs;
   RxBool isErrorCanceled = false.obs;
   @override
@@ -22,38 +23,38 @@ class MyBookingController extends GetxController {
     upComingBooking = [];
     completedBooking = [];
     isLoading = false.obs;
+    isLoadingCancall = false.obs;
     await getUpComingAndCompletedBooking();
     await getCalceledBooking();
     super.onInit();
   }
 
   getCalceledBooking() async {
-    try {
-      isLoading.value = true;
-      Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token");
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.myCancelledBookings,
-          method: "GEt",
-          token: token);
+    // try {
+    isLoadingCancall.value = true;
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token");
+    response = await ApiHelper.makeRequest(
+        targetRout: ServerConstApis.myCancelledBookings,
+        method: "GEt",
+        token: token);
 
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        isErrorCanceled.value = true;
-        errorMessage.value = handlingResponse.getErrorMessages();
-      } else {
-        List<dynamic> interestsJson = handlingResponse['cancelled_bookings'];
-
-        cancelledBooking = interestsJson
-            .map((jsonItem) => CancelledBooking.fromJson(jsonItem))
-            .toList();
-        isLoading.value = false;
-        update();
-      }
-    } catch (e) {
-      isLoading.value = false;
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
       isErrorCanceled.value = true;
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      List<dynamic> interestsJson = handlingResponse['cancelled_bookings'];
+
+      cancelledBooking =
+          interestsJson.map((jsonItem) => Booking.fromJson(jsonItem)).toList();
+      isLoadingCancall.value = false;
+      update();
     }
+    // } catch (e) {
+    //   isLoadingCancall.value = false;
+    //   isErrorCanceled.value = true;
+    // }
   }
 
   getUpComingAndCompletedBooking() async {

@@ -16,10 +16,9 @@ class EditImageWidgetOrganizer extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               ///// cover image
-              image: controller.profileModel.organizerInfo.cover != null
+              image: controller.profileModel.cover != null
                   ? getImageNetwork(
-                          url:
-                              "/storage/${controller.profileModel.organizerInfo.cover}",
+                          url: "/storage/${controller.profileModel.cover}",
                           width: double.infinity,
                           height: null)
                       .image
@@ -70,10 +69,9 @@ class EditImageWidgetOrganizer extends StatelessWidget {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: controller.profileModel.organizerInfo.profile != null
+                    child: controller.profileModel.profile != null
                         ? getImageNetwork(
-                            url:
-                                "/storage/${controller.profileModel.organizerInfo.profile}",
+                            url: "/storage/${controller.profileModel.profile}",
                             width: null,
                             height: null)
                         : controller.profileImage != null

@@ -6,36 +6,6 @@ class OrganizationProfileModel {
   int id;
   int followingCount;
   int followersCount;
-  int organizedEventsCount;
-  OrganizerInfo organizerInfo;
-  List<OrganizationProfileEvent> organizedEvents;
-
-  OrganizationProfileModel(
-      {required this.id,
-      required this.organizerInfo,
-      required this.followersCount,
-      required this.followingCount,
-      required this.organizedEventsCount,
-      required this.organizedEvents});
-
-  factory OrganizationProfileModel.fromJson(Map<String, dynamic> json) {
-    print(json['followers_count']);
-    return OrganizationProfileModel(
-      id: json['id'] ?? 0,
-      followersCount: json['followers_count'] ?? 0,
-      followingCount: json['following_count'] ?? 0,
-      organizedEventsCount: json['organized_events_count'] ?? 0,
-      organizerInfo: OrganizerInfo.fromJson(json['organizer_info'] ?? {}),
-      organizedEvents: json['organized_events'] != null
-          ? List<OrganizationProfileEvent>.from(json['organized_events']
-              .map((x) => OrganizationProfileEvent.fromJson(x)))
-          : [],
-    );
-  }
-}
-
-class OrganizerInfo {
-  int id;
   String name;
   String bio;
   String services;
@@ -45,8 +15,16 @@ class OrganizerInfo {
   bool isFollowedByAuthUser;
   List<OrganizationProfileAlbum> albums;
   List<Category> categories;
-  OrganizerInfo(
+
+  int organizedEventsCount;
+  List<OrganizationProfileEvent> organizedEvents;
+
+  OrganizationProfileModel(
       {required this.id,
+      required this.followersCount,
+      required this.followingCount,
+      required this.organizedEventsCount,
+      required this.organizedEvents,
       required this.name,
       required this.profile,
       required this.cover,
@@ -57,11 +35,17 @@ class OrganizerInfo {
       required this.isFollowedByAuthUser,
       required this.albums});
 
-  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return OrganizerInfo(
+  factory OrganizationProfileModel.fromJson(Map<String, dynamic> json) {
+    print(json['followers_count']);
+    return OrganizationProfileModel(
       id: json['id'] ?? 0,
+      followersCount: json['followers_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
+      organizedEventsCount: json['organized_events_count'] ?? 0,
+      organizedEvents: json['organized_events'] != null
+          ? List<OrganizationProfileEvent>.from(json['organized_events']
+              .map((x) => OrganizationProfileEvent.fromJson(x)))
+          : [],
       name: json['name'] ?? "Unknown",
       bio: json['bio'] ?? "",
       services: json['services'] ?? "",
@@ -77,6 +61,21 @@ class OrganizerInfo {
           ? List<OrganizationProfileAlbum>.from(
               json['albums'].map((x) => OrganizationProfileAlbum.fromJson(x)))
           : [],
+    );
+  }
+}
+
+class OrganizerInfo {
+  int id;
+  OrganizerInfo({
+    required this.id,
+  });
+
+  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
+    return OrganizerInfo(
+      id: json['id'] ?? 0,
     );
   }
 }

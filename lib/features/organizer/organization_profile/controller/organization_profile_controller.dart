@@ -78,8 +78,7 @@ class OrganizationProfileController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      final List<dynamic> interestsJson =
-          handlingResponse['followers']['followers'];
+      final List<dynamic> interestsJson = handlingResponse['followers'];
       rganizerFollowers
           .addAll(interestsJson.map<OrganizerFollowersModel>((jsonItem) {
         return OrganizerFollowersModel.fromJson(jsonItem);
@@ -112,7 +111,7 @@ class OrganizationProfileController extends GetxController {
 
   followOrUnFollowOrganizer(int organizerId) async {
     late String isDoneSuccefully;
-    if (organizerProfileModel.organizerInfo.isFollowedByAuthUser) {
+    if (organizerProfileModel.isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/$organizerId");
     } else {
@@ -120,11 +119,11 @@ class OrganizationProfileController extends GetxController {
           "${ServerConstApis.followOrganizer}/$organizerId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      organizerProfileModel.organizerInfo.isFollowedByAuthUser = true;
+      organizerProfileModel.isFollowedByAuthUser = true;
       organizerProfileModel.followersCount++;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      organizerProfileModel.organizerInfo.isFollowedByAuthUser = false;
+      organizerProfileModel.isFollowedByAuthUser = false;
       organizerProfileModel.followersCount--;
 
       update();
