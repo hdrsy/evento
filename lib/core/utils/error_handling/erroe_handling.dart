@@ -1,3 +1,7 @@
+import 'package:evento/main.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:get/get.dart';
+
 import 'valdation_errors.dart';
 
 /// ErrorResponse class models the error response returned from an API.
@@ -30,14 +34,14 @@ class ErrorResponse {
   /// This is commonly used to parse the JSON response from an API call.
   factory ErrorResponse.fromJson(Map<String, dynamic> json) {
     String parseMessage(String value) {
-      // if (value == "Invalid Token") {
-      //   Get.offAllNamed('/');
-      //   prefService.remove('token');
-      //   prefService.remove('userInfo');
-      //   prefService.remove('isCompleteProfile');
-      //   FlutterBackgroundService service = FlutterBackgroundService();
-      //   service.invoke("stopService");
-      // }
+      if (value == "Invalid Token") {
+        Get.offAllNamed('/');
+        prefService.remove('token');
+        prefService.remove('userInfo');
+        prefService.remove('isCompleteProfile');
+        FlutterBackgroundService service = FlutterBackgroundService();
+        service.invoke("stopService");
+      }
       return value.contains("SQL") ? "SomeThing Wrong !!!" : value;
     }
 

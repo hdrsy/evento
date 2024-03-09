@@ -65,21 +65,6 @@ class OrganizationProfileModel {
   }
 }
 
-class OrganizerInfo {
-  int id;
-  OrganizerInfo({
-    required this.id,
-  });
-
-  factory OrganizerInfo.fromJson(Map<String, dynamic> oldJson) {
-    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    return OrganizerInfo(
-      id: json['id'] ?? 0,
-    );
-  }
-}
-
 class OrganizationProfileAlbum {
   int id;
   String name;

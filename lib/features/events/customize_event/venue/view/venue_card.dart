@@ -133,7 +133,7 @@ class VenueCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "4.25",
+                      venue.averageRating.toStringAsFixed(1),
                       style: customTextStyle.labelMedium,
                     ),
                     Icon(

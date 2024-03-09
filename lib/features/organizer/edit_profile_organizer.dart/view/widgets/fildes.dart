@@ -99,3 +99,36 @@ class _SelectStates extends State<SelectStates> {
         onSelectionChanged: _handleSelectionChange);
   }
 }
+// class SelectCategory extends StatefulWidget {
+//   const SelectCategory({
+//     super.key,
+//   });
+
+//   @override
+//   State<SelectCategory> createState() => _SelectCategory();
+// }
+
+// class _SelectCategory extends State<SelectCategory> {
+//   @override
+//   initState() {
+//     super.initState();
+//   }
+
+//   List<String> _selectedValues = [];
+
+//   void _handleSelectionChange(List<String> newSelections) {
+//     setState(() {
+//       _selectedValues = newSelections;
+//     });
+//     // Get.find<EditProfileOrganizerController>().selectedState =
+//     //     newSelections.join(', ');
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiSelectDropDown(
+//         options: Get.find<EditProfileOrganizerController>().choiceServiceList.map((e)=>e.name).toList,
+//         selectedValues: _selectedValues,
+//         onSelectionChanged: _handleSelectionChange);
+//   }
+// }

@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
       case 7:
         return isGuset ? const SizedBox() : EventsFromOrganizer();
       case 8:
-        return ForYou();
+        return isGuset ? const SizedBox() : ForYou();
 
       // Add cases for your other widgets...
       default:

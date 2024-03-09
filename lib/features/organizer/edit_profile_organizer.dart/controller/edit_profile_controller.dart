@@ -1,9 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
+import 'package:evento/features/events/home/controller/home_controller.dart';
+import 'package:evento/features/events/home/model/category_model.dart';
 import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
+import 'package:evento/features/profile_pages/account_type_inner_screens/becom_an_organizer/choice_oganizer_category/controller/choice_organizer_category_controller.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -14,6 +18,8 @@ import 'package:image_picker/image_picker.dart';
 
 class EditProfileOrganizerController extends GetxController {
   late File customImage;
+  List<ChoiceOrganizerCategoryTypeModel> choiceServiceList = [];
+
   late RxBool isImageSelected;
   late TextEditingController firstName;
   late TextEditingController bio;
@@ -29,6 +35,8 @@ class EditProfileOrganizerController extends GetxController {
   late File? profileImage;
   late File? coverImage;
   late RxList<FolderModel> foldersModel;
+  RxList<int> selectedCategories = <int>[].obs;
+
   @override
   void onInit() {
     profileModel = Get.arguments;
@@ -38,6 +46,9 @@ class EditProfileOrganizerController extends GetxController {
     selectedState = profileModel.state;
     bio = TextEditingController(text: profileModel.bio);
     sepecialities = TextEditingController(text: profileModel.services);
+    // foldersModel.assignAll(profileModel.albums);
+    getCategoriesList();
+    getSelectedGategories();
     isLoading = false.obs;
     foldersModel = <FolderModel>[].obs;
     formstate = GlobalKey<FormState>();
@@ -70,6 +81,12 @@ class EditProfileOrganizerController extends GetxController {
     }
   }
 
+  getSelectedGategories() {
+    for (var element in profileModel.categories) {
+      selectedCategories.add(element.id);
+    }
+  }
+
   final imagePicker = ImagePicker();
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
@@ -79,6 +96,18 @@ class EditProfileOrganizerController extends GetxController {
           : coverImage = File(pickedImage.path);
       update();
       Get.back();
+    }
+  }
+
+  getCategoriesList() {
+    final CategoryListController categoryListController = Get.find();
+    List<CategoryModel> categories = [];
+    categories.assignAll(categoryListController.categoryList);
+    categories.removeAt(0);
+    categories.removeAt(0);
+    for (var element in categories) {
+      choiceServiceList.add(ChoiceOrganizerCategoryTypeModel(
+          name: element.title, categoryId: element.id));
     }
   }
 

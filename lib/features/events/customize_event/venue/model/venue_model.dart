@@ -14,13 +14,15 @@ class Venue {
   final String profile;
   final String contactNumber;
   final List<VenueAlbum> venueAlbums;
-
+final double averageRating;
   Venue({
     required this.id,
     required this.name,
     required this.capacity,
     required this.profile,
     required this.governorate,
+    required this.averageRating,
+    
     required this.locationDescription,
     required this.description,
     required this.latitude,
@@ -42,6 +44,9 @@ class Venue {
       capacity: json['capacity'] ?? 0,
       profile: json['profile'] ?? '',
       governorate: json['governorate'] ?? '',
+      averageRating: json['average_rating'] == null
+          ? 0
+          : double.parse(json['average_rating']),
       locationDescription: json['location_description'] ?? '',
       description: json['description'] ?? '',
       latitude: json['latitude'].toDouble() ?? 0.0,
