@@ -43,6 +43,7 @@ class HomeController extends GetxController {
     // Get.find<PaginationController>().refreshData();
     Get.find<FeaturedListController>().refreshData();
     Get.find<TrendingListController>().refreshData();
+
     isGuset ? null : Get.find<EventsforOrganizerListController>().refreshData();
     Get.find<OffersController>().refreshData();
     isGuset ? null : Get.find<EventInYourCityListController>().refreshData();

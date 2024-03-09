@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -115,6 +117,46 @@ class PriceSummaryWidget extends StatelessWidget {
                       style: customTextStyle.displaySmall,
                     ),
                   ],
+                ),
+              ),
+
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                  child: ButtonWidget(
+                    showLoadingIndicator: bookNowController.isLoading.value,
+                    onPressed: () async {
+                      bookNowController.onPressBookNow(index);
+                    },
+                    text: bookNowController
+                            .ticketList[index].isPaidSuccfully.value
+                        ? tr("Booking Confirmed")
+                        : tr("Confirm Booking"),
+                    options: ButtonOptions(
+                      width: 300,
+                      height: 40,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: bookNowController
+                              .ticketList[index].isPaidSuccfully.value
+                          ? customColors.success
+                          : customColors.primary,
+                      textStyle: customTextStyle.displaySmall.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      elevation: 0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
                 ),
               ),
             ],

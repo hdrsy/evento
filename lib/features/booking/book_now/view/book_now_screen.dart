@@ -3,7 +3,6 @@ import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
-import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../core/utils/theme/text_theme.dart';
@@ -96,42 +95,6 @@ class BookNowScreen extends StatelessWidget {
                       ],
                     ),
                     // const PaymontInformation(),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                      child: ButtonWidget(
-                        showLoadingIndicator: bookNowController.isLoading.value,
-                        onPressed: () async {
-                          bookNowController.ticketList.isNotEmpty
-                              ? bookNowController.onPressBookNow()
-                              : null;
-                        },
-                        text: tr("Confirm Booking"),
-                        options: ButtonOptions(
-                          width: 300,
-                          height: 40,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              32, 0, 32, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: bookNowController.ticketList.isNotEmpty
-                              ? customColors.primary
-                              : customColors.alternate,
-                          textStyle: customTextStyle.displaySmall.override(
-                            fontFamily: 'Lexend Deca',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          elevation: 0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                    ),
                     ...List.generate(
                         bookNowController.errorMessage.length,
                         (index) => ErrorMessages(
@@ -164,8 +127,9 @@ class BookNowScreen extends StatelessWidget {
 }
 
 class TicketCard extends StatelessWidget {
-  const TicketCard({super.key, required this.index});
+  TicketCard({super.key, required this.index});
   final int index;
+  final BookNowController bookNowController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(

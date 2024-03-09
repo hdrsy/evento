@@ -254,58 +254,6 @@ class OrganizerMediaCard extends StatelessWidget {
   }
 }
 
-//// for select the state of organizer
-// class SelectStates extends StatelessWidget {
-//   const SelectStates({
-//     super.key,
-//     required this.organizerCreateProfileController,
-//   });
-
-//   final OrganizerCreateProfileController organizerCreateProfileController;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () async {
-//         await showButtonSheet(
-//             context: context, widget: SelectState(), height: 300);
-//       },
-//       child: GetBuilder<OrganizerCreateProfileController>(builder: (ccontext) {
-//         return Container(
-//           width: double.infinity,
-//           height: scaleHeight(50),
-//           padding: padding(0, 10, 0, 10),
-//           decoration: BoxDecoration(
-//             border: Border.all(color: customColors.primaryBackground, width: 2),
-//             borderRadius: const BorderRadius.all(Radius.circular(30)),
-//             // color: customColors.primaryBackground
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: [
-//               Text(
-//                 organizerCreateProfileController.selectedState ??
-//                     "Covering Areas",
-//                 style: customTextStyle.bodyMedium.override(
-//                   fontFamily: 'Nunito',
-//                   color: customColors.primary,
-//                   useGoogleFonts: true,
-//                 ),
-//               ).tr(),
-//               Icon(
-//                 Icons.keyboard_arrow_down_rounded,
-//                 color: customColors.secondaryText,
-//                 size: 15,
-//               )
-//             ],
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
-
 class SelectStates extends StatefulWidget {
   const SelectStates(
       {super.key, required this.organizerCreateProfileController});
@@ -334,6 +282,7 @@ class _SelectStates extends State<SelectStates> {
   @override
   Widget build(BuildContext context) {
     return MultiSelectDropDown(
+        title: "Covering Areas",
         options: states,
         selectedValues: _selectedValues,
         onSelectionChanged: _handleSelectionChange);

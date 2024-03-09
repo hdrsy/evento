@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:evento/core/shared/models/media.dart';
 import 'package:evento/core/utils/services/compress_video.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
@@ -20,7 +19,8 @@ class EditProfileOrganizerController extends GetxController {
   late File customImage;
   List<ChoiceOrganizerCategoryTypeModel> choiceServiceList = [];
 
-  late RxBool isImageSelected;
+  late RxBool isProfileSelected;
+  late RxBool isCoverSelected;
   late TextEditingController firstName;
   late TextEditingController bio;
   late TextEditingController createFolderName;
@@ -40,15 +40,15 @@ class EditProfileOrganizerController extends GetxController {
   @override
   void onInit() {
     profileModel = Get.arguments;
-    isImageSelected = false.obs;
+    isCoverSelected = false.obs;
+    isProfileSelected = false.obs;
     firstName = TextEditingController(text: profileModel.name);
     createFolderName = TextEditingController();
     selectedState = profileModel.state;
     bio = TextEditingController(text: profileModel.bio);
-    sepecialities = TextEditingController(text: profileModel.services);
-    // foldersModel.assignAll(profileModel.albums);
     getCategoriesList();
     getSelectedGategories();
+    print("the states:${profileModel.state}");
     isLoading = false.obs;
     foldersModel = <FolderModel>[].obs;
     formstate = GlobalKey<FormState>();
@@ -94,6 +94,7 @@ class EditProfileOrganizerController extends GetxController {
       isProfile
           ? profileImage = File(pickedImage.path)
           : coverImage = File(pickedImage.path);
+      isProfile ? isProfileSelected.value = true : isCoverSelected.value = true;
       update();
       Get.back();
     }
@@ -123,42 +124,40 @@ class EditProfileOrganizerController extends GetxController {
         'covering_area': selectedState,
       };
 
-      // for (int i = 0;
-      //     i < choiceOrganizerCategoryController.selectedCategories.length;
-      //     i++) {
-      //   dataRequest["category_ids[$i]"] =
-      //       choiceOrganizerCategoryController.selectedCategories[i];
-      // }
+      for (int i = 0; i < selectedCategories.length; i++) {
+        dataRequest["category_ids[$i]"] = selectedCategories[i];
+      }
       print(dataRequest);
       Map<String, File> fileMap = {};
-      // if (profileImage != null) {
-      //   fileMap['profile'] = profileImage!;
-      // }
-      // if (coverImage != null) {
-      //   fileMap['cover'] = coverImage!;
-      // }
-      // if (foldersModel.isNotEmpty) {
-      //   for (var i = 0; i < foldersModel.length; i++) {
-      //     dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
-      //     for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
-      //       if (foldersModel[i].mediaList[j].mediaType == 'image') {
-      //         fileMap['album-${i + 1}-images[$j]'] =
-      //             foldersModel[i].mediaList[j].media;
-      //       } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
-      //         File? compressedVideo =
-      //             await compressVideo(foldersModel[i].mediaList[j].media);
-      //         if (compressedVideo != null) {
-      //           fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
-      //         } else {
-      //           // Handle the case where video compression fails
-      //           // For example, you might choose to skip this file, log an error, or use the original file
-      //           print(
-      //               "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
-      //         }
-      //       }
-      //     }
-      //   }
-      // }
+      if (isProfileSelected.value) {
+        fileMap['profile'] = profileImage!;
+      }
+      if (isCoverSelected.value) {
+        fileMap['cover'] = coverImage!;
+      }
+      print(fileMap);
+      if (foldersModel.isNotEmpty) {
+        for (var i = 0; i < foldersModel.length; i++) {
+          dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
+          for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
+            if (foldersModel[i].mediaList[j].mediaType == 'image') {
+              fileMap['album-${i + 1}-images[$j]'] =
+                  foldersModel[i].mediaList[j].media;
+            } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
+              File? compressedVideo =
+                  await compressVideo(foldersModel[i].mediaList[j].media);
+              if (compressedVideo != null) {
+                fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
+              } else {
+                // Handle the case where video compression fails
+                // For example, you might choose to skip this file, log an error, or use the original file
+                print(
+                    "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
+              }
+            }
+          }
+        }
+      }
       // print("before sending request ");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.organizationUpdateProfile,

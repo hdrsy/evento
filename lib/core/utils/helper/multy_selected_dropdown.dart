@@ -7,12 +7,13 @@ class MultiSelectDropDown extends StatefulWidget {
   final List<String> options;
   final List<String> selectedValues;
   final Function(List<String>) onSelectionChanged;
-
+  final String title;
   const MultiSelectDropDown({
     Key? key,
     required this.options,
     required this.selectedValues,
     required this.onSelectionChanged,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -103,7 +104,7 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
             Expanded(
               child: Text(
                 widget.selectedValues.isEmpty
-                    ? "Covering Areas"
+                    ? widget.title
                     : widget.selectedValues.join(', '),
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',

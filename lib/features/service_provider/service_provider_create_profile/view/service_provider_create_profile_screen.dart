@@ -338,6 +338,7 @@ class _SelectStates extends State<SelectStates> {
   @override
   Widget build(BuildContext context) {
     return MultiSelectDropDown(
+        title: "Covering Areas",
         options: states,
         selectedValues: _selectedValues,
         onSelectionChanged: _handleSelectionChange);

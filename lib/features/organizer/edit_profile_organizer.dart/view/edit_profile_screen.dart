@@ -45,27 +45,29 @@ class EditProfileOrganizerScreen extends StatelessWidget {
           //   () =>
           SizedBox(
         width: double.infinity,
-        child: SingleChildScrollView(
-          padding: padding(20, 20, 0, 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              EditImageWidgetOrganizer(),
-              SizedBox(
-                height: 10.h,
-              ),
-              FieldsOrganizer(),
-              OrganizerMediaCard(),
-              ButtonsOrganizer(),
-              ...List.generate(
-                  editProfileOrganizerController.errorMessage.length,
-                  (index) => ErrorMessages(
-                        message:
-                            editProfileOrganizerController.errorMessage[index],
-                      )),
-            ].divide(SizedBox(
-              height: scaleHeight(15),
-            )),
+        child: Obx(
+          () => SingleChildScrollView(
+            padding: padding(20, 20, 0, 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                EditImageWidgetOrganizer(),
+                SizedBox(
+                  height: 10.h,
+                ),
+                FieldsOrganizer(),
+                OrganizerMediaCard(),
+                ButtonsOrganizer(),
+                ...List.generate(
+                    editProfileOrganizerController.errorMessage.length,
+                    (index) => ErrorMessages(
+                          message: editProfileOrganizerController
+                              .errorMessage[index],
+                        )),
+              ].divide(SizedBox(
+                height: scaleHeight(15),
+              )),
+            ),
           ),
         ),
       ),
@@ -101,7 +103,7 @@ class OrganizerMediaCard extends StatelessWidget {
                 Align(
                   alignment: const AlignmentDirectional(-1, -1),
                   child: Text(
-                    "Create Profile",
+                    "Add new folders",
                     style: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
                       color: customColors.primary,

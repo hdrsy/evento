@@ -226,14 +226,15 @@ class BookNowController extends GetxController {
     }
   }
 
-  void onPressBookNow() async {
+  void onPressBookNow(int ticketId) async {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
       Get.toNamed('/PaymentScreenInBooking', arguments: [
         eventDetailsModel,
-        ticketList,
-        createBookingJson(ticketList)
+        [ticketList[ticketId]],
+        createBookingJson([ticketList[ticketId]]),
+        ticketId
       ]);
     }
     //   errorMessage = <String>[].obs;
@@ -264,13 +265,13 @@ class BookNowController extends GetxController {
   }
 
   whenBookingSuccefly(handlingResponse) {
-    handlingResponse['message'] == "Booking successful"
-        ? Get.toNamed('/PaymentScreenInBooking', arguments: [
-            eventDetailsModel,
-            ticketList,
-            createBookingJson(ticketList)
-          ])
-        : null;
+    if (handlingResponse['message'] == "Booking successful") {
+      Get.toNamed('/PaymentScreenInBooking', arguments: [
+        eventDetailsModel,
+        ticketList,
+        createBookingJson(ticketList)
+      ]);
+    }
   }
 
   Map<String, dynamic> createBookingJson(List<TicketModel> bookings) {

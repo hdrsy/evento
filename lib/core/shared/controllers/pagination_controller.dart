@@ -115,6 +115,9 @@ class PaginationController<T> extends GetxController {
 
   // Method to fetch data using the provided callback. It handles the response and updates the controller's state.
   fetchData() async {
+    if (pageId == 1) {
+      itemList.clear();
+    }
     try {
       isLoading.value = itemList.isNotEmpty ? false : true;
       if (!_connectivityService.isConnected.value) {

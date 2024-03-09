@@ -49,7 +49,7 @@ class OrganizationProfileModel {
       name: json['name'] ?? "Unknown",
       bio: json['bio'] ?? "",
       services: json['services'] ?? "",
-      state: json['state'] ?? '',
+      state: json['covering_area'] ?? '',
       categories: json['categories'] != null
           ? List<Category>.from(
               json['categories'].map((x) => Category.fromJson(x)))

@@ -45,17 +45,18 @@ class FieldsOrganizer extends StatelessWidget {
                 validator: (value) {
                   return null;
                 }),
-            EditProfileField(
-                suffixIcon: Icons.calendar_month,
-                controller: editProfileController.sepecialities,
-                hintText: tr("Decoration"),
-                labelText: tr("Sepecialities"),
-                onChanged: (value) {
-                  editProfileController.sepecialities.text = value;
-                },
-                validator: (value) {
-                  return null;
-                }),
+            // EditProfileField(
+            //     suffixIcon: Icons.calendar_month,
+            //     controller: editProfileController.sepecialities,
+            //     hintText: tr("Decoration"),
+            //     labelText: tr("Sepecialities"),
+            //     onChanged: (value) {
+            //       editProfileController.sepecialities.text = value;
+            //     },
+            //     validator: (value) {
+            //       return null;
+            //     }),
+            SelectCategory(),
             SelectStates()
           ].divide(SizedBox(
             height: scaleHeight(10),
@@ -78,6 +79,11 @@ class SelectStates extends StatefulWidget {
 class _SelectStates extends State<SelectStates> {
   @override
   initState() {
+    final EditProfileOrganizerController editProfileOrganizerController =
+        Get.find();
+    _selectedValues
+        .addAll(editProfileOrganizerController.profileModel.state.split(', '));
+    print("the states:${_selectedValues}");
     super.initState();
   }
 
@@ -94,41 +100,62 @@ class _SelectStates extends State<SelectStates> {
   @override
   Widget build(BuildContext context) {
     return MultiSelectDropDown(
+        title: "Covering Areas",
         options: states,
         selectedValues: _selectedValues,
         onSelectionChanged: _handleSelectionChange);
   }
 }
-// class SelectCategory extends StatefulWidget {
-//   const SelectCategory({
-//     super.key,
-//   });
 
-//   @override
-//   State<SelectCategory> createState() => _SelectCategory();
-// }
+class SelectCategory extends StatefulWidget {
+  const SelectCategory({
+    super.key,
+  });
 
-// class _SelectCategory extends State<SelectCategory> {
-//   @override
-//   initState() {
-//     super.initState();
-//   }
+  @override
+  State<SelectCategory> createState() => _SelectCategory();
+}
 
-//   List<String> _selectedValues = [];
+class _SelectCategory extends State<SelectCategory> {
+  @override
+  initState() {
+    final EditProfileOrganizerController editProfileOrganizerController =
+        Get.find();
 
-//   void _handleSelectionChange(List<String> newSelections) {
-//     setState(() {
-//       _selectedValues = newSelections;
-//     });
-//     // Get.find<EditProfileOrganizerController>().selectedState =
-//     //     newSelections.join(', ');
-//   }
+    _selectedValues.addAll(editProfileOrganizerController.choiceServiceList
+        .where((element) => editProfileOrganizerController.selectedCategories
+            .contains(element.categoryId))
+        .map((e) => e.name));
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MultiSelectDropDown(
-//         options: Get.find<EditProfileOrganizerController>().choiceServiceList.map((e)=>e.name).toList,
-//         selectedValues: _selectedValues,
-//         onSelectionChanged: _handleSelectionChange);
-//   }
-// }
+    super.initState();
+  }
+
+  List<String> _selectedValues = [];
+
+  void _handleSelectionChange(List<String> newSelections) {
+    setState(() {
+      _selectedValues = newSelections;
+    });
+    final EditProfileOrganizerController editProfileOrganizerController =
+        Get.find();
+    editProfileOrganizerController.selectedCategories.addAll(
+        editProfileOrganizerController.choiceServiceList
+            .where((element) => element.name == newSelections.map((e) => e))
+            .map((e) => e.categoryId)
+            .toList());
+    print(
+        "the selected values :${editProfileOrganizerController.selectedCategories}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiSelectDropDown(
+        options: Get.find<EditProfileOrganizerController>()
+            .choiceServiceList
+            .map((e) => e.name)
+            .toList(),
+        selectedValues: _selectedValues,
+        title: "Event category",
+        onSelectionChanged: _handleSelectionChange);
+  }
+}

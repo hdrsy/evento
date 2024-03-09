@@ -4,6 +4,7 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/payment_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import 'package:evento/features/booking/book_now/controller/book_now_controller.dart';
 import 'package:evento/features/booking/book_now/model/ticket_model.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/main.dart';
@@ -11,6 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
+  @override
+  void onClose() {
+    final BookNowController bookNowController = Get.find();
+    bookNowController.ticketList[ticketIndex].isPaidSuccfully.value = true;
+    // TODO: implement onClose
+    super.onClose();
+  }
+
   TextEditingController phone = TextEditingController();
   TextEditingController otp = TextEditingController();
   late RxInt _totalSeconds;
@@ -29,6 +38,7 @@ class PaymentController extends GetxController {
 
   RxBool isIvoiceCreated = false.obs;
   RxBool isPhoneCorrect = false.obs;
+  bool paidSccuffly = false;
   RxBool isSentOtpActive = false.obs;
   RxBool isLoadingPhone = false.obs;
   RxBool isLoadingotp = false.obs;
@@ -40,6 +50,8 @@ class PaymentController extends GetxController {
   int invoiceTax = 0;
   RxInt invoiceId = 0.obs;
   List bookingIds = [];
+  int ticketIndex = 0;
+
   @override
   void onInit() {
     _totalSeconds = 360.obs;
@@ -51,6 +63,7 @@ class PaymentController extends GetxController {
     eventDetailsModel = Get.arguments[0];
     ticketList = Get.arguments[1];
     booking = Get.arguments[2];
+    ticketIndex = Get.arguments[3];
 
     totalAmount = calculateIvoiceAmount();
     getTaxInvoice(totalAmount);
@@ -151,6 +164,7 @@ class PaymentController extends GetxController {
       otp.clear();
     } else {
       print("success create:$handlingResponse");
+      paidSccuffly = true;
       Get.offAndToNamed('/BookingDetailesScreen',
           arguments: [eventDetailsModel, ticketList]);
     }

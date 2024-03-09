@@ -51,28 +51,30 @@ class ButtonsOrganizer extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: const AlignmentDirectional(0.00, 0.05),
-            child: ButtonWidget(
-              showLoadingIndicator:
-                  editProfileOrganizerController.isLoading.value,
-              onPressed: () async {
-                editProfileOrganizerController.onPressDone();
-              },
-              text: tr("Save Changes"),
-              options: ButtonOptions(
-                height: 44,
-                padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: customColors.primary,
-                textStyle: customTextStyle.titleSmall
-                    .copyWith(color: customColors.info),
-                elevation: 3,
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
+          Obx(
+            () => Align(
+              alignment: const AlignmentDirectional(0.00, 0.05),
+              child: ButtonWidget(
+                showLoadingIndicator:
+                    editProfileOrganizerController.isLoading.value,
+                onPressed: () async {
+                  editProfileOrganizerController.onPressDone();
+                },
+                text: tr("Save Changes"),
+                options: ButtonOptions(
+                  height: 44,
+                  padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  color: customColors.primary,
+                  textStyle: customTextStyle.titleSmall
+                      .copyWith(color: customColors.info),
+                  elevation: 3,
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
