@@ -45,17 +45,17 @@ class FieldsOrganizer extends StatelessWidget {
                 validator: (value) {
                   return null;
                 }),
-            // EditProfileField(
-            //     suffixIcon: Icons.calendar_month,
-            //     controller: editProfileController.sepecialities,
-            //     hintText: tr("Decoration"),
-            //     labelText: tr("Sepecialities"),
-            //     onChanged: (value) {
-            //       editProfileController.sepecialities.text = value;
-            //     },
-            //     validator: (value) {
-            //       return null;
-            //     }),
+            EditProfileField(
+                suffixIcon: Icons.calendar_month,
+                controller: editProfileController.otherCatogery,
+                hintText: tr("Other category"),
+                labelText: tr("Sepecialities"),
+                onChanged: (value) {
+                  editProfileController.otherCatogery.text = value;
+                },
+                validator: (value) {
+                  return null;
+                }),
             SelectCategory(),
             SelectStates()
           ].divide(SizedBox(

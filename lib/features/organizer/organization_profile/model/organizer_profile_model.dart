@@ -12,6 +12,7 @@ class OrganizationProfileModel {
   String state;
   String? profile;
   String? cover;
+  String? otherCategory;
   bool isFollowedByAuthUser;
   List<OrganizationProfileAlbum> albums;
   List<Category> categories;
@@ -30,6 +31,7 @@ class OrganizationProfileModel {
       required this.cover,
       required this.categories,
       required this.bio,
+      required this.otherCategory,
       required this.services,
       required this.state,
       required this.isFollowedByAuthUser,
@@ -49,6 +51,7 @@ class OrganizationProfileModel {
       name: json['name'] ?? "Unknown",
       bio: json['bio'] ?? "",
       services: json['services'] ?? "",
+      otherCategory: json['other_category'] ?? "",
       state: json['covering_area'] ?? '',
       categories: json['categories'] != null
           ? List<Category>.from(

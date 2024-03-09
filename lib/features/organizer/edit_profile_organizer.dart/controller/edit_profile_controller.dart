@@ -23,6 +23,7 @@ class EditProfileOrganizerController extends GetxController {
   late RxBool isCoverSelected;
   late TextEditingController firstName;
   late TextEditingController bio;
+  late TextEditingController otherCatogery;
   late TextEditingController createFolderName;
 
   late TextEditingController sepecialities;
@@ -46,6 +47,7 @@ class EditProfileOrganizerController extends GetxController {
     createFolderName = TextEditingController();
     selectedState = profileModel.state;
     bio = TextEditingController(text: profileModel.bio);
+    otherCatogery = TextEditingController(text: profileModel.otherCategory);
     getCategoriesList();
     getSelectedGategories();
     print("the states:${profileModel.state}");
@@ -122,6 +124,7 @@ class EditProfileOrganizerController extends GetxController {
         'name': firstName.text,
         'bio': bio.text,
         'covering_area': selectedState,
+        'other_category': otherCatogery.text,
       };
 
       for (int i = 0; i < selectedCategories.length; i++) {
