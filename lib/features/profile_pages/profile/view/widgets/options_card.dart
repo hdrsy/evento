@@ -1,4 +1,4 @@
-import 'package:flutter_background_service/flutter_background_service.dart';
+// import 'package:flutter_background_service/flutter_background_service.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -8,13 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OptionsCard extends StatelessWidget {
-   OptionsCard(
+  OptionsCard(
       {super.key,
       required this.icon,
       required this.targetRout,
       required this.title,
-       this.bottomSheetHeight
-      });
+      this.bottomSheetHeight});
   final String title;
   final dynamic targetRout;
   final IconData icon;
@@ -25,25 +24,24 @@ class OptionsCard extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(8, 12, 8, 0),
       child: GestureDetector(
         onTap: () async {
-          if(targetRout is String && targetRout == '/'){
+          if (targetRout is String && targetRout == '/') {
             Get.offAllNamed('/');
             prefService.remove('token');
             prefService.remove('userInfo');
             prefService.remove('isCompleteProfile');
-                 FlutterBackgroundService service=FlutterBackgroundService();
-    service.invoke("stopService");
-  print("is running service");
-            print(await service.isRunning());
-          
-            print(await prefService.isContainKey('userInfo'));
-          }else{
+            //              FlutterBackgroundService service=FlutterBackgroundService();
+            // service.invoke("stopService");
+            print("is running service");
+            // print(await service.isRunning());
 
-          targetRout is String
-              ? Get.toNamed(targetRout)
-              : showButtonSheet(
-                  context: context,
-                  widget: targetRout,
-                  height:bottomSheetHeight?? screenHeight * 0.2);
+            print(await prefService.isContainKey('userInfo'));
+          } else {
+            targetRout is String
+                ? Get.toNamed(targetRout)
+                : showButtonSheet(
+                    context: context,
+                    widget: targetRout,
+                    height: bottomSheetHeight ?? screenHeight * 0.2);
           }
         },
         child: Container(

@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
+import 'package:evento/core/utils/services/work_manger.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:workmanager/workmanager.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -21,10 +26,22 @@ late String? targetRout;
 late String? themeValue;
 UserInfo? user;
 bool isGuset = false;
+late Timer timer;
+void startTimerToRemoveSplashScreen() {
+  timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+    if (t.tick == 2) {
+      // Timer reached 3 seconds
+      t.cancel(); // Stop the timer
+      FlutterNativeSplash.remove(); // Remove splash screen
+    }
+  });
+}
 
 void main() async {
+  startTimerToRemoveSplashScreen();
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+  WorkmanagerService.initializeWorkmanager();
   await EasyLocalization.ensureInitialized();
 
   themeValue = await prefService.readString('theme');
@@ -35,7 +52,6 @@ void main() async {
       : "/";
 
   await Get.putAsync(() => ConnectivityService().init());
-
   runApp(EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path:

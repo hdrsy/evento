@@ -19,7 +19,6 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
       Get.put(CancelBookingController());
   @override
   Widget build(BuildContext context) {
-    cancelBookingController.bookings = [];
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -69,31 +68,37 @@ class ChoiceTicketForCancalWidget extends StatelessWidget {
           Spacer(),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-            child: ButtonWidget(
-              onPressed: () async {
-                Get.back();
-                showButtonSheet(
-                    context: context,
-                    widget: CancelBookingWidget(),
-                    height: screenHeight * 0.7);
-              },
-              text: tr("Continue"),
-              options: ButtonOptions(
-                height: 40,
-                padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: customColors.primary,
-                textStyle: customTextStyle.titleSmall.override(
-                  fontFamily: 'Nunito',
-                  color: Colors.white,
-                  useGoogleFonts: true,
+            child: Obx(
+              () => ButtonWidget(
+                onPressed: () async {
+                  if (cancelBookingController.selectedTicket.isNotEmpty) {
+                    Get.back();
+                    showButtonSheet(
+                        context: context,
+                        widget: CancelBookingWidget(),
+                        height: screenHeight * 0.7);
+                  }
+                },
+                text: tr("Continue"),
+                options: ButtonOptions(
+                  height: 40,
+                  padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                  iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  color: cancelBookingController.selectedTicket.isNotEmpty
+                      ? customColors.primary
+                      : customColors.alternate,
+                  textStyle: customTextStyle.titleSmall.override(
+                    fontFamily: 'Nunito',
+                    color: Colors.white,
+                    useGoogleFonts: true,
+                  ),
+                  elevation: 3,
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                elevation: 3,
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
@@ -161,7 +166,7 @@ class ddd extends StatelessWidget {
                   child: Checkbox(
                     value: c.selectedTicket.contains(eventBooking.id),
                     onChanged: (value) {
-                      c.changeSelected(eventBooking.id);
+                      c.changeSelected(eventBooking.id, eventBooking);
                     },
                     activeColor: customColors.primary,
                     checkColor: customColors.info,

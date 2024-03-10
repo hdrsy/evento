@@ -3,7 +3,7 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/main.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
+// import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 
 class AccountTypeController extends GetxController {
@@ -38,7 +38,7 @@ class AccountTypeController extends GetxController {
     prefService.remove('token');
     prefService.remove('userInfo');
     prefService.remove('isCompleteProfile');
-    FlutterBackgroundService service = FlutterBackgroundService();
-    service.invoke("stopService");
+    // FlutterBackgroundService service = FlutterBackgroundService();
+    // service.invoke("stopService");
   }
 }

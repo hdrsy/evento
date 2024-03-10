@@ -90,7 +90,9 @@ class SearchPageController extends GetxController {
     try {
       String token = await prefService.readString("token");
       var response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.eventSearch,
+          targetRout: isGuset
+              ? ServerConstApis.eventSearchforGuest
+              : ServerConstApis.eventSearch,
           method: "post",
           data: {"Search": query},
           token: token);

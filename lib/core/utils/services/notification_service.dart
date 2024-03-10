@@ -33,52 +33,55 @@ class NotificationService {
     //         iOS: initializationSettingsIOS);
 
     // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    
-  // Setting up the notification channel for foreground service.
-  const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'booking',
-    'booking',
-    description: 'This channel is used for important notifications.',
-    importance: Importance.max  ,
-    playSound: true
-  );
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+    // Setting up the notification channel for foreground service.
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'booking', 'booking',
+        description: 'This channel is used for important notifications.',
+        importance: Importance.max,
+        playSound: true);
 
-  // Initializing the local notifications plugin.
-  if (Platform.isIOS || Platform.isAndroid) {
-    await flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(
-        iOS: DarwinInitializationSettings(),
-        android: AndroidInitializationSettings('ic_bg_service_small'),
-      ),
-    );
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    // Initializing the local notifications plugin.
+    if (Platform.isIOS || Platform.isAndroid) {
+      await flutterLocalNotificationsPlugin.initialize(
+        const InitializationSettings(
+          iOS: DarwinInitializationSettings(),
+          android: AndroidInitializationSettings('launcher_icon'),
+        ),
+      );
+    }
+
+    // Creating the notification channel.
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
   }
 
-  // Creating the notification channel.
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
-  }
-
-  Future<void> showNotification(int notificationId,String title, String body) async {
-     AndroidNotificationDetails androidPlatformChannelSpecifics =
+  Future<void> showNotification(
+      int notificationId, String title, String body) async {
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(title, body,
-            channelDescription: 'This channel is used for important notifications.',
+            channelDescription:
+                'This channel is used for important notifications.',
             importance: Importance.max,
             priority: Priority.high,
             ongoing: false,
             playSound: true,
-            
             showWhen: false);
 
-     NotificationDetails platformChannelSpecifics = NotificationDetails(
+    NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
     );
 
-    await flutterLocalNotificationsPlugin
-        .show(notificationId, title, body, platformChannelSpecifics, );
+    await flutterLocalNotificationsPlugin.show(
+      notificationId,
+      title,
+      body,
+      platformChannelSpecifics,
+    );
   }
 }

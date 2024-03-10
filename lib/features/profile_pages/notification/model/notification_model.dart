@@ -3,7 +3,7 @@ class NotificationModel {
   final String title;
   final String description;
   final int userId;
-  final String type;
+  final int type;
   final DateTime createdAt;
 
   NotificationModel({
@@ -22,7 +22,7 @@ class NotificationModel {
         title: json['title'] ?? '',
         description: json['description'] ?? '',
         userId: json['user_id'] ?? 0,
-        type: json['type'] ?? '',
+        type: json['seen_type'] ?? 0,
         createdAt: json['created_at'] != null
             ? DateTime.parse(json['created_at'])
             : DateTime.now());

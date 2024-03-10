@@ -126,7 +126,9 @@ class PriceSummaryWidget extends StatelessWidget {
                   child: ButtonWidget(
                     showLoadingIndicator: bookNowController.isLoading.value,
                     onPressed: () async {
-                      bookNowController.onPressBookNow(index);
+                      bookNowController.ticketList[index].isPaidSuccfully.value
+                          ? null
+                          : bookNowController.onPressBookNow(index);
                     },
                     text: bookNowController
                             .ticketList[index].isPaidSuccfully.value

@@ -58,25 +58,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-       <service
-       android:name="com.ekasetiawans.flutterbackgroundservice.BackgroundService"
-       android:enabled="true"
-       android:exported="false"/>
-
-        <service
-            android:name="com.mycompany.evento"
-            android:enabled="true"
-            android:foregroundServiceType="dataSync"
-            android:exported="true">
-            <meta-data
-                android:name="flutterEmbedding"
-                android:value="2" />
-        </service>
-        <service
-            android:name="id.flutter.flutter_background_service.BackgroundService"
-            android:foregroundServiceType="dataSync"
-        />
-
+       <meta-data
+         android:name="flutterEmbedding"
+         android:value="2" />
+        
         <!-- FileProvider configuration -->
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -92,6 +92,7 @@ class Booking {
   String firstName;
   String lastName;
   int age;
+  int invoiceId;
   String phoneNumber;
   List<Amenity> amenities;
   String status;
@@ -101,6 +102,7 @@ class Booking {
     required this.id,
     required this.userId,
     required this.eventId,
+    required this.invoiceId,
     required this.userPhoneNumber,
     required this.eventTitle,
     required this.classType,
@@ -116,6 +118,7 @@ class Booking {
   factory Booking.fromJson(Map<String, dynamic> json) {
     return Booking(
       id: json['id'],
+      invoiceId: json['invoice_id'],
       userId: json['user_id'],
       eventId: json['event_id'],
       userPhoneNumber: json['user_phone_number'],

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
+// import 'package:flutter_background_service/flutter_background_service.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -41,7 +41,5 @@ class LogOutController extends GetxController {
     prefService.remove('token');
     prefService.remove('userInfo');
     prefService.remove('isCompleteProfile');
-    FlutterBackgroundService service = FlutterBackgroundService();
-    service.invoke("stopService");
   }
 }

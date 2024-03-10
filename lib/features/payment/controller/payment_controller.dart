@@ -14,8 +14,10 @@ import 'package:get/get.dart';
 class PaymentController extends GetxController {
   @override
   void onClose() {
-    final BookNowController bookNowController = Get.find();
-    bookNowController.ticketList[ticketIndex].isPaidSuccfully.value = true;
+    if (paidSccuffly) {
+      final BookNowController bookNowController = Get.find();
+      bookNowController.ticketList[ticketIndex].isPaidSuccfully.value = true;
+    }
     // TODO: implement onClose
     super.onClose();
   }
@@ -95,7 +97,6 @@ class PaymentController extends GetxController {
 
       isLoadingPhone.value = true;
       errorMessageInInvoice.value = '';
-      print(booking['bookings']);
       Map<String, dynamic> data = {
         // "invoice_amount": calculateIvoiceAmount(),
         "invoice_amount": 100,
@@ -105,7 +106,6 @@ class PaymentController extends GetxController {
         "bookings": booking['bookings'],
         "event_id": eventDetailsModel.id,
       };
-      print(data);
       Either<String, List> response;
       String token = await prefService.readString("token");
       response = await PaymentApi.makeRequest(

@@ -132,7 +132,7 @@ class EventDetailesController extends GetxController {
     isSameUser = isGuset
         ? true
         : eventDetailsModel.organizer != null
-            ? user!.id == eventDetailsModel.organizer!.id
+            ? user!.id == eventDetailsModel.organizer!.mobileUserId
             : false;
     relatedEvents.value = List<EventModel>.from(
         handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));

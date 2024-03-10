@@ -77,6 +77,7 @@ class ServerConstApis {
   static String likeReel = '$baseAPI/api/reels';
   //// notification
   static String getNotification = '$baseAPI/api/notification';
+  static String liveNotification = '$baseAPI/api/livenotification';
   //// promoCode
   static String myPromoCode = '$baseAPI/api/my_promo_code';
 
@@ -118,6 +119,7 @@ class ServerConstApis {
   ///// guest
   static String getCategoryListforGuest = '$baseAPI/api/event_category-guest';
   static String getFeaturedListforGuest = '$baseAPI/api/featured_event-guest';
+  static String eventSearchforGuest = '$baseAPI/api/event_search-guest';
   static String getTrendingListforGuest = '$baseAPI/api/trending_event-guest';
   static String getToNightListforGuest = '$baseAPI/api/toNight-guest';
   static String getThisWeekListforGuest = '$baseAPI/api/thisWeek-guest';

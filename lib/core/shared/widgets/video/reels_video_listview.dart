@@ -3,6 +3,7 @@ import 'package:evento/core/colors/app_colors.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:evento/features/reels/controller/reels_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,11 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
               _betterPlayerController.videoPlayerController!.value.aspectRatio);
         });
       }
+      if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
+        // Handle the error, e.g., show a Snackbar with an error message
+        SnackbarManager.showSnackbar(
+            "Error", "An error occurred while playing the video.");
+      }
       if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
         _isPlayerInitialized = false;
         if (_currentIndex < _dataSourceList.length - 1) {
@@ -196,16 +202,18 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
         child: Stack(
           // alignment: Alignment.center,
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Row(
-                children:
-                    List.generate(widget.videos.length, (index) => rr(index))
-                        .divide(const SizedBox(
-                  width: 3,
-                )),
-              ),
-            ),
+            !isLoading
+                ? Align(
+                    alignment: Alignment.topCenter,
+                    child: Row(
+                      children: List.generate(
+                              widget.videos.length, (index) => rr(index))
+                          .divide(const SizedBox(
+                        width: 3,
+                      )),
+                    ),
+                  )
+                : SizedBox.shrink(),
             isLoading
                 ? Align(
                     alignment: const AlignmentDirectional(0, 0),

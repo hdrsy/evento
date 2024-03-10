@@ -1,5 +1,5 @@
 import 'package:evento/main.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
+// import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 
 import 'valdation_errors.dart';
@@ -39,8 +39,6 @@ class ErrorResponse {
         prefService.remove('token');
         prefService.remove('userInfo');
         prefService.remove('isCompleteProfile');
-        FlutterBackgroundService service = FlutterBackgroundService();
-        service.invoke("stopService");
       }
       return value.contains("SQL") ? "SomeThing Wrong !!!" : value;
     }

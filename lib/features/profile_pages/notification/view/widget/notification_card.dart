@@ -30,13 +30,13 @@ class NotificationCard extends StatelessWidget {
               description.lastIndexOf(' '); // or use another delimiter
           String eventIdString = description.substring(lastSpaceIndex + 1);
           int eventId = int.parse(eventIdString);
-        
+
           Get.toNamed('/eventDetailes', arguments: [eventId, false, 0]);
         }
       },
       child: Container(
         decoration: BoxDecoration(
-          color: notificationModel.type == "seen"
+          color: notificationModel.type == 0
               ? null
               : customColors.primaryBackground,
         ),

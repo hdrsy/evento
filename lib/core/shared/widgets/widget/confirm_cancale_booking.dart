@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ConfirmCancelBookingWidget extends StatelessWidget {
-  const ConfirmCancelBookingWidget({Key? key}) : super(key: key);
-
+  ConfirmCancelBookingWidget({Key? key}) : super(key: key);
+  final CancelBookingController cancelBookingController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,6 +63,7 @@ class ConfirmCancelBookingWidget extends StatelessWidget {
                 ButtonWidget(
                   onPressed: () async {
                     Get.back();
+                    Get.delete<CancelBookingController>();
                   },
                   text: tr("No,Don't Cancel"),
                   options: ButtonOptions(
@@ -87,42 +88,45 @@ class ConfirmCancelBookingWidget extends StatelessWidget {
                   ),
                   showLoadingIndicator: false,
                 ),
-                ButtonWidget(
-                  onPressed: () async {
-                    Get.back();
-                    final CancelBookingController cancelBookingController =
-                        Get.put(CancelBookingController());
-                    await cancelBookingController.onPressCancell();
-                    if (cancelBookingController.cancellState) {
-                      Get.back();
-                      showButtonSheet(
-                          context: context,
-                          widget: const SuccefulCancelBookingWidget(),
-                          height: 600);
-                    }
-                  },
-                  text: tr("Yes,cancel"),
-                  options: ButtonOptions(
-                    width: 150,
-                    height: 45,
-                    padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: customColors.rejected,
-                    textStyle: customTextStyle.titleSmall.override(
-                      fontFamily: 'Nunito',
-                      color: customColors.info,
-                      fontSize: 14,
-                      useGoogleFonts: true,
-                    ),
-                    elevation: 0,
-                    borderSide: BorderSide(
+                Obx(
+                  () => ButtonWidget(
+                    onPressed: () async {
+                      // Get.back();
+
+                      await cancelBookingController.onPressCancell();
+                      if (cancelBookingController.cancellState) {
+                        Get.back();
+                        showButtonSheet(
+                            context: context,
+                            widget: const SuccefulCancelBookingWidget(),
+                            height: 600);
+                      }
+                    },
+                    text: tr("Yes,cancel"),
+                    options: ButtonOptions(
+                      width: 150,
+                      height: 45,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       color: customColors.rejected,
-                      width: 2,
+                      textStyle: customTextStyle.titleSmall.override(
+                        fontFamily: 'Nunito',
+                        color: customColors.info,
+                        fontSize: 14,
+                        useGoogleFonts: true,
+                      ),
+                      elevation: 0,
+                      borderSide: BorderSide(
+                        color: customColors.rejected,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    borderRadius: BorderRadius.circular(10),
+                    showLoadingIndicator:
+                        cancelBookingController.isLoading.value,
                   ),
-                  showLoadingIndicator: false,
                 ),
               ],
             ),

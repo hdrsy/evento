@@ -84,9 +84,9 @@ dependencies:
   video_compress_plus: ^1.0.0
   flutter_local_notifications: ^16.3.0
   # pusher_client: ^2.0.0
-  flutter_background_service: ^5.0.5
-  flutter_background_service_android: ^6.0.1
-  flutter_background_service_ios: ^5.0.0
+  # flutter_background_service: ^5.0.5
+  # flutter_background_service_android: ^6.0.1
+  # flutter_background_service_ios: ^5.0.0
   connectivity_plus: ^5.0.2
   syncfusion_flutter_sliders: ^22.2.11
   web_socket_channel: ^2.4.0
@@ -99,6 +99,7 @@ dependencies:
   better_player_plus: ^1.0.5
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: 
+  workmanager: ^0.5.2
   
   
   
@@ -107,9 +108,12 @@ dependencies:
 
 flutter_native_splash:
   image: "assets/images/splash.png"
-  color: "#ffffff"
+  color: "#6E429A"
   android: true
   ios: true
+  android_12:
+    image: "assets/images/splash.png"
+    color: "#6E429A"
   
 
 
