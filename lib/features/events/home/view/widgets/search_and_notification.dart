@@ -1,5 +1,4 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
-
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/text_fields/search_filed.dart';
 import '../../../../main_bottom_navigation_bar/controller/main_bottom_navigation_controller.dart';

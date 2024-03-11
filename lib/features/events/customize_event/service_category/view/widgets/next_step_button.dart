@@ -21,7 +21,11 @@ class NextStepButton extends StatelessWidget {
         if (serviceCategoryController.selectedVenue.value != 0 && isDoneone) {
           Get.toNamed('/dateTimeScreen');
         } else {
-          snakBarForError(tr("Please Select Your Venue First"));
+          if (!isDoneone) {
+            snakBarForError(tr("Please select at least one service provider"));
+          } else {
+            snakBarForError(tr("Please Select Your Venue First"));
+          }
         }
       },
       text: "Next ",

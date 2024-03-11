@@ -68,7 +68,7 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                                     // fit: BoxFit.,
                                     alignment: const Alignment(0, 0),
                                   )
-                                : getImageNetwork(
+                                : getImageNetworkforCahing(
                                     url: eventDetailesController
                                         .eventDetailsModel.organizer!.profile,
                                     width: null,

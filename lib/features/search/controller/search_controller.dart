@@ -143,7 +143,6 @@ class SearchPageController extends GetxController {
     // Your filter logic
     var filteredData = await filter(
         data); // Assuming this returns List<dynamic> representing filtered data
-    print(filteredData);
     if (filteredData is List<dynamic>) {
       List<SearchModel> filteredResults = filteredData.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting

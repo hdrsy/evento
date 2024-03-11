@@ -118,10 +118,15 @@ class BookNowController extends GetxController {
       int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
       int newTotal =
           ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
+      print("the codeDiscount:${codeDiscount}");
+      print("the codeLimit:${codeLimit}");
+      print("the newTotal:${newTotal}");
       if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
+        print("the discount is :${ticketList[ticketIndex].discount}");
         return codeLimit;
       } else {
+        print("the discount is :${ticketList[ticketIndex].discount}");
         ticketList[ticketIndex].discount =
             ticketList[ticketIndex].totalPrice - newTotal;
         return newTotal;
@@ -278,16 +283,30 @@ class BookNowController extends GetxController {
     List<Map<String, dynamic>> bookingList = [];
 
     for (var booking in bookings) {
-      bookingList.add({
-        'class_id': booking.selectedClass!.id,
-        'first_name': booking.fisrtName.text,
-        'last_name': booking.lastName.text,
-        'age': int.tryParse(booking.age.text) ?? 0,
-        'phone_number': booking.phoneNumber.text,
-        "class_ticket_price": booking.selectedClass!.ticketPrice,
-        'options':
-            booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
-      });
+      if (booking.selectedPromoCode != null) {
+        bookingList.add({
+          'class_id': booking.selectedClass!.id,
+          'first_name': booking.fisrtName.text,
+          'last_name': booking.lastName.text,
+          'age': int.tryParse(booking.age.text) ?? 0,
+          'phone_number': booking.phoneNumber.text,
+          "promo_code_id": booking.selectedPromoCode!.id,
+          "class_ticket_price": booking.selectedClass!.ticketPrice,
+          'options':
+              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+        });
+      } else {
+        bookingList.add({
+          'class_id': booking.selectedClass!.id,
+          'first_name': booking.fisrtName.text,
+          'last_name': booking.lastName.text,
+          'age': int.tryParse(booking.age.text) ?? 0,
+          'phone_number': booking.phoneNumber.text,
+          "class_ticket_price": booking.selectedClass!.ticketPrice,
+          'options':
+              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+        });
+      }
     }
 
     Map<String, dynamic> jsonMap = {'bookings': bookingList};

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService {
   static final NotificationService _notificationService =
@@ -16,62 +17,70 @@ class NotificationService {
   NotificationService._internal();
 
   Future<void> init() async {
-    // const AndroidInitializationSettings initializationSettingsAndroid =
-    //     AndroidInitializationSettings("@mipmap/ic_launcher");
-
-    // // iOS Initialization
-    // const DarwinInitializationSettings initializationSettingsIOS =
-    //     DarwinInitializationSettings(
-    //         requestAlertPermission: true,
-    //         requestBadgePermission: true,
-    //         requestSoundPermission: true);
-
-    // // General Initialization
-    // const InitializationSettings initializationSettings =
-    //     InitializationSettings(
-    //         android: initializationSettingsAndroid,
-    //         iOS: initializationSettingsIOS);
-
-    // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-    // Setting up the notification channel for foreground service.
+    await Permission.notification.request();
+    // Setting up the notification channel for Android foreground service.
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        'booking', 'booking',
-        description: 'This channel is used for important notifications.',
-        importance: Importance.max,
-        playSound: true);
+      'booking', // id
+      'Booking Notifications', // title
+      description: 'This channel is used for important booking notifications.',
+      importance: Importance.max,
+      playSound: true,
+    );
 
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    // Requesting permissions for iOS.
+    final DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    );
 
-    // Initializing the local notifications plugin.
-    if (Platform.isIOS || Platform.isAndroid) {
-      await flutterLocalNotificationsPlugin.initialize(
-        const InitializationSettings(
-          iOS: DarwinInitializationSettings(),
-          android: AndroidInitializationSettings('launcher_icon'),
-        ),
-      );
+    // Initializing the local notifications plugin with platform-specific settings.
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: AndroidInitializationSettings(
+          '@mipmap/launcher_icon'), // Ensure 'launcher_icon' exists in drawable resources.
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      // onDidReceiveBackgroundNotificationResponse: selectNotification,
+    );
+
+    // Creating the notification channel for Android.
+    if (Platform.isAndroid) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
     }
+  }
 
-    // Creating the notification channel.
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+  Future selectNotification(NotificationResponse mm) async {
+    // Handle notification tapped logic here
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) async {
+    // Handle iOS foreground notification
   }
 
   Future<void> showNotification(
       int notificationId, String title, String body) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(title, body,
-            channelDescription:
-                'This channel is used for important notifications.',
-            importance: Importance.max,
-            priority: Priority.high,
-            ongoing: false,
-            playSound: true,
-            showWhen: false);
+        AndroidNotificationDetails(
+      'booking', // id
+      'Booking Notifications', // title
+      channelDescription:
+          'This channel is used for important booking notifications.',
+      importance: Importance.max,
+      priority: Priority.high,
+      ongoing: false,
+      playSound: true,
+      showWhen: false,
+    );
 
     NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,

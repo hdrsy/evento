@@ -113,7 +113,7 @@ class PaymentController extends GetxController {
           method: "post",
           token: token,
           data: data);
-      print("response for invoice is:$response");
+      // print("response for invoice is:$response");
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is String) {
         errorMessageInInvoice.value = handlingResponse;

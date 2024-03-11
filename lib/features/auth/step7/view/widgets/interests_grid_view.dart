@@ -108,9 +108,7 @@ class _CategoryGridItemState extends State<CategoryGridItem> {
                           color: widget.isSelected.value
                               ? customColors.primary
                               : customColors.primaryBackground),
-                      color: widget.isSelected.value
-                          ? customColors.primary
-                          : customColors.primaryBackground,
+                      color: customColors.primaryBackground,
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.cover,

@@ -151,10 +151,7 @@ class _IconContainerWidgetState extends State<IconContainerWidget> {
                                       widget.categoryModel.id
                                   ? customColors.primary
                                   : customColors.primaryBackground),
-                      color: typetoSetEventController.selectedCategory.value ==
-                              widget.categoryModel.id
-                          ? customColors.primary
-                          : customColors.primaryBackground,
+                      color: customColors.secondaryBackground,
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.cover,

@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
-import 'package:evento/core/utils/services/work_manger.dart';
+import 'package:evento/core/utils/services/pushy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:workmanager/workmanager.dart';
+import 'package:pushy_flutter/pushy_flutter.dart';
+
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -38,11 +39,22 @@ void startTimerToRemoveSplashScreen() {
 }
 
 void main() async {
-  startTimerToRemoveSplashScreen();
   WidgetsFlutterBinding.ensureInitialized();
+  startTimerToRemoveSplashScreen();
+
   sharedPreferences = await SharedPreferences.getInstance();
-  WorkmanagerService.initializeWorkmanager();
   await EasyLocalization.ensureInitialized();
+  // Start the Pushy service
+  Pushy.listen();
+
+  // Enable in-app notification banners (iOS 10+)
+  Pushy.toggleInAppBanner(true);
+
+  // Set custom notification icon (Android)
+  Pushy.setNotificationIcon('@mipmap/launcher_icon');
+
+// Listen for push notifications received
+  Pushy.setNotificationListener(backgroundNotificationListener);
 
   themeValue = await prefService.readString('theme');
   themeValue == '' ? prefService.createString('theme', "dark") : null;
@@ -58,6 +70,13 @@ void main() async {
           'assets/localization', // <-- change the path of the translation files
       fallbackLocale: const Locale('en'),
       child: const MyApp()));
+
+  // initializeWorkmanager();
+  // await NotificationService().init();
+  // Workmanager().registerPeriodicTask(
+  //     "t", // Unique task name for fetching notifications
+  //     "t",
+  //     frequency: Duration(minutes: 15));
 }
 
 class MyApp extends StatelessWidget {

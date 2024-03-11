@@ -77,7 +77,7 @@ class ServerConstApis {
   static String likeReel = '$baseAPI/api/reels';
   //// notification
   static String getNotification = '$baseAPI/api/notification';
-  static String liveNotification = '$baseAPI/api/livenotification';
+  static String liveNotification = '$baseAPI/api/live_notification';
   //// promoCode
   static String myPromoCode = '$baseAPI/api/my_promo_code';
 

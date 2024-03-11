@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/pushy.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -71,9 +72,10 @@ class Step8Controller extends GetxController {
 
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
+    String deviceToken = await pushyRegister();
 
     Map<String, String> data = getDataFromAllSteps();
-    print(data['birth_date']);
+    data['device_token'] = deviceToken;
     data.containsKey('image')
         ? response = await ApiHelper.makeRequest(
             targetRout: ServerConstApis.signUpStep2,
@@ -127,8 +129,6 @@ class Step8Controller extends GetxController {
     StepsController stepsController = Get.find();
     data['password'] = stepsController.password.text;
     data['gender'] = stepsController.isMale.value ? "male" : "female";
-    data['device_token'] =
-        "cD_ZqzqnQsG0dmy1dTUA8A:APA91bHH-fJ36YMpdkQa9hzuLavBzInsLQ0ew-MKhLE2tjhCemjYQ3IVQgDyR7B7Q1hGriK-FZAEonIcPXzlXzL4rKUrfns0m6fp33B6ejMreYTEtqlq-jNhhHkbfE1NbzbFd9wGia9L";
     data['birth_date'] =
         DateFormat('yyyy/M/d', 'en').format(stepsController.day!);
     data['state'] = states[stateindex!];

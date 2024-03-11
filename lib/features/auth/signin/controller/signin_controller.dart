@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/pushy.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -28,8 +29,8 @@ class SigninController extends GetxController {
     if (formdata!.validate()) {
       formdata.save();
       isLoading.value = true;
-      // final fcmToken = await firebaseMessaging.getToken();
       Either<ErrorResponse, Map<String, dynamic>> response;
+      String deviceToken = await pushyRegister();
 
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.signIn,
@@ -37,7 +38,7 @@ class SigninController extends GetxController {
           data: {
             "phone_number": phone.text,
             "password": password.text,
-            // "device_token": fcmToken
+            "device_token": deviceToken
           });
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
 

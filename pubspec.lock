@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  charcode:
+    dependency: transitive
+    description:
+      name: charcode
+      sha256: fb98c0f6d12c920a02ee2d998da788bca066ca5f148492b7085ee23372b12306
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.1"
   checked_yaml:
     dependency: transitive
     description:
@@ -1069,6 +1077,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.4"
+  pushy_flutter:
+    dependency: "direct main"
+    description:
+      name: pushy_flutter
+      sha256: fa60e5405cbed7b026e37d68605589c67e2fe6c32b70d018d4eeb41d7ed41b96
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.18"
   qr:
     dependency: transitive
     description:
@@ -1346,6 +1362,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  universal_html:
+    dependency: transitive
+    description:
+      name: universal_html
+      sha256: "56536254004e24d9d8cfdb7dbbf09b74cf8df96729f38a2f5c238163e3d58971"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.4"
   universal_io:
     dependency: transitive
     description:
@@ -1554,14 +1578,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.0"
-  workmanager:
-    dependency: "direct main"
-    description:
-      name: workmanager
-      sha256: ed13530cccd28c5c9959ad42d657cd0666274ca74c56dea0ca183ddd527d3a00
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.2"
   xdg_directories:
     dependency: transitive
     description:
