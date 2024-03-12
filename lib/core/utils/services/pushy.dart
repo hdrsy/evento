@@ -5,9 +5,6 @@ Future<String> pushyRegister() async {
     Pushy.setAppId('65eed18265c1588976608a51');
     // Register the user for push notifications
     String deviceToken = await Pushy.register();
-
-    // Print token to console/logcat
-    print('Device token: $deviceToken');
     return deviceToken;
     // Display an alert with the device token
 
