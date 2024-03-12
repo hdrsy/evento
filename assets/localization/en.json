@@ -551,4 +551,9 @@
       "Yes, Delete":"Yes, Delete",
       "Booked Successfully":"Booked Successfully",
   "You have booked 1 Tickets Successfully in event":"You have booked 1 Tickets Successfully in event"
+
+,"requestBody":"To enhance your experience, we suggest allowing 'Evento' to bypass battery optimizations. This ensures reliable notifications and smooth operation, even in the background."
+,"requestTitle":"Optimize App Performance",
+"OK, Let's Do It":"OK, Let's Do It",
+"Later":"Later"
 }

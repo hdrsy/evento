@@ -158,8 +158,6 @@ class FreindsController extends GetxController {
       // If there is another bottom sheet underneath, close it as well
       // You can call Get.back() again if needed, depending on your app's flow
       Get.back();
-
-      Get.offAndToNamed('/FreindsScreen');
     }
   }
 

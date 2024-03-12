@@ -55,7 +55,6 @@ void main() async {
 
 // Listen for push notifications received
   Pushy.setNotificationListener(backgroundNotificationListener);
-
   themeValue = await prefService.readString('theme');
   themeValue == '' ? prefService.createString('theme', "dark") : null;
   targetRout = await prefService.isContainKey('token') &&

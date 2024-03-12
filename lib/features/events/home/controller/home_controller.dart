@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/battery_optimzation.dart';
 
 import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:pushy_flutter/pushy_flutter.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -34,8 +36,14 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     isLoading = false.obs;
+    String isIgnoiedRequest = await prefService.readString("battery");
+    bool isIgnoried = await Pushy.isIgnoringBatteryOptimizations();
+    if (!isGuset && isIgnoiedRequest == '') {
+      isIgnoried ? null : showBatteryOptimizationDialog();
+      await prefService.createString("battery", "true");
+    }
     super.onInit();
   }
 
