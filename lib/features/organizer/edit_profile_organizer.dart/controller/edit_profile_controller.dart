@@ -125,11 +125,12 @@ class EditProfileOrganizerController extends GetxController {
         'bio': bio.text,
         'covering_area': selectedState,
         'other_category': otherCatogery.text,
+        'category_ids': selectedCategories
       };
 
-      for (int i = 0; i < selectedCategories.length; i++) {
-        dataRequest["category_ids[$i]"] = selectedCategories[i];
-      }
+      // for (int i = 0; i < selectedCategories.length; i++) {
+      //   dataRequest["category_ids[$i]"] = selectedCategories[i];
+      // }
       print(dataRequest);
       Map<String, File> fileMap = {};
       if (isProfileSelected.value) {

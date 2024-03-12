@@ -114,8 +114,7 @@ class ServiceAccordingCard extends StatelessWidget {
                                         .changeSelectedServiceProviderInEachCategory(
                                             serviceProvider.id,
                                             serviceCategoryIndex,
-                                            serviceProvider.user.firstName +
-                                                serviceProvider.user.lastName);
+                                            serviceProvider.name);
                                   },
                                   activeColor: customColors.success,
                                   checkColor: customColors.info,
@@ -135,7 +134,7 @@ class ServiceAccordingCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "${tr("Location")}: ${tr(serviceProvider.address)}",
+                        "${tr("Location")}: ${tr(serviceProvider.locationWorkGovernorate)}",
                         style: customTextStyle.labelMedium.override(
                             fontFamily: secondaryFontFamily,
                             useGoogleFonts: true,

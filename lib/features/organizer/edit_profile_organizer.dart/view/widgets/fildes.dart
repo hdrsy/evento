@@ -136,15 +136,29 @@ class _SelectCategory extends State<SelectCategory> {
     setState(() {
       _selectedValues = newSelections;
     });
+
     final EditProfileOrganizerController editProfileOrganizerController =
         Get.find();
-    editProfileOrganizerController.selectedCategories.addAll(
-        editProfileOrganizerController.choiceServiceList
-            .where((element) => element.name == newSelections.map((e) => e))
-            .map((e) => e.categoryId)
-            .toList());
+
+    // Clear existing categories if you're replacing them, or skip this if you're appending
+    editProfileOrganizerController.selectedCategories.clear();
+
+    // Find matching category IDs and add them to the controller's list
+    newSelections.forEach((selectedName) {
+      // Find the first match in choiceServiceList for the selectedName
+      var matchingCategory = editProfileOrganizerController.choiceServiceList
+          .firstWhereOrNull((element) => element.name == selectedName);
+
+      // If a match was found, add its categoryId to selectedCategories
+      if (matchingCategory != null) {
+        editProfileOrganizerController.selectedCategories
+            .add(matchingCategory.categoryId);
+      }
+    });
+
+    print(newSelections);
     print(
-        "the selected values :${editProfileOrganizerController.selectedCategories}");
+        "The selected values: ${editProfileOrganizerController.selectedCategories}");
   }
 
   @override

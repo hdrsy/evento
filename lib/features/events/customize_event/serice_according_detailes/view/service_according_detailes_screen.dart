@@ -4,6 +4,7 @@ import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../controller/service_according_detailes_controller.dart';
 import 'widgets/detailes_card.dart';
 import 'widgets/name_check_box.dart';
@@ -26,7 +27,7 @@ class ServiceAccordingDetailesScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 400,
+              height: 400.h,
               child: Stack(children: [
                 TopImageWidget(
                   imageUrl:

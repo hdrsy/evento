@@ -103,10 +103,10 @@ dependencies:
   
 
 flutter_native_splash:
-  image: "assets/images/splash.png"
-  color: "#6E429A"
   android: true
   ios: true
+  image: "assets/images/splash.png"
+  color: "#6E429A"
   android_12:
     image: "assets/images/splash.png"
     color: "#6E429A"

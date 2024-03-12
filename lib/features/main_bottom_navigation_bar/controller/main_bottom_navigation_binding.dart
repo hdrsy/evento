@@ -32,6 +32,6 @@ class MainBottomNavigationBinding implements Bindings {
     Get.lazyPut<TypetoSetEventController>(() => TypetoSetEventController());
     Get.lazyPut<SearchController>(() => SearchController());
     Get.lazyPut<ProfileController>(() => ProfileController());
-    Get.lazyPut<ThemeController>(() => ThemeController());
+    Get.lazyPut<ThemeController>(() => ThemeController(), fenix: true);
   }
 }
