@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/pushy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
-
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -53,8 +51,11 @@ void main() async {
   // Set custom notification icon (Android)
   Pushy.setNotificationIcon('@mipmap/launcher_icon');
 
-// Listen for push notifications received
+  // Listen for push notifications received
   Pushy.setNotificationListener(backgroundNotificationListener);
+  Pushy.setNotificationClickListener(notificationClickListener);
+  // Check for the notification that launched the app
+
   themeValue = await prefService.readString('theme');
   themeValue == '' ? prefService.createString('theme', "dark") : null;
   targetRout = await prefService.isContainKey('token') &&
@@ -69,13 +70,6 @@ void main() async {
           'assets/localization', // <-- change the path of the translation files
       fallbackLocale: const Locale('en'),
       child: const MyApp()));
-
-  // initializeWorkmanager();
-  // await NotificationService().init();
-  // Workmanager().registerPeriodicTask(
-  //     "t", // Unique task name for fetching notifications
-  //     "t",
-  //     frequency: Duration(minutes: 15));
 }
 
 class MyApp extends StatelessWidget {

@@ -62,6 +62,8 @@ class GoingController extends PaginationController<GoingModel> {
   }
 
   onPressAddFreind(int userId, int modelId) async {
+    itemList[modelId].friendRequestStatus = 'pending';
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -72,13 +74,12 @@ class GoingController extends PaginationController<GoingModel> {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      itemList[modelId].friendRequestStatus = 'pending';
-      update();
-    }
+    } else {}
   }
 
   onPressCancelReques(int requestId, int modelId) async {
+    itemList[modelId].friendRequestStatus = null;
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -89,9 +90,6 @@ class GoingController extends PaginationController<GoingModel> {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      itemList[modelId].friendRequestStatus = null;
-      update();
-    }
+    } else {}
   }
 }

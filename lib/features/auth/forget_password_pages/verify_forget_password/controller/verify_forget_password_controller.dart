@@ -8,18 +8,18 @@ import 'package:get/get.dart';
 
 class VerifyForgetPasswordController extends GetxController {
   late TextEditingController pin;
-  late String phone;
+  String phone = '';
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
   late RxList<String> errorMessage;
   @override
   void onInit() {
     pin = TextEditingController();
-    phone = Get.arguments;
+    // phone = Get.arguments;
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
     errorMessage = <String>[].obs;
-    getOtp();
+    // getOtp();
     super.onInit();
   }
 
@@ -51,7 +51,6 @@ class VerifyForgetPasswordController extends GetxController {
   }
 
   onPressContinue() async {
-    
     FormState? formdata = formstate.currentState;
     print(formdata!.validate());
     if (formdata.validate()) {
@@ -77,7 +76,6 @@ class VerifyForgetPasswordController extends GetxController {
   }
 
   whenvalidateSuccess(handlingResponse) {
-    Get.toNamed('/SetNewPasswordScreen',arguments: [phone,pin.text]);
+    Get.toNamed('/SetNewPasswordScreen', arguments: [phone, pin.text]);
   }
-
 }

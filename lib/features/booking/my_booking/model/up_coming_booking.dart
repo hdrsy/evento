@@ -118,7 +118,7 @@ class Booking {
   factory Booking.fromJson(Map<String, dynamic> json) {
     return Booking(
       id: json['id'],
-      invoiceId: json['invoice_id'],
+      invoiceId: json['invoice_id'] ?? 0,
       userId: json['user_id'],
       eventId: json['event_id'],
       userPhoneNumber: json['user_phone_number'],
@@ -143,14 +143,12 @@ class Event {
   int id;
   int organizerId;
   String title;
-  String titleAr;
   int venueId;
   int capacity;
   DateTime startDate;
   DateTime endDate;
   int ticketPrice;
   String description;
-  String descriptionAr;
   String type;
   List<String> images;
   Venue venue;
@@ -159,14 +157,12 @@ class Event {
     required this.id,
     required this.organizerId,
     required this.title,
-    required this.titleAr,
     required this.venueId,
     required this.capacity,
     required this.startDate,
     required this.endDate,
     required this.ticketPrice,
     required this.description,
-    required this.descriptionAr,
     required this.type,
     required this.images,
     required this.venue,
@@ -177,7 +173,6 @@ class Event {
       id: json['id'],
       organizerId: json['organizer_id'],
       title: json['title'],
-      titleAr: json['title_ar'],
       venueId: json['venue_id'],
       capacity: json['capacity'],
       startDate: json['start_date'] != null
@@ -188,7 +183,6 @@ class Event {
           : DateTime.now(),
       ticketPrice: json['ticket_price'],
       description: json['description'],
-      descriptionAr: json['description_ar'],
       type: json['type'],
       images: json['images'] != null
           ? jsonDecode(json['images']).cast<String>()
@@ -201,13 +195,10 @@ class Event {
 class Venue {
   int id;
   String name;
-  String nameAr;
   int capacity;
   String governorate;
   String locationDescription;
-  String locationDescriptionAr;
   String description;
-  String descriptionAr;
   double latitude;
   double longitude;
   String profile;
@@ -217,13 +208,10 @@ class Venue {
   Venue({
     required this.id,
     required this.name,
-    required this.nameAr,
     required this.capacity,
     required this.governorate,
     required this.locationDescription,
-    required this.locationDescriptionAr,
     required this.description,
-    required this.descriptionAr,
     required this.latitude,
     required this.longitude,
     required this.profile,
@@ -235,13 +223,10 @@ class Venue {
     return Venue(
       id: json['id'],
       name: json['name'],
-      nameAr: json['name_ar'],
       capacity: json['capacity'],
       governorate: json['governorate'],
       locationDescription: json['location_description'],
-      locationDescriptionAr: json['location_description_ar'],
       description: json['description'],
-      descriptionAr: json['description_ar'],
       latitude: json['latitude'],
       longitude: json['longitude'],
       profile: json['profile'],

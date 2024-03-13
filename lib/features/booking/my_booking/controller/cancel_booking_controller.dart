@@ -51,6 +51,7 @@ class CancelBookingController extends GetxController {
         cancellState = false;
       } else {
         cancellState = true;
+        Get.back();
       }
     }
     isLoading.value = false;

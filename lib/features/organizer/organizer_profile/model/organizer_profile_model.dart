@@ -13,10 +13,12 @@ class OrganizerProfileModel {
   String state;
   String profile;
   String cover;
+  int mobileUserId;
+
   bool isFollowedByAuthUser;
   List<OrganizerProfileAlbum> albums;
   List<Category> categories;
-  
+
   List<OrganizerProfileEvent> organizedEvents;
 
   OrganizerProfileModel(
@@ -24,9 +26,10 @@ class OrganizerProfileModel {
       required this.followersCount,
       required this.followingCount,
       required this.organizedEventsCount,
-          required this.name,
+      required this.name,
       required this.profile,
       required this.cover,
+      required this.mobileUserId,
       required this.categories,
       required this.bio,
       required this.services,
@@ -38,10 +41,11 @@ class OrganizerProfileModel {
   factory OrganizerProfileModel.fromJson(Map<String, dynamic> json) {
     return OrganizerProfileModel(
       id: json['id'] ?? 0,
+      mobileUserId: json['mobile_user_id'] ?? 0,
       followersCount: json['followers_count'] ?? 0,
       followingCount: json['following_count'] ?? 0,
       organizedEventsCount: json['organized_events_count'] ?? 0,
-       name: json['name'] ?? '',
+      name: json['name'] ?? '',
       bio: json['bio'] ?? '',
       services: json['services'] ?? '',
       state: json['state'] ?? '',
@@ -56,7 +60,6 @@ class OrganizerProfileModel {
           ? List<OrganizerProfileAlbum>.from(json['albums']
               .map((x) => OrganizerProfileAlbum.fromJson(x ?? [])))
           : [],
-    
       organizedEvents: json['organized_events'] != null
           ? List<OrganizerProfileEvent>.from(json['organized_events']
               .map((x) => OrganizerProfileEvent.fromJson(x ?? {})))

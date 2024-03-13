@@ -123,6 +123,8 @@ class FreindsController extends GetxController {
   }
 
   cancelSentRequest(int requestId, int modelId) async {
+    sentFreinds.removeAt(modelId);
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -133,10 +135,7 @@ class FreindsController extends GetxController {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      sentFreinds.removeAt(modelId);
-      update();
-    }
+    } else {}
   }
 
   unFreindRequest(int userId, int modelId) async {
@@ -162,6 +161,7 @@ class FreindsController extends GetxController {
   }
 
   confirmRecivedRequest(int senderId, int modelId) async {
+    recivedFreinds.removeAt(modelId);
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -173,13 +173,14 @@ class FreindsController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      recivedFreinds.removeAt(modelId);
       await getMyFreinds();
       update();
     }
   }
 
   deleteRecivedRequest(int senderId, int modelId) async {
+    recivedFreinds.removeAt(modelId);
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -190,9 +191,6 @@ class FreindsController extends GetxController {
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      recivedFreinds.removeAt(modelId);
-      update();
-    }
+    } else {}
   }
 }

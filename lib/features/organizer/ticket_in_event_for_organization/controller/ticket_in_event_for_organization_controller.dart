@@ -3,18 +3,19 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/booking/book_now/model/ticket_model.dart';
-import 'package:evento/features/booking/my_booking/model/my_cancel_booking_model.dart';
+import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
 import 'package:evento/features/organizer/organization_profile/model/organizer_profile_model.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/model/ticket_in_event_for_organization_model.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
 class TicketsInEventForOrganizerController extends GetxController {
-  BookingResponse bookingResponse = BookingResponse(booking: {});
+  BookingResponseForOrganizer bookingResponse =
+      BookingResponseForOrganizer(booking: {});
   late OrganizationProfileEvent organizationProfileEvent;
   late int eventId;
   List<TicketModel> generatedTicketModel = [];
-  late CancelledEvent eventDetailsModel;
+  late Event eventDetailsModel;
 
   late RxBool isLoading;
   RxBool isError = false.obs;
@@ -38,16 +39,31 @@ class TicketsInEventForOrganizerController extends GetxController {
       generatedTicketModel[i].phoneNumber.text =
           bookings[i].phoneNumber.toString();
     }
-    eventDetailsModel = CancelledEvent(
+    eventDetailsModel = Event(
+        capacity: 0,
+        description: "",
+        organizerId: 0,
         id: eventId,
+        ticketPrice: 0,
+        type: "",
         title: organizationProfileEvent.title,
         startDate: organizationProfileEvent.startDate,
         endDate: DateTime.now(),
         venueId: organizationProfileEvent.venueId,
         images: [],
-        isFollowedByAuthUser: false,
-        venue: CancelledVenue(
-            governorate: "Damascus", id: 1, locationDescription: ""));
+        //  / isFollowedByAuthUser: false,
+        venue: Venue(
+            averageRating: 0,
+            capacity: 0,
+            contactNumber: "0",
+            description: "",
+            latitude: 0,
+            longitude: 0,
+            name: "",
+            profile: "",
+            governorate: "Damascus",
+            id: 1,
+            locationDescription: ""));
     return generatedTicketModel;
   }
 
@@ -67,7 +83,8 @@ class TicketsInEventForOrganizerController extends GetxController {
       if (handlingResponse is ErrorResponse) {
         isError.value = true;
       } else {
-        bookingResponse = BookingResponse.fromJson(handlingResponse);
+        bookingResponse =
+            BookingResponseForOrganizer.fromJson(handlingResponse);
 
         print("booking detailes:${bookingResponse.booking}");
         update();

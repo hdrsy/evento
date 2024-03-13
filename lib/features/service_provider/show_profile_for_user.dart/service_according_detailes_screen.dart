@@ -34,11 +34,8 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
                     icon: Icons.error_outline_outlined,
                     message: "SomeThing Wrong!!",
                   )
-                : Column(children: [
+                : ListView(children: [
                     _buildTopSection(context),
-                    // SizedBox(
-                    //   height: 50,
-                    // ),
                     _buildContentSection(),
                   ])),
       ),
@@ -102,28 +99,20 @@ class ServiceAccordingDetailesForUserScreen extends StatelessWidget {
   }
 
   Widget _buildContentSection() {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: customColors.secondaryBackground,
-          boxShadow: const [
-            // BoxShadow(
-            //     blurRadius: 4, color: Color(0x320E151B), offset: Offset(0, -2))
+    return Container(
+      decoration: BoxDecoration(
+        color: customColors.secondaryBackground,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+        child: Column(
+          children: [
+            NameCheckBox(
+                serviceProvider:
+                    serviceAccordingDetailesController.serviceProvider),
+            const SizedBox(height: 20),
+            TabBarGalleryAndDetailes(),
           ],
-          // borderRadius: const BorderRadius.only(
-          //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-          child: Column(
-            children: [
-              NameCheckBox(
-                  serviceProvider:
-                      serviceAccordingDetailesController.serviceProvider),
-              const SizedBox(height: 20),
-              Expanded(child: TabBarGalleryAndDetailes()),
-            ],
-          ),
         ),
       ),
     );
@@ -155,14 +144,11 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
               Tab(text: tr("Gallery")),
             ],
           ),
-          Expanded(
-            child: TabBarView(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(16), child: DetailesCard()),
-                _buildGallery(),
-              ],
-            ),
+          TabBarView(
+            children: [
+              Padding(padding: const EdgeInsets.all(16), child: DetailesCard()),
+              _buildGallery(),
+            ],
           ),
         ],
       ),

@@ -18,11 +18,7 @@ class OrganizerEventCard extends StatelessWidget {
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+    return GestureDetector(
       onTap: () async {
         Get.toNamed('/eventDetailes',
             arguments: [organizerProfileEvent.id, false, 0]);

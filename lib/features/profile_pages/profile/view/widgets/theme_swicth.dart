@@ -1,6 +1,5 @@
 import 'package:evento/features/profile_pages/profile/view/widgets/account_text.dart';
 
-import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../core/utils/theme/theme_controller.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';

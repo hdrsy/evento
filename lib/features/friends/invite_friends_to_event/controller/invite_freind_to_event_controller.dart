@@ -55,6 +55,8 @@ class InviteFreindsToEventController extends GetxController {
     String token = await prefService.readString("token");
 
     // The response from the API call, wrapped in Either to handle both success and error cases.
+    initedList[modelId] = true;
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     Map<String, dynamic> data = {
       "event_name": eventNAme,
@@ -78,8 +80,6 @@ class InviteFreindsToEventController extends GetxController {
       // Return the first error message.
     } else {
       // If the response is successful, return the success message from the response.
-      initedList[modelId] = true;
-      update();
     }
   }
 }

@@ -392,12 +392,10 @@ class EventInYourCityListController extends PaginationController<EventModel> {
     if (isDoneSuccefully == "followed successfully") {
       itemList[modelIndex].isFollowedByAuthUser = true;
       eventStateManager.toggleFavorite(eventId);
-
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      eventStateManager.toggleFavorite(eventId);
-
       itemList[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }

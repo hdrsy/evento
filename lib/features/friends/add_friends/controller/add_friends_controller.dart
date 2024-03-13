@@ -119,6 +119,8 @@ class AddFriendsController extends GetxController {
   }
 
   onPressAddFreind(int userId, int modelId) async {
+    itemList[modelId].friendRequestStatus = 'pending';
+    update();
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -130,7 +132,6 @@ class AddFriendsController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      itemList[modelId].friendRequestStatus = 'pending';
       Get.find<FreindsController>().getSendRequest();
       update();
     }
@@ -138,6 +139,8 @@ class AddFriendsController extends GetxController {
 
   onPressCancelReques(int requestId, int modelId) async {
     Either<ErrorResponse, Map<String, dynamic>> response;
+    itemList[modelId].friendRequestStatus = null;
+    update();
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
         targetRout: "${ServerConstApis.cancelRequest}/$requestId",
@@ -148,7 +151,6 @@ class AddFriendsController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      itemList[modelId].friendRequestStatus = null;
       update();
     }
   }

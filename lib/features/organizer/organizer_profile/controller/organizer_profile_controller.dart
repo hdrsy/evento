@@ -29,7 +29,6 @@ class OrganizerProfileController extends GetxController {
     rganizerFollowers = [];
     orgnizerId = Get.arguments;
     // isorganizerEditProfile = Get.arguments[1]??false;
-    checkIfSameUser();
     await getOrganizerProfile();
     getOrganizerFollowers();
     super.onInit();
@@ -52,8 +51,9 @@ class OrganizerProfileController extends GetxController {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
         final interestsJson = handlingResponse['organizer'];
-        print("orrr:$interestsJson");
         organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
+        checkIfSameUser();
+
         update();
       }
       isLoading.value = false;
@@ -73,7 +73,6 @@ class OrganizerProfileController extends GetxController {
         token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
@@ -136,7 +135,10 @@ class OrganizerProfileController extends GetxController {
 
   checkIfSameUser() {
     final ProfileController profileController = Get.find();
-    isSameUser = orgnizerId == profileController.profileModel.id ? true : false;
+    isSameUser =
+        organizerProfileModel.mobileUserId == profileController.profileModel.id
+            ? true
+            : false;
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {

@@ -1,11 +1,11 @@
-class BookingResponse {
+class BookingResponseForOrganizer {
   Map<String, List<BookingO>> booking;
 
-  BookingResponse({
+  BookingResponseForOrganizer({
     required this.booking,
   });
 
-  factory BookingResponse.fromJson(Map<String, dynamic> json) {
+  factory BookingResponseForOrganizer.fromJson(Map<String, dynamic> json) {
     Map<String, List<BookingO>> bookingMap = {};
     if (json['Booking'] != null) {
       json['Booking'].forEach((key, value) {
@@ -16,7 +16,7 @@ class BookingResponse {
       });
     }
 
-    return BookingResponse(
+    return BookingResponseForOrganizer(
       booking: bookingMap,
     );
   }

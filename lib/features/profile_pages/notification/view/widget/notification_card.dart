@@ -36,7 +36,7 @@ class NotificationCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: notificationModel.type == 0
+          color: notificationModel.type == 1
               ? null
               : customColors.primaryBackground,
         ),
@@ -106,7 +106,7 @@ class NotificationCard extends StatelessWidget {
                       ),
                     ].divide(const SizedBox(width: 15)),
                   ),
-                  notificationModel.type == "seen"
+                  notificationModel.type == 1
                       ? const SizedBox()
                       : Container(
                           width: 50,

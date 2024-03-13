@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
 
 Future<String> pushyRegister() async {
@@ -36,4 +37,20 @@ void backgroundNotificationListener(Map<String, dynamic> data) {
 
   // Clear iOS app badge number
   Pushy.clearBadge();
+}
+
+@pragma('vm:entry-point')
+void notificationClickListener(Map<String, dynamic> data) {
+  // Handle notification click
+  print("Notification clicked: $data");
+
+  // Check if GetX navigation context is ready, otherwise, delay the navigation
+  if (Get.context != null) {
+    Get.toNamed('/NotificationScreen');
+  } else {
+    // Use Future.delayed to wait for GetX navigation context to be ready
+    Future.delayed(Duration.zero, () {
+      Get.toNamed('/NotificationScreen');
+    });
+  }
 }

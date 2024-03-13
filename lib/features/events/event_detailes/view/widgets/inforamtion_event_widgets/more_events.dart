@@ -97,8 +97,9 @@ class MoreEventsCard extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
       child: GestureDetector(
         onTap: () {
-          Get.offAndToNamed('/eventDetailes',
-              arguments: [relatedEventModel.id, false, 0]);
+          final EventDetailesController eventDetailesController = Get.find();
+          eventDetailesController.eventId = relatedEventModel.id;
+          eventDetailesController.getEventDetailesModel();
         },
         child: Container(
           width: screenWidth * 0.8,

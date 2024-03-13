@@ -14,13 +14,10 @@ import 'package:flutter/material.dart';
 // Define a StatelessWidget named 'CouponCard'.
 class CouponCard extends StatelessWidget {
   // Define required fields for the widget.
-  
-final PromoCode promoCode;
+
+  final PromoCode promoCode;
   // Constructor for the CouponCard, initializing with required values.
-  const CouponCard({
-    Key? key,
-    required this.promoCode
-  }) : super(key: key);
+  const CouponCard({Key? key, required this.promoCode}) : super(key: key);
 
   // Override the build method to describe how the UI should be constructed.
   @override
@@ -31,7 +28,10 @@ final PromoCode promoCode;
         InkWell(
           onTap: () {
             // Add your onTap functionality here
-            showButtonSheet(context: context, widget: CouponsWidget(promoCode: promoCode), height: screenHeight*0.5);
+            showButtonSheet(
+                context: context,
+                widget: CouponsWidget(promoCode: promoCode),
+                height: screenHeight * 0.5);
           },
           child: Container(
             width: 350,
@@ -91,9 +91,11 @@ final PromoCode promoCode;
                           children: [
                             // Display the coupon image.
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child:getImageNetwork(url: promoCode.image, width: 50, height:50)
-                            ),
+                                borderRadius: BorderRadius.circular(8),
+                                child: getImageNetwork(
+                                    url: promoCode.image,
+                                    width: 50,
+                                    height: 50)),
                             // Display the coupon title.
                             Text(
                               "${promoCode.discount}% ${tr("Off")}",
@@ -113,6 +115,7 @@ final PromoCode promoCode;
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
+                          maxLines: 1,
                         ),
                         // Row for displaying expiry details.
                         Row(
@@ -123,7 +126,7 @@ final PromoCode promoCode;
                               style: customTextStyle.bodyMedium,
                             ).tr(),
                             Text(
-                              DateFormatter.formatDate( promoCode.endDate),
+                              DateFormatter.formatDate(promoCode.endDate),
                               style: customTextStyle.bodyMedium.copyWith(
                                 color: customColors.primaryText,
                                 fontSize: 12,

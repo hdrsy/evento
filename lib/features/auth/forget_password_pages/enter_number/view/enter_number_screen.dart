@@ -16,7 +16,8 @@ import 'package:get/get.dart';
 
 class EnterNumberScreen extends StatelessWidget {
   EnterNumberScreen({super.key});
-  final EnterNumberController enterNumberController = Get.put(EnterNumberController());
+  final EnterNumberController enterNumberController =
+      Get.put(EnterNumberController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +38,7 @@ class EnterNumberScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
       ),
       body: Container(
-         padding:  padding(15,24,24,24),
-       
+        padding: padding(15, 24, 24, 24),
         width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
@@ -61,28 +61,30 @@ class EnterNumberScreen extends StatelessWidget {
                 ),
               ).tr(),
               SizedBox(
-                  height: scaleHeight(50),
-                ),
+                height: scaleHeight(50),
+              ),
               Image.asset(
                 'assets/images/cuate.png',
                 height: 180,
                 fit: BoxFit.contain,
               ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
               SizedBox(
-                  height: scaleHeight(60),
-                ),
+                height: scaleHeight(60),
+              ),
               Form(
                 key: enterNumberController.formstate,
                 child: customTextField(
                   context: context,
-                  label:tr( "+963    mobile Phone"),
+                  label: tr("+963    mobile Phone"),
                   onChanged: (value) {
-                     if (value != null && !value.startsWith('0') && value.isNotEmpty) {
-      // Prepend '0' if it's not already there and the value is not empty
-      enterNumberController.phone.text = '0$value';
-    } else {
-      enterNumberController.phone.text = value!;
-    }
+                    if (value != null &&
+                        !value.startsWith('0') &&
+                        value.isNotEmpty) {
+                      // Prepend '0' if it's not already there and the value is not empty
+                      enterNumberController.phone.text = '0$value';
+                    } else {
+                      enterNumberController.phone.text = value!;
+                    }
                   },
                   keyboardType: TextInputType.phone,
                   validator: (value) {
@@ -90,9 +92,10 @@ class EnterNumberScreen extends StatelessWidget {
                   },
                 ),
               ),
-              
               buildButton()
-            ].divide(const SizedBox(height: 16,)),
+            ].divide(const SizedBox(
+              height: 16,
+            )),
           ),
         ),
       ),
@@ -107,10 +110,10 @@ class EnterNumberScreen extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
             child: ButtonWidget(
               onPressed: () async {
-                enterNumberController.onPressContinue();
+                enterNumberController.getOtp();
               },
-              text:tr( "Continue"),
-              showLoadingIndicator: false,
+              text: tr("Continue"),
+              showLoadingIndicator: enterNumberController.isLoading.value,
               options: ButtonOptions(
                 width: scaleWidth(330),
                 height: scaleHeight(40),
