@@ -77,8 +77,8 @@ Widget buildHorizontalScrollEventCards() {
               ? buildEventCard(justForYouController.itemList[index], index)
               : ShimmerLoadingWidget(
                   loadingShimmerWidget: Container(
-                  width: 355,
-                  height: 300,
+                  width: 150,
+                  height: 200,
                   // height: 330 ,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),

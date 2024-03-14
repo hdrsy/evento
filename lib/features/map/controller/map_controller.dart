@@ -57,6 +57,7 @@ class MapController extends GetxController {
     var eventModels =
         d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
     searchResultSearch.addAll(eventModels.cast<EventModel>());
+    update();
   }
 
   late LatLng? googleMapsCenter = const LatLng(13.106061, -59.613158);
