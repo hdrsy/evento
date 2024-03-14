@@ -18,7 +18,7 @@ class PaymentApi {
   /// [method] - HTTP method ('GET', 'POST', 'PUT', etc.).
   /// [token] - Authentication token, if required.
   /// [files] - Files to be uploaded, if any.
-  static Future<Either<String, List>> makeRequest({
+  static Future<Either<String, Map>> makeRequest({
     required String targetRout,
     Map<String, dynamic>? data,
     required String method, // 'GET', 'POST', 'PUT', etc.
@@ -89,12 +89,12 @@ class PaymentApi {
       print(response.body);
 
       // Decoding the JSON response.
-      List responseBody = jsonDecode(response.body);
+      Map responseBody = jsonDecode(response.body);
       print("response bid :$responseBody");
       print("response bid :${response.statusCode}");
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (responseBody[0]['original']['status'] == true) {
+        if (responseBody['status'] == true) {
           return Right(responseBody);
         } else {
           // Return Left side of Either for API-level errors.

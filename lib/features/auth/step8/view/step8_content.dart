@@ -95,7 +95,7 @@ class Step8Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: Obx(
         () => Column(
           children: [

@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:evento/features/events/see_all/controller/see_all_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -245,7 +246,7 @@ class SeeAllCard extends StatelessWidget {
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
                 child: Text(
-                  "${eventModel.ticketPrice} s.p",
+                  "${formatPrice( eventModel.ticketPrice)} ${tr("sp")}",
                   textAlign: TextAlign.center,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,

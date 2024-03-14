@@ -28,7 +28,7 @@ class Step3Content extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 20,
+            height: 12,
           ),
           Text(
             "Set your date of birth",
@@ -231,7 +231,7 @@ class Step3Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: Obx(
         () => Column(
           children: [

@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/utils/theme/text_theme.dart';
@@ -41,7 +43,7 @@ class Step7Content extends StatelessWidget {
             ).tr(),
           ),
           SizedBox(
-              height: scaleHeight(500),
+              height: scaleHeight(400.h),
               child: Obx(() => step7controller.isLoading.value
                   ? interestShimmerGridView()
                   : MyGridView())),
@@ -53,7 +55,7 @@ class Step7Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
           StepsPageController stepsPageController = Get.find();

@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
@@ -75,7 +76,7 @@ class Offerprice extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "${eventDetailesController.eventDetailsModel.ticketPrice} sp",
+            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice)} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,
@@ -86,7 +87,7 @@ class Offerprice extends StatelessWidget {
             ),
           ),
           Text(
-            "${eventDetailesController.eventDetailsModel.ticketPrice - ((eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.offerPrecent / 100)} sp",
+            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice - ((eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.offerPrecent / 100).toInt())} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,

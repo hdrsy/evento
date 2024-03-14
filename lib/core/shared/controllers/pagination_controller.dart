@@ -32,6 +32,7 @@ class PaginationController<T> extends GetxController {
   late int dataLimit;
   late int pageId;
   late int lastPageId;
+  bool isDataLoaded = false;
   late RxBool hasMoreData;
   late CacheService cacheService;
   final String cacheKey;
@@ -42,6 +43,7 @@ class PaginationController<T> extends GetxController {
 
   // A reactive list to hold any error messages that might occur during data fetching.
   late RxList<String> errorMessage;
+  bool isFetchInProgress = false;
 
   // Constructor: Initializes variables and sets up the scroll listener.
   PaginationController(
@@ -51,6 +53,7 @@ class PaginationController<T> extends GetxController {
     dataLimit = 4;
     pageId = 1;
     hasMoreData = true.obs;
+
     errorMessage = <String>[].obs;
     itemList = <T>[].obs;
     scrollController = ScrollController();
@@ -112,9 +115,12 @@ class PaginationController<T> extends GetxController {
 
   // Method to fetch data using the provided callback. It handles the response and updates the controller's state.
   fetchData() async {
-    if (pageId == 1) {
-      itemList.clear();
-    }
+    // Prevent fetching if a fetch operation is already in progress
+    if (isFetchInProgress) return;
+
+    // Indicate that a fetch operation is now in progress
+    isFetchInProgress = true;
+
     try {
       isLoading.value = itemList.isNotEmpty ? false : true;
       if (!_connectivityService.isConnected.value) {
@@ -149,10 +155,12 @@ class PaginationController<T> extends GetxController {
       }
       isLoading.value = false;
       isLoadingMoreData.value = false;
+      isFetchInProgress = false;
     } catch (e) {
       isLoading.value = false;
       isLoadingMoreData.value = false;
       isError.value = true;
+      isFetchInProgress = false;
     }
   }
 

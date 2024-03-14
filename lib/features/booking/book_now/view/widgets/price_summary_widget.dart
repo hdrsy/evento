@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
@@ -49,18 +50,18 @@ class PriceSummaryWidget extends StatelessWidget {
                   ? SizedBox.shrink()
                   : priceElement(
                       bookNowController.ticketList[index].selectedClass!.code,
-                      bookNowController
-                          .ticketList[index].selectedClass!.ticketPrice),
+                      formatPrice(bookNowController
+                          .ticketList[index].selectedClass!.ticketPrice)),
               ...List.generate(
                   bookNowController.ticketList[index].selectedAminiteds.length,
                   (innerIndex) => priceElement(
                       bookNowController.ticketList[index]
                           .selectedAminiteds[innerIndex].title,
-                      bookNowController.ticketList[index]
-                          .selectedAminiteds[innerIndex].pivot.price!)),
+                      formatPrice(bookNowController.ticketList[index]
+                          .selectedAminiteds[innerIndex].pivot.price!))),
               // priceElement("Taxes", bookNowController.ticketList[index].tax),
-              priceElement(
-                  "Discount", bookNowController.ticketList[index].discount),
+              priceElement("Discount",
+                  formatPrice(bookNowController.ticketList[index].discount)),
               Divider(
                 thickness: 1,
                 indent: 12,
@@ -113,7 +114,7 @@ class PriceSummaryWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "${bookNowController.ticketList[index].totalPrice} ${tr("sp")}",
+                      "${formatPrice(bookNowController.ticketList[index].totalPrice)} ${tr("sp")}",
                       style: customTextStyle.displaySmall,
                     ),
                   ],

@@ -1,3 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
+
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
@@ -240,7 +243,7 @@ class FavoriteCard extends StatelessWidget {
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
                 child: Text(
-                  "${favoriteEventModel.ticketPrice} s.p",
+                  "${formatPrice(favoriteEventModel.ticketPrice)} ${tr("sp")}",
                   textAlign: TextAlign.center,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,

@@ -1,4 +1,5 @@
 import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
 
 import '../../../../../../core/responsive/responsive.dart';
@@ -172,7 +173,7 @@ class MoreEventsCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            "${relatedEventModel.ticketPrice} ${tr("sp")}",
+                            "${formatPrice(relatedEventModel.ticketPrice)} ${tr("sp")}",
                             textAlign: TextAlign.center,
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: breeSerif,

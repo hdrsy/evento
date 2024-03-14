@@ -57,7 +57,7 @@ class Step2Content extends StatelessWidget {
             ).animateOnPageLoad(
                 animationsMap['imageOnPageLoadAnimationsteps']!),
             Container(
-                margin: EdgeInsets.symmetric(vertical: scaleHeight(48)),
+                margin: EdgeInsets.symmetric(vertical: scaleHeight(20)),
                 child: customTextField(
                     context: context,
                     label: tr("Enter Password"),
@@ -78,7 +78,7 @@ class Step2Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: ButtonWidget(
         showLoadingIndicator: false,
         onPressed: () async {

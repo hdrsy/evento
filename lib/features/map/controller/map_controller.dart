@@ -1,6 +1,10 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:evento/core/server/filter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:flutter/services.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/helper/flutter_flow_google_map.dart';
@@ -21,13 +25,15 @@ class MapController extends GetxController {
   RxBool isSearchActive = false.obs;
   TextEditingController searchField = TextEditingController();
   late LatLng currentPosition;
+  late BitmapDescriptor customIcon;
+  bool isReady = false;
+
   @override
   void onInit() async {
-    await getSuggestModels();
-    // Init
-    // googleMapsCenter
-
     super.onInit();
+    customIcon = await getCustomMarker();
+    await getSuggestModels(); // Assumes this now properly initializes `myMarker`
+    // Indicate that everything is ready
   }
 
   void onPressSearch(String query) {
@@ -60,23 +66,20 @@ class MapController extends GetxController {
 
   // State field(s) for PageView widget.
   // PageController? paggooeViewController1;
-  getSuggestModels() {
+  getSuggestModels() async {
 // final TrendingListController trendingListController=Get.find();
     final TrendingListController eventInYourCityListController =
         Get.put(TrendingListController());
     events.assignAll(eventInYourCityListController.itemList);
 
-    print(events.length);
-    carouselCurrentIndex = 0;
-    print(events.length);
-    print(events[0]);
     currentPosition = LatLng(events[carouselCurrentIndex].venue!.lang,
         events[carouselCurrentIndex].venue!.long);
     googleMapsCenter = currentPosition;
-
     myMarker = FlutterFlowMarker(
       'markerId$carouselCurrentIndex', // Unique ID for the marker
       currentPosition, // Replace with your latitude and longitude
+      icon: customIcon,
+
       (controller) async {
         controller.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -86,9 +89,11 @@ class MapController extends GetxController {
         ));
       },
     );
+    isReady = true;
+    update();
   }
 
-  void updateMarkerAndPosition(int carouselIndex) {
+  void updateMarkerAndPosition(int carouselIndex) async {
     if (carouselIndex < 0 || carouselIndex >= events.length) return;
 
     currentPosition = LatLng(
@@ -99,6 +104,7 @@ class MapController extends GetxController {
     myMarker = FlutterFlowMarker(
       'markerId$carouselIndex', // Unique ID for the marker
       currentPosition, // New position
+      icon: customIcon,
       (controller) async {
         controller.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -108,10 +114,6 @@ class MapController extends GetxController {
         ));
       },
     );
-    print("fffffffffffffffffffff");
-    print("fffffffffffffffffffff");
-    print(myMarker.markerId);
-    print("fffffffffffffffffffff");
 
     // Update camera position
     googleMapsController.future.then((controller) {
@@ -140,5 +142,39 @@ class MapController extends GetxController {
 
       update();
     }
+  }
+
+  Future<BitmapDescriptor> getCustomMarker() async {
+    final Uint8List markerIcon =
+        await createCustomMarkerBitmap('assets/images/mapLogo.png');
+    return BitmapDescriptor.fromBytes(markerIcon);
+  }
+
+  Future<Uint8List> createCustomMarkerBitmap(String imagePath) async {
+    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final image = await loadImage(imagePath); // Load image from path
+    final imageSize = Offset(100.0, 120.0); // the marker size
+    canvas.drawImageRect(
+      image,
+      Rect.fromLTRB(0.0, 0.0, image.width.toDouble(), image.height.toDouble()),
+      Rect.fromPoints(Offset(0.0, 0.0), imageSize),
+      Paint(),
+    );
+
+    final picture = pictureRecorder.endRecording();
+    final img = await picture.toImage(100, 120); //the marker size
+    final bytes = await img.toByteData(format: ui.ImageByteFormat.png);
+
+    return bytes!.buffer.asUint8List();
+  }
+
+  Future<ui.Image> loadImage(String imagePath) async {
+    final ByteData data = await rootBundle.load(imagePath);
+    final List<int> bytes = data.buffer.asUint8List();
+    final ui.Codec codec = await ui.instantiateImageCodec(bytes as Uint8List);
+    final ui.Image image = (await codec.getNextFrame()).image;
+
+    return image;
   }
 }

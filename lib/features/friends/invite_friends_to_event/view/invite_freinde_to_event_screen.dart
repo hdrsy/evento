@@ -138,6 +138,8 @@ class InviteFreindsCard extends StatelessWidget {
                       options: ButtonOptions(
                         width: 100,
                         height: 21,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         color: controller.initedList[modelIndex]
@@ -148,7 +150,7 @@ class InviteFreindsCard extends StatelessWidget {
                           color: controller.initedList[modelIndex]
                               ? customColors.primary
                               : customColors.info,
-                          fontSize: 12,
+                          fontSize: 10,
                           fontWeight: FontWeight.normal,
                           useGoogleFonts: true,
                         ),

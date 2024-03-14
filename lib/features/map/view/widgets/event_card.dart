@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -82,7 +84,7 @@ class EventCard extends StatelessWidget {
                           child: Align(
                             alignment: const AlignmentDirectional(0.00, 0.00),
                             child: Text(
-                              "${eventModel.ticketPrice} s.p",
+                              "${formatPrice(eventModel.ticketPrice)} ${tr("sp")}",
                               textAlign: TextAlign.center,
                               style: customTextStyle.bodyMedium.override(
                                 fontFamily: 'Nunito',

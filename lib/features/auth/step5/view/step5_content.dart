@@ -54,7 +54,7 @@ class Step5Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
           StepsPageController stepsPageController = Get.find();

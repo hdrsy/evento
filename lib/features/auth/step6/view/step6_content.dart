@@ -33,7 +33,7 @@ class Step6Content extends StatelessWidget {
           ).tr(),
           buildAvatarList(context),
           SizedBox(
-            height: scaleHeight(60),
+            height: scaleHeight(50),
           ),
           SizedBox(
             width: scaleWidth(300),
@@ -79,7 +79,7 @@ class Step6Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
           StepsPageController stepsPageController = Get.find();

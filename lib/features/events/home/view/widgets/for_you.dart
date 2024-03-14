@@ -1,3 +1,4 @@
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:marquee/marquee.dart';
 
 import '../../../../../core/responsive/responsive.dart';
@@ -191,7 +192,7 @@ Widget buildEventImage(EventModel eventModel, int modelIndex) {
                         child: Align(
                           alignment: const AlignmentDirectional(0, 0),
                           child: Text(
-                            "${eventModel.ticketPrice} s.p",
+                            "${formatPrice(eventModel.ticketPrice)} ${tr("sp")}",
                             textAlign: TextAlign.center,
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',

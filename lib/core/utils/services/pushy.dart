@@ -44,13 +44,39 @@ void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
   print("Notification clicked: $data");
 
+  // Normalize title for comparison
+  String normalizedTitle = data['title']?.trim().toLowerCase() ?? '';
+  String routName = '';
+  String body = '';
+
+  // Compare normalized title
+  if (normalizedTitle == "new friend request" ||
+      normalizedTitle == "new friend") {
+    routName =
+        'FreindsScreen'; // Note: Check if 'FreindsScreen' is a typo. It should be 'FriendsScreen'?
+  } else if (normalizedTitle == "you have a new event invitation") {
+    routName =
+        'eventDetailes'; // Note: Check spelling, should it be 'eventDetails'?
+    body = data['body'];
+  } else if (normalizedTitle == "booked successfully") {
+    routName = 'MyBookingScreen';
+  } else {
+    routName = 'NotificationScreen';
+  }
+
   // Check if GetX navigation context is ready, otherwise, delay the navigation
   if (Get.context != null) {
-    Get.toNamed('/NotificationScreen');
+    routName == 'eventDetailes' // Note: Same as above, check spelling.
+        ? Get.toNamed('/$routName',
+            arguments: [int.parse(body[body.length - 1]), false, 0])
+        : Get.toNamed('/$routName');
   } else {
     // Use Future.delayed to wait for GetX navigation context to be ready
-    Future.delayed(Duration.zero, () {
-      Get.toNamed('/NotificationScreen');
+    Future.delayed(Duration(seconds: 4), () {
+      routName == 'eventDetailes' // Note: Same spelling concern.
+          ? Get.toNamed('/$routName',
+              arguments: [body[body.length - 1], false, 0])
+          : Get.toNamed('/$routName');
     });
   }
 }

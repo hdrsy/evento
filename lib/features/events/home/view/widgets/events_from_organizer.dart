@@ -1,3 +1,4 @@
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:marquee/marquee.dart';
 
 import '../../../../../core/responsive/helper_functions.dart';
@@ -118,7 +119,7 @@ class EventsFromOrganizer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               buildImageSection(
-                  eventModel.images[0], eventModel.ticketPrice.toString()),
+                  eventModel.images[0], formatPrice(eventModel.ticketPrice)),
               buildEventDetails(
                   eventModel.title,
                   DateFormatter.formatDate(eventModel.startDate),

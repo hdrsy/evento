@@ -1,5 +1,6 @@
 import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marquee/marquee.dart';
@@ -351,7 +352,7 @@ class FeaturedWidget extends StatelessWidget {
             child: Align(
               alignment: const AlignmentDirectional(0.00, 0.00),
               child: Text(
-                "$ticketPrice ${tr("sp")}",
+                "${formatPrice(ticketPrice)} ${tr("sp")}",
                 textAlign: TextAlign.center,
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'BeerSerif',

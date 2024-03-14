@@ -137,7 +137,7 @@ class ServiceProviderCard extends StatelessWidget {
             style: customTextStyle.bodyMedium.override(
                 fontFamily: primaryFontFamily,
                 useGoogleFonts: true,
-                color: customColors.primary),
+                color: customColors.primaryText),
           )
         ],
       ),

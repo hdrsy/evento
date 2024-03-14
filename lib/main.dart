@@ -54,7 +54,6 @@ void main() async {
   // Listen for push notifications received
   Pushy.setNotificationListener(backgroundNotificationListener);
   Pushy.setNotificationClickListener(notificationClickListener);
-  // Check for the notification that launched the app
 
   themeValue = await prefService.readString('theme');
   themeValue == '' ? prefService.createString('theme', "dark") : null;

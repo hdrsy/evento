@@ -16,56 +16,55 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class MainStepsScreen extends StatelessWidget {
-   MainStepsScreen({super.key});
-StepsPageController pageController=Get.find();
+  MainStepsScreen({super.key});
+  StepsPageController pageController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-      backgroundColor: customColors.secondaryBackground,
-      appBar: buildAppBarWithLineIndicatorincenter(
-        pageController.pageIdex.value/8,
-        pageController.pageIdex.value
-      ),
-      body: Padding(
-        padding:  padding(15,24,24,24),
-        child:  SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              StepsText(pageIdex: pageController.pageIdex.value,),
-              SizedBox(height: scaleHeight(12),),
-             
-              getCenterContent(pageController.pageIdex.value),
-            
-            ],
-              
-          ),
-        ),)
-      ),
+    return Obx(
+      () => Scaffold(
+          backgroundColor: customColors.secondaryBackground,
+          appBar: buildAppBarWithLineIndicatorincenter(
+              pageController.pageIdex.value / 8, pageController.pageIdex.value),
+          body: Padding(
+            padding: padding(0, 24, 24, 24),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  StepsText(
+                    pageIdex: pageController.pageIdex.value,
+                  ),
+                  SizedBox(
+                    height: scaleHeight(12),
+                  ),
+                  getCenterContent(pageController.pageIdex.value),
+                ],
+              ),
+            ),
+          )),
     );
   }
- 
 }
 
-
- Widget getCenterContent(int index){
+Widget getCenterContent(int index) {
   switch (index) {
     case 1:
       return Step1Screen();
-      case 2:
-      return  Step2Content();
-      case 3:
-      return  Step3Content();
-      case 4:
-      return  Step4Content();
-      case 5:
-      return  Step5Content();
-      case 6:
-      return  Step6Content();
-      case 7:
-      return  Step7Content();
-      case 8:
-      return  Step8Content();
-    default:return Step1Screen();
+    case 2:
+      return Step2Content();
+    case 3:
+      return Step3Content();
+    case 4:
+      return Step4Content();
+    case 5:
+      return Step5Content();
+    case 6:
+      return Step6Content();
+    case 7:
+      return Step7Content();
+    case 8:
+      return Step8Content();
+    default:
+      return Step1Screen();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:marquee/marquee.dart';
 
@@ -141,7 +142,7 @@ class TrendingNow extends StatelessWidget {
         child: Stack(
           children: [
             buildImage(eventModel),
-            buildPriceTag(eventModel.ticketPrice.toString()),
+            buildPriceTag(formatPrice(eventModel.ticketPrice)),
             eventModel.videos.isNotEmpty
                 ? buildSoundToggleButton()
                 : const SizedBox()

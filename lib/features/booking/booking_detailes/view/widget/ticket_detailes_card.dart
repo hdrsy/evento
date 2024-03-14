@@ -1,4 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/booking/booking_detailes/controller/booking_detailes_controller.dart';
 import 'package:get/get.dart';
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
@@ -139,15 +140,18 @@ class TicketDetailesCard extends StatelessWidget {
                           ? const SizedBox.shrink()
                           : SinglePriceElement(
                               title: ticketModel.selectedClass!.code,
-                              subTitle: ticketModel.selectedClass!.ticketPrice
+                              subTitle: formatPrice(
+                                      ticketModel.selectedClass!.ticketPrice)
                                   .toString()),
                       ...List.generate(
                           ticketModel.selectedAminiteds.length,
                           (innerIndex) => SinglePriceElement(
                               title: ticketModel
                                   .selectedAminiteds[innerIndex].title,
-                              subTitle: ticketModel
-                                  .selectedAminiteds[innerIndex].pivot.price!
+                              subTitle: formatPrice(ticketModel
+                                      .selectedAminiteds[innerIndex]
+                                      .pivot
+                                      .price!)
                                   .toString())),
                       const SinglePriceElement(title: "Tax", subTitle: ""),
                       const SinglePriceElement(title: "Discount", subTitle: ""),
@@ -172,7 +176,7 @@ class TicketDetailesCard extends StatelessWidget {
                             ),
                           ).tr(),
                           Text(
-                            "${ticketModel.totalPrice} ${tr("sp")}",
+                            "${formatPrice(ticketModel.totalPrice)} ${tr("sp")}",
                             style: customTextStyle.bodyMedium.override(
                               fontFamily: 'Nunito',
                               color: customColors.primaryText,

@@ -87,6 +87,7 @@ Widget buildEventColumn() {
 // Function to create each event item
 Widget buildOrganizerItem(
     {required OrganizerHome organizerHome, required int modelIndex}) {
+  print("the item is:$modelIndex");
   return GestureDetector(
       onTap: () {
         Get.toNamed('/OrganizerProfileScreen', arguments: organizerHome.id);

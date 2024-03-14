@@ -106,7 +106,7 @@ class PaymentController extends GetxController {
         "bookings": booking['bookings'],
         "event_id": eventDetailsModel.id,
       };
-      Either<String, List> response;
+      Either<String, Map> response;
       String token = await prefService.readString("token");
       response = await PaymentApi.makeRequest(
           targetRout: ServerConstApis.getInvoice,
@@ -121,9 +121,8 @@ class PaymentController extends GetxController {
       } else {
         isIvoiceCreated.value = true;
         startTimer();
-        invoiceId.value =
-            handlingResponse[0]['original']['message']['Receipt']['Invoice'];
-        bookingIds = handlingResponse[1];
+        invoiceId.value = handlingResponse['0']['Receipt']['Invoice'];
+        bookingIds = handlingResponse["1"];
         print("invoice id:$invoiceId");
         // whenBookingSuccefly(handlingResponse);
       }
