@@ -157,13 +157,10 @@ class ServiceProviderCreateProfileController extends GetxController {
             } else {
               // Handle the case where video compression fails
               // For example, you might choose to skip this file, log an error, or use the original file
-              print(
-                  "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
             }
           }
         }
       }
-      print(fileMap.length);
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.becomeServiceProvider,
           method: "POST",
@@ -171,7 +168,6 @@ class ServiceProviderCreateProfileController extends GetxController {
           data: dataRequest,
           files: fileMap);
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         isLoading.value = false;
@@ -179,30 +175,24 @@ class ServiceProviderCreateProfileController extends GetxController {
         Get.dialog(ErrorInUploading(
           errorMessaging: errorMessage,
         ));
-        print("object");
       } else {
         isLoading.value = false;
-        print(handlingResponse);
         Get.offAllNamed('/home');
       }
     } catch (e) {
-      print("ecption $e");
       Get.back();
       isLoading.value = false;
     }
   }
 
   editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
-    print("inside media");
     foldersModel[folderIndex].mediaList.clear();
     foldersModel[folderIndex].mediaList.addAll(media);
     update();
     Get.back();
-    print("editing complete");
   }
 
   deleteFolder(int folderIndex) {
     foldersModel.removeAt(folderIndex);
-    print("inside deleteFolder");
   }
 }

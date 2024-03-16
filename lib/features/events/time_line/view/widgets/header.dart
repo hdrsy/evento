@@ -39,7 +39,7 @@ Widget buildHeaderTimeLine(BuildContext context) {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                   child: Text(
-                    "10,000+",
+                    timeLineController.bookingNumber.toString(),
                     style: customTextStyle.bodySmall.override(
                       fontFamily: 'Open Sans',
                       color: const Color(0xFF8B97A2),

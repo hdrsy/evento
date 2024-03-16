@@ -53,7 +53,7 @@ class ColumnText extends StatelessWidget {
                 style: customTextStyle.labelSmall.override(
                   fontFamily: breeSerif,
                   color: customColors.primary,
-                  fontSize: SizeConfig.safeBlockHorizontal * 2.5,
+                  fontSize: SizeConfig.safeBlockHorizontal * 2.8,
                   useGoogleFonts: true,
                 ),
               ).tr(),

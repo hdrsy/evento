@@ -23,8 +23,12 @@ class DetailesCard extends StatelessWidget {
           _buildIconTextRow(context, Icons.description_outlined, 'Description',
               serviceAccordingDetailesController.serviceProvider.description),
           // _buildIconTextRow(context, Icons.photo_outlined, 'Sessions:', 'The standard session includes 8 hours of event coverage, 300 professionally edited digital photos, an online gallery, and a complimentary engagement shoot. Custom sessions are also available upon request.'),
-          _buildIconTextRow(context, Icons.location_on_outlined, 'Location',
-              serviceAccordingDetailesController.serviceProvider.address),
+          _buildIconTextRow(
+              context,
+              Icons.location_on_outlined,
+              'Location',
+              serviceAccordingDetailesController
+                  .serviceProvider.locationWorkGovernorate),
           serviceAccordingDetailesController.serviceProvider.latitude != null
               ? _buildLocationButton(context)
               : const SizedBox(),

@@ -18,8 +18,6 @@ class SizeConfig {
     screenHeight = _mediaQueryData.size.height;
     blockSizeHorizontal = screenWidth / 100;
     blockSizeVertical = screenHeight / 100;
-    print("screen width is :$screenWidth");
-    print("screen width is :$screenHeight");
     _safeAreaHorizontal =
         _mediaQueryData.padding.left + _mediaQueryData.padding.right;
     _safeAreaVertical =

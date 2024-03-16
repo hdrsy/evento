@@ -30,7 +30,6 @@ class VerifyForgetPasswordController extends GetxController {
         targetRout: ServerConstApis.sendCode,
         method: "Post",
         data: {"phone_number": phone});
-    print("object");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
 
     if (handlingResponse is ErrorResponse) {
@@ -52,8 +51,7 @@ class VerifyForgetPasswordController extends GetxController {
 
   onPressContinue() async {
     FormState? formdata = formstate.currentState;
-    print(formdata!.validate());
-    if (formdata.validate()) {
+    if (formdata!.validate()) {
       formdata.save();
       isLoading.value = true;
 

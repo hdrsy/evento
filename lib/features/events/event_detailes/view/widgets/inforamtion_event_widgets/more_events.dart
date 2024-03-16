@@ -1,6 +1,7 @@
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/responsive/responsive.dart';
 import '../../../../../../core/shared/functions/lists/carouse_options_functions.dart';
@@ -194,7 +195,7 @@ class MoreEventsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 20,
+                          height: 20.h,
                           child: marqueeTitle(relatedEventModel.title),
                         ),
                         // Icon(

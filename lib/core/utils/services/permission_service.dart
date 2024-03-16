@@ -6,19 +6,18 @@ class PermissionService {
 
   Future<bool> requestNotificationPermission() async {
     if (!await _notificationPermissionGranted()) {
-      print("inside s");
       // For iOS, request permission
       if (await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-            alert: true,
-            badge: true,
-            sound: true,
-          ) ?? false) {
+              .resolvePlatformSpecificImplementation<
+                  IOSFlutterLocalNotificationsPlugin>()
+              ?.requestPermissions(
+                alert: true,
+                badge: true,
+                sound: true,
+              ) ??
+          false) {
         return true;
       }
-      print("dalse");
       return false;
     }
     return true;

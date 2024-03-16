@@ -37,13 +37,11 @@ class ServiceAccordingDetailesForUserController extends GetxController {
           token: token);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         isError.value = true;
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
         final interestsJson = handlingResponse['message'];
-        print(interestsJson);
         serviceProvider = ServiceProvider.fromJson(interestsJson);
       }
       isLoading.value = false;

@@ -23,25 +23,15 @@ RxBool connectionState = true.obs;
 
 startTracking() {
   // checkInternet();
-  print("inside track");
   Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-    print("result.name:${result.name}");
     if (result == ConnectivityResult.none) {
       // Device is not connected to the internet
-      log("Device is not connected to the internet in tracking");
       Get.snackbar("Offline", "we are currently offline");
       connectionState.value = false;
     } else {
-      log("Device is connected to the internet in tracking");
       // Device is connected to the internet
       Get.find<PaginationController>().refreshData();
       connectionState.value = true;
     }
-
-    print("new value is :$connectionState");
-  }, onError: (e) {
-    print("error $e");
-  }, onDone: () {
-    print("connection done");
-  });
+  }, onError: (e) {}, onDone: () {});
 }

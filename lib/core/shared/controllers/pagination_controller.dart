@@ -73,13 +73,11 @@ class PaginationController<T> extends GetxController {
       if (pageController.position.maxScrollExtent == pageController.offset &&
           hasMoreData.value) {
         isLoadingMoreData.value = true;
-        print("inside  page controller");
         fetchData();
       }
     });
     _connectivityService.isConnected.listen((isConnected) {
       if (isConnected) {
-        print("Internet connection is back!");
         refreshData(); // Refetch data when connection is back
         SnackbarManager.showSnackbar(
           "Online",
@@ -88,7 +86,6 @@ class PaginationController<T> extends GetxController {
           backgroundColor: customColors.primaryBackground,
         );
       } else {
-        print("You are offline!");
         SnackbarManager.showSnackbar(
           "Offline",
           "No internet connection.",
@@ -129,7 +126,6 @@ class PaginationController<T> extends GetxController {
           cacheKey: cacheKey,
           deserializeFunction: (jsonMap) => jsonMap,
         );
-        print("$cacheKey : $d");
         if (d != null) {
           handleDataSuccess(d);
         } else {

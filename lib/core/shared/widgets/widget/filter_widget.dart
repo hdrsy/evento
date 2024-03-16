@@ -40,7 +40,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   FormFieldController<String>? dropDownValueController;
 
   FormFieldController<List<String>>? choiceChipsValueController;
-
+  bool isLoading = false;
   double price = 1000;
   double locationRange = 1;
   SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
@@ -379,7 +379,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                         ),
                       ),
                       ButtonWidget(
+                        showLoadingIndicator: isLoading,
                         onPressed: () async {
+                          isLoading = true;
                           // Navigator.pop(context);
                           Map<String, dynamic> data = {};
                           if (choiceChipsValueController != null) {
@@ -399,9 +401,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {
-                            print("sending data : $data");
-                            widget.onApplyFilters(data);
+                            await widget.onApplyFilters(data);
                           }
+                          setState(() {
+                            isLoading = false;
+                          });
                         },
                         text: tr("Apply filters"),
                         options: ButtonOptions(

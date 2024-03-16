@@ -55,20 +55,16 @@ class UserInfo {
   }
 
   static Future<void> storeUserInfo(userInfo) async {
-    print(userInfo);
     String userInfoJson = jsonEncode(userInfo);
     await prefService.createString('userInfo', userInfoJson);
   }
 
   static Future<UserInfo?> getUserInfo() async {
     bool userInfoJson = await prefService.isContainKey('userInfo');
-    print("is from storagte:$userInfoJson");
     if (userInfoJson) {
       final userInfo = jsonDecode(await prefService.readString('userInfo'));
-      print("userInfofrom storage:$userInfo");
       return UserInfo.fromJson(userInfo);
     } else {
-      print("userInfoJson");
       return getUserInfoFromApi();
     }
   }
@@ -80,7 +76,6 @@ class UserInfo {
         targetRout: ServerConstApis.getprofile, method: "GEt", token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print("handling respo");
     if (handlingResponse is ErrorResponse) {
     } else {
       storeUserInfo(handlingResponse);

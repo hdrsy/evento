@@ -106,16 +106,15 @@ class Step3Content extends StatelessWidget {
                                     ),
                                     child: CupertinoDatePicker(
                                       initialDateTime: stepsController.day ??
-                                          DateTime.now().subtract(
-                                              const Duration(
-                                                  days: 365 * 12 + 3)),
+                                          DateTime(2000, 1, 1),
                                       mode: CupertinoDatePickerMode.date,
                                       minimumDate: DateTime(
                                           1950), // Assuming you want to allow dates back to 1800
-                                      maximumDate: DateTime.now().subtract(
-                                          const Duration(
-                                              days: 365 * 12 +
-                                                  3)), // 12 years and 3 days ago to account for leap years
+                                      maximumDate: DateTime(
+                                          DateTime.now().year - 12,
+                                          DateTime.now().month,
+                                          DateTime.now()
+                                              .day), // 12 years and 3 days ago to account for leap years
 
                                       onDateTimeChanged: (val) {
                                         selectedDate = val;

@@ -89,12 +89,11 @@ class FavoriteController extends GetxController {
   }
 
   calculateDistance() async {
+    print("calculate the disctance start");
     LocationService locationService = LocationService();
     for (var i = 0; i < favoriteEvents.length; i++) {
-      distances[i] = (await locationService.calculateDistance(
-              favoriteEvents[i].venue.latitude,
-              favoriteEvents[i].venue.longitude))
-          .obs;
+      distances[i].value = (await locationService.calculateDistance(
+          favoriteEvents[i].venue.latitude, favoriteEvents[i].venue.longitude));
     }
   }
 

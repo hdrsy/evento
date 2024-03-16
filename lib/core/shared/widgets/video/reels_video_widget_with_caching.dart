@@ -97,9 +97,6 @@ class _ReelsVideoWidgetState extends State<ReelsVideoWidgetWitCaching> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "video controller :${_betterPlayerController.videoPlayerController!.value}");
-
     return isLoading
         ? Center(
             child: CircularProgressIndicator(

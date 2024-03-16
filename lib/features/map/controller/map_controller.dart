@@ -47,15 +47,16 @@ class MapController extends GetxController {
               event.title.toLowerCase().contains(query.toLowerCase()))
           .toList());
     }
+    update();
   }
 
   void onApplyFilters(Map<String, dynamic> data) async {
-    isSearchActive.value = true;
     final d = await filter(data);
     print(d);
     Get.back();
     var eventModels =
         d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
+    isSearchActive.value = true;
     searchResultSearch.addAll(eventModels.cast<EventModel>());
     update();
   }

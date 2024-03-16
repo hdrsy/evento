@@ -61,7 +61,6 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
     // }
     // if (mounted) {
     // videoPlayerController = VideoPlayerController.file(fileInfo!.file)
-    print("video url is :${widget.currentVideoUrl}");
     videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(widget.currentVideoUrl))
           ..initialize().then((_) {
@@ -72,7 +71,6 @@ class _VideoWidgetState extends State<ReelsVideoWidget>
             });
           }).catchError((error) {
             // Handle the error here
-            print("error in videos: $error");
           });
     videoPlayerController.addListener(() {
       final bool isActuallyBuffering = !videoPlayerController.value.isPlaying &&

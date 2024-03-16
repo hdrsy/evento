@@ -46,6 +46,7 @@ class EventReviewController extends GetxController {
         lastName: dateTimeController.lastName.text,
         phoneNumber: dateTimeController.phoneNumber.text,
         adultNumber: dateTimeController.adultNumber.value,
+        eventTitle: dateTimeController.eventTitle.text,
         childrenNumber: dateTimeController.childrenNumber.value);
   }
 

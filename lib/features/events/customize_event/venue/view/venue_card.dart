@@ -104,7 +104,7 @@ class VenueCard extends StatelessWidget {
                                   onChanged: (newValue) async {
                                     serviceCategoryController
                                         .changeSelectedVenue(
-                                            venue.id, "La Rosa");
+                                            venue.id, venue.name);
                                   },
                                   activeColor: customColors.success,
                                   checkColor: customColors.info,

@@ -14,17 +14,14 @@ void listenToEvents(int userId) {
 
   // Listen for messages
   channel.stream.listen((message) {
-    print("state");
     final decodedMessage = jsonDecode(message);
 
     // Check if the message is for the channel you're interested in
     if (decodedMessage['channel'] == channelName &&
         decodedMessage['event'] == 'App\\Events\\NotificationEvent') {
       // Handle your event data here
-      print('Event Data: ${decodedMessage['data']}');
       var data = json.decode(decodedMessage['data']);
 
-      print((data['title']).toString());
       isThereNotification.value = true;
       NotificationService()
           .showNotification(112233, data['title'], data['description']);

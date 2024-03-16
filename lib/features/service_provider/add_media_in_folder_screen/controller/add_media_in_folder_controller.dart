@@ -88,15 +88,28 @@ class AddMediaInFolderServiseProviderController extends GetxController {
   }
 
   void pickNewMedia(ImageSource imageSource) async {
-    final pickedImage = await imagePicker.pickImage(source: imageSource);
-    if (pickedImage != null) {
-      attachedMedia.add({"image": File(pickedImage.path)});
-      ServiceProviderCreateProfileController
-          serviceProviderCreateProfileController = Get.find();
-      serviceProviderCreateProfileController.foldersModel[folderIndex].mediaList
-          .add(MediaModel(mediaType: "image", media: File(pickedImage.path)));
-
-      // }
+    if (imageSource == ImageSource.gallery) {
+      final List<XFile>? pp = await imagePicker.pickMultiImage();
+      if (pp != null) {
+        for (var element in pp) {
+          attachedMedia.add({"image": File(element.path)});
+          ServiceProviderCreateProfileController
+              serviceProviderCreateProfileController = Get.find();
+          serviceProviderCreateProfileController
+              .foldersModel[folderIndex].mediaList
+              .add(MediaModel(mediaType: "image", media: File(element.path)));
+        }
+      }
+    } else {
+      final pickedImage = await imagePicker.pickImage(source: imageSource);
+      if (pickedImage != null) {
+        attachedMedia.add({"image": File(pickedImage.path)});
+        ServiceProviderCreateProfileController
+            serviceProviderCreateProfileController = Get.find();
+        serviceProviderCreateProfileController
+            .foldersModel[folderIndex].mediaList
+            .add(MediaModel(mediaType: "image", media: File(pickedImage.path)));
+      }
     }
   }
 

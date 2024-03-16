@@ -77,7 +77,7 @@ class EventReviewScreen extends StatelessWidget {
                   tr("Date")
                 ],
                 rightColumnData: [
-                  "La Rose",
+                  eventReviewController.contactInfoModel.eventTitle,
                   DateFormatter.formatTime(
                       eventReviewController.eventOverView.startTime),
                   DateFormatter.formatTime(
@@ -87,17 +87,16 @@ class EventReviewScreen extends StatelessWidget {
                 ],
               ),
               ReviewCard(
-                onTapEdit: () {
-                  Get.back();
-                },
-                title: tr("Event Crew"),
-                leftColumnData: eventReviewController.selected.values
-                    .map((value) => value.toString())
-                    .toList(),
-                rightColumnData: eventReviewController.selected.keys
-                    .map((value) => value.toString())
-                    .toList(),
-              ),
+                  onTapEdit: () {
+                    Get.back();
+                  },
+                  title: tr("Event Crew"),
+                  leftColumnData: eventReviewController.selected.keys
+                      .map((value) => value.toString())
+                      .toList(),
+                  rightColumnData: eventReviewController.selected.values
+                      .map((value) => value.toString())
+                      .toList()),
               AdditionalNote(
                 controller: eventReviewController.notes,
                 onChange: (value) {},

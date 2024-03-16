@@ -50,7 +50,6 @@ class SelectState extends StatelessWidget {
                 backgroundColor: customColors.secondaryBackground,
                 onSelectedItemChanged: (index) {
                   selectedState = states[index];
-                  print(states[index]);
                 },
                 children: List<Widget>.generate(states.length, (index) {
                   return Center(

@@ -36,9 +36,16 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
 
       _moveCameraTo(
           LatLng(currentLocation.latitude, currentLocation.longitude));
+      _markers.clear(); // Clear existing markers
+      _markers.add(
+        Marker(
+          markerId: const MarkerId('selectedLoc'),
+          position: LatLng(currentLocation.latitude, currentLocation.longitude),
+          infoWindow: const InfoWindow(title: 'Selected Location'),
+        ),
+      );
     } catch (e) {
       // Handle the exception (e.g., show an error message)
-      print('Error getting location: $e');
     }
   }
 
@@ -46,6 +53,14 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
     _mapController.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(target: position, zoom: 15.0),
+      ),
+    );
+    _markers.clear(); // Clear existing markers
+    _markers.add(
+      Marker(
+        markerId: const MarkerId('selectedLoc'),
+        position: position,
+        infoWindow: const InfoWindow(title: 'Selected Location'),
       ),
     );
   }
@@ -136,17 +151,20 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
 
         debounceTime: 400,
         countries: ["sy"],
-        isLatLngRequired: false,
-        getPlaceDetailWithLatLng: (Prediction prediction) {},
+        isLatLngRequired: true,
+        getPlaceDetailWithLatLng: (Prediction prediction) {
+          if (prediction.lat != null) {
+            _moveCameraTo(LatLng(
+                double.parse(prediction.lat!), double.parse(prediction.lng!)));
+            // _onMapTap();
+          }
+        },
 
         itemClick: (Prediction prediction) {
+          print("the data is:${prediction.lat}");
           controller.text = prediction.description ?? "";
           controller.selection = TextSelection.fromPosition(
               TextPosition(offset: prediction.description?.length ?? 0));
-          if (prediction.lat != null) {
-            _onMapTap(LatLng(
-                double.parse(prediction.lat!), double.parse(prediction.lng!)));
-          }
         },
         seperatedBuilder: const Divider(),
         containerHorizontalPadding: 10,

@@ -4,7 +4,6 @@ import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../core/shared/widgets/text_fields/search_filed.dart';
-import '../../../../core/shared/widgets/widget/users_shimmer_card.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../core/utils/theme/text_theme.dart';
@@ -62,14 +61,7 @@ class SeeAllOrganizersScreen extends StatelessWidget {
                               ? seeAllOrganizersController.searchItemList[index]
                               : seeAllOrganizersController.itemList[index],
                         )
-                      : Column(
-                          children: [
-                            ...List.generate(
-                                3, (index) => const ShimmerFriendCard())
-                          ].divide(const SizedBox(
-                            height: 5,
-                          )),
-                        ))
+                      : SizedBox())
             ].divide(SizedBox(
               height: 10,
             )),

@@ -118,15 +118,10 @@ class BookNowController extends GetxController {
       int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
       int newTotal =
           ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
-      print("the codeDiscount:${codeDiscount}");
-      print("the codeLimit:${codeLimit}");
-      print("the newTotal:${newTotal}");
       if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
-        print("the discount is :${ticketList[ticketIndex].discount}");
         return codeLimit;
       } else {
-        print("the discount is :${ticketList[ticketIndex].discount}");
         ticketList[ticketIndex].discount =
             ticketList[ticketIndex].totalPrice - newTotal;
         return newTotal;

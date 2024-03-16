@@ -13,7 +13,6 @@ Future<String> pushyRegister() async {
     // ...
   } catch (error) {
     // Display an alert with the error message
-    print("the error:$error");
     return '';
   }
 }
@@ -23,7 +22,6 @@ Future<String> pushyRegister() async {
 @pragma('vm:entry-point')
 void backgroundNotificationListener(Map<String, dynamic> data) {
   // Print notification payload data
-  print('Received notification: $data');
 
   // Notification title
   String notificationTitle = data['title'];
@@ -42,7 +40,6 @@ void backgroundNotificationListener(Map<String, dynamic> data) {
 @pragma('vm:entry-point')
 void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
-  print("Notification clicked: $data");
 
   // Normalize title for comparison
   String normalizedTitle = data['title']?.trim().toLowerCase() ?? '';

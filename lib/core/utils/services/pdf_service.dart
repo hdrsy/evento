@@ -43,7 +43,6 @@ Future<void> saveAndOpenFile(List<int> bytes, String filename) async {
 
   if (Platform.isAndroid) {
     var status = await Permission.manageExternalStorage.request();
-    print(status);
     if (status.isGranted) {
       path = await ExternalPath.getExternalStoragePublicDirectory(
           ExternalPath.DIRECTORY_DOWNLOADS);

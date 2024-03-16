@@ -130,9 +130,6 @@ class LocationService {
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
-        print(position == null
-            ? 'Unknown'
-            : '${position.latitude.toString()}, ${position.longitude.toString()}');
         userLocation = position!;
       });
 
