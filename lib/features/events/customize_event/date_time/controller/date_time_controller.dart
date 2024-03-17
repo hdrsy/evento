@@ -35,8 +35,8 @@ class DateTimeController extends GetxController {
     media = <File>[].obs;
     adultNumber = 0.obs;
     childrenNumber = 0.obs;
-    startTime = DateTime.now();
-    endTime = DateTime.now();
+    startTime = DateTime(2024, 3, 16);
+    endTime = DateTime(2024, 3, 16);
     date = DateTime.now();
 
     errorMessage = <String>[].obs;

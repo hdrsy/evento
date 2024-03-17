@@ -42,10 +42,13 @@ class SeeAllController extends GetxController {
     dataLimit = 4;
     pageId = Get.arguments[0] ?? 1;
     errorMessage = <String>[].obs;
-    itemList = Get.arguments[1] ?? <EventModel>[].obs;
+    RxList<EventModel> oldList = Get.arguments[1] ?? <EventModel>[].obs;
+    itemList = <EventModel>[].obs;
+    itemList.assignAll(oldList);
     targetRout = Get.arguments[2];
     mapKey = Get.arguments[3];
     pageTitle = Get.arguments[4] ?? "";
+
     log(pageId.toString());
     scrollController = ScrollController();
     itemList.isEmpty ? fetchData() : null;
@@ -98,6 +101,7 @@ class SeeAllController extends GetxController {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
+    print("the length is :${categoryListJson.length}");
     var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
@@ -115,7 +119,6 @@ class SeeAllController extends GetxController {
       hasMoreData.value = false;
     }
     pageId++;
-    isLoading.value = false;
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }

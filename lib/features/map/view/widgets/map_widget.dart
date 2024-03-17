@@ -1,5 +1,3 @@
-import 'package:evento/main.dart';
-
 import '../../../../core/utils/helper/flutter_flow_google_map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

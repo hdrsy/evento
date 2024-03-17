@@ -1,3 +1,4 @@
+import 'package:evento/main.dart';
 import 'package:get/get.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
 
@@ -32,7 +33,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) {
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
   Pushy.notify(notificationTitle, notificationText, data);
-
+  isThereNotification.value = true;
   // Clear iOS app badge number
   Pushy.clearBadge();
 }

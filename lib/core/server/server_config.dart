@@ -94,6 +94,7 @@ class ServerConstApis {
   static String getAllvenue = '$baseAPI/api/venue';
   static String sendEventRequest = '$baseAPI/api/sendEventRequest';
   static String myEventRequest = '$baseAPI/api/my_request';
+  static String getEventServiceCategory = '$baseAPI/api/event_service_category';
 
   ///// freinds
   static String freindRequest = '$baseAPI/api/friend-request';

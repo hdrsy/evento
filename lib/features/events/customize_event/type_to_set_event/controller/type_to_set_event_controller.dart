@@ -53,7 +53,7 @@ class TypetoSetEventController extends GetxController {
         }
       } else {
         response = await ApiHelper.makeRequest(
-            targetRout: ServerConstApis.getCategoryList,
+            targetRout: ServerConstApis.getEventServiceCategory,
             method: "GEt",
             token: token);
         dynamic handlingResponse = response.fold((l) => l, (r) => r);
