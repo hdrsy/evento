@@ -67,16 +67,9 @@ class AccountTypeScreen extends StatelessWidget {
                   ),
                 ).tr(),
               ),
-
               // Adding various account type cards with icons and routes.
               AccountTypeCard(
-                icon: Icons.privacy_tip_outlined,
-                route: 'AccountPrivacyScreen',
-                title: tr("Account privacy"),
-                isPrivateAccount: false,
-              ),
-              AccountTypeCard(
-                  icon: Icons.phone_outlined,
+                  icon: Icons.miscellaneous_services,
                   route: 'SwithcToServiceProviderScreen',
                   title: tr("Switch to service provider"),
                   isPrivateAccount:
@@ -92,8 +85,19 @@ class AccountTypeScreen extends StatelessWidget {
                   title: tr("Become an Organizer"),
                   isPrivateAccount:
                       accountTypeController.isAccountPrivate.value),
+              Divider(
+                thickness: 0.5,
+                color: customColors.secondary,
+              ),
+
               AccountTypeCard(
-                  icon: Icons.delete_forever_outlined,
+                icon: Icons.privacy_tip_outlined,
+                route: 'AccountPrivacyScreen',
+                title: tr("Account privacy"),
+                isPrivateAccount: false,
+              ),
+              AccountTypeCard(
+                  icon: Icons.delete,
                   route: DeleteAccountWidget(),
                   title: tr("Delete Account"),
                   isPrivateAccount: false),

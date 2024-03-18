@@ -5,13 +5,15 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the AccountPrivacyScreen as a StatelessWidget.
 class AccountPrivacyScreen extends StatelessWidget {
   // Constructor with optional key parameter.
   AccountPrivacyScreen({super.key});
 
   // Creating an instance of AccountPrivacyController and registering it with GetX.
-  final AccountPrivacyController accountPrivacyController = Get.put(AccountPrivacyController());
+  final AccountPrivacyController accountPrivacyController =
+      Get.put(AccountPrivacyController());
 
   @override
   // Building the widget.
@@ -84,7 +86,7 @@ class AccountPrivacyScreen extends StatelessWidget {
               Align(
                 alignment: const AlignmentDirectional(-1, -1),
                 child: Text(
-                  "When your account is private, only the followers you approve can see what you share, including your photos or videos on hashtag and location pages, and your followers and following lists.",
+                  "Switching your account to private hides your attendance at events and the list of accounts you follow. This ensures your engagement and connections remain private, not visible to the public.",
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: 'Nunito',
                     color: customColors.secondaryText,
