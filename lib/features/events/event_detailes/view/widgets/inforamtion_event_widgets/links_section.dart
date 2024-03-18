@@ -1,6 +1,6 @@
 import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../../main.dart';
@@ -130,24 +130,27 @@ class LinkCard extends StatelessWidget {
                         size: 20,
                       ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: customTextStyle.bodyMedium.copyWith(fontSize: 14),
-                  ),
-                  subTitle != null
-                      ? Text(
-                          subTitle ?? "",
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: primaryFontFamily,
-                            fontSize: 12,
-                            useGoogleFonts: true,
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
+              SizedBox(
+                width: 300.w,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: customTextStyle.bodyMedium.copyWith(fontSize: 14),
+                    ),
+                    subTitle != null
+                        ? Text(
+                            subTitle ?? "",
+                            style: customTextStyle.bodyMedium.override(
+                              fontFamily: primaryFontFamily,
+                              fontSize: 12,
+                              useGoogleFonts: true,
+                            ),
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
               ),
             ],
           ),

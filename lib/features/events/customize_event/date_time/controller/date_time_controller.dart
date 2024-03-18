@@ -44,13 +44,19 @@ class DateTimeController extends GetxController {
   }
 
   final imagePicker = ImagePicker();
-  void pickImageForDashbard() async {
-    final List<XFile>? pp = await imagePicker.pickMultiImage();
-    if (pp != null) {
-      for (var element in pp) {
-        media.add(File(element.path));
+  void pickNewMedia(ImageSource imageSource) async {
+    if (imageSource == ImageSource.gallery) {
+      final List<XFile>? pp = await imagePicker.pickMultiImage();
+      if (pp != null) {
+        for (var element in pp) {
+          media.add(File(element.path));
+        }
       }
-      ///// for isart the custom image iside avatar list on selected position
+    } else {
+      final pickedImage = await imagePicker.pickImage(source: imageSource);
+      if (pickedImage != null) {
+        media.add(File(pickedImage.path));
+      }
     }
   }
 

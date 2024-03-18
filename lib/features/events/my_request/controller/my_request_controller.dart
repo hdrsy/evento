@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -11,6 +12,10 @@ class MyRequestController extends GetxController {
   late RxList<String> errorMessage;
   late RxBool isLoading;
   RxBool isError = false.obs;
+  RxBool isSearchActive = false.obs;
+  TextEditingController searchField = TextEditingController();
+  RxList<MyRequestModel> searchResultSearch = <MyRequestModel>[].obs;
+
   @override
   void onInit() {
     myRequestsList = [];
@@ -18,6 +23,21 @@ class MyRequestController extends GetxController {
     isLoading = false.obs;
     getMyEventRequests();
     super.onInit();
+  }
+
+  void onPressSearch(String query) {
+    isSearchActive.value = true;
+    if (query.isEmpty) {
+      isSearchActive.value = false;
+      searchResultSearch.clear();
+    } else {
+      isSearchActive.value = true;
+      searchResultSearch.assignAll(myRequestsList
+          .where((event) =>
+              event.title.toLowerCase().contains(query.toLowerCase()))
+          .toList());
+    }
+    update();
   }
 
   getMyEventRequests() async {

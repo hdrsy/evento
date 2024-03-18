@@ -12,13 +12,14 @@ class NotificationController extends GetxController {
   late RxList<NotificationModel> notificationList;
   late RxList<String> errorMessage;
   @override
-  void onInit() {
+  void onInit() async {
     isLoading = false.obs;
     notificationList = <NotificationModel>[
       //// the tonight and this week is fixed in the list becuase this always exist
     ].obs;
     errorMessage = <String>[].obs;
-    fetchCategoryData();
+    await fetchCategoryData();
+    isThereNotification.value = false;
     super.onInit();
   }
 

@@ -1,5 +1,7 @@
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../controller/date_time_controller.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,19 @@ class UploadMedia extends StatelessWidget {
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                       child: GestureDetector(
                         onTap: () async {
-                          dateTimeController.pickImageForDashbard();
+                          showBottomSheetForImages(
+                            context: context,
+                            onPressCamera: () {
+                              Get.back();
+                              dateTimeController
+                                  .pickNewMedia(ImageSource.camera);
+                            },
+                            onPressGallery: () async {
+                              Get.back();
+                              dateTimeController
+                                  .pickNewMedia(ImageSource.gallery);
+                            },
+                          );
                         },
                         child: Icon(
                           Icons.add_a_photo_rounded,

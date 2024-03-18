@@ -101,7 +101,6 @@ class SeeAllController extends GetxController {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse[mapKey]['data'];
     lastPageId = handlingResponse[mapKey]['last_page'];
-    print("the length is :${categoryListJson.length}");
     var ll = categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList();
@@ -114,7 +113,7 @@ class SeeAllController extends GetxController {
         .toList());
     distances
         .addAll(List.generate(categoryListJson.length, (index) => "0".obs));
-
+    calculateDistance();
     if (pageId >= lastPageId) {
       hasMoreData.value = false;
     }

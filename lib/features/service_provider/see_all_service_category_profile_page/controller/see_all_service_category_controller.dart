@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 class SeeAllServiceCategoryController extends GetxController {
   late RxList<ServiceCategoryModel> serviceCategoryList;
   late RxBool isLoading;
+  RxBool isError = false.obs;
+
   late RxList<String> errorMessage;
   @override
   void onInit() async {
@@ -24,20 +26,26 @@ class SeeAllServiceCategoryController extends GetxController {
 
   fetchCategoryData() async {
     isLoading.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.serviceCategory,
-        method: "GEt",
-        token: token);
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.serviceCategory,
+          method: "GEt",
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      whenGetDataSuccess(handlingResponse);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isError.value = true;
+      } else {
+        whenGetDataSuccess(handlingResponse);
+      }
+      isLoading.value = false;
+    } catch (e) {
+      isError.value = true;
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   whenGetDataSuccess(handlingResponse) {

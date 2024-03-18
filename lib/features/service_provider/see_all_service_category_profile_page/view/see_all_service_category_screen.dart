@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../controller/see_all_service_category_controller.dart';
@@ -32,41 +34,59 @@ class SeeAllServiceCategoryScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Obx(
-              () => Expanded(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // const SeeAllServiceVenueCard(),
-                    ...List.generate(
-                      serviceCategoryController.serviceCategoryList.length,
-                      (index) => SeeAllServiceCard(
-                        serviceCategoryModel: serviceCategoryController
-                            .serviceCategoryList[index],
-                        serviceCategoryIndex: index,
+      body: Obx(() => serviceCategoryController.isLoading.value
+          ? Center(
+              child: CircularProgressIndicator(
+                color: customColors.primary,
+              ),
+            )
+          : serviceCategoryController.isError.value
+              ? EmptyData(
+                  icon: Icons.error_outline_outlined,
+                  message: "SomeThing Wrong!!",
+                )
+              : serviceCategoryController.serviceCategoryList.isEmpty
+                  ? EmptyData(
+                      icon: Icons.miscellaneous_services,
+                      message:
+                          "No service providers available. Services will appear here as they become available.")
+                  : Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                // const SeeAllServiceVenueCard(),
+                                ...List.generate(
+                                  serviceCategoryController
+                                      .serviceCategoryList.length,
+                                  (index) => SeeAllServiceCard(
+                                    serviceCategoryModel:
+                                        serviceCategoryController
+                                            .serviceCategoryList[index],
+                                    serviceCategoryIndex: index,
+                                  ),
+                                ),
+                              ].divide(
+                                SizedBox(height: scaleHeight(15)),
+                              ),
+                            ),
+                          )),
+
+                          // const NextStepButton()
+                        ]
+                            .divide(SizedBox(
+                              height: scaleHeight(15),
+                            ))
+                            .addToEnd(const SizedBox(
+                              height: 15,
+                            )),
                       ),
-                    ),
-                  ].divide(
-                    SizedBox(height: scaleHeight(15)),
-                  ),
-                ),
-              )),
-            ),
-            // const NextStepButton()
-          ]
-              .divide(SizedBox(
-                height: scaleHeight(15),
-              ))
-              .addToEnd(const SizedBox(
-                height: 15,
-              )),
-        ),
-      ),
+                    )),
     );
   }
 }

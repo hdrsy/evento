@@ -2,6 +2,7 @@ import 'package:evento/core/server/helper_api.dart';
 
 class OrganizerHome {
   int id;
+  int mobileUserId;
   String firstName;
   String lastName;
   String phoneNumber;
@@ -18,6 +19,7 @@ class OrganizerHome {
 
   OrganizerHome({
     required this.id,
+    required this.mobileUserId,
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
@@ -38,6 +40,7 @@ class OrganizerHome {
 
     return OrganizerHome(
       id: json['id'] ?? 0,
+      mobileUserId: json['mobile_user_id'] ?? 0,
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       phoneNumber: json['phone_number'] ?? "",

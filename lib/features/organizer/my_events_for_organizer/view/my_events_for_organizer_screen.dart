@@ -56,7 +56,11 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
                       padding: padding(16, 20, 10, 20),
                       child: Column(
                         children: [
-                          searchTextField(onChanged: (value) {}),
+                          searchTextField(
+                              controller: myRequestController.searchField,
+                              onChanged: (value) {
+                                myRequestController.onPressSearch(value!);
+                              }),
                           // Generated code for this Row Widget...
                           Row(
                             mainAxisSize: MainAxisSize.max,
@@ -66,7 +70,10 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 12, 0, 0),
                                 child: Text(
-                                  myRequestController.itemList.length
+                                  (myRequestController.isSearchActive.value
+                                          ? myRequestController
+                                              .searchResultSearch.length
+                                          : myRequestController.itemList.length)
                                       .toString(),
                                   style: customTextStyle.labelMedium,
                                 ),
@@ -82,10 +89,15 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
                             ],
                           ),
                           ...List.generate(
-                            myRequestController.itemList.length,
+                            myRequestController.isSearchActive.value
+                                ? myRequestController.searchResultSearch.length
+                                : myRequestController.itemList.length,
                             (index) => MyEventsForOrganizerCard(
                                 myRequestModel:
-                                    myRequestController.itemList[index]),
+                                    myRequestController.isSearchActive.value
+                                        ? myRequestController
+                                            .searchResultSearch[index]
+                                        : myRequestController.itemList[index]),
                           )
                         ].divide(const SizedBox(
                           height: 10,

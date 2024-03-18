@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
 
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
@@ -122,42 +123,46 @@ class OrganizerSeeAllCard extends StatelessWidget {
                           useGoogleFonts: true),
                     ),
                     Spacer(),
-                    GetBuilder<SeeAllOrganizersController>(
-                        builder: (controller) {
-                      return ButtonWidget(
-                        onPressed: () {
-                          controller.followOrUnFollowOrganizer(
-                              organizerHome.id, modelId);
-                        },
-                        text: organizerHome.isFollowedByAuthUser
-                            ? tr("UnFollow")
-                            : tr("Follow"),
-                        options: ButtonOptions(
-                          width: 100,
-                          height: 21,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              10, 0, 10, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: organizerHome.isFollowedByAuthUser
-                              ? customColors.secondaryBackground
-                              : customColors.primary,
-                          textStyle: customTextStyle.titleSmall.override(
-                            fontFamily: 'Nunito',
-                            color: organizerHome.isFollowedByAuthUser
-                                ? customColors.primary
-                                : customColors.info,
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                            useGoogleFonts: true,
-                          ),
-                          borderSide: BorderSide(
-                            color: customColors.primary,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      );
-                    }),
+                    organizerHome.mobileUserId ==
+                            Get.find<ProfileController>().profileModel.id
+                        ? SizedBox()
+                        : GetBuilder<SeeAllOrganizersController>(
+                            builder: (controller) {
+                            return ButtonWidget(
+                              onPressed: () {
+                                controller.followOrUnFollowOrganizer(
+                                    organizerHome.id, modelId);
+                              },
+                              text: organizerHome.isFollowedByAuthUser
+                                  ? tr("UnFollow")
+                                  : tr("Follow"),
+                              options: ButtonOptions(
+                                width: 100,
+                                height: 21,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10, 0, 10, 0),
+                                iconPadding:
+                                    const EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 0),
+                                color: organizerHome.isFollowedByAuthUser
+                                    ? customColors.secondaryBackground
+                                    : customColors.primary,
+                                textStyle: customTextStyle.titleSmall.override(
+                                  fontFamily: 'Nunito',
+                                  color: organizerHome.isFollowedByAuthUser
+                                      ? customColors.primary
+                                      : customColors.info,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.normal,
+                                  useGoogleFonts: true,
+                                ),
+                                borderSide: BorderSide(
+                                  color: customColors.primary,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            );
+                          }),
                   ],
                 )),
           ),

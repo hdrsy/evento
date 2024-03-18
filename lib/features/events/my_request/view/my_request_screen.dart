@@ -56,7 +56,11 @@ class MyrequestScreen extends StatelessWidget {
                         padding: padding(16, 20, 10, 20),
                         child: Column(
                           children: [
-                            searchTextField(onChanged: (value) {}),
+                            searchTextField(
+                                controller: myRequestController.searchField,
+                                onChanged: (value) {
+                                  myRequestController.onPressSearch(value!);
+                                }),
                             // Generated code for this Row Widget...
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -66,7 +70,11 @@ class MyrequestScreen extends StatelessWidget {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       16, 12, 0, 0),
                                   child: Text(
-                                    myRequestController.myRequestsList.length
+                                    (myRequestController.isSearchActive.value
+                                            ? myRequestController
+                                                .searchResultSearch.length
+                                            : myRequestController
+                                                .myRequestsList.length)
                                         .toString(),
                                     style: customTextStyle.labelMedium,
                                   ),
@@ -82,10 +90,17 @@ class MyrequestScreen extends StatelessWidget {
                               ],
                             ),
                             ...List.generate(
-                              myRequestController.myRequestsList.length,
+                              myRequestController.isSearchActive.value
+                                  ? myRequestController
+                                      .searchResultSearch.length
+                                  : myRequestController.myRequestsList.length,
                               (index) => RequestCard(
-                                  myRequestModel: myRequestController
-                                      .myRequestsList[index]),
+                                  myRequestModel:
+                                      myRequestController.isSearchActive.value
+                                          ? myRequestController
+                                              .searchResultSearch[index]
+                                          : myRequestController
+                                              .myRequestsList[index]),
                             )
                           ].divide(const SizedBox(
                             height: 10,

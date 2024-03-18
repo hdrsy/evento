@@ -14,7 +14,7 @@ class TicketsInEventForOrganizerController extends GetxController {
       BookingResponseForOrganizer(booking: {});
   late OrganizationProfileEvent organizationProfileEvent;
   late int eventId;
-  List<TicketModel> generatedTicketModel = [];
+  BookingResponse generatedTicketModel = BookingResponse(upcomingBookings: []);
   late Event eventDetailsModel;
 
   late RxBool isLoading;
@@ -29,15 +29,48 @@ class TicketsInEventForOrganizerController extends GetxController {
   }
 
   createTicketModelsFromEventBookings(List<BookingO> bookings) {
-    generatedTicketModel.clear();
+    generatedTicketModel.upcomingBookings = [];
 
     for (var i = 0; i < bookings.length; i++) {
-      generatedTicketModel.add(TicketModel());
-      generatedTicketModel[i].age.text = bookings[i].age.toString();
-      generatedTicketModel[i].fisrtName.text = bookings[i].firstName.toString();
-      generatedTicketModel[i].lastName.text = bookings[i].lastName.toString();
-      generatedTicketModel[i].phoneNumber.text =
-          bookings[i].phoneNumber.toString();
+      generatedTicketModel.upcomingBookings.add(Booking(
+          age: bookings[i].age,
+          amenities: [],
+          classType: "",
+          event: Event(
+              capacity: 0,
+              description: "",
+              organizerId: 0,
+              id: eventId,
+              ticketPrice: 0,
+              type: "",
+              title: organizationProfileEvent.title,
+              startDate: organizationProfileEvent.startDate,
+              endDate: DateTime.now(),
+              venueId: organizationProfileEvent.venueId,
+              images: [],
+              //  / isFollowedByAuthUser: false,
+              venue: Venue(
+                  averageRating: 0,
+                  capacity: 0,
+                  contactNumber: "0",
+                  description: "",
+                  latitude: 0,
+                  longitude: 0,
+                  name: "",
+                  profile: "",
+                  governorate: "Damascus",
+                  id: 1,
+                  locationDescription: "")),
+          eventId: 0,
+          eventTitle: "",
+          firstName: bookings[i].firstName.toString(),
+          lastName: bookings[i].lastName.toString(),
+          id: 0,
+          invoiceId: 0,
+          status: "paid",
+          userId: 0,
+          phoneNumber: bookings[i].phoneNumber.toString(),
+          userPhoneNumber: bookings[i].phoneNumber.toString()));
     }
     eventDetailsModel = Event(
         capacity: 0,
@@ -77,7 +110,6 @@ class TicketsInEventForOrganizerController extends GetxController {
               "${ServerConstApis.organizationMyEventsBookings}/${eventId}",
           method: "GEt",
           token: token);
-
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
@@ -85,8 +117,6 @@ class TicketsInEventForOrganizerController extends GetxController {
       } else {
         bookingResponse =
             BookingResponseForOrganizer.fromJson(handlingResponse);
-
-        print("booking detailes:${bookingResponse.booking}");
         update();
       }
       isLoading.value = false;
