@@ -77,7 +77,7 @@ class TypetoSetEventController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
-    List<dynamic> categoryListJson = handlingResponse['category'];
+    List<dynamic> categoryListJson = handlingResponse['categories'];
 
     categoryList.addAll(
         categoryListJson.map((jsonItem) => CategoryModel.fromJson(jsonItem)));

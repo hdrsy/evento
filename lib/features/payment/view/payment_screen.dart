@@ -316,7 +316,9 @@ class PhonePayment extends StatelessWidget {
                     showLoadingIndicator:
                         Get.find<PaymentController>().isLoadingPhone.value,
                     onPressed: () async {
-                      Get.find<PaymentController>().getInvoice();
+                      Get.find<PaymentController>().isIvoiceCreated.value
+                          ? null
+                          : Get.find<PaymentController>().getInvoice();
                     },
                     text: "Confirm",
                     options: ButtonOptions(

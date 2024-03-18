@@ -26,8 +26,8 @@ late String? themeValue;
 UserInfo? user;
 bool isGuset = false;
 late Timer timer;
-void startTimerToRemoveSplashScreen() {
-  timer = Timer.periodic(const Duration(seconds: 10), (Timer t) {
+startTimerToRemoveSplashScreen() {
+  timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
     if (t.tick == 2) {
       // Timer reached 3 seconds
       t.cancel(); // Stop the timer
@@ -38,7 +38,7 @@ void startTimerToRemoveSplashScreen() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  startTimerToRemoveSplashScreen();
+  await startTimerToRemoveSplashScreen();
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();

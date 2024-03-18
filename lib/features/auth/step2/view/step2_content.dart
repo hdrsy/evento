@@ -69,6 +69,22 @@ class Step2Content extends StatelessWidget {
                       return passwordValidation(value);
                     },
                     isPassWordVisible: true)),
+            Container(
+                margin: EdgeInsets.symmetric(vertical: scaleHeight(5)),
+                child: customTextField(
+                    context: context,
+                    label: tr("Confirm Password"),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (value) {
+                      stepsController.confirmPassword.text = value!;
+                    },
+                    validator: (value) {
+                      return stepsController.confirmPassword.text ==
+                              stepsController.password.text
+                          ? null
+                          : "The confirm password doesn't mathcing the new password";
+                    },
+                    isPassWordVisible: true)),
             buildButton()
           ],
         ),

@@ -129,15 +129,6 @@ class SeeAllFoldersCard extends StatelessWidget {
           Container(
             width: 100,
             height: 100,
-            decoration: const BoxDecoration(
-              boxShadow: [
-                // BoxShadow(
-                //   blurRadius: 4,
-                //   color: Color(0x33000000),
-                //   offset: Offset(0, 2),
-                // )
-              ],
-            ),
             child: Align(
               alignment: const AlignmentDirectional(0, 0),
               child: Text(

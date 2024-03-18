@@ -36,23 +36,28 @@ class TypeToSetEventScreen extends StatelessWidget {
                       icon: Icons.error_outline_outlined,
                       message: "SomeThing Wrong!!",
                     )
-                  : Container(
-                      padding: padding(16, 16, 16, 16),
-                      width: double.infinity,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const StepText(),
-                            const LinearPercentIndicatorWidget(),
-                            EventTypesWidget(),
-                            Spacer(),
-                            const CustomizeEventButton()
-                          ].divide(SizedBox(
-                            height: scaleHeight(10),
-                          ))),
-                    ),
+                  : typetoSetEventController.categoryList.isEmpty
+                      ? EmptyData(
+                          icon: Icons.settings,
+                          message:
+                              "Looks like there are no  events available right now - check back later!")
+                      : Container(
+                          padding: padding(16, 16, 16, 16),
+                          width: double.infinity,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                const StepText(),
+                                const LinearPercentIndicatorWidget(),
+                                EventTypesWidget(),
+                                Spacer(),
+                                const CustomizeEventButton()
+                              ].divide(SizedBox(
+                                height: scaleHeight(10),
+                              ))),
+                        ),
         ));
   }
 }

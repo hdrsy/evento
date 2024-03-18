@@ -19,20 +19,7 @@ class ProfileController extends GetxController {
       bool isCompleteProfile =
           await prefService.readString("isCompleteProfile") == "true";
       await getProfileInfo();
-      if (isCompleteProfile && targetRout == '/home') {
-        // listenToEvents(user!.id);
-        // Workmanager().registerPeriodicTask(
-        //     "t", // Unique task name for fetching notifications
-        //     "t",
-        //     frequency: Duration(minutes: 15));
-        // initializeService();
-        // final service = FlutterBackgroundService();
-        // service.startService();
-        // service.invoke("setAsBackground");
-        // listenToEvents(2);
-        // initWorkManager();
-        // registertask();
-      }
+      if (isCompleteProfile && targetRout == '/home') {}
     }
     super.onInit();
   }

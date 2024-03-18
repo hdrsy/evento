@@ -1,4 +1,5 @@
 import 'package:evento/core/responsive/size_config.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/utils/extenstions/color_extenstions.dart';
 import '../../../core/utils/extenstions/text_extenstions.dart';
@@ -19,13 +20,14 @@ class MainBottomNavigationBarWidget extends StatelessWidget {
     SizeConfig().init(context);
 
     return PopScope(
-      canPop: mainBottomNavigationController.selectedPage.value != 0,
+      canPop: false,
       onPopInvoked: (popHandled) {
         // Check if the pop event has not been handled and the current index is not the home page
-        if (!popHandled &&
-            mainBottomNavigationController.selectedPage.value != 0) {
+        if (mainBottomNavigationController.selectedPage.value != 0) {
           // Change to the home page index
           mainBottomNavigationController.changePage(0);
+        } else {
+          SystemNavigator.pop();
         }
       },
       child: Theme(

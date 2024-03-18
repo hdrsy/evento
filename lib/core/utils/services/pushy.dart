@@ -33,6 +33,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) {
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
   Pushy.notify(notificationTitle, notificationText, data);
+
   isThereNotification.value = true;
   // Clear iOS app badge number
   Pushy.clearBadge();

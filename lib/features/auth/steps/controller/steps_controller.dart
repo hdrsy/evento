@@ -13,6 +13,7 @@ class StepsController extends GetxController {
   late List<InterestItem> interestList;
   late File customImage;
   late TextEditingController password;
+  late TextEditingController confirmPassword;
   late GlobalKey<FormState> passwordformstate;
   late bool turnOnNotification;
   DateTime? day;
@@ -22,6 +23,7 @@ class StepsController extends GetxController {
   void onInit() {
     passwordformstate = GlobalKey<FormState>();
     password = TextEditingController();
+    confirmPassword = TextEditingController();
     turnOnNotification = false;
     isMale = true.obs;
     // day = DateTime.now();

@@ -18,8 +18,7 @@ import 'package:easy_localization/easy_localization.dart';
 class Step3Content extends StatelessWidget {
   Step3Content({super.key});
   StepsController stepsController = Get.find();
-  DateTime selectedDate =
-      DateTime.now().subtract(const Duration(days: 365 * 12 + 3));
+  DateTime selectedDate = DateTime(2000, 1, 1);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -117,6 +116,7 @@ class Step3Content extends StatelessWidget {
                                               .day), // 12 years and 3 days ago to account for leap years
 
                                       onDateTimeChanged: (val) {
+                                        print("the selected value is:$val");
                                         selectedDate = val;
                                       },
                                     ),
