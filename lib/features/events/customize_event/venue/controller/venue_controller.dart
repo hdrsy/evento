@@ -30,10 +30,10 @@ class VenueController extends PaginationController<Venue> {
 
     List<dynamic> categoryListJson = handlingResponse['message']['data'];
     lastPageId = handlingResponse['message']['last_page'];
-    print("length of data ${categoryListJson.length}");
     itemList.addAll(
         categoryListJson.map((jsonItem) => Venue.fromJson(jsonItem)).toList());
 
+    print("length of data ${itemList[3].venueAlbums.length}");
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }

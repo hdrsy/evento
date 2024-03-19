@@ -70,8 +70,10 @@ getImageNetworkforCahing({
     alignment: alignmentGeometry ?? Alignment.center,
     color: imgColor,
     placeholder: (context, url) => Shimmer.fromColors(
-      baseColor: Colors.grey[300]!, // Replace with your base color
-      highlightColor: Colors.grey[100]!, // Replace with your highlight color
+      baseColor: Color(0xff666666), // Replace with your base color
+      // baseColor: Colors.grey[300]!, // Replace with your base color
+      // highlightColor: Colors.grey[100]!, // Replace with your highlight color
+      highlightColor: Color(0xff95a1ac), // Replace with your highlight color
       child: Container(
         width: width,
         height: height,

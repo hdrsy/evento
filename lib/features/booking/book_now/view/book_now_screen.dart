@@ -95,11 +95,6 @@ class BookNowScreen extends StatelessWidget {
                       ],
                     ),
                     // const PaymontInformation(),
-                    ...List.generate(
-                        bookNowController.errorMessage.length,
-                        (index) => ErrorMessages(
-                              message: bookNowController.errorMessage[index],
-                            )),
                   ].addToEnd(SizedBox(
                     height: 15.h,
                   )),

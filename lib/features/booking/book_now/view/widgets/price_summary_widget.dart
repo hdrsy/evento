@@ -1,4 +1,5 @@
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
+import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 
 import '../../../../../core/responsive/responsive.dart';
@@ -125,7 +126,8 @@ class PriceSummaryWidget extends StatelessWidget {
                 () => Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                   child: ButtonWidget(
-                    showLoadingIndicator: bookNowController.isLoading.value,
+                    showLoadingIndicator:
+                        bookNowController.ticketList[index].isLoading.value,
                     onPressed: () async {
                       bookNowController.ticketList[index].isPaidSuccfully.value
                           ? null
@@ -162,6 +164,12 @@ class PriceSummaryWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              ...List.generate(
+                  bookNowController.errorMessage.length,
+                  (index) => ErrorMessages(
+                        message: bookNowController
+                            .ticketList[index].errorMessage[index],
+                      )),
             ],
           ));
     });

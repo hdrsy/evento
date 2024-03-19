@@ -12,6 +12,7 @@ class TicketModel {
   int ticketIndex;
   TextEditingController fisrtName = TextEditingController();
   TextEditingController lastName = TextEditingController();
+  RxList<String> errorMessage = <String>[].obs;
 
   TextEditingController age = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
@@ -20,6 +21,7 @@ class TicketModel {
   int discount = 0;
   int tax = 0;
   RxBool isPaidSuccfully = false.obs;
+  RxBool isLoading = false.obs;
   // String? selectedCoupon = null;
   TicketModel({this.ticketIndex = 0});
 }

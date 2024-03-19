@@ -129,10 +129,14 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
                       children: [
                         ...List.generate(
                             venueDetailesController.venue.venueAlbums.length,
-                            (index) => VenueServicesCard(
-                                  album: venueDetailesController
-                                      .venue.venueAlbums[index],
-                                ))
+                            (index) {
+                          print(
+                              "the album : ${venueDetailesController.venue.venueAlbums.length}");
+                          return VenueServicesCard(
+                            album: venueDetailesController
+                                .venue.venueAlbums[index],
+                          );
+                        })
                       ]
                           .divide(const SizedBox(
                             height: 16,

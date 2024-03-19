@@ -60,7 +60,7 @@ class ServerConstApis {
   static String showGoing = '$baseAPI/api/showGoing';
 
 /////
-  static String bookNow = '$baseAPI/api/book';
+  static String bookNow = '$baseAPI/api/booking/calculate_invoice_amount';
   static String myCoupons = '$baseAPI/api/my_promo_code_booking';
 
   /////my booking

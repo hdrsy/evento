@@ -65,7 +65,6 @@ class EventDetailsModel {
 
   factory EventDetailsModel.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
     return EventDetailsModel(
       bookings: json['bookings'] != null
           ? List<Booking>.from(json['bookings'].map((x) => Booking.fromJson(x)))

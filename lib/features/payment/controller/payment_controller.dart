@@ -66,26 +66,10 @@ class PaymentController extends GetxController {
     ticketList = Get.arguments[1];
     booking = Get.arguments[2];
     ticketIndex = Get.arguments[3];
-
-    totalAmount = calculateIvoiceAmount();
-    getTaxInvoice(totalAmount);
+    invoiceTax = Get.arguments[5];
+    totalAmount = Get.arguments[4];
+    // getTaxInvoice(totalAmount);
     super.onInit();
-  }
-
-  getTaxInvoice(int amount) {
-    int totalPriceInTicket = totalAmount;
-    if (totalPriceInTicket < 1000) {
-      invoiceTax = 75;
-    } else if (totalPriceInTicket > 1000 && totalPriceInTicket < 10000) {
-      invoiceTax = 100;
-    }
-    if (totalPriceInTicket >= 10000 && totalPriceInTicket < 20000) {
-      invoiceTax = 150;
-    } else {
-      invoiceTax = 200;
-    }
-
-    // update();
   }
 
   void getInvoice() async {
@@ -98,14 +82,14 @@ class PaymentController extends GetxController {
       isLoadingPhone.value = true;
       errorMessageInInvoice.value = '';
       Map<String, dynamic> data = {
-        // "invoice_amount": calculateIvoiceAmount(),
-        "invoice_amount": 100,
         "customer_phone": phone.text.startsWith("0", 0)
             ? "963${phone.text.substring(1)}"
             : "963${phone.text}",
-        "bookings": booking['bookings'],
         "event_id": eventDetailsModel.id,
       };
+      booking.forEach((key, value) {
+        data[key] = value;
+      });
       Either<String, Map> response;
       String token = await prefService.readString("token");
       response = await PaymentApi.makeRequest(
@@ -139,7 +123,9 @@ class PaymentController extends GetxController {
           ? "963${phone.text.substring(1)}"
           : "963${phone.text}",
       "code": otp.text,
-      "ids": bookingIds
+      "ids": bookingIds,
+      "promocode_id": "",
+      "event_id": eventDetailsModel.id
     };
     print("the request data is :${data}");
     Either<ErrorResponse, Map<String, dynamic>> response;

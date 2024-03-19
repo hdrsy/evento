@@ -40,23 +40,6 @@ class BookNowController extends GetxController {
     super.onInit();
   }
 
-  getTaxForTicket(int ticketId) {
-    int totalPriceInTicket = ticketList[ticketId].totalPrice;
-    if (totalPriceInTicket < 1000) {
-      ticketList[ticketId].tax = 75;
-    } else if (totalPriceInTicket > 1000 && totalPriceInTicket < 10000) {
-      ticketList[ticketId].tax = 100;
-    }
-    if (totalPriceInTicket >= 10000 && totalPriceInTicket < 20000) {
-      ticketList[ticketId].tax = 150;
-    } else {
-      ticketList[ticketId].tax = 200;
-    }
-
-    return ticketList[ticketId].tax;
-    // update();
-  }
-
   addnewTicket() {
     ticketList.add(TicketModel(ticketIndex: ticketList.length));
     ticketList.last.selectedClass = eventDetailsModel.classes[0];
@@ -230,82 +213,77 @@ class BookNowController extends GetxController {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      Get.toNamed('/PaymentScreenInBooking', arguments: [
-        eventDetailsModel,
-        [ticketList[ticketId]],
-        createBookingJson([ticketList[ticketId]]),
-        ticketId
-      ]);
-    }
-    //   errorMessage = <String>[].obs;
-    //   isLoading.value = true;
 
-    //   Either<ErrorResponse, Map<String, dynamic>> response;
-    //   String token = await prefService.readString("token");
-    //   response = await ApiHelper.makeRequest(
-    //       targetRout: ServerConstApis.bookNow,
-    //       method: "post",
-    //       token: token,
-    //       data: createBookingJson(ticketList));
+      ticketList[ticketId].errorMessage.value = [];
+      ticketList[ticketId].isLoading.value = true;
+      final oldMap = createBookingJson(ticketList[ticketId]);
+      Map<String, dynamic> data = {
+        "event_id": eventDetailsModel.id,
+      };
+      oldMap.forEach((key, value) {
+        data[key] = value;
+      });
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.bookNow,
+          method: "post",
+          token: token,
+          data: data);
 
-    //   dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    //   if (handlingResponse is ErrorResponse) {
-    //     errorMessage.value = handlingResponse.getErrorMessages();
-    //     Future.delayed(const Duration(milliseconds: 500))
-    //         .then((value) => scrollController.animateTo(
-    //               scrollController.position.maxScrollExtent,
-    //               duration: const Duration(milliseconds: 50),
-    //               curve: Curves.easeInOut,
-    //             ));
-    //   } else {
-    //     whenBookingSuccefly(handlingResponse);
-    //   }
-    //   isLoading.value = false;
-    // }
-  }
-
-  whenBookingSuccefly(handlingResponse) {
-    if (handlingResponse['message'] == "Booking successful") {
-      Get.toNamed('/PaymentScreenInBooking', arguments: [
-        eventDetailsModel,
-        ticketList,
-        createBookingJson(ticketList)
-      ]);
-    }
-  }
-
-  Map<String, dynamic> createBookingJson(List<TicketModel> bookings) {
-    List<Map<String, dynamic>> bookingList = [];
-
-    for (var booking in bookings) {
-      if (booking.selectedPromoCode != null) {
-        bookingList.add({
-          'class_id': booking.selectedClass!.id,
-          'first_name': booking.fisrtName.text,
-          'last_name': booking.lastName.text,
-          'age': int.tryParse(booking.age.text) ?? 0,
-          'phone_number': booking.phoneNumber.text,
-          "promo_code_id": booking.selectedPromoCode!.id,
-          "class_ticket_price": booking.selectedClass!.ticketPrice,
-          'options':
-              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
-        });
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      print("the response : $handlingResponse");
+      if (handlingResponse is ErrorResponse) {
+        ticketList[ticketId].errorMessage.value =
+            handlingResponse.getErrorMessages();
+        update();
       } else {
-        bookingList.add({
-          'class_id': booking.selectedClass!.id,
-          'first_name': booking.fisrtName.text,
-          'last_name': booking.lastName.text,
-          'age': int.tryParse(booking.age.text) ?? 0,
-          'phone_number': booking.phoneNumber.text,
-          "class_ticket_price": booking.selectedClass!.ticketPrice,
-          'options':
-              booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
-        });
+        int totalAmount = handlingResponse["event_price_with_discount"];
+        int appTaxes = handlingResponse["app_taxes"];
+        int mtnTaxes = handlingResponse["mtn_taxes"];
+        print("theee :$appTaxes");
+        print("theee :$mtnTaxes");
+        Get.toNamed('/PaymentScreenInBooking', arguments: [
+          eventDetailsModel,
+          [ticketList[ticketId]],
+          createBookingJson(ticketList[ticketId]),
+          ticketId,
+          totalAmount,
+          appTaxes + mtnTaxes
+        ]);
       }
+      ticketList[ticketId].isLoading.value = false;
+    }
+  }
+
+  Map<String, dynamic> createBookingJson(TicketModel booking) {
+    Map<String, dynamic> bookingList = {};
+
+    if (booking.selectedPromoCode != null) {
+      bookingList = {
+        'class_id': booking.selectedClass!.id,
+        'first_name': booking.fisrtName.text,
+        'last_name': booking.lastName.text,
+        'age': int.tryParse(booking.age.text) ?? 0,
+        'phone_number': booking.phoneNumber.text,
+        "promo_code_id": booking.selectedPromoCode!.id,
+        "class_ticket_price": booking.selectedClass!.ticketPrice,
+        'options':
+            booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+      };
+    } else {
+      bookingList = {
+        'class_id': booking.selectedClass!.id,
+        'first_name': booking.fisrtName.text,
+        'last_name': booking.lastName.text,
+        'age': int.tryParse(booking.age.text) ?? 0,
+        'phone_number': booking.phoneNumber.text,
+        'options':
+            booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
+      };
     }
 
-    Map<String, dynamic> jsonMap = {'bookings': bookingList};
-    return jsonMap;
+    return bookingList;
   }
 
   onPressFillMyData(int ticketIndex) {

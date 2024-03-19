@@ -11,6 +11,7 @@ class VenueServicesCard extends StatelessWidget {
   final VenueAlbum album;
   @override
   Widget build(BuildContext context) {
+    print("the album :${album.images.length}");
     return GestureDetector(
       onTap: () async {
         Get.toNamed('/GalleryScreen',

@@ -43,7 +43,7 @@ class Step7Content extends StatelessWidget {
             ).tr(),
           ),
           SizedBox(
-              height: scaleHeight(400.h),
+              height: scaleHeight(500.h),
               child: Obx(() => step7controller.isLoading.value
                   ? interestShimmerGridView()
                   : MyGridView())),
@@ -55,7 +55,7 @@ class Step7Content extends StatelessWidget {
 
   Widget buildButton() {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
       child: ButtonWidget(
         onPressed: () async {
           StepsPageController stepsPageController = Get.find();

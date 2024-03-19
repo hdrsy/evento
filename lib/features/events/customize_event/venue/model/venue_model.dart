@@ -14,7 +14,7 @@ class Venue {
   final String profile;
   final String contactNumber;
   final List<VenueAlbum> venueAlbums;
-final double averageRating;
+  final double averageRating;
   Venue({
     required this.id,
     required this.name,
@@ -22,7 +22,6 @@ final double averageRating;
     required this.profile,
     required this.governorate,
     required this.averageRating,
-    
     required this.locationDescription,
     required this.description,
     required this.latitude,
@@ -33,10 +32,10 @@ final double averageRating;
 
   factory Venue.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
-    var albumList = json['albums'] == null ? json['albums'] as List : [];
+    print("the data is ${json}");
+    var albumList = json['albums'] != null ? json['albums'] as List : [];
     List<VenueAlbum> albums =
-        albumList.map((album) => VenueAlbum.fromJson(album ?? {})).toList();
+        albumList.map((album) => VenueAlbum.fromJson(album)).toList();
 
     return Venue(
       id: json['id'] ?? 0,
@@ -73,6 +72,7 @@ class VenueAlbum {
   });
 
   factory VenueAlbum.fromJson(Map<String, dynamic> oldJson) {
+    // print("the data is :$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     List<String> parseImages(String? imagesJson) {
