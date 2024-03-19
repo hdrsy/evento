@@ -18,9 +18,7 @@ class Language {
 class LanguageSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return 
-    
-     SizedBox(
+    return SizedBox(
       height: scaleHeight(100),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -54,31 +52,28 @@ Widget dropDown(BuildContext context) {
       isExpanded: true,
       hint: Text(
         selectedLanguage.name.toString(),
-        style:  TextStyle(
+        style: TextStyle(
           color: customColors.info, // your theme color here
           fontWeight: FontWeight.normal,
           fontSize: 13,
         ),
       ),
       value: selectedLanguage,
-      iconStyleData:  IconStyleData(
+      iconStyleData: IconStyleData(
         iconEnabledColor: customColors.info, // your theme color here
       ),
       onChanged: (Language? newValue) {
-    // Use EasyLocalization context here
-    Locale newLocale   = newValue!.languageCode == 'en' 
-        ? Locale('en') 
-        : Locale('ar');
-        print(newLocale);
+        // Use EasyLocalization context here
+        Locale newLocale =
+            newValue!.languageCode == 'en' ? Locale('en') : Locale('ar');
         context.setLocale(newLocale);
-       Get.updateLocale(newLocale);
-        prefService.createString("language_code", newValue.languageCode == 'en' 
-        ? 'en'
-        : 'ar');
+        Get.updateLocale(newLocale);
+        prefService.createString(
+            "language_code", newValue.languageCode == 'en' ? 'en' : 'ar');
         // Get.offAllNamed('/home')
 
         ;
-        },
+      },
       items: languages.map<DropdownMenuItem<Language>>((Language language) {
         return DropdownMenuItem<Language>(
           value: language,
@@ -99,7 +94,7 @@ Widget dropDown(BuildContext context) {
                     ),
                     Text(
                       language.name,
-                      style:  TextStyle(
+                      style: TextStyle(
                         color: customColors.info, // your theme color here
                         fontWeight: FontWeight.normal,
                         fontSize: 13,

@@ -28,7 +28,7 @@ class EditProfileServiceProviderController extends GetxController {
   late RxBool isLoading;
   late File? profileImage;
   late File? coverImage;
-  
+
   @override
   void onInit() {
     profileModel = Get.arguments;
@@ -65,11 +65,13 @@ class EditProfileServiceProviderController extends GetxController {
   }
 
   final imagePicker = ImagePicker();
-  void pickImageForDashbard(ImageSource imageSource ,bool isProfile) async {
+  void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-    isProfile?profileImage=File(pickedImage.path):coverImage=File(pickedImage.path);
-    update();
+      isProfile
+          ? profileImage = File(pickedImage.path)
+          : coverImage = File(pickedImage.path);
+      update();
       Get.back();
     }
   }
@@ -81,7 +83,7 @@ class EditProfileServiceProviderController extends GetxController {
       errorMessage.clear();
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token") ;
+      String token = await prefService.readString("token");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.updateProfile,
           method: "post",
@@ -97,7 +99,6 @@ class EditProfileServiceProviderController extends GetxController {
           files: isImageSelected.value ? {"image": customImage} : null);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {
@@ -108,7 +109,6 @@ class EditProfileServiceProviderController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
-    print(handlingResponse);
     Get.back();
   }
 }

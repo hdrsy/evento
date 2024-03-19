@@ -239,7 +239,7 @@ class MyBookingCard extends StatelessWidget {
     return ButtonWidget(
       onPressed: () {
         Get.toNamed('/BookingDetailesForMyBookingScreen',
-            arguments: [model, eventBooking]);
+            arguments: [model.id, user!.id]);
       },
       text: tr("View E-Ticket"),
       options: ButtonOptions(

@@ -243,7 +243,6 @@ class Class {
   });
 
   factory Class.fromJson(Map<String, dynamic> json) {
-    print("the calss is :$json");
     return Class(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
@@ -335,7 +334,6 @@ class Amenity {
   });
 
   factory Amenity.fromJson(Map<String, dynamic> oldJson) {
-    print("aminity is:$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return Amenity(
       id: json['id'] ?? 0,
@@ -360,7 +358,6 @@ class Pivot {
 
   factory Pivot.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("pivot is:$json");
 
     return Pivot(
       eventId: json['event_id'] ?? 0,

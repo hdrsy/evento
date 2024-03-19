@@ -43,7 +43,6 @@ class EditImageWidget extends StatelessWidget {
             alignment: AlignmentDirectional(-0.8, 2),
             child: InkWell(
               onTap: () {
-                print(tr("object"));
                 showBottomSheetForImages(
                     context: context,
                     onPressCamera: () {

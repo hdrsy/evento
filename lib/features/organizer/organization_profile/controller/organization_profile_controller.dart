@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/organizer/organizer_profile/model/organizer_profile_followers_model.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
@@ -45,17 +43,14 @@ class OrganizationProfileController extends GetxController {
           token: token);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         isError.value = true;
       } else {
-        print("handling :$handlingResponse");
         final interestsJson = handlingResponse['organizer'];
 
         organizerProfileModel =
             OrganizationProfileModel.fromJson(interestsJson);
-        print("organization: ${organizerProfileModel.organizedEvents}");
         update();
       }
       isLoading.value = false;
@@ -74,7 +69,6 @@ class OrganizationProfileController extends GetxController {
         token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print(handlingResponse);
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
@@ -130,71 +124,3 @@ class OrganizationProfileController extends GetxController {
     }
   }
 }
-
-// Example of fake data for OrganizationProfileModel
-var fakeOrganizationProfileData = {
-  "id": 1,
-  "followers_count": 150,
-  "following_count": 75,
-  "organized_events_count": 10,
-  "organizer_info": {
-    "id": 1,
-    "name": "Event Organizer Inc.",
-    "bio": "We organize the best events.",
-    "services": "Event Planning and Management",
-    "state": "Active",
-    "profile": "https://example.com/profile.jpg",
-    "cover": "https://example.com/cover.jpg",
-    "is_followed_by_auth_user": true,
-    "albums": [
-      {
-        "id": 1,
-        "name": "Event Highlights",
-        "images": jsonEncode([
-          "https://example.com/image1.jpg",
-          "https://example.com/image2.jpg"
-        ]),
-        "videos": jsonEncode([
-          "https://example.com/video1.mp4",
-          "https://example.com/video2.mp4"
-        ]),
-      }
-    ],
-    "categories": [
-      {
-        "id": 1,
-        "title": "Music",
-        "icon": "https://example.com/icons/music.png",
-      },
-      {
-        "id": 2,
-        "title": "Technology",
-        "icon": "https://example.com/icons/tech.png",
-      }
-    ]
-  },
-  "organized_events": [
-    {
-      "id": 1,
-      "organizer_id": 1,
-      "title": "Tech Conference 2023",
-      "venue_id": 1,
-      "capacity": 500,
-      "start_date": "2023-09-15T09:00:00Z",
-      "end_date": "2023-09-15T18:00:00Z",
-      "ticket_price": 99,
-      "description": "A tech conference focusing on the latest in technology.",
-      "type": "Conference",
-      "videos": null,
-      "images": jsonEncode([
-        "https://example.com/event1/image1.jpg",
-        "https://example.com/event1/image2.jpg"
-      ]),
-      "is_followed_by_auth_user": false,
-    }
-  ]
-};
-
-// Parsing the fake data to create an OrganizationProfileModel instance
-
-// print(organizationProfileModel.organizerInfo.name); // Should print "Event Organizer Inc."

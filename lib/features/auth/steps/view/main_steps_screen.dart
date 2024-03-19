@@ -1,6 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
-
 import '../../../../core/responsive/responsive.dart';
 import '../../step1/view/step1_screen.dart';
 import '../../step2/view/step2_content.dart';
@@ -25,31 +22,6 @@ class MainStepsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: ButtonWidget(
-            onPressed: () async {},
-            text: tr("Continue"),
-            options: ButtonOptions(
-              width: 350,
-              height: 45,
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-              color: customColors.primary,
-              textStyle: customTextStyle.titleSmall.copyWith(
-                fontFamily: 'Roboto',
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-              elevation: 0,
-              borderSide: const BorderSide(
-                color: Colors.transparent,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
           backgroundColor: customColors.secondaryBackground,
           appBar: buildAppBarWithLineIndicatorincenter(
               pageController.pageIdex.value / 8, pageController.pageIdex.value),

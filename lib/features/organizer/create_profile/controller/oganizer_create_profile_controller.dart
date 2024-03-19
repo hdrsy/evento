@@ -109,14 +109,9 @@ class OrganizerCreateProfileController extends GetxController {
   void pickImageForDashbard(ImageSource imageSource, bool isProfile) async {
     final pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-      print(isProfile);
       isProfile
           ? profileImage = File(pickedImage.path)
           : coverImage = File(pickedImage.path);
-      ///// for isart the custom image iside avatar list on selected position
-      !isProfile
-          ? print("coverrrrrrrrr ${coverImage!.path}")
-          : print("profileeeeeeeeeeee${profileImage!.path}");
       update();
       Get.back();
     }
@@ -147,7 +142,6 @@ class OrganizerCreateProfileController extends GetxController {
         dataRequest["category_ids[$i]"] =
             choiceOrganizerCategoryController.selectedCategories[i];
       }
-      print(dataRequest);
       Map<String, File> fileMap = {};
       if (profileImage != null) {
         fileMap['profile'] = profileImage!;
@@ -173,8 +167,6 @@ class OrganizerCreateProfileController extends GetxController {
               } else {
                 // Handle the case where video compression fails
                 // For example, you might choose to skip this file, log an error, or use the original file
-                print(
-                    "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
               }
             }
           }
@@ -195,17 +187,14 @@ class OrganizerCreateProfileController extends GetxController {
           errorMessaging: errorMessage,
         ));
         currentUploadingFile.value = "uplading media field";
-        print("object");
       } else {
         isLoading.value = false;
-        print(handlingResponse);
         prefService.remove('userInfo');
         currentUploadingFile.value = "All files uploaded successfully!";
         Get.offAllNamed('/home');
       }
       isLoading.value = false;
     } catch (e) {
-      print("ecption $e");
       Get.back();
       isLoading.value = false;
     }
@@ -213,14 +202,11 @@ class OrganizerCreateProfileController extends GetxController {
 
   deleteFolder(int folderIndex) {
     foldersModel.removeAt(folderIndex);
-    print("inside deleteFolder");
   }
 
   editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
-    print("inside media");
     foldersModel[folderIndex].mediaList.clear();
     foldersModel[folderIndex].mediaList.addAll(media);
     Get.back();
-    print("editing complete");
   }
 }

@@ -29,12 +29,6 @@ class OptionsCard extends StatelessWidget {
             prefService.remove('token');
             prefService.remove('userInfo');
             prefService.remove('isCompleteProfile');
-            //              FlutterBackgroundService service=FlutterBackgroundService();
-            // service.invoke("stopService");
-            print("is running service");
-            // print(await service.isRunning());
-
-            print(await prefService.isContainKey('userInfo'));
           } else {
             targetRout is String
                 ? Get.toNamed(targetRout)

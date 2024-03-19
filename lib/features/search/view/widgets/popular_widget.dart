@@ -12,7 +12,6 @@ class PopularWidget extends StatelessWidget {
   final SearchPageController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    print("ppp active");
     return Obx(
       () => Column(
         mainAxisSize: MainAxisSize.max,

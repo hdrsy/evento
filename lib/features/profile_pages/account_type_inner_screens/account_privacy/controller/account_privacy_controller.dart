@@ -28,7 +28,6 @@ class AccountPrivacyController extends GetxController {
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
-      print(handlingResponse);
     } else {
       isAccountPrivate.value = !isAccountPrivate.value;
       Get.find<AccountTypeController>().isAccountPrivate.value =

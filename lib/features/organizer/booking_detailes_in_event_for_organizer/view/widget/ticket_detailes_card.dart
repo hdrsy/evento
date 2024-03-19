@@ -322,9 +322,7 @@ class BookingDetailesInEventForOrganizerBooking extends StatelessWidget {
                             ),
                           ),
                           ButtonWidget(
-                            onPressed: () {
-                              print(tr('Button pressed ...'));
-                            },
+                            onPressed: () {},
                             text: tr("Paid"),
                             options: ButtonOptions(
                               height: 22,

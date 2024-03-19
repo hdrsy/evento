@@ -106,7 +106,6 @@ class CancelButton extends StatelessWidget {
   final int modelId;
   @override
   Widget build(BuildContext context) {
-    print("onside cancel");
     return ButtonWidget(
       onPressed: () {
         OrganizerProfileController goingController = Get.find();

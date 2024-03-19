@@ -25,8 +25,6 @@ class ProfileController extends GetxController {
   }
 
   getProfileInfo() async {
-    print("the user info is:${user!.image}");
     profileModel = ProfileModel.fromJson(user != null ? user!.toJson() : {});
-    print("the user is :${profileModel.image}");
   }
 }

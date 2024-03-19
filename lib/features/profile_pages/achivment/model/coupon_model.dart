@@ -70,7 +70,6 @@ class PromoCodeEvent {
   });
 
   factory PromoCodeEvent.fromJson(Map<String, dynamic> json) {
-    print(json['promo_code_id'] is int);
     return PromoCodeEvent(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,

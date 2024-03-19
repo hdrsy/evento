@@ -17,7 +17,6 @@ class NextStepButton extends StatelessWidget {
         ServiceCategoryController serviceCategoryController = Get.find();
         bool isDoneone = serviceCategoryController.selectedServiceProviders
             .any((element) => element.value != 0);
-        print("the result is:$isDoneone");
         if (serviceCategoryController.selectedVenue.value != 0 && isDoneone) {
           Get.toNamed('/dateTimeScreen');
         } else {

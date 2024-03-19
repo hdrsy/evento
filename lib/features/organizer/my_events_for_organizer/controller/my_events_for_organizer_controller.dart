@@ -49,7 +49,6 @@ class MyEventsForOrganizerController
     List<dynamic> categoryListJson = handlingResponse['events']['data'];
     lastPageId = handlingResponse['events']['last_page'];
     dataLimit = handlingResponse['events']['per_page'];
-    print("categoryListJson:$categoryListJson");
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizationEvent.fromJson(jsonItem))
         .toList());

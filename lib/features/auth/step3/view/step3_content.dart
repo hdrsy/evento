@@ -116,7 +116,6 @@ class Step3Content extends StatelessWidget {
                                               .day), // 12 years and 3 days ago to account for leap years
 
                                       onDateTimeChanged: (val) {
-                                        print("the selected value is:$val");
                                         selectedDate = val;
                                       },
                                     ),

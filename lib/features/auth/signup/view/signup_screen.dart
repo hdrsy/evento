@@ -126,7 +126,6 @@ class SignupScreen extends StatelessWidget {
                     },
                     keyboardType: TextInputType.phone,
                     validator: (value) {
-                      print("validation data is :$value");
                       return phoneValidation(value);
                       // return null;
                     },

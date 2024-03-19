@@ -82,13 +82,9 @@ class ApiHelper {
             throw UnimplementedError('HTTP method $method not supported');
         }
       }
-      print(response.statusCode);
-      print(response.body);
 
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-      print("response bid :$responseBody");
-      print("response bid :${response.statusCode}");
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {
@@ -103,7 +99,6 @@ class ApiHelper {
         return Left(ErrorResponse.fromJson(responseBody));
       }
     } catch (e) {
-      print(e);
       // Catching exceptions and returning as error responses.
       return Left(ErrorResponse.fromJson(
           {"message": "SomeThing Wrong !. Try again later "}));

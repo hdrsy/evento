@@ -32,7 +32,6 @@ class Venue {
 
   factory Venue.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("the data is ${json}");
     var albumList = json['albums'] != null ? json['albums'] as List : [];
     List<VenueAlbum> albums =
         albumList.map((album) => VenueAlbum.fromJson(album)).toList();
@@ -72,7 +71,6 @@ class VenueAlbum {
   });
 
   factory VenueAlbum.fromJson(Map<String, dynamic> oldJson) {
-    // print("the data is :$oldJson");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
     List<String> parseImages(String? imagesJson) {
@@ -84,7 +82,6 @@ class VenueAlbum {
         var decodedList = jsonDecode(imagesJson) as List;
         return decodedList.map((item) => item.toString()).toList();
       } catch (e) {
-        print('Error decoding images JSON: $e');
         return [];
       }
     }

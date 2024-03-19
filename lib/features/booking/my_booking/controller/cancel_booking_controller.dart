@@ -20,7 +20,6 @@ class CancelBookingController extends GetxController {
   }
 
   changeSelected(int id, Booking booking) {
-    print("the invoice is:${booking.invoiceId}");
     if (selectedTicket.contains(id)) {
       selectedTicket.remove(id);
       invoiceTicket.remove(booking.invoiceId);
@@ -29,7 +28,6 @@ class CancelBookingController extends GetxController {
       invoiceTicket.add(booking.invoiceId);
     }
 
-    print("the invoice length:${invoiceTicket.length}");
     update();
   }
 
@@ -38,7 +36,6 @@ class CancelBookingController extends GetxController {
     Either<ErrorResponse, Map<String, dynamic>> response;
     for (var i = 0; i < selectedTicket.length; i++) {
       String token = await prefService.readString("token");
-      print("the invoice is:${invoiceTicket[i]}");
       response = await ApiHelper.makeRequest(
           targetRout: "${ServerConstApis.cancellBooking}",
           method: "Post",

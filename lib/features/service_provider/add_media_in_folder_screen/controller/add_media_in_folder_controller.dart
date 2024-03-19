@@ -35,13 +35,11 @@ class AddMediaInFolderServiseProviderController extends GetxController {
   Future<void> pickVideo() async {
     File? videoFile = await _selectVideoFromGallery();
     if (videoFile == null) {
-      print('No video selected.');
       return;
     }
 
     Duration? videoDuration = await getVideoDuration(videoFile);
     if (videoDuration == null) {
-      print('Failed to retrieve video duration.');
       return;
     }
 
@@ -84,7 +82,6 @@ class AddMediaInFolderServiseProviderController extends GetxController {
         serviceProviderCreateProfileController = Get.find();
     serviceProviderCreateProfileController.foldersModel[folderIndex].mediaList
         .add(MediaModel(mediaType: "video", media: videoFile));
-    print("Video path: ${videoFile.path}");
   }
 
   void pickNewMedia(ImageSource imageSource) async {

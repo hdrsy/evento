@@ -38,17 +38,6 @@ class Dd extends GetxController {
     super.onInit();
   }
 
-  void setSourceAndDestinationMarkerIcons() async {
-    // String parentCat = widget.subCategory!.imgName!.split("_")[0];
-
-    // sourceIcon = await BitmapDescriptor.fromAssetImage(
-    //     ImageConfiguration(devicePixelRatio: 2.0), 'assets/images/تيست 1.png');
-
-    // destinationIcon = await BitmapDescriptor.fromAssetImage(
-    //     ImageConfiguration(devicePixelRatio: 2.0), 'assets/images/تيست 1.png');
-    // print("inisde setSourceAndDestinationMarkerIcons");
-  }
-
   void setInitialLocation() {
     currentLocation =
         LatLng(SOURCE_LOCATION.latitude, SOURCE_LOCATION.longitude);
@@ -82,7 +71,6 @@ class Dd extends GetxController {
           this.pinPillPosition = PIN_VISIBLE_POSITION;
           update();
         }));
-    print(markers.first.markerId);
     update();
   }
 

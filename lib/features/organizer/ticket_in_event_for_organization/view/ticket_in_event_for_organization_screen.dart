@@ -89,8 +89,10 @@ class TicketsInEventForOrganizerCard extends StatelessWidget {
               Get.find();
           var result = myBookingController.createTicketModelsFromEventBookings(
               myBookingController.bookingResponse.booking[modelId]!);
-          Get.toNamed('/BookingDetailesForMyBookingScreen',
-              arguments: [myBookingController.eventDetailsModel, result]);
+          Get.toNamed('/BookingDetailesForMyBookingScreen', arguments: [
+            myBookingController.eventDetailsModel.id,
+            myBookingController.bookingResponse.booking[0]![0].userId
+          ]);
         },
         child: SizedBox(
           width: double.infinity,

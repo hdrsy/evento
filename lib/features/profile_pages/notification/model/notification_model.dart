@@ -16,7 +16,6 @@ class NotificationModel {
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
-    print(json['created_at'] is String);
     return NotificationModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? '',

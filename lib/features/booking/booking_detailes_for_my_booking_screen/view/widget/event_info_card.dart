@@ -55,16 +55,19 @@ class EventInfoCard2 extends StatelessWidget {
                 children: [
                   SingleItemData(
                     title: tr("Event"),
-                    subTitle: bookingDetailesController.eventDetailsModel.title,
+                    subTitle:
+                        bookingDetailesController.userBookings[0].event.title,
                   ),
                   SingleItemData(
                     title: tr("Event Location"),
                     subTitle: bookingDetailesController
-                        .eventDetailsModel.venue.governorate,
+                        .userBookings[0].event.venue.governorate,
+                    // subTitle: "عىنىخصى",
                   ),
                   SingleItemData(
                     title: tr("Event Organizer"),
-                    subTitle: "Evento",
+                    subTitle: bookingDetailesController
+                        .userBookings[0].event.organizer!.name,
                   ),
                 ].divide(const SizedBox(height: 18)),
               ),

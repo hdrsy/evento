@@ -92,7 +92,6 @@ class AddFriendsController extends GetxController {
   }
 
   void _handleDataSuccess(Map<String, dynamic> data) {
-    print("page is $pageId, data is $data");
     var newItems = (data["result"]['data'] as List)
         .map((jsonItem) => AddFriendsModel.fromJson(jsonItem))
         .toList();

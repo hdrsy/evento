@@ -33,12 +33,9 @@ class VenueController extends PaginationController<Venue> {
     itemList.addAll(
         categoryListJson.map((jsonItem) => Venue.fromJson(jsonItem)).toList());
 
-    print("length of data ${itemList[3].venueAlbums.length}");
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }
-    print("page id :$pageId");
-    print("last page id :$lastPageId");
     pageId++;
     isLoading.value = false;
     isLoadingMoreData.value = false;

@@ -19,10 +19,7 @@ class BookingDetailesInEventForOrganizerController extends GetxController {
         .toList();
 
     // // Use the bookings list as needed
-    bookings.forEach((booking) {
-      print(
-          'Booking ID: ${booking.id}, Name: ${booking.firstName} ${booking.lastName}');
-    });
+    bookings.forEach((booking) {});
     createTicketModelsFromEventBookings(bookings);
 
     super.onInit();

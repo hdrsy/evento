@@ -22,8 +22,6 @@ Future<String> pushyRegister() async {
 
 @pragma('vm:entry-point')
 void backgroundNotificationListener(Map<String, dynamic> data) {
-  // Print notification payload data
-
   // Notification title
   String notificationTitle = data['title'];
 

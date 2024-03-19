@@ -15,7 +15,6 @@ class AddFriendsModel {
       required this.friendRequestStatus});
 
   factory AddFriendsModel.fromJson(Map<String, dynamic> json) {
-    print(json["image"]);
     return AddFriendsModel(
       id: json['id'] ?? 0,
       friendRequestStatus: json['friend_request_status_with_auth_user'],

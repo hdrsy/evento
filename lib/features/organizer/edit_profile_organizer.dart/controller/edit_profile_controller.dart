@@ -50,7 +50,6 @@ class EditProfileOrganizerController extends GetxController {
     otherCatogery = TextEditingController(text: profileModel.otherCategory);
     getCategoriesList();
     getSelectedGategories();
-    print("the states:${profileModel.state}");
     isLoading = false.obs;
     foldersModel = <FolderModel>[].obs;
     formstate = GlobalKey<FormState>();
@@ -128,7 +127,6 @@ class EditProfileOrganizerController extends GetxController {
         'category_ids': selectedCategories
       };
 
-      print(dataRequest);
       Map<String, File> fileMap = {};
       if (isProfileSelected.value) {
         fileMap['profile'] = profileImage!;
@@ -136,7 +134,6 @@ class EditProfileOrganizerController extends GetxController {
       if (isCoverSelected.value) {
         fileMap['cover'] = coverImage!;
       }
-      print(fileMap);
       if (foldersModel.isNotEmpty) {
         for (var i = 0; i < foldersModel.length; i++) {
           dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
@@ -152,29 +149,23 @@ class EditProfileOrganizerController extends GetxController {
               } else {
                 // Handle the case where video compression fails
                 // For example, you might choose to skip this file, log an error, or use the original file
-                print(
-                    "Video compression failed for file: ${foldersModel[i].mediaList[j].media.path}");
               }
             }
           }
         }
       }
-      // print("before sending request ");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.organizationUpdateProfile,
           method: "POST",
           token: token,
           data: dataRequest,
           files: fileMap);
-      print("the response is :$response");
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         isLoading.value = false;
-        print("object");
       } else {
         isLoading.value = false;
-        print(handlingResponse);
         prefService.remove('userInfo');
         Get.offAllNamed('/home');
       }
@@ -190,16 +181,13 @@ class EditProfileOrganizerController extends GetxController {
   }
 
   editMediaInsideFolder(int folderIndex, List<MediaModel> media) {
-    print("inside media");
     foldersModel[folderIndex].mediaList.clear();
     foldersModel[folderIndex].mediaList.addAll(media);
     Get.back();
-    print("editing complete");
   }
 
   deleteFolder(int folderIndex) {
     foldersModel.removeAt(folderIndex);
-    print("inside deleteFolder");
   }
 
   onPressCreateFolder() {

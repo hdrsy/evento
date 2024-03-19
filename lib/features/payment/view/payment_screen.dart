@@ -182,9 +182,7 @@ class TabBarSection extends StatelessWidget {
         length: 2,
         child: Column(children: [
           TabBar(
-              onTap: (value) {
-                print(value);
-              },
+              onTap: (value) {},
               labelColor: customColors.primary,
               unselectedLabelColor: customColors.grayIcon,
               labelStyle: customTextStyle.titleSmall.override(

@@ -14,6 +14,10 @@ import 'package:easy_localization/easy_localization.dart';
 // ignore: must_be_immutable
 class Step1Screen extends StatelessWidget {
   Step1Screen({super.key});
+  Widget g() {
+    return buildButton();
+  }
+
   Step1Controller step1controller = Get.find();
   @override
   Widget build(BuildContext context) {

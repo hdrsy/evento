@@ -183,7 +183,6 @@ class BookNowController extends GetxController {
   }
 
   changeSelectedCalss(Class newClass, int index) {
-    print("the selected class is :${newClass.interests.length}");
     //// check if there no class selecte yet
     if (ticketList[index].selectedClass == null) {
       ticketList[index].selectedClass = newClass;
@@ -232,7 +231,6 @@ class BookNowController extends GetxController {
           data: data);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print("the response : $handlingResponse");
       if (handlingResponse is ErrorResponse) {
         ticketList[ticketId].errorMessage.value =
             handlingResponse.getErrorMessages();
@@ -241,8 +239,6 @@ class BookNowController extends GetxController {
         int totalAmount = handlingResponse["event_price_with_discount"];
         int appTaxes = handlingResponse["app_taxes"];
         int mtnTaxes = handlingResponse["mtn_taxes"];
-        print("theee :$appTaxes");
-        print("theee :$mtnTaxes");
         Get.toNamed('/PaymentScreenInBooking', arguments: [
           eventDetailsModel,
           [ticketList[ticketId]],

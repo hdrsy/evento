@@ -231,7 +231,6 @@ class FullTicketInfo extends StatelessWidget {
                             bookNowController.getCouponListForTicket(index),
                         onChanged: (val) {
                           if (val != null) {
-                            print("new val is:$val");
                             bookNowController.changeSelectedCouponInTicket(
                                 val, index);
                           }

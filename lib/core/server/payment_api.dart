@@ -62,10 +62,6 @@ class PaymentApi {
         // Sending the multipart request and getting the response.
         var streamedResponse = await request.send();
         response = await http.Response.fromStream(streamedResponse);
-        print("response bid mmm:$response");
-        print("response bid mmm :${response.statusCode}");
-
-        // print(response.body);
       } else {
         // Standard handling for non-file-upload requests (GET, POST, etc.).
         Uri url = Uri.parse(targetRout);
@@ -85,13 +81,9 @@ class PaymentApi {
             throw UnimplementedError('HTTP method $method not supported');
         }
       }
-      print(response.statusCode);
-      print(response.body);
 
       // Decoding the JSON response.
       Map responseBody = jsonDecode(response.body);
-      print("response bid :$responseBody");
-      print("response bid :${response.statusCode}");
       // Handling response based on status code.
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (responseBody['status'] == true) {
@@ -106,7 +98,6 @@ class PaymentApi {
         return Left("SomeThing Wrong!!");
       }
     } catch (e) {
-      print(e);
       // Catching exceptions and returning as error responses.
       return Left("SomeThing Wrong !. Try again later ");
     }

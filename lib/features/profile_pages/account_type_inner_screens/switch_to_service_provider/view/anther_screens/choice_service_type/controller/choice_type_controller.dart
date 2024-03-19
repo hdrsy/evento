@@ -48,7 +48,6 @@ class ChoiceTypeController extends GetxController {
                 .toLowerCase()
                 .contains(searchController.text.toLowerCase()))
             .toList());
-        print("inisde the timer ");
       } else {
         // Optionally handle empty search field case
         // _fetchData("");

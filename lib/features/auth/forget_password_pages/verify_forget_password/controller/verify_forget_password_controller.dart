@@ -62,7 +62,6 @@ class VerifyForgetPasswordController extends GetxController {
           method: "Post",
           data: {"code": pin.text, "phone_number": phone});
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(pin.text);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
       } else {

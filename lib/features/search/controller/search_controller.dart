@@ -34,7 +34,6 @@ class SearchPageController extends GetxController {
     _debounce = Timer(const Duration(milliseconds: 500), () {
       if (searchField.text.isNotEmpty) {
         onPressSearch(searchField.text);
-        print("inisde the timer ");
       } else {
         // Optionally handle empty search field case
         _fetchData("");
@@ -60,7 +59,6 @@ class SearchPageController extends GetxController {
   bool _isSavingToCache = false;
 
   void addNewEventToCache(SearchModel searchModel) async {
-    print("in add new");
     if (_isSavingToCache) return; // Prevent concurrent access
     _isSavingToCache = true;
     if (!recentSearch.any((item) => item.id == searchModel.id)) {
@@ -74,16 +72,13 @@ class SearchPageController extends GetxController {
       Map<String, dynamic> resultMap = {
         'result': recentSearch.map((item) => item.toJson()).toList()
       };
-      print("result of search $resultMap");
       // String jsonList = jsonEncode(resultMap);
       await cacheService.cacheObject<Map<String, dynamic>>(
         object: resultMap,
         cacheKey: cacheKey,
         serializeFunction: (string) => string,
       );
-    } else {
-      print("data rejected");
-    }
+    } else {}
   }
 
   void _fetchData(String query) async {
@@ -116,7 +111,6 @@ class SearchPageController extends GetxController {
     var results = (data['result'] as List)
         .map((jsonItem) => SearchModel.fromJson(jsonItem))
         .toList();
-    print(results);
     _updateSearchResults(results);
   }
 
@@ -148,10 +142,8 @@ class SearchPageController extends GetxController {
         // Ensure jsonItem is a Map<String, dynamic> before converting
         return SearchModel.fromJson(jsonItem);
       }).toList();
-      print("filteredResults:$filteredResults");
       _updateSearchResults(filteredResults);
     } else {
-      print("elese");
       // Handle the case where filte
       //redData is not a List<dynamic>
       // For example, log an error or show an error message

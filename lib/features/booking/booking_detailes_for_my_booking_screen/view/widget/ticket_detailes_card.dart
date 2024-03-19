@@ -1,4 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
 import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
@@ -10,7 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 class TicketDetailesCardForMyBooking extends StatelessWidget {
   const TicketDetailesCardForMyBooking(
       {super.key, required this.ticketModel, required this.modelIndex});
-  final Booking ticketModel;
+  final UserBooking ticketModel;
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
@@ -119,26 +120,23 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SinglePriceElement(
+                        title: ticketModel.classType,
+                        subTitle: ticketModel.classTicketPrice.toString(),
+                      ),
                       ...List.generate(
                           ticketModel.amenities.length,
                           (index) => SinglePriceElement(
                                 title: ticketModel.amenities[index].title,
-                                subTitle: ticketModel
-                                    .amenities[index].pivot.price
+                                subTitle: ticketModel.event.amenities
+                                    .where((element) =>
+                                        element.id ==
+                                        ticketModel.amenities[index].id)
+                                    .first
+                                    .pivot
+                                    .price
                                     .toString(),
                               )),
-                      Divider(
-                        thickness: 1,
-                        indent: 50,
-                        endIndent: 50,
-                        color: customColors.secondary,
-                      ),
-                      // SinglePriceElement(
-                      //           title: ticketModel.,
-                      //           subTitle: ticketModel
-                      //               .amenities[index].pivot.price
-                      //               .toString(),
-                      //         )
                     ].divide(const SizedBox(height: 8)),
                   ),
                 ),

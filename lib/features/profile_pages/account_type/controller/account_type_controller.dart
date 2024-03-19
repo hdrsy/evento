@@ -26,7 +26,6 @@ class AccountTypeController extends GetxController {
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {
-      print(handlingResponse);
       whenSignInSuccess(handlingResponse);
     }
 

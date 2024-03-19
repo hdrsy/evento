@@ -42,55 +42,66 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
       ),
       body: SizedBox(
         width: double.infinity,
-        child: SingleChildScrollView(
-          padding: padding(16, 24, 0, 24),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Date Of Event",
-                    style: customTextStyle.bodyMedium,
-                  ).tr(),
-                ],
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              EventInfoCard2(),
-              const SizedBox(
-                height: 16,
-              ),
-              ...List.generate(
-                  bookingDetailesController.ticketList.upcomingBookings.length,
-                  (index) => TicketDetailesCardForMyBooking(
-                        ticketModel: bookingDetailesController
-                            .ticketList.upcomingBookings[index],
-                        modelIndex: index,
-                      )),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      "Your booking has been completed",
-                      style: customTextStyle.titleMedium,
-                    ).tr(),
-                    Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                        child: BuildButton2()),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-        ),
+        child: GetBuilder<BookingDetailesForMyBookingController>(
+            builder: (controller) {
+          return controller.isLoading.value
+              ? Center(
+                  child: CircularProgressIndicator(color: customColors.primary),
+                )
+              : controller.userBookings.isEmpty
+                  ? Center()
+                  : SingleChildScrollView(
+                      padding: padding(16, 24, 0, 24),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Date Of Event",
+                                style: customTextStyle.bodyMedium,
+                              ).tr(),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          EventInfoCard2(),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ...List.generate(
+                              bookingDetailesController.userBookings.length,
+                              (index) => TicketDetailesCardForMyBooking(
+                                    ticketModel: bookingDetailesController
+                                        .userBookings[index],
+                                    modelIndex: index,
+                                  )),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 30, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  "Your booking has been completed",
+                                  style: customTextStyle.titleMedium,
+                                ).tr(),
+                                Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 12, 0, 0),
+                                    child: BuildButton2()),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                        ],
+                      ),
+                    );
+        }),
       ),
     );
   }

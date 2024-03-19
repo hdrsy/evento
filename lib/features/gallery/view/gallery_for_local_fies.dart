@@ -90,17 +90,14 @@ class GalleryForLocalScreen extends StatelessWidget {
   void handleClick(String value) {
     switch (value) {
       case 'Edit Folder Name':
-        print('Edit Folder Name clicked');
         // Implement your logic
         showEditFolderName!();
         break;
       case 'Edit Media in Folder':
-        print('Edit Media in Folder clicked');
         // Implement your logic
         editFolderMedia!();
         break;
       case 'Delete Folder':
-        print('Delete Folder clicked');
         // Implement your logic
         deleteFolder!();
 

@@ -151,7 +151,6 @@ class SeeAllController extends GetxController {
         distances[i] = (await locationService.calculateDistance(
                 itemList[i].venue!.lang, itemList[i].venue!.long))
             .obs;
-        print("event id $i distance is ${distances[i].value}");
       }
     }
     update();

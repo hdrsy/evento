@@ -18,7 +18,6 @@ class ReelsController extends PaginationController<ReelModel> {
   static Future<Either<ErrorResponse, Map<String, dynamic>>> _fetchData(
       String url, int page, Map<String, dynamic> additionalParams) async {
     String token = await prefService.readString("token");
-    print("page id :$page");
     String apiUrl =
         "${isGuset ? ServerConstApis.getReelsforGuest : ServerConstApis.getReels}?page=$page";
 
@@ -33,12 +32,7 @@ class ReelsController extends PaginationController<ReelModel> {
   @override
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
-    print(categoryListJson);
-    print(
-        "reels len : ${categoryListJson.length} , ${handlingResponse['reels']['current_page']}");
-    print("reeels response :$handlingResponse");
     lastPageId = handlingResponse['reels']['last_page'];
-    print("lastPageId is :$lastPageId");
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());
@@ -78,12 +72,10 @@ class ReelsController extends PaginationController<ReelModel> {
   playNextVideo(int userIndex, int videoIndex) {
     if (innerPageController.page!.round() + 1 <
         itemList[userIndex].videos.length) {
-      print("inside next video");
       innerPageController.nextPage(
           duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
     } else if (innerPageController.page!.round() + 1 ==
         itemList[userIndex].videos.length) {
-      print("inside next user");
       pageController.nextPage(
           duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
@@ -91,7 +83,6 @@ class ReelsController extends PaginationController<ReelModel> {
 
   prevVideoInSameUser(int userIndex, int videoIndex) {
     if (innerPageController.page!.round() + 1 > 1) {
-      print("inside next video");
       innerPageController.previousPage(
           duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }

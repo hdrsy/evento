@@ -97,7 +97,6 @@ class PaymentController extends GetxController {
           method: "post",
           token: token,
           data: data);
-      // print("response for invoice is:$response");
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is String) {
         errorMessageInInvoice.value = handlingResponse;
@@ -107,8 +106,6 @@ class PaymentController extends GetxController {
         startTimer();
         invoiceId.value = handlingResponse['0']['Receipt']['Invoice'];
         bookingIds = handlingResponse["1"];
-        print("invoice id:$invoiceId");
-        // whenBookingSuccefly(handlingResponse);
       }
       isLoadingPhone.value = false;
     }
@@ -124,10 +121,12 @@ class PaymentController extends GetxController {
           : "963${phone.text}",
       "code": otp.text,
       "ids": bookingIds,
-      "promocode_id": "",
       "event_id": eventDetailsModel.id
     };
-    print("the request data is :${data}");
+    if (booking.containsKey('promo_code_id')) {
+      data['promo_code_id'] = booking['promo_code_id'];
+    }
+
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
@@ -135,7 +134,6 @@ class PaymentController extends GetxController {
         method: "post",
         token: token,
         data: data);
-    print("response for invoice is:$response");
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
     if (handlingResponse is ErrorResponse) {
       isIvoiceCreated.value = false;
@@ -148,7 +146,6 @@ class PaymentController extends GetxController {
       timer!.cancel();
       otp.clear();
     } else {
-      print("success create:$handlingResponse");
       paidSccuffly = true;
       Get.offAndToNamed('/BookingDetailesScreen',
           arguments: [eventDetailsModel, ticketList]);

@@ -12,7 +12,6 @@ class EventsList extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: GetBuilder<MapController>(builder: (context) {
-        print("is the search active:${mapController.isSearchActive.value}");
         return CarouselSlider(
           items: [
             ...List.generate(

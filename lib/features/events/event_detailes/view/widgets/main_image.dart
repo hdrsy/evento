@@ -19,7 +19,6 @@ class MainImage extends StatelessWidget {
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
-    print("videos lenght ${videosUrl.length}");
     return Stack(
       children: [
         SizedBox(
@@ -53,7 +52,6 @@ class MainImage extends StatelessWidget {
                   } else {
                     // Adjust index for videosUrl
                     int videoIndex = index - imgUrl.length;
-                    print("vv:${videosUrl[videoIndex]}");
                     // Handle video display
                     return GestureDetector(
                       onTap: () async {

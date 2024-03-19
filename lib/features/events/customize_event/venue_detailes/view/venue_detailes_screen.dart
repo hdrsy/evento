@@ -130,8 +130,6 @@ class TabBarGalleryAndDetailes extends StatelessWidget {
                         ...List.generate(
                             venueDetailesController.venue.venueAlbums.length,
                             (index) {
-                          print(
-                              "the album : ${venueDetailesController.venue.venueAlbums.length}");
                           return VenueServicesCard(
                             album: venueDetailesController
                                 .venue.venueAlbums[index],

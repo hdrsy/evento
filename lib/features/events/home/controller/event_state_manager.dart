@@ -12,7 +12,6 @@ class EventStateManager {
     } else {
       _allEvents.add(event);
     }
-    print("add or update new item success");
     _allEvents.refresh(); // Refresh the list to notify listeners
   }
 

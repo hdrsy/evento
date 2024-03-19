@@ -39,8 +39,6 @@ class ReelModel {
   });
 
   factory ReelModel.fromJson(Map<String, dynamic> json) {
-    // Map<String,dynamic> json= removeDuplicateKeysAr(oldJson);
-    print("evnt in reel:${json['event']}");
     return ReelModel(
       id: json['id'] ?? 0,
       eventId: json['event_id'],

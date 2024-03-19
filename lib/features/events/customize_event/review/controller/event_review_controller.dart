@@ -99,15 +99,12 @@ class EventReviewController extends GetxController {
             .toList();
 
     for (int i = 0; i < serviceProviderIds.length; i++) {
-      print(serviceProviderIds[i]);
       if (serviceProviderIds[i] != 0) {
         dataRequest['service_provider_id[$i]'] =
             serviceProviderIds[i].toString();
       }
     }
 
-    // dataRequest['service_provider_id'] = serviceProviderIds;
-    print(dataRequest.containsKey('service_provider_id'));
     Map<String, File> fileMap = {};
     for (int i = 0; i < dateTimeController.media.length; i++) {
       fileMap['images[$i]'] = dateTimeController.media[i];

@@ -32,7 +32,6 @@ class OrganizationEvent {
   });
 
   factory OrganizationEvent.fromJson(Map<String, dynamic> json) {
-    print("event category:${json['categories_events']}");
     List<String> imageList = [];
 
     if (json['images'] != null) {

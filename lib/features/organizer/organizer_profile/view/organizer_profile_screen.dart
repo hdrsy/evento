@@ -403,7 +403,6 @@ class MyTabBarWidget extends StatelessWidget {
 
   Widget _buildGalleryTab(BuildContext context) {
     final OrganizerProfileController organizerProfileController = Get.find();
-    print(organizerProfileController.organizerProfileModel.albums);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(

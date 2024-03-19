@@ -69,7 +69,6 @@ class VenueDetailesCard extends StatelessWidget {
       alignment: const AlignmentDirectional(1, 1),
       child: ButtonWidget(
         onPressed: () {
-          print('Button pressed ...');
           Get.toNamed('/SeeLocation', arguments: [
             venueDetailesController.venue.latitude,
             venueDetailesController.venue.longitude

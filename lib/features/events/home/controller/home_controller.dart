@@ -300,8 +300,6 @@ class FeaturedListController extends PaginationController<EventModel> {
     for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
-// ll.map((e) => eventStateManager.addOrUpdateEvent(e));
-    print("the length of list is :${eventStateManager.allEvents.length}");
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());

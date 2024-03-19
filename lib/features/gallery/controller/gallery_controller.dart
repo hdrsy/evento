@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 
 class GalleryItem {
@@ -40,7 +39,6 @@ class GalleryController extends GetxController {
         mixedItems.add(GalleryItem(url: videos[videoIndex], isVideo: true));
       }
     }
-    print("mixed lenght is :${mixedItems.length}");
     return mixedItems;
   }
 }

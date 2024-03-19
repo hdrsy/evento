@@ -25,7 +25,6 @@ Widget commentShareLike(int modelIndex) {
               children: [
                 ToggleIcon(
                   onPressed: () async {
-                    print("dddddd");
                     reelsController.followOrUnFollowEvent(
                         reelsController.itemList[modelIndex].id, modelIndex);
                   },

@@ -38,7 +38,6 @@ class AchivmentController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
-      print(e);
       isLoading.value = false;
       isError.value = true;
     }

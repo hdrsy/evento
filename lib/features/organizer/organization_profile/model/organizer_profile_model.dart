@@ -38,7 +38,6 @@ class OrganizationProfileModel {
       required this.albums});
 
   factory OrganizationProfileModel.fromJson(Map<String, dynamic> json) {
-    print(json['followers_count']);
     return OrganizationProfileModel(
       id: json['id'] ?? 0,
       followersCount: json['followers_count'] ?? 0,
@@ -91,7 +90,6 @@ class OrganizationProfileAlbum {
       try {
         return List<String>.from(jsonDecode(imagesJson));
       } catch (e) {
-        print('Error decoding images JSON: $e');
         return [];
       }
     }
@@ -103,7 +101,6 @@ class OrganizationProfileAlbum {
       try {
         return List<String>.from(jsonDecode(imagesJson));
       } catch (e) {
-        print('Error decoding images JSON: $e');
         return [];
       }
     }
@@ -160,7 +157,6 @@ class OrganizationProfileEvent {
 
   factory OrganizationProfileEvent.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("event category:${json['categories_events']}");
     List<String> imageList = [];
 
     if (json['images'] != null) {

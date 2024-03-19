@@ -161,7 +161,6 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         },
 
         itemClick: (Prediction prediction) {
-          print("the data is:${prediction.lat}");
           controller.text = prediction.description ?? "";
           controller.selection = TextSelection.fromPosition(
               TextPosition(offset: prediction.description?.length ?? 0));

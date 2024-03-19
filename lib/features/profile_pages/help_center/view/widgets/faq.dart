@@ -48,7 +48,6 @@ class _FAQPageState extends State<FAQPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
             children: currentQuestions.entries
                 .map((entry) {
-                  print(entry.key);
                   return question(context, entry.key, entry.value);
                 })
                 .toList()

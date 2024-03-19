@@ -156,9 +156,7 @@ class CouponsWidget extends StatelessWidget {
                                           ].divide(const SizedBox(height: 5)),
                                         ),
                                         ButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
+                                          onPressed: () {},
                                           text: "Redeem",
                                           options: ButtonOptions(
                                             width: 120,

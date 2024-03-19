@@ -83,7 +83,6 @@ class _SelectStates extends State<SelectStates> {
         Get.find();
     _selectedValues
         .addAll(editProfileOrganizerController.profileModel.state.split(', '));
-    print("the states:${_selectedValues}");
     super.initState();
   }
 
@@ -155,10 +154,6 @@ class _SelectCategory extends State<SelectCategory> {
             .add(matchingCategory.categoryId);
       }
     });
-
-    print(newSelections);
-    print(
-        "The selected values: ${editProfileOrganizerController.selectedCategories}");
   }
 
   @override

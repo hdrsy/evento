@@ -46,8 +46,6 @@ class BookingO {
   });
 
   factory BookingO.fromJson(Map<String, dynamic> json) {
-    print("booking detailes:${json}");
-
     return BookingO(
       id: json['id'] ?? 0,
       userId: json['user_id'] ?? 0,

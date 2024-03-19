@@ -45,7 +45,6 @@ class OrganizerProfileController extends GetxController {
           token: token);
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         isError.value = true;
         errorMessage.value = handlingResponse.getErrorMessages();
@@ -82,8 +81,6 @@ class OrganizerProfileController extends GetxController {
         return OrganizerFollowersModel.fromJson(jsonItem);
       }).toList());
       updateFriendRequestStatus(rganizerFollowers);
-      print("organizer followers id:$rganizerFollowers");
-      // organizerProfileModel = OrganizerProfileModel.fromJson(interestsJson);
       update();
     }
     isLoadingFollowers.value = false;

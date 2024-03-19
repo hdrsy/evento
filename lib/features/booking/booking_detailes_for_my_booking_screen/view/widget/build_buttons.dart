@@ -51,7 +51,7 @@ class BuildButton2 extends StatelessWidget {
                 context: context,
                 widget: ReviewEventWidget(
                   ratingTarget: tr("Your Event"),
-                  id: bookingDetailesController.eventDetailsModel.id,
+                  id: bookingDetailesController.userBookings[0].event.id,
                   idKey: "event_id",
                   url: ServerConstApis.reviewEvent,
                 ),

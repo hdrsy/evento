@@ -39,7 +39,6 @@ class EventWrapper {
   });
 
   factory EventWrapper.fromJson(Map<String, dynamic> json) {
-    print(json['event']);
     return EventWrapper(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,

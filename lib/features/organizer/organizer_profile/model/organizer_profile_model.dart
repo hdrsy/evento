@@ -91,7 +91,6 @@ class OrganizerProfileAlbum {
       try {
         return List<String>.from(jsonDecode(imagesJson));
       } catch (e) {
-        print('Error decoding images JSON: $e');
         return [];
       }
     }
@@ -103,7 +102,6 @@ class OrganizerProfileAlbum {
       try {
         return List<String>.from(jsonDecode(imagesJson));
       } catch (e) {
-        print('Error decoding images JSON: $e');
         return [];
       }
     }
@@ -172,7 +170,6 @@ class OrganizerProfileEvent {
 
   factory OrganizerProfileEvent.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("ddddddddddddd$json");
     return OrganizerProfileEvent(
       id: json['id'] ?? 0,
       organizerId: json['organizer_id'] ?? 0,

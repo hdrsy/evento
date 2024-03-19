@@ -52,7 +52,6 @@ class MapController extends GetxController {
 
   void onApplyFilters(Map<String, dynamic> data) async {
     final d = await filter(data);
-    print(d);
     Get.back();
     var eventModels =
         d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
