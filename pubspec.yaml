@@ -107,7 +107,6 @@ flutter_native_splash:
   ios: true
   image: "assets/images/newsplash.png"
   color: "#6E429A"
-  android_gravity: fill
   android_12:
     image: "assets/images/newsplash.png"
     color: "#6E429A"

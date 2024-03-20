@@ -50,7 +50,6 @@ void main() async {
 
   // Set custom notification icon (Android)
   Pushy.setNotificationIcon('@mipmap/launcher_icon');
-
   // Listen for push notifications received
   Pushy.setNotificationListener(backgroundNotificationListener);
   Pushy.setNotificationClickListener(notificationClickListener);

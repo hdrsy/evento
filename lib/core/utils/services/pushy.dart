@@ -1,3 +1,4 @@
+import 'package:evento/core/utils/services/notification_service.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
@@ -21,7 +22,7 @@ Future<String> pushyRegister() async {
 // After the import statements, and outside any Widget class (top-level)
 
 @pragma('vm:entry-point')
-void backgroundNotificationListener(Map<String, dynamic> data) {
+void backgroundNotificationListener(Map<String, dynamic> data) async {
   // Notification title
   String notificationTitle = data['title'];
 
@@ -31,7 +32,6 @@ void backgroundNotificationListener(Map<String, dynamic> data) {
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
   Pushy.notify(notificationTitle, notificationText, data);
-
   isThereNotification.value = true;
   // Clear iOS app badge number
   Pushy.clearBadge();

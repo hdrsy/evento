@@ -103,7 +103,7 @@ class ReelsController extends PaginationController<ReelModel> {
       itemList[modelIndex].likedByUser = true;
       itemList[modelIndex].likesCount += 1;
       update();
-    } else if (isDoneSuccefully == "like deleted successfully") {
+    } else if (isDoneSuccefully == "Like deleted successfully") {
       itemList[modelIndex].likedByUser = false;
 
       itemList[modelIndex].likesCount -= 1;
