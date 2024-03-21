@@ -62,7 +62,7 @@ class StepsController extends GetxController {
     if (status.isGranted) {
       StepsPageController stepsPageController = Get.find();
 
-      stepsPageController.pageIdex.value = 5;
+      stepsPageController.pageIdex.value = 4;
       return true;
     } else {
       return false;

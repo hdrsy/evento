@@ -35,7 +35,7 @@ class StepsText extends StatelessWidget {
             ),
           ),
           const TextSpan(
-            text: "8",
+            text: "7",
             style: TextStyle(
               color: Color(0xFF4B39EF),
             ),

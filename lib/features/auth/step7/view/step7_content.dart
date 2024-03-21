@@ -65,7 +65,7 @@ class Step7Content extends StatelessWidget {
                   .add(step7controller.allInterestItem[i]);
             }
           }
-          stepsPageController.pageIdex.value = 8;
+          stepsPageController.pageIdex.value = 7;
         },
         text: tr("Continue"),
         options: ButtonOptions(

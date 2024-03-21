@@ -1,3 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/colors/app_colors.dart';
+import 'package:evento/core/shared/functions/open_link.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
@@ -14,67 +19,116 @@ class ContactUs extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          contactWidget(context, "Customer Service",
+              Icons.miscellaneous_services_sharp, ""),
+          contactWidget(context, "WhatsApp", 'assets/images/WhatsApp.png', ""),
+          contactWidget(context, "Website", Icons.language_sharp, ""),
+          contactWidget(context, "Facebook", Icons.facebook, ""),
           contactWidget(
-              context, "Customer Service", Icons.miscellaneous_services_sharp),
-          contactWidget(context, "WhatsApp", 'assets/images/WhatsApp.png'),
-          contactWidget(context, "Website", Icons.language_sharp),
-          contactWidget(context, "Facebook", Icons.facebook),
-          contactWidget(context, "Twitter", 'assets/images/Twitter_Circled.png'),
-          contactWidget(context, "Instagram", 'assets/images/Instagram.png'),
+              context, "Twitter", 'assets/images/Twitter_Circled.png', ""),
+          contactWidget(
+              context, "Instagram", 'assets/images/Instagram.png', ""),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  tr("powered by "),
+                  style: customTextStyle.bodyMedium
+                      .copyWith(fontSize: 16, color: customColors.primaryText),
+                ),
+                InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () {
+                      _launchURL();
+                    },
+                    child: Text(
+                      'HDR',
+                      style: customTextStyle.bodyMedium.copyWith(
+                          fontSize: 16, color: customColors.primaryText),
+                    ))
+              ],
+            ),
+          )
         ].divide(const SizedBox(height: 20)),
       ),
     );
   }
 
-  Row contactWidget(BuildContext context, String title, var icon) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Expanded(
-          child: Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: customColors.primaryBackground,
+  void _launchURL() async {
+    final Uri _url = Uri.parse('https://www.hdragency.com/');
+
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  Widget contactWidget(
+      BuildContext context, String title, var icon, String link) {
+    return GestureDetector(
+      onTap: () async {
+        await openLink(link);
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: customColors.primaryBackground,
+                ),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  icon is IconData
-                      ? Icon(
-                          icon,
-                          color: customColors.primary,
-                          size: 20,
-                        )
-                      : ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    icon is IconData
+                        ? Icon(
                             icon,
-                            width: 20,
-                            height: 20,
-                            fit: BoxFit.cover,
+                            color: AppColors.lightPrimary,
+                            size: 20,
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              icon,
+                              width: 20,
+                              height: 20,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                  Text(
-                    title,
-                    style: customTextStyle.displaySmall.override(
-                      fontFamily: 'Nunito',
-                      color: customColors.primaryText,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      useGoogleFonts: true,
+                    SizedBox(
+                      width: 5,
                     ),
-                  ),
-                ].divide(const SizedBox(width: 5)),
+                    SizedBox(
+                      // width: double. ,
+                      child: Text(
+                        title,
+                        style: customTextStyle.displaySmall.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.primaryText,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          useGoogleFonts: true,
+                        ),
+                      ),
+                    ),
+                  ].divide(const SizedBox(width: 5)),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

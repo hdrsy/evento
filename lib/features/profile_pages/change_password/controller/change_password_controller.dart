@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/core/utils/services/snackbar_manager.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
@@ -53,5 +54,11 @@ class ChangePasswordController extends GetxController {
 
   whenGetDataSuccess(handlingResponse) {
     Get.back();
+    SnackbarManager.showSnackbar(
+      "Online",
+      "Your password has been changed",
+      icon: Icon(Icons.password_outlined, color: customColors.primaryText),
+      backgroundColor: customColors.primaryBackground,
+    );
   }
 }

@@ -1,3 +1,6 @@
+import 'package:evento/core/colors/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../../../../main.dart';
@@ -29,12 +32,19 @@ class _FAQPageState extends State<FAQPage> {
           children: allQuestions.keys
               .map((category) => ChoiceChip(
                     showCheckmark: false,
+                    backgroundColor: customColors.primaryBackground,
                     selectedColor: customColors.primary,
                     labelStyle: customTextStyle.bodyMedium.copyWith(
                         color: selectedCategory == category
                             ? customColors.info
                             : customColors.secondaryText),
-                    label: Text(category).tr(),
+                    label: Text(
+                      category,
+                      style: TextStyle(
+                          color: selectedCategory == category
+                              ? AppColors.darkPrimaryText
+                              : customColors.primaryText),
+                    ).tr(),
                     selected: selectedCategory == category,
                     onSelected: (_) => updateQuestions(category),
                   ))
@@ -56,8 +66,42 @@ class _FAQPageState extends State<FAQPage> {
                 )),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                tr("powered by "),
+                style: customTextStyle.bodyMedium
+                    .copyWith(fontSize: 16, color: customColors.primaryText),
+              ),
+              InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    _launchURL();
+                  },
+                  child: Text(
+                    'HDR',
+                    style: customTextStyle.bodyMedium.copyWith(
+                        fontSize: 16, color: customColors.primaryText),
+                  ))
+            ],
+          ),
+        )
       ],
     );
+  }
+}
+
+void _launchURL() async {
+  final Uri _url = Uri.parse('https://www.hdragency.com/');
+
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
   }
 }
 
@@ -123,7 +167,7 @@ Row question(BuildContext context, String question, String answer) {
                   ),
                   theme: ExpandableThemeData(
                     tapHeaderToExpand: true,
-                    tapBodyToExpand: false,
+                    tapBodyToExpand: true,
                     tapBodyToCollapse: false,
                     headerAlignment: ExpandablePanelHeaderAlignment.center,
                     hasIcon: true,

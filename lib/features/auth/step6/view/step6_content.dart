@@ -83,7 +83,7 @@ class Step6Content extends StatelessWidget {
       child: ButtonWidget(
         onPressed: () async {
           StepsPageController stepsPageController = Get.find();
-          stepsPageController.pageIdex.value = 7;
+          stepsPageController.pageIdex.value = 6;
         },
         text: tr("Continue"),
         options: ButtonOptions(

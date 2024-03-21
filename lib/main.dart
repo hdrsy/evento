@@ -98,19 +98,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-
-Future<String> getTergetRout() async {
-  bool tokenState = await prefService.isContainKey('token');
-  if (tokenState) {
-    user = await UserInfo.getUserInfo();
-    if (user != null) {
-//  PusherService.initPusher();
-//  await NotificationService().init();
-      return '/home';
-    } else {
-      return '/';
-    }
-  } else {
-    return '/';
-  }
-}

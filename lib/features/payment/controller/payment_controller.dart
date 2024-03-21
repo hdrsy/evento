@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/payment_api.dart';
 import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
+import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/booking/book_now/controller/book_now_controller.dart';
 import 'package:evento/features/booking/book_now/model/ticket_model.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
@@ -145,6 +149,43 @@ class PaymentController extends GetxController {
       _seconds = 00.obs;
       timer!.cancel();
       otp.clear();
+
+      Get.dialog(AlertDialog(
+          backgroundColor: customColors.secondaryBackground,
+          title: Text(
+                  "Sorry, an error has occurred. Please ensure the possible reasons and try again later:",
+                  style: customTextStyle.titleSmall
+                      .copyWith(color: customColors.primaryText))
+              .tr(),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ErrorMessages(
+                message: "The information entered",
+              ),
+              ErrorMessages(
+                message: "Insufficient balance available",
+              ),
+              ErrorMessages(
+                message: "No internet connection",
+              )
+            ],
+          ),
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Text(
+                  "Ok",
+                  style: customTextStyle.titleSmall.override(
+                    fontFamily: 'Nunito',
+                    color: customColors.primaryText,
+                    fontSize: 14.sp,
+                    useGoogleFonts: true,
+                  ),
+                ))
+          ]));
     } else {
       paidSccuffly = true;
       Get.offAndToNamed('/BookingDetailesScreen',

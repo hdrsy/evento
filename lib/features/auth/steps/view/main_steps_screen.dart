@@ -2,7 +2,6 @@ import '../../../../core/responsive/responsive.dart';
 import '../../step1/view/step1_screen.dart';
 import '../../step2/view/step2_content.dart';
 import '../../step3/view/step3_content.dart';
-import '../../step4/view/step4_content.dart';
 import '../../step5/view/step5_content.dart';
 import '../../step6/view/step6_content.dart';
 import '../../step7/view/step7_content.dart';
@@ -24,7 +23,7 @@ class MainStepsScreen extends StatelessWidget {
       () => Scaffold(
           backgroundColor: customColors.secondaryBackground,
           appBar: buildAppBarWithLineIndicatorincenter(
-              pageController.pageIdex.value / 8, pageController.pageIdex.value),
+              pageController.pageIdex.value / 7, pageController.pageIdex.value),
           body: Padding(
             padding: padding(0, 24, 24, 24),
             child: SingleChildScrollView(
@@ -55,15 +54,14 @@ Widget getCenterContent(int index) {
     case 3:
       return Step3Content();
     case 4:
-      return Step4Content();
-    case 5:
       return Step5Content();
-    case 6:
+    case 5:
       return Step6Content();
-    case 7:
+    case 6:
       return Step7Content();
-    case 8:
+    case 7:
       return Step8Content();
+
     default:
       return Step1Screen();
   }

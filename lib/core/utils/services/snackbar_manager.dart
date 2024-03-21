@@ -27,7 +27,7 @@ class SnackbarManager {
 
       margin: const EdgeInsets.all(10),
       borderRadius: 10,
-      duration: const Duration(seconds: 1), // Adjust duration as needed
+      duration: const Duration(seconds: 2), // Adjust duration as needed
       isDismissible: true,
       dismissDirection: DismissDirection.horizontal,
       forwardAnimationCurve: Curves.easeOutBack,
