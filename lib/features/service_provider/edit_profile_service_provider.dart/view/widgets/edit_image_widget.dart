@@ -4,7 +4,6 @@ import '../../controller/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class EditImageWidget extends StatelessWidget {
   EditImageWidget({super.key});

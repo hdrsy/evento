@@ -3,7 +3,6 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
-import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
 import 'package:evento/main.dart';
 
 import '../../../../core/utils/services/pdf_service.dart';
@@ -56,7 +55,7 @@ class BookingDetailesForMyBookingController extends GetxController {
       // errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       List<dynamic> interestsJson = handlingResponse['bookings'];
-
+      print("booo${handlingResponse['bookings']}");
       userBookings = interestsJson
           .map((jsonItem) => UserBooking.fromJson(jsonItem))
           .toList();
@@ -67,6 +66,30 @@ class BookingDetailesForMyBookingController extends GetxController {
     // isErrorCanceled.value = true;
     update();
     isLoading.value = false;
+  }
+
+  updateTotalPrice(int ticketIndex) {
+    int total = 0;
+    total = userBookings[ticketIndex].classTicketPrice;
+
+    for (int index = 0;
+        index < userBookings[ticketIndex].amenities.length;
+        index++) {
+      total += userBookings[ticketIndex]
+          .event
+          .amenities
+          .where((element) =>
+              element.id == userBookings[ticketIndex].amenities[index].id)
+          .first
+          .pivot
+          .price!;
+    }
+    if (userBookings[ticketIndex].promoCode != null) {}
+    return total;
+    // discount = ticketList[ticketIndex].discount;
+    // // tax = getTaxForTicket(ticketIndex);
+    // total = (totalAminityPrice + totalClassPrice + tax) - discount;
+    // ticketList[ticketIndex].totalPrice = total;
   }
 
   void openPdf() async {

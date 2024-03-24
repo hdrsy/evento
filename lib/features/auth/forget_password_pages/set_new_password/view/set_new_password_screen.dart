@@ -14,8 +14,9 @@ import '../controller/set_new_password_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class SetNewPasswordScreen extends StatelessWidget {
-   SetNewPasswordScreen({super.key});
-final SetNewPasswordController setNewPasswordController=Get.put(SetNewPasswordController());
+  SetNewPasswordScreen({super.key});
+  final SetNewPasswordController setNewPasswordController =
+      Get.put(SetNewPasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,73 +37,75 @@ final SetNewPasswordController setNewPasswordController=Get.put(SetNewPasswordCo
         backgroundColor: customColors.secondaryBackground,
       ),
       body: Container(
-         padding:  padding(15,24,24,24),
-       
+        padding: padding(15, 24, 24, 24),
         width: double.infinity,
         child: Form(
-key: setNewPasswordController.formstate,
+          key: setNewPasswordController.formstate,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                "Set your password",
-                textAlign: TextAlign.center,
-                style: customTextStyle.titleMedium.copyWith(
-                  fontFamily: 'BeerSerif',
-                  fontSize: 16,
-                  color: customColors.primaryText,
+                  "Set your password",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.titleMedium.copyWith(
+                    fontFamily: 'BeerSerif',
+                    fontSize: 16,
+                    color: customColors.primaryText,
+                  ),
+                ).tr(),
+                SizedBox(
+                  height: scaleHeight(12),
                 ),
-              ).tr(),
-              SizedBox(
-                height: scaleHeight(12),
-              ),
-              Text(
-                "Enter a strong password for your account",
-                textAlign: TextAlign.center,
-                style: customTextStyle.bodyMedium.copyWith(
-                  fontFamily: 'BeerSerif',
-                  color: customColors.primaryText,
-                  fontSize: 14,
-                  letterSpacing: 0.2,
-                  fontWeight: FontWeight.normal,
+                Text(
+                  "Enter a strong password for your account",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.bodyMedium.copyWith(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.primaryText,
+                    fontSize: 14,
+                    letterSpacing: 0.2,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ).tr(),
+                SizedBox(
+                  height: scaleHeight(50),
                 ),
-              ).tr(),
-              SizedBox(
-                height: scaleHeight(50),
-              ),
-              Image.asset(
-                'assets/images/pana.png',
-                height: 180,
-                fit: BoxFit.contain,
-              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimationsteps']!),
-              customTextField(
-                  context: context,
-                  label:tr( "New Password"),
-                  keyboardType: TextInputType.visiblePassword,
-                  onChanged: (value) {
-                    setNewPasswordController.newPassword.text=value!;
-                  },
-                  validator: (value) {
-                    return passwordValidation(value);
-                  },
-                  isPassWordVisible: true),
-              
-              customTextField(
-                  context: context,
-                  label:tr( "Confirm Password"),
-                  keyboardType: TextInputType.visiblePassword,
-                  onChanged: (value) {
-                    setNewPasswordController.confPassword.text=value!;
-                  },
-                  validator: (value) {
-                return   setNewPasswordController.confPassword.text==setNewPasswordController.newPassword.text?null:"The confirm password doesn't mathcing the new password";
-                   
-                  },
-                  isPassWordVisible: true),
-              
+                Image.asset(
+                  'assets/images/pana.png',
+                  height: 180,
+                  fit: BoxFit.contain,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimationsteps']!),
+                customTextField(
+                    context: context,
+                    label: tr("New Password"),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (value) {
+                      setNewPasswordController.newPassword.text = value!;
+                    },
+                    validator: (value) {
+                      return passwordValidation(value);
+                    },
+                    isPassWordVisible: true),
+                customTextField(
+                    context: context,
+                    label: tr("Confirm Password"),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (value) {
+                      setNewPasswordController.confPassword.text = value!;
+                    },
+                    validator: (value) {
+                      return setNewPasswordController.confPassword.text ==
+                              setNewPasswordController.newPassword.text
+                          ? null
+                          : "The confirm password doesn't mathcing the new password";
+                    },
+                    isPassWordVisible: true),
                 buildButton()
-              ].divide(const SizedBox(height: 16,)),
+              ].divide(const SizedBox(
+                height: 16,
+              )),
             ),
           ),
         ),
@@ -117,14 +120,14 @@ key: setNewPasswordController.formstate,
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
             child: ButtonWidget(
-              
               onPressed: () async {
-setNewPasswordController.onPressContinue();              },
-              text:tr( "Continue"),
+                setNewPasswordController.onPressContinue();
+              },
+              text: tr("Continue"),
               showLoadingIndicator: setNewPasswordController.isLoading.value,
               options: ButtonOptions(
-                width: scaleWidth(330),
-                height: scaleHeight(40),
+                width: 350,
+                height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: customColors.primary,

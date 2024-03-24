@@ -1,6 +1,11 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
-import 'package:evento/features/booking/my_booking/model/up_coming_booking.dart';
+import 'package:evento/features/booking/resell/controller/resell_controller.dart';
+import 'package:evento/features/booking/resell/view/resell_screen.dart';
+import 'package:get/get.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -28,6 +33,24 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                 child: Text(
                   "Ticket ${modelIndex + 1}",
                   style: customTextStyle.headlineMedium.override(
+                      color: customColors.primary,
+                      fontFamily: secondaryFontFamily,
+                      useGoogleFonts: true),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  final ReSellController reSellController =
+                      Get.put(ReSellController());
+                  reSellController.selectedTicket.value = ticketModel.id;
+                  await showButtonSheet(
+                      context: context,
+                      widget: ReSellTicketPage(),
+                      height: screenHeight * 0.9);
+                },
+                child: Text(
+                  "ReSell Ticket",
+                  style: customTextStyle.bodySmall.override(
                       color: customColors.primary,
                       fontFamily: secondaryFontFamily,
                       useGoogleFonts: true),
@@ -99,10 +122,6 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                   title: "age",
                   subTitle: ticketModel.age.toString(),
                 ),
-                // SinglePriceElement(
-                //   title: "age",
-                //   subTitle: ticketModel.,
-                // ),
                 Divider(
                   thickness: 1,
                   color: customColors.secondary,
@@ -144,6 +163,15 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                   thickness: 1,
                   color: customColors.secondary,
                 ),
+                SinglePriceElement(
+                  title: "Total Price",
+                  subTitle: Get.find<BookingDetailesForMyBookingController>()
+                      .updateTotalPrice(modelIndex)
+                      .toString(),
+                ),
+                SizedBox(
+                  height: 5,
+                )
               ],
             ),
           ),

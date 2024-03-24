@@ -188,8 +188,8 @@ class PaymentController extends GetxController {
           ]));
     } else {
       paidSccuffly = true;
-      Get.offAndToNamed('/BookingDetailesScreen',
-          arguments: [eventDetailsModel, ticketList]);
+      Get.offAndToNamed('/BookingDetailesForMyBookingScreen',
+          arguments: [eventDetailsModel.id, user!.id]);
     }
     isLoadingotp.value = false;
   }

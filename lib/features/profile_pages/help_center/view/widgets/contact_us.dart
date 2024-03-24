@@ -39,18 +39,14 @@ class ContactUs extends StatelessWidget {
                   style: customTextStyle.bodyMedium
                       .copyWith(fontSize: 16, color: customColors.primaryText),
                 ),
-                InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                GestureDetector(
                     onTap: () {
                       _launchURL();
                     },
                     child: Text(
                       'HDR',
-                      style: customTextStyle.bodyMedium.copyWith(
-                          fontSize: 16, color: customColors.primaryText),
+                      style: customTextStyle.bodyMedium
+                          .copyWith(fontSize: 16, color: customColors.primary),
                     ))
               ],
             ),

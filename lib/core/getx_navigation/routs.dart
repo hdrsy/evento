@@ -44,6 +44,7 @@ import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaize
 import 'package:evento/features/organizer/ticket_in_event_for_organization/view/ticket_in_event_for_organization_screen.dart';
 import 'package:evento/features/payment/view/payment_screen.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
+import 'package:evento/features/venue/venue_detailes/view/venue_detailes_screen.dart';
 
 import '../../features/auth/forget_password_pages/enter_number/view/enter_number_screen.dart';
 import '../../features/auth/forget_password_pages/set_new_password/view/set_new_password_screen.dart';
@@ -182,6 +183,10 @@ appRoutes() => [
           name: '/EditProfileScreen',
           page: () => EditProfileScreen(),
           binding: EditProfileBinding()),
+      GetPage(
+        name: '/VenueDetailesForUserScreen',
+        page: () => VenueDetailesForUserScreen(),
+      ),
       GetPage(
           name: '/EditProfileServiceProviderScreen',
           page: () => EditProfileServiceProviderScreen(),

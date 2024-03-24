@@ -1,4 +1,4 @@
-import 'package:evento/core/utils/services/notification_service.dart';
+import 'package:evento/core/shared/functions/fix_notification_title.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
@@ -23,8 +23,9 @@ Future<String> pushyRegister() async {
 
 @pragma('vm:entry-point')
 void backgroundNotificationListener(Map<String, dynamic> data) async {
+  print("noooo:$data");
   // Notification title
-  String notificationTitle = data['title'];
+  String notificationTitle = removeNavigateToEnd(data['title']);
 
   // Attempt to extract the "message" property from the payload: {"message":"Hello World!"}
   String notificationText = data['body'] ?? 'Hello World!';
@@ -45,35 +46,77 @@ void notificationClickListener(Map<String, dynamic> data) {
   String normalizedTitle = data['title']?.trim().toLowerCase() ?? '';
   String routName = '';
   String body = '';
-
-  // Compare normalized title
-  if (normalizedTitle == "new friend request" ||
-      normalizedTitle == "new friend") {
-    routName =
-        'FreindsScreen'; // Note: Check if 'FreindsScreen' is a typo. It should be 'FriendsScreen'?
-  } else if (normalizedTitle == "you have a new event invitation") {
-    routName =
-        'eventDetailes'; // Note: Check spelling, should it be 'eventDetails'?
-    body = data['body'];
-  } else if (normalizedTitle == "booked successfully") {
-    routName = 'MyBookingScreen';
+  if (normalizedTitle.contains("navigate")) {
+    String targetRout = extractWordAfterNavigate(normalizedTitle);
+    print(targetRout);
+    if (targetRout.toLowerCase() == "organizer") {
+      Get.context != null
+          ? Get.toNamed('/OrganizerProfileScreen',
+              arguments:
+                  int.tryParse(normalizedTitle[normalizedTitle.length - 1]))
+          : Future.delayed(Duration(seconds: 2), () {
+              Get.toNamed('/OrganizerProfileScreen',
+                  arguments: int.tryParse(
+                      normalizedTitle[normalizedTitle.length - 1]));
+            });
+    } else if (targetRout.toLowerCase() == "venue") {
+      Get.context != null
+          ? Get.toNamed('/VenueDetailesForUserScreen',
+              arguments:
+                  int.tryParse(normalizedTitle[normalizedTitle.length - 1]))
+          : Future.delayed(Duration(seconds: 2), () {
+              Get.toNamed('/VenueDetailesForUserScreen',
+                  arguments: int.tryParse(
+                      normalizedTitle[normalizedTitle.length - 1]));
+            });
+    } else if (targetRout.toLowerCase() == "event") {
+      Get.context != null
+          ? Get.toNamed('/eventDetailes', arguments: [
+              int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+              false,
+              0
+            ])
+          : Future.delayed(Duration(seconds: 2), () {
+              Get.toNamed('/eventDetailes', arguments: [
+                int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+                false,
+                0
+              ]);
+            });
+    }
   } else {
-    routName = 'NotificationScreen';
+    // Compare normalized title
+    if (normalizedTitle == "new friend request" ||
+        normalizedTitle == "new friend") {
+      routName =
+          'FreindsScreen'; // Note: Check if 'FreindsScreen' is a typo. It should be 'FriendsScreen'?
+    } else if (normalizedTitle == "you have a new event invitation") {
+      routName =
+          'eventDetailes'; // Note: Check spelling, should it be 'eventDetails'?
+      body = data['body'];
+    } else if (normalizedTitle == "booked successfully" ||
+        normalizedTitle == "ticket resell") {
+      routName = 'MyBookingScreen';
+    } else {
+      routName = 'NotificationScreen';
+    }
   }
 
-  // Check if GetX navigation context is ready, otherwise, delay the navigation
-  if (Get.context != null) {
-    routName == 'eventDetailes' // Note: Same as above, check spelling.
-        ? Get.toNamed('/$routName',
-            arguments: [int.parse(body[body.length - 1]), false, 0])
-        : Get.toNamed('/$routName');
-  } else {
-    // Use Future.delayed to wait for GetX navigation context to be ready
-    Future.delayed(Duration(seconds: 4), () {
-      routName == 'eventDetailes' // Note: Same spelling concern.
+  if (!normalizedTitle.contains("navigate")) {
+    if (Get.context != null) {
+      routName == 'eventDetailes' // Note: Same as above, check spelling.
           ? Get.toNamed('/$routName',
-              arguments: [body[body.length - 1], false, 0])
+              arguments: [int.parse(body[body.length - 1]), false, 0])
           : Get.toNamed('/$routName');
-    });
+    } else {
+      // Use Future.delayed to wait for GetX navigation context to be ready
+      Future.delayed(Duration(seconds: 2), () {
+        routName == 'eventDetailes' // Note: Same spelling concern.
+            ? Get.toNamed('/$routName',
+                arguments: [body[body.length - 1], false, 0])
+            : Get.toNamed('/$routName');
+      });
+    }
   }
+  // Check if GetX navigation context is ready, otherwise, delay the navigation
 }

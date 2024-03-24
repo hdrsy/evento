@@ -18,7 +18,7 @@ class ReelModel {
   bool likedByUser;
   final EventModel? event;
   final Venue? venue;
-  final User? user;
+  final Organizer? organizer;
 
   ReelModel({
     required this.id,
@@ -35,7 +35,7 @@ class ReelModel {
     required this.likedByUser,
     this.event,
     required this.venue,
-    this.user,
+    this.organizer,
   });
 
   factory ReelModel.fromJson(Map<String, dynamic> json) {
@@ -64,7 +64,9 @@ class ReelModel {
           ? EventModel.fromJson(json['event'] ?? {})
           : null,
       venue: json['venue'] != null ? Venue.fromJson(json['venue'] ?? {}) : null,
-      user: json['user'] != null ? User.fromJson(json['user'] ?? {}) : null,
+      organizer: json['organizer'] != null
+          ? Organizer.fromJson(json['organizer'] ?? {})
+          : null,
     );
   }
 }

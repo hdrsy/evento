@@ -15,7 +15,8 @@ import '../controller/verify_forget_password_controller.dart';
 
 class VerifyForgetPasswordScreen extends StatelessWidget {
   VerifyForgetPasswordScreen({super.key});
-  final VerifyForgetPasswordController verifyForgetPasswordController = Get.put(VerifyForgetPasswordController());
+  final VerifyForgetPasswordController verifyForgetPasswordController =
+      Get.put(VerifyForgetPasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +37,7 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
       ),
       body: Container(
-         padding:  padding(15,24,24,24),
-       
+        padding: padding(15, 24, 24, 24),
         width: double.infinity,
         child: Form(
           key: verifyForgetPasswordController.formstate,
@@ -46,52 +46,52 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                    "We’ll text you on ${verifyForgetPasswordController.phone}.",
-                    textAlign: TextAlign.center,
-                    style: customTextStyle.bodyMedium.copyWith(
-                      fontFamily: 'BeerSerif',
-                      color: customColors.primaryText,
-                      fontSize: 16,
-                      letterSpacing: 0.2,
-                      fontWeight: FontWeight.normal,
-                    ),
+                  "We’ll text you on ${verifyForgetPasswordController.phone}.",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.bodyMedium.copyWith(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.primaryText,
+                    fontSize: 16,
+                    letterSpacing: 0.2,
+                    fontWeight: FontWeight.normal,
                   ),
-                  SizedBox(
-                    height: scaleHeight(50),
+                ),
+                SizedBox(
+                  height: scaleHeight(50),
+                ),
+                Image.asset(
+                  'assets/images/rafiki.png',
+                  height: scaleHeight(180),
+                  fit: BoxFit.contain,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimationsteps']!),
+                SizedBox(
+                  height: scaleHeight(12),
+                ),
+                Pin(
+                  onChanged: (value) {
+                    verifyForgetPasswordController.pin.text = value;
+                  },
+                  textEditingController: verifyForgetPasswordController.pin,
+                  validator: (value) {
+                    return pinValidation(value);
+                  },
+                ),
+                Text(
+                  "Send me a new code",
+                  style: customTextStyle.bodyMedium.copyWith(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.primaryText,
+                    fontWeight: FontWeight.w500,
                   ),
-                  Image.asset(
-                    'assets/images/rafiki.png',
-                    height: scaleHeight(180),
-                    fit: BoxFit.contain,
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimationsteps']!),
-                  SizedBox(
-                    height: scaleHeight(12),
-                  ),
-                  Pin(
-                  
-                    onChanged: (value) {
-                      verifyForgetPasswordController.pin.text = value;
-                    },
-                    textEditingController: verifyForgetPasswordController.pin,
-                    validator: (value) {
-                      return pinValidation(value);
-                    },
-                  ),
-                  Text(
-                    "Send me a new code",
-                    style: customTextStyle.bodyMedium.copyWith(
-                      fontFamily: 'BeerSerif',
-                      color: customColors.primaryText,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ).tr(),
-                  SizedBox(
-                    height: scaleHeight(50),
-                  ),
-                  
+                ).tr(),
+                SizedBox(
+                  height: scaleHeight(50),
+                ),
                 buildButton()
-              ].divide(const SizedBox(height: 16,)),
+              ].divide(const SizedBox(
+                height: 16,
+              )),
             ),
           ),
         ),
@@ -109,11 +109,12 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
               onPressed: () async {
                 verifyForgetPasswordController.onPressContinue();
               },
-              text:tr( "Continue"),
-              showLoadingIndicator: verifyForgetPasswordController.isLoading.value,
+              text: tr("Continue"),
+              showLoadingIndicator:
+                  verifyForgetPasswordController.isLoading.value,
               options: ButtonOptions(
-                width: scaleWidth(330),
-                height: scaleHeight(40),
+                width: 350,
+                height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: customColors.primary,

@@ -37,6 +37,10 @@ class TypetoSetEventController extends GetxController {
   //  return selectedCategory.contains(categoryModel);
   // }
   fetchCategoryData() async {
+    if (isGuset) {
+      return;
+    }
+
     try {
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;

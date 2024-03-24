@@ -87,8 +87,6 @@ class TicketsInEventForOrganizerCard extends StatelessWidget {
         onTap: () {
           final TicketsInEventForOrganizerController myBookingController =
               Get.find();
-          var result = myBookingController.createTicketModelsFromEventBookings(
-              myBookingController.bookingResponse.booking[modelId]!);
           Get.toNamed('/BookingDetailesForMyBookingScreen', arguments: [
             myBookingController.eventDetailsModel.id,
             myBookingController.bookingResponse.booking[0]![0].userId

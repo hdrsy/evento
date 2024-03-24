@@ -1,5 +1,7 @@
+import 'package:evento/core/shared/functions/fix_notification_title.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/features/profile_pages/notification/model/notification_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
@@ -12,26 +14,47 @@ import 'package:easy_localization/easy_localization.dart';
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key, required this.notificationModel});
   final NotificationModel notificationModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (notificationModel.title == "New Friend Request") {
-          Get.toNamed('/FreindsScreen');
-        } else if (notificationModel.title == "New Friend") {
-          Get.toNamed('/FreindsScreen');
-        } else if (notificationModel.title == "Booked Successfully") {
-          Get.toNamed('/MyBookingScreen');
-        }
-        // if(notificationModel.title=="You have a new event Invitation"){
-        else {
-          String description = notificationModel.description;
-          int lastSpaceIndex =
-              description.lastIndexOf(' '); // or use another delimiter
-          String eventIdString = description.substring(lastSpaceIndex + 1);
-          int eventId = int.parse(eventIdString);
+        if (notificationModel.title.contains("navigate")) {
+          String targetRout = extractWordAfterNavigate(notificationModel.title);
+          print(targetRout);
+          if (targetRout.toLowerCase() == "organizer") {
+            Get.toNamed('/OrganizerProfileScreen',
+                arguments: int.tryParse(notificationModel
+                    .title[notificationModel.title.length - 1]));
+          } else if (targetRout.toLowerCase() == "venue") {
+            Get.toNamed('/VenueDetailesForUserScreen',
+                arguments: int.tryParse(notificationModel
+                    .title[notificationModel.title.length - 1]));
+          } else if (targetRout.toLowerCase() == "event") {
+            Get.toNamed('/eventDetailes', arguments: [
+              int.tryParse(
+                  notificationModel.title[notificationModel.title.length - 1]),
+              false,
+              0
+            ]);
+          }
+        } else {
+          if (notificationModel.title == "New Friend Request") {
+            Get.toNamed('/FreindsScreen');
+          } else if (notificationModel.title == "New Friend") {
+            Get.toNamed('/FreindsScreen');
+          } else if (notificationModel.title == "Booked Successfully" ||
+              notificationModel.title == "Ticket Resell") {
+            Get.toNamed('/MyBookingScreen');
+          } else if (notificationModel.title.contains("Invitation")) {
+            String description = notificationModel.description;
+            int lastSpaceIndex =
+                description.lastIndexOf(' '); // or use another delimiter
+            String eventIdString = description.substring(lastSpaceIndex + 1);
+            int eventId = int.parse(eventIdString);
 
-          Get.toNamed('/eventDetailes', arguments: [eventId, false, 0]);
+            Get.toNamed('/eventDetailes', arguments: [eventId, false, 0]);
+          }
         }
       },
       child: Container(
@@ -68,16 +91,19 @@ class NotificationCard extends StatelessWidget {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Text(
-                                notificationModel.title,
-                                style: customTextStyle.bodyMedium.override(
-                                  fontFamily: 'Nunito',
-                                  color: customColors.primaryText,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
-                              ).tr(),
+                              SizedBox(
+                                width: 200.w,
+                                child: Text(
+                                  removeNavigateToEnd(notificationModel.title),
+                                  style: customTextStyle.bodyMedium.override(
+                                    fontFamily: 'Nunito',
+                                    color: customColors.primaryText,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
+                                ).tr(),
+                              ),
                             ],
                           ),
                           Row(

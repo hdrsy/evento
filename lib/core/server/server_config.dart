@@ -68,6 +68,7 @@ class ServerConstApis {
   static String myBooking = '$baseAPI/api/my_booking';
   static String getUserBooking = '$baseAPI/api/organizer/getUserBooking';
   static String cancellBooking = '$baseAPI/api/booking/cancel';
+  static String reSellTicket = '$baseAPI/api/booking/resell_ticket';
 
   //// follow
   static String followEvent = '$baseAPI/api/event_follow';
@@ -93,6 +94,7 @@ class ServerConstApis {
   static String serviceAccordingCategory =
       '$baseAPI/api/serviceAccordingCategory';
   static String getAllvenue = '$baseAPI/api/venue';
+  static String getVenueDetailes = '$baseAPI/api/venue';
   static String sendEventRequest = '$baseAPI/api/sendEventRequest';
   static String myEventRequest = '$baseAPI/api/my_request';
   static String getEventServiceCategory =

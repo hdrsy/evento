@@ -5,6 +5,7 @@ import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/shared/widgets/text_fields/pin.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/payment/controller/payment_controller.dart';
 import 'package:evento/main.dart';
@@ -384,10 +385,10 @@ class PaymentDetailes extends StatelessWidget {
               SingleRowInPayment(
                   title: "Amount",
                   subtitle:
-                      Get.find<PaymentController>().totalAmount.toString()),
+                      formatPrice(Get.find<PaymentController>().totalAmount)),
               SingleRowInPayment(
                 title: "Taxes",
-                subtitle: Get.find<PaymentController>().invoiceTax.toString(),
+                subtitle: formatPrice(Get.find<PaymentController>().invoiceTax),
               ),
               Divider(
                 thickness: 1,
@@ -414,7 +415,7 @@ class PaymentDetailes extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "${(Get.find<PaymentController>().totalAmount + Get.find<PaymentController>().invoiceTax).toString()} ${tr("sp")}",
+                    " ${formatPrice(Get.find<PaymentController>().totalAmount + Get.find<PaymentController>().invoiceTax)} ${tr("sp")}",
                     style: customTextStyle.displaySmall,
                   ),
                 ],

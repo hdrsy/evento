@@ -1,9 +1,9 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
+import 'package:evento/features/booking/my_booking/view/widget/more_options_widget.dart';
 import 'package:evento/main.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
-import '../../../../../core/shared/widgets/widget/choice_ticket_for_cancal.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import 'my_booking_card.dart';
 import 'package:flutter/material.dart';
@@ -47,16 +47,14 @@ class UpComingList extends StatelessWidget {
                                 eventBooking:
                                     myBookingController.upComingBooking[index],
                                 leftButtonOnTap: () async {
-                                  await showButtonSheet(
+                                  showButtonSheet(
                                       context: context,
-                                      widget: ChoiceTicketForCancalWidget(
-                                        bookings: myBookingController
-                                            .upComingBooking[index]
-                                            .upcomingBookings,
+                                      widget: MoreOptionsWidget(
+                                        modelIndex: index,
                                       ),
-                                      height: screenHeight * 0.7);
+                                      height: screenHeight * 0.15);
                                 },
-                                leftButtonTitle: tr("Cancel Booking"),
+                                leftButtonTitle: tr("More Options"),
                                 bookingStatus: tr("Paid"),
                                 model: myBookingController
                                     .upComingBooking[index]

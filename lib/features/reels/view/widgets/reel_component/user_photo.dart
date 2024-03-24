@@ -23,8 +23,8 @@ Container userPhoto(ReelModel model) {
 String? getReelImage(ReelModel model) {
   if (model.event != null) {
     return model.event!.images[0];
-  } else if (model.user != null) {
-    return model.user!.image;
+  } else if (model.organizer != null) {
+    return model.organizer!.profile;
   } else if (model.venue != null) {
     return model.venue!.profile!;
   } else {

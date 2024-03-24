@@ -170,8 +170,8 @@ class userPhotoAndName extends StatelessWidget {
 String getReelToname(ReelModel model) {
   if (model.event != null) {
     return model.event!.title;
-  } else if (model.user != null) {
-    return model.user!.firstName;
+  } else if (model.organizer != null) {
+    return model.organizer!.name;
   } else if (model.venue != null) {
     return model.venue!.name;
   } else {

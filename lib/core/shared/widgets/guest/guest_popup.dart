@@ -36,9 +36,9 @@ class GuestPopupWidget extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
-                    'assets/images/Artboard_1.png',
-                    width: 300,
-                    height: 100,
+                    'assets/images/logowithtext.png',
+                    width: 150,
+                    height: 75,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -69,13 +69,17 @@ class GuestPopupWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
                         child: ButtonWidget(
                           onPressed: () async {
-                                                         Get.lazyPut(()=>SignupController());
-                               await showButtonSheet(context: context, widget:  SignupScreen(), height: screenHeight*0.8).then((value) => 
-                               Get.delete<SignupController>()
-                               );
+                            Get.lazyPut(() => SignupController());
+                            await showButtonSheet(
+                                    context: context,
+                                    widget: SignupScreen(),
+                                    height: screenHeight * 0.8)
+                                .then(
+                                    (value) => Get.delete<SignupController>());
                           },
                           text: tr("Join"),
                           options: ButtonOptions(
@@ -83,8 +87,8 @@ class GuestPopupWidget extends StatelessWidget {
                             height: 50,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24, 0, 24, 0),
-                            iconPadding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 0),
                             color: customColors.primaryBackground,
                             textStyle: customTextStyle.titleSmall.override(
                               fontFamily: 'Nunito',
@@ -101,13 +105,18 @@ class GuestPopupWidget extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
                         child: ButtonWidget(
                           onPressed: () async {
-                              Get.lazyPut(()=>SigninController());
-                            
-                            await showButtonSheet(context: context, widget: SignInScreen(), height: screenHeight*0.8).then((value) => Get.delete<SigninController>());
-                          
+                            Get.lazyPut(() => SigninController());
+
+                            await showButtonSheet(
+                                    context: context,
+                                    widget: SignInScreen(),
+                                    height: screenHeight * 0.8)
+                                .then(
+                                    (value) => Get.delete<SigninController>());
                           },
                           text: tr("Sign in"),
                           options: ButtonOptions(
@@ -115,8 +124,8 @@ class GuestPopupWidget extends StatelessWidget {
                             height: 50,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24, 0, 24, 0),
-                            iconPadding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 0),
                             color: customColors.secondaryBackground,
                             textStyle: customTextStyle.titleSmall.override(
                               fontFamily: 'Nunito',
