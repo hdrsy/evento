@@ -56,7 +56,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                   child: Text(
-                    "Your password must be at least 6 characters and should include a combination of numbers, letters and special characters (!\$@%)",
+                    "Your password must be at least 8 characters and should include a combination of numbers and letters",
                     style: customTextStyle.bodyMedium.override(
                         fontSize: 14,
                         color: customColors.secondaryText,
@@ -71,7 +71,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     isPasswordSecure: true,
                     controller: changePasswordController.oldPassword,
                     hintText: "",
-                    labelText: tr("Current pssword"),
+                    labelText: tr("Current password"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },
@@ -82,7 +82,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     isPasswordSecure: true,
                     controller: changePasswordController.newPassword,
                     hintText: "",
-                    labelText: tr("New pssword"),
+                    labelText: tr("New password"),
                     onChanged: (value) {
                       // editProfileController.gender.text=value;
                     },

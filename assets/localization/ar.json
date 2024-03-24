@@ -461,8 +461,6 @@
   "Date & Location": "التاريخ والموقع",
   "From vision to reality": "من الرؤية إلى الواقع",
   "Choose your event theme with our experts and create something extraordinary.": "اختر موضوع حدثك مع خبرائنا وأنشئ شيئًا غير عادي.",
-  "New password": "كلمة المرور الجديدة",
-  "Current password": "كلمة المرور الحالية",
   "Aleppo": "حلب",
   "Al-Ḥasakah": "الحسكة",
   "Al-Qamishli": "القامشلي",
@@ -477,7 +475,7 @@
   "Idlib": "إدلب",
   "Latakia": "اللاذقية",
   "Rif Dimashq": "ريف دمشق",
-  "Introduction": "مقدمة .1",
+  "Introduction": "1. مقدمة",
   "Introduction_body": "تطبيق \"إيفينتو\" هو منصة رقمية متخصصة في تسويق وحجز الفعاليات المجتمعية. يُرجى قراءة شروط الاستخدام هذه بعناية قبل استخدام التطبيق لضمان فهمك وموافقتك على هذه الشروط.",
   "Acceptance_of_Terms": "2. قبول الشروط",
   "Acceptance_of_Terms_body": "باستخدامك لتطبيق \"إيفينتو\"، أنت توافق على الالتزام بشروط الاستخدام هذه. إذا كنت لا توافق على هذه الشروط، يجب عليك التوقف فورًا عن استخدام التطبيق.",
@@ -534,8 +532,22 @@
 
 
 
+,
+  "My Gallery": "معرضي",
+  "Current password": "كلمة المرور الحالية",
+  "New password": "كلمة المرور الجديدة",
+  "Customer Service": "خدمة العملاء",
+  "WhatsApp": "واتساب",
+  "Facebook": "فيسبوك",
+  "Website": "الموقع الإلكتروني",
+  "Twitter": "تويتر",
+  "Instagram": "إنستغرام",
+  "No service providers available. Services will appear here as they become available.": "لا يوجد مقدمي خدمات متاحين. الخدمات ستظهر هنا كما تصبح متاحة.",
+  "Looks like there are no  events available right now - check back later!": "يبدو أنه لا توجد فعاليات متاحة الآن - تحقق مرة أخرى لاحقًا!"
 
 
 
+,  "Your password must be at least 8 characters and should include a combination of numbers and letters":"يجب أن تكون كلمة المرور الخاصة بك مكونة من 8 أحرف على الأقل وأن تتضمن مزيجًا من الأرقام والحروف"
+                    
 
 }

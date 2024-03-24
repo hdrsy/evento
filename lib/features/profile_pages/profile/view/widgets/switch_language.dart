@@ -3,6 +3,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,8 +72,7 @@ Widget dropDown(BuildContext context) {
         prefService.createString(
             "language_code", newValue.languageCode == 'en' ? 'en' : 'ar');
         // Get.offAllNamed('/home')
-
-        ;
+        Get.find<HomeController>().onrefresh();
       },
       items: languages.map<DropdownMenuItem<Language>>((Language language) {
         return DropdownMenuItem<Language>(

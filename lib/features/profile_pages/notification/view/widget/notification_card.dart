@@ -43,8 +43,9 @@ class NotificationCard extends StatelessWidget {
             Get.toNamed('/FreindsScreen');
           } else if (notificationModel.title == "New Friend") {
             Get.toNamed('/FreindsScreen');
-          } else if (notificationModel.title == "Booked Successfully" ||
-              notificationModel.title == "Ticket Resell") {
+          } else if (notificationModel.title == "Booked Successfully") {
+            Get.toNamed('/MyBookingScreen');
+          } else if (notificationModel.title == "Ticket Resell ") {
             Get.toNamed('/MyBookingScreen');
           } else if (notificationModel.title.contains("Invitation")) {
             String description = notificationModel.description;
@@ -157,7 +158,7 @@ class NotificationCard extends StatelessWidget {
                 ],
               ),
               Text(
-                notificationModel.description,
+                removeLastWordIfInt(notificationModel.description),
                 style: customTextStyle.bodyMedium,
               ).tr(),
             ].divide(const SizedBox(height: 15)),
@@ -166,4 +167,18 @@ class NotificationCard extends StatelessWidget {
       ),
     );
   }
+}
+
+String removeLastWordIfInt(String input) {
+  // Split the string into a list of words
+  List<String> words = input.split(' ');
+
+  // Check if the last word is an integer
+  if (words.isNotEmpty && int.tryParse(words.last) != null) {
+    // Remove the last word if it's an integer
+    words.removeLast();
+  }
+
+  // Join the list back into a string and return
+  return words.join(' ');
 }

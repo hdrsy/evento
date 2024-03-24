@@ -1,4 +1,3 @@
-
 import 'package:evento/core/shared/models/media.dart';
 
 import '../../../../../core/shared/widgets/buttons/general_button.dart';
@@ -35,7 +34,7 @@ class CreateFolder extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: Text(
-                      "Create folder",
+                      "My Gallery",
                       style: customTextStyle.headlineMedium.override(
                         fontFamily: 'Nunito',
                         color: customColors.primaryText,

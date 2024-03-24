@@ -20,14 +20,17 @@ class ContactUs extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           contactWidget(context, "Customer Service",
-              Icons.miscellaneous_services_sharp, ""),
-          contactWidget(context, "WhatsApp", 'assets/images/WhatsApp.png', ""),
-          contactWidget(context, "Website", Icons.language_sharp, ""),
-          contactWidget(context, "Facebook", Icons.facebook, ""),
-          contactWidget(
-              context, "Twitter", 'assets/images/Twitter_Circled.png', ""),
-          contactWidget(
-              context, "Instagram", 'assets/images/Instagram.png', ""),
+              Icons.miscellaneous_services_sharp, "0996366666"),
+          contactWidget(context, "WhatsApp", 'assets/images/WhatsApp.png',
+              "https://www.hdragency.com/"),
+          contactWidget(context, "Website", Icons.language_sharp,
+              "https://www.hdragency.com/"),
+          contactWidget(context, "Facebook", Icons.facebook,
+              "https://www.hdragency.com/"),
+          contactWidget(context, "Twitter", 'assets/images/Twitter_Circled.png',
+              "https://www.hdragency.com/"),
+          contactWidget(context, "Instagram", 'assets/images/Instagram.png',
+              "https://www.hdragency.com/"),
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
@@ -68,7 +71,9 @@ class ContactUs extends StatelessWidget {
       BuildContext context, String title, var icon, String link) {
     return GestureDetector(
       onTap: () async {
-        await openLink(link);
+        title == "Customer Service"
+            ? await launchDialer(link)
+            : await openLink(link);
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -116,7 +121,7 @@ class ContactUs extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                     ),
                   ].divide(const SizedBox(width: 5)),
                 ),
@@ -126,5 +131,14 @@ class ContactUs extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> launchDialer(String phoneNumber) async {
+  final Uri dialUri = Uri(scheme: 'tel', path: phoneNumber);
+  if (await canLaunchUrl(dialUri)) {
+    await launchUrl(dialUri);
+  } else {
+    throw 'Could not launch $dialUri';
   }
 }

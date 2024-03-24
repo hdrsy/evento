@@ -102,6 +102,9 @@ void _launchURL() async {
 }
 
 Row question(BuildContext context, String question, String answer) {
+  final controller = ExpandableController(initialExpanded: false);
+  final key = ValueKey('$answer-$question');
+
   return Row(
     mainAxisSize: MainAxisSize.max,
     children: [
@@ -119,7 +122,8 @@ Row question(BuildContext context, String question, String answer) {
               width: double.infinity,
               color: const Color(0x00000000),
               child: ExpandableNotifier(
-                controller: ExpandableController(initialExpanded: false),
+                key: key,
+                controller: controller,
                 child: ExpandablePanel(
                   header: Column(
                     mainAxisSize: MainAxisSize.max,

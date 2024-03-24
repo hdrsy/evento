@@ -48,7 +48,7 @@ class HomeController extends GetxController {
   }
 
   Future onrefresh() async {
-    // Get.find<PaginationController>().refreshData();
+    Get.find<CategoryListController>().onInit();
     Get.find<FeaturedListController>().refreshData();
     Get.find<TrendingListController>().refreshData();
 

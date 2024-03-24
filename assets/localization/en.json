@@ -567,5 +567,20 @@
   "More Options": "More Options",
   "Resell Ticket": "Resell Ticket",
 "ReSell":"Resell",
-"I'm sick,  can't come":"I'm sick,  can't come"
+"I'm sick,  can't come":"I'm sick,  can't come",
+
+  "My Gallery": "My Gallery",
+  "Current password": "Current password",
+  "New password": "New password",
+  "Customer Service": "Customer Service",
+  "WhatsApp": "WhatsApp",
+  "Facebook": "Facebook",
+  "Website": "Website",
+  "Twitter": "Twitter",
+  "Instagram": "Instagram",
+  "No service providers available. Services will appear here as they become available.": "No service providers available. Services will appear here as they become available.",
+  "Looks like there are no  events available right now - check back later!": "Looks like there are no events available right now - check back later!"
+,"Your password must be at least 8 characters and should include a combination of numbers and letters":"Your password must be at least 8 characters and should include a combination of numbers and letters"
+                    
+                    
 }

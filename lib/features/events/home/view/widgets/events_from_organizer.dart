@@ -176,7 +176,7 @@ class EventsFromOrganizer extends StatelessWidget {
           child: Align(
             alignment: const AlignmentDirectional(0.00, 0.00),
             child: Text(
-              "$price s.p",
+              "$price ${tr("sp")}",
               textAlign: TextAlign.center,
               style: customTextStyle.bodyMedium.override(
                 fontFamily: 'BeerSerif',

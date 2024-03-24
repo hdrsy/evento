@@ -17,7 +17,7 @@ class ChoiceTypeSuggestList extends StatelessWidget {
         Align(
           alignment: const AlignmentDirectional(-1, -1),
           child: Text(
-            "Suggested ",
+            "Suggested",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.primaryText,
