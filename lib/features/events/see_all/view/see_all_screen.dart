@@ -18,6 +18,7 @@ class SeeAllScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(seeAllController.pageTitle,
                 style: customTextStyle.bodyMedium
@@ -49,7 +50,7 @@ class SeeAllScreen extends StatelessWidget {
               ),
             )
           : seeAllController.itemList.isEmpty
-              ? const EmptyData(
+              ? EmptyData(
                   icon: Icons.replay_circle_filled_outlined,
                   message:
                       "Looks like there are no  events available right now - check back later!")

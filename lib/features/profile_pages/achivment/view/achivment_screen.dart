@@ -44,7 +44,7 @@ class AchivmentScreen extends StatelessWidget {
                           message: "SomeThing Wrong!!",
                         )
                       : achivmentController.notificationList.isEmpty
-                          ? const EmptyData(
+                          ? EmptyData(
                               icon: Icons.discount_outlined,
                               message:
                                   "No current coupons. Exclusive offers will be featured here as they're available.",

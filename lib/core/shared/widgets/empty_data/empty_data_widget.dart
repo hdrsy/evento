@@ -3,10 +3,12 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/widgets.dart';
 
+// ignore: must_be_immutable
 class EmptyData extends StatelessWidget {
-  const EmptyData({super.key, required this.icon, required this.message});
+  EmptyData({super.key, required this.icon, required this.message, this.onTap});
   final IconData icon;
   final String message;
+  Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,10 +19,13 @@ class EmptyData extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: customColors.primary,
-              size: 60,
+            GestureDetector(
+              onTap: onTap,
+              child: Icon(
+                icon,
+                color: customColors.primary,
+                size: 60,
+              ),
             ),
             Align(
               alignment: const AlignmentDirectional(0, 0),

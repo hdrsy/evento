@@ -26,5 +26,6 @@ class ProfileController extends GetxController {
 
   getProfileInfo() async {
     profileModel = ProfileModel.fromJson(user != null ? user!.toJson() : {});
+    print(profileModel.type);
   }
 }

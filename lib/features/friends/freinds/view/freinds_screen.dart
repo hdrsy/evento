@@ -27,6 +27,7 @@ class FreindsScreen extends StatelessWidget {
           }),
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Freinds"),
             style: customTextStyle.bodyMedium

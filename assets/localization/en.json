@@ -265,6 +265,7 @@
 "Switching to a service provider account makes your profile public. Anyone will be able to see your photos and videos on Instagram. You will no longer need to approve followers. Any pending follow requests will be automatically approved.": "Switching to a service provider account makes your profile public. Anyone will be able to see your photos and videos on Instagram. You will no longer need to approve followers. Any pending follow requests will be automatically approved.",
 " Cancel":" Cancel",
 "Ok":"Ok",
+"Invited":"Invited",
 "What best describes you?":"What best describes you?",
 "With a service provider account, you get access to tools like insights about your followers and account performance, new contact options and more.": "With a service provider account, you get access to tools like insights about your followers and account performance, new contact options and more.",
 "'Coupons:'": "'Coupons",
@@ -585,6 +586,62 @@
   "No service providers available. Services will appear here as they become available.": "No service providers available. Services will appear here as they become available.",
   "Looks like there are no  events available right now - check back later!": "Looks like there are no events available right now - check back later!"
 ,"Your password must be at least 8 characters and should include a combination of numbers and letters":"Your password must be at least 8 characters and should include a combination of numbers and letters"
-                    
+,
+"Event Catergory":"Event Catergory",
+  "choose_source": "Choose Source",
+  "camera": "Camera"
+,
+
+
+  "organizers_heartbeat": "Organizers are the heartbeat of every event, transforming ideas into tangible, unforgettable experiences.",
+  "organizer_role_title": "Organizer Role",
+  "role_description": "Offers professional growth, networking opportunities and the flexibility to design passion-driven events.",
+  "benefits_title": "Benefits",
+  "benefits_description": "Organizers masterfully handle everything from vision crafting and budget management to serving as problem solver.",
+  "responsibilities_title": "Responsibilities",
+  "responsibilities_description": "Begin your journey as an Organizer by creating a profile to showcase your expertise.",
+  "getting_started": "Getting Started",
+  "getting_started_body": "Begin your journey as an Organizer by creating a profile to showcase your expertise.translate this"
+
+  
+   , "service_provider_role": "Service Provider Role",
+    "service_provider_role_description": "As a service provider, you play a pivotal role in delivering exceptional experiences for users.",
+    "service_provider_responsibilities": "Responsibilities",
+    "service_provider_responsibilities_description": "Delivering high-quality services ensures that your offerings meet our standards and exceed user expectations.",
+    "service_provider_benefits": "Benefits",
+    "service_provider_benefits_description": "Growth Opportunities, Flexible Scheduling and Rewards and Recognition",
+    "service_provider_getting_started": "Getting Started",
+    "service_provider_getting_started_description": "We're thrilled to have you with us and can't wait to see the great things we'll achieve together."
+   , "SomeThing Wrong !. Try again later":"SomeThing Wrong !. Try again later"
+    ,
+      "Please enter a phone number": "Please enter a phone number",
+      "Please enter a valid Syrian phone number": "Please enter a valid Syrian phone number",
+      "Password must contain at least one number": "Password must contain at least one number",
+      "Password must contain at least one letter": "Password must contain at least one letter",
+      "Password must be at least 8 characters long": "Password must be at least 8 characters long",
+      "Password is required": "Password is required",
+      "Please enter a name": "Please enter a name",
+      "Please Type Longer name": "Please Type Longer name",
+      "Please enter a pin": "Please enter a pin",
+      "Select Addional options":"Select Addional options",
+      "Please Type the required digits": "Please Type the required digits"
+  ,  "Copoun code":"Copoun code",
+  
+    "error_message": "Sorry, an error has occurred. Please ensure the possible reasons and try again later:",
+    "reason_information_entered": "The information entered",
+    "reason_insufficient_balance": "Insufficient balance available",
+    "reason_no_internet": "No internet connection"
+  ,
+  
+    "Amount": "Amount",
+    "Total": "Total",
+    "Payment Summary": "Payment Summary",
+    "Send code again": "Send code again",
+    "Enter Otp": "Enter Otp",
+    "Invoice ID": "Invoice ID"
+  ,
+  
+  "It looks like your friends list is empty, Use the search bar above to find and connect with friends":"It looks like your friends list is empty, Use the search bar above to find and connect with friends"
+    
                     
 }

@@ -159,7 +159,7 @@ class EventLocation extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.normal,
                   useGoogleFonts: true),
-            ),
+            ).tr(),
           ),
         ],
       ),

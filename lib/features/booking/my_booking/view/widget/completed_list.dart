@@ -30,7 +30,7 @@ class CompletedList extends StatelessWidget {
                 message: "SomeThing Wrong!!",
               )
             : myBookingController.completedBooking.isEmpty
-                ? const EmptyData(
+                ? EmptyData(
                     icon: Icons.calendar_today,
                     message:
                         "No completed bookings! Explore events to find your next great experience.",

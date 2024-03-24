@@ -30,7 +30,10 @@ class SentList extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : freindsController.sentFreinds.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
+                      onTap: () {
+                        Get.toNamed('/AddFriendsScreen');
+                      },
                       icon: Icons.person_add,
                       message:
                           "You haven't sent any friend requests yet. Find friends and expand your network!",

@@ -8,12 +8,10 @@ import 'package:expandable/expandable.dart';
 import 'package:timelines/timelines.dart';
 
 class SingleDayTimeLine extends StatelessWidget {
-  final SingleDayTimeLineModel singleDayTimeLineModel ;
-      
-  SingleDayTimeLine({
-    Key? key,
-    required this.singleDayTimeLineModel
-  }) : super(key: key);
+  final SingleDayTimeLineModel singleDayTimeLineModel;
+
+  SingleDayTimeLine({Key? key, required this.singleDayTimeLineModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +30,7 @@ class SingleDayTimeLine extends StatelessWidget {
                 Align(
                   alignment: const AlignmentDirectional(-1.00, -1.00),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(43, 5, 10, 5),
+                    padding: const EdgeInsetsDirectional.fromSTEB(43, 5, 10, 5),
                     child: Icon(
                       Icons.radio_button_checked_outlined,
                       color: customColors.primary,
@@ -67,7 +64,6 @@ class SingleDayTimeLine extends StatelessWidget {
                 theme: TimelineThemeData(
                   nodePosition: 0.15,
                   color: const Color(0xff989898),
-                 
                   connectorTheme: const ConnectorThemeData(
                     thickness: 2.5,
                   ),
@@ -81,6 +77,7 @@ class SingleDayTimeLine extends StatelessWidget {
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: breeSerif,
                         color: customColors.primaryText,
+                        fontSize: 14,
                         useGoogleFonts: false,
                       ),
                     ),
@@ -96,8 +93,8 @@ class SingleDayTimeLine extends StatelessWidget {
                       ),
                     ),
                   ),
-                  lastConnectorStyle:ConnectorStyle.dashedLine ,
-                  firstConnectorStyle:ConnectorStyle.dashedLine ,
+                  lastConnectorStyle: ConnectorStyle.dashedLine,
+                  firstConnectorStyle: ConnectorStyle.dashedLine,
                   connectorStyleBuilder: (context, index) =>
                       ConnectorStyle.dashedLine,
                   indicatorStyleBuilder: (context, index) =>

@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Home"),
             style: customTextStyle.bodyMedium

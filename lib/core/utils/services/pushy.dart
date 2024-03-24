@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:ui';
+
+import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/shared/functions/fix_notification_title.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
@@ -23,12 +27,18 @@ Future<String> pushyRegister() async {
 
 @pragma('vm:entry-point')
 void backgroundNotificationListener(Map<String, dynamic> data) async {
+  // Map<String, dynamic> data =
+  //     removeDuplicateKeysAr(jsonDecode(oldJson['__json']));
+
   print("noooo:$data");
   // Notification title
-  String notificationTitle = removeNavigateToEnd(data['title']);
+  String notificationTitle = removeNavigateToEnd(
+      Get.locale == Locale("en") ? data['title'] : data['title_ar']);
 
   // Attempt to extract the "message" property from the payload: {"message":"Hello World!"}
-  String notificationText = data['body'] ?? 'Hello World!';
+  String notificationText = Get.locale == Locale("en")
+      ? data['body']
+      : data['body_ar'] ?? 'Hello World!';
 
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
@@ -41,7 +51,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) async {
 @pragma('vm:entry-point')
 void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
-
+  print("ttttttttttt$data");
   // Normalize title for comparison
   String normalizedTitle = data['title']?.trim().toLowerCase() ?? '';
   String routName = '';

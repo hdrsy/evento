@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          surfaceTintColor: customColors.secondaryBackground,
           backgroundColor: customColors.secondaryBackground,
           title: Text(tr("Profile"),
               style: customTextStyle.bodyMedium

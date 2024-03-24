@@ -20,7 +20,7 @@ Widget buildEventTimelineButton(
     ),
     text: tr("Timeline"),
     options: ButtonOptions(
-      width: SizeConfig.safeBlockHorizontal * 30,
+      // width: SizeConfig.safeBlockHorizontal * 30,
       height: SizeConfig.safeBlockHorizontal * 6,
       padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
       iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),

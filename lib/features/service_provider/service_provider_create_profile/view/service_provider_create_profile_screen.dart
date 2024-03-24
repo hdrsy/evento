@@ -259,7 +259,7 @@ class OrganizerMediaCard extends StatelessWidget {
                   Align(
                     alignment: const AlignmentDirectional(-1, -1),
                     child: Text(
-                      tr("Create Folder"),
+                      tr("My Gallery"),
                       style: customTextStyle.bodyMedium.override(
                         fontFamily: 'Nunito',
                         color: customColors.primary,

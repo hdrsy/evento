@@ -19,20 +19,25 @@
 //   }
 //   return null; // If all conditions are met, return null (valid)
 // }
+import 'package:easy_localization/easy_localization.dart';
+
 String? passwordValidation(String? value) {
   if (value == null || value.isEmpty) {
-    return "Password is required"; // Password is required
+    return tr("Password is required"); // Password is required
   }
   if (value.length < 8) {
-    return "Password must be at least 8 characters long"; // Check for minimum length
+    return tr(
+        "Password must be at least 8 characters long"); // Check for minimum length
   }
   // Check for at least one letter
   if (!RegExp(r'(?=.*[A-Za-z])').hasMatch(value)) {
-    return "Password must contain at least one letter"; // Check for at least one letter
+    return tr(
+        "Password must contain at least one letter"); // Check for at least one letter
   }
   // Check for at least one number
   if (!RegExp(r'(?=.*\d)').hasMatch(value)) {
-    return "Password must contain at least one number"; // Check for at least one number
+    return tr(
+        "Password must contain at least one number"); // Check for at least one number
   }
   return null; // If all conditions are met, return null (valid)
 }

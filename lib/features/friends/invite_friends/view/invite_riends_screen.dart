@@ -7,6 +7,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class InviteFriendsScreen extends StatelessWidget {
   const InviteFriendsScreen({super.key});
 
@@ -15,6 +16,7 @@ class InviteFriendsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Freinds"),
             style: customTextStyle.bodyMedium
@@ -34,17 +36,21 @@ class InviteFriendsScreen extends StatelessWidget {
       body: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
-          padding: padding(0,24,0,24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: scaleHeight(16),),
-      const InvitedfriendsText(),
-      const BarCodeWidget(),
-      const AcceptInvitList()
-          ].divide(const SizedBox(height: 16,)),
-        )),
+            padding: padding(0, 24, 0, 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: scaleHeight(16),
+                ),
+                const InvitedfriendsText(),
+                const BarCodeWidget(),
+                const AcceptInvitList()
+              ].divide(const SizedBox(
+                height: 16,
+              )),
+            )),
       ),
-      );
+    );
   }
 }

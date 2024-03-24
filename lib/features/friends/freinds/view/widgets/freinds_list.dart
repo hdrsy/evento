@@ -32,10 +32,13 @@ class FreindsList extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : freindsController.myFreinds.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
+                      onTap: () {
+                        Get.toNamed('/AddFriendsScreen');
+                      },
                       icon: Icons.person_add,
                       message:
-                          "Your friends list is looking a bit lonely. Go ahead and connect with people!",
+                          "It looks like your friends list is empty, Use the search bar above to find and connect with friends",
                     )
                   : SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(

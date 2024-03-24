@@ -45,7 +45,7 @@ class NotificationScreen extends StatelessWidget {
                     message: "SomeThing Wrong!!",
                   )
                 : notificationController.notificationList.isEmpty
-                    ? const EmptyData(
+                    ? EmptyData(
                         icon: Icons.notifications_sharp,
                         message:
                             "All caught up! No new notifications right now.",

@@ -22,6 +22,7 @@ class InviteFreindsToEventScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Invite"),
             style: customTextStyle.bodyMedium
@@ -133,8 +134,8 @@ class InviteFreindsCard extends StatelessWidget {
                             freindsModel.id, modelIndex);
                       },
                       text: controller.initedList[modelIndex]
-                          ? "Invited"
-                          : "Invite",
+                          ? tr("Invited")
+                          : tr("Invite"),
                       options: ButtonOptions(
                         width: 100,
                         height: 21,

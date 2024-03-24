@@ -24,6 +24,7 @@ class DateTimeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         title: Text(tr("Customize Your Event"),
             style: customTextStyle.bodyMedium
                 .copyWith(color: customColors.primary, fontSize: 20)),

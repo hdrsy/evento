@@ -26,6 +26,7 @@ class SearchScreen extends StatelessWidget {
           : floatingActionButton(),
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Search"),
             style: customTextStyle.bodyMedium

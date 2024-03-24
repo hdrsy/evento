@@ -81,7 +81,7 @@ class OtpSection extends StatelessWidget {
             fontWeight: FontWeight.bold,
             useGoogleFonts: false,
           ),
-        ),
+        ).tr(),
         const SizedBox(
           height: 4,
         ),
@@ -128,7 +128,7 @@ class OtpSection extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   useGoogleFonts: false,
                 ),
-              ),
+              ).tr(),
             ),
           ),
         ),
@@ -144,7 +144,7 @@ class OtpSection extends StatelessWidget {
                       ? paymentController.sentOtp()
                       : null;
                 },
-                text: "Confirm",
+                text: tr("Confirm"),
                 options: ButtonOptions(
                   width: 200,
                   height: 40,
@@ -247,7 +247,7 @@ class PhonePayment extends StatelessWidget {
                   obscureText: false,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                    labelText: "+963    Mobile Phone",
+                    labelText: tr("+963    mobile Phone"),
                     labelStyle: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
                       color: customColors.secondaryText,
@@ -319,7 +319,7 @@ class PhonePayment extends StatelessWidget {
                           ? null
                           : Get.find<PaymentController>().getInvoice();
                     },
-                    text: "Confirm",
+                    text: tr("Confirm"),
                     options: ButtonOptions(
                       width: 200,
                       height: 40,
@@ -373,7 +373,7 @@ class PaymentDetailes extends StatelessWidget {
             fontWeight: FontWeight.bold,
             useGoogleFonts: false,
           ),
-        ),
+        ).tr(),
         Container(
           padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           width: double.infinity,
@@ -411,7 +411,7 @@ class PaymentDetailes extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.normal,
                         ),
-                      ),
+                      ).tr(),
                     ],
                   ),
                   Text(
@@ -449,7 +449,7 @@ class SingleRowInPayment extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.normal,
           ),
-        ),
+        ).tr(),
         Text(
           "$subtitle ${tr("sp")}",
           style: customTextStyle.bodyLarge.override(
@@ -518,7 +518,7 @@ class InvoiceSection extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 useGoogleFonts: false,
               ),
-            ),
+            ).tr(),
             Obx(
               () => Text(
                 "#${paymentController.invoiceId.value}",

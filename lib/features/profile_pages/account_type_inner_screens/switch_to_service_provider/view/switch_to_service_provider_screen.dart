@@ -7,13 +7,15 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the SwithcToServiceProviderScreen as a StatelessWidget.
 class SwithcToServiceProviderScreen extends StatelessWidget {
   // Constructor with optional key parameter.
   SwithcToServiceProviderScreen({super.key});
 
   // Creating an instance of SwithcToServiceProviderController and registering it with GetX.
-  final SwithcToServiceProviderController swithcToServiceProviderController = Get.put(SwithcToServiceProviderController());
+  final SwithcToServiceProviderController swithcToServiceProviderController =
+      Get.put(SwithcToServiceProviderController());
 
   @override
   // Building the widget.
@@ -64,8 +66,9 @@ class SwithcToServiceProviderScreen extends StatelessWidget {
             onPressed: () async {
               Get.toNamed('/ChoiceTypeScreen');
             },
-            text:tr( " Continue"),
-            options: buttonOptions(context), // Using the buttonOptions function.
+            text: tr("Continue"),
+            options:
+                buttonOptions(context), // Using the buttonOptions function.
           ),
           // Spacing after the button.
           const SizedBox(height: 16),

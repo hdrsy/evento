@@ -45,7 +45,7 @@ class ShowAllBookingInEventForOrganizerScreen extends StatelessWidget {
                   ),
                 )
               : controller.itemList.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
                       icon: Icons.people_rounded,
                       message:
                           "It looks like no one has confirmed attendance yet. Be the first to join!",

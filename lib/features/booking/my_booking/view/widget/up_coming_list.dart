@@ -30,7 +30,7 @@ class UpComingList extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : myBookingController.upComingBooking.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
                       icon: Icons.calendar_today,
                       message:
                           "No upcoming bookings! Explore events to find your next great experience.",

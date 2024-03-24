@@ -25,6 +25,7 @@ class AddFriendsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
+          surfaceTintColor: customColors.secondaryBackground,
           backgroundColor: customColors.secondaryBackground,
           title: Text(tr("Add Friends"),
               style: customTextStyle.bodyMedium

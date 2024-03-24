@@ -39,7 +39,7 @@
   "No,Don't Cancel": "لا، لا تلغي",
   "Yes,cancel": "نعم، إلغاء",
   "Filter": "تصفية",
-  "Event Category": "فئة الفعالية",
+  "Event Catergory": "فئة الفعالية",
   "All": "الكل",
   "Music": "موسيقى",
   "Workshops": "ورش عمل",
@@ -228,10 +228,11 @@
   "image": "صورة",
   "video": "فيديو",
   "Gallery": "معرض الصور",
-  "Going": "الذهاب",
+  "Going": "مشاركين بالفعالية",
   "pending": "قيد الانتظار",
   "Add friend": "إضافة صديق",
   "Invite": "دعوة",
+  "Invited": "تم الدعوة",
   "Home": "الرئيسية",
   "search": "بحث",
   "Reels": "ريلز",
@@ -293,7 +294,7 @@
   "Not Matching the new password": "لا تتطابق مع كلمة المرور الجديدة",
   "Save": "حفظ",
   "Change Photo": "تغيير الصورة",
-  "Favorite": "المفضل",
+  "Favorite": "المفضلة",
   "Friend requests": "طلبات الصداقة",
   "see all": "رؤية الكل",
   "Confirm": "تأكيد",
@@ -530,18 +531,33 @@
   "requestTitle": "تحسين أداء التطبيق",
   "Your reels space is currently empty, but stay tuned for exciting content coming your way soon!": "مساحة الفيديوهات القصيرة الخاصة بك فارغة حاليًا، ولكن ترقبوا المحتوى المثير القادم إليكم قريبًا!",
   "Switching your account to private hides your attendance at events and the list of accounts you follow. This ensures your engagement and connections remain private, not visible to the public.": "تحويل حسابك إلى خاص يخفي حضورك في الأحداث وقائمة الحسابات التي تتابعها. هذا يضمن بقاء تفاعلك واتصالاتك خاصة، غير مرئية للعامة.",
-  "powered by ": "مُدعَم بواسطة ",
+  "powered by ": "مطور التطبيق",
   "resellConfirm":"ايفنتو لا يشارك في تحويلات الدفع بين المستخدمين. التعامل يكون على مسؤوليتك الخاصة.",
-  
+  "Select Addional options":"اختر خيارات إضافية",
   "More Options": "مزيد من الخيارات",
   "Resell Ticket": "إعادة بيع التذكرة",
   "ReSell":"إعادة بيع",
   "I'm sick,  can't come":"أنا مريض، لا أستطيع الحضور."
-
-
-
+  
+  ,  "error_message": "عذرًا، حدث خطأ. يرجى التأكد من الأسباب المحتملة والمحاولة مرة أخرى لاحقًا:",
+    "reason_information_entered": "المعلومات المدخلة",
+    "reason_insufficient_balance": "الرصيد غير كافي",
+    "reason_no_internet": "لا يوجد اتصال بالإنترنت"
+  
+  
+ ,   "Amount": "المبلغ",
+    "Total": "الإجمالي",
+    "Payment Summary": "ملخص الدفع",
+    "Send code again": "إرسال الرمز مرة أخرى",
+    "Enter Otp": "أدخل الرمز",
+    "Invoice ID": "رقم الفاتورة"
+  ,
+  "SomeThing Wrong !. Try again later":"هناك خطأ ما!. حاول مرة أخرى لاحقًا."
+,
+"Switch to a organizer account?":"التحويل إلى حساب منظم؟"
 ,
   "My Gallery": "معرضي",
+  "Add new Gallery": "اضافة معرض جديد" ,
   "Current password": "كلمة المرور الحالية",
   "New password": "كلمة المرور الجديدة",
   "Customer Service": "خدمة العملاء",
@@ -556,6 +572,44 @@
 ,"Coupons":"كودات الحسم"
 
 ,  "Your password must be at least 8 characters and should include a combination of numbers and letters":"يجب أن تكون كلمة المرور الخاصة بك مكونة من 8 أحرف على الأقل وأن تتضمن مزيجًا من الأرقام والحروف"
-                    
+,
+  "choose_source": "اختر المصدر",
+  "camera": "الكاميرا"
+,
+
+  "organizers_heartbeat": "المنظمون هم نبض كل حدث، يحولون الأفكار إلى تجارب ملموسة لا تُنسى.",
+  "organizer_role_title": "دور المنظم",
+  "role_description": "يقدم فرص للنمو المهني والتواصل والمرونة لتصميم أحداث تنبع من الشغف.",
+  "benefits_title": "الفوائد",
+  "benefits_description": "يتقن المنظمون كل شيء بدءًا من صياغة الرؤية وإدارة الميزانية وحتى كونهم حلالي المشكلات.",
+  "responsibilities_title": "المسؤوليات",
+  "responsibilities_description": "ابدأ رحلتك كمنظم بإنشاء ملف تعريفي لعرض خبراتك.",
+  "getting_started": "البدء",
+  "getting_started_body": "ابدأ رحلتك كمنظم عن طريق إنشاء ملف شخصي لعرض خبراتك."
+
+  ,
+  "service_provider_role": "دور مقدم الخدمة",
+    "service_provider_role_description": "كمقدم خدمة، تلعب دورًا محوريًا في تقديم تجارب استثنائية للمستخدمين.",
+    "service_provider_responsibilities": "المسؤوليات",
+    "service_provider_responsibilities_description": "تقديم خدمات عالية الجودة يضمن أن عروضك تلبي معاييرنا وتتجاوز توقعات المستخدمين.",
+    "service_provider_benefits": "الفوائد",
+    "service_provider_benefits_description": "فرص النمو، جدولة مرنة ومكافآت وتقدير",
+    "service_provider_getting_started": "البدء",
+    "service_provider_getting_started_description": "نحن متحمسون لوجودك معنا ولا يمكننا الانتظار لرؤية الأشياء العظيمة التي سنحققها معًا."
+  ,
+  "Select State":"اختر المحافظة"
+            ,"Copoun code":"كود الخصم"
+,"It looks like your friends list is empty, Use the search bar above to find and connect with friends":"يبدو أن قائمة أصدقائك فارغة,استخدم شريط البحث أعلاه للعثور على الأصدقاء"
+ , "Please enter a phone number": "الرجاء إدخال رقم الهاتف",
+  "Please enter a valid Syrian phone number": "الرجاء إدخال رقم هاتف سوري صحيح",
+  "Password must contain at least one number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+  "Password must contain at least one letter": "يجب أن تحتوي كلمة المرور على حرف واحد على الأقل",
+  "Password must be at least 8 characters long": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+  "Password is required": "كلمة المرور مطلوبة",
+  "Please enter a name": "الرجاء إدخال اسم",
+  "Please Type Longer name": "الرجاء كتابة اسم أطول",
+  "Please enter a pin": "الرجاء إدخال الرقم السري",
+  "Please Type the required digits": "الرجاء كتابة الأرقام المطلوبة"
+
 
 }

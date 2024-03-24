@@ -25,7 +25,7 @@ class CanceledList extends StatelessWidget {
                 message: "SomeThing Wrong!!",
               )
             : myBookingController.cancelledBooking.isEmpty
-                ? const EmptyData(
+                ? EmptyData(
                     icon: Icons.calendar_today,
                     message:
                         "No canceled bookings! Explore events to find your next great experience.",

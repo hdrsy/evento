@@ -18,6 +18,7 @@ class MyrequestScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("My Requests"),
             style: customTextStyle.bodyMedium
@@ -47,8 +48,11 @@ class MyrequestScreen extends StatelessWidget {
                     message: "SomeThing Wrong!!",
                   )
                 : myRequestController.myRequestsList.isEmpty
-                    ? const EmptyData(
-                        icon: Icons.email_rounded,
+                    ? EmptyData(
+                        onTap: () {
+                          Get.toNamed('/TypeToSetEventScreen');
+                        },
+                        icon: Icons.add_circle,
                         message:
                             "You haven't made any requests. Start by searching for events you're interested in!",
                       )

@@ -61,8 +61,12 @@ class PriceSummaryWidget extends StatelessWidget {
                       formatPrice(bookNowController.ticketList[index]
                           .selectedAminiteds[innerIndex].pivot.price!))),
               // priceElement("Taxes", bookNowController.ticketList[index].tax),
-              priceElement("Discount",
-                  formatPrice(bookNowController.ticketList[index].discount)),
+              bookNowController.ticketList[index].discount == 0
+                  ? SizedBox()
+                  : priceElement(
+                      "Discount",
+                      formatPrice(
+                          bookNowController.ticketList[index].discount)),
               Divider(
                 thickness: 1,
                 indent: 12,

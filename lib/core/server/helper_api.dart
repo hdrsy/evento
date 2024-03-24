@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:get/get.dart';
 import '../utils/error_handling/erroe_handling.dart';
@@ -82,7 +83,6 @@ class ApiHelper {
             throw UnimplementedError('HTTP method $method not supported');
         }
       }
-      print(response.body);
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       // Handling response based on status code.
@@ -101,7 +101,7 @@ class ApiHelper {
     } catch (e) {
       // Catching exceptions and returning as error responses.
       return Left(ErrorResponse.fromJson(
-          {"message": "SomeThing Wrong !. Try again later "}));
+          {"message": tr("SomeThing Wrong !. Try again later")}));
     }
   }
 }

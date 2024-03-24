@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../utils/theme/text_theme.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +62,7 @@ Widget choosePhotoSource(
               fontSize: 20,
               fontWeight: FontWeight.w400,
               color: textColor ?? customColors.primaryText),
-        ),
+        ).tr(),
       ),
     ),
   );

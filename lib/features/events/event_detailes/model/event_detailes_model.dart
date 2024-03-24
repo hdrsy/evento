@@ -229,6 +229,7 @@ class Class {
   final int id;
   final int eventId;
   final String code;
+  final String description;
   final int ticketPrice;
   final int ticketNumber;
   final List<Amenity> interests;
@@ -237,15 +238,19 @@ class Class {
     required this.id,
     required this.eventId,
     required this.code,
+    required this.description,
     required this.ticketPrice,
     required this.ticketNumber,
     required this.interests,
   });
 
-  factory Class.fromJson(Map<String, dynamic> json) {
+  factory Class.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return Class(
       id: json['id'] ?? 0,
       eventId: json['event_id'] ?? 0,
+      description: json['description'] ?? 0,
       code: json['code'] ?? '',
       ticketPrice: json['ticket_price'] ?? 0,
       ticketNumber: json['ticket_number'] ?? 0,

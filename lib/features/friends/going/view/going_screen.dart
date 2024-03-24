@@ -1,10 +1,13 @@
 import 'package:evento/core/responsive/responsive.dart';
+import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/animation/shimmer_animation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
+import 'package:evento/features/booking/book_now/controller/book_now_controller.dart';
+import 'package:evento/features/booking/book_now/view/book_now_screen.dart';
 import 'package:evento/main.dart';
 
 import '../controller/going_controller.dart';
@@ -21,6 +24,7 @@ class GoingScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
+          surfaceTintColor: customColors.secondaryBackground,
           backgroundColor: customColors.secondaryBackground,
           title: Text(tr("Going"),
               style: customTextStyle.bodyMedium
@@ -50,7 +54,16 @@ class GoingScreen extends StatelessWidget {
                       message: "SomeThing Wrong!!",
                     )
                   : goingController.itemList.isEmpty
-                      ? const EmptyData(
+                      ? EmptyData(
+                          onTap: () async {
+                            Get.back();
+                            await showButtonSheet(
+                                context: context,
+                                widget: BookNowScreen(),
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.9);
+                            Get.delete<BookNowController>();
+                          },
                           icon: Icons.people_rounded,
                           message:
                               "It looks like no one has confirmed attendance yet. Be the first to join!",

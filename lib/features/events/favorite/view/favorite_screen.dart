@@ -18,6 +18,7 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("Favorite"),
             style: customTextStyle.bodyMedium
@@ -46,7 +47,10 @@ class FavoriteScreen extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : controller.favoriteEvents.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
+                      onTap: () {
+                        Get.offAllNamed('/home');
+                      },
                       icon: Icons.add_circle,
                       message:
                           "No favorites saved. Add your most loved events here.",

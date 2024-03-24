@@ -7,13 +7,15 @@ import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 // Defining the AccountOrganizerScreen as a StatelessWidget.
 class AccountOrganizerScreen extends StatelessWidget {
   // Constructor with optional key parameter.
   AccountOrganizerScreen({super.key});
 
   // Creating an instance of AccountOrganizerController and registering it with GetX.
-  final AccountOrganizerController accountOrganizerController = Get.put(AccountOrganizerController());
+  final AccountOrganizerController accountOrganizerController =
+      Get.put(AccountOrganizerController());
 
   @override
   // Building the widget.
@@ -64,8 +66,9 @@ class AccountOrganizerScreen extends StatelessWidget {
             onPressed: () async {
               Get.toNamed('/ChoiceOrganizerCategoryScreen');
             },
-            text:tr( " Continue"),
-            options: buttonOptions(context), // Using the buttonOptions function.
+            text: tr("Continue"),
+            options:
+                buttonOptions(context), // Using the buttonOptions function.
           ),
           // Spacing after the button.
           const SizedBox(height: 16),

@@ -19,6 +19,7 @@ class TypeToSetEventScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
+          surfaceTintColor: customColors.secondaryBackground,
           backgroundColor: customColors.secondaryBackground,
           title: Text(tr("Customize Your Event"),
               style: customTextStyle.bodyMedium

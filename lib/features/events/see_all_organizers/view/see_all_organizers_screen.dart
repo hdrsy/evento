@@ -23,6 +23,7 @@ class SeeAllOrganizersScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text("Organizers",
             style: customTextStyle.bodyMedium

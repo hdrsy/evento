@@ -7,6 +7,7 @@ import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class RequestStatusScreen extends StatelessWidget {
   RequestStatusScreen({super.key});
   final RequestStatusController requestStatusController =
@@ -16,10 +17,12 @@ class RequestStatusScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
+          surfaceTintColor: customColors.secondaryBackground,
           backgroundColor: customColors.secondaryBackground,
           title: Text("Status",
-              style: customTextStyle.bodyMedium
-                  .copyWith(color: customColors.primary, fontSize: 20)).tr(),
+                  style: customTextStyle.bodyMedium
+                      .copyWith(color: customColors.primary, fontSize: 20))
+              .tr(),
           centerTitle: true,
           leading: InkWell(
             onTap: () {
@@ -77,17 +80,17 @@ class RequestStatusScreen extends StatelessWidget {
                             myRequestModel.adults.toString(),
                             Icons.people_outlined),
                         singleRowInfo(
-                           tr( "Number of Children"),
+                            tr("Number of Children"),
                             myRequestModel.child.toString(),
                             Icons.people_outlined),
                         singleRowInfo(tr("Event Title "), myRequestModel.title,
                             Icons.celebration_outlined),
-                        singleRowInfo(tr("Start Time "), myRequestModel.startTime,
-                            Icons.timer_sharp),
+                        singleRowInfo(tr("Start Time "),
+                            myRequestModel.startTime, Icons.timer_sharp),
                         singleRowInfo(tr("End Time"), myRequestModel.endTime,
                             Icons.timer_off_outlined),
                         singleRowInfo(
-                           tr( "Date"),
+                            tr("Date"),
                             DateFormatter.formatDate(myRequestModel.date),
                             Icons.date_range),
                       ].divide(const SizedBox(height: 10)),
@@ -100,11 +103,14 @@ class RequestStatusScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        singleRowInfo(tr("Venue Name"), myRequestModel.venue.name,
-                            Icons.place_outlined),
+                        singleRowInfo(tr("Venue Name"),
+                            myRequestModel.venue.name, Icons.place_outlined),
                         ...List.generate(
                             myRequestModel.serviceProviders.length,
-                            (index) => singleRowInfo(myRequestModel.serviceProviders[index].categoryTitle, "${myRequestModel.serviceProviders[index].firstName} ${myRequestModel.serviceProviders[index].lastName}",
+                            (index) => singleRowInfo(
+                                myRequestModel
+                                    .serviceProviders[index].categoryTitle,
+                                "${myRequestModel.serviceProviders[index].firstName} ${myRequestModel.serviceProviders[index].lastName}",
                                 Icons.dry_cleaning_outlined))
                       ].divide(const SizedBox(height: 10)),
                     ),
@@ -112,8 +118,18 @@ class RequestStatusScreen extends StatelessWidget {
                       thickness: 1,
                       color: customColors.secondary,
                     ),
-                 myRequestModel.description!=null?   notesAndDescription(icon: Icons.description_outlined, title: "Description", subTitle: myRequestModel.description!):const SizedBox(),
-                 myRequestModel.additionalNotes!=null?   notesAndDescription(icon: Icons.speaker_notes_outlined, title: "Notes", subTitle: myRequestModel.additionalNotes!):const SizedBox(),
+                    myRequestModel.description != null
+                        ? notesAndDescription(
+                            icon: Icons.description_outlined,
+                            title: "Description",
+                            subTitle: myRequestModel.description!)
+                        : const SizedBox(),
+                    myRequestModel.additionalNotes != null
+                        ? notesAndDescription(
+                            icon: Icons.speaker_notes_outlined,
+                            title: "Notes",
+                            subTitle: myRequestModel.additionalNotes!)
+                        : const SizedBox(),
                   ].divide(const SizedBox(height: 20)),
                 ),
               ),
@@ -172,7 +188,7 @@ class RequestStatusScreen extends StatelessWidget {
         children: [
           singleStatusWidget(
               isinThisStatus: status == "Pending",
-              title:tr( "Pending"),
+              title: tr("Pending"),
               icon: Icons.pending),
           Column(
             mainAxisSize: MainAxisSize.max,
@@ -188,7 +204,7 @@ class RequestStatusScreen extends StatelessWidget {
           ),
           singleStatusWidget(
               isinThisStatus: status == "In Progress",
-              title:tr( "In Review"),
+              title: tr("In Review"),
               icon: Icons.preview_outlined),
           Column(
             mainAxisSize: MainAxisSize.max,
@@ -204,7 +220,7 @@ class RequestStatusScreen extends StatelessWidget {
           ),
           singleStatusWidget(
               isinThisStatus: status == "Approved",
-              title:tr( "Contacted"),
+              title: tr("Contacted"),
               icon: Icons.connect_without_contact_outlined),
         ],
       ),

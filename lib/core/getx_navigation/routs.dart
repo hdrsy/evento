@@ -13,6 +13,7 @@ import 'package:evento/features/events/customize_event/serivce_according_categor
 import 'package:evento/features/events/customize_event/serivce_according_category/view/service_according_category_screen.dart';
 import 'package:evento/features/events/customize_event/service_category/controller/binding/service_category_binding.dart';
 import 'package:evento/features/events/customize_event/service_category/view/service_category_screen.dart';
+import 'package:evento/features/events/customize_event/type_to_set_event/view/type_to_set_event_screen.dart';
 import 'package:evento/features/events/customize_event/venue/controller/binding/venue_binding.dart';
 import 'package:evento/features/events/customize_event/venue/view/venue_screen.dart';
 import 'package:evento/features/events/customize_event/venue_detailes/controller/binding/venue_detailes_binding.dart';
@@ -186,6 +187,10 @@ appRoutes() => [
       GetPage(
         name: '/VenueDetailesForUserScreen',
         page: () => VenueDetailesForUserScreen(),
+      ),
+      GetPage(
+        name: '/TypeToSetEventScreen',
+        page: () => TypeToSetEventScreen(),
       ),
       GetPage(
           name: '/EditProfileServiceProviderScreen',

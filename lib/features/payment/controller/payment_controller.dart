@@ -152,8 +152,7 @@ class PaymentController extends GetxController {
 
       Get.dialog(AlertDialog(
           backgroundColor: customColors.secondaryBackground,
-          title: Text(
-                  "Sorry, an error has occurred. Please ensure the possible reasons and try again later:",
+          title: Text("error_message",
                   style: customTextStyle.titleSmall
                       .copyWith(color: customColors.primaryText))
               .tr(),
@@ -161,13 +160,13 @@ class PaymentController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             children: [
               ErrorMessages(
-                message: "The information entered",
+                message: "reason_information_entered",
               ),
               ErrorMessages(
-                message: "Insufficient balance available",
+                message: "reason_insufficient_balance",
               ),
               ErrorMessages(
-                message: "No internet connection",
+                message: "reason_no_internet",
               )
             ],
           ),
@@ -184,7 +183,7 @@ class PaymentController extends GetxController {
                     fontSize: 14.sp,
                     useGoogleFonts: true,
                   ),
-                ))
+                ).tr())
           ]));
     } else {
       paidSccuffly = true;

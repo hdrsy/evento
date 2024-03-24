@@ -18,6 +18,7 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: customColors.secondaryBackground,
       appBar: AppBar(
+        surfaceTintColor: customColors.secondaryBackground,
         backgroundColor: customColors.secondaryBackground,
         title: Text(tr("My Events"),
             style: customTextStyle.bodyMedium
@@ -46,7 +47,7 @@ class MyEventsForOrganizerScreen extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : myRequestController.itemList.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
                       icon: Icons.email_rounded,
                       message:
                           "You haven't made any requests. Start by searching for events you're interested in!",

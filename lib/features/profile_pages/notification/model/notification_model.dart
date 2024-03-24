@@ -1,7 +1,11 @@
+import 'package:evento/core/server/helper_api.dart';
+
 class NotificationModel {
   final int id;
   final String title;
+  final String titlear;
   final String description;
+  final String descriptionar;
   final int userId;
   final int type;
   final DateTime createdAt;
@@ -9,7 +13,9 @@ class NotificationModel {
   NotificationModel({
     required this.id,
     required this.title,
+    required this.titlear,
     required this.description,
+    required this.descriptionar,
     required this.userId,
     required this.type,
     required this.createdAt,
@@ -19,7 +25,9 @@ class NotificationModel {
     return NotificationModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? '',
+        titlear: json['title_ar'] ?? '',
         description: json['description'] ?? '',
+        descriptionar: json['description_ar'] ?? '',
         userId: json['user_id'] ?? 0,
         type: json['seen_type'] ?? 0,
         createdAt: json['created_at'] != null

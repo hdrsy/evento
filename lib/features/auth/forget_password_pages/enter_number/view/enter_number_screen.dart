@@ -37,65 +37,75 @@ class EnterNumberScreen extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: customColors.secondaryBackground,
       ),
-      body: Container(
-        padding: padding(15, 24, 24, 24),
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Enter your number",
-                textAlign: TextAlign.center,
-                style: customTextStyle.titleMedium,
-              ).tr(),
-              Text(
-                " Please enter a valid number to...",
-                textAlign: TextAlign.center,
-                style: customTextStyle.bodyMedium.override(
-                  fontFamily: secondaryFontFamily,
-                  fontSize: 14,
-                  letterSpacing: 0.2,
-                  fontWeight: FontWeight.normal,
-                  useGoogleFonts: true,
+      body: Obx(
+        () => Container(
+          padding: padding(15, 24, 24, 24),
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Enter your number",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.titleMedium,
+                ).tr(),
+                Text(
+                  "Please enter a valid Syrian phone number",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.bodyMedium.override(
+                    fontFamily: secondaryFontFamily,
+                    fontSize: 14,
+                    letterSpacing: 0.2,
+                    fontWeight: FontWeight.normal,
+                    useGoogleFonts: true,
+                  ),
+                ).tr(),
+                SizedBox(
+                  height: scaleHeight(50),
                 ),
-              ).tr(),
-              SizedBox(
-                height: scaleHeight(50),
-              ),
-              Image.asset(
-                'assets/images/cuate.png',
-                height: 180,
-                fit: BoxFit.contain,
-              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
-              SizedBox(
-                height: scaleHeight(60),
-              ),
-              Form(
-                key: enterNumberController.formstate,
-                child: customTextField(
-                  context: context,
-                  label: tr("+963    mobile Phone"),
-                  onChanged: (value) {
-                    if (value != null &&
-                        !value.startsWith('0') &&
-                        value.isNotEmpty) {
-                      // Prepend '0' if it's not already there and the value is not empty
-                      enterNumberController.phone.text = '0$value';
-                    } else {
-                      enterNumberController.phone.text = value!;
-                    }
-                  },
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    return phoneValidation(value);
-                  },
+                Image.asset(
+                  'assets/images/cuate.png',
+                  height: 180,
+                  fit: BoxFit.contain,
+                ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
+                SizedBox(
+                  height: scaleHeight(60),
                 ),
-              ),
-              buildButton()
-            ].divide(const SizedBox(
-              height: 16,
-            )),
+                Form(
+                  key: enterNumberController.formstate,
+                  child: customTextField(
+                    context: context,
+                    label: tr("+963    mobile Phone"),
+                    onChanged: (value) {
+                      if (value != null &&
+                          !value.startsWith('0') &&
+                          value.isNotEmpty) {
+                        // Prepend '0' if it's not already there and the value is not empty
+                        enterNumberController.phone.text = '0$value';
+                      } else {
+                        enterNumberController.phone.text = value!;
+                      }
+                    },
+                    keyboardType: TextInputType.phone,
+                    validator: (value) {
+                      return phoneValidation(value);
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ...List.generate(
+                    enterNumberController.errorMessage.length,
+                    (index) => ErrorMessages(
+                          message: enterNumberController.errorMessage[index],
+                        )),
+                buildButton()
+              ].divide(const SizedBox(
+                height: 16,
+              )),
+            ),
           ),
         ),
       ),
@@ -107,7 +117,7 @@ class EnterNumberScreen extends StatelessWidget {
       () => Column(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
             child: ButtonWidget(
               onPressed: () async {
                 enterNumberController.getOtp();
@@ -135,14 +145,6 @@ class EnterNumberScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: scaleHeight(5),
-          ),
-          ...List.generate(
-              enterNumberController.errorMessage.length,
-              (index) => ErrorMessages(
-                    message: enterNumberController.errorMessage[index],
-                  )),
         ],
       ),
     );

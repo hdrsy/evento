@@ -22,6 +22,7 @@ class ProfileModel {
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    print("user request:$json");
     return ProfileModel(
       id: json['id'] ?? 0,
       firstName: json['first_name'] ?? '',

@@ -30,7 +30,10 @@ class RequestsList extends StatelessWidget {
                   message: "SomeThing Wrong!!",
                 )
               : controller.recivedFreinds.isEmpty
-                  ? const EmptyData(
+                  ? EmptyData(
+                      onTap: () {
+                        Get.toNamed('/AddFriendsScreen');
+                      },
                       icon: Icons.person,
                       message:
                           "No new friend requests. Send out some invites to get connected!",

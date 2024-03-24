@@ -53,86 +53,6 @@ class FullTicketInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                index != 0
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                bookNowController.removeTicket(index);
-                              },
-                              child: Icon(
-                                Icons.cancel_outlined,
-                                color: customColors.primaryText,
-                                size: 20,
-                              ))
-                        ],
-                      )
-                    : const SizedBox(),
-                bookNowController.eventDetailsModel.classes.isEmpty
-                    ? const SizedBox.shrink()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          bookNowController.eventDetailsModel.classes.length ==
-                                  1
-                              ? SizedBox.shrink()
-                              : Text(
-                                  tr("class"),
-                                  style: customTextStyle.bodyMedium.override(
-                                      fontFamily: primaryFontFamily,
-                                      fontSize: 14),
-                                ),
-                          bookNowController.eventDetailsModel.classes.length ==
-                                  1
-                              ? SizedBox.shrink()
-                              : Wrap(
-                                  children: [
-                                    ...List.generate(
-                                        bookNowController
-                                            .eventDetailsModel.classes.length,
-                                        (index) => _buildRadioOption(
-                                            bookNowController.eventDetailsModel
-                                                .classes[index]))
-                                  ],
-                                ),
-                          bookNowController.ticketList[index].selectedClass ==
-                                  null
-                              ? const SizedBox.shrink()
-                              : bookNowController.ticketList[index]
-                                      .selectedClass!.interests.isEmpty
-                                  ? const SizedBox.shrink()
-                                  : Text(tr("Select Addional options"),
-                                      style: customTextStyle.bodyMedium
-                                          .override(
-                                              fontFamily: primaryFontFamily,
-                                              fontSize: 14)),
-                          bookNowController.ticketList[index].selectedClass ==
-                                  null
-                              ? const SizedBox.shrink()
-                              : Wrap(
-                                  spacing: 8.0, // gap between adjacent chips
-                                  runSpacing: 4.0, // gap between lines
-                                  children: bookNowController.ticketList[index]
-                                      .selectedClass!.interests
-                                      .map((label) {
-                                    return ChoiceChip(
-                                      showCheckmark: false,
-                                      label: Text("+ ${label.title}"),
-                                      selected: bookNowController
-                                          .ticketList[index].selectedAminiteds
-                                          .contains(label),
-                                      selectedColor: customColors.primary,
-                                      onSelected: (bool selected) {
-                                        bookNowController
-                                            .addOrRemoveAminitesFromCladd(
-                                                label, index);
-                                      },
-                                    );
-                                  }).toList(),
-                                ),
-                        ],
-                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -150,7 +70,7 @@ class FullTicketInfo extends StatelessWidget {
                       child: Text(tr("Fill profile / Friend list data"),
                           style: customTextStyle.bodyMedium.override(
                               fontFamily: primaryFontFamily,
-                              fontSize: SizeConfig.safeBlockHorizontal * 2.5,
+                              fontSize: SizeConfig.safeBlockHorizontal * 2.7,
                               color: customColors.primary)),
                     ),
                   ],
@@ -207,20 +127,6 @@ class FullTicketInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          "+Add",
-                          style: customTextStyle.bodyMedium.override(
-                            fontFamily: 'Nunito',
-                            color: customColors.primary,
-                            fontSize: 14,
-                            useGoogleFonts: false,
-                          ),
-                        ),
-                      ].divide(SizedBox(width: 10)),
-                    ),
                     Expanded(
                       child: FlutterFlowDropDown<String>(
                         controller: bookNowController
@@ -287,7 +193,99 @@ class FullTicketInfo extends StatelessWidget {
                     label: tr("Phone Number"),
                     validator: (value) {
                       return phoneValidation(value);
-                    })
+                    }),
+                index != 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                bookNowController.removeTicket(index);
+                              },
+                              child: Icon(
+                                Icons.cancel_outlined,
+                                color: customColors.primaryText,
+                                size: 20,
+                              ))
+                        ],
+                      )
+                    : const SizedBox(),
+                bookNowController.eventDetailsModel.classes.isEmpty
+                    ? const SizedBox.shrink()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          bookNowController.eventDetailsModel.classes.length ==
+                                  1
+                              ? SizedBox.shrink()
+                              : Text(
+                                  tr("class"),
+                                  style: customTextStyle.bodyMedium.override(
+                                      fontFamily: primaryFontFamily,
+                                      fontSize: 14),
+                                ),
+                          bookNowController.eventDetailsModel.classes.length ==
+                                  1
+                              ? SizedBox.shrink()
+                              : Wrap(
+                                  children: [
+                                    ...List.generate(
+                                        bookNowController
+                                            .eventDetailsModel.classes.length,
+                                        (index) => _buildRadioOption(
+                                            bookNowController.eventDetailsModel
+                                                .classes[index]))
+                                  ],
+                                ),
+                          bookNowController.eventDetailsModel.classes.length ==
+                                  1
+                              ? SizedBox.shrink()
+                              : Text(
+                                  bookNowController.ticketList[index]
+                                      .selectedClass!.description,
+                                  style: customTextStyle.bodyMedium.override(
+                                      fontFamily: primaryFontFamily,
+                                      fontSize: 14)),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          bookNowController.ticketList[index].selectedClass ==
+                                  null
+                              ? const SizedBox.shrink()
+                              : bookNowController.ticketList[index]
+                                      .selectedClass!.interests.isEmpty
+                                  ? const SizedBox.shrink()
+                                  : Text(tr("Select Addional options"),
+                                      style: customTextStyle.bodyMedium
+                                          .override(
+                                              fontFamily: primaryFontFamily,
+                                              fontSize: 14)),
+                          bookNowController.ticketList[index].selectedClass ==
+                                  null
+                              ? const SizedBox.shrink()
+                              : Wrap(
+                                  spacing: 8.0, // gap between adjacent chips
+                                  runSpacing: 4.0, // gap between lines
+                                  children: bookNowController.ticketList[index]
+                                      .selectedClass!.interests
+                                      .map((label) {
+                                    return ChoiceChip(
+                                      showCheckmark: false,
+                                      label: Text("+ ${label.title}"),
+                                      selected: bookNowController
+                                          .ticketList[index].selectedAminiteds
+                                          .contains(label),
+                                      selectedColor: customColors.primary,
+                                      onSelected: (bool selected) {
+                                        bookNowController
+                                            .addOrRemoveAminitesFromCladd(
+                                                label, index);
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                        ],
+                      ),
               ],
             ),
           );

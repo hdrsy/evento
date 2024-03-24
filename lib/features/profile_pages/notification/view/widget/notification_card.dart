@@ -95,7 +95,11 @@ class NotificationCard extends StatelessWidget {
                               SizedBox(
                                 width: 200.w,
                                 child: Text(
-                                  removeNavigateToEnd(notificationModel.title),
+                                  Get.locale == Locale('en')
+                                      ? removeNavigateToEnd(
+                                          notificationModel.title)
+                                      : removeNavigateToEnd(
+                                          notificationModel.titlear),
                                   style: customTextStyle.bodyMedium.override(
                                     fontFamily: 'Nunito',
                                     color: customColors.primaryText,
@@ -158,7 +162,9 @@ class NotificationCard extends StatelessWidget {
                 ],
               ),
               Text(
-                removeLastWordIfInt(notificationModel.description),
+                Get.locale == Locale('en')
+                    ? removeLastWordIfInt(notificationModel.description)
+                    : removeLastWordIfInt(notificationModel.descriptionar),
                 style: customTextStyle.bodyMedium,
               ).tr(),
             ].divide(const SizedBox(height: 15)),
