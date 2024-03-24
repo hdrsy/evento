@@ -122,7 +122,7 @@ class SignInScreen extends StatelessWidget {
                             signinController.onClickSignIn();
                           },
                           text: tr(
-                              'Sign In'), // Replace with localization if needed.
+                              'Sign in'), // Replace with localization if needed.
                           options: ButtonOptions(
                             width: 400,
                             height: 45,

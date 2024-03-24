@@ -103,7 +103,8 @@ class LogoutWidget extends StatelessWidget {
                           },
                           text: tr("Yes, Logout"),
                           options: ButtonOptions(
-                            width: 120,
+                            width:
+                                logOutController.isLoading.value ? 130 : null,
                             height: 45,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 20, 0, 20, 0),

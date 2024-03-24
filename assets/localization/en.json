@@ -106,6 +106,8 @@
       "By sign in, I agree to Tables'...": "By sign in, I agree to Tables'...",
       "Data Privacy Center": "Data Privacy Center",
       "Sign in": "Sign in",
+      "By joining, I agree to Evento' Terms of Use":"By joining, I agree to Evento' Terms of Use",
+"We’ll text you on":"We’ll text you on",
       "Welcome back! Log in to continue.": "Welcome back! Log in to continue.",
       "Password": "Password",
       "By joining, I agree to Tables' Terms of Use": "By joining, I agree to Tables' Terms of Use",
@@ -130,6 +132,7 @@
   "Please enter where do you live": "Please enter where do you live",
 "Capacity":"Capacity",
   "Select State": "Select State",
+  
       "Skip":"Skip",
       "Available  Amenities":"Available  Amenities",
     "Join":"Join",
@@ -578,6 +581,7 @@
   "Website": "Website",
   "Twitter": "Twitter",
   "Instagram": "Instagram",
+  "Coupons":"Coupons",
   "No service providers available. Services will appear here as they become available.": "No service providers available. Services will appear here as they become available.",
   "Looks like there are no  events available right now - check back later!": "Looks like there are no events available right now - check back later!"
 ,"Your password must be at least 8 characters and should include a combination of numbers and letters":"Your password must be at least 8 characters and should include a combination of numbers and letters"

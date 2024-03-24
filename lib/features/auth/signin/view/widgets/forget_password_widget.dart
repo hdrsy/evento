@@ -26,7 +26,7 @@ class FogetPasswordWidget extends StatelessWidget {
               ),
             ),
             TextSpan(
-              text: tr(" send me code."),
+              text: tr("send me code."),
               style: TextStyle(
                 color: customColors.secondaryText,
                 fontSize: 12,

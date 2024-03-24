@@ -78,7 +78,7 @@ class GuestWidget extends StatelessWidget {
                       "Thank you for visiting EVENTO",
                       textAlign: TextAlign.start,
                       style: customTextStyle.bodyMedium,
-                    ),
+                    ).tr(),
                   ),
                 ].divide(const SizedBox(height: 20)),
               ),
@@ -106,7 +106,7 @@ class GuestWidget extends StatelessWidget {
                             },
                             text: tr("Join"),
                             options: ButtonOptions(
-                              width: MediaQuery.sizeOf(context).width * 0.35,
+                              // width: MediaQuery.sizeOf(context).width * 0.35,
                               height: 50,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   24, 0, 24, 0),
@@ -175,7 +175,7 @@ class GuestWidget extends StatelessWidget {
                       color: customColors.primary,
                       useGoogleFonts: false,
                     ),
-                  ),
+                  ).tr(),
                 ],
               ),
             ],

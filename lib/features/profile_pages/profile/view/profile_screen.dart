@@ -143,7 +143,7 @@ List<Widget> getnormalUserOptionsCard() => [
       OptionsCard(
         targetRout: '/AchivmentScreen',
         icon: Icons.code_sharp,
-        title: tr("Achievements"),
+        title: tr("Coupons"),
       ),
       OptionsCard(
         targetRout: LanguageSelector(),

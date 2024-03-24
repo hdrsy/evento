@@ -266,7 +266,7 @@
   "Account Type": "نوع الحساب",
   "Your Account": "حسابك",
   "Account privacy": "خصوصية الحساب",
-  "Switch to service provider": "التحويل إلى مزود خدمة",
+  "Switch to service provider": "تحويل الى حساب مزود خدمات",
   "Account Privacy": "خصوصية الحساب",
   "Private account": "حساب خاص",
   "When your account is private, only the followers you approve can see what you share, including your photos or videos on hashtag and location pages, and your followers and following lists.": "عندما يكون حسابك خاصًا، فقط المتابعون الذين توافق عليهم يمكنهم رؤية ما تشاركه، بما في ذلك صورك أو مقاطع الفيديو على صفحات الهاشتاج والموقع، وقوائم المتابعين والمتابَعين لك.",
@@ -335,10 +335,18 @@
   "New": "جديد",
   "You have successfully booked the Art Workshops. The event...": "لقد قمت بحجز ورش العمل الفنية بنجاح. الحدث...",
   "Notifications": "الإشعارات",
-  "Become an Organizer": "كن منظمًا",
+  "Become an Organizer": "تحويل الى حساب منظم حفلات",
   "Account": "الحساب",
   "organizer": "منظم",
   "guest": "ضيف",
+  "We’ll text you on":"سنرسل لك رسالة نصية على"
+
+,"Please enter where do you live":"يرجى إدخال مكان إقامتك"
+,
+"Enter your location":"أدخل موقعك"
+
+,
+  "By joining, I agree to Evento' Terms of Use":"بالانضمام، أوافق على شروط استخدام إيفينتو",
   "Fill My Data": "املأ بياناتي",
   "My Events": "فعالياتي",
   "SomeThing Wrong!!": "هناك شيء خاطئ!!",
@@ -545,7 +553,7 @@
   "No service providers available. Services will appear here as they become available.": "لا يوجد مقدمي خدمات متاحين. الخدمات ستظهر هنا كما تصبح متاحة.",
   "Looks like there are no  events available right now - check back later!": "يبدو أنه لا توجد فعاليات متاحة الآن - تحقق مرة أخرى لاحقًا!"
 
-
+,"Coupons":"كودات الحسم"
 
 ,  "Your password must be at least 8 characters and should include a combination of numbers and letters":"يجب أن تكون كلمة المرور الخاصة بك مكونة من 8 أحرف على الأقل وأن تتضمن مزيجًا من الأرقام والحروف"
                     

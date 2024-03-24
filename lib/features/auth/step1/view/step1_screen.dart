@@ -30,7 +30,7 @@ class Step1Screen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "We’ll text you on ${step1controller.phone}.",
+                "${tr("We’ll text you on")} ${step1controller.phone}.",
                 textAlign: TextAlign.center,
                 style: customTextStyle.bodyMedium.copyWith(
                   fontFamily: 'BeerSerif',
