@@ -38,7 +38,7 @@ class ContactUs extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  tr("powered by "),
+                  tr("powered by  "),
                   style: customTextStyle.bodyMedium
                       .copyWith(fontSize: 16, color: customColors.primaryText),
                 ),
@@ -47,7 +47,7 @@ class ContactUs extends StatelessWidget {
                       _launchURL();
                     },
                     child: Text(
-                      'HDR',
+                      'HDR Group',
                       style: customTextStyle.bodyMedium
                           .copyWith(fontSize: 16, color: customColors.primary),
                     ))

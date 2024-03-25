@@ -37,6 +37,10 @@ class ReelsController extends PaginationController<ReelModel> {
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());
+    itemList.any((element) {
+      print(element.videos);
+      return true;
+    });
     currentUserIndex = 0;
     if (pageId == lastPageId) {
       hasMoreData.value = false;
