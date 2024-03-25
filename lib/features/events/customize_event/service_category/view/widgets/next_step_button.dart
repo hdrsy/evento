@@ -21,13 +21,13 @@ class NextStepButton extends StatelessWidget {
           Get.toNamed('/dateTimeScreen');
         } else {
           if (!isDoneone) {
-            snakBarForError(tr("Please select at least one service provider"));
+            snakBarForError(tr("select_service_provider"));
           } else {
-            snakBarForError(tr("Please Select Your Venue First"));
+            snakBarForError(tr("select_venue_first"));
           }
         }
       },
-      text: "Next ",
+      text: tr("Next"),
       options: ButtonOptions(
         height: 40,
         padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),

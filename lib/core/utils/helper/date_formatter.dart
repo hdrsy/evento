@@ -14,7 +14,7 @@ class DateFormatter {
   // Formats a DateTime object into a time string.
   static String formatTime(DateTime dateTime) {
     // You can customize the time format string as needed
-    DateFormat timeFormat = DateFormat('HH:mm a', Get.locale.toString());
+    DateFormat timeFormat = DateFormat('h:mm a', Get.locale.toString());
     return timeFormat.format(dateTime);
   }
 

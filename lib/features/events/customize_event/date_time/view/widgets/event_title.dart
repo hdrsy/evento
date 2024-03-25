@@ -1,6 +1,7 @@
 import 'package:evento/core/shared/functions/validation/name_validation.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../controller/date_time_controller.dart';
 import 'text_field_contact_information.dart';
@@ -35,8 +36,8 @@ class EventTitle extends StatelessWidget {
           ),
         ),
         Container(
-          width: 360,
-          height: 45,
+          width: 360.w,
+          height: 60.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(

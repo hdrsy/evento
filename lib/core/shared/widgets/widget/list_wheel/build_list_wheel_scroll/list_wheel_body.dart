@@ -72,24 +72,32 @@ class _ListWheelBodyState extends State<ListWheelBody> {
             context: context,
             onPressedSubmit: () {
               final DateTimeController dateTimeController = Get.find();
-              // String selectedTime =
-              //       "${_hoursController.selectedItem + 1}:${_minutesController.selectedItem} ${_ampmController.selectedItem==0?"Am":"Pm"} ";
               int selectedHour =
                   _hoursController.selectedItem + 1; // Hours are 1-12
               int selectedMinute =
                   _minutesController.selectedItem; // Minutes are 0-59
               bool isAm = _ampmController.selectedItem == 0;
+
               DateTime now = DateTime.now();
+              // First, correct the hour based on the AM/PM selection BEFORE creating the DateTime
+              // Adjust the hour based on AM/PM BEFORE constructing the DateTime object
+              if (!isAm) {
+                // It's PM
+                if (selectedHour < 12) {
+                  // If it's not 12 PM (which is already in 24-hour format as 12), convert to 24-hour by adding 12
+                  selectedHour += 12;
+                  print("the selected date is :$selectedHour");
+                }
+              } else {
+                // It's AM
+                if (selectedHour == 12) {
+                  // If it's 12 AM, convert to 0 to comply with 24-hour format
+                  selectedHour = 0;
+                }
+                // No adjustment needed for 1-11 AM as they directly map to 1-11 in 24-hour time
+              }
               DateTime selectedDateTime = DateTime(
                   now.year, now.month, now.day, selectedHour, selectedMinute);
-
-              if (!isAm && selectedHour != 12) {
-                // PM and not 12 PM
-                selectedHour += 12;
-              } else if (isAm && selectedHour == 12) {
-                // 12 AM
-                selectedHour = 0;
-              }
 
               if (widget.isStartTime) {
                 dateTimeController.startTime = selectedDateTime;
@@ -196,6 +204,7 @@ class _ListWheelBodyState extends State<ListWheelBody> {
             physics: const FixedExtentScrollPhysics(),
             controller: _ampmController,
             onSelectedItemChanged: (index) {
+              print("the apm : $index");
               setState(() {});
             },
             childDelegate: ListWheelChildBuilderDelegate(

@@ -68,7 +68,7 @@ class MainImage extends StatelessWidget {
                             child: CardsVideoWidget(
                                 autoPlay: true,
                                 currentVideoUrl:
-                                    "${ServerConstApis.baseAPI}/storage/${videosUrl[videoIndex]}",
+                                    "${ServerConstApis.baseAPIImage}/storage/${videosUrl[videoIndex]}",
                                 soundControlCallback: () => true,
                                 videoHgiht: double.infinity,
                                 videoWidth: double.infinity)),

@@ -1,9 +1,9 @@
 import 'package:evento/core/const/share_event_and_app.dart';
-import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
-import '../../../../../core/utils/helper/flutter_flow_util.dart';
-import '../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../core/shared/widgets/buttons/toggle_icon.dart';
+import '../../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
 import '../../../controller/reels_controller.dart';
-import '../../../../../main.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,7 +79,7 @@ Widget commentShareLike(int modelIndex) {
 
           GestureDetector(
             onTap: () async {
-              await shareApp(null);
+              await shareReel(reelsController.itemList[modelIndex].id);
             },
             child: Container(
               decoration: const BoxDecoration(),

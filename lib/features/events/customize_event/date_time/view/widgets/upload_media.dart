@@ -85,14 +85,27 @@ class UploadMedia extends StatelessWidget {
                     children: [
                       ...List.generate(
                         dateTimeController.media.length,
-                        (index) => ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.file(
-                            dateTimeController.media[index],
-                            width: 95,
-                            height: 95,
-                            fit: BoxFit.cover,
-                          ),
+                        (index) => Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                dateTimeController.media[index],
+                                width: 95,
+                                height: 95,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                                top: -5,
+                                right: -5,
+                                child: IconButton(
+                                    onPressed: () {
+                                      dateTimeController.media.removeAt(index);
+                                    },
+                                    icon: Icon(Icons.cancel_outlined,
+                                        color: Colors.black))),
+                          ],
                         ),
                       )
                     ],

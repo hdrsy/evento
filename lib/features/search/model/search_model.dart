@@ -15,6 +15,7 @@ class SearchModel {
       required this.startDate,
       required this.images});
   factory SearchModel.fromJson(Map<String, dynamic> oldJson) {
+    print("the search :${oldJson}");
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
     return SearchModel(
         id: json['id'] ?? 0,

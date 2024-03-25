@@ -231,7 +231,7 @@ class FeaturedWidget extends StatelessWidget {
                       soundControlCallback: () =>
                           featuredListController.sound(),
                       currentVideoUrl:
-                          "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                          "${ServerConstApis.baseAPIImage}/storage/${eventModel.videos[0]}",
                       videoHgiht: 190,
                       videoWidth: double.infinity,
                     ),

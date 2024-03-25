@@ -195,7 +195,7 @@ class MoreEventsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 20.h,
+                          height: 30.h,
                           child: marqueeTitle(relatedEventModel.title),
                         ),
                         // Icon(

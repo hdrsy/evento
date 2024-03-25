@@ -1,3 +1,4 @@
+import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:marquee/marquee.dart';
 
@@ -17,7 +18,6 @@ import 'home_loading_widget.dart';
 import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class EventsFromOrganizer extends StatelessWidget {
@@ -124,7 +124,8 @@ class EventsFromOrganizer extends StatelessWidget {
                   eventModel.title,
                   DateFormatter.formatDate(eventModel.startDate),
                   DateFormatter.formatTime(eventModel.startDate),
-                  modelIndex),
+                  modelIndex,
+                  eventModel.id),
             ],
           ),
         ),
@@ -209,8 +210,8 @@ class EventsFromOrganizer extends StatelessWidget {
   }
 
 // Function to build the event details section
-  Widget buildEventDetails(
-      String eventName, String eventDate, String eventTime, int modelIndex) {
+  Widget buildEventDetails(String eventName, String eventDate, String eventTime,
+      int modelIndex, int eventId) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       child: Column(
@@ -218,7 +219,7 @@ class EventsFromOrganizer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildEventTitle(eventName, modelIndex),
+          buildEventTitle(eventName, modelIndex, eventId),
           buildEventDate(eventDate),
           buildEventTimeAndArrow(
             eventTime,
@@ -229,7 +230,7 @@ class EventsFromOrganizer extends StatelessWidget {
   }
 
 // Function to build the event title
-  Widget buildEventTitle(String eventName, int modelIndex) {
+  Widget buildEventTitle(String eventName, int modelIndex, int eventId) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -255,7 +256,7 @@ class EventsFromOrganizer extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-        buildShareAndFavoriteIcons(modelIndex),
+        buildShareAndFavoriteIcons(modelIndex, eventId),
       ],
     );
   }
@@ -293,24 +294,22 @@ class EventsFromOrganizer extends StatelessWidget {
   }
 
 // Function to build share and favorite icons
-  Widget buildShareAndFavoriteIcons(int modelIndex) {
+  Widget buildShareAndFavoriteIcons(int modelIndex, int eventId) {
     return Row(
       children: [
-        buildShareIcon(),
+        buildShareIcon(eventId),
         buildFavoriteToggleButton(modelIndex),
       ],
     );
   }
 
 // Function to build the share icon
-  Widget buildShareIcon() {
+  Widget buildShareIcon(int eventId) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
       child: GestureDetector(
         onTap: () async {
-          await Share.share(
-            tr('Check out this event in Evento'),
-          );
+          await shareApp(eventId);
         },
         child: Icon(
           Icons.share_rounded,

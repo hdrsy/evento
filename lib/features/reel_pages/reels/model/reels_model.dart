@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import '../../events/event_detailes/model/event_detailes_model.dart';
-import '../../events/home/model/event_model.dart';
+import '../../../events/event_detailes/model/event_detailes_model.dart';
+import '../../../events/home/model/event_model.dart';
 
 class ReelModel {
   final int id;

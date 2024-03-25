@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
+// import 'package:evento/core/utils/services/deep_linking.dart';
 import 'package:evento/core/utils/services/pushy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
+import 'package:uni_links/uni_links.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -14,7 +16,10 @@ import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'core/utils/services/deep_linking.dart';
 
 RxBool isThereNotification = false.obs;
 SharedPreferences? sharedPreferences;
@@ -42,6 +47,15 @@ void main() async {
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
+  final initialLink = await getInitialLink();
+  _handleLink(initialLink);
+
+  // Listen for new links if the app is already opened
+  linkStream.listen((String? link) {
+    _handleLink(link);
+  }, onError: (err) {
+    // Handle error scenarios
+  });
   // Start the Pushy service
   Pushy.listen();
 
@@ -68,6 +82,26 @@ void main() async {
           'assets/localization', // <-- change the path of the translation files
       fallbackLocale: const Locale('en'),
       child: const MyApp()));
+  // CustomDeepLinkService deepLinkService = CustomDeepLinkService();
+  // await deepLinkService.initUniLinks();
+}
+
+void _handleLink(String? link) {
+  if (link != null && link.contains('/#/ShowReelScreen')) {
+    Uri uri = Uri.parse(link);
+    String? id = uri.queryParameters['id'];
+    if (id != null) {
+      Get.context != null
+          ?
+          // Use GetX's navigation method to navigate
+          Get.toNamed('/ShowReelScreen', parameters: {'id': id})
+          : Future.delayed(Duration(seconds: 2), () {
+              Get.toNamed('/ShowReelScreen', parameters: {'id': id});
+            });
+
+      print("Navigate to ShowReelScreen with ID: $id");
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {

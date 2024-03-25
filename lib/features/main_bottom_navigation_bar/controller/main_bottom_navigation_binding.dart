@@ -5,7 +5,7 @@ import 'package:evento/features/events/home/controller/event_state_manager.dart'
 import '../../events/home/controller/home_controller.dart';
 import 'main_bottom_navigation_controller.dart';
 import '../../profile_pages/profile/controller/profile_controller.dart';
-import '../../reels/controller/reels_controller.dart';
+import '../../reel_pages/reels/controller/reels_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

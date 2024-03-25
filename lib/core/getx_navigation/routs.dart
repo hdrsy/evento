@@ -44,6 +44,7 @@ import 'package:evento/features/organizer/organization_profile/view/organization
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/view/show_all_booking_in_event_for_organizer_screen.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/view/ticket_in_event_for_organization_screen.dart';
 import 'package:evento/features/payment/view/payment_screen.dart';
+import 'package:evento/features/reel_pages/show_reel/view/reels_screen.dart';
 import 'package:evento/features/service_provider/show_profile_for_user.dart/service_according_detailes_screen.dart';
 import 'package:evento/features/venue/venue_detailes/view/venue_detailes_screen.dart';
 
@@ -308,4 +309,5 @@ appRoutes() => [
           name: '/PaymentScreenInBooking',
           page: () => PaymentScreenInBooking()),
       // GetPage(name: '/vedioReels', page:()=> VedioReels()) ,
+      GetPage(name: '/ShowReelScreen', page: () => ShowReelScreen()),
     ];

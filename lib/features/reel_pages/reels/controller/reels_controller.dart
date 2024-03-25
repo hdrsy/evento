@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/follow_unfollow_event_api.dart';
 import 'package:flutter/material.dart';
-import '../../../core/server/helper_api.dart';
-import '../../../core/server/server_config.dart';
-import '../../../core/shared/controllers/pagination_controller.dart';
-import '../../../core/utils/error_handling/erroe_handling.dart';
+import '../../../../core/server/helper_api.dart';
+import '../../../../core/server/server_config.dart';
+import '../../../../core/shared/controllers/pagination_controller.dart';
+import '../../../../core/utils/error_handling/erroe_handling.dart';
 import '../model/reels_model.dart';
-import '../../../main.dart';
+import '../../../../main.dart';
 
 class ReelsController extends PaginationController<ReelModel> {
   ReelsController()
@@ -33,6 +33,7 @@ class ReelsController extends PaginationController<ReelModel> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
     lastPageId = handlingResponse['reels']['last_page'];
+    print(handlingResponse);
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());

@@ -506,6 +506,14 @@
 "Yes, a dedicated team is available for inquiries and assistance through multiple channels.":
 "Yes, a dedicated team is available for inquiries and assistance through multiple channels."
 ,
+"Choose Sourse":"Choose Sourse",
+"Camera":"Camera",
+"am":"am",
+"pm":"pm",
+"The end time must be later than the start time. Please adjust your selection to continue.":"The end time must be later than the start time. Please adjust your selection to continue.",
+"Time Selection Error":"Time Selection Error",
+"select_service_provider": "Please select at least one service provider",
+    "select_venue_first": "Please Select Your Venue First",
   "editFolderName": "Edit Folder Name",
   "tickets": "Tickets",
   "selectOptionsBelow": "Select Options Below",

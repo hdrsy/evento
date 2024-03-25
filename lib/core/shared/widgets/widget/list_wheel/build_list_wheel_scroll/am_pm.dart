@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +19,12 @@ class AmPm extends StatelessWidget {
           isItAm == true ? 'am' : 'pm',
           style: TextStyle(
             fontSize: 20,
-             color:   isCenterItem?customColors.primaryBtnText:customColors.primaryText
-      ,fontWeight: FontWeight.bold,
+            color: isCenterItem
+                ? customColors.primaryBtnText
+                : customColors.primaryText,
+            fontWeight: FontWeight.bold,
           ),
-        ),
+        ).tr(),
       ),
     );
   }

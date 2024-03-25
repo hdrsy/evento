@@ -2,6 +2,7 @@ import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../controller/venue_detailes_controller.dart';
 import 'widgets/detailes_card.dart';
@@ -70,7 +71,7 @@ class VenueDetailesScreen extends StatelessWidget {
                     NameCheckBox(
                       venue: venueDetailesController.venue,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.h),
                     Expanded(child: TabBarGalleryAndDetailes())
                   ],
                 ),

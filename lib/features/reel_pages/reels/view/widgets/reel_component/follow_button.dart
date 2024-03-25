@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/colors/app_colors.dart';
 
-import 'package:evento/features/reels/controller/reels_controller.dart';
+import 'package:evento/features/reel_pages/reels/controller/reels_controller.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/shared/widgets/buttons/general_button.dart';
-import '../../../../../core/utils/theme/text_theme.dart';
-import '../../../../../main.dart';
+import '../../../../../../core/shared/widgets/buttons/general_button.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 Widget followButton(int modelIndex) {

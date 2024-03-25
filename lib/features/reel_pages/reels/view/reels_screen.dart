@@ -1,5 +1,5 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
-import 'package:evento/features/reels/view/widgets/reel_component/reels_shimmer.dart';
+import 'package:evento/features/reel_pages/reels/view/widgets/reel_component/reels_shimmer.dart';
 
 import '../controller/reels_controller.dart';
 import 'widgets/reel_widget.dart';

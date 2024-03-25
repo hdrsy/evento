@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/main.dart';
 
@@ -21,6 +22,7 @@ class DateTimeController extends GetxController {
   late DateTime endTime;
   late GlobalKey<FormState> formstate;
   bool isUserEnterDateInfo = false;
+  bool isStartEndDateValid = false;
   late RxList<String> errorMessage;
   RxBool isEdit = false.obs;
 
@@ -61,10 +63,10 @@ class DateTimeController extends GetxController {
   }
 
   onPressedNext() {
+    isStartEndDateValid = endTime.isAfter(startTime);
     if (date > DateTime.now() &&
         (adultNumber > 0 || childrenNumber > 0) &&
-        startTime != "00:00 Am" &&
-        endTime != "00:00 Am") {
+        isStartEndDateValid) {
       isUserEnterDateInfo = true;
     }
     FormState? formdata = formstate.currentState;
@@ -76,10 +78,19 @@ class DateTimeController extends GetxController {
         Get.toNamed('/EventReviewScreen');
       }
     } else {
-      Get.snackbar("Uncomplete data", "Please fill all the required data",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: customColors.primaryBackground,
-          colorText: customColors.primaryText);
+      if (!isStartEndDateValid) {
+        Get.snackbar(tr("Time Selection Error"),
+            tr("The end time must be later than the start time. Please adjust your selection to continue."),
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: customColors.primaryBackground,
+            colorText: customColors.primaryText);
+      } else {
+        Get.snackbar(
+            tr("Uncomplete data"), tr("Please fill all the required data"),
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: customColors.primaryBackground,
+            colorText: customColors.primaryText);
+      }
     }
   }
 

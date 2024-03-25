@@ -20,7 +20,7 @@ class ProccessToPaymentButton extends StatelessWidget {
           eventReviewController.onPressDone();
         },
         showLoadingIndicator: eventReviewController.isLoading.value,
-        text: tr("Proceed to Payment"),
+        text: tr("Done"),
         options: ButtonOptions(
           height: 40,
           width: screenWidth * 0.5,

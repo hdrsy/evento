@@ -1,9 +1,11 @@
+import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/widget/rate_event_widget.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/customize_event/venue/model/venue_model.dart';
 import 'package:evento/main.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../controller/venue_detailes_controller.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +25,22 @@ class NameCheckBox extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          venue.name,
-          style: customTextStyle.headlineSmall,
-        ).tr(),
+        SizedBox(
+          width: screenWidth * 0.60,
+          height: screenHeight * 0.03,
+          child: venue.name.length > 30
+              ? Marquee(
+                  text: venue.name,
+                  scrollAxis: Axis.horizontal,
+                  blankSpace: 20.0,
+                  velocity: 70.0,
+                  pauseAfterRound: const Duration(seconds: 3),
+                  style: customTextStyle.headlineSmall)
+              : Text(
+                  venue.name,
+                  style: customTextStyle.headlineSmall,
+                ),
+        ),
         GestureDetector(
           onTap: () async {
             // context.pushNamed('Services');

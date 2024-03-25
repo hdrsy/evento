@@ -162,7 +162,7 @@ class TrendingNow extends StatelessWidget {
                 child: CardsVideoWidget(
                   soundControlCallback: () => false,
                   currentVideoUrl:
-                      "${ServerConstApis.baseAPI}/storage/${eventModel.videos[0]}",
+                      "${ServerConstApis.baseAPIImage}/storage/${eventModel.videos[0]}",
                   videoHgiht: 240,
                   videoWidth: double.infinity,
                 ),

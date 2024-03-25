@@ -14,7 +14,7 @@ getImageNetwork(
     AlignmentGeometry? alignmentGeometry}) {
   String cleanUrl = url.contains("storage") ? url : "/storage/$url";
   return Image.network(
-    ServerConstApis.baseAPI + cleanUrl,
+    ServerConstApis.baseAPIImage + cleanUrl,
     width: width,
     alignment: alignmentGeometry ?? Alignment.center,
     height: height,
@@ -60,7 +60,7 @@ getImageNetworkforCahing({
   Alignment? alignmentGeometry,
 }) {
   String cleanUrl = url.contains("storage") ? url : "/storage/$url";
-  final fullUrl = ServerConstApis.baseAPI + cleanUrl;
+  final fullUrl = ServerConstApis.baseAPIImage + cleanUrl;
 
   return CachedNetworkImage(
     imageUrl: fullUrl,
@@ -80,15 +80,17 @@ getImageNetworkforCahing({
         color: Colors.white,
       ),
     ),
-    errorWidget: (context, url, error) => SizedBox(
-      width: width,
-      height: height,
-      child: Center(
-        child: Icon(
-          Icons.error, // or any other icon or widget
+    errorWidget: (context, url, error) {
+      return SizedBox(
+        width: width,
+        height: height,
+        child: Center(
+          child: Icon(
+            Icons.error, // or any other icon or widget
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }
 
@@ -100,7 +102,7 @@ getImageNetworkImageProvider({
   Alignment? alignmentGeometry,
 }) {
   String cleanUrl = url.contains("storage") ? url : "/storage/$url";
-  final fullUrl = ServerConstApis.baseAPI + cleanUrl;
+  final fullUrl = ServerConstApis.baseAPIImage + cleanUrl;
 
   return CachedNetworkImageProvider(
     fullUrl,

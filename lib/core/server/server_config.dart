@@ -1,8 +1,9 @@
 class ServerConstApis {
-  static String baseAPI = 'http://94.141.219.13:8000';
+  static String baseAPI = 'https://evento.sy';
+  // static String baseAPI = 'http://94.141.219.13:8000';
   // static String baseAPI = 'http://10.0.2.2:8000';
   // static String baseAPI = 'http://127.0.0.1:8000';
-  static String baseAPIImage = 'http://127.0.0.1:8000';
+  static String baseAPIImage = 'http://94.141.219.13:8000';
   // static String baseAPI = 'http://192.168.100.7:8000';
 
 ///// auth
@@ -76,6 +77,7 @@ class ServerConstApis {
   static String myFavoriteEvents = '$baseAPI/api/my_favorite';
   //// reels
   static String getReels = '$baseAPI/api/reels';
+  static String showReel = '$baseAPI/api/reels-show';
   static String likeReel = '$baseAPI/api/reels';
   //// notification
   static String getNotification = '$baseAPI/api/notification';

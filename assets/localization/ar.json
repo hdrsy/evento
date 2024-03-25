@@ -554,8 +554,18 @@
   ,
   "SomeThing Wrong !. Try again later":"هناك خطأ ما!. حاول مرة أخرى لاحقًا."
 ,
+"Select Options Below":"اختر الخيارات أدناه",
 "Switch to a organizer account?":"التحويل إلى حساب منظم؟"
 ,
+
+"The end time must be later than the start time. Please adjust your selection to continue.":"يجب أن يكون وقت النهاية أحدث من وقت البداية. يرجى تعديل اختيارك للمتابعة.",
+"Time Selection Error":"خطأ في اختيار الوقت",
+"Choose Sourse":"اختر المصدر",
+"Camera":"كاميرا",
+"pm":"م",
+"am":"ص",
+"select_service_provider": "الرجاء اختيار مزود خدمة واحد على الأقل",
+"select_venue_first": "الرجاء اختيار مكانك أولاً",
   "My Gallery": "معرضي",
   "Add new Gallery": "اضافة معرض جديد" ,
   "Current password": "كلمة المرور الحالية",

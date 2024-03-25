@@ -7,6 +7,7 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> newJson = removeDuplicateKeysAr(json);
+    print("the ee:${newJson}");
     return CategoryModel(
       id: newJson['id'] ?? 0,
       title: newJson['title'] ?? '',

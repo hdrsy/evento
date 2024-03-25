@@ -3,10 +3,10 @@
 import 'package:evento/core/colors/app_colors.dart';
 import 'package:evento/core/shared/widgets/video/reels_video_listview.dart';
 
-import '../../../../core/responsive/responsive.dart';
-import '../../../../core/utils/helper/date_formatter.dart';
-import '../../../../core/utils/helper/flutter_flow_util.dart';
-import '../../../../core/utils/theme/text_theme.dart';
+import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/utils/helper/date_formatter.dart';
+import '../../../../../core/utils/helper/flutter_flow_util.dart';
+import '../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/reels_controller.dart';
 import '../../model/reels_model.dart';
 import 'reel_component/comment_like_share.dart';
@@ -14,7 +14,7 @@ import 'reel_component/follow_button.dart';
 import 'reel_component/reels_shimmer.dart';
 import 'reel_component/user_name.dart';
 import 'reel_component/user_photo.dart';
-import '../../../../main.dart';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

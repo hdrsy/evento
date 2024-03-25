@@ -63,15 +63,14 @@ Widget dropDown(BuildContext context) {
       iconStyleData: IconStyleData(
         iconEnabledColor: customColors.info, // your theme color here
       ),
-      onChanged: (Language? newValue) {
+      onChanged: (Language? newValue) async {
         // Use EasyLocalization context here
         Locale newLocale =
             newValue!.languageCode == 'en' ? Locale('en') : Locale('ar');
-        context.setLocale(newLocale);
-        Get.updateLocale(newLocale);
+        await context.setLocale(newLocale);
+        await Get.updateLocale(newLocale);
         prefService.createString(
             "language_code", newValue.languageCode == 'en' ? 'en' : 'ar');
-        // Get.offAllNamed('/home')
         Get.find<HomeController>().onrefresh();
       },
       items: languages.map<DropdownMenuItem<Language>>((Language language) {

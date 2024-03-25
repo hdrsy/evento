@@ -31,6 +31,7 @@ class MapController extends GetxController {
   void onInit() async {
     super.onInit();
     customIcon = await getCustomMarker();
+
     await getSuggestModels(); // Assumes this now properly initializes `myMarker`
     // Indicate that everything is ready
   }

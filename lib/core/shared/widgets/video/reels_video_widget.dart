@@ -4,7 +4,7 @@ import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:smooth_video_progress/smooth_video_progress.dart';
 
 import '../../controllers/tween_animation_controller.dart';
-import '../../../../features/reels/controller/reels_controller.dart';
+import '../../../../features/reel_pages/reels/controller/reels_controller.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

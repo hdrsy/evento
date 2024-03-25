@@ -2,8 +2,8 @@ import 'package:evento/core/colors/app_colors.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:marquee/marquee.dart';
 
-import '../../../../../core/utils/theme/text_theme.dart';
-import '../../../../../main.dart';
+import '../../../../../../core/utils/theme/text_theme.dart';
+import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 Widget userName(String userName) {

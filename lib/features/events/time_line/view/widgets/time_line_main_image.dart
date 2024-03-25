@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../main.dart';
@@ -14,7 +16,7 @@ class TimeLineMainImage extends StatelessWidget {
       alignment: const AlignmentDirectional(0.00, 0.00),
       child: SizedBox(
         width: double.infinity,
-        height: 300,
+        height: 300.h,
         // color: Colors.amber,
         child: GestureDetector(
           onTap: () async {
@@ -50,8 +52,9 @@ class TimeLineMainImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: getImageNetwork(
                       url: imgUrl, width: double.infinity, height: null)),
-              Align(
-                alignment: const AlignmentDirectional(-0.9, -0.9),
+              Positioned(
+                top: 25.w,
+                right: 20.w,
                 child: Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   color: const Color(0x3A000000),

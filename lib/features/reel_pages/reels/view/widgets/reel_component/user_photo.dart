@@ -1,5 +1,5 @@
 import 'package:evento/core/shared/widgets/images/network_image.dart';
-import 'package:evento/features/reels/model/reels_model.dart';
+import 'package:evento/features/reel_pages/reels/model/reels_model.dart';
 import 'package:flutter/material.dart';
 
 Container userPhoto(ReelModel model) {

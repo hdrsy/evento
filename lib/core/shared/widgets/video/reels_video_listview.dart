@@ -4,7 +4,7 @@ import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
-import 'package:evento/features/reels/controller/reels_controller.dart';
+import 'package:evento/features/reel_pages/reels/controller/reels_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -128,7 +128,9 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
         widget.videos.length,
         (index) => BetterPlayerDataSource(
               BetterPlayerDataSourceType.network,
-              "${ServerConstApis.baseAPI}/storage/${widget.videos[index]}",
+              widget.videos[index],
+              liveStream: true,
+              videoFormat: BetterPlayerVideoFormat.hls,
               cacheConfiguration: const BetterPlayerCacheConfiguration(
                 useCache: true,
                 maxCacheSize: 100 * 1024 * 1024, // e.g., 100MB

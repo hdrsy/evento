@@ -4,6 +4,7 @@ import 'package:evento/features/gallery/controller/gallery_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ShowInFullScreen extends StatelessWidget {
@@ -40,8 +41,17 @@ class GalleryMediaWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return galleryItem.isVideo
         ? VideoWidget(video: galleryItem.url)
-        : getImageNetworkforCahing(
-            url: "/storage/${galleryItem.url}", width: null, height: null);
+        : PhotoView(
+            imageProvider: getImageNetworkImageProvider(
+                url: "/storage/${galleryItem.url}", width: null, height: null),
+            backgroundDecoration: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            minScale: PhotoViewComputedScale.contained * 0.8,
+            maxScale: PhotoViewComputedScale.covered * 2,
+            enableRotation:
+                false, // Set to true if you want to enable rotation.
+          );
   }
 }
 
@@ -61,7 +71,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
-        Uri.parse("${ServerConstApis.baseAPI}/storage/${widget.video}"))
+        Uri.parse("${ServerConstApis.baseAPIImage}/storage/${widget.video}"))
       ..initialize().then((_) {
         _controller.setVolume(100);
         _controller.play();
