@@ -20,7 +20,7 @@ Widget buildMainStack(BuildContext context) {
           // Container for the first item (Male)
           _buildItemContainer(
               context,
-              tr('Male'),
+              'Male',
               stepsController.isMale.value
                   ? customColors.primary
                   : Colors.white,
@@ -30,7 +30,7 @@ Widget buildMainStack(BuildContext context) {
           // // Container for the second item (Female)
           _buildItemContainer(
               context,
-              tr('Female'),
+              'Female',
               stepsController.isMale.value
                   ? Colors.white
                   : customColors.primary,
@@ -49,10 +49,10 @@ Widget _buildItemContainer(BuildContext context, String localizationKey,
   return GestureDetector(
     onTap: () {
       StepsController stepsController = Get.find();
-      stepsController.isMale.value = localizationKey == tr("Male");
+      stepsController.isMale.value = localizationKey == "Male";
     },
     child: Stack(
-      alignment: localizationKey == tr("Female")
+      alignment: localizationKey == "Female"
           ? const Alignment(-1, 0) // Changed to Alignment
           : const Alignment(1, 0),
       children: [
@@ -74,15 +74,15 @@ Widget _buildItemContainer(BuildContext context, String localizationKey,
             padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: localizationKey == tr("Female")
+              mainAxisAlignment: localizationKey == "Female"
                   ? MainAxisAlignment.start
                   : MainAxisAlignment.end,
-              crossAxisAlignment: localizationKey == tr("Female")
+              crossAxisAlignment: localizationKey == "Female"
                   ? CrossAxisAlignment.center
                   : CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: localizationKey == tr("Female")
+                  alignment: localizationKey == "Female"
                       ? const AlignmentDirectional(1, 0)
                       : const AlignmentDirectional(-1, 0),
                   child: Text(
@@ -92,14 +92,14 @@ Widget _buildItemContainer(BuildContext context, String localizationKey,
                       color: textColor,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                 ),
               ],
             ),
           ),
         ),
         Image.asset(
-          localizationKey == tr("Female")
+          localizationKey == "Female"
               ? 'assets/images/Group_17613_(1).png'
               : 'assets/images/character-1_(1).png',
           width: scaleWidth(150),

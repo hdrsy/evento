@@ -24,7 +24,7 @@ class SearchPageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _fetchData(""); // Fetch initial data with empty query
+    _fetchData(" "); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
     getRecentSearch();
   }

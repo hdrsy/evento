@@ -77,7 +77,7 @@ class SelectState extends StatelessWidget {
                     onPressed: () async {
                       Get.back();
                     },
-                    text: "Cancel",
+                    text: tr("Cancel"),
                     options: ButtonOptions(
                       width: 120,
                       height: 45,

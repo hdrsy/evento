@@ -17,46 +17,32 @@ class ElementWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 290,
-                // height: 45,
-                decoration: BoxDecoration(
-                  color: customColors.primaryBackground,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: customColors.primaryBackground,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      mapController.isSearchActive.value = true;
-                    },
-                    child: SearchFieldWithFiltering(
-                        controller: mapController.searchField,
-                        onChanged: (value) {
-                          mapController.onPressSearch(value);
-                        },
-                        onApplyFilters: (filters) {
-                          mapController.onApplyFilters(filters);
-                        }),
-                  ),
-                ),
+          child: Container(
+            width: double.infinity,
+            // height: 45,
+            decoration: BoxDecoration(
+              color: customColors.primaryBackground,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: customColors.primaryBackground,
               ),
-              // IconWithContainer(
-              //   borderRadius: 10,
-              //   iconColor: customColors.secondaryBackground,
-              //   buttonSize: 45,
-              //   backgroundColor: customColors.secondaryText,
-              //   icon: Icons.location_searching,
-              //   onTap: () {},
-              // ),
-            ].divide(const SizedBox(width: 20)),
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+              child: GestureDetector(
+                onTap: () {
+                  mapController.isSearchActive.value = true;
+                },
+                child: SearchFieldWithFiltering(
+                    controller: mapController.searchField,
+                    onChanged: (value) {
+                      // mapController.onPressSearch(value);
+                    },
+                    onApplyFilters: (filters) {
+                      mapController.onApplyFilters(filters);
+                    }),
+              ),
+            ),
           ),
         ),
       ],

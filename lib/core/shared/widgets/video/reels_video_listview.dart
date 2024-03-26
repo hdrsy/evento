@@ -100,6 +100,8 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
           _betterPlayerController.setOverriddenAspectRatio(
               _betterPlayerController.videoPlayerController!.value.aspectRatio);
         });
+        print(
+            "video size:${_betterPlayerController.videoPlayerController!.value.size}");
       }
       if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
         // Handle the error, e.g., show a Snackbar with an error message
@@ -117,8 +119,6 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
         } else {
           widget.reelsController.nextUserPage();
         }
-        // widget.reelsController
-        //     .playNextVideo(widget.modelIndex, widget.videoIndex);
       }
     });
   }

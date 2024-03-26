@@ -42,6 +42,7 @@ class ShowReelController extends GetxController {
 
     pageController = PageController();
     // itemList.isEmpty ? fetchData() : null;
+
     await fetchData();
     pageController.addListener(() {
       if (pageController.position.maxScrollExtent == pageController.offset &&
@@ -58,9 +59,11 @@ class ShowReelController extends GetxController {
   fetchData() async {
     isLoading.value = true;
     try {
+      isGuset = await prefService.isContainKey("token") ? false : true;
+
       String token = await prefService.readString("token");
       String apiUrl =
-          "${isGuset ? ServerConstApis.showReel : ServerConstApis.showReel}/$reelId?page=$pageId";
+          "${isGuset ? ServerConstApis.showReelforGuest : ServerConstApis.showReel}/$reelId?page=$pageId";
 
       Either<ErrorResponse, Map<String, dynamic>> response =
           await ApiHelper.makeRequest(

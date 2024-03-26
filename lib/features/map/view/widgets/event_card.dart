@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
+import 'package:evento/features/search/model/search_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/responsive/responsive.dart';
@@ -17,7 +18,7 @@ import 'package:get/get.dart';
 class EventCard extends StatelessWidget {
   const EventCard(
       {super.key, required this.eventModel, required this.modelIndex});
-  final EventModel eventModel;
+  final SearchModel eventModel;
   final int modelIndex;
   @override
   Widget build(BuildContext context) {
@@ -257,8 +258,8 @@ class EventCard extends StatelessWidget {
                         mapController.followOrUnFollowEvent(
                             eventIndex, modelIndex);
                       },
-                      value:
-                          mapController.events[modelIndex].isFollowedByAuthUser,
+                      value: mapController
+                          .searchResultSearch[modelIndex].isFollowedByAuthUser,
                       onIcon: Icon(
                         Icons.favorite_rounded,
                         color: customColors.rejected,

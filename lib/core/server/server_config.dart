@@ -110,9 +110,9 @@ class ServerConstApis {
   static String myFreinds = '$baseAPI/api/my-friends';
   static String mySentRequests = '$baseAPI/api/my-sent-requests';
   static String myReciviedRequests = '$baseAPI/api/my-received-requests';
-  static String freindSearch = '$baseAPI/api/searchFriend';
 
   /// review
+  static String freindSearch = '$baseAPI/api/searchFriend';
   static String reviewEvent = '$baseAPI/api/event-review';
   static String reviewServiceProvider = '$baseAPI/api/service-provider-review';
   static String reviewVenue = '$baseAPI/api/venue-review';
@@ -134,6 +134,7 @@ class ServerConstApis {
   static String getAccordingCategoryListforGuest =
       '$baseAPI/api/eventAccordingCategory-guest';
   static String getReelsforGuest = '$baseAPI/api/reels-guest';
+  static String showReelforGuest = '$baseAPI/api/reels-show-guest';
   static String getEventDetailesforGuest = '$baseAPI/api/event-guest';
 
   //// payment

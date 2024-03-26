@@ -1,8 +1,13 @@
+import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:evento/core/server/filter.dart';
+import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:evento/features/search/model/search_model.dart';
+import 'package:evento/main.dart';
 import 'package:flutter/services.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
@@ -14,40 +19,57 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapController extends GetxController {
-  List<EventModel> events = [];
   final EventStateManager eventStateManager = Get.find();
 
   TextEditingController searchController = TextEditingController();
   final googleMapsController = Completer<GoogleMapController>();
   late FlutterFlowMarker myMarker;
-  RxList<EventModel> searchResultSearch = <EventModel>[].obs;
   RxBool isSearchActive = false.obs;
   TextEditingController searchField = TextEditingController();
   late LatLng currentPosition;
   late BitmapDescriptor customIcon;
   bool isReady = false;
+  var searchResultSearch = <SearchModel>[].obs;
+  Timer? _debounce;
 
   @override
   void onInit() async {
     super.onInit();
     customIcon = await getCustomMarker();
+    myMarker = FlutterFlowMarker(
+      'markerId-1', // Unique ID for the marker
+      LatLng(0, 0), // Replace with your latitude and longitude
+      icon: customIcon,
+
+      (controller) async {
+        controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(0, 0),
+            zoom: 14.0,
+          ),
+        ));
+      },
+    );
+
+    _fetchData(""); // Fetch initial data with empty query
+    searchField.addListener(_onSearchChanged);
 
     await getSuggestModels(); // Assumes this now properly initializes `myMarker`
+
     // Indicate that everything is ready
   }
 
-  void onPressSearch(String query) {
-    if (query.isEmpty) {
-      isSearchActive.value = false;
-      searchResultSearch.clear();
-    } else {
-      isSearchActive.value = true;
-      searchResultSearch.assignAll(events
-          .where((event) =>
-              event.title.toLowerCase().contains(query.toLowerCase()))
-          .toList());
-    }
-    update();
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (searchField.text.isNotEmpty) {
+        onPressSearch(searchField.text);
+      } else {
+        // Optionally handle empty search field case
+        _fetchData("");
+        isSearchActive.value = false;
+      }
+    });
   }
 
   void onApplyFilters(Map<String, dynamic> data) async {
@@ -60,6 +82,58 @@ class MapController extends GetxController {
     update();
   }
 
+  void _fetchData(String query) async {
+    try {
+      String token = await prefService.readString("token");
+      var response = await ApiHelper.makeRequest(
+          targetRout: isGuset
+              ? ServerConstApis.eventSearchforGuest
+              : ServerConstApis.eventSearch,
+          method: "post",
+          data: {"Search": query},
+          token: token);
+
+      response.fold(
+        (error) => _handleError(error),
+        (result) => _handleSuccess(result),
+      );
+    } catch (e) {
+      // isError.value = true;
+    }
+  }
+
+  void _handleError(ErrorResponse error) {
+    // isError.value = true;
+    // Handle your error, maybe show a snackbar or log it
+    // Get.snackbar("Error", error.message); // Example
+  }
+
+  void _handleSuccess(Map<String, dynamic> data) {
+    var results = (data['result'] as List)
+        .map((jsonItem) => SearchModel.fromJson(jsonItem))
+        .toList();
+    update();
+    _updateSearchResults(results);
+  }
+
+  void _updateSearchResults(List<SearchModel> results) {
+    searchResultSearch.assignAll(results);
+    getSuggestModels();
+    update();
+  }
+
+  void onPressSearch(String query) {
+    isSearchActive.value = query.isNotEmpty;
+    if (isSearchActive.isTrue) {
+      _fetchData(query);
+    } else {
+      _fetchData("");
+
+      update();
+      // _updateSearchResults([]);
+    }
+  }
+
   late LatLng? googleMapsCenter = const LatLng(13.106061, -59.613158);
   CarouselController? carouselController;
 
@@ -68,14 +142,19 @@ class MapController extends GetxController {
   // State field(s) for PageView widget.
   // PageController? paggooeViewController1;
   getSuggestModels() async {
-// final TrendingListController trendingListController=Get.find();
-    final TrendingListController eventInYourCityListController =
-        Get.put(TrendingListController());
-    events.assignAll(eventInYourCityListController.itemList);
-
-    currentPosition = LatLng(events[carouselCurrentIndex].venue!.lang,
-        events[carouselCurrentIndex].venue!.long);
+    if (searchResultSearch.isEmpty) {
+      isReady = true;
+      update();
+      return;
+    } else {
+      // carouselCurrentIndex = 0;
+    }
+    print("sssssssss startMArker");
+    currentPosition = LatLng(
+        searchResultSearch[carouselCurrentIndex].venue.latitude,
+        searchResultSearch[carouselCurrentIndex].venue.longitude);
     googleMapsCenter = currentPosition;
+    print("sssssssss ${currentPosition.latitude}");
     myMarker = FlutterFlowMarker(
       'markerId$carouselCurrentIndex', // Unique ID for the marker
       currentPosition, // Replace with your latitude and longitude
@@ -88,17 +167,19 @@ class MapController extends GetxController {
             zoom: 14.0,
           ),
         ));
+        update();
       },
     );
-    isReady = true;
+    print("sssssssss ${myMarker}");
     update();
+    isReady = true;
   }
 
   void updateMarkerAndPosition(int carouselIndex) async {
-    if (carouselIndex < 0 || carouselIndex >= events.length) return;
+    if (carouselIndex < 0 || carouselIndex >= searchResultSearch.length) return;
 
-    currentPosition = LatLng(
-        events[carouselIndex].venue!.lang, events[carouselIndex].venue!.long);
+    currentPosition = LatLng(searchResultSearch[carouselIndex].venue.latitude,
+        searchResultSearch[carouselIndex].venue.longitude);
     googleMapsCenter = currentPosition;
 
     // Update marker
@@ -126,7 +207,7 @@ class MapController extends GetxController {
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
-    if (events[modelIndex].isFollowedByAuthUser) {
+    if (searchResultSearch[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowEvent}/$eventId");
     } else {
@@ -134,11 +215,11 @@ class MapController extends GetxController {
           await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
     }
     if (isDoneSuccefully == "followed successfully") {
-      events[modelIndex].isFollowedByAuthUser = true;
+      searchResultSearch[modelIndex].isFollowedByAuthUser = true;
       eventStateManager.toggleFavorite(eventId);
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      events[modelIndex].isFollowedByAuthUser = false;
+      searchResultSearch[modelIndex].isFollowedByAuthUser = false;
       eventStateManager.toggleFavorite(eventId);
 
       update();

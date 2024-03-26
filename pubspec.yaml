@@ -107,9 +107,11 @@ flutter_native_splash:
   android: true
   ios: true
   image: "assets/images/newsplash.png"
+  image_dark: assets/images/newsplash.png
   color: "#6E429A"
   android_12:
     image: "assets/images/newsplash.png"
+    image_dark: assets/images/newsplash.png
     color: "#6E429A"
   
 

@@ -43,7 +43,7 @@ startTimerToRemoveSplashScreen() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await startTimerToRemoveSplashScreen();
+  startTimerToRemoveSplashScreen();
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
@@ -82,24 +82,24 @@ void main() async {
           'assets/localization', // <-- change the path of the translation files
       fallbackLocale: const Locale('en'),
       child: const MyApp()));
-  // CustomDeepLinkService deepLinkService = CustomDeepLinkService();
-  // await deepLinkService.initUniLinks();
 }
 
 void _handleLink(String? link) {
+  print("Received deep link: $link");
   if (link != null && link.contains('/#/ShowReelScreen')) {
     Uri uri = Uri.parse(link);
     String? id = uri.queryParameters['id'];
+    print("Extracted ID: $id");
     if (id != null) {
-      Get.context != null
-          ?
-          // Use GetX's navigation method to navigate
-          Get.toNamed('/ShowReelScreen', parameters: {'id': id})
-          : Future.delayed(Duration(seconds: 2), () {
-              Get.toNamed('/ShowReelScreen', parameters: {'id': id});
-            });
-
-      print("Navigate to ShowReelScreen with ID: $id");
+      // Check if GetX is ready for navigation
+      if (Get.context != null) {
+        Get.toNamed('/ShowReelScreen', parameters: {'id': id});
+      } else {
+        // Wait for GetX navigation to be ready
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Get.toNamed('/ShowReelScreen', parameters: {'id': id});
+        });
+      }
     }
   }
 }

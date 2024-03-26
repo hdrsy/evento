@@ -15,18 +15,11 @@ class EventsList extends StatelessWidget {
         return CarouselSlider(
           items: [
             ...List.generate(
-                mapController.isSearchActive.value
-                    ? mapController.searchResultSearch.length
-                    : mapController.events.length,
-                (index) => mapController.isSearchActive.value
-                    ? EventCard(
-                        eventModel: mapController.searchResultSearch[index],
-                        modelIndex: index,
-                      )
-                    : EventCard(
-                        eventModel: mapController.events[index],
-                        modelIndex: index,
-                      ))
+                mapController.searchResultSearch.length,
+                (index) => EventCard(
+                      eventModel: mapController.searchResultSearch[index],
+                      modelIndex: index,
+                    ))
           ],
           carouselController: mapController.carouselController,
           options: CarouselOptions(

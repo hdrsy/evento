@@ -111,7 +111,6 @@ class DirctionController extends GetxController {
     super.onInit();
     latitude = Get.arguments[0];
     longitude = Get.arguments[1];
-    await getUserLocation();
     googleMapsCenter = CameraPosition(target: LatLng(latitude, longitude));
 
     // Marker for destination
@@ -121,6 +120,7 @@ class DirctionController extends GetxController {
       infoWindow: InfoWindow(),
     );
 
+    await getUserLocation();
     // Start tracking user location
     drawRoute();
   }

@@ -67,6 +67,7 @@ class EventDetailesController extends GetxController {
         );
       }
     });
+
     await getEventDetailesModel();
     await calculateDistance();
 
@@ -76,6 +77,8 @@ class EventDetailesController extends GetxController {
   getEventDetailesModel() async {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
+    isGuset = await prefService.isContainKey("token") ? false : true;
+
     String token = await prefService.readString("token");
     try {
       if (await checkInternet()) {
