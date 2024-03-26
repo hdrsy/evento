@@ -81,17 +81,19 @@ void notificationClickListener(Map<String, dynamic> data) {
             });
     } else if (targetRout.toLowerCase() == "event") {
       Get.context != null
-          ? Get.toNamed('/eventDetailes', arguments: [
-              int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
-              false,
-              0
-            ])
+          ? Get.toNamed('/eventDetailes', parameters: {
+              'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
+                  .toString(),
+              'isOffer': false.toString(),
+              'offerPercent': 0.toString(),
+            })
           : Future.delayed(Duration(seconds: 2), () {
-              Get.toNamed('/eventDetailes', arguments: [
-                int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
-                false,
-                0
-              ]);
+              Get.toNamed('/eventDetailes', parameters: {
+                'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
+                    .toString(),
+                'isOffer': false.toString(),
+                'offerPercent': 0.toString(),
+              });
             });
     }
   } else {
@@ -115,15 +117,23 @@ void notificationClickListener(Map<String, dynamic> data) {
   if (!normalizedTitle.contains("navigate")) {
     if (Get.context != null) {
       routName == 'eventDetailes' // Note: Same as above, check spelling.
-          ? Get.toNamed('/$routName',
-              arguments: [int.parse(body[body.length - 1]), false, 0])
+          ? Get.toNamed('/$routName', parameters: {
+              'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
+                  .toString(),
+              'isOffer': false.toString(),
+              'offerPercent': 0.toString(),
+            })
           : Get.toNamed('/$routName');
     } else {
       // Use Future.delayed to wait for GetX navigation context to be ready
       Future.delayed(Duration(seconds: 2), () {
         routName == 'eventDetailes' // Note: Same spelling concern.
-            ? Get.toNamed('/$routName',
-                arguments: [body[body.length - 1], false, 0])
+            ? Get.toNamed('/routName', parameters: {
+                'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
+                    .toString(),
+                'isOffer': false.toString(),
+                'offerPercent': 0.toString(),
+              })
             : Get.toNamed('/$routName');
       });
     }

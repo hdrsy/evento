@@ -42,20 +42,13 @@ startTimerToRemoveSplashScreen() {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding =
+      await WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   startTimerToRemoveSplashScreen();
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
-  final initialLink = await getInitialLink();
-  _handleLink(initialLink);
-
-  // Listen for new links if the app is already opened
-  linkStream.listen((String? link) {
-    _handleLink(link);
-  }, onError: (err) {
-    // Handle error scenarios
-  });
   // Start the Pushy service
   Pushy.listen();
 
@@ -87,25 +80,96 @@ void main() async {
 void _handleLink(String? link) {
   print("Received deep link: $link");
   if (link != null && link.contains('/#/ShowReelScreen')) {
-    Uri uri = Uri.parse(link);
-    String? id = uri.queryParameters['id'];
-    print("Extracted ID: $id");
-    if (id != null) {
-      // Check if GetX is ready for navigation
-      if (Get.context != null) {
-        Get.toNamed('/ShowReelScreen', parameters: {'id': id});
-      } else {
-        // Wait for GetX navigation to be ready
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+    // Attempting to manually extract the 'id' from the URL.
+    final uri = Uri.parse(link);
+    final fragments =
+        uri.fragment?.split('?'); // Splitting the fragment by '?'.
+
+    // Assuming the format is always '/ShowReelScreen?id=XX'
+    if (fragments != null && fragments.length > 1) {
+      final fragmentQuery = fragments[1];
+      final fakeUri = Uri.parse('dummy://dummy?$fragmentQuery');
+      final id = fakeUri.queryParameters['id'];
+
+      print("Extracted ID: $id");
+      if (id != null) {
+        // Check if GetX is ready for navigation
+        if (Get.context != null) {
           Get.toNamed('/ShowReelScreen', parameters: {'id': id});
-        });
+        } else {
+          // Wait for GetX navigation to be ready
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Get.toNamed('/ShowReelScreen', parameters: {'id': id});
+          });
+        }
+      }
+    }
+  } else if (link != null && link.contains('/#/eventDetailes')) {
+    final uri = Uri.parse(link);
+    final fragments = uri.fragment?.split('?'); // Splitting the fragment by '?'
+
+    // Assuming the format is '/eventDetailes?id=XX&isOffer=XX&offerPercent=XX'
+    if (fragments != null && fragments.length > 1) {
+      final fragmentQuery = fragments[1];
+      final fakeUri = Uri.parse('dummy://dummy?$fragmentQuery');
+
+      // Now, extract the specific parameters
+      final id = fakeUri.queryParameters['id'];
+      final isOffer = fakeUri.queryParameters['isOffer'];
+      final offerPercent = fakeUri.queryParameters['offerPercent'];
+
+      print(
+          "Extracted ID: $id, IsOffer: $isOffer, OfferPercent: $offerPercent");
+
+      if (id != null) {
+        // Check if GetX is ready for navigation
+        if (Get.context != null) {
+          // Navigating to the Event Details screen with the extracted parameters
+
+          Get.toNamed('/eventDetailes', parameters: {
+            'id': id,
+            'isOffer': isOffer ?? 'false',
+            'offerPercent': offerPercent ?? '0'
+          });
+        } else {
+          // Wait for GetX navigation to be ready
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Get.toNamed('/eventDetailes', parameters: {
+              'id': id,
+              'isOffer': isOffer ?? 'false',
+              'offerPercent': offerPercent ?? '0'
+            });
+          });
+        }
       }
     }
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initDeepLinkHandling();
+  }
+
+  void initDeepLinkHandling() async {
+    final initialLink = await getInitialLink();
+    _handleLink(initialLink);
+
+    linkStream.listen((String? link) {
+      _handleLink(link);
+    }, onError: (err) {
+      // Handle error scenarios
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

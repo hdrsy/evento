@@ -20,8 +20,11 @@ class OrganizerEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        Get.toNamed('/eventDetailes',
-            arguments: [organizerProfileEvent.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': organizerProfileEvent.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,

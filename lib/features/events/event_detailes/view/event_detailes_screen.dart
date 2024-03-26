@@ -1,3 +1,4 @@
+import 'package:evento/core/responsive/size_config.dart';
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 
@@ -16,6 +17,7 @@ class EventDetailesScreen extends StatelessWidget {
   final EventDetailesController eventDetailesController = Get.find();
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: customColors.primaryBackground,
       body: Obx(() => eventDetailesController.isLoading.value

@@ -90,11 +90,11 @@ class SeeAllOffersCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [
-          offerEvent.offer.eventId,
-          true,
-          offerEvent.offer.percent
-        ]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': offerEvent.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Container(
         width: double.infinity,

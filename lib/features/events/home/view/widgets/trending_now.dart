@@ -102,7 +102,11 @@ class TrendingNow extends StatelessWidget {
       {required EventModel eventModel, required int modelIndex}) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventModel.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Container(
         width: screenWidth * 0.9,

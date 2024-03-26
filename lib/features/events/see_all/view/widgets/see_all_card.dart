@@ -25,7 +25,11 @@ class SeeAllCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventModel.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Container(
         width: double.infinity,
@@ -246,7 +250,7 @@ class SeeAllCard extends StatelessWidget {
               child: Align(
                 alignment: const AlignmentDirectional(0.00, 0.00),
                 child: Text(
-                  "${formatPrice( eventModel.ticketPrice)} ${tr("sp")}",
+                  "${formatPrice(eventModel.ticketPrice)} ${tr("sp")}",
                   textAlign: TextAlign.center,
                   style: customTextStyle.bodyMedium.override(
                     fontFamily: breeSerif,

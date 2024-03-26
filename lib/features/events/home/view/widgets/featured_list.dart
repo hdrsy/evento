@@ -111,7 +111,11 @@ class FeaturedWidget extends StatelessWidget {
     return GetBuilder<FeaturedListController>(builder: (context) {
       return GestureDetector(
         onTap: () {
-          Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+          Get.toNamed('/eventDetailes', parameters: {
+            'id': eventModel.id.toString(),
+            'isOffer': false.toString(),
+            'offerPercent': 0.toString(),
+          });
         },
         child: Container(
           width: screenWidth * 0.9, // height: 330 ,
@@ -209,7 +213,11 @@ class FeaturedWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventModel.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Stack(
         children: [

@@ -24,7 +24,11 @@ class FavoriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventWrapper.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventWrapper.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Container(
         width: double.infinity,

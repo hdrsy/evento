@@ -63,7 +63,11 @@ buildOffersList() {
 Widget offerImage(String imgUrl, int eventId, int percent) {
   return GestureDetector(
     onTap: () {
-      Get.toNamed('/eventDetailes', arguments: [eventId, true, percent]);
+      Get.toNamed('/eventDetailes', parameters: {
+        'id': eventId.toString(),
+        'isOffer': false.toString(),
+        'offerPercent': 0.toString(),
+      });
     },
     child: ClipRRect(
         borderRadius: BorderRadius.circular(20),

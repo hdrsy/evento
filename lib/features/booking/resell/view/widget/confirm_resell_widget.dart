@@ -41,7 +41,7 @@ class ConfirmReSellWidget extends StatelessWidget {
             Align(
               alignment: const AlignmentDirectional(0, -1),
               child: Text(
-                "ReSell Ticket",
+                "Resell Ticket",
                 textAlign: TextAlign.center,
                 style: customTextStyle.headlineSmall.override(
                   fontFamily: 'Nunito',
@@ -62,7 +62,7 @@ class ConfirmReSellWidget extends StatelessWidget {
                 Text(
                   "resellConfirm",
                   textAlign: TextAlign.center,
-                  style: customTextStyle.headlineSmall,
+                  style: customTextStyle.bodyMedium,
                 ).tr(),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
@@ -105,7 +105,7 @@ class ConfirmReSellWidget extends StatelessWidget {
                           },
                           text: tr("Yes, ReSell"),
                           options: ButtonOptions(
-                            width: 120,
+                            // width: 120,
                             height: 45,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 20, 0, 20, 0),

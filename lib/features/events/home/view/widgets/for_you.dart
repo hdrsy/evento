@@ -100,7 +100,11 @@ Widget buildEventCard(EventModel eventModel, int modelIndex) {
   return GetBuilder<JustForYouController>(builder: (context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventModel.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Container(
         width: screenWidth * 0.45,

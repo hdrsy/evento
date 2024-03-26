@@ -31,12 +31,13 @@ class NotificationCard extends StatelessWidget {
                 arguments: int.tryParse(notificationModel
                     .title[notificationModel.title.length - 1]));
           } else if (targetRout.toLowerCase() == "event") {
-            Get.toNamed('/eventDetailes', arguments: [
-              int.tryParse(
-                  notificationModel.title[notificationModel.title.length - 1]),
-              false,
-              0
-            ]);
+            Get.toNamed('/eventDetailes', parameters: {
+              'id': int.tryParse(notificationModel
+                      .title[notificationModel.title.length - 1])
+                  .toString(),
+              'isOffer': false.toString(),
+              'offerPercent': 0.toString(),
+            });
           }
         } else {
           if (notificationModel.title == "New Friend Request") {
@@ -54,7 +55,11 @@ class NotificationCard extends StatelessWidget {
             String eventIdString = description.substring(lastSpaceIndex + 1);
             int eventId = int.parse(eventIdString);
 
-            Get.toNamed('/eventDetailes', arguments: [eventId, false, 0]);
+            Get.toNamed('/eventDetailes', parameters: {
+              'id': eventId.toString(),
+              'isOffer': false.toString(),
+              'offerPercent': 0.toString(),
+            });
           }
         }
       },

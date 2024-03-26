@@ -1,3 +1,4 @@
+import 'package:evento/features/booking/book_now/model/promo_code_model.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 
 class UserBooking {
@@ -18,7 +19,7 @@ class UserBooking {
   final int classTicketPrice;
   final String status;
   final UserEvent event;
-  final dynamic promoCode;
+  final PromoCode? promoCode;
 
   UserBooking({
     required this.id,
@@ -42,6 +43,7 @@ class UserBooking {
   });
 
   factory UserBooking.fromJson(Map<String, dynamic> json) {
+    print(json['promo_code']);
     return UserBooking(
       id: json['id'],
       userId: json['user_id'],
@@ -63,7 +65,9 @@ class UserBooking {
       classTicketPrice: json['class_ticket_price'],
       status: json['status'],
       event: UserEvent.fromJson(json['event']),
-      promoCode: json['promo_code'],
+      promoCode: json['promo_code'] != null
+          ? PromoCode.fromJson(json['promo_code'])
+          : null,
     );
   }
 }

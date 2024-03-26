@@ -1,3 +1,4 @@
+import 'package:evento/core/const/share_event_and_app.dart';
 import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -83,15 +84,7 @@ class InviteFreinds extends StatelessWidget {
                           onPressed: () async {
                             final EventDetailesController
                                 eventDetailesController = Get.find();
-
-                            const String message =
-                                "Check out this event in Evento";
-                            final String url =
-                                "www.evento.sy/#/eventDetailes/${eventDetailesController.eventId}"; // Replace with your event link
-                            final String shareContent =
-                                "$message\n\nFor more details, visit: $url";
-
-                            await Share.share(shareContent);
+                            shareApp(eventDetailesController.eventId);
                           },
                           text: tr("External Share"),
                           options: ButtonOptions(

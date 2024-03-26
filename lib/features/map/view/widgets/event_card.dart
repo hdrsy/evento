@@ -24,7 +24,11 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/eventDetailes', arguments: [eventModel.id, false, 0]);
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': eventModel.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
       },
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 20),

@@ -156,6 +156,12 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                                     .price
                                     .toString(),
                               )),
+                      ticketModel.promoCode != null
+                          ? SinglePriceElement(
+                              title: ticketModel.promoCode!.title,
+                              subTitle: "${ticketModel.promoCode!.discount} %",
+                            )
+                          : SizedBox()
                     ].divide(const SizedBox(height: 8)),
                   ),
                 ),
