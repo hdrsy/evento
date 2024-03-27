@@ -86,7 +86,6 @@ class _ListWheelBodyState extends State<ListWheelBody> {
                 if (selectedHour < 12) {
                   // If it's not 12 PM (which is already in 24-hour format as 12), convert to 24-hour by adding 12
                   selectedHour += 12;
-                  print("the selected date is :$selectedHour");
                 }
               } else {
                 // It's AM
@@ -204,7 +203,6 @@ class _ListWheelBodyState extends State<ListWheelBody> {
             physics: const FixedExtentScrollPhysics(),
             controller: _ampmController,
             onSelectedItemChanged: (index) {
-              print("the apm : $index");
               setState(() {});
             },
             childDelegate: ListWheelChildBuilderDelegate(

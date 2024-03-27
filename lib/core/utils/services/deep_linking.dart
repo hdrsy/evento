@@ -22,7 +22,6 @@ class CustomDeepLinkService {
       if (id != null) {
         // Use GetX's navigation method to navigate
         Get.toNamed('/ShowReelScreen', parameters: {'id': id});
-        print("Navigate to ShowReelScreen with ID: $id");
       }
     }
   }

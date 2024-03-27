@@ -7,7 +7,6 @@ import '../../../../core/server/server_config.dart';
 import '../../../../core/utils/error_handling/erroe_handling.dart';
 
 import '../../../../main.dart';
-import 'dart:developer';
 
 import 'package:get/get.dart';
 
@@ -72,7 +71,6 @@ class ShowReelController extends GetxController {
         token: token,
       );
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      print(handlingResponse);
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         isError.value = true;
@@ -80,7 +78,6 @@ class ShowReelController extends GetxController {
         handleDataSuccess(handlingResponse);
       }
     } catch (e) {
-      print(e);
       isError.value = true;
     }
     isLoading.value = false;
@@ -88,7 +85,6 @@ class ShowReelController extends GetxController {
   }
 
   handleDataSuccess(dynamic handlingResponse) {
-    print(handlingResponse);
     if (isFirstRequest) {
       // Handle the initial request by adding the requestedReel.
       itemList
@@ -115,7 +111,6 @@ class ShowReelController extends GetxController {
       hasMoreData.value = pageId < lastPageId;
       pageId++;
     }
-    print(itemList.length);
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
@@ -171,7 +166,6 @@ class ShowReelController extends GetxController {
 
   void nextUserPage() {
     if (currentUserIndex + 1 < itemList.length) {
-      print("sssssssssssssss inside first condition");
       // There are more items in the list, simply navigate to the next user's reel.
       currentUserIndex++;
       pageController.animateToPage(
@@ -181,7 +175,6 @@ class ShowReelController extends GetxController {
       );
       update(); // If using GetX or similar for state management to update the UI.
     } else if (hasMoreData.value) {
-      print("sssssssssssssss inside second condition");
       // The end of the list is reached and there's more data to fetch.
       fetchData().then((_) {
         // After fetching data, navigate to the next reel if data was successfully loaded.
@@ -196,7 +189,6 @@ class ShowReelController extends GetxController {
         }
       }).catchError((error) {
         // Handle any errors during data fetching.
-        print("Error fetching data: $error");
       });
     }
     // If there's no more data to load, you might want to handle this scenario as well (e.g., showing a message).

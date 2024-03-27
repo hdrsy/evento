@@ -1,6 +1,5 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:evento/core/colors/app_colors.dart';
-import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';

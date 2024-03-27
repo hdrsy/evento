@@ -1,6 +1,5 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:evento/core/colors/app_colors.dart';
-import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/video/smooth_indecator.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
@@ -100,8 +99,6 @@ class _MultiVideoPlayerState extends State<MultiVideoPlayer>
           _betterPlayerController.setOverriddenAspectRatio(
               _betterPlayerController.videoPlayerController!.value.aspectRatio);
         });
-        print(
-            "video size:${_betterPlayerController.videoPlayerController!.value.size}");
       }
       if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
         // Handle the error, e.g., show a Snackbar with an error message

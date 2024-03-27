@@ -33,12 +33,10 @@ class ReelsController extends PaginationController<ReelModel> {
   handleDataSuccess(dynamic handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['reels']['data'];
     lastPageId = handlingResponse['reels']['last_page'];
-    print(handlingResponse);
     itemList.addAll(categoryListJson
         .map((jsonItem) => ReelModel.fromJson(jsonItem))
         .toList());
     itemList.any((element) {
-      print(element.videos);
       return true;
     });
     currentUserIndex = 0;

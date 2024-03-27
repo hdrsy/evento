@@ -1,5 +1,3 @@
-import 'package:evento/core/server/helper_api.dart';
-
 class NotificationModel {
   final int id;
   final String title;

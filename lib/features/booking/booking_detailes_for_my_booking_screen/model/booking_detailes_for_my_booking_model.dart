@@ -43,7 +43,6 @@ class UserBooking {
   });
 
   factory UserBooking.fromJson(Map<String, dynamic> json) {
-    print(json['promo_code']);
     return UserBooking(
       id: json['id'],
       userId: json['user_id'],

@@ -61,7 +61,6 @@ class UserInfo {
 
   static Future<UserInfo?> getUserInfo() async {
     bool userInfoJson = await prefService.isContainKey('userInfo');
-    print(userInfoJson);
     if (userInfoJson) {
       final userInfo = jsonDecode(await prefService.readString('userInfo'));
       return UserInfo.fromJson(userInfo);
@@ -73,12 +72,10 @@ class UserInfo {
   static Future<UserInfo?> getUserInfoFromApi() async {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
-    print(token);
     response = await ApiHelper.makeRequest(
         targetRout: ServerConstApis.getprofile, method: "GEt", token: token);
 
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print("usee:$handlingResponse");
     if (handlingResponse is ErrorResponse) {
     } else {
       storeUserInfo(handlingResponse);

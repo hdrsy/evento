@@ -21,7 +21,6 @@ class NotificationCard extends StatelessWidget {
       onTap: () {
         if (notificationModel.title.contains("navigate")) {
           String targetRout = extractWordAfterNavigate(notificationModel.title);
-          print(targetRout);
           if (targetRout.toLowerCase() == "organizer") {
             Get.toNamed('/OrganizerProfileScreen',
                 arguments: int.tryParse(notificationModel

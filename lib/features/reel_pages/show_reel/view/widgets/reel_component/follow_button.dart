@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/colors/app_colors.dart';
 
-import 'package:evento/features/reel_pages/reels/controller/reels_controller.dart';
 import 'package:evento/features/reel_pages/show_reel/controller/show_reel_controller.dart';
 import 'package:get/get.dart';
 

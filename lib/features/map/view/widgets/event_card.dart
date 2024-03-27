@@ -9,7 +9,6 @@ import '../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../core/utils/helper/date_formatter.dart';
 import '../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../core/utils/theme/text_theme.dart';
-import '../../../events/home/model/event_model.dart';
 import '../../controller/map_controller.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';

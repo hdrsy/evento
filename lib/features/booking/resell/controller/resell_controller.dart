@@ -130,7 +130,6 @@ class ReSellController extends GetxController {
         data: {"user_id": userId, "ticket_id": selectedTicket.value},
         token: token);
     dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    print("thrResell :$handlingResponse");
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
     } else {

@@ -6,7 +6,6 @@ import 'package:evento/features/events/event_detailes/controller/event_detailes_
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class InviteFreinds extends StatelessWidget {

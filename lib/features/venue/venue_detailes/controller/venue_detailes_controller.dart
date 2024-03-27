@@ -3,7 +3,6 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/events/customize_event/venue/model/venue_model.dart';
-import 'package:evento/features/profile_pages/notification/model/notification_model.dart';
 import 'package:evento/main.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +47,6 @@ class VenueDetailesForUserController extends GetxController {
   }
 
   whenGetDataSuccess(handlingResponse) {
-    print(handlingResponse);
     // List<dynamic> categoryListJson = handlingResponse['Notification'];
 
     // var reversedList = categoryListJson

@@ -19,8 +19,6 @@ import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/utils/services/deep_linking.dart';
-
 RxBool isThereNotification = false.obs;
 SharedPreferences? sharedPreferences;
 PrefService prefService = PrefService();
@@ -78,7 +76,6 @@ void main() async {
 }
 
 void _handleLink(String? link) {
-  print("Received deep link: $link");
   if (link != null && link.contains('/#/ShowReelScreen')) {
     // Attempting to manually extract the 'id' from the URL.
     final uri = Uri.parse(link);
@@ -91,7 +88,6 @@ void _handleLink(String? link) {
       final fakeUri = Uri.parse('dummy://dummy?$fragmentQuery');
       final id = fakeUri.queryParameters['id'];
 
-      print("Extracted ID: $id");
       if (id != null) {
         // Check if GetX is ready for navigation
         if (Get.context != null) {
@@ -117,9 +113,6 @@ void _handleLink(String? link) {
       final id = fakeUri.queryParameters['id'];
       final isOffer = fakeUri.queryParameters['isOffer'];
       final offerPercent = fakeUri.queryParameters['offerPercent'];
-
-      print(
-          "Extracted ID: $id, IsOffer: $isOffer, OfferPercent: $offerPercent");
 
       if (id != null) {
         // Check if GetX is ready for navigation

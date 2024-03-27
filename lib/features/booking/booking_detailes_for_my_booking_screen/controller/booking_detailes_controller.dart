@@ -55,7 +55,6 @@ class BookingDetailesForMyBookingController extends GetxController {
       // errorMessage.value = handlingResponse.getErrorMessages();
     } else {
       List<dynamic> interestsJson = handlingResponse['bookings'];
-      print("booo${handlingResponse['bookings']}");
       userBookings = interestsJson
           .map((jsonItem) => UserBooking.fromJson(jsonItem))
           .toList();

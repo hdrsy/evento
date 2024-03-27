@@ -12,7 +12,6 @@ import 'package:flutter/services.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/helper/flutter_flow_google_map.dart';
-import '../../events/home/controller/home_controller.dart';
 import '../../events/home/model/event_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -149,12 +148,10 @@ class MapController extends GetxController {
     } else {
       // carouselCurrentIndex = 0;
     }
-    print("sssssssss startMArker");
     currentPosition = LatLng(
         searchResultSearch[carouselCurrentIndex].venue.latitude,
         searchResultSearch[carouselCurrentIndex].venue.longitude);
     googleMapsCenter = currentPosition;
-    print("sssssssss ${currentPosition.latitude}");
     myMarker = FlutterFlowMarker(
       'markerId$carouselCurrentIndex', // Unique ID for the marker
       currentPosition, // Replace with your latitude and longitude
@@ -170,7 +167,6 @@ class MapController extends GetxController {
         update();
       },
     );
-    print("sssssssss ${myMarker}");
     update();
     isReady = true;
   }
