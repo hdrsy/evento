@@ -28,7 +28,7 @@ class ShowReelController extends GetxController {
   RxList<ReelModel> itemList = <ReelModel>[].obs;
   late int reelId;
   late RxList<String> errorMessage;
-  bool isfristRequest = true;
+  bool isFirstRequest = true;
   @override
   void onInit() async {
     reelId = int.tryParse(Get.parameters['id'] ?? "1") ?? 1;
@@ -89,26 +89,33 @@ class ShowReelController extends GetxController {
 
   handleDataSuccess(dynamic handlingResponse) {
     print(handlingResponse);
-    if (!isfristRequest) {
-      print("inside fffffff");
+    if (isFirstRequest) {
+      // Handle the initial request by adding the requestedReel.
+      itemList
+          .clear(); // Clear if you want only fresh data, or remove if you want to append.
+      itemList.add(ReelModel.fromJson(handlingResponse['requestedReel']));
+      List<dynamic> categoryListJson = handlingResponse["otherReels"]['data'];
+      lastPageId = handlingResponse["otherReels"]['last_page'];
+      itemList.addAll(categoryListJson
+          .map((jsonItem) => ReelModel.fromJson(jsonItem))
+          .toList());
+      pageId++;
+
+      isFirstRequest = false;
+      hasMoreData.value = handlingResponse["otherReels"]['last_page'] > 2;
+      pageId = 2; // Assuming next page to fetch after initial reel is page 2.
+    } else {
+      // Handle pagination by adding other reels.
       List<dynamic> categoryListJson = handlingResponse["otherReels"]['data'];
       lastPageId = handlingResponse["otherReels"]['last_page'];
 
       itemList.addAll(categoryListJson
           .map((jsonItem) => ReelModel.fromJson(jsonItem))
           .toList());
-    } else {
-      itemList.add(ReelModel.fromJson(handlingResponse['requestedReel']));
-      lastPageId = 2;
-      isfristRequest = false;
-      hasMoreData.value = true;
-      pageId = 1;
-      isLoadingMoreData.value = true;
+      hasMoreData.value = pageId < lastPageId;
+      pageId++;
     }
-    if (pageId >= lastPageId) {
-      hasMoreData.value = false;
-    }
-    pageId++;
+    print(itemList.length);
     isLoading.value = false;
     isLoadingMoreData.value = false;
   }
@@ -129,25 +136,6 @@ class ShowReelController extends GetxController {
       itemList[modelIndex].event!.isFollowedByAuthUser = false;
 
       update();
-    }
-  }
-
-  playNextVideo(int userIndex, int videoIndex) {
-    if (innerPageController.page!.round() + 1 <
-        itemList[userIndex].videos.length) {
-      innerPageController.nextPage(
-          duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
-    } else if (innerPageController.page!.round() + 1 ==
-        itemList[userIndex].videos.length) {
-      pageController.nextPage(
-          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-    }
-  }
-
-  prevVideoInSameUser(int userIndex, int videoIndex) {
-    if (innerPageController.page!.round() + 1 > 1) {
-      innerPageController.previousPage(
-          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
   }
 
@@ -182,15 +170,36 @@ class ShowReelController extends GetxController {
   }
 
   void nextUserPage() {
-    // if (isStartPagination) {
     if (currentUserIndex + 1 < itemList.length) {
+      print("sssssssssssssss inside first condition");
+      // There are more items in the list, simply navigate to the next user's reel.
       currentUserIndex++;
-      pageController.nextPage(
-          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-
-      update();
-      // }
+      pageController.animateToPage(
+        currentUserIndex,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInOut,
+      );
+      update(); // If using GetX or similar for state management to update the UI.
+    } else if (hasMoreData.value) {
+      print("sssssssssssssss inside second condition");
+      // The end of the list is reached and there's more data to fetch.
+      fetchData().then((_) {
+        // After fetching data, navigate to the next reel if data was successfully loaded.
+        if (currentUserIndex + 1 < itemList.length) {
+          currentUserIndex++;
+          pageController.animateToPage(
+            currentUserIndex,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeInOut,
+          );
+          update(); // Update the UI to reflect changes.
+        }
+      }).catchError((error) {
+        // Handle any errors during data fetching.
+        print("Error fetching data: $error");
+      });
     }
+    // If there's no more data to load, you might want to handle this scenario as well (e.g., showing a message).
   }
 
   void previousUser() {
