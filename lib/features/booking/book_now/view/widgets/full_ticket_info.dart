@@ -4,6 +4,7 @@ import 'package:evento/core/shared/functions/validation/phone_validation.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
+import 'package:evento/core/utils/services/snackbar_manager.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
@@ -30,7 +31,7 @@ class FullTicketInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
           child: Text(
-            "Ticket ${index + 1}",
+            "${tr("Ticket")} ${index + 1}",
             style: customTextStyle.bodyMedium.override(
               fontFamily: primaryFontFamily,
               color: customColors.primaryText,
@@ -152,6 +153,15 @@ class FullTicketInfo extends StatelessWidget {
                         hintText: tr("Copoun code"),
                         icon: GestureDetector(
                           onTap: () {
+                            if (bookNowController.userCopuns.isEmpty) {
+                              SnackbarManager.showSnackbar(
+                                tr("Copuns empty"),
+                                tr("You don't have any copuns yet"),
+                                icon: Icon(Icons.code_outlined,
+                                    color: customColors.primaryText),
+                                backgroundColor: customColors.primaryBackground,
+                              );
+                            }
                             bookNowController.ticketList[index]
                                         .dropDownValueController!.value ==
                                     null

@@ -474,6 +474,16 @@
   "Al-Ḥasakah": "الحسكة",
   "Al-Qamishli": "القامشلي",
   "Al-Qunayṭirah": "القنيطرة",
+  "Contact Detailes":"معلومات التوتصل",
+  "Copuns empty":"القسائم فارغة",
+  "You don't have any copuns yet":"لا توجد قسائم حتى الآن",
+
+    "The number of guest is required": "مطلوب عدد الضيوف",
+    "Number Of Guest Error": "خطأ في عدد الضيوف",
+    "The media is required at least one item": "الميديا مطلوبة ولو عنصر واحد على الأقل",
+    "Upload Media Required": "مطلوب تحميل الميديا"
+  ,
+  
   "Al-Raqqah": "الرقة",
   "Al-Suwayda": "السويداء",
   "Damascus": "دمشق",

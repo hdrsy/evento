@@ -47,7 +47,6 @@ class EventDetailesController extends GetxController {
     eventId = int.parse(Get.parameters['id'] ?? "0");
     isOffer = bool.parse(Get.parameters['isOffer'] ?? "false");
     offerPrecent = int.parse(Get.parameters['offerPrecent'] ?? "0");
-
     cacheKey = "eventDetailes$eventId";
     _connectivityService.isConnected.listen((isConnected) {
       if (isConnected) {

@@ -156,13 +156,10 @@ class EventsFromOrganizer extends StatelessWidget {
 
 // Function to build the image widget
   Widget buildImage(String imagePath) {
-    return GestureDetector(
-      onTap: () {},
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: getImageNetworkforCahing(
-              url: "/storage/$imagePath", width: double.infinity, height: 240)),
-    );
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: getImageNetworkforCahing(
+            url: "/storage/$imagePath", width: double.infinity, height: 240));
   }
 
 // Function to build the price tag

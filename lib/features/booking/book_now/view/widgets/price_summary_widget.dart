@@ -37,7 +37,7 @@ class PriceSummaryWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Ticket ${index + 1}",
+                      "${tr("Ticket")} ${index + 1}",
                       style: customTextStyle.displaySmall.override(
                         fontFamily: 'Nunito',
                         fontSize: 18,

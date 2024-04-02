@@ -111,8 +111,8 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                           eventDetailesController.followAndUnFollowOrganizer();
                         }
                       },
-                      text: eventDetailesController
-                              .eventDetailsModel.isOrganizerFollowedByAuthUser
+                      text: eventDetailesController.eventDetailsModel.organizer!
+                              .isOrganizerFollowedByAuthUser
                           ? tr("UnFollow")
                           : tr("Follow"),
                       options: ButtonOptions(
@@ -122,7 +122,10 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
                             const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: customColors.primary,
+                        color: eventDetailesController.eventDetailsModel
+                                .organizer!.isOrganizerFollowedByAuthUser
+                            ? customColors.primaryBackground
+                            : customColors.primary,
                         textStyle: customTextStyle.titleSmall.override(
                           fontFamily: 'BeerSerif',
                           color: customColors.info,

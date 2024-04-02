@@ -526,12 +526,21 @@
   "typeBioAgain": "Please type your bio",
   "noServiceProvidersAvailable": "No service providers available. Services will appear here as they become available."
   ,
+  "Contact Detailes":"Contact Detailes",
+  "Copuns empty":"Copuns empty",
+  "You don't have any copuns yet":"You don't have any copuns yet",
+
     "Date & Location": "Date & Location",
     "From vision to reality": "From vision to reality",
     "Choose your event theme with our experts and create something extraordinary.": "Choose your event theme with our experts and create something extraordinary.",
     "New password": "New password",
     "Current password": "Current password",
     
+      "The number of guest is required": "The number of guest is required",
+      "Number Of Guest Error": "Number Of Guest Error",
+      "The media is required at least one item": "The media is required at least one item",
+      "Upload Media Required": "Upload Media Required"
+    ,    
       "Aleppo": "Aleppo",
       "Al-Ḥasakah": "Al-Ḥasakah",
       "Al-Qamishli": "Al-Qamishli",

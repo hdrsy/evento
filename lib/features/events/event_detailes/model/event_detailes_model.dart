@@ -175,6 +175,7 @@ class Organizer {
   final String services;
   final String state;
   final String? images; // Assuming images can be null
+  bool isOrganizerFollowedByAuthUser;
 
   Organizer({
     required this.id,
@@ -185,6 +186,7 @@ class Organizer {
     required this.bio,
     required this.services,
     required this.state,
+    required this.isOrganizerFollowedByAuthUser,
     this.images,
   });
 
@@ -199,6 +201,7 @@ class Organizer {
       services: json['services'] ?? '',
       state: json['state'] ?? '',
       images: json['images'] ?? '',
+      isOrganizerFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
     );
   }
 }

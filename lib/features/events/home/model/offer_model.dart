@@ -29,7 +29,6 @@ class OfferEvent {
 
   factory OfferEvent.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
     return OfferEvent(
       id: json['id'] ?? 0,
       title: json['title'] ?? "UnKnown",

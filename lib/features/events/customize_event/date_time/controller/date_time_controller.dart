@@ -66,7 +66,8 @@ class DateTimeController extends GetxController {
     isStartEndDateValid = endTime.isAfter(startTime);
     if (date > DateTime.now() &&
         (adultNumber > 0 || childrenNumber > 0) &&
-        isStartEndDateValid) {
+        isStartEndDateValid &&
+        media.length > 0) {
       isUserEnterDateInfo = true;
     }
     FormState? formdata = formstate.currentState;
@@ -81,6 +82,18 @@ class DateTimeController extends GetxController {
       if (!isStartEndDateValid) {
         Get.snackbar(tr("Time Selection Error"),
             tr("The end time must be later than the start time. Please adjust your selection to continue."),
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: customColors.primaryBackground,
+            colorText: customColors.primaryText);
+      } else if (adultNumber.value == 0 || childrenNumber.value == 0) {
+        Get.snackbar(
+            tr("Number Of Guest Error"), tr("The number of guest is required"),
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: customColors.primaryBackground,
+            colorText: customColors.primaryText);
+      } else if (media.length == 0) {
+        Get.snackbar(tr("Upload Media Required"),
+            tr("The media is required at least one item"),
             snackPosition: SnackPosition.TOP,
             backgroundColor: customColors.primaryBackground,
             colorText: customColors.primaryText);

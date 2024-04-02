@@ -65,8 +65,8 @@ Widget offerImage(String imgUrl, int eventId, int percent) {
     onTap: () {
       Get.toNamed('/eventDetailes', parameters: {
         'id': eventId.toString(),
-        'isOffer': false.toString(),
-        'offerPercent': 0.toString(),
+        'isOffer': true.toString(),
+        'offerPrecent': percent.toString(),
       });
     },
     child: ClipRRect(

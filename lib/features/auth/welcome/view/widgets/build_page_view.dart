@@ -33,7 +33,7 @@ class BuildPageView extends StatelessWidget {
               context: context,
               title: tr("Never Miss a Moment"),
               smallTitle: tr(
-                  " Receive real-time notifications about your booked events, reminders, and updates from event organizers."),
+                  "Receive real-time notifications about your booked events, reminders, and updates from event organizers."),
               imagePath:
                   "assets/images/[fpdl.in]_view-from-back-unrecognizable-people-warm-clothes-shooting-fireworks-phone-night_636705-315_normal.jpg"),
         ],

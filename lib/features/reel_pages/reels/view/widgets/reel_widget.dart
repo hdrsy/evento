@@ -154,15 +154,18 @@ class userPhotoAndName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        userPhoto(model),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-          child: userName(getReelToname(model)),
-        ),
-      ],
+    return GestureDetector(
+      onTap: onTapp(model),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          userPhoto(model),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
+            child: userName(getReelToname(model)),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -176,5 +179,27 @@ String getReelToname(ReelModel model) {
     return model.venue!.name;
   } else {
     return "Evento";
+  }
+}
+
+Function()? onTapp(ReelModel model) {
+  if (model.event != null) {
+    return () {
+      Get.toNamed('/eventDetailes', parameters: {
+        'id': model.event!.id.toString(),
+        'isOffer': false.toString(),
+        'offerPercent': 0.toString(),
+      });
+    };
+  } else if (model.organizer != null) {
+    return () {
+      Get.toNamed('/OrganizerProfileScreen', arguments: model.organizer!.id);
+    };
+  } else if (model.venue != null) {
+    return () {
+      Get.toNamed('/VenueDetailesForUserScreen', arguments: model.venue!.id);
+    };
+  } else {
+    return () {};
   }
 }
