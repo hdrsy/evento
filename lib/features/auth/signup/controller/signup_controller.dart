@@ -13,6 +13,7 @@ class SignupController extends GetxController {
   late RxBool isLoading;
   late RxList<String> errorMessage;
   late RxBool isAgreedOn;
+  RxBool isAgreedError = false.obs;
   @override
   void onInit() {
     firstName = TextEditingController();
@@ -27,6 +28,7 @@ class SignupController extends GetxController {
   }
 
   onPressSignUp() async {
+    isAgreedError.value = false;
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();

@@ -148,7 +148,7 @@ class SignupScreen extends StatelessWidget {
                             onPressed: () {
                               signupController.isAgreedOn.value
                                   ? signupController.onPressSignUp()
-                                  : null;
+                                  : signupController.isAgreedError.value = true;
                             },
                             text: tr(
                                 'Join'), // Replace with localization if needed.

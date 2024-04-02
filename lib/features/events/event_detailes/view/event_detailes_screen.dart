@@ -31,7 +31,12 @@ class EventDetailesScreen extends StatelessWidget {
                   icon: Icons.error_outline_outlined,
                   message: "SomeThing Wrong!!",
                 )
-              : _buildBody()),
+              : eventDetailesController.isEventEdnded.value
+                  ? EmptyData(
+                      icon: Icons.error_outline_outlined,
+                      message: "This event is Ended",
+                    )
+                  : _buildBody()),
     );
   }
 

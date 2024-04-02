@@ -161,7 +161,7 @@ class ServiceProviderCreateProfileScreen extends StatelessWidget {
                               serviceProviderCreateProfileController
                                           .locationData ==
                                       null
-                                  ? "Location"
+                                  ? tr("Location")
                                   : "${serviceProviderCreateProfileController.locationData!.latitude}, ${serviceProviderCreateProfileController.locationData!.longitude}",
                               style: customTextStyle.bodyMedium.override(
                                 fontFamily: 'Nunito',
@@ -338,8 +338,8 @@ class _SelectStates extends State<SelectStates> {
   @override
   Widget build(BuildContext context) {
     return MultiSelectDropDown(
-        title: "Covering Areas",
-        options: states,
+        title: tr("Covering Areas"),
+        options: Get.find<ServiceProviderCreateProfileController>().states,
         selectedValues: _selectedValues,
         onSelectionChanged: _handleSelectionChange);
   }

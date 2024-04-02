@@ -36,6 +36,7 @@ class EventDetailesController extends GetxController {
   CacheService cacheService = CacheService('eventDetailes');
   late String cacheKey;
   late RxBool isSomeThingError;
+  RxBool isEventEdnded = false.obs;
   final ConnectivityService _connectivityService = Get.find();
   bool isSameUser = false;
   @override
@@ -103,7 +104,11 @@ class EventDetailesController extends GetxController {
         dynamic handlingResponse = response.fold((l) => l, (r) => r);
         if (handlingResponse is ErrorResponse) {
           errorMessage.value = handlingResponse.getErrorMessages();
-          isSomeThingError.value = true;
+          if (errorMessage[0] == "Not Found") {
+            isEventEdnded.value = true;
+          } else {
+            isSomeThingError.value = true;
+          }
         } else {
           whenGetDataSuccess(handlingResponse);
 

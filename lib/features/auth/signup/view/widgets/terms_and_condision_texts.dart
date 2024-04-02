@@ -9,14 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class TermsAndCondisionTexts extends StatelessWidget {
-   TermsAndCondisionTexts({super.key});
-final SignupController signupController=Get.find();
+  TermsAndCondisionTexts({super.key});
+  final SignupController signupController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: scaleHeight(5),),
+        SizedBox(
+          height: scaleHeight(5),
+        ),
         // Generated code for this Text Widget...
         Text(
           "By joining, I agree to Evento' Terms of Use",
@@ -27,47 +29,51 @@ final SignupController signupController=Get.find();
           ),
         ).tr(),
 
-Padding(
-  padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-  child: Row(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      GestureDetector(
-        onTap: (){
-          showButtonSheet(context: context, widget:TermOfUse(), height: MediaQuery.of(context).size.height * 0.9);
-        },
-        child: Text(
-          "Terms of Use"  ,
-          style: customTextStyle.bodyMedium.copyWith(
-                fontFamily: 'Merriweather',
-                fontSize: 12,
-      
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showButtonSheet(
+                      context: context,
+                      widget: TermOfUse(),
+                      height: MediaQuery.of(context).size.height * 0.9);
+                },
+                child: Text(
+                  "Terms of Use",
+                  style: customTextStyle.bodyMedium.copyWith(
+                    fontFamily: 'Merriweather',
+                    fontSize: 12,
+                  ),
+                ).tr(),
               ),
-        ).tr(),
-      ),
-      Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-        child: Icon(
-          Icons.arrow_right_alt_outlined,
-          color: customColors.secondaryText,
-          size: 24,
-        ),
-      ),
-      Spacer(),
-      Obx(
-        ()=> Checkbox(value: signupController.isAgreedOn.value, 
-        
-        side: BorderSide(color: customColors.primary),
-        onChanged:(value) {
-      signupController.isAgreedOn.value=value!;
-        },
-        activeColor: customColors.primary,
-        ),
-      )
-    ],
-  ),
-)
-,// Generated code for this Row Widget...
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
+                child: Icon(
+                  Icons.arrow_right_alt_outlined,
+                  color: customColors.secondaryText,
+                  size: 24,
+                ),
+              ),
+              Spacer(),
+              Obx(
+                () => Checkbox(
+                  value: signupController.isAgreedOn.value,
+                  side: BorderSide(
+                      color: signupController.isAgreedError.value
+                          ? customColors.error
+                          : customColors.primary),
+                  onChanged: (value) {
+                    signupController.isAgreedOn.value = value!;
+                  },
+                  activeColor: customColors.primary,
+                ),
+              )
+            ],
+          ),
+        ), // Generated code for this Row Widget...
 // Row(
 //   mainAxisSize: MainAxisSize.max,
 //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +96,6 @@ Padding(
 //     ),
 //   ],
 // )
-
       ],
     );
   }

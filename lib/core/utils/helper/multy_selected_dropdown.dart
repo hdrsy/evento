@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
@@ -39,7 +40,7 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
                   color: customColors.primaryText,
                   useGoogleFonts: true,
                 ),
-              ),
+              ).tr(),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: widget.options.map((String option) {
@@ -52,7 +53,7 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
                           color: customColors.secondaryText,
                           useGoogleFonts: true,
                         ),
-                      ),
+                      ).tr(),
                       onChanged: (bool? value) {
                         setState(() {
                           // This setState refers to the StatefulBuilder's setState
@@ -71,7 +72,7 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text('Done'),
+                  child: Text('Done').tr(),
                   onPressed: () {
                     Navigator.of(context).pop();
                     widget.onSelectionChanged(
@@ -104,8 +105,12 @@ class _MultiSelectDropDownState extends State<MultiSelectDropDown> {
             Expanded(
               child: Text(
                 widget.selectedValues.isEmpty
-                    ? widget.title
-                    : widget.selectedValues.join(', '),
+                    ? tr(widget
+                        .title) // Translate the title if no selected values
+                    : widget.selectedValues
+                        .map((item) => tr(item)) // Translate each item
+                        .join(
+                            ', '), // Join translated items with a space or '' for no space
                 style: customTextStyle.bodyMedium.override(
                   fontFamily: 'Nunito',
                   color: customColors.primary,
