@@ -54,6 +54,22 @@ class FullTicketInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                index != 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                bookNowController.removeTicket(index);
+                              },
+                              child: Icon(
+                                Icons.cancel_outlined,
+                                color: customColors.primaryText,
+                                size: 20,
+                              ))
+                        ],
+                      )
+                    : const SizedBox(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -204,22 +220,6 @@ class FullTicketInfo extends StatelessWidget {
                     validator: (value) {
                       return phoneValidation(value);
                     }),
-                index != 0
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                bookNowController.removeTicket(index);
-                              },
-                              child: Icon(
-                                Icons.cancel_outlined,
-                                color: customColors.primaryText,
-                                size: 20,
-                              ))
-                        ],
-                      )
-                    : const SizedBox(),
                 bookNowController.eventDetailsModel.classes.isEmpty
                     ? const SizedBox.shrink()
                     : Column(

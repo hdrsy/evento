@@ -49,20 +49,20 @@ class ReelsController extends PaginationController<ReelModel> {
     isLoadingMoreData.value = false;
   }
 
-  followOrUnFollowreelEvent(int eventId, int modelIndex) async {
+  followOrUnFollowreelOrganizer(int organizerId, int modelIndex) async {
     late String isDoneSuccefully;
     if (itemList[modelIndex].event!.isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
-          "${ServerConstApis.unFollowEvent}/$eventId");
+          "${ServerConstApis.unFollowOrganizer}/${organizerId}");
     } else {
-      isDoneSuccefully =
-          await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
+      isDoneSuccefully = await followUnFollowEvent(
+          "${ServerConstApis.followOrganizer}/${organizerId}");
     }
     if (isDoneSuccefully == "followed successfully") {
-      itemList[modelIndex].event!.isFollowedByAuthUser = true;
+      itemList[modelIndex].organizer!.isOrganizerFollowedByAuthUser = true;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      itemList[modelIndex].event!.isFollowedByAuthUser = false;
+      itemList[modelIndex].organizer!.isOrganizerFollowedByAuthUser = false;
 
       update();
     }

@@ -14,8 +14,8 @@ Widget followButton(int modelIndex) {
   return GetBuilder<ReelsController>(builder: (context) {
     return ButtonWidget(
       onPressed: () {
-        reelsController.followOrUnFollowreelEvent(
-            reelsController.itemList[modelIndex].event!.id, modelIndex);
+        reelsController.followOrUnFollowreelOrganizer(
+            reelsController.itemList[modelIndex].organizer!.id, modelIndex);
       },
       text: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
           ? tr("Following")

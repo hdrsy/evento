@@ -85,7 +85,7 @@ class ReelsWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     userPhotoAndName(model: model),
-                    model.event != null
+                    model.organizer != null
                         ? followButton(modelIndex)
                         : SizedBox.shrink(),
                   ].divide(const SizedBox(width: 10)),

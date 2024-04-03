@@ -28,10 +28,15 @@ class SignupController extends GetxController {
   }
 
   onPressSignUp() async {
-    isAgreedError.value = false;
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
+      if (!isAgreedOn.value) {
+        isAgreedError.value = true;
+        return;
+      } else {
+        isAgreedError.value = false;
+      }
       isLoading.value = true;
 
       Either<ErrorResponse, Map<String, dynamic>> response;

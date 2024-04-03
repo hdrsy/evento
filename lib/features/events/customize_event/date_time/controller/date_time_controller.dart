@@ -65,7 +65,7 @@ class DateTimeController extends GetxController {
   onPressedNext() {
     isStartEndDateValid = endTime.isAfter(startTime);
     if (date > DateTime.now() &&
-        (adultNumber > 0 || childrenNumber > 0) &&
+        (adultNumber > 0 && childrenNumber > 0) &&
         isStartEndDateValid &&
         media.length > 0) {
       isUserEnterDateInfo = true;
@@ -85,7 +85,7 @@ class DateTimeController extends GetxController {
             snackPosition: SnackPosition.TOP,
             backgroundColor: customColors.primaryBackground,
             colorText: customColors.primaryText);
-      } else if (adultNumber.value == 0 || childrenNumber.value == 0) {
+      } else if (adultNumber.value == 0 && childrenNumber.value == 0) {
         Get.snackbar(
             tr("Number Of Guest Error"), tr("The number of guest is required"),
             snackPosition: SnackPosition.TOP,

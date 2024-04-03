@@ -246,7 +246,7 @@ class EventDetailesController extends GetxController {
 
   followAndUnFollowOrganizer() async {
     late String isDoneSuccefully;
-    if (eventDetailsModel.isOrganizerFollowedByAuthUser) {
+    if (eventDetailsModel.organizer!.isOrganizerFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowOrganizer}/${eventDetailsModel.organizerId}");
     } else {
@@ -254,10 +254,10 @@ class EventDetailesController extends GetxController {
           "${ServerConstApis.followOrganizer}/${eventDetailsModel.organizerId}");
     }
     if (isDoneSuccefully == "followed successfully") {
-      eventDetailsModel.isOrganizerFollowedByAuthUser = true;
+      eventDetailsModel.organizer!.isOrganizerFollowedByAuthUser = true;
       update();
     } else if (isDoneSuccefully == "removed successfully") {
-      eventDetailsModel.isOrganizerFollowedByAuthUser = false;
+      eventDetailsModel.organizer!.isOrganizerFollowedByAuthUser = false;
 
       update();
     }
