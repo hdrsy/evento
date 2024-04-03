@@ -30,7 +30,7 @@ getImageNetwork(
         highlightColor: Colors.grey[100]!, // Replace with your highlight color
         child: Container(
           width: width,
-          height: height,
+          height: height ?? 200,
           color: Colors.white,
         ),
       );
