@@ -116,10 +116,10 @@ class SignupScreen extends StatelessWidget {
                     label: tr("+963    mobile Phone"),
                     onChanged: (value) {
                       if (value != null &&
-                          value.startsWith('0') &&
+                          !value.startsWith('0') &&
                           value.isNotEmpty) {
                         // Prepend '0' if it's not already there and the value is not empty
-                        signupController.phone.text = value.substring(1);
+                        signupController.phone.text = '0$value';
                       } else {
                         signupController.phone.text = value!;
                       }

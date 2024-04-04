@@ -78,15 +78,13 @@ class SignInScreen extends StatelessWidget {
                   label: tr("+963    mobile Phone"),
                   onChanged: (value) {
                     if (value != null &&
-                        value.startsWith('0') &&
+                        !value.startsWith('0') &&
                         value.isNotEmpty) {
-                      print("dddddddddddddddddddd");
                       // Prepend '0' if it's not already there and the value is not empty
-                      signinController.phone.text = value.substring(1);
+                      signinController.phone.text = '0$value';
                     } else {
                       signinController.phone.text = value!;
                     }
-                    print(signinController.phone.text);
                   },
                   keyboardType: TextInputType.phone,
                   validator: (value) {

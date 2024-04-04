@@ -78,11 +78,11 @@ class EnterNumberScreen extends StatelessWidget {
                     context: context,
                     label: tr("+963    mobile Phone"),
                     onChanged: (value) {
-                      if (value != null &&
-                          value.startsWith('0') &&
+                          if (value != null &&
+                          !value.startsWith('0') &&
                           value.isNotEmpty) {
                         // Prepend '0' if it's not already there and the value is not empty
-                        enterNumberController.phone.text = value.substring(1);
+                        enterNumberController.phone.text = '0$value';
                       } else {
                         enterNumberController.phone.text = value!;
                       }
