@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../../../../core/responsive/responsive.dart';
 import '../../../../core/shared/functions/validation/pin.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
@@ -50,17 +52,6 @@ class Step1Screen extends StatelessWidget {
               ).animateOnPageLoad(
                   animationsMap['imageOnPageLoadAnimationsteps']!),
               SizedBox(
-                height: scaleHeight(12),
-              ),
-              Text(
-                "Send me a new code",
-                style: customTextStyle.bodyMedium.copyWith(
-                  fontFamily: 'BeerSerif',
-                  color: customColors.primaryText,
-                  fontWeight: FontWeight.w500,
-                ),
-              ).tr(),
-              SizedBox(
                 height: scaleHeight(50),
               ),
               Pin(
@@ -69,8 +60,33 @@ class Step1Screen extends StatelessWidget {
                 },
                 textEditingController: step1controller.pin,
                 validator: (value) {
-                  return pinValidation(value);
+                  return null;
                 },
+              ),
+              SizedBox(
+                height: scaleHeight(12),
+              ),
+              Obx(() => Text(
+                    step1controller.remainingTime.value,
+                    style: TextStyle(
+                      // Customize your timer text style
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: customColors.primaryText, // Example color
+                    ),
+                  )),
+              GestureDetector(
+                onTap: () {
+                  step1controller.getOtp();
+                },
+                child: Text(
+                  "Send me a new code",
+                  style: customTextStyle.bodyMedium.copyWith(
+                    fontFamily: 'BeerSerif',
+                    color: customColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ).tr(),
               ),
               buildButton()
             ],
@@ -88,16 +104,20 @@ class Step1Screen extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(0, 155, 0, 0),
             child: ButtonWidget(
               onPressed: () async {
-                step1controller.onPressContinue();
+                if (step1controller.isOtpValid.value) {
+                  step1controller.onPressContinue();
+                }
               },
               text: tr("Continue"),
-              showLoadingIndicator: false,
+              showLoadingIndicator: step1controller.isLoading.value,
               options: ButtonOptions(
                 width: 350,
                 height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: customColors.primary,
+                color: step1controller.isOtpValid.value
+                    ? customColors.primary
+                    : customColors.alternate,
                 textStyle: customTextStyle.titleSmall.copyWith(
                   fontFamily: 'Roboto',
                   color: Colors.white,

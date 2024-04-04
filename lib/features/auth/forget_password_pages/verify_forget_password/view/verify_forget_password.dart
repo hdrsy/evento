@@ -74,17 +74,31 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
                   },
                   textEditingController: verifyForgetPasswordController.pin,
                   validator: (value) {
-                    return pinValidation(value);
+                    return null;
                   },
                 ),
-                Text(
-                  "Send me a new code",
-                  style: customTextStyle.bodyMedium.copyWith(
-                    fontFamily: 'BeerSerif',
-                    color: customColors.primaryText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ).tr(),
+                Obx(() => Text(
+                      verifyForgetPasswordController.remainingTime.value,
+                      style: TextStyle(
+                        // Customize your timer text style
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: customColors.primaryText, // Example color
+                      ),
+                    )),
+                GestureDetector(
+                  onTap: () {
+                    verifyForgetPasswordController.getOtp();
+                  },
+                  child: Text(
+                    "Send me a new code",
+                    style: customTextStyle.bodyMedium.copyWith(
+                      fontFamily: 'BeerSerif',
+                      color: customColors.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ).tr(),
+                ),
                 SizedBox(
                   height: scaleHeight(50),
                 ),
@@ -117,7 +131,9 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
                 height: 45,
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: customColors.primary,
+                color: verifyForgetPasswordController.isOtpValid.value
+                    ? customColors.primary
+                    : customColors.alternate,
                 textStyle: customTextStyle.titleSmall.copyWith(
                   fontFamily: 'Roboto',
                   color: Colors.white,

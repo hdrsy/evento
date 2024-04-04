@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import '../../../../core/server/helper_api.dart';
 import '../../../../core/server/server_config.dart';
@@ -14,10 +16,18 @@ class Step1Controller extends GetxController {
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
   late RxList<String> errorMessage;
+  RxBool isOtpValid = false.obs;
+  RxBool canResendOtp = false.obs;
+  Timer? otpTimer = null;
+  RxString remainingTime = '10:00'.obs; // Initial value for 10 minutes
+
   @override
   void onInit() {
     pin = TextEditingController();
-    // phone='';
+    pin.addListener(() {
+      isOtpValid.value = pin.text.length == 4;
+    });
+
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
     errorMessage = <String>[].obs;
@@ -25,7 +35,34 @@ class Step1Controller extends GetxController {
     super.onInit();
   }
 
+  void startOtpTimer() {
+    canResendOtp.value = false;
+    final int startSeconds = 10 * 60; // Initialize once and keep it constant
+    int currentSeconds =
+        startSeconds; // Current seconds will decrease over time
+
+    // Cancel any previous timer to avoid multiple timers running
+    otpTimer?.cancel();
+
+    // Create a new timer
+    otpTimer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      if (currentSeconds <= 0) {
+        timer.cancel();
+        canResendOtp.value = true;
+        remainingTime.value = '00:00';
+      } else {
+        // Decrement currentSeconds by 1 for each tick
+        currentSeconds -= 1;
+        remainingTime.value =
+            '${(currentSeconds ~/ 60).toString().padLeft(2, '0')}:${(currentSeconds % 60).toString().padLeft(2, '0')}';
+      }
+    });
+  }
+
   getOtp() async {
+    isOtpValid = false.obs;
+    startOtpTimer();
+
     Either<ErrorResponse, Map<String, dynamic>> response;
 
     response = await ApiHelper.makeRequest(
@@ -36,13 +73,7 @@ class Step1Controller extends GetxController {
 
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      pin.text = extractOtpFromMessage(handlingResponse['message']);
-      // Get.snackbar(handlingResponse['message'], "",
-      //     // duration: Duration(minutes: 1),
-      //     snackPosition: SnackPosition.TOP,
-      //     backgroundColor: customColors.primaryBackground,colorText: customColors.primaryText);
-    }
+    } else {}
   }
 
   onPressContinue() async {
@@ -77,15 +108,10 @@ class Step1Controller extends GetxController {
     stepsController.pageIdex.value = 2;
   }
 
-  String extractOtpFromMessage(String message) {
-    final RegExp otpRegex =
-        RegExp(r'\d{4}'); // Regex to find 4 consecutive digits
-    final Match? match = otpRegex.firstMatch(message);
-
-    if (match != null) {
-      return match.group(0) ?? ""; // Returns the matched OTP
-    } else {
-      return ""; // No OTP found
-    }
+  // Ensure to call this in your dispose method to avoid memory leaks
+  @override
+  void onClose() {
+    otpTimer!.cancel();
+    super.onClose();
   }
 }

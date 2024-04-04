@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import '../../../../../core/server/helper_api.dart';
 import '../../../../../core/server/server_config.dart';
@@ -12,40 +14,67 @@ class VerifyForgetPasswordController extends GetxController {
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
   late RxList<String> errorMessage;
+  RxBool isOtpValid = false.obs;
+  RxBool canResendOtp = false.obs;
+  Timer? otpTimer = null;
+  RxString remainingTime = '10:00'.obs; // Initial value for 10 minutes
+
   @override
   void onInit() {
     pin = TextEditingController();
-    // phone = Get.arguments;
+    pin.addListener(() {
+      isOtpValid.value = pin.text.length == 4;
+    });
+
     formstate = GlobalKey<FormState>();
     isLoading = false.obs;
     errorMessage = <String>[].obs;
-    // getOtp();
+    startOtpTimer();
     super.onInit();
   }
 
+  void startOtpTimer() {
+    canResendOtp.value = false;
+    final int startSeconds = 10 * 60; // Initialize once and keep it constant
+    int currentSeconds =
+        startSeconds; // Current seconds will decrease over time
+
+    // Cancel any previous timer to avoid multiple timers running
+    otpTimer?.cancel();
+
+    // Create a new timer
+    otpTimer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      if (currentSeconds <= 0) {
+        timer.cancel();
+        canResendOtp.value = true;
+        remainingTime.value = '00:00';
+      } else {
+        // Decrement currentSeconds by 1 for each tick
+        currentSeconds -= 1;
+        remainingTime.value =
+            '${(currentSeconds ~/ 60).toString().padLeft(2, '0')}:${(currentSeconds % 60).toString().padLeft(2, '0')}';
+      }
+    });
+  }
+
   getOtp() async {
-    Either<ErrorResponse, Map<String, dynamic>> response;
+    startOtpTimer();
+    FormState? formdata = formstate.currentState;
+    if (formdata!.validate()) {
+      formdata.save();
 
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.sendCode,
-        method: "Post",
-        data: {"phone_number": phone});
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      Either<ErrorResponse, Map<String, dynamic>> response;
 
-    if (handlingResponse is ErrorResponse) {
-      errorMessage.value = handlingResponse.getErrorMessages();
-      Get.snackbar(errorMessage[0], "",
-          // duration: Duration(minutes: 1),
-          snackPosition: SnackPosition.TOP,
-          colorText: customColors.primaryText,
-          backgroundColor: customColors.primaryBackground);
-    } else {
-      pin.text = handlingResponse['code'].toString();
-      update();
-      Get.snackbar(handlingResponse['code'].toString(), "",
-          // duration: Duration(minutes: 1),
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: customColors.primaryBackground);
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.sendCode,
+          method: "Post",
+          data: {"phone_number": phone});
+
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+      } else {}
     }
   }
 
@@ -74,5 +103,12 @@ class VerifyForgetPasswordController extends GetxController {
 
   whenvalidateSuccess(handlingResponse) {
     Get.toNamed('/SetNewPasswordScreen', arguments: [phone, pin.text]);
+  }
+
+  // Ensure to call this in your dispose method to avoid memory leaks
+  @override
+  void onClose() {
+    otpTimer!.cancel();
+    super.onClose();
   }
 }
