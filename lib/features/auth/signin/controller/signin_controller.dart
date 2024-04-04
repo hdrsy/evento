@@ -31,7 +31,6 @@ class SigninController extends GetxController {
       isLoading.value = true;
       Either<ErrorResponse, Map<String, dynamic>> response;
       String deviceToken = await pushyRegister();
-
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.signIn,
           method: "Post",

@@ -40,7 +40,6 @@ class SignupController extends GetxController {
       isLoading.value = true;
 
       Either<ErrorResponse, Map<String, dynamic>> response;
-
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.signUpStep1,
           method: "Post",
