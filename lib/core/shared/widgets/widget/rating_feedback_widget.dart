@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class RateingFeedbackWidget extends StatelessWidget {
   const RateingFeedbackWidget({
-    Key? key, required this.userRatingl,
+    Key? key,
+    required this.userRatingl,
   }) : super(key: key);
-final double userRatingl;
+  final double userRatingl;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -23,8 +25,8 @@ final double userRatingl;
           width: 350,
           decoration: BoxDecoration(
             color: customColors.secondaryBackground,
-            boxShadow: const[
-               BoxShadow(
+            boxShadow: const [
+              BoxShadow(
                 blurRadius: 6,
                 color: Color(0x35000000),
                 offset: Offset(0, -2),
@@ -51,7 +53,7 @@ final double userRatingl;
                       children: [
                         Expanded(
                           child: Text(
-                             "Thank You for Your Feedback!",
+                            "Thank You for Your Feedback!",
                             textAlign: TextAlign.center,
                             style: customTextStyle.headlineSmall,
                           ).tr(),
@@ -68,8 +70,8 @@ final double userRatingl;
                         color: customColors.primary,
                       ),
                       direction: Axis.horizontal,
-                      initialRating: userRatingl ,
-                      unratedColor: customColors.primary,
+                      initialRating: userRatingl,
+                      unratedColor: customColors.primaryBackground,
                       itemCount: 5,
                       itemSize: 48,
                       glowColor: customColors.primary,
@@ -82,19 +84,20 @@ final double userRatingl;
                         // context.pushNamed('Booking-Details');
                         Get.back();
                       },
-                      text:tr(  "Done"),
+                      text: tr("Done"),
                       options: ButtonOptions(
                         height: 45,
-                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         color: customColors.primary,
-                        textStyle:
-                            customTextStyle.bodyMedium.override(
-                                  fontFamily: 'Nunito',
-                                  color: customColors.info,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: true,
-                                ),
+                        textStyle: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.info,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: true,
+                        ),
                         elevation: 3,
                         borderSide: const BorderSide(
                           color: Colors.transparent,
