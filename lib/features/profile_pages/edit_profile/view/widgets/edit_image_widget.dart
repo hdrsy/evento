@@ -9,14 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EditImageWidget extends StatelessWidget {
   EditImageWidget({super.key});
   final EditProfileController editProfileController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return 
-    
-    Column(
+    return Column(
       children: [
         Container(
           width: 100,
@@ -37,19 +36,20 @@ class EditImageWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child:Obx(()=> editProfileController.isImageSelected.value
+              child: Obx(() => editProfileController.isImageSelected.value
                   ? Image.file(
                       editProfileController.customImage,
                       fit: BoxFit.cover,
                       alignment: const Alignment(0.00, 0.00),
                     )
-                  :  editProfileController.profileModel.image.length > 6
-                ? getImageNetwork(
-                    url: "/storage/${editProfileController.profileModel.image}",
-                    width: null,
-                    height: null)
-                : Image.asset(
-                    'assets/images/${editProfileController.profileModel.image}.png')),
+                  : editProfileController.profileModel.image.length > 6
+                      ? getImageNetwork(
+                          url:
+                              "/storage/${editProfileController.profileModel.image}",
+                          width: null,
+                          height: null)
+                      : Image.asset(
+                          'assets/images/${editProfileController.profileModel.image}.png')),
             ),
           ),
         ),
@@ -69,7 +69,7 @@ class EditImageWidget extends StatelessWidget {
                       .pickImageForDashbard(ImageSource.gallery);
                 });
           },
-          text:tr( "Change Photo"),
+          text: tr("Change Photo"),
           options: ButtonOptions(
             height: 35,
             padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),

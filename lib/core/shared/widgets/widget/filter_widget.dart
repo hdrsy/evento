@@ -381,16 +381,23 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ButtonWidget(
                         showLoadingIndicator: isLoading,
                         onPressed: () async {
-                          isLoading = true;
+                          setState(() {
+                            isLoading = true;
+                          });
                           // Navigator.pop(context);
                           Map<String, dynamic> data = {};
                           if (choiceChipsValueController != null) {
                             List<String> selectedChoices =
                                 choiceChipsValueController!.value!;
-
+                            if (selectedChoices.contains('All')) {
+                              selectedChoices.clear();
+                              selectedChoices
+                                  .assignAll(categoryList.map((e) => e.title));
+                            }
                             for (var i = 0; i < selectedChoices.length; i++) {
                               data['event_category[$i]'] = selectedChoices[i];
                             }
+                            print(selectedChoices);
                           }
                           if (dropDownValueController != null) {
                             data['state'] = dropDownValueController!.value;
@@ -401,7 +408,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {
-                            await widget.onApplyFilters(data);
+                            // await widget.onApplyFilters(data);
                           }
                           setState(() {
                             isLoading = false;

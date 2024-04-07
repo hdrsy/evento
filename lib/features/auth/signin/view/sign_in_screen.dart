@@ -158,7 +158,7 @@ class SignInScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const FogetPasswordWidget(),
-// const TermsAndCondisionTexts()
+        // const TermsAndCondisionTexts()
       ].divide(SizedBox(
         height: scaleHeight(10),
       )),
