@@ -5,11 +5,16 @@ import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/core/utils/services/cache_service.dart';
+import 'package:evento/core/utils/services/location_service.dart';
 import 'package:evento/features/search/model/search_model.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+
 // Add your other necessary imports here
+LocationService locationService = LocationService();
+late Position userLocation;
 
 class SearchPageController extends GetxController {
   var searchResults = <SearchModel>[].obs;
@@ -22,11 +27,16 @@ class SearchPageController extends GetxController {
   final String cacheKey = 'searchRecent';
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     _fetchData(" "); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
-    getRecentSearch();
+    await getRecentSearch();
+    getuserlocation();
+  }
+
+  getuserlocation() async {
+    userLocation = await locationService.getCurrentLocation();
   }
 
   void _onSearchChanged() {
@@ -115,6 +125,7 @@ class SearchPageController extends GetxController {
   }
 
   void _updateSearchResults(List<SearchModel> results) {
+    searchResults.clear();
     searchResults.assignAll(results);
     update();
   }
@@ -135,11 +146,15 @@ class SearchPageController extends GetxController {
     isSearchActive.value = true;
     update();
     // Your filter logic
+    Get.back();
+    print("sssssssssssssssss $data");
     var filteredData = await filter(
         data); // Assuming this returns List<dynamic> representing filtered data
+    print("sssssssssssssssss ${filteredData.length}");
     if (filteredData is List<dynamic>) {
       List<SearchModel> filteredResults = filteredData.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting
+        print("eventdata :$jsonItem");
         return SearchModel.fromJson(jsonItem);
       }).toList();
       _updateSearchResults(filteredResults);
@@ -149,7 +164,6 @@ class SearchPageController extends GetxController {
       // For example, log an error or show an error message
     }
     // isSearchActive.value = true;
-    Get.back();
   }
 
   resetController() {

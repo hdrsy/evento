@@ -34,10 +34,9 @@ class MainImage extends StatelessWidget {
                     // Handle image display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(
-                            imageUrl:
-                                GalleryItem(url: imgUrl[index], isVideo: false),
-                            tag: "image$index")); // Ensure unique tag for Hero
+                        Get.to(ShowInFullScreen(imageUrlList: [
+                          GalleryItem(url: imgUrl[index], isVideo: false)
+                        ], tag: "image$index")); // Ensure unique tag for Hero
                       },
                       child: Hero(
                         tag: "image$index", // Ensure unique tag for Hero
@@ -55,11 +54,9 @@ class MainImage extends StatelessWidget {
                     // Handle video display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(
-                            imageUrl: GalleryItem(
-                                url: videosUrl[videoIndex], isVideo: true),
-                            tag:
-                                "video$videoIndex")); // Ensure unique tag for Hero
+                        Get.to(ShowInFullScreen(imageUrlList: [
+                          GalleryItem(url: videosUrl[videoIndex], isVideo: true)
+                        ], tag: "video$videoIndex")); // Ensure unique tag for Hero
                       },
                       child: Hero(
                         tag: "video$videoIndex", // Ensure unique tag for Hero
@@ -113,11 +110,16 @@ class MainImage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BuildPageIndecator extends StatelessWidget {
-  const BuildPageIndecator(
-      {super.key, required this.pageController, required this.itemCount});
+  BuildPageIndecator(
+      {super.key,
+      required this.pageController,
+      required this.itemCount,
+      this.dotColor});
   final PageController pageController;
   final int itemCount;
+  Color? dotColor;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -141,7 +143,7 @@ class BuildPageIndecator extends StatelessWidget {
             radius: 16,
             dotWidth: 10,
             dotHeight: 8,
-            dotColor: customColors.secondaryBackground,
+            dotColor: dotColor ?? customColors.secondaryBackground,
             activeDotColor: customColors.primary,
             paintStyle: PaintingStyle.fill,
           ),

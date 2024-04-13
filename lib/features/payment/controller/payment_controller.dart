@@ -103,7 +103,42 @@ class PaymentController extends GetxController {
           data: data);
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
       if (handlingResponse is String) {
-        errorMessageInInvoice.value = handlingResponse;
+        Get.dialog(AlertDialog(
+            backgroundColor: customColors.secondaryBackground,
+            title: Text("error_message",
+                    style: customTextStyle.titleSmall
+                        .copyWith(color: customColors.primaryText))
+                .tr(),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ErrorMessages(
+                  message: "reason_information_entered",
+                ),
+                ErrorMessages(
+                  message: "reason_insufficient_balance",
+                ),
+                ErrorMessages(
+                  message: "reason_no_internet",
+                )
+              ],
+            ),
+            actions: [
+              GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    "Ok",
+                    style: customTextStyle.titleSmall.override(
+                      fontFamily: 'Nunito',
+                      color: customColors.primaryText,
+                      fontSize: 14.sp,
+                      useGoogleFonts: true,
+                    ),
+                  ).tr())
+            ]));
+
         // errorMessage.value = handlingResponse.getErrorMessages();
       } else {
         isIvoiceCreated.value = true;

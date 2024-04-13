@@ -8,6 +8,7 @@ import 'package:evento/core/utils/services/location_service.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
+import 'package:evento/features/search/controller/search_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,22 +26,16 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  LocationService locationService = LocationService();
-  late Position userLocation;
   @override
   void initState() {
-    getuserlocation();
     super.initState();
   }
 
-  getuserlocation() async {
-    userLocation = await locationService.getCurrentLocation();
-  }
+  bool isLoading = false;
 
   FormFieldController<String>? dropDownValueController;
 
   FormFieldController<List<String>>? choiceChipsValueController;
-  bool isLoading = false;
   double price = 1000;
   double locationRange = 1;
   SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
@@ -381,14 +376,18 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ButtonWidget(
                         showLoadingIndicator: isLoading,
                         onPressed: () async {
-                          setState(() {
-                            isLoading = true;
-                          });
+                          if (!isLoading) {
+                            // Prevent multiple taps
+                            setState(() {
+                              isLoading = true; // Show loading indicator
+                            });
+                          }
                           // Navigator.pop(context);
                           Map<String, dynamic> data = {};
                           if (choiceChipsValueController != null) {
-                            List<String> selectedChoices =
-                                choiceChipsValueController!.value!;
+                            List<String> selectedChoices = [];
+                            selectedChoices
+                                .assignAll(choiceChipsValueController!.value!);
                             if (selectedChoices.contains('All')) {
                               selectedChoices.clear();
                               selectedChoices
@@ -408,11 +407,14 @@ class _FilterWidgetState extends State<FilterWidget> {
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {
-                            // await widget.onApplyFilters(data);
+                            print(data);
+                            await widget.onApplyFilters(data);
                           }
-                          setState(() {
-                            isLoading = false;
-                          });
+                          if (mounted) {
+                            setState(() {
+                              isLoading = false; // Hide loading indicator
+                            });
+                          }
                         },
                         text: tr("Apply filters"),
                         options: ButtonOptions(

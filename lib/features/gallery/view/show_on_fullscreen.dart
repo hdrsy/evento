@@ -1,5 +1,6 @@
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
+import 'package:evento/features/events/event_detailes/view/widgets/main_image.dart';
 import 'package:evento/features/gallery/controller/gallery_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,11 @@ import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ShowInFullScreen extends StatelessWidget {
-  final GalleryItem imageUrl;
+  final List<GalleryItem> imageUrlList;
   final String tag;
 
-  const ShowInFullScreen(
-      {super.key, required this.imageUrl, required this.tag});
+  ShowInFullScreen({super.key, required this.imageUrlList, required this.tag});
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,24 @@ class ShowInFullScreen extends StatelessWidget {
         child: Center(
           child: Hero(
               tag: tag,
-              child: GalleryMediaWidget(
-                galleryItem: imageUrl,
+              child: Stack(
+                children: [
+                  PageView.builder(
+                      controller: pageController,
+                      itemCount: imageUrlList.length,
+                      itemBuilder: (ctx, index) {
+                        return GalleryMediaWidget(
+                            galleryItem: imageUrlList[index]);
+                      }),
+                  Positioned(
+                      right: 20,
+                      bottom: 20,
+                      child: BuildPageIndecator(
+                        itemCount: imageUrlList.length,
+                        pageController: pageController,
+                        dotColor: customColors.secondary,
+                      )),
+                ],
               )), // Replace with your image or video widget
         ),
       ),
@@ -32,6 +49,9 @@ class ShowInFullScreen extends StatelessWidget {
   }
 }
 
+// GalleryMediaWidget(
+//                 galleryItem: imageUrl,
+//               )
 class GalleryMediaWidget extends StatelessWidget {
   final GalleryItem galleryItem;
 

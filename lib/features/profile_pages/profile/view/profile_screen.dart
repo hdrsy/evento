@@ -212,7 +212,7 @@ List<Widget> getOrganizerOptionsCard() => [
       OptionsCard(
         targetRout: '/AchivmentScreen',
         icon: Icons.code_sharp,
-        title: tr("Achievements"),
+        title: tr("Coupons"),
       ),
       OptionsCard(
         targetRout: LanguageSelector(),
@@ -262,7 +262,7 @@ List<Widget> getServiceProviderOptionsCard() => [
       OptionsCard(
         targetRout: '/AchivmentScreen',
         icon: Icons.code_sharp,
-        title: tr("Achievements"),
+        title: tr("Coupons"),
       ),
       OptionsCard(
         targetRout: LanguageSelector(),

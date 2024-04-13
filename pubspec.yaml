@@ -96,8 +96,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   # flutter_native_splash: 
   pushy_flutter: ^2.0.18
-  uni_links: ^0.5.1
+  # uni_links: ^0.5.1
   flutter_native_splash: ^2.3.10
+  app_links: ^4.0.1
   
   
   

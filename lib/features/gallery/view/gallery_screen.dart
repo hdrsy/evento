@@ -51,8 +51,7 @@ class GalleryScreen extends StatelessWidget {
                     return GestureDetector(
                         onTap: () {
                           Get.to(ShowInFullScreen(
-                              imageUrl:
-                                  galleryController.mixedGalleryItems[index],
+                              imageUrlList: galleryController.mixedGalleryItems,
                               tag: index.toString()));
                         },
                         child: Hero(

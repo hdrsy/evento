@@ -259,14 +259,23 @@ class PhonePayment extends StatelessWidget {
                       color: customColors.primaryText,
                       useGoogleFonts: false,
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: customColors.primary,
+                    // enabledBorder: UnderlineInputBorder(
+                    //   borderSide: BorderSide(
+                    //     color: customColors.primary,
+                    //     width: 2,
+                    //   ),
+                    //   borderRadius: BorderRadius.circular(40),
+                    // ),
+
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(40),
                     ),
-                    focusedBorder: UnderlineInputBorder(
+
+                    enabledBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
                         color: Color(0x00000000),
                         width: 2,

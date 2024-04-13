@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 // import 'package:evento/core/utils/services/deep_linking.dart';
@@ -6,7 +7,7 @@ import 'package:evento/core/utils/services/pushy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
-import 'package:uni_links/uni_links.dart';
+// import 'package:uni_links/uni_links.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -40,10 +41,11 @@ startTimerToRemoveSplashScreen() {
 }
 
 void main() async {
-  WidgetsBinding widgetsBinding =
-      await WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  startTimerToRemoveSplashScreen();
+  // WidgetsBinding widgetsBinding =
+  //     await
+  WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // startTimerToRemoveSplashScreen();
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();
@@ -147,20 +149,29 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late final AppLinks _appLinks; // Create an instance of AppLinks
+
   @override
   void initState() {
     super.initState();
+    _appLinks = AppLinks(); // Initialize the AppLinks instance
     initDeepLinkHandling();
   }
 
   void initDeepLinkHandling() async {
-    final initialLink = await getInitialLink();
-    _handleLink(initialLink);
-
-    linkStream.listen((String? link) {
-      _handleLink(link);
+    // final initialLink = await getInitialLink();
+    final Uri? initialUri = await _appLinks.getInitialAppLink();
+    if (initialUri != null) {
+      _handleLink(initialUri.toString());
+    }
+    // Listen to incoming app link
+    _appLinks.uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        _handleLink(uri.toString());
+      }
     }, onError: (err) {
-      // Handle error scenarios
+      // Handle errors (e.g., if the app link was not formatted correctly)
+      print('Failed to handle incoming app link: $err');
     });
   }
 
