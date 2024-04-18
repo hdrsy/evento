@@ -5,7 +5,7 @@ class NotificationModel {
   final String description;
   final String descriptionar;
   final int userId;
-  final int type;
+  int type;
   final DateTime createdAt;
 
   NotificationModel({

@@ -33,9 +33,10 @@ Widget buildOrganizerSection(BuildContext context, Organizer? organizer) {
             Get.dialog(const GuestPopupWidget());
           } else {
             eventDetailesController.eventDetailsModel.organizer != null
-                ? Get.toNamed('/OrganizerProfileScreen',
-                    arguments:
-                        eventDetailesController.eventDetailsModel.organizer!.id)
+                ? Get.toNamed('/OrganizerProfileScreen', arguments: [
+                    eventDetailesController.eventDetailsModel.organizer!.id,
+                    eventDetailesController.eventId
+                  ])
                 : null;
           }
         },

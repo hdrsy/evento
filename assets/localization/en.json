@@ -338,9 +338,10 @@
 "My Events":"My Events",
 "Pending": "Pending",
 "In Review": "In Review",
+"No Result":"No Result",
 "Contacted": "Contacted",
 "Follow": "Follow",
-"UnFollow":"UnFollow",
+"UnFollow":"Unfollow",
 "This event is Ended":"This event is Ended",
 
 "Popular on Evanto": "Popular on Evanto",

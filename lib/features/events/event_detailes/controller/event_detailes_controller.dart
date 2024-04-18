@@ -121,6 +121,7 @@ class EventDetailesController extends GetxController {
         isLoading.value = false;
       }
     } catch (e) {
+      print(e);
       isSomeThingError.value = true;
       isLoading.value = false;
     }

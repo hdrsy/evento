@@ -99,7 +99,7 @@ class NameCheckBox extends StatelessWidget {
                             context: context,
                             widget: ReviewEventWidget(
                                 ratingTarget: tr("Venue"),
-                                idKey: tr("venue_id"),
+                                idKey: "venue_id",
                                 url: ServerConstApis.reviewVenue,
                                 id: venue.id),
                             height: 450);

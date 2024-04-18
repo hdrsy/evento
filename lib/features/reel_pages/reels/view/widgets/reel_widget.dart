@@ -193,7 +193,8 @@ Function()? onTapp(ReelModel model) {
     };
   } else if (model.organizer != null) {
     return () {
-      Get.toNamed('/OrganizerProfileScreen', arguments: model.organizer!.id);
+      Get.toNamed('/OrganizerProfileScreen',
+          arguments: [model.organizer!.id, 0]);
     };
   } else if (model.venue != null) {
     return () {

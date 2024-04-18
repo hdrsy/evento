@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:evento/features/events/event_detailes/controller/event_detailes_controller.dart';
 import 'package:evento/features/organizer/organizer_profile/model/organizer_profile_followers_model.dart';
 import 'package:evento/features/profile_pages/profile/controller/profile_controller.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
@@ -17,6 +18,7 @@ class OrganizerProfileController extends GetxController {
   RxBool isError = false.obs;
   late RxBool isLoadingFollowers;
   late int orgnizerId;
+  late int eventId;
   late bool isSameUser;
 // late bool isorganizerEditProfile;
 
@@ -27,7 +29,8 @@ class OrganizerProfileController extends GetxController {
     isLoading = false.obs;
     isLoadingFollowers = false.obs;
     rganizerFollowers = [];
-    orgnizerId = Get.arguments;
+    orgnizerId = Get.arguments[0];
+    eventId = Get.arguments[1];
     // isorganizerEditProfile = Get.arguments[1]??false;
     await getOrganizerProfile();
     getOrganizerFollowers();
@@ -178,6 +181,9 @@ class OrganizerProfileController extends GetxController {
       organizerProfileModel.followersCount--;
 
       update();
+    }
+    if (eventId != 0) {
+      Get.find<EventDetailesController>().followAndUnFollowOrganizer();
     }
   }
 }

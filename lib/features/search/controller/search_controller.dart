@@ -21,6 +21,7 @@ class SearchPageController extends GetxController {
   var recentSearch = <SearchModel>[].obs;
   var isSearchActive = false.obs;
   var isError = false.obs;
+  var isLoading = false.obs;
   TextEditingController searchField = TextEditingController();
   Timer? _debounce;
   CacheService cacheService = CacheService('searchRecent');
@@ -93,6 +94,7 @@ class SearchPageController extends GetxController {
 
   void _fetchData(String query) async {
     try {
+      isLoading.value = true;
       String token = await prefService.readString("token");
       var response = await ApiHelper.makeRequest(
           targetRout: isGuset
@@ -109,6 +111,7 @@ class SearchPageController extends GetxController {
     } catch (e) {
       isError.value = true;
     }
+    isLoading.value = false;
   }
 
   void _handleError(ErrorResponse error) {
@@ -144,13 +147,12 @@ class SearchPageController extends GetxController {
 
   void onApplyFilters(Map<String, dynamic> data) async {
     isSearchActive.value = true;
+    isLoading.value = true;
     update();
     // Your filter logic
     Get.back();
-    print("sssssssssssssssss $data");
     var filteredData = await filter(
         data); // Assuming this returns List<dynamic> representing filtered data
-    print("sssssssssssssssss ${filteredData.length}");
     if (filteredData is List<dynamic>) {
       List<SearchModel> filteredResults = filteredData.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting
@@ -163,6 +165,7 @@ class SearchPageController extends GetxController {
       //redData is not a List<dynamic>
       // For example, log an error or show an error message
     }
+    isLoading.value = false;
     // isSearchActive.value = true;
   }
 
@@ -170,6 +173,7 @@ class SearchPageController extends GetxController {
     searchField.clear();
     isSearchActive.value = false;
     isError.value = false;
+    _fetchData(" "); // Fetch initial data with empty query
   }
 
   @override

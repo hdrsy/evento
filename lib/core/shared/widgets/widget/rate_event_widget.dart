@@ -10,10 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ReviewEventWidget extends StatelessWidget {
   const ReviewEventWidget({
-    Key? key, required this.ratingTarget, required this.url, required this.id, required this.idKey,
-   
+    Key? key,
+    required this.ratingTarget,
+    required this.url,
+    required this.id,
+    required this.idKey,
   }) : super(key: key);
 
   final String ratingTarget;
@@ -22,22 +26,22 @@ class ReviewEventWidget extends StatelessWidget {
   final String idKey;
   @override
   Widget build(BuildContext context) {
-    double ratingValue=0;
-    TextEditingController comment=TextEditingController();
- 
+    double ratingValue = 1;
+    TextEditingController comment = TextEditingController();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
         color: customColors.secondaryBackground,
-        boxShadow: const[
+        boxShadow: const [
           BoxShadow(
             blurRadius: 6,
             color: Color(0x35000000),
             offset: Offset(0, -2),
           )
         ],
-        borderRadius:const BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0),
           bottomRight: Radius.circular(0),
           topLeft: Radius.circular(16),
@@ -64,7 +68,7 @@ class ReviewEventWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                         "Rate $ratingTarget",
+                        "Rate $ratingTarget",
                         textAlign: TextAlign.start,
                         style: customTextStyle.headlineSmall,
                       ),
@@ -94,9 +98,10 @@ class ReviewEventWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                         child: Text(
-                           "How would you rate it?",
+                          "How would you rate it?",
                           textAlign: TextAlign.start,
                           style: customTextStyle.bodySmall,
                         ).tr(),
@@ -108,15 +113,15 @@ class ReviewEventWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: RatingBar.builder(
-                  onRatingUpdate: (value){
-                    ratingValue=value;
+                  onRatingUpdate: (value) {
+                    ratingValue = value;
                   },
                   itemBuilder: (context, index) => Icon(
                     Icons.star_rounded,
                     color: customColors.primary,
                   ),
                   direction: Axis.horizontal,
-                  initialRating:  0,
+                  initialRating: 1,
                   unratedColor: customColors.primaryBackground,
                   itemCount: 5,
                   itemSize: 48,
@@ -129,7 +134,7 @@ class ReviewEventWidget extends StatelessWidget {
                   controller: comment,
                   obscureText: false,
                   decoration: InputDecoration(
-                    hintText:tr( "Please leave a description of ..."),
+                    hintText: tr("Please leave a description of ..."),
                     hintStyle: customTextStyle.bodyMedium,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -162,30 +167,42 @@ class ReviewEventWidget extends StatelessWidget {
                   ),
                   style: customTextStyle.bodySmall,
                   maxLines: 4,
-                 ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
                 child: ButtonWidget(
                   onPressed: () async {
-
-                   bool state= await review(url: url, rating: ratingValue.toInt(), desc: comment.text, idKey: idKey, id: id) ;
-              state?  {
-                Get.back(),
-                    showButtonSheet(context: context, widget:  RateingFeedbackWidget(userRatingl: ratingValue), height: MediaQuery.sizeOf(context).height * 0.8)}:Get.back();
-                    },
-                  text:tr(  "Submit Review"),
+                    bool state = await review(
+                        url: url,
+                        rating: ratingValue.toInt(),
+                        desc: comment.text,
+                        idKey: idKey,
+                        id: id);
+                    state
+                        ? {
+                            Get.back(),
+                            showButtonSheet(
+                                context: context,
+                                widget: RateingFeedbackWidget(
+                                    userRatingl: ratingValue),
+                                height: MediaQuery.sizeOf(context).height * 0.8)
+                          }
+                        : Get.back();
+                  },
+                  text: tr("Submit Review"),
                   options: ButtonOptions(
                     height: 45,
                     padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     color: customColors.primary,
                     textStyle: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.info,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: true,
-                        ),
+                      fontFamily: 'Nunito',
+                      color: customColors.info,
+                      fontWeight: FontWeight.bold,
+                      useGoogleFonts: true,
+                    ),
                     elevation: 3,
                     borderSide: const BorderSide(
                       color: Colors.transparent,

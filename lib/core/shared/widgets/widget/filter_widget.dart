@@ -393,9 +393,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                               selectedChoices
                                   .assignAll(categoryList.map((e) => e.title));
                             }
-                            for (var i = 0; i < selectedChoices.length; i++) {
-                              data['event_category[$i]'] = selectedChoices[i];
-                            }
+                            // for (var i = 0; i < selectedChoices.length; i++) {
+                            //   data['event_category[$i]'] = selectedChoices[i];
+                            // }
+                            data["event_category"] = selectedChoices;
                             print(selectedChoices);
                           }
                           if (dropDownValueController != null) {

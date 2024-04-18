@@ -83,7 +83,8 @@ class OrganizerSeeAllCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/OrganizerProfileScreen', arguments: organizerHome.id);
+        Get.toNamed('/OrganizerProfileScreen',
+            arguments: [organizerHome.id, 0]);
       },
       child: SizedBox(
         width: double.infinity,

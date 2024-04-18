@@ -76,23 +76,53 @@ class SearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () =>
-
-          //  searchPageController.searchResults.isEmpty
-          //     ? const EmptyData(
-          //         icon: Icons.search_sharp,
-          //         message:
-          //             "No luck this time, but the perfect event might be just a few keywords away!",
-          //       )
-          Column(
-        children: [
-          ...List.generate(
-              searchPageController.searchResults.length,
-              (index) => SearchEventCard(
-                    eventModel: searchPageController.searchResults[index],
-                  )),
-        ],
-      ),
+      () => searchPageController.isLoading.value
+          ? Container(
+              margin: EdgeInsets.symmetric(vertical: 50),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: customColors.primary,
+                ),
+              ),
+            )
+          : searchPageController.searchResults.isEmpty
+              ? Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search_off_outlined,
+                      color: customColors.primary,
+                      size: 60,
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(0, 0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          "No Result",
+                          textAlign: TextAlign.center,
+                          style: customTextStyle.bodyMedium.override(
+                            fontFamily: 'Nunito',
+                            color: customColors.primary,
+                            fontSize: 18,
+                            useGoogleFonts: false,
+                          ),
+                        ).tr(),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    ...List.generate(
+                        searchPageController.searchResults.length,
+                        (index) => SearchEventCard(
+                              eventModel:
+                                  searchPageController.searchResults[index],
+                            )),
+                  ],
+                ),
     );
   }
 }

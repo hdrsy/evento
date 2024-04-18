@@ -36,7 +36,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) async {
   String notificationText = Get.locale == Locale("en")
       ? data['body']
       : data['body_ar'] ?? 'Hello World!';
-
+  print("notification :$data");
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
   Pushy.notify(notificationTitle, notificationText, data);
@@ -56,13 +56,15 @@ void notificationClickListener(Map<String, dynamic> data) {
     String targetRout = extractWordAfterNavigate(normalizedTitle);
     if (targetRout.toLowerCase() == "organizer") {
       Get.context != null
-          ? Get.toNamed('/OrganizerProfileScreen',
-              arguments:
-                  int.tryParse(normalizedTitle[normalizedTitle.length - 1]))
+          ? Get.toNamed('/OrganizerProfileScreen', arguments: [
+              int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+              0
+            ])
           : Future.delayed(Duration(seconds: 2), () {
-              Get.toNamed('/OrganizerProfileScreen',
-                  arguments: int.tryParse(
-                      normalizedTitle[normalizedTitle.length - 1]));
+              Get.toNamed('/OrganizerProfileScreen', arguments: [
+                int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+                0
+              ]);
             });
     } else if (targetRout.toLowerCase() == "venue") {
       Get.context != null

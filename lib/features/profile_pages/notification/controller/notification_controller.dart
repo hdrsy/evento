@@ -24,26 +24,26 @@ class NotificationController extends GetxController {
   }
 
   fetchCategoryData() async {
-    try {
-      isLoading.value = true;
-      Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token");
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.getNotification,
-          method: "GEt",
-          token: token);
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        isError.value = true;
-        errorMessage.value = handlingResponse.getErrorMessages();
-      } else {
-        whenGetDataSuccess(handlingResponse);
-      }
-      isLoading.value = false;
-    } catch (e) {
-      isLoading.value = false;
+    // try {
+    isLoading.value = true;
+    Either<ErrorResponse, Map<String, dynamic>> response;
+    String token = await prefService.readString("token");
+    response = await ApiHelper.makeRequest(
+        targetRout: ServerConstApis.getNotification,
+        method: "GEt",
+        token: token);
+    dynamic handlingResponse = response.fold((l) => l, (r) => r);
+    if (handlingResponse is ErrorResponse) {
       isError.value = true;
+      errorMessage.value = handlingResponse.getErrorMessages();
+    } else {
+      whenGetDataSuccess(handlingResponse);
     }
+    isLoading.value = false;
+    // } catch (e) {
+    //   isLoading.value = false;
+    //   isError.value = true;
+    // }
   }
 
   whenGetDataSuccess(handlingResponse) {

@@ -1,5 +1,6 @@
 import 'package:evento/core/shared/functions/fix_notification_title.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
+import 'package:evento/features/profile_pages/notification/controller/notification_controller.dart';
 import 'package:evento/features/profile_pages/notification/model/notification_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,12 +20,16 @@ class NotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        notificationModel.type = 1;
+        Get.find<NotificationController>().update();
         if (notificationModel.title.contains("navigate")) {
           String targetRout = extractWordAfterNavigate(notificationModel.title);
           if (targetRout.toLowerCase() == "organizer") {
-            Get.toNamed('/OrganizerProfileScreen',
-                arguments: int.tryParse(notificationModel
-                    .title[notificationModel.title.length - 1]));
+            Get.toNamed('/OrganizerProfileScreen', arguments: [
+              int.tryParse(
+                  notificationModel.title[notificationModel.title.length - 1]),
+              0
+            ]);
           } else if (targetRout.toLowerCase() == "venue") {
             Get.toNamed('/VenueDetailesForUserScreen',
                 arguments: int.tryParse(notificationModel
@@ -62,119 +67,121 @@ class NotificationCard extends StatelessWidget {
           }
         }
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: notificationModel.type == 1
-              ? null
-              : customColors.primaryBackground,
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      IconWithContainer(
-                        backgroundColor: const Color(0xFFDAC9EE),
-                        borderRadius: 40,
-                        buttonSize: 50,
-                        icon: Icons.calendar_month,
-                        iconColor: customColors.primary,
-                        onTap: () {},
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(
-                                width: 200.w,
-                                child: Text(
-                                  Get.locale == Locale('en')
-                                      ? removeNavigateToEnd(
-                                          notificationModel.title)
-                                      : removeNavigateToEnd(
-                                          notificationModel.titlear),
-                                  style: customTextStyle.bodyMedium.override(
-                                    fontFamily: 'Nunito',
-                                    color: customColors.primaryText,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
-                                ).tr(),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                DateFormatter.formatDate(
-                                    notificationModel.createdAt),
-                                style: customTextStyle.bodyMedium,
-                              ).tr(),
-                              SizedBox(
-                                height: 20,
-                                child: VerticalDivider(
-                                  thickness: 1,
-                                  color: customColors.secondary,
-                                ),
-                              ),
-                              Text(
-                                DateFormatter.formatTime(
-                                    notificationModel.createdAt),
-                                style: customTextStyle.bodyMedium,
-                              ).tr(),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ].divide(const SizedBox(width: 15)),
-                  ),
-                  notificationModel.type == 1
-                      ? const SizedBox()
-                      : Container(
-                          width: 50,
-                          height: 25,
-                          decoration: BoxDecoration(
-                            color: customColors.alternate,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Align(
-                            alignment: const AlignmentDirectional(0.00, 0.00),
-                            child: Text(
-                              "New",
-                              style: customTextStyle.titleSmall.override(
-                                fontFamily: 'Nunito',
-                                fontSize: 12,
-                                color: customColors.info,
-                                useGoogleFonts: false,
-                              ),
-                            ).tr(),
-                          ),
-                        ),
-                ],
-              ),
-              Text(
-                Get.locale == Locale('en')
-                    ? removeLastWordIfInt(notificationModel.description)
-                    : removeLastWordIfInt(notificationModel.descriptionar),
-                style: customTextStyle.bodyMedium,
-              ).tr(),
-            ].divide(const SizedBox(height: 15)),
+      child: GetBuilder<NotificationController>(builder: (ccontext) {
+        return Container(
+          decoration: BoxDecoration(
+            color: notificationModel.type == 1
+                ? null
+                : customColors.primaryBackground,
           ),
-        ),
-      ),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        IconWithContainer(
+                          backgroundColor: const Color(0xFFDAC9EE),
+                          borderRadius: 40,
+                          buttonSize: 50,
+                          icon: Icons.calendar_month,
+                          iconColor: customColors.primary,
+                          onTap: () {},
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                SizedBox(
+                                  width: 200.w,
+                                  child: Text(
+                                    Get.locale == Locale('en')
+                                        ? removeNavigateToEnd(
+                                            notificationModel.title)
+                                        : removeNavigateToEnd(
+                                            notificationModel.titlear),
+                                    style: customTextStyle.bodyMedium.override(
+                                      fontFamily: 'Nunito',
+                                      color: customColors.primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ).tr(),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  DateFormatter.formatDate(
+                                      notificationModel.createdAt),
+                                  style: customTextStyle.bodyMedium,
+                                ).tr(),
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    thickness: 1,
+                                    color: customColors.secondary,
+                                  ),
+                                ),
+                                Text(
+                                  DateFormatter.formatTime(
+                                      notificationModel.createdAt),
+                                  style: customTextStyle.bodyMedium,
+                                ).tr(),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ].divide(const SizedBox(width: 15)),
+                    ),
+                    notificationModel.type == 1
+                        ? const SizedBox()
+                        : Container(
+                            width: 50,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              color: customColors.alternate,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Align(
+                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              child: Text(
+                                "New",
+                                style: customTextStyle.titleSmall.override(
+                                  fontFamily: 'Nunito',
+                                  fontSize: 12,
+                                  color: customColors.info,
+                                  useGoogleFonts: false,
+                                ),
+                              ).tr(),
+                            ),
+                          ),
+                  ],
+                ),
+                Text(
+                  Get.locale == Locale('en')
+                      ? removeLastWordIfInt(notificationModel.description)
+                      : removeLastWordIfInt(notificationModel.descriptionar),
+                  style: customTextStyle.bodyMedium,
+                ).tr(),
+              ].divide(const SizedBox(height: 15)),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -155,36 +155,36 @@ class CouponsWidget extends StatelessWidget {
                                             ),
                                           ].divide(const SizedBox(height: 5)),
                                         ),
-                                        ButtonWidget(
-                                          onPressed: () {},
-                                          text: "Redeem",
-                                          options: ButtonOptions(
-                                            width: 120,
-                                            height: 40,
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(24, 0, 24, 0),
-                                            iconPadding:
-                                                const EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 0),
-                                            color: customColors.primary,
-                                            textStyle: customTextStyle
-                                                .titleSmall
-                                                .override(
-                                              fontFamily: 'Nunito',
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
-                                            elevation: 3,
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                        ),
+                                        // ButtonWidget(
+                                        //   onPressed: () {},
+                                        //   text: "Redeem",
+                                        //   options: ButtonOptions(
+                                        //     width: 120,
+                                        //     height: 40,
+                                        //     padding: const EdgeInsetsDirectional
+                                        //         .fromSTEB(24, 0, 24, 0),
+                                        //     iconPadding:
+                                        //         const EdgeInsetsDirectional
+                                        //             .fromSTEB(0, 0, 0, 0),
+                                        //     color: customColors.primary,
+                                        //     textStyle: customTextStyle
+                                        //         .titleSmall
+                                        //         .override(
+                                        //       fontFamily: 'Nunito',
+                                        //       color: Colors.white,
+                                        //       fontSize: 14,
+                                        //       fontWeight: FontWeight.w500,
+                                        //       useGoogleFonts: false,
+                                        //     ),
+                                        //     elevation: 3,
+                                        //     borderSide: const BorderSide(
+                                        //       color: Colors.transparent,
+                                        //       width: 1,
+                                        //     ),
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(20),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ].divide(const SizedBox(height: 10)),
