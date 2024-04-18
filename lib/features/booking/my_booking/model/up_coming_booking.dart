@@ -203,7 +203,6 @@ class Venue {
   double longitude;
   String profile;
   String contactNumber;
-  double? averageRating;
 
   Venue({
     required this.id,
@@ -216,7 +215,6 @@ class Venue {
     required this.longitude,
     required this.profile,
     required this.contactNumber,
-    required this.averageRating,
   });
 
   factory Venue.fromJson(Map<String, dynamic> json) {
@@ -231,7 +229,6 @@ class Venue {
       longitude: json['longitude'],
       profile: json['profile'],
       contactNumber: json['contact_number'],
-      averageRating: json['average_rating'],
     );
   }
 }

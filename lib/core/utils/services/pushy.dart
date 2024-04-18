@@ -25,9 +25,6 @@ Future<String> pushyRegister() async {
 
 @pragma('vm:entry-point')
 void backgroundNotificationListener(Map<String, dynamic> data) async {
-  // Map<String, dynamic> data =
-  //     removeDuplicateKeysAr(jsonDecode(oldJson['__json']));
-
   // Notification title
   String notificationTitle = removeNavigateToEnd(
       Get.locale == Locale("en") ? data['title'] : data['title_ar']);

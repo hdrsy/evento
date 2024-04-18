@@ -49,7 +49,6 @@ class TicketsInEventForOrganizerController extends GetxController {
               images: [],
               //  / isFollowedByAuthUser: false,
               venue: Venue(
-                  averageRating: 0,
                   capacity: 0,
                   contactNumber: "0",
                   description: "",
@@ -85,7 +84,6 @@ class TicketsInEventForOrganizerController extends GetxController {
         images: [],
         //  / isFollowedByAuthUser: false,
         venue: Venue(
-            averageRating: 0,
             capacity: 0,
             contactNumber: "0",
             description: "",

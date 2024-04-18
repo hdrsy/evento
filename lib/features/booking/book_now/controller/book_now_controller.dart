@@ -91,7 +91,6 @@ class BookNowController extends GetxController {
   removeTicket(int ticketIndex) {
     ticketList.removeAt(ticketIndex);
 
-    // userCopuns.map((e) {});
     update();
   }
 
@@ -240,14 +239,16 @@ class BookNowController extends GetxController {
         int appTaxes = handlingResponse["app_taxes"];
         int mtnTaxes = handlingResponse["mtn_taxes"];
         print("before hte nav");
-        Get.toNamed('/PaymentScreenInBooking', arguments: [
-          eventDetailsModel,
-          [ticketList[ticketId]],
-          createBookingJson(ticketList[ticketId]),
-          ticketId,
-          totalAmount,
-          appTaxes + mtnTaxes
-        ]);
+        Get.toNamed('/PaymentScreenInBooking',
+            preventDuplicates: false,
+            arguments: [
+              eventDetailsModel,
+              [ticketList[ticketId]],
+              createBookingJson(ticketList[ticketId]),
+              ticketId,
+              totalAmount,
+              appTaxes + mtnTaxes
+            ]);
         print("afterrr");
       }
       ticketList[ticketId].isLoading.value = false;
