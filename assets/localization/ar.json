@@ -363,6 +363,11 @@
   "Pending": "قيد الانتظار",
   "In Review": "قيد المراجعة",
   "Contacted": "تم الاتصال",
+  
+    "oops_error": "عذرًا! خطأ",
+    "You can't select a date before today": "لا يمكنك اختيار تاريخ قبل اليوم"
+  ,
+  
   "Follow": "تابع",
   "No Result":"لا يوجد نتائج",
   "This event is Ended":"هذا الحدث غير موجود",

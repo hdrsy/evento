@@ -34,9 +34,12 @@ class MainImage extends StatelessWidget {
                     // Handle image display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(imageUrlList: [
-                          GalleryItem(url: imgUrl[index], isVideo: false)
-                        ], tag: "image$index")); // Ensure unique tag for Hero
+                        Get.to(ShowInFullScreen(
+                            index: index,
+                            imageUrlList: [
+                              GalleryItem(url: imgUrl[index], isVideo: false)
+                            ],
+                            tag: "image$index")); // Ensure unique tag for Hero
                       },
                       child: Hero(
                         tag: "image$index", // Ensure unique tag for Hero
@@ -54,9 +57,14 @@ class MainImage extends StatelessWidget {
                     // Handle video display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(imageUrlList: [
-                          GalleryItem(url: videosUrl[videoIndex], isVideo: true)
-                        ], tag: "video$videoIndex")); // Ensure unique tag for Hero
+                        Get.to(ShowInFullScreen(
+                            index: index,
+                            imageUrlList: [
+                              GalleryItem(
+                                  url: videosUrl[videoIndex], isVideo: true)
+                            ],
+                            tag:
+                                "video$videoIndex")); // Ensure unique tag for Hero
                       },
                       child: Hero(
                         tag: "video$videoIndex", // Ensure unique tag for Hero

@@ -62,14 +62,28 @@ class DateTimeController extends GetxController {
     }
   }
 
-  onPressedNext() {
+  void onPressedNext() {
+    DateTime now = DateTime.now();
+    DateTime today = DateTime(
+        now.year, now.month, now.day); // Today's date at midnight in local time
+
+    // Ensuring the 'date' is at midnight too, for a fair comparison
+    DateTime midnightSelectedDate = DateTime(date.year, date.month, date.day);
+
+    // Check if the selected date is before today (both dates at midnight)
+    bool isDateValid = !midnightSelectedDate.isBefore(today);
+
+    // Checking if the end time is after the start time
     isStartEndDateValid = endTime.isAfter(startTime);
-    if (date > DateTime.now() &&
-        (adultNumber.value + childrenNumber.value > 0) &&
+    print(isDateValid);
+    print(date);
+
+    if ((adultNumber.value + childrenNumber.value > 0) &&
         isStartEndDateValid &&
-        media.length > 0) {
+        media.isNotEmpty) {
       isUserEnterDateInfo = true;
     }
+    print(isUserEnterDateInfo);
     FormState? formdata = formstate.currentState;
     if (formdata!.validate() && isUserEnterDateInfo && media.isNotEmpty) {
       formdata.save();
@@ -79,33 +93,94 @@ class DateTimeController extends GetxController {
         Get.toNamed('/EventReviewScreen');
       }
     } else {
-      if (!isStartEndDateValid) {
-        Get.snackbar(tr("Time Selection Error"),
-            tr("The end time must be later than the start time. Please adjust your selection to continue."),
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: customColors.primaryBackground,
-            colorText: customColors.primaryText);
-      } else if (adultNumber.value + childrenNumber.value == 0) {
-        Get.snackbar(
-            tr("Number Of Guest Error"), tr("The number of guest is required"),
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: customColors.primaryBackground,
-            colorText: customColors.primaryText);
-      } else if (media.length == 0) {
-        Get.snackbar(tr("Upload Media Required"),
-            tr("The media is required at least one item"),
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: customColors.primaryBackground,
-            colorText: customColors.primaryText);
-      } else {
-        Get.snackbar(
-            tr("Uncomplete data"), tr("Please fill all the required data"),
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: customColors.primaryBackground,
-            colorText: customColors.primaryText);
-      }
+      handleErrors();
     }
   }
+
+  void handleErrors() {
+    if (!isStartEndDateValid) {
+      Get.snackbar(tr("Time Selection Error"),
+          tr("The end time must be later than the start time. Please adjust your selection to continue."),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: customColors.primaryBackground,
+          colorText: customColors.primaryText);
+    } else if (adultNumber.value + childrenNumber.value == 0) {
+      Get.snackbar(
+          tr("Number Of Guest Error"), tr("The number of guest is required"),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: customColors.primaryBackground,
+          colorText: customColors.primaryText);
+    } else if (media.isEmpty) {
+      Get.snackbar(tr("Upload Media Required"),
+          tr("The media is required at least one item"),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: customColors.primaryBackground,
+          colorText: customColors.primaryText);
+    } else {
+      Get.snackbar(
+          tr("Uncomplete data"), tr("Please fill all the required data"),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: customColors.primaryBackground,
+          colorText: customColors.primaryText);
+    }
+  }
+
+  // onPressedNext() {
+  //   print(date);
+  //   DateTime now = DateTime.now();
+  //   DateTime today = DateTime(
+  //       now.year, now.month, now.day); // Resetting time part to midnight
+
+  //   bool isDateValid = !(date.isBefore(today));
+
+  //   isStartEndDateValid = endTime.isAfter(startTime);
+  //   print(isDateValid);
+  //   if (isDateValid &&
+  //       (adultNumber.value + childrenNumber.value > 0) &&
+  //       isStartEndDateValid &&
+  //       media.length > 0) {
+  //     isUserEnterDateInfo = true;
+  //   }
+  //   FormState? formdata = formstate.currentState;
+  //   if (formdata!.validate() && isUserEnterDateInfo && media.isNotEmpty) {
+  //     formdata.save();
+  //     if (isEdit.value) {
+  //       Get.back();
+  //     } else {
+  //       Get.toNamed('/EventReviewScreen');
+  //     }
+  //   } else {
+  //     if (!isStartEndDateValid) {
+  //       Get.snackbar(tr("Time Selection Error"),
+  //           tr("The end time must be later than the start time. Please adjust your selection to continue."),
+  //           snackPosition: SnackPosition.TOP,
+  //           backgroundColor: customColors.primaryBackground,
+  //           colorText: customColors.primaryText);
+  //     } else if (adultNumber.value + childrenNumber.value == 0) {
+  //       Get.snackbar(
+  //           tr("Number Of Guest Error"), tr("The number of guest is required"),
+  //           snackPosition: SnackPosition.TOP,
+  //           backgroundColor: customColors.primaryBackground,
+  //           colorText: customColors.primaryText);
+  //     } else if (media.length == 0) {
+  //       Get.snackbar(tr("Upload Media Required"),
+  //           tr("The media is required at least one item"),
+  //           snackPosition: SnackPosition.TOP,
+  //           backgroundColor: customColors.primaryBackground,
+  //           colorText: customColors.primaryText);
+  //     } else {
+  //       // print(date);
+  //       print(date
+  //           .toUtc()
+  //           .isAfter(DateTime.now().toUtc().subtract(const Duration(days: 1))));
+  //       Get.snackbar(
+  //           tr("Uncomplete data"), tr("Please fill all the required data"),
+  //           snackPosition: SnackPosition.TOP,
+  //           backgroundColor: customColors.primaryBackground,
+  //           colorText: customColors.primaryText);
+  //     }
+  //   }
+  // }
 
   fillContactInfo() {
     phoneNumber.text = user!.phoneNumber;

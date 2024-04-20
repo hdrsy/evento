@@ -397,14 +397,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                             //   data['event_category[$i]'] = selectedChoices[i];
                             // }
                             data["event_category"] = selectedChoices;
-                            print(selectedChoices);
                           }
                           if (dropDownValueController != null) {
                             data['state'] = dropDownValueController!.value;
                           }
                           data['min_ticket_price'] = _values.start;
                           data['max_ticket_price'] = _values.end;
-                          data['distance'] = _valueSlider;
+                          data['distance'] = _valueSlider / 1000;
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {

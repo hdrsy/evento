@@ -344,6 +344,10 @@
 "UnFollow":"Unfollow",
 "This event is Ended":"This event is Ended",
 
+  "oops_error": "Ooops! Error",
+  "You can't select a date before today": "You can't select a date before today"
+
+,
 "Popular on Evanto": "Popular on Evanto",
 "Search": "Search",
 "VIEW MAP": "VIEW MAP",

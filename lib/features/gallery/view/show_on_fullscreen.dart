@@ -8,12 +8,28 @@ import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
-class ShowInFullScreen extends StatelessWidget {
+class ShowInFullScreen extends StatefulWidget {
   final List<GalleryItem> imageUrlList;
   final String tag;
 
-  ShowInFullScreen({super.key, required this.imageUrlList, required this.tag});
-  final PageController pageController = PageController();
+  final int index;
+  ShowInFullScreen(
+      {super.key,
+      required this.imageUrlList,
+      required this.tag,
+      required this.index});
+
+  @override
+  State<ShowInFullScreen> createState() => _ShowInFullScreenState();
+}
+
+class _ShowInFullScreenState extends State<ShowInFullScreen> {
+  late PageController pageController;
+  @override
+  initState() {
+    pageController = PageController(initialPage: widget.index);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +39,21 @@ class ShowInFullScreen extends StatelessWidget {
         onTap: () => Get.back(),
         child: Center(
           child: Hero(
-              tag: tag,
+              tag: widget.tag,
               child: Stack(
                 children: [
                   PageView.builder(
                       controller: pageController,
-                      itemCount: imageUrlList.length,
+                      itemCount: widget.imageUrlList.length,
                       itemBuilder: (ctx, index) {
                         return GalleryMediaWidget(
-                            galleryItem: imageUrlList[index]);
+                            galleryItem: widget.imageUrlList[index]);
                       }),
                   Positioned(
                       right: 20,
                       bottom: 20,
                       child: BuildPageIndecator(
-                        itemCount: imageUrlList.length,
+                        itemCount: widget.imageUrlList.length,
                         pageController: pageController,
                         dotColor: customColors.secondary,
                       )),

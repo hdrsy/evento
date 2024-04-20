@@ -50,13 +50,15 @@ class GalleryScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {
-                          Get.to(ShowInFullScreen(
+                          Get.to(() => ShowInFullScreen(
+                              index: index,
                               imageUrlList: galleryController.mixedGalleryItems,
                               tag: index.toString()));
                         },
                         child: Hero(
                             tag: index.toString(),
                             child: GalleryMediaWidget(
+                              key: ValueKey("gallery_item_$index"),
                               galleryItem:
                                   galleryController.mixedGalleryItems[index],
                             )));
@@ -85,7 +87,10 @@ class GalleryMediaWidget extends StatelessWidget {
     return galleryItem.isVideo
         ? VideoWidget(video: galleryItem.url)
         : getImageNetwork(
-            url: "/storage/${galleryItem.url}", width: null, height: null);
+            key: ValueKey("storage/${galleryItem.url}"),
+            url: "/storage/${galleryItem.url}",
+            width: null,
+            height: null);
   }
 }
 

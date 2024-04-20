@@ -221,7 +221,7 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
       rowHeight: screenHeight * 0.04,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
-      focusedDay: focusedDay,
+      focusedDay: widget.dateTimeController.date,
       headerStyle: HeaderStyle(
         titleTextStyle: customTextStyle.bodyMedium
             .copyWith(color: customColors.primaryText),
@@ -231,11 +231,21 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
       ),
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),
       onDaySelected: (selectedDay, focusedDay) {
-        widget.dateTimeController.date = selectedDay;
-        setState(() {
-          this.selectedDay = selectedDay;
-          this.focusedDay = focusedDay; // update focusedDay as well if needed
-        });
+        if (selectedDay.isBefore(DateTime.now())) {
+          print("dddddddddddddddd");
+          Get.snackbar(
+              tr("oops_error"), // Localization key for the title
+              tr("You can't select a date before today"), // Localization key for the message
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: customColors.primaryBackground,
+              colorText: customColors.primaryText);
+        } else {
+          widget.dateTimeController.date = selectedDay;
+          setState(() {
+            this.selectedDay = selectedDay;
+            this.focusedDay = focusedDay; // update focusedDay as well if needed
+          });
+        }
       },
       calendarStyle: CalendarStyle(
         todayDecoration: BoxDecoration(

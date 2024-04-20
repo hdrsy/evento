@@ -40,7 +40,9 @@ class ErrorResponse {
         prefService.remove('userInfo');
         prefService.remove('isCompleteProfile');
       }
-      return value.contains("SQL") ? "SomeThing Wrong !!!" : value;
+      return value.contains("SQL") || value.contains("cURL")
+          ? "SomeThing Wrong !!!"
+          : value;
     }
 
     return ErrorResponse(
