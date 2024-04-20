@@ -231,7 +231,7 @@ class EventDetailesController extends GetxController {
         throw Exception('Could not launch $link');
       }
     } catch (e) {
-      log(e.toString());
+      // log(e.toString());
     }
   }
 

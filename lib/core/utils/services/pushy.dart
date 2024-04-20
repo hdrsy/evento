@@ -46,7 +46,10 @@ void backgroundNotificationListener(Map<String, dynamic> data) async {
 void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
   // Normalize title for comparison
-  String normalizedTitle = data['title']?.trim().toLowerCase() ?? '';
+  print("notification click :$data");
+  String normalizedTitle = data['navigate'] != null
+      ? "navigate " + data['navigate']
+      : data['title']?.trim().toLowerCase() ?? '';
   String routName = '';
   String body = '';
   if (normalizedTitle.contains("navigate")) {

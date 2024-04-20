@@ -4,7 +4,6 @@ import 'package:evento/core/utils/helper/flutter_flow_choice_chips.dart';
 import 'package:evento/core/utils/helper/flutter_flow_drop_down.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/helper/form_field_controller.dart';
-import 'package:evento/core/utils/services/location_service.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/features/events/home/controller/home_controller.dart';
 import 'package:evento/features/events/home/model/category_model.dart';
@@ -12,7 +11,6 @@ import 'package:evento/features/search/controller/search_controller.dart';
 import 'package:evento/main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
