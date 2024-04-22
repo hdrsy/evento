@@ -1,5 +1,4 @@
 // Defining the OrganizerCreateProfileScreen as a StatelessWidget.
-import 'package:evento/core/const/states.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet_for_images.dart';

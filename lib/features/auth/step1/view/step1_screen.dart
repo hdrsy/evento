@@ -1,7 +1,4 @@
-import 'package:flutter/widgets.dart';
-
 import '../../../../core/responsive/responsive.dart';
-import '../../../../core/shared/functions/validation/pin.dart';
 import '../../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../../core/shared/widgets/error_messages/error_messages.dart';
 import '../../../../core/shared/widgets/text_fields/pin.dart';

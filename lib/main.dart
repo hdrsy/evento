@@ -2,12 +2,10 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
-// import 'package:evento/core/utils/services/deep_linking.dart';
 import 'package:evento/core/utils/services/pushy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pushy_flutter/pushy_flutter.dart';
-// import 'package:uni_links/uni_links.dart';
 import 'core/getx_navigation/routs.dart';
 import 'core/responsive/responsive.dart';
 import 'core/utils/extenstions/color_extenstions.dart';
@@ -17,7 +15,6 @@ import 'package:evento/core/utils/services/user_info.dart';
 import 'package:evento/core/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 RxBool isThereNotification = false.obs;
@@ -41,11 +38,10 @@ startTimerToRemoveSplashScreen() {
 }
 
 void main() async {
-  // WidgetsBinding widgetsBinding =
-  //     await
-  WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // startTimerToRemoveSplashScreen();
+  WidgetsBinding widgetsBinding =
+      await WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  startTimerToRemoveSplashScreen();
 
   sharedPreferences = await SharedPreferences.getInstance();
   await EasyLocalization.ensureInitialized();

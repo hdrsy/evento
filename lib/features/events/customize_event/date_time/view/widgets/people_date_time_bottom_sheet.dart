@@ -7,7 +7,6 @@ import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/app_fonts_from_google.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
 import 'package:evento/main.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../../controller/date_time_controller.dart';
 import 'package:flutter/material.dart';

@@ -74,16 +74,18 @@ Widget buildMoreEventsSection(BuildContext context) {
                     height: MediaQuery.of(context).size.height * 0.23,
                     child: buildListShow(
                         body: List.generate(
-                            eventDetailesController.relatedEvents.length,
-                            (index) => MoreEventsCard(
-                                  relatedEventModel: eventDetailesController
-                                      .relatedEvents[index],
-                                  modelId: index,
-                                )),
+                          eventDetailesController.relatedEvents.length,
+                          (index) => MoreEventsCard(
+                            relatedEventModel:
+                                eventDetailesController.relatedEvents[index],
+                            modelId: index,
+                          ),
+                        ),
                         carouselOptions:
                             eventDetailesController.relatedEvents.length == 1
                                 ? CaroucelOptionFunctions.seeMoreEventsJustOne
-                                : CaroucelOptionFunctions.seeMoreEvents)),
+                                : CaroucelOptionFunctions.seeMoreEvents),
+                  ),
           ],
         );
 }

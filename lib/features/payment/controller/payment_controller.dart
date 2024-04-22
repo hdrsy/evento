@@ -22,7 +22,6 @@ class PaymentController extends GetxController {
       final BookNowController bookNowController = Get.find();
       bookNowController.ticketList[ticketIndex].isPaidSuccfully.value = true;
     }
-    // TODO: implement onClose
     super.onClose();
   }
 

@@ -47,7 +47,7 @@ class ContactUs extends StatelessWidget {
                       _launchURL();
                     },
                     child: Text(
-                      'HDR Group',
+                      'HDR Agency',
                       style: customTextStyle.bodyMedium
                           .copyWith(fontSize: 16, color: customColors.primary),
                     ))

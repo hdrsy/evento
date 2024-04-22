@@ -246,6 +246,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 min: 100000.0,
                 max: 5000000.0,
                 values: _values,
+                // interval: getDivitionStep(_values),
                 interval: 10000,
                 showDividers: false,
                 showTicks: false,
@@ -253,8 +254,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 enableTooltip: true,
                 labelPlacement: LabelPlacement.betweenTicks,
                 minorTicksPerInterval: 2,
-                // numberFormat: NumberFormat.compact(),
-                stepSize: 10000,
+                // stepSize: 1000000,
                 activeColor: customColors.primary,
                 inactiveColor: customColors.secondaryText,
                 tooltipTextFormatterCallback:
@@ -445,5 +445,30 @@ class _FilterWidgetState extends State<FilterWidget> {
         ),
       ),
     );
+  }
+}
+
+getDivitionStep(SfRangeValues values) {
+  if (values.start < 1000000) {
+    return 100000.0;
+  } else {
+    return 1000000.0;
+  }
+}
+
+String formatTooltipText(double value) {
+  if (value < 1000000) {
+    return '${(value / 1000).toStringAsFixed(0)}k';
+  } else {
+    return '${(value / 1000000).toStringAsFixed(0)}M';
+  }
+}
+
+String formatLabel(double value) {
+  double firstDivisionMax = 1000000;
+  if (value >= firstDivisionMax) {
+    return '${((value / 1000000)).toString()}M';
+  } else {
+    return '${(value).toString()}';
   }
 }

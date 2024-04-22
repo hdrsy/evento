@@ -1,6 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/shared/widgets/buttons/general_button.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';

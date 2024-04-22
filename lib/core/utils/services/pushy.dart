@@ -33,7 +33,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) async {
   String notificationText = Get.locale == Locale("en")
       ? data['body']
       : data['body_ar'] ?? 'Hello World!';
-  print("notification :$data");
+  // print("notification :$data");
   // Android: Displays a system notification
   // iOS: Displays an alert dialog
   Pushy.notify(notificationTitle, notificationText, data);
@@ -46,7 +46,7 @@ void backgroundNotificationListener(Map<String, dynamic> data) async {
 void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
   // Normalize title for comparison
-  print("notification click :$data");
+  // print("notification click :$data");
   String normalizedTitle = data['navigate'] != null
       ? "navigate " + data['navigate']
       : data['title']?.trim().toLowerCase() ?? '';

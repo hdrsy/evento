@@ -94,7 +94,7 @@ class Offerprice extends StatelessWidget {
             ),
           ),
           Text(
-            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice - ((eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.offerPrecent / 100).toInt())} sp",
+            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice - (eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.offerPrecent ~/ 100)} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,

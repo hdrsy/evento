@@ -121,6 +121,7 @@ class LinkCard extends StatelessWidget {
                           icon,
                           width: 20,
                           height: 20,
+                          color: customColors.primary,
                           fit: BoxFit.cover,
                         ),
                       )

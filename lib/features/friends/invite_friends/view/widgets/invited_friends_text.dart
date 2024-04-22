@@ -9,8 +9,7 @@ class InvitedfriendsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Generated code for this RichText Widget...
-        Padding(
+    return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
       child: RichText(
         text: TextSpan(

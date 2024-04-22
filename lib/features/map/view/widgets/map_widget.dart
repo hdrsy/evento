@@ -21,7 +21,7 @@ class MapWidget extends StatelessWidget {
                 onCameraIdle: (latLng) => mapController.googleMapsCenter,
                 initialLocation: mapController.googleMapsCenter,
                 // markerColor: GoogleMarkerColor.violet,
-                markers: [mapController.myMarker!],
+                markers: mapController.myMarker,
                 mapType: MapType.normal,
                 style: GoogleMapStyle.standard,
                 initialZoom: 14,

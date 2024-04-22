@@ -22,7 +22,7 @@ class MapController extends GetxController {
 
   TextEditingController searchController = TextEditingController();
   final googleMapsController = Completer<GoogleMapController>();
-  late FlutterFlowMarker myMarker;
+  List<FlutterFlowMarker> myMarker = [];
   RxBool isSearchActive = false.obs;
   TextEditingController searchField = TextEditingController();
   late LatLng currentPosition;
@@ -35,20 +35,6 @@ class MapController extends GetxController {
   void onInit() async {
     super.onInit();
     customIcon = await getCustomMarker();
-    myMarker = FlutterFlowMarker(
-      'markerId-1', // Unique ID for the marker
-      LatLng(0, 0), // Replace with your latitude and longitude
-      icon: customIcon,
-
-      (controller) async {
-        controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(0, 0),
-            zoom: 14.0,
-          ),
-        ));
-      },
-    );
 
     _fetchData(""); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
@@ -117,6 +103,9 @@ class MapController extends GetxController {
 
   void _updateSearchResults(List<SearchModel> results) {
     searchResultSearch.assignAll(results);
+    print(results.isEmpty);
+    results.isEmpty ? myMarker.clear() : updateMarkerAndPosition(0);
+
     getSuggestModels();
     update();
   }
@@ -148,25 +137,30 @@ class MapController extends GetxController {
     } else {
       // carouselCurrentIndex = 0;
     }
-    currentPosition = LatLng(
-        searchResultSearch[carouselCurrentIndex].venue.latitude,
-        searchResultSearch[carouselCurrentIndex].venue.longitude);
-    googleMapsCenter = currentPosition;
-    myMarker = FlutterFlowMarker(
-      'markerId$carouselCurrentIndex', // Unique ID for the marker
-      currentPosition, // Replace with your latitude and longitude
-      icon: customIcon,
+    if (searchResultSearch.isNotEmpty) {
+      currentPosition = LatLng(
+          searchResultSearch[carouselCurrentIndex].venue.latitude,
+          searchResultSearch[carouselCurrentIndex].venue.longitude);
+      googleMapsCenter = currentPosition;
+      myMarker.clear();
+      myMarker.add(FlutterFlowMarker(
+        'markerId$carouselCurrentIndex', // Unique ID for the marker
+        currentPosition, // Replace with your latitude and longitude
+        icon: customIcon,
 
-      (controller) async {
-        controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: currentPosition,
-            zoom: 14.0,
-          ),
-        ));
-        update();
-      },
-    );
+        (controller) async {
+          controller.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: currentPosition,
+              zoom: 14.0,
+            ),
+          ));
+          update();
+        },
+      ));
+    } else {
+      myMarker.clear();
+    }
     update();
     isReady = true;
   }
@@ -177,9 +171,8 @@ class MapController extends GetxController {
     currentPosition = LatLng(searchResultSearch[carouselIndex].venue.latitude,
         searchResultSearch[carouselIndex].venue.longitude);
     googleMapsCenter = currentPosition;
-
-    // Update marker
-    myMarker = FlutterFlowMarker(
+    myMarker.clear(); // Update marker
+    myMarker.add(FlutterFlowMarker(
       'markerId$carouselIndex', // Unique ID for the marker
       currentPosition, // New position
       icon: customIcon,
@@ -191,7 +184,7 @@ class MapController extends GetxController {
           ),
         ));
       },
-    );
+    ));
 
     // Update camera position
     googleMapsController.future.then((controller) {

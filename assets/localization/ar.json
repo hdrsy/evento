@@ -368,7 +368,9 @@
     "You can't select a date before today": "لا يمكنك اختيار تاريخ قبل اليوم"
   ,
   
-  "Follow": "تابع",
+ "Please select at least one event category":"يرجى اختيار فئة واحدة على الأقل للأحداث",
+ "Please select at least one state":"يرجى اختيار محافطة واحدة على الأقل",
+  "Follow": "متابعة",
   "No Result":"لا يوجد نتائج",
   "This event is Ended":"هذا الحدث غير موجود",
   "UnFollow": "الغاء المتابعة",

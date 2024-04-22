@@ -114,65 +114,67 @@ class EditProfileOrganizerController extends GetxController {
   }
 
   onPressDone() async {
-    try {
-      isLoading.value = true;
-      // Before starting upload
-      Either<ErrorResponse, Map<String, dynamic>> response;
-      String token = await prefService.readString("token");
-      Map<String, dynamic> dataRequest = {
-        'name': firstName.text,
-        'bio': bio.text,
-        'covering_area': selectedState,
-        'other_category': otherCatogery.text,
-        'category_ids': selectedCategories
-      };
+    errorMessage.clear();
+    if (validationFunction()) {
+      try {
+        isLoading.value = true;
+        // Before starting upload
+        Either<ErrorResponse, Map<String, dynamic>> response;
+        String token = await prefService.readString("token");
+        Map<String, dynamic> dataRequest = {
+          'name': firstName.text,
+          'bio': bio.text,
+          'covering_area': selectedState,
+          'other_category': otherCatogery.text,
+          'category_ids': selectedCategories
+        };
 
-      Map<String, File> fileMap = {};
-      if (isProfileSelected.value) {
-        fileMap['profile'] = profileImage!;
-      }
-      if (isCoverSelected.value) {
-        fileMap['cover'] = coverImage!;
-      }
-      if (foldersModel.isNotEmpty) {
-        for (var i = 0; i < foldersModel.length; i++) {
-          dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
-          for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
-            if (foldersModel[i].mediaList[j].mediaType == 'image') {
-              fileMap['album-${i + 1}-images[$j]'] =
-                  foldersModel[i].mediaList[j].media;
-            } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
-              File? compressedVideo =
-                  await compressVideo(foldersModel[i].mediaList[j].media);
-              if (compressedVideo != null) {
-                fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
-              } else {
-                // Handle the case where video compression fails
-                // For example, you might choose to skip this file, log an error, or use the original file
+        Map<String, File> fileMap = {};
+        if (isProfileSelected.value) {
+          fileMap['profile'] = profileImage!;
+        }
+        if (isCoverSelected.value) {
+          fileMap['cover'] = coverImage!;
+        }
+        if (foldersModel.isNotEmpty) {
+          for (var i = 0; i < foldersModel.length; i++) {
+            dataRequest['album-${i + 1}-name'] = foldersModel[i].folderName;
+            for (int j = 0; j < foldersModel[i].mediaList.length; j++) {
+              if (foldersModel[i].mediaList[j].mediaType == 'image') {
+                fileMap['album-${i + 1}-images[$j]'] =
+                    foldersModel[i].mediaList[j].media;
+              } else if (foldersModel[i].mediaList[j].mediaType == 'video') {
+                File? compressedVideo =
+                    await compressVideo(foldersModel[i].mediaList[j].media);
+                if (compressedVideo != null) {
+                  fileMap['album-${i + 1}-videos[$j]'] = compressedVideo;
+                } else {
+                  // Handle the case where video compression fails
+                  // For example, you might choose to skip this file, log an error, or use the original file
+                }
               }
             }
           }
         }
-      }
-      response = await ApiHelper.makeRequest(
-          targetRout: ServerConstApis.organizationUpdateProfile,
-          method: "POST",
-          token: token,
-          data: dataRequest,
-          files: fileMap);
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
+        response = await ApiHelper.makeRequest(
+            targetRout: ServerConstApis.organizationUpdateProfile,
+            method: "POST",
+            token: token,
+            data: dataRequest,
+            files: fileMap);
+        dynamic handlingResponse = response.fold((l) => l, (r) => r);
+        if (handlingResponse is ErrorResponse) {
+          errorMessage.value = handlingResponse.getErrorMessages();
+          isLoading.value = false;
+        } else {
+          isLoading.value = false;
+          prefService.remove('userInfo');
+          Get.offAllNamed('/home');
+        }
         isLoading.value = false;
-      } else {
+      } catch (e) {
         isLoading.value = false;
-        prefService.remove('userInfo');
-        Get.offAllNamed('/home');
       }
-      isLoading.value = false;
-      isLoading.value = false;
-    } catch (e) {
-      isLoading.value = false;
     }
   }
 
@@ -195,5 +197,18 @@ class EditProfileOrganizerController extends GetxController {
         .add(FolderModel(folderName: createFolderName.text, mediaList: []));
     createFolderName.clear();
     Get.back();
+  }
+
+  bool validationFunction() {
+    print(selectedState);
+    if (selectedCategories.isEmpty) {
+      errorMessage.add("Please select at least one event category");
+      return false;
+    } else if (selectedState == '') {
+      errorMessage.add("Please select at least one state");
+      return false;
+    } else {
+      return true;
+    }
   }
 }

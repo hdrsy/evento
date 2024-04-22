@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/main.dart';
 
 import 'package:flutter/widgets.dart';

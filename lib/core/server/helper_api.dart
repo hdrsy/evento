@@ -1,11 +1,8 @@
 import 'dart:convert';
-
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:get/get.dart';
 import '../utils/error_handling/erroe_handling.dart';
 import 'package:http/http.dart' as http;
@@ -32,7 +29,6 @@ class ApiHelper {
       Map<String, String> headers = {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
-        // "Host": "event.sy:80"
       };
 
       // Add authorization token to headers if provided.
@@ -83,7 +79,7 @@ class ApiHelper {
             throw UnimplementedError('HTTP method $method not supported');
         }
       }
-      print(response.body);
+      // print(response.body);
       // Decoding the JSON response.
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       // Handling response based on status code.
