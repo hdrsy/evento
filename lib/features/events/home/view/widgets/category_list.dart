@@ -71,7 +71,7 @@ class CategoryWidget extends StatelessWidget {
                   break;
                 default:
                   targetRout =
-                      "${ServerConstApis.getAccordingCategoryList}/${categoryModel.id}";
+                      "${isGuset ? ServerConstApis.getAccordingCategoryListforGuest : ServerConstApis.getAccordingCategoryList}/${categoryModel.id}";
                   targetKeyMap = 'Events';
               }
               Get.toNamed('/seeAll', arguments: [

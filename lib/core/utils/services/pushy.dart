@@ -120,18 +120,22 @@ void notificationClickListener(Map<String, dynamic> data) {
               'isOffer': false.toString(),
               'offerPercent': 0.toString(),
             })
-          : Get.toNamed('/$routName');
+          : normalizedTitle == "new friend request"
+              ? Get.toNamed('/$routName', arguments: 1)
+              : Get.toNamed('/$routName');
     } else {
       // Use Future.delayed to wait for GetX navigation context to be ready
       Future.delayed(Duration(seconds: 2), () {
         routName == 'eventDetailes' // Note: Same spelling concern.
-            ? Get.toNamed('/routName', parameters: {
+            ? Get.toNamed('/$routName', parameters: {
                 'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
                     .toString(),
                 'isOffer': false.toString(),
                 'offerPercent': 0.toString(),
               })
-            : Get.toNamed('/$routName');
+            : normalizedTitle == "new friend request"
+                ? Get.toNamed('/$routName', arguments: 1)
+                : Get.toNamed('/$routName');
       });
     }
   }

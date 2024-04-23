@@ -45,7 +45,7 @@ class NotificationCard extends StatelessWidget {
           }
         } else {
           if (notificationModel.title == "New Friend Request") {
-            Get.toNamed('/FreindsScreen');
+            Get.toNamed('/FreindsScreen', arguments: 1);
           } else if (notificationModel.title == "New Friend") {
             Get.toNamed('/FreindsScreen');
           } else if (notificationModel.title == "Booked Successfully") {

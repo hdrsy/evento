@@ -124,6 +124,7 @@ class ServerConstApis {
   static String eventSearch = '$baseAPI/api/event_search';
 
   ///// guest
+  static String filterForGuest = '$baseAPI/api/filter-guest';
   static String getCategoryListforGuest = '$baseAPI/api/event_category-guest';
   static String getFeaturedListforGuest = '$baseAPI/api/featured_event-guest';
   static String eventSearchforGuest = '$baseAPI/api/event_search-guest';

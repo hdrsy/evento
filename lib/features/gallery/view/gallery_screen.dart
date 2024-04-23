@@ -15,6 +15,7 @@ class GalleryScreen extends StatelessWidget {
   final GalleryController galleryController = Get.find();
   @override
   Widget build(BuildContext context) {
+    print("the page builds");
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
@@ -50,18 +51,23 @@ class GalleryScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {
-                          Get.to(() => ShowInFullScreen(
-                              index: index,
-                              imageUrlList: galleryController.mixedGalleryItems,
-                              tag: index.toString()));
+                          // Get.to(
+                          //     () => ShowInFullScreen(
+                          //         index: index,
+                          //         imageUrlList:
+                          //             galleryController.mixedGalleryItems,
+                          //         tag: index.toString()),
+                          //     preventDuplicates: false);
+                          Get.toNamed('/ShowInFullScreen', arguments: [
+                            galleryController.mixedGalleryItems,
+                            index.toString(),
+                            index
+                          ]);
                         },
-                        child: Hero(
-                            tag: index.toString(),
-                            child: GalleryMediaWidget(
-                              key: ValueKey("gallery_item_$index"),
-                              galleryItem:
-                                  galleryController.mixedGalleryItems[index],
-                            )));
+                        child: GalleryMediaWidget(
+                          galleryItem:
+                              galleryController.mixedGalleryItems[index],
+                        ));
 
                     // Image.asset(
                     //   images[index],

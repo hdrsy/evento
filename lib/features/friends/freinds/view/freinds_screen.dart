@@ -48,6 +48,7 @@ class FreindsScreen extends StatelessWidget {
         top: true,
         child: DefaultTabController(
           length: 3,
+          initialIndex: freindsController.initTabIndex,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

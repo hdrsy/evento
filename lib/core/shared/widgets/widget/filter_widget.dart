@@ -41,6 +41,9 @@ class _FilterWidgetState extends State<FilterWidget> {
   List<String>? choiceChipsValues;
   CategoryListController categoryListController = Get.find();
   List<CategoryModel> categoryList = [];
+  double sliderValuePricerangeStart = 0.0;
+  double sliderValuePricerangeEnd = 2000000.0;
+
 // = categoryListController.categoryList
   @override
   Widget build(BuildContext context) {
@@ -242,40 +245,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ).tr(),
                 ),
               ),
-              SfRangeSlider(
-                min: 100000.0,
-                max: 5000000.0,
-                values: _values,
-                // interval: getDivitionStep(_values),
-                interval: 10000,
-                showDividers: false,
-                showTicks: false,
-                showLabels: false, // Set to false to hide static labels
-                enableTooltip: true,
-                labelPlacement: LabelPlacement.betweenTicks,
-                minorTicksPerInterval: 2,
-                // stepSize: 1000000,
-                activeColor: customColors.primary,
-                inactiveColor: customColors.secondaryText,
-                tooltipTextFormatterCallback:
-                    (dynamic actualValue, String formattedText) {
-                  // Check if the value is less than 1 million
-                  if (actualValue < 1000000) {
-                    // Convert to thousands (k)
-                    return '${(actualValue / 1000).toStringAsFixed(0)}k';
-                  } else {
-                    // Convert to millions (M) and round down to avoid fractional part
-                    return '+ ${(actualValue / 1000000).toStringAsFixed(0)}M';
-                  }
-                },
-                dragMode: SliderDragMode.onThumb,
-
-                onChanged: (SfRangeValues values) {
-                  setState(() {
-                    _values = values;
-                  });
-                },
-              ),
+              _buildPriceRangeSlider(),
               Divider(
                 thickness: 2,
                 color: customColors.secondary,
@@ -399,8 +369,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                           if (dropDownValueController != null) {
                             data['state'] = dropDownValueController!.value;
                           }
-                          data['min_ticket_price'] = _values.start;
-                          data['max_ticket_price'] = _values.end;
+                          data['min_ticket_price'] =
+                              sliderValuePricerangeStart > 1000000
+                                  ? getPriceNumberToShow(
+                                      sliderValuePricerangeStart)
+                                  : sliderValuePricerangeStart;
+                          data['max_ticket_price'] = sliderValuePricerangeEnd >
+                                  1000000
+                              ? getPriceNumberToShow(sliderValuePricerangeEnd)
+                              : sliderValuePricerangeEnd;
                           data['distance'] = _valueSlider / 1000;
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
@@ -446,29 +423,40 @@ class _FilterWidgetState extends State<FilterWidget> {
       ),
     );
   }
-}
 
-getDivitionStep(SfRangeValues values) {
-  if (values.start < 1000000) {
-    return 100000.0;
-  } else {
-    return 1000000.0;
+  Widget _buildPriceRangeSlider() {
+    double min = 0;
+    double max = 2000000;
+    double firstDivisionMax = 1000000;
+    return RangeSlider(
+      min: min,
+      max: max,
+      values: RangeValues(sliderValuePricerangeStart, sliderValuePricerangeEnd),
+      onChanged: (RangeValues values) {
+        setState(() {
+          sliderValuePricerangeStart = values.start;
+          sliderValuePricerangeEnd = values.end;
+        });
+      },
+      labels: priceLabels(firstDivisionMax),
+      divisions: 100,
+      activeColor: customColors.primary,
+      inactiveColor: customColors.secondaryBackground,
+    );
   }
-}
 
-String formatTooltipText(double value) {
-  if (value < 1000000) {
-    return '${(value / 1000).toStringAsFixed(0)}k';
-  } else {
-    return '${(value / 1000000).toStringAsFixed(0)}M';
+  RangeLabels priceLabels(double firstDivisionMax) {
+    return RangeLabels(
+      sliderValuePricerangeStart >= firstDivisionMax
+          ? '${((getPriceNumberToShow(sliderValuePricerangeStart) ~/ 1000000)).toString()} m ${tr('SP')}'
+          : '${(sliderValuePricerangeStart).toString()} ${tr('SP')}',
+      sliderValuePricerangeEnd >= firstDivisionMax
+          ? '${((getPriceNumberToShow(sliderValuePricerangeEnd) ~/ 1000000)).toString()} m ${tr('SP')}'
+          : '${(sliderValuePricerangeEnd).toString()} ${tr('SP')}',
+    );
   }
-}
 
-String formatLabel(double value) {
-  double firstDivisionMax = 1000000;
-  if (value >= firstDivisionMax) {
-    return '${((value / 1000000)).toString()}M';
-  } else {
-    return '${(value).toString()}';
+  double getPriceNumberToShow(double numberBetweenOneAndTwoMillion) {
+    return 4 * numberBetweenOneAndTwoMillion - 3000000;
   }
 }

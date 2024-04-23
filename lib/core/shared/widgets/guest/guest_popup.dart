@@ -37,9 +37,9 @@ class GuestPopupWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/images/logowithtext.png',
-                    width: 150,
+                    width: 100,
                     height: 75,
-                    fit: BoxFit.cover,
+                    // fit: BoxFit.cover,
                   ),
                 ),
                 Column(

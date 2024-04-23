@@ -8,16 +8,24 @@ import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
-class ShowInFullScreen extends StatefulWidget {
-  final List<GalleryItem> imageUrlList;
-  final String tag;
+class ShowInFullScreenController extends GetxController {
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    imageUrlList = Get.arguments[0];
+    tag = Get.arguments[1];
+    index = Get.arguments[2];
+  }
 
-  final int index;
-  ShowInFullScreen(
-      {super.key,
-      required this.imageUrlList,
-      required this.tag,
-      required this.index});
+  late List<GalleryItem> imageUrlList;
+  late String tag;
+
+  late int index;
+}
+
+class ShowInFullScreen extends StatefulWidget {
+  ShowInFullScreen();
 
   @override
   State<ShowInFullScreen> createState() => _ShowInFullScreenState();
@@ -25,9 +33,12 @@ class ShowInFullScreen extends StatefulWidget {
 
 class _ShowInFullScreenState extends State<ShowInFullScreen> {
   late PageController pageController;
+  final ShowInFullScreenController showInFullScreenController =
+      Get.put(ShowInFullScreenController());
   @override
   initState() {
-    pageController = PageController(initialPage: widget.index);
+    pageController =
+        PageController(initialPage: showInFullScreenController.index);
     super.initState();
   }
 
@@ -38,27 +49,26 @@ class _ShowInFullScreenState extends State<ShowInFullScreen> {
       body: GestureDetector(
         onTap: () => Get.back(),
         child: Center(
-          child: Hero(
-              tag: widget.tag,
-              child: Stack(
-                children: [
-                  PageView.builder(
-                      controller: pageController,
-                      itemCount: widget.imageUrlList.length,
-                      itemBuilder: (ctx, index) {
-                        return GalleryMediaWidget(
-                            galleryItem: widget.imageUrlList[index]);
-                      }),
-                  Positioned(
-                      right: 20,
-                      bottom: 20,
-                      child: BuildPageIndecator(
-                        itemCount: widget.imageUrlList.length,
-                        pageController: pageController,
-                        dotColor: customColors.secondary,
-                      )),
-                ],
-              )), // Replace with your image or video widget
+          child: Stack(
+            children: [
+              PageView.builder(
+                  controller: pageController,
+                  itemCount: showInFullScreenController.imageUrlList.length,
+                  itemBuilder: (ctx, index) {
+                    return GalleryMediaWidget(
+                        galleryItem:
+                            showInFullScreenController.imageUrlList[index]);
+                  }),
+              Positioned(
+                  right: 20,
+                  bottom: 20,
+                  child: BuildPageIndecator(
+                    itemCount: showInFullScreenController.imageUrlList.length,
+                    pageController: pageController,
+                    dotColor: customColors.secondary,
+                  )),
+            ],
+          ), // Replace with your image or video widget
         ),
       ),
     );

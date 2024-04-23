@@ -34,12 +34,17 @@ class MainImage extends StatelessWidget {
                     // Handle image display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(
-                            index: index,
-                            imageUrlList: [
-                              GalleryItem(url: imgUrl[index], isVideo: false)
-                            ],
-                            tag: "image$index")); // Ensure unique tag for Hero
+                        // Get.to(ShowInFullScreen(
+                        //     index: index,
+                        //     imageUrlList: [
+                        //       GalleryItem(url: imgUrl[index], isVideo: false)
+                        //     ],
+                        //     tag: "image$index")); // Ensure unique tag for Hero
+                        Get.toNamed('/ShowInFullScreen', arguments: [
+                          [GalleryItem(url: imgUrl[index], isVideo: false)],
+                          index.toString(),
+                          index
+                        ]);
                       },
                       child: Hero(
                         tag: "image$index", // Ensure unique tag for Hero
@@ -57,14 +62,22 @@ class MainImage extends StatelessWidget {
                     // Handle video display
                     return GestureDetector(
                       onTap: () async {
-                        Get.to(ShowInFullScreen(
-                            index: index,
-                            imageUrlList: [
-                              GalleryItem(
-                                  url: videosUrl[videoIndex], isVideo: true)
-                            ],
-                            tag:
-                                "video$videoIndex")); // Ensure unique tag for Hero
+                        // Get.to(ShowInFullScreen(
+                        //     index: index,
+                        //     imageUrlList: [
+                        //       GalleryItem(
+                        //           url: videosUrl[videoIndex], isVideo: true)
+                        //     ],
+                        //     tag:
+                        //         "video$videoIndex")); // Ensure unique tag for Hero
+                        Get.toNamed('/ShowInFullScreen', arguments: [
+                          [
+                            GalleryItem(
+                                url: videosUrl[videoIndex], isVideo: true)
+                          ],
+                          index.toString(),
+                          index
+                        ]);
                       },
                       child: Hero(
                         tag: "video$videoIndex", // Ensure unique tag for Hero

@@ -16,7 +16,8 @@ filter(Map<String, dynamic> data, {String? url}) async {
 
   // Making the API request. The method is set to "GET".
   response = await ApiHelper.makeRequest(
-      targetRout: url ?? ServerConstApis.filter,
+      targetRout: url ??
+          (isGuset ? ServerConstApis.filter : ServerConstApis.filterForGuest),
       method: "post",
       data: data,
       token: token);

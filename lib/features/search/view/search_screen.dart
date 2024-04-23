@@ -130,12 +130,8 @@ class SearchResult extends StatelessWidget {
 Widget floatingActionButton() {
   return FloatingActionButton.extended(
     onPressed: () async {
-      if (isGuset) {
-        Get.dialog(const GuestPopupWidget());
-      } else {
-        // context.pushNamed('Map');
-        Get.toNamed('/MapScreen');
-      }
+      // context.pushNamed('Map');
+      Get.toNamed('/MapScreen');
     },
     // shape: ShapeBorder(),
     backgroundColor: customColors.primary,

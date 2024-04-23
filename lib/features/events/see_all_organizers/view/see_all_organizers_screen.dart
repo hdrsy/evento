@@ -117,12 +117,15 @@ class OrganizerSeeAllCard extends StatelessWidget {
                     SizedBox(
                       width: 12,
                     ),
-                    Text(
-                      "${organizerHome.name} ",
-                      style: customTextStyle.bodyLarge.override(
-                          fontSize: 16,
-                          fontFamily: secondaryFontFamily,
-                          useGoogleFonts: true),
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        "${organizerHome.name} ",
+                        style: customTextStyle.bodyLarge.override(
+                            fontSize: 16,
+                            fontFamily: secondaryFontFamily,
+                            useGoogleFonts: true),
+                      ),
                     ),
                     Spacer(),
                     organizerHome.mobileUserId ==

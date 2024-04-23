@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/search/model/search_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -258,8 +259,12 @@ class EventCard extends StatelessWidget {
                   child: GetBuilder<MapController>(builder: (mapController) {
                     return ToggleIcon(
                       onPressed: () async {
-                        mapController.followOrUnFollowEvent(
-                            eventIndex, modelIndex);
+                        if (isGuset) {
+                          Get.dialog(const GuestPopupWidget());
+                        } else {
+                          mapController.followOrUnFollowEvent(
+                              eventIndex, modelIndex);
+                        }
                       },
                       value: mapController
                           .searchResultSearch[modelIndex].isFollowedByAuthUser,

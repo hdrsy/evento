@@ -19,6 +19,7 @@ class FreindsController extends GetxController {
   RxBool isSentFreindsError = false.obs;
   RxBool isMyFriendsError = false.obs;
   RxBool isRecivedFreindsError = false.obs;
+  int initTabIndex = 0;
   @override
   void onInit() {
     myFreinds = <FreindsModel>[].obs;
@@ -28,6 +29,7 @@ class FreindsController extends GetxController {
     isMyFriendsLoading = false.obs;
     isRecivedFreindsLoading = false.obs;
     isSentFreindsLoading = false.obs;
+    initTabIndex = Get.arguments ?? 0;
     getMyFreinds();
     getSendRequest();
     getRecivedRequest();

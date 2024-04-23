@@ -124,6 +124,7 @@ class SearchPageController extends GetxController {
     var results = (data['result'] as List)
         .map((jsonItem) => SearchModel.fromJson(jsonItem))
         .toList();
+    print("the length is : ${results.length}");
     _updateSearchResults(results);
   }
 

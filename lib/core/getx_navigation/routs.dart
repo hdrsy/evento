@@ -32,6 +32,7 @@ import 'package:evento/features/friends/going/view/going_screen.dart';
 import 'package:evento/features/friends/invite_friends/controller/binding/invite_friends_binding.dart';
 import 'package:evento/features/friends/invite_friends/view/invite_riends_screen.dart';
 import 'package:evento/features/friends/invite_friends_to_event/view/invite_freinde_to_event_screen.dart';
+import 'package:evento/features/gallery/view/show_on_fullscreen.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/controller/binding/booking_detailes_in_event_for_organizer_binding.dart';
 import 'package:evento/features/organizer/booking_detailes_in_event_for_organizer/view/booking_detailes_in_event_for_organizer_screen.dart';
 import 'package:evento/features/organizer/edit_profile_organizer.dart/controller/binding/edit_profile_binding.dart';
@@ -253,6 +254,7 @@ appRoutes() => [
       GetPage(
           name: '/SeeAllServiceCategoryScreen',
           page: () => SeeAllServiceCategoryScreen()),
+      GetPage(name: '/ShowInFullScreen', page: () => ShowInFullScreen()),
       GetPage(
           name: '/EditMediaInFolderScreen',
           page: () => EditMediaInFolderScreen()),

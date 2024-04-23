@@ -14,9 +14,9 @@ import 'package:easy_localization/easy_localization.dart';
 class SelectStateEditProfile extends StatelessWidget {
   SelectStateEditProfile({super.key});
   EditProfileController editProfileController = Get.find();
-  String selectedState = '';
   @override
   Widget build(BuildContext context) {
+    String selectedState = editProfileController.states[0];
     return Center(
       child: Container(
         // height: scaleHeight(200), // Height of the picker
