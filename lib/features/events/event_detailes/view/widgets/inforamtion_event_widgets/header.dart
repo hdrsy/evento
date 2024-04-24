@@ -39,7 +39,7 @@ Widget buildHeader(BuildContext context, EventDetailsModel eventDetailsModel) {
       ),
       Align(
         alignment: const AlignmentDirectional(-1.00, -1.00),
-        child: eventDetailsModel.title.length > 15
+        child: eventDetailsModel.title.length > 20
             ? SizedBox(
                 width: screenWidth * 0.5,
                 height: screenHeight * 0.04,

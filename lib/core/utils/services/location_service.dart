@@ -88,6 +88,7 @@
 // }
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:geolocator/geolocator.dart';
 
 StreamSubscription<Position>? positionStream;
@@ -149,9 +150,9 @@ class LocationService {
 
   String formatDistance(double distance) {
     if (distance < 1000) {
-      return "${distance.toStringAsFixed(0)} m";
+      return "${distance.toStringAsFixed(0)} ${tr("m")}";
     } else {
-      return "${(distance / 1000).toStringAsFixed(1)} km";
+      return "${(distance / 1000).toStringAsFixed(1)} ${tr("km")}";
     }
   }
 }

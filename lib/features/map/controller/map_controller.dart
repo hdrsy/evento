@@ -12,7 +12,6 @@ import 'package:flutter/services.dart';
 import '../../../core/server/follow_unfollow_event_api.dart';
 import '../../../core/server/server_config.dart';
 import '../../../core/utils/helper/flutter_flow_google_map.dart';
-import '../../events/home/model/event_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -58,12 +57,9 @@ class MapController extends GetxController {
   }
 
   void onApplyFilters(Map<String, dynamic> data) async {
-    final d = await filter(data);
+    final eventModels = await filter(data);
     Get.back();
-    var eventModels =
-        d.map((jsonItem) => SearchModel.fromJson(jsonItem)).toList();
     isSearchActive.value = true;
-    print(eventModels);
     if (eventModels is List<dynamic>) {
       List<SearchModel> filteredResults = eventModels.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting
