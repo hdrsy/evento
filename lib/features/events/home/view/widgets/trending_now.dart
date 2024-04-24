@@ -44,7 +44,9 @@ class TrendingNow extends StatelessWidget {
                       Get.toNamed('/seeAll', arguments: [
                         trendingListController.pageId,
                         trendingListController.itemList,
-                        ServerConstApis.getTrendingList,
+                        isGuset
+                            ? ServerConstApis.getTrendingListforGuest
+                            : ServerConstApis.getTrendingList,
                         "trending_event",
                         "Trending Now"
                       ]);

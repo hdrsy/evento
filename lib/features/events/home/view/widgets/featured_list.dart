@@ -47,7 +47,9 @@ class FeaturedList extends StatelessWidget {
                         Get.toNamed('/seeAll', arguments: [
                           featuredListController.pageId,
                           featuredListController.itemList,
-                          ServerConstApis.getFeaturedList,
+                          isGuset
+                              ? ServerConstApis.getFeaturedListforGuest
+                              : ServerConstApis.getFeaturedList,
                           "featured_event",
                           "Featured"
                         ]);

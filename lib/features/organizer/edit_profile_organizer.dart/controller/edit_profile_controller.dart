@@ -200,7 +200,6 @@ class EditProfileOrganizerController extends GetxController {
   }
 
   bool validationFunction() {
-    print(selectedState);
     if (selectedCategories.isEmpty) {
       errorMessage.add("Please select at least one event category");
       return false;

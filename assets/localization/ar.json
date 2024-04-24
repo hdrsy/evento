@@ -394,6 +394,14 @@
   "Edit Profile": "تعديل الملف الشخصي",
   "Venue": "المكان",
   "Skip": "تخطي",
+  "Booking Detailes":"تفاصيل الحجز",
+  
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phoneNumber": "رقم الهاتف",
+    "age": "العمر",
+  
+  
   "Available  Amenities": "المرافق المتاحة",
   "Capacity": "السعة",
   "Personalised program": "برنامج شخصي",

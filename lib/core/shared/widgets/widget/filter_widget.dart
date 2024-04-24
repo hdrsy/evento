@@ -34,7 +34,6 @@ class _FilterWidgetState extends State<FilterWidget> {
   FormFieldController<String>? dropDownValueController;
 
   FormFieldController<List<String>>? choiceChipsValueController;
-  double price = 1000;
   double locationRange = 1;
   SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
   double _valueSlider = 400000;
@@ -378,11 +377,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   1000000
                               ? getPriceNumberToShow(sliderValuePricerangeEnd)
                               : sliderValuePricerangeEnd;
-                          data['distance'] = _valueSlider / 1000;
+                          data['distance'] = _valueSlider;
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
                           if (data.isNotEmpty) {
-                            print(data);
                             await widget.onApplyFilters(data);
                           }
                           if (mounted) {

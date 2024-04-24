@@ -159,13 +159,13 @@ class NameAndFollow extends StatelessWidget {
                     arguments:
                         organizerProfileController.organizerProfileModel);
               },
-              text: "Edit profile",
+              text: tr("Edit Profile"),
               icon: const Icon(
                 Icons.edit,
                 size: 20,
               ),
               options: ButtonOptions(
-                width: 150,
+                // width: 150,
                 height: 35,
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 23, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),

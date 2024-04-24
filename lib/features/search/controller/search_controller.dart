@@ -30,7 +30,7 @@ class SearchPageController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    _fetchData(" "); // Fetch initial data with empty query
+    _fetchData(""); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
     await getRecentSearch();
     getuserlocation();
@@ -124,7 +124,6 @@ class SearchPageController extends GetxController {
     var results = (data['result'] as List)
         .map((jsonItem) => SearchModel.fromJson(jsonItem))
         .toList();
-    print("the length is : ${results.length}");
     _updateSearchResults(results);
   }
 
@@ -157,7 +156,6 @@ class SearchPageController extends GetxController {
     if (filteredData is List<dynamic>) {
       List<SearchModel> filteredResults = filteredData.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting
-        print("eventdata :$jsonItem");
         return SearchModel.fromJson(jsonItem);
       }).toList();
       _updateSearchResults(filteredResults);

@@ -13,7 +13,7 @@ class SeeAllOffersController extends GetxController {
   late String rout;
   late RxBool isLoading;
   late RxBool isLoadingMoreData;
-  final EventStateManager eventStateManager=Get.find();
+  final EventStateManager eventStateManager = Get.find();
 
   // A ScrollController to listen to scroll events for implementing 'load more' functionality.
   late ScrollController scrollController;
@@ -54,7 +54,8 @@ class SeeAllOffersController extends GetxController {
     isLoading.value = itemList.isNotEmpty ? false : true;
 
     String token = await prefService.readString("token");
-    String apiUrl = "${ServerConstApis.getOfferList}?page=$pageId";
+    String apiUrl =
+        "${isGuset ? ServerConstApis.getOfferListforGuest : ServerConstApis.getOfferList}?page=$pageId";
 
     Either<ErrorResponse, Map<String, dynamic>> response =
         await ApiHelper.makeRequest(

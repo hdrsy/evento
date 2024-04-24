@@ -238,7 +238,6 @@ class BookNowController extends GetxController {
         int totalAmount = handlingResponse["event_price_with_discount"];
         int appTaxes = handlingResponse["app_taxes"];
         int mtnTaxes = handlingResponse["mtn_taxes"];
-        print("before hte nav");
         Get.toNamed('/PaymentScreenInBooking',
             preventDuplicates: false,
             arguments: [
@@ -249,7 +248,6 @@ class BookNowController extends GetxController {
               totalAmount,
               appTaxes + mtnTaxes
             ]);
-        print("afterrr");
       }
       ticketList[ticketId].isLoading.value = false;
     }

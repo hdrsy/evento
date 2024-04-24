@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:evento/core/server/filter.dart';
 import 'package:evento/features/events/home/controller/event_state_manager.dart';
+import 'package:evento/features/search/controller/search_controller.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
@@ -33,7 +34,12 @@ class FavoriteController extends GetxController {
     distances = [];
     await getMyFavoriteEvents();
     calculateDistance();
+    getuserlocation();
     super.onInit();
+  }
+
+  getuserlocation() async {
+    userLocation = await locationService.getCurrentLocation();
   }
 
   getMyFavoriteEvents() async {
@@ -111,10 +117,12 @@ class FavoriteController extends GetxController {
 
   void onApplyFilters(Map<String, dynamic> data) async {
     isSearchActive.value = true;
-    final d = await filter(data, url: ServerConstApis.favoritefilter);
+    isLoading.value = true;
     Get.back();
+    final d = await filter(data, url: ServerConstApis.favoritefilter);
     var eventModels =
         d.map((jsonItem) => EventWrapper.fromJson(jsonItem)).toList();
     searchResultSearch.addAll(eventModels.cast<EventWrapper>());
+    isLoading.value = false;
   }
 }

@@ -366,11 +366,18 @@
 "Date of Birth": "Date of Birth",
 "+963 900000000": "+963 900000000",
 "Phone Number": "Phone Number",
-"Male": "Male",
+"Male": "Male","Booking Detailes":"Booking Detailes",
 "Gender": "Gender",
 "Edit Profile": "Edit Profile",
 "Select a picturesque setting for your special day": "Select a picturesque setting for your special day",
 "Service Provider's": "Service Provider's",
+
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "phoneNumber": "Phone Number",
+  "age": "Age"
+,
+
 "Create folder": "Create folder",
 "Folder name": "Folder name",
 "The folder name should at least 2 char": "The folder name should at least 2 char",

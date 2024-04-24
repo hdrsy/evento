@@ -17,11 +17,10 @@ filter(Map<String, dynamic> data, {String? url}) async {
   // Making the API request. The method is set to "GET".
   response = await ApiHelper.makeRequest(
       targetRout: url ??
-          (isGuset ? ServerConstApis.filter : ServerConstApis.filterForGuest),
+          (isGuset ? ServerConstApis.filterForGuest : ServerConstApis.filter),
       method: "post",
       data: data,
       token: token);
-
   // Handling the response. 'fold' is used to handle both Left (error) and Right (success) cases.
   dynamic handlingResponse = response.fold((l) => l, (r) => r);
   // print("ssssssssssssssss $handlingResponse");

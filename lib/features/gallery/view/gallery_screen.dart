@@ -15,7 +15,6 @@ class GalleryScreen extends StatelessWidget {
   final GalleryController galleryController = Get.find();
   @override
   Widget build(BuildContext context) {
-    print("the page builds");
     return Scaffold(
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(

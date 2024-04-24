@@ -59,7 +59,6 @@ class NameCheckBox extends StatelessWidget {
                           url: ServerConstApis.reviewVenue,
                           id: venue.id),
                       height: 450);
-                  print("dddddddddddddd :${venue.id}");
                 },
                 child: Text(
                   "Review Venue",

@@ -231,7 +231,6 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),
       onDaySelected: (selectedDay, focusedDay) {
         if (selectedDay.isBefore(DateTime.now())) {
-          print("dddddddddddddddd");
           Get.snackbar(
               tr("oops_error"), // Localization key for the title
               tr("You can't select a date before today"), // Localization key for the message

@@ -254,19 +254,25 @@ class PhonePayment extends StatelessWidget {
                       fontSize: 12,
                       useGoogleFonts: false,
                     ),
+                    suffixIcon:
+                        !Get.find<PaymentController>().isIvoiceCreated.value
+                            ? null
+                            : GestureDetector(
+                                onTap: () {
+                                  Get.find<PaymentController>()
+                                      .isIvoiceCreated
+                                      .value = false;
+                                },
+                                child: Icon(
+                                  Icons.edit,
+                                  size: 20,
+                                  color: customColors.primary,
+                                )),
                     hintStyle: customTextStyle.bodyMedium.override(
                       fontFamily: 'Nunito',
                       color: customColors.primaryText,
                       useGoogleFonts: false,
                     ),
-                    // enabledBorder: UnderlineInputBorder(
-                    //   borderSide: BorderSide(
-                    //     color: customColors.primary,
-                    //     width: 2,
-                    //   ),
-                    //   borderRadius: BorderRadius.circular(40),
-                    // ),
-
                     focusedBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
                         color: Color(0x00000000),
@@ -274,7 +280,6 @@ class PhonePayment extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(40),
                     ),
-
                     enabledBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
                         color: Color(0x00000000),
@@ -315,44 +320,45 @@ class PhonePayment extends StatelessWidget {
             SizedBox(
               height: 15.h,
             ),
-            Align(
-              alignment: const AlignmentDirectional(0, -1),
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Obx(
-                  () => ButtonWidget(
-                    showLoadingIndicator:
-                        Get.find<PaymentController>().isLoadingPhone.value,
-                    onPressed: () async {
-                      Get.find<PaymentController>().isIvoiceCreated.value
-                          ? null
-                          : Get.find<PaymentController>().getInvoice();
-                    },
-                    text: tr("Confirm"),
-                    options: ButtonOptions(
-                      width: 200,
-                      height: 40,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: customColors.primary,
-                      textStyle: customTextStyle.titleSmall.override(
-                        fontFamily: 'Nunito',
-                        color: Colors.white,
-                        useGoogleFonts: false,
+            Get.find<PaymentController>().isIvoiceCreated.value
+                ? SizedBox()
+                : Align(
+                    alignment: const AlignmentDirectional(0, -1),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Obx(
+                        () => ButtonWidget(
+                          showLoadingIndicator: Get.find<PaymentController>()
+                              .isLoadingPhone
+                              .value,
+                          onPressed: () async {
+                            Get.find<PaymentController>().getInvoice();
+                          },
+                          text: tr("Confirm"),
+                          options: ButtonOptions(
+                            width: 200,
+                            height: 40,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24, 0, 24, 0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 0),
+                            color: customColors.primary,
+                            textStyle: customTextStyle.titleSmall.override(
+                              fontFamily: 'Nunito',
+                              color: Colors.white,
+                              useGoogleFonts: false,
+                            ),
+                            elevation: 3,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
-                      elevation: 3,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                ),
-              ),
-            ),
             paymentController.errorMessageInInvoice != ''
                 ? ErrorMessages(
                     message: paymentController.errorMessageInInvoice.value,

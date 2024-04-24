@@ -61,9 +61,22 @@ class MapController extends GetxController {
     final d = await filter(data);
     Get.back();
     var eventModels =
-        d.map((jsonItem) => EventModel.fromJson(jsonItem)).toList();
+        d.map((jsonItem) => SearchModel.fromJson(jsonItem)).toList();
     isSearchActive.value = true;
-    searchResultSearch.addAll(eventModels.cast<EventModel>());
+    print(eventModels);
+    if (eventModels is List<dynamic>) {
+      List<SearchModel> filteredResults = eventModels.map((jsonItem) {
+        // Ensure jsonItem is a Map<String, dynamic> before converting
+        print("eventdata :$jsonItem");
+        return SearchModel.fromJson(jsonItem);
+      }).toList();
+      if (searchResultSearch.isEmpty) {
+        myMarker = [];
+        update();
+      }
+      searchResultSearch.clear();
+      searchResultSearch.addAll(filteredResults);
+    }
     update();
   }
 

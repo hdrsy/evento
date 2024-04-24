@@ -70,19 +70,15 @@ class DateTimeController extends GetxController {
     DateTime midnightSelectedDate = DateTime(date.year, date.month, date.day);
 
     // Check if the selected date is before today (both dates at midnight)
-    bool isDateValid = !midnightSelectedDate.isBefore(today);
 
     // Checking if the end time is after the start time
     isStartEndDateValid = endTime.isAfter(startTime);
-    print(isDateValid);
-    print(date);
 
     if ((adultNumber.value + childrenNumber.value > 0) &&
         isStartEndDateValid &&
         media.isNotEmpty) {
       isUserEnterDateInfo = true;
     }
-    print(isUserEnterDateInfo);
     FormState? formdata = formstate.currentState;
     if (formdata!.validate() && isUserEnterDateInfo && media.isNotEmpty) {
       formdata.save();

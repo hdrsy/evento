@@ -31,7 +31,7 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
               Align(
                 alignment: AlignmentDirectional(-1, -1),
                 child: Text(
-                  "Ticket ${modelIndex + 1}",
+                  "${tr("Ticket")} ${modelIndex + 1}",
                   style: customTextStyle.headlineMedium.override(
                       color: customColors.primary,
                       fontFamily: secondaryFontFamily,
@@ -54,7 +54,7 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                       color: customColors.primary,
                       fontFamily: secondaryFontFamily,
                       useGoogleFonts: true),
-                ),
+                ).tr(),
               ),
             ],
           ),

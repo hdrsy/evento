@@ -26,6 +26,7 @@ class SeeAllController extends GetxController {
   late int pageId;
   late int lastPageId;
   late RxBool hasMoreData;
+  late RxBool isFetching;
   final EventStateManager eventStateManager = Get.find();
   late List<RxString> distances;
   late RxList<EventModel> itemList;
@@ -36,6 +37,7 @@ class SeeAllController extends GetxController {
   late String pageTitle;
   @override
   void onInit() {
+    isFetching = false.obs; // New flag to lock fetch operations
     isLoading = false.obs;
     isLoadingMoreData = false.obs;
     distances = [];
@@ -62,7 +64,8 @@ class SeeAllController extends GetxController {
       scrollController.addListener(() {
         if (scrollController.position.maxScrollExtent ==
                 scrollController.offset &&
-            hasMoreData.value) {
+            hasMoreData.value &&
+            !isFetching.value) {
           isLoadingMoreData.value = true;
           fetchData();
         }
@@ -76,11 +79,13 @@ class SeeAllController extends GetxController {
   }
 
   fetchData() async {
+    if (isFetching.value) return; // Prevent concurrent fetches
+    isFetching.value = true;
+
     isLoading.value = itemList.isNotEmpty ? false : true;
 
     String token = await prefService.readString("token");
     String apiUrl = "$targetRout?page=$pageId";
-
     Either<ErrorResponse, Map<String, dynamic>> response =
         await ApiHelper.makeRequest(
       targetRout: apiUrl,
@@ -96,6 +101,7 @@ class SeeAllController extends GetxController {
     }
     isLoading.value = false;
     isLoadingMoreData.value = false;
+    isFetching.value = false; // Unlock fetching after handling response
   }
 
   handleDataSuccess(dynamic handlingResponse) {

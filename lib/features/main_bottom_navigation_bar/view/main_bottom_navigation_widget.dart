@@ -27,7 +27,11 @@ class MainBottomNavigationBarWidget extends StatelessWidget {
           // Change to the home page index
           mainBottomNavigationController.changePage(0);
         } else {
-          SystemNavigator.pop();
+          if (isGuset) {
+            Get.offAllNamed('/');
+          } else {
+            SystemNavigator.pop();
+          }
         }
       },
       child: Theme(
