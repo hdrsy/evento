@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../core/shared/widgets/buttons/general_button.dart';
 import '../../../core/utils/theme/text_theme.dart';
 import '../controller/map_controller.dart';
@@ -18,8 +20,9 @@ class MapScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
           title: Text("Map",
-              style: customTextStyle.bodyMedium
-                  .copyWith(color: customColors.primary, fontSize: 20)),
+                  style: customTextStyle.bodyMedium
+                      .copyWith(color: customColors.primary, fontSize: 20))
+              .tr(),
           centerTitle: true,
           leading: GestureDetector(
             onTap: () {

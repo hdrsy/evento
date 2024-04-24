@@ -47,6 +47,8 @@ class _FilterWidgetState extends State<FilterWidget> {
   @override
   Widget build(BuildContext context) {
     categoryList.assignAll(categoryListController.categoryList);
+    categoryList.removeAt(0);
+    categoryList.removeAt(0);
 
     return Container(
       width: double.infinity,
@@ -126,7 +128,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                             alignment: const AlignmentDirectional(0.00, 0.00),
                             child: FlutterFlowChoiceChips(
                               options: [
-                                ChipData(tr("All")),
                                 ...List.generate(
                                     categoryList.length,
                                     (index) =>
@@ -360,10 +361,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                               selectedChoices
                                   .assignAll(categoryList.map((e) => e.title));
                             }
-                            // for (var i = 0; i < selectedChoices.length; i++) {
-                            //   data['event_category[$i]'] = selectedChoices[i];
-                            // }
-                            data["event_category"] = selectedChoices;
+                            List<int> selectedIds = [];
+                            categoryList
+                                .where((category) =>
+                                    selectedChoices.contains(category.title))
+                                .map((category) => category.id)
+                                .toList();
+                            data["event_category"] = selectedIds;
                           }
                           if (dropDownValueController != null) {
                             data['state'] = dropDownValueController!.value;
@@ -380,6 +384,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           data['distance'] = _valueSlider;
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
+                          print(data);
                           if (data.isNotEmpty) {
                             await widget.onApplyFilters(data);
                           }

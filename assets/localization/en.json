@@ -375,7 +375,9 @@
   "firstName": "First Name",
   "lastName": "Last Name",
   "phoneNumber": "Phone Number",
-  "age": "Age"
+  "age": "Age",
+  "Map":
+  "Map"
 ,
 "km":"كم",
 "m":"M",
