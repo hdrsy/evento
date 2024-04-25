@@ -15,6 +15,7 @@ class BookingDetailesForMyBookingController extends GetxController {
   late int eventId;
   late int userId;
   RxBool isLoading = false.obs;
+  RxBool isError = false.obs;
   @override
   void onInit() async {
     eventId = Get.arguments[0];
@@ -38,33 +39,39 @@ class BookingDetailesForMyBookingController extends GetxController {
   }
 
   getCalceledBooking() async {
-    // try {
-    isLoading.value = true;
-    update();
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: ServerConstApis.getUserBooking,
-        method: "post",
-        data: {"event_id": eventId, "user_id": userId},
-        token: token);
+    try {
+      isLoading.value = true;
+      isError.value=false;
+      update();
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: ServerConstApis.getUserBooking,
+          method: "post",
+          data: {"event_id": eventId, "user_id": userId},
+          token: token);
 
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-      // isErrorCanceled.value = true;
-      // errorMessage.value = handlingResponse.getErrorMessages();
-    } else {
-      List<dynamic> interestsJson = handlingResponse['bookings'];
-      userBookings = interestsJson
-          .map((jsonItem) => UserBooking.fromJson(jsonItem))
-          .toList();
-      // isLoadingCancall.value = false;
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        // isErrorCanceled.value = true;
+        isError.value=true;
+    isLoading.value = false;
+        // errorMessage.value = handlingResponse.getErrorMessages();
+      } else {
+        List<dynamic> interestsJson = handlingResponse['bookings'];
+        userBookings = interestsJson
+            .map((jsonItem) => UserBooking.fromJson(jsonItem))
+            .toList();
+        // isLoadingCancall.value = false;
+    isLoading.value = false;
+      }
+    } catch (e) {
+
+        isError.value=true;
+    isLoading.value = false;
     }
-    // } catch (e) {
-    // }
     // isErrorCanceled.value = true;
     update();
-    isLoading.value = false;
   }
 
   updateTotalPrice(int ticketIndex) {

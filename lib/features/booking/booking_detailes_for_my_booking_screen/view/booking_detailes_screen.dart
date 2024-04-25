@@ -1,3 +1,4 @@
+import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/view/widget/build_buttons.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/view/widget/event_info_card.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/view/widget/ticket_detailes_card.dart';
@@ -48,59 +49,63 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(color: customColors.primary),
                 )
-              : controller.userBookings.isEmpty
-                  ? Center()
-                  : SingleChildScrollView(
-                      padding: padding(16, 24, 0, 24),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+              : controller.isError.value
+                  ? EmptyData(
+                      icon: Icons.error_outline_outlined,
+                      message: "SomeThing Wrong!!",
+                    )
+                  : controller.userBookings.isEmpty
+                      ? Center()
+                      : SingleChildScrollView(
+                          padding: padding(16, 24, 0, 24),
+                          child: Column(
                             children: [
-                              Text(
-                                "Date Of Event",
-                                style: customTextStyle.bodyMedium,
-                              ).tr(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Date Of Event",
+                                    style: customTextStyle.bodyMedium,
+                                  ).tr(),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              EventInfoCard2(),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              ...List.generate(
+                                  bookingDetailesController.userBookings.length,
+                                  (index) => TicketDetailesCardForMyBooking(
+                                        ticketModel: bookingDetailesController
+                                            .userBookings[index],
+                                        modelIndex: index,
+                                      )),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0, 30, 0, 0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      "Your booking has been completed",
+                                      style: customTextStyle.titleMedium,
+                                    ).tr(),
+                                    Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0, 12, 0, 0),
+                                        child: BuildButton2()),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          EventInfoCard2(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          ...List.generate(
-                              bookingDetailesController.userBookings.length,
-                              (index) => TicketDetailesCardForMyBooking(
-                                    ticketModel: bookingDetailesController
-                                        .userBookings[index],
-                                    modelIndex: index,
-                                  )),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 30, 0, 0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  "Your booking has been completed",
-                                  style: customTextStyle.titleMedium,
-                                ).tr(),
-                                Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            0, 12, 0, 0),
-                                    child: BuildButton2()),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                        ],
-                      ),
-                    );
+                        );
         }),
       ),
     );
