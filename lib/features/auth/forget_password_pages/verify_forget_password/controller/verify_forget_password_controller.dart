@@ -73,7 +73,10 @@ class VerifyForgetPasswordController extends GetxController {
 
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
-      } else {}
+      } else {
+        int otp = handlingResponse['code'];
+        pin.text = otp.toString();
+      }
     }
   }
 

@@ -9,7 +9,7 @@ class GalleryItem {
 
 class GalleryController extends GetxController {
   late List<String> images;
-  List<String> videos = [];
+  late List<String> videos;
   late List<GalleryItem> mixedGalleryItems; // New list for mixed items
 
   @override
@@ -18,8 +18,10 @@ class GalleryController extends GetxController {
     images = args['images'] ?? [];
     if (args.containsKey('videos') && args['videos']!.isNotEmpty) {
       videos = args['videos']!;
+    } else {
+      videos = [];
     }
-
+    print("ssssssssssss $videos");
     mixedGalleryItems = _mixImagesAndVideos(images, videos);
 
     super.onInit();

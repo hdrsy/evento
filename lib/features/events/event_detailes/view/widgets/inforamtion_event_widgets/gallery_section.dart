@@ -12,6 +12,8 @@ import 'package:easy_localization/easy_localization.dart';
 
 Widget buildGallerySection(BuildContext context) {
   final EventDetailesController eventDetailesController = Get.find();
+  print("ssssssssssssss ${eventDetailesController.eventDetailsModel.videos}");
+
   return Column(
     mainAxisSize: MainAxisSize.max,
     children: [
@@ -32,10 +34,16 @@ Widget buildGallerySection(BuildContext context) {
             ).tr(),
             GestureDetector(
               onTap: () {
-                Get.toNamed('/GalleryScreen', arguments: {
-                  "images": eventDetailesController.eventDetailsModel.images,
-                  'videos': eventDetailesController.eventDetailsModel.videos
-                });
+                print(
+                    "ssssssssssssss ${eventDetailesController.eventDetailsModel.videos}");
+
+                Get.toNamed('/GalleryScreen',
+                    preventDuplicates: false,
+                    arguments: {
+                      "images":
+                          eventDetailesController.eventDetailsModel.images,
+                      'videos': eventDetailesController.eventDetailsModel.videos
+                    });
               },
               child: Text(
                 "See All",
@@ -69,10 +77,16 @@ Widget buildGallerySection(BuildContext context) {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed('/GalleryScreen', arguments: {
-                            "images":
-                                eventDetailesController.eventDetailsModel.images
-                          });
+                          print(
+                              "ssssssssssssss ${eventDetailesController.eventDetailsModel.videos}");
+                          Get.toNamed('/GalleryScreen',
+                              preventDuplicates: false,
+                              arguments: {
+                                "images": eventDetailesController
+                                    .eventDetailsModel.images,
+                                'videos': eventDetailesController
+                                    .eventDetailsModel.videos
+                              });
                         },
                         child: Container(
                           width: screenWidth * 0.25,

@@ -26,7 +26,7 @@ class MapController extends GetxController {
   TextEditingController searchField = TextEditingController();
   late LatLng currentPosition;
   late BitmapDescriptor customIcon;
-  bool isReady = false;
+  RxBool isReady = false.obs;
   var searchResultSearch = <SearchModel>[].obs;
   Timer? _debounce;
 
@@ -34,12 +34,12 @@ class MapController extends GetxController {
   void onInit() async {
     super.onInit();
     customIcon = await getCustomMarker();
-
+    print("ssssssssssss ${customIcon}");
     _fetchData(""); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
 
     await getSuggestModels(); // Assumes this now properly initializes `myMarker`
-
+    isReady.value = true;
     // Indicate that everything is ready
   }
 
@@ -140,7 +140,7 @@ class MapController extends GetxController {
   // PageController? paggooeViewController1;
   getSuggestModels() async {
     if (searchResultSearch.isEmpty) {
-      isReady = true;
+      isReady.value = true;
       update();
       return;
     } else {
@@ -153,7 +153,7 @@ class MapController extends GetxController {
       googleMapsCenter = currentPosition;
       myMarker.clear();
       myMarker.add(FlutterFlowMarker(
-        'markerId$carouselCurrentIndex', // Unique ID for the marker
+        'markerId${searchResultSearch[carouselCurrentIndex].venue.latitude}', // Unique ID for the marker
         currentPosition, // Replace with your latitude and longitude
         icon: customIcon,
 
@@ -171,7 +171,7 @@ class MapController extends GetxController {
       myMarker.clear();
     }
     update();
-    isReady = true;
+    isReady.value = true;
   }
 
   void updateMarkerAndPosition(int carouselIndex) async {
@@ -182,7 +182,7 @@ class MapController extends GetxController {
     googleMapsCenter = currentPosition;
     myMarker.clear(); // Update marker
     myMarker.add(FlutterFlowMarker(
-      'markerId$carouselIndex', // Unique ID for the marker
+      'markerId${searchResultSearch[carouselIndex].venue.latitude}', // Unique ID for the marker
       currentPosition, // New position
       icon: customIcon,
       (controller) async {
@@ -200,7 +200,16 @@ class MapController extends GetxController {
       controller.animateCamera(CameraUpdate.newLatLng(currentPosition));
     });
 
+    print("ssssssssssss ${myMarker.first.location}");
+    print("ssssssssssss ${myMarker.first.markerId}");
     update(); // Call update to refresh the UI if needed
+  }
+
+  moveCamiraPosition() {
+    googleMapsController.future.then((controller) {
+      controller.animateCamera(CameraUpdate.newLatLng(currentPosition));
+    });
+    update();
   }
 
   followOrUnFollowEvent(int eventId, int modelIndex) async {

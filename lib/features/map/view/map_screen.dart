@@ -75,6 +75,40 @@ class MapScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.96, 0.20),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: ButtonWidget(
+                  onPressed: () async {
+                    mapController.moveCamiraPosition();
+                  },
+                  text: '',
+                  icon: const Icon(
+                    Icons.location_searching_sharp,
+                    size: 30,
+                  ),
+                  options: ButtonOptions(
+                    height: 40,
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    color: customColors.primary,
+                    textStyle: customTextStyle.titleSmall.override(
+                      fontFamily: 'Nunito',
+                      color: Colors.white,
+                      useGoogleFonts: true,
+                    ),
+                    elevation: 3,
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
             )
           ],
         ));

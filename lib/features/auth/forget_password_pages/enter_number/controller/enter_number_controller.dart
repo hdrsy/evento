@@ -42,8 +42,10 @@ class EnterNumberController extends GetxController {
       } else {
         final VerifyForgetPasswordController verifyForgetPasswordController =
             Get.put(VerifyForgetPasswordController());
+        int otp = handlingResponse['code'];
 
         verifyForgetPasswordController.phone = phone.text;
+        verifyForgetPasswordController.pin.text = otp.toString();
 
         Get.toNamed(
           '/VerifyForgetPasswordScreen',

@@ -44,20 +44,21 @@ class NotificationScreen extends StatelessWidget {
                     icon: Icons.error_outline_outlined,
                     message: "SomeThing Wrong!!",
                   )
-                : notificationController.notificationList.isEmpty
+                : notificationController.itemList.isEmpty
                     ? EmptyData(
                         icon: Icons.notifications_sharp,
                         message:
                             "All caught up! No new notifications right now.",
                       )
                     : SingleChildScrollView(
+                        controller: notificationController.scrollController,
                         child: Column(
                           children: [
                             ...List.generate(
-                                notificationController.notificationList.length,
+                                notificationController.itemList.length,
                                 (index) => NotificationCard(
                                       notificationModel: notificationController
-                                          .notificationList[index],
+                                          .itemList[index],
                                     ))
                           ].divide(Divider(
                             thickness: 1,

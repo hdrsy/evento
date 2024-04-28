@@ -30,20 +30,29 @@ class MyBookingCard extends StatelessWidget {
   final Event model;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            _buildImageSection(context, model),
-            Divider(
-              thickness: 1,
-              color: customColors.primaryBackground,
-            ),
-            isCanceldSection ? const SizedBox() : _buildButtonsRow(context),
-          ],
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/eventDetailes', parameters: {
+          'id': model.id.toString(),
+          'isOffer': false.toString(),
+          'offerPercent': 0.toString(),
+        });
+      },
+      child: Container(
+        decoration: const BoxDecoration(),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _buildImageSection(context, model),
+              Divider(
+                thickness: 1,
+                color: customColors.primaryBackground,
+              ),
+              isCanceldSection ? const SizedBox() : _buildButtonsRow(context),
+            ],
+          ),
         ),
       ),
     );

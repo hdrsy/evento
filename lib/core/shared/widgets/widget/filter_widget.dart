@@ -35,7 +35,6 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   FormFieldController<List<String>>? choiceChipsValueController;
   double locationRange = 1;
-  SfRangeValues _values = const SfRangeValues(100000.0, 5000000.0);
   double _valueSlider = 400000;
   List<String>? choiceChipsValues;
   CategoryListController categoryListController = Get.find();
@@ -296,7 +295,6 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                   child: Row(
@@ -312,7 +310,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                             // Resetting the dropdown value to null
                             dropDownValueController?.value = null;
                             // Resetting the slider values to their default values
-                            _values = const SfRangeValues(1000.0, 5000000.0);
                             _valueSlider = 1000;
                             // Resetting any other fields you have to their default values
                             locationRange =
@@ -362,7 +359,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   .assignAll(categoryList.map((e) => e.title));
                             }
                             List<int> selectedIds = [];
-                            categoryList
+                            selectedIds = categoryList
                                 .where((category) =>
                                     selectedChoices.contains(category.title))
                                 .map((category) => category.id)

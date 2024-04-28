@@ -73,7 +73,10 @@ class Step1Controller extends GetxController {
 
     if (handlingResponse is ErrorResponse) {
       errorMessage.value = handlingResponse.getErrorMessages();
-    } else {}
+    } else {
+      int otp = handlingResponse['otp']['otp'];
+      pin.text = otp.toString();
+    }
   }
 
   onPressContinue() async {

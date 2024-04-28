@@ -50,6 +50,7 @@ void notificationClickListener(Map<String, dynamic> data) {
   String normalizedTitle = data['navigate'] != null
       ? "navigate " + data['navigate']
       : data['title']?.trim().toLowerCase() ?? '';
+  print("sssssssssssssssssss $data");
   String routName = '';
   String body = '';
   if (normalizedTitle.contains("navigate")) {
@@ -57,37 +58,38 @@ void notificationClickListener(Map<String, dynamic> data) {
     if (targetRout.toLowerCase() == "organizer") {
       Get.context != null
           ? Get.toNamed('/OrganizerProfileScreen', arguments: [
-              int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+              extractNumberAfterWord(normalizedTitle, "organizer"),
               0
             ])
           : Future.delayed(Duration(seconds: 2), () {
               Get.toNamed('/OrganizerProfileScreen', arguments: [
-                int.tryParse(normalizedTitle[normalizedTitle.length - 1]),
+                extractNumberAfterWord(normalizedTitle, "organizer"),
                 0
               ]);
             });
     } else if (targetRout.toLowerCase() == "venue") {
       Get.context != null
           ? Get.toNamed('/VenueDetailesForUserScreen',
-              arguments:
-                  int.tryParse(normalizedTitle[normalizedTitle.length - 1]))
+              arguments: extractNumberAfterWord(normalizedTitle, "venue"))
           : Future.delayed(Duration(seconds: 2), () {
               Get.toNamed('/VenueDetailesForUserScreen',
-                  arguments: int.tryParse(
-                      normalizedTitle[normalizedTitle.length - 1]));
+                  arguments: extractNumberAfterWord(normalizedTitle, "venue"));
             });
     } else if (targetRout.toLowerCase() == "event") {
+      print(
+          "sssssssssssssssssss ${int.tryParse(normalizedTitle[normalizedTitle.length - 1]).toString()} ");
+      int j = extractNumberAfterWord(normalizedTitle, "event");
+      print("sssssssssss ${j}");
       Get.context != null
           ? Get.toNamed('/eventDetailes', parameters: {
-              'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
-                  .toString(),
+              'id': extractNumberAfterWord(normalizedTitle, "event").toString(),
               'isOffer': false.toString(),
               'offerPercent': 0.toString(),
             })
           : Future.delayed(Duration(seconds: 2), () {
               Get.toNamed('/eventDetailes', parameters: {
-                'id': int.tryParse(normalizedTitle[normalizedTitle.length - 1])
-                    .toString(),
+                'id':
+                    extractNumberAfterWord(normalizedTitle, "event").toString(),
                 'isOffer': false.toString(),
                 'offerPercent': 0.toString(),
               });
@@ -139,5 +141,16 @@ void notificationClickListener(Map<String, dynamic> data) {
       });
     }
   }
+
   // Check if GetX navigation context is ready, otherwise, delay the navigation
+}
+
+int extractNumberAfterWord(String text, String word) {
+  final RegExp regex = RegExp(r'\b' + RegExp.escape(word) + r' (\d+)');
+  final match = regex.firstMatch(text);
+  if (match != null && match.groupCount >= 1) {
+    return int.parse(match
+        .group(1)!); // Using ! as group(1) will not be null if a match is found
+  }
+  return 0; // Return null if no matching number is found
 }

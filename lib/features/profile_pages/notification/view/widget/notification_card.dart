@@ -12,6 +12,22 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+int extractNumberAfterLastSpace(String text) {
+  final RegExp regex = RegExp(r'(\d+)\b(?!\s)');
+  final matches = regex.allMatches(text);
+  Match? lastMatch;
+
+  for (final match in matches) {
+    lastMatch = match;
+  }
+
+  if (lastMatch != null) {
+    return int.parse(lastMatch
+        .group(0)!); // Using ! as group(0) will not be null if a match is found
+  }
+  return 0; // Return null if no number is found
+}
+
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key, required this.notificationModel});
   final NotificationModel notificationModel;
@@ -22,22 +38,21 @@ class NotificationCard extends StatelessWidget {
       onTap: () {
         notificationModel.type = 1;
         Get.find<NotificationController>().update();
+        print("ddddddddddddddddddddd ${notificationModel.title}");
         if (notificationModel.title.contains("navigate")) {
           String targetRout = extractWordAfterNavigate(notificationModel.title);
           if (targetRout.toLowerCase() == "organizer") {
             Get.toNamed('/OrganizerProfileScreen', arguments: [
-              int.tryParse(
-                  notificationModel.title[notificationModel.title.length - 1]),
+              extractNumberAfterLastSpace(notificationModel.title),
               0
             ]);
           } else if (targetRout.toLowerCase() == "venue") {
             Get.toNamed('/VenueDetailesForUserScreen',
-                arguments: int.tryParse(notificationModel
-                    .title[notificationModel.title.length - 1]));
+                arguments:
+                    extractNumberAfterLastSpace(notificationModel.title));
           } else if (targetRout.toLowerCase() == "event") {
             Get.toNamed('/eventDetailes', parameters: {
-              'id': int.tryParse(notificationModel
-                      .title[notificationModel.title.length - 1])
+              'id': extractNumberAfterLastSpace(notificationModel.title)
                   .toString(),
               'isOffer': false.toString(),
               'offerPercent': 0.toString(),

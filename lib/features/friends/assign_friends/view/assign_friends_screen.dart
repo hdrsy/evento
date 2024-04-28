@@ -101,7 +101,11 @@ class AssignFreindCard extends StatelessWidget {
                           Get.find();
                       assignFriendsController.onPressFillFriendData(modelId);
                     },
-                    child: Text("Assign")),
+                    child: Text(
+                      "Assign",
+                      style: customTextStyle.bodyMedium
+                          .copyWith(color: customColors.primary),
+                    )),
               ],
             ),
           ),

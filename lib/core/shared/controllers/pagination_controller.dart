@@ -118,46 +118,46 @@ class PaginationController<T> extends GetxController {
     // Indicate that a fetch operation is now in progress
     isFetchInProgress = true;
 
-    try {
-      isLoading.value = itemList.isNotEmpty ? false : true;
-      if (!_connectivityService.isConnected.value) {
-        log("from cache");
-        final d = await cacheService.getObject<Map<String, dynamic>>(
-          cacheKey: cacheKey,
-          deserializeFunction: (jsonMap) => jsonMap,
-        );
-        if (d != null) {
-          handleDataSuccess(d);
-        } else {
-          isLoading.value = false;
-        }
+    // try {
+    isLoading.value = itemList.isNotEmpty ? false : true;
+    if (!_connectivityService.isConnected.value) {
+      log("from cache");
+      final d = await cacheService.getObject<Map<String, dynamic>>(
+        cacheKey: cacheKey,
+        deserializeFunction: (jsonMap) => jsonMap,
+      );
+      if (d != null) {
+        handleDataSuccess(d);
       } else {
-        Either<ErrorResponse, Map<String, dynamic>> response =
-            await fetchDataCallback('your-api-url', pageId,
-                {}); // Replace 'your-api-url' and {} with actual values
-        dynamic handlingResponse = response.fold((l) => l, (r) => r);
-
-        if (handlingResponse is ErrorResponse) {
-          errorMessage.value = handlingResponse.getErrorMessages();
-          isError.value = true;
-        } else {
-          handleDataSuccess(handlingResponse);
-          cacheService.cacheObject<Map<String, dynamic>>(
-            object: handlingResponse,
-            cacheKey: cacheKey,
-            serializeFunction: (data) => data,
-          );
-        }
+        isLoading.value = false;
       }
-      isLoading.value = false;
-      isLoadingMoreData.value = false;
-      isFetchInProgress = false;
-    } catch (e) {
-      isLoading.value = false;
-      isLoadingMoreData.value = false;
-      isError.value = true;
-      isFetchInProgress = false;
+    } else {
+      Either<ErrorResponse, Map<String, dynamic>> response =
+          await fetchDataCallback('your-api-url', pageId,
+              {}); // Replace 'your-api-url' and {} with actual values
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+
+      if (handlingResponse is ErrorResponse) {
+        errorMessage.value = handlingResponse.getErrorMessages();
+        isError.value = true;
+      } else {
+        handleDataSuccess(handlingResponse);
+        cacheService.cacheObject<Map<String, dynamic>>(
+          object: handlingResponse,
+          cacheKey: cacheKey,
+          serializeFunction: (data) => data,
+        );
+      }
     }
+    isLoading.value = false;
+    isLoadingMoreData.value = false;
+    isFetchInProgress = false;
+    // } catch (e) {
+    //   isLoading.value = false;
+    //   isLoadingMoreData.value = false;
+    //   isError.value = true;
+    //   isFetchInProgress = false;
+    // }
   }
 
   // A method that can be overridden in subclasses to handle data differently upon successful fetch.

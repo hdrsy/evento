@@ -48,6 +48,7 @@ class GalleryScreen extends StatelessWidget {
                   itemCount: galleryController.images.length +
                       galleryController.videos.length,
                   itemBuilder: (context, index) {
+                    print("buildddddddddddddddddd");
                     return GestureDetector(
                         onTap: () {
                           // Get.to(
@@ -92,10 +93,7 @@ class GalleryMediaWidget extends StatelessWidget {
     return galleryItem.isVideo
         ? VideoWidget(video: galleryItem.url)
         : getImageNetwork(
-            key: ValueKey("storage/${galleryItem.url}"),
-            url: "/storage/${galleryItem.url}",
-            width: null,
-            height: null);
+            url: "/storage/${galleryItem.url}", width: null, height: null);
   }
 }
 

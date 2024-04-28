@@ -64,7 +64,8 @@ class OrganizationProfileController extends GetxController {
     Either<ErrorResponse, Map<String, dynamic>> response;
     String token = await prefService.readString("token");
     response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.organizerFollowers}/${user!.id}",
+        targetRout:
+            "${ServerConstApis.organizerFollowers}/${organizerProfileModel.id}",
         method: "GEt",
         token: token);
 

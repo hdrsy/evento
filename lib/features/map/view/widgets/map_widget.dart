@@ -11,7 +11,7 @@ class MapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MapController>(builder: (controller) {
-      return !mapController.isReady
+      return !mapController.isReady.value
           ? SizedBox()
           : SizedBox(
               width: MediaQuery.of(context).size.width,
