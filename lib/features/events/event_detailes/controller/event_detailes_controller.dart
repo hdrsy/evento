@@ -80,51 +80,51 @@ class EventDetailesController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     isGuset = await prefService.isContainKey("token") ? false : true;
-
+    print("ssssssssssss $isGuset");
     String token = await prefService.readString("token");
-    // try {
-    if (await checkInternet()) {
-      log("from cache");
-      final d = await cacheService.getObject<Map<String, dynamic>>(
-        cacheKey: cacheKey,
-        deserializeFunction: (jsonMap) => jsonMap,
-      );
-      if (d != null) {
-        whenGetDataSuccess(d);
-      } else {
-        isSomeThingError.value = true;
-        isLoading.value = false;
-      }
-      isLoading.value = false;
-    } else {
-      response = await ApiHelper.makeRequest(
-          targetRout:
-              "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
-          method: "GEt",
-          token: token);
-      dynamic handlingResponse = response.fold((l) => l, (r) => r);
-      if (handlingResponse is ErrorResponse) {
-        errorMessage.value = handlingResponse.getErrorMessages();
-        if (errorMessage[0] == "Not Found") {
-          isEventEdnded.value = true;
+    try {
+      if (await checkInternet()) {
+        log("from cache");
+        final d = await cacheService.getObject<Map<String, dynamic>>(
+          cacheKey: cacheKey,
+          deserializeFunction: (jsonMap) => jsonMap,
+        );
+        if (d != null) {
+          whenGetDataSuccess(d);
         } else {
           isSomeThingError.value = true;
+          isLoading.value = false;
         }
+        isLoading.value = false;
       } else {
-        whenGetDataSuccess(handlingResponse);
+        response = await ApiHelper.makeRequest(
+            targetRout:
+                "${isGuset ? ServerConstApis.getEventDetailesforGuest : ServerConstApis.getEventDetailes}/$eventId",
+            method: "GEt",
+            token: token);
+        dynamic handlingResponse = response.fold((l) => l, (r) => r);
+        if (handlingResponse is ErrorResponse) {
+          errorMessage.value = handlingResponse.getErrorMessages();
+          if (errorMessage[0] == "Not Found") {
+            isEventEdnded.value = true;
+          } else {
+            isSomeThingError.value = true;
+          }
+        } else {
+          whenGetDataSuccess(handlingResponse);
 
-        cacheService.cacheObject<Map<String, dynamic>>(
-          object: handlingResponse,
-          cacheKey: cacheKey,
-          serializeFunction: (data) => data,
-        );
+          cacheService.cacheObject<Map<String, dynamic>>(
+            object: handlingResponse,
+            cacheKey: cacheKey,
+            serializeFunction: (data) => data,
+          );
+        }
+        isLoading.value = false;
       }
+    } catch (e) {
+      isSomeThingError.value = true;
       isLoading.value = false;
     }
-    // } catch (e) {
-    //   isSomeThingError.value = true;
-    //   isLoading.value = false;
-    // }
   }
 
   whenGetDataSuccess(handlingResponse) {

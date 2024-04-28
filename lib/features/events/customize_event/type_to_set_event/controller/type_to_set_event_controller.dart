@@ -30,12 +30,6 @@ class TypetoSetEventController extends GetxController {
     super.onInit();
   }
 
-  // choiceCategoryItem(CategoryModel categoryModel){
-  //   selectedCategory.contains(categoryModel)?selectedCategory.remove(categoryModel):selectedCategory.add(categoryModel);
-  // }
-  // bool isSelected(CategoryModel categoryModel){
-  //  return selectedCategory.contains(categoryModel);
-  // }
   fetchCategoryData() async {
     if (isGuset) {
       return;
@@ -82,7 +76,7 @@ class TypetoSetEventController extends GetxController {
 
   whenGetDataSuccess(handlingResponse) {
     List<dynamic> categoryListJson = handlingResponse['categories'];
-
+    categoryList.clear();
     categoryList.addAll(
         categoryListJson.map((jsonItem) => CategoryModel.fromJson(jsonItem)));
 
