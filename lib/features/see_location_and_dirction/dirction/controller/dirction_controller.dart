@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -11,90 +12,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const LatLng SOURCE_LOCATION = LatLng(42.7477863, -71.1699932);
 const LatLng DEST_LOCATION = LatLng(42.744421, -71.1698939);
-const double CAMERA_ZOOM = 16;
+const double CAMERA_ZOOM = 14;
 const double CAMERA_TILT = 80;
 const double CAMERA_BEARING = 30;
 const double PIN_VISIBLE_POSITION = 20;
 const double PIN_INVISIBLE_POSITION = -220;
-
-class Dd extends GetxController {
-  Completer<GoogleMapController> controller = Completer();
-  // late BitmapDescriptor sourceIcon;
-  // late BitmapDescriptor destinationIcon;
-  Set<Marker> markers = Set<Marker>();
-  double pinPillPosition = 20;
-  late LatLng currentLocation;
-  late LatLng destinationLocation;
-  bool userBadgeSelected = false;
-
-  Set<Polyline> polylines = Set<Polyline>();
-  List<LatLng> polylineCoordinates = [];
-  late PolylinePoints polylinePoints;
-  @override
-  void onInit() async {
-    polylinePoints = PolylinePoints();
-    // setSourceAndDestinationMarkerIcons();
-    setInitialLocation();
-    super.onInit();
-  }
-
-  void setInitialLocation() {
-    currentLocation =
-        LatLng(SOURCE_LOCATION.latitude, SOURCE_LOCATION.longitude);
-
-    destinationLocation =
-        LatLng(DEST_LOCATION.latitude, DEST_LOCATION.longitude);
-  }
-
-  CameraPosition initialCameraPosition = CameraPosition(
-      zoom: CAMERA_ZOOM,
-      tilt: CAMERA_TILT,
-      bearing: CAMERA_BEARING,
-      target: SOURCE_LOCATION);
-
-  void showPinsOnMap() {
-    markers.add(Marker(
-        markerId: MarkerId('sourcePin'),
-        position: currentLocation,
-        // icon: sourceIcon,
-        infoWindow: InfoWindow(title: "sourcePin", snippet: "Sssssssss"),
-        onTap: () {
-          this.userBadgeSelected = true;
-          update();
-        }));
-
-    markers.add(Marker(
-        markerId: MarkerId('destinationPin'),
-        position: destinationLocation,
-        // icon: destinationIcon,
-        onTap: () {
-          this.pinPillPosition = PIN_VISIBLE_POSITION;
-          update();
-        }));
-    update();
-  }
-
-  void setPolylines() async {
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        "AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs",
-        PointLatLng(currentLocation.latitude, currentLocation.longitude),
-        PointLatLng(
-            destinationLocation.latitude, destinationLocation.longitude));
-
-    if (result.status == 'OK') {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-
-      polylines.add(Polyline(
-          width: 10,
-          polylineId: PolylineId('polyLine'),
-          color: Color(0xFF08A5CB),
-          points: polylineCoordinates));
-      update();
-    }
-  }
-}
 
 class DirctionController extends GetxController {
   late double latitude;
@@ -105,13 +27,15 @@ class DirctionController extends GetxController {
   Marker? userMarker; // Marker for user location
   final Set<Polyline> polylines = {};
   LocationService locationService = LocationService();
-  // Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController> controller = Completer();
+  GoogleMapController? googleMapController;
   @override
   void onInit() async {
     super.onInit();
     latitude = Get.arguments[0];
     longitude = Get.arguments[1];
-    googleMapsCenter = CameraPosition(target: LatLng(latitude, longitude));
+    googleMapsCenter =
+        CameraPosition(target: LatLng(latitude, longitude), zoom: 12);
 
     // Marker for destination
     myMarker = Marker(
@@ -122,7 +46,7 @@ class DirctionController extends GetxController {
 
     await getUserLocation();
     // Start tracking user location
-    drawRoute();
+    // drawRoute();
   }
 
   @override
@@ -134,8 +58,17 @@ class DirctionController extends GetxController {
 
   void updateMapView() async {
     if (userMarker != null) {
-      // LatLngBounds bounds =
-      //     _boundsFromLatLngList([userMarker!.position, myMarker.position]);
+      LatLngBounds bounds =
+          boundsFromLatLngList([userMarker!.position, myMarker.position]);
+    }
+  }
+
+  void adjustCamera(List<LatLng> polylineCoordinates) async {
+    if (polylineCoordinates.isNotEmpty) {
+      LatLngBounds bounds = boundsFromLatLngList(polylineCoordinates);
+      // GoogleMapController controller = await _controller.future;
+      googleMapController!.animateCamera(CameraUpdate.newLatLngBounds(
+          bounds, 100)); // Adjust the padding as needed
     }
   }
 
@@ -171,36 +104,48 @@ class DirctionController extends GetxController {
   }
 
   void drawRoute() async {
-    var currentLocation = await locationService.getCurrentLocation();
-    LatLng startLocation =
-        LatLng(currentLocation.latitude, currentLocation.longitude);
-    LatLng destinationLocation = LatLng(latitude, longitude);
+    try {
+      var currentLocation = await locationService.getCurrentLocation();
+      LatLng startLocation =
+          LatLng(currentLocation.latitude, currentLocation.longitude);
+      LatLng destinationLocation = LatLng(latitude, longitude);
 
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs", // Your API Key
-      PointLatLng(startLocation.latitude, startLocation.longitude),
-      PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
-      travelMode: TravelMode.driving,
-    );
-
-    if (result.points.isNotEmpty) {
-      polylines.clear(); // Clear existing polylines
-
-      // Convert the result to a list of LatLng
-      List<LatLng> polylineCoordinates = result.points
-          .map((point) => LatLng(point.latitude, point.longitude))
-          .toList();
-
-      Polyline polyline = Polyline(
-        polylineId: PolylineId('route'),
-        color: customColors.primary,
-        points: polylineCoordinates,
-        width: 5,
+      PolylinePoints polylinePoints = PolylinePoints();
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        "AIzaSyAQqGaYBImwBfEwNfZEDkHDbOaJW7Pofrs", // Your API Key
+        PointLatLng(startLocation.latitude, startLocation.longitude),
+        PointLatLng(
+            destinationLocation.latitude, destinationLocation.longitude),
+        travelMode: TravelMode.driving,
       );
 
-      polylines.add(polyline);
-      update(); // Notify listeners for state update
+      if (result.points.isNotEmpty) {
+        polylines.clear(); // Clear existing polylines
+
+        // Convert the result to a list of LatLng
+        List<LatLng> polylineCoordinates = result.points
+            .map((point) => LatLng(point.latitude, point.longitude))
+            .toList();
+
+        Polyline polyline = Polyline(
+          polylineId: PolylineId('route'),
+          color: customColors.primary,
+          points: polylineCoordinates,
+          width: 5,
+        );
+
+        polylines.add(polyline);
+        // updateMapView();
+        adjustCamera(polylineCoordinates);
+        update(); // Notify listeners for state update
+      }
+    } catch (e) {
+      SnackbarManager.showSnackbar(
+        "Direction",
+        "Something wrong when get direction",
+        icon: Icon(Icons.directions, color: customColors.primaryText),
+        backgroundColor: customColors.primaryBackground,
+      );
     }
   }
 

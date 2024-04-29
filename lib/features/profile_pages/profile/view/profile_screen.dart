@@ -165,6 +165,12 @@ List<Widget> getOrganizerOptionsCard() => [
         title: tr("Organaizations Profile"),
       ),
       OptionsCard(
+        targetRout: '/OrganizerFollowersScreen',
+        icon: Icons.group_outlined,
+        title: tr("Followers"),
+      ),
+
+      OptionsCard(
         targetRout: '/MyBookingScreen',
         icon: Icons.list,
         title: tr("My Bookings"),
@@ -194,16 +200,11 @@ List<Widget> getOrganizerOptionsCard() => [
         icon: Icons.password_outlined,
         title: tr("Change Password"),
       ),
-      // OptionsCard(
-      //   targetRout: '/FreindsScreen',
-      //   icon: Icons.group_outlined,
-      //   title: tr("Friends"),
-      // ),
-      // OptionsCard(
-      //   targetRout: '/InviteFreindsScreen',
-      //   icon: Icons.groups_2_outlined,
-      //   title: tr("Invite friends"),
-      // ),
+      OptionsCard(
+        targetRout: '/FreindsScreen',
+        icon: Icons.group_outlined,
+        title: tr("Friends"),
+      ),
       OptionsCard(
         targetRout: '/SeeAllServiceCategoryScreen',
         icon: Icons.miscellaneous_services_outlined,
@@ -254,6 +255,12 @@ List<Widget> getServiceProviderOptionsCard() => [
         icon: Icons.password_outlined,
         title: tr("Change Password"),
       ),
+      OptionsCard(
+        targetRout: '/FreindsScreen',
+        icon: Icons.group_outlined,
+        title: tr("Friends"),
+      ),
+
       OptionsCard(
         targetRout: '/SeeAllServiceCategoryScreen',
         icon: Icons.miscellaneous_services_outlined,

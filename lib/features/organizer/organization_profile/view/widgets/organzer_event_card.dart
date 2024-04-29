@@ -1,3 +1,6 @@
+import 'package:evento/core/responsive/responsive.dart';
+import 'package:marquee/marquee.dart';
+
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
 import '../../../../../core/shared/widgets/images/network_image.dart';
 import '../../../../../core/utils/helper/date_formatter.dart';
@@ -51,16 +54,34 @@ class OrganizationEventCard extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        organizerProfileEvent.title,
-                        style: customTextStyle.bodyMedium.override(
-                          fontFamily: 'Nunito',
-                          color: customColors.primaryText,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          useGoogleFonts: true,
-                        ),
-                      ),
+                      organizerProfileEvent.title.length > 20
+                          ? SizedBox(
+                              width: screenWidth * 0.5,
+                              height: screenHeight * 0.035,
+                              child: Marquee(
+                                  text: organizerProfileEvent.title,
+                                  scrollAxis: Axis.horizontal,
+                                  blankSpace: 20.0,
+                                  velocity: 70.0,
+                                  pauseAfterRound: const Duration(seconds: 3),
+                                  style: customTextStyle.bodyMedium.override(
+                                    fontFamily: 'Nunito',
+                                    color: customColors.primaryText,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    useGoogleFonts: true,
+                                  )),
+                            )
+                          : Text(
+                              organizerProfileEvent.title,
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'Nunito',
+                                color: customColors.primaryText,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: true,
+                              ),
+                            ),
                     ],
                   ),
                   Row(

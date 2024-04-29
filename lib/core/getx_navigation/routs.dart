@@ -42,6 +42,7 @@ import 'package:evento/features/organizer/my_events_for_organizer/controller/bin
 import 'package:evento/features/organizer/my_events_for_organizer/view/my_events_for_organizer_screen.dart';
 import 'package:evento/features/organizer/organization_profile/controller/binding/ofganization_profile_binding.dart';
 import 'package:evento/features/organizer/organization_profile/view/organization_profile_screen.dart';
+import 'package:evento/features/organizer/organizer_followers/view/organizer_followers_screen.dart';
 import 'package:evento/features/organizer/show_all_booking_in_event_for_orgnaizer/view/show_all_booking_in_event_for_organizer_screen.dart';
 import 'package:evento/features/organizer/ticket_in_event_for_organization/view/ticket_in_event_for_organization_screen.dart';
 import 'package:evento/features/payment/view/payment_screen.dart';
@@ -288,6 +289,9 @@ appRoutes() => [
       GetPage(name: '/SeeLocation', page: () => SeeLocation()),
       GetPage(name: '/GoingScreen', page: () => GoingScreen()),
       GetPage(name: '/DirctionScreen', page: () => DirctionScreen()),
+      GetPage(
+          name: '/OrganizerFollowersScreen',
+          page: () => OrganizerFollowersScreen()),
       GetPage(name: '/EnterNumberScreen', page: () => EnterNumberScreen()),
       GetPage(
           name: '/VerifyForgetPasswordScreen',

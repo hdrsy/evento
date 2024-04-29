@@ -30,6 +30,18 @@ class DirctionScreen extends StatelessWidget {
             size: 30,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              dirctionController.drawRoute();
+            },
+            icon: Icon(
+              Icons.directions,
+              color: customColors.primary,
+              size: 30,
+            ),
+          ),
+        ],
       ),
       body: GetBuilder<DirctionController>(builder: (context) {
         return SizedBox(
@@ -41,6 +53,9 @@ class DirctionScreen extends StatelessWidget {
               initialCameraPosition: dirctionController.googleMapsCenter,
               polylines: dirctionController.polylines,
               onCameraIdle: () => dirctionController.googleMapsCenter,
+              // onMapCreated: (dirctionController) {
+              //   dirctionController.controller.complete(controller);
+              // },
               markers: {
                 if (dirctionController.userMarker != null)
                   dirctionController.userMarker!,

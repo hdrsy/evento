@@ -21,12 +21,12 @@ class OrganizationFolloersCard extends StatelessWidget {
               child: organizerFollowersModel.profile!.length > 6
                   ? getImageNetwork(
                       url: "/storage/${organizerFollowersModel.profile}",
-                      width: 50,
-                      height: 50)
+                      width: 90,
+                      height: 90)
                   : Image.asset(
                       'assets/images/${organizerFollowersModel.profile}.png',
-                      width: 50,
-                      height: 50)),
+                      width: 90,
+                      height: 90)),
           Expanded(
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),

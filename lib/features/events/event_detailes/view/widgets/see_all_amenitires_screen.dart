@@ -55,7 +55,7 @@ class SeeAllAmenities extends StatelessWidget {
                 (index) => AmenitiesCard(
                       amenity: eventDetailesController
                           .eventDetailsModel.amenities[index],
-                    ))
+                    )).divide(Divider())
           ].divide(const SizedBox(
             height: 10,
           )),
@@ -86,22 +86,23 @@ class _AmenitiesCardState extends State<AmenitiesCard> {
     return ExpandableNotifier(
         controller: expandableController1,
         child: ExpandablePanel(
-          theme: const ExpandableThemeData(
-            tapHeaderToExpand: true,
-            tapBodyToExpand: false,
-            // useInkWell: false,
+          theme: ExpandableThemeData(
+              tapHeaderToExpand: true,
+              tapBodyToExpand: false,
+              // useInkWell: false,
 
-            tapBodyToCollapse: false,
-            headerAlignment: ExpandablePanelHeaderAlignment.center,
-            hasIcon: false,
-          ),
+              tapBodyToCollapse: false,
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              hasIcon: true,
+              iconColor: customColors.primaryText),
           expanded: Text(
             widget.amenity.pivot.description,
             style: customTextStyle.bodyMedium.override(
-              fontFamily: 'Nunito',
-              color: customColors.secondaryText,
-              useGoogleFonts: false,
-            ),
+                fontSize: 14,
+                color: customColors.secondaryText,
+                fontWeight: FontWeight.w500,
+                fontFamily: primaryFontFamily,
+                useGoogleFonts: true),
           ),
           collapsed: Container(
             width: MediaQuery.sizeOf(context).width * 0,
@@ -117,11 +118,11 @@ class _AmenitiesCardState extends State<AmenitiesCard> {
                 Text(
                   widget.amenity.title,
                   style: customTextStyle.bodyMedium.override(
-                      fontSize: 14,
-                      color: customColors.secondaryText,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: primaryFontFamily,
-                      useGoogleFonts: true),
+                    fontFamily: 'Nunito',
+                    color: customColors.primaryText,
+                    fontWeight: FontWeight.bold,
+                    useGoogleFonts: false,
+                  ),
                 ),
                 amentitesIcon(widget.amenity.icon)
               ],

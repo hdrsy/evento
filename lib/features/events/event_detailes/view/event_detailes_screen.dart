@@ -48,7 +48,7 @@ class EventDetailesScreen extends StatelessWidget {
           imgUrl: eventDetailesController.eventDetailsModel.images,
           videosUrl: eventDetailesController.eventDetailsModel.videos,
         ),
-        eventDetailesController.isOffer
+        eventDetailesController.eventDetailsModel.offer != null
             ? Positioned(top: screenHeight * 0.26, child: Offerprice())
             : SizedBox.shrink(),
         Positioned(
@@ -94,7 +94,7 @@ class Offerprice extends StatelessWidget {
             ),
           ),
           Text(
-            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice - (eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.offerPrecent ~/ 100)} sp",
+            "${formatPrice(eventDetailesController.eventDetailsModel.ticketPrice - (eventDetailesController.eventDetailsModel.ticketPrice) * eventDetailesController.eventDetailsModel.offer!.percent ~/ 100)} sp",
             style: customTextStyle.bodyMedium.override(
               fontFamily: 'Nunito',
               color: customColors.info,

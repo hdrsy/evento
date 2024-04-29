@@ -17,64 +17,34 @@ class TimeLineMainImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 300.h,
-        // color: Colors.amber,
-        child: GestureDetector(
-          onTap: () async {
-            // await Navigator.push(
-            //   context,
-            //   PageTransition(
-            //     type: PageTransitionType.fade,
-            //     child: FlutterFlowExpandedImageView(
-            //       image: Image.asset(
-            //         'assets/images/Austin_Banger_s_Sausage_House_Beer_Garden_508dc4f0-5a14-47d7-80ba-304bb9f18bf0.jpg',
-            //         fit: BoxFit.contain,
-            //       ),
-            //       allowRotation: false,
-            //       tag: valueOrDefault<String>(
-            //         widget.propertyRef?.mainImage,
-            //         'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-property-finder-834ebu/assets/oowrriphtb4n/hero_home@3x.jpg',
-            //       ),
-            //       useHeroAnimation: true,
-            //     ),
-            //   ),
-            // );
-          },
-          // child: Hero(
-          //   tag: valueOrDefault<String>(
-          //     widget.propertyRef?.mainImage,
-          //     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-property-finder-834ebu/assets/oowrriphtb4n/hero_home@3x.jpg',
-          //   ),
-          //   transitionOnUserGestures: true,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: getImageNetwork(
-                      url: imgUrl, width: double.infinity, height: null)),
-              Positioned(
-                top: 25.w,
-                right: 20.w,
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: const Color(0x3A000000),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: IconWithContainer(
-                    backgroundColor: Colors.transparent,
-                    buttonSize: 46,
-                    borderRadius: 10,
-                    icon: Icons.arrow_back_rounded,
-                    iconColor: customColors.info,
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: getImageNetwork(
+                    url: imgUrl, width: double.infinity, height: null)),
+            Align(
+              alignment: const AlignmentDirectional(-0.9, -0.6),
+              child: Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: const Color(0x3A000000),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: IconWithContainer(
+                  backgroundColor: Colors.transparent,
+                  buttonSize: 46,
+                  borderRadius: 10,
+                  icon: Icons.arrow_back_rounded,
+                  iconColor: customColors.info,
+                  onTap: () {
+                    Get.back();
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       // ),

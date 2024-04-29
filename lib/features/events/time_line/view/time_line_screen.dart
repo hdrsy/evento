@@ -1,8 +1,6 @@
 import '../controller/time_line_controller.dart';
-import '../model/time_line_model.dart';
 import 'widgets/header.dart';
 import 'widgets/single_day_time_line.dart';
-import 'widgets/time_line_event.dart';
 import 'widgets/time_line_main_image.dart';
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +9,7 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class TimeLineScreen extends StatelessWidget {
   TimeLineScreen({super.key});
-  final List<TimelineModel> events = [
-    TimelineModel(
-        time: '10:00',
-        activity: 'Lunch at a local restaurant',
-        iconColor: Colors.blue),
-    TimelineModel(time: '12:00', activity: 'City tour', iconColor: Colors.red),
-    // Add more events as needed
-  ];
+
   TimeLineController timeLineController = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -49,17 +40,10 @@ class TimeLineScreen extends StatelessWidget {
                         singleDayTimeLineModel:
                             timeLineController.eventTrip[index],
                       ))
-              // SingleDayTimeLine(),
-              // SingleDayTimeLine(),
-              // SingleDayTimeLine(),
             ],
           ),
         ),
       ),
     );
-  }
-
-  List<Widget> buildTimelineEvents(BuildContext context) {
-    return events.map((event) => buildTimelineEvent(context, event)).toList();
   }
 }

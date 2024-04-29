@@ -21,7 +21,7 @@ Widget buildLocationSection(BuildContext context) {
         if (isGuset) {
           Get.dialog(GuestPopupWidget());
         } else {
-          Get.toNamed('/SeeLocation', arguments: [
+          Get.toNamed('/DirctionScreen', arguments: [
             eventDetailesController.eventDetailsModel.venue.latitude,
             eventDetailesController.eventDetailsModel.venue.longitude
           ]);

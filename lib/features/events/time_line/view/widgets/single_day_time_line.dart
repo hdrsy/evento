@@ -18,7 +18,7 @@ class SingleDayTimeLine extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ExpandableNotifier(
-        controller: ExpandableController(initialExpanded: false),
+        controller: ExpandableController(initialExpanded: true),
         child: ExpandablePanel(
             collapsed: Container(
               decoration: BoxDecoration(
@@ -148,12 +148,14 @@ class HourWidget extends StatelessWidget {
   final String hour;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      hour,
-      style: customTextStyle.bodyMedium.override(
-        fontFamily: breeSerif,
-        color: customColors.primaryText,
-        useGoogleFonts: true,
+    return FittedBox(
+      child: Text(
+        hour,
+        style: customTextStyle.bodyMedium.override(
+          fontFamily: breeSerif,
+          color: customColors.primaryText,
+          useGoogleFonts: true,
+        ),
       ),
     );
   }

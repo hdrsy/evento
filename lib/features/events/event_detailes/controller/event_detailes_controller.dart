@@ -7,6 +7,7 @@ import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';

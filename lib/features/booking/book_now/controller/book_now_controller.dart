@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/booking/book_now/model/promo_code_model.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 import 'package:evento/features/friends/freinds/model/freinds_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/helper_api.dart';
@@ -14,6 +15,7 @@ import 'package:get/get.dart';
 
 class BookNowController extends GetxController {
   late EventDetailsModel eventDetailsModel;
+  Offer? offer;
   late RxBool isLoading;
   late RxBool isLoadingCoupons;
   late RxList<String> errorMessage;
@@ -46,6 +48,12 @@ class BookNowController extends GetxController {
     updateTotalPrice(ticketList.length - 1);
   }
 
+  int calclateNewClassAfterOffer(int index) {
+    int offerPercent = eventDetailsModel.offer!.percent;
+    return ticketList[index].selectedClass!.ticketPrice -
+        (ticketList[index].selectedClass!.ticketPrice * offerPercent ~/ 100);
+  }
+
   updateTotalPrice(int ticketIndex) {
     int totalAminityPrice = 0;
     int totalClassPrice = 0;
@@ -54,6 +62,9 @@ class BookNowController extends GetxController {
     int total = 0;
     if (ticketList[ticketIndex].selectedClass != null) {
       totalClassPrice = ticketList[ticketIndex].selectedClass!.ticketPrice;
+    }
+    if (eventDetailsModel.offer != null) {
+      totalClassPrice = calclateNewClassAfterOffer(ticketIndex);
     }
     for (var i = 0; i < ticketList[ticketIndex].selectedAminiteds.length; i++) {
       for (var element in eventDetailsModel.amenities) {
@@ -197,6 +208,7 @@ class BookNowController extends GetxController {
         ticketList[index].selectedAminiteds = [];
       }
     }
+
     updateTotalPrice(index);
     update();
   }

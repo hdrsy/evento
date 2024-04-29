@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 
 class EventModel {
   final int id;
@@ -11,6 +12,7 @@ class EventModel {
   final List<String> videos;
   bool isFollowedByAuthUser;
   final EventHomeVenue? venue;
+  final Offer? offer;
   EventModel(
       {required this.id,
       required this.title,
@@ -19,11 +21,12 @@ class EventModel {
       required this.images,
       required this.videos,
       required this.isFollowedByAuthUser,
-      required this.venue});
+      required this.venue,
+      required this.offer});
 
   factory EventModel.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-
+    print("fgfggf ${json['offer']}");
     return EventModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? "UnKnown",
@@ -38,6 +41,7 @@ class EventModel {
             ? List<String>.from(jsonDecode(json['videos']).map((x) => x))
             : [],
         isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
+        offer: json['offer'] == null ? null : Offer.fromJson(json['offer']),
         venue: json.containsKey('venue')
             ? EventHomeVenue.fromJson(json['venue'] ?? {})
             : null);

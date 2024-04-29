@@ -20,6 +20,8 @@ class TicketModel {
   PromoCode? selectedPromoCode;
   int discount = 0;
   int tax = 0;
+  int offerPercent = 0;
+
   RxBool isPaidSuccfully = false.obs;
   RxBool isLoading = false.obs;
   // String? selectedCoupon = null;

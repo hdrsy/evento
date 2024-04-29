@@ -35,7 +35,7 @@ class ServiceProvider {
 
     var albumsList = json['albums'] == null ? [] : json['albums'] as List;
     List<Album> albums = albumsList.map((i) => Album.fromJson(i)).toList();
-
+    print("ssssssssssssssssss ${json['location_work_governorate']}");
     return ServiceProvider(
       id: json['id'] ?? 0,
       userId: json['user_id'] ?? '',

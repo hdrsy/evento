@@ -94,8 +94,8 @@ class CouponCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                                 child: getImageNetwork(
                                     url: promoCode.image,
-                                    width: 50,
-                                    height: 50)),
+                                    width: 62,
+                                    height: 62)),
                             // Display the coupon title.
                             Text(
                               "${promoCode.discount}% ${tr("Off")}",

@@ -1,3 +1,5 @@
+import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
+
 import '../../../../../core/utils/animation/animation_def.dart';
 import '../../../../../core/utils/animation/animation_util.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
@@ -25,17 +27,17 @@ Widget buildHeaderTimeLine(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () async {
-              // context.pushNamed('Going');
+            onTap: () {
+              if (isGuset) {
+                Get.dialog(const GuestPopupWidget());
+              } else {
+                Get.toNamed('/GoingScreen',
+                    arguments: timeLineController.eventDetailsModel.id);
+              }
             },
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                  size: 20,
-                ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                   child: Text(

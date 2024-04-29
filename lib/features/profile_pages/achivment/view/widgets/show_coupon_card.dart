@@ -1,5 +1,6 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';
 import 'package:evento/core/utils/helper/flutter_flow_util.dart';
 import 'package:evento/core/utils/theme/text_theme.dart';
@@ -82,7 +83,7 @@ class CouponsWidget extends StatelessWidget {
                               children: [
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       promoCode.title,
@@ -97,35 +98,26 @@ class CouponsWidget extends StatelessWidget {
                                     Text(
                                       promoCode.description,
                                       style: customTextStyle.bodyMedium,
+                                      textAlign: TextAlign.center,
                                       maxLines: 3,
                                     ),
-                                    // Text(
-                                    //    "-Applicable for all types of events – concerts, seminars, workshops, and more.",
-                                    //   style: customTextStyle
-                                    //       .bodyMedium,
-                                    // ),
                                   ].divide(const SizedBox(height: 10)),
                                 ),
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
+                                      width: 100,
+                                      height: 90,
                                       decoration: const BoxDecoration(),
-                                      child: BarcodeWidget(
-                                        data: 'Barcode',
-                                        barcode: Barcode.qrCode(),
-                                        width: 100,
-                                        height: 90,
-                                        color: customColors.primaryText,
-                                        backgroundColor: Colors.transparent,
-                                        errorBuilder: (_context, _error) =>
-                                            const SizedBox(
-                                          width: 100,
-                                          height: 90,
-                                        ),
-                                        drawText: false,
-                                      ),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: getImageNetwork(
+                                              url: promoCode.image,
+                                              width: 50,
+                                              height: 50)),
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,

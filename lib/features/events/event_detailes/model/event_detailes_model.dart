@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:evento/core/server/helper_api.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 
 class EventDetailsModel {
   final int id;
@@ -23,6 +24,7 @@ class EventDetailsModel {
   // final List<ServiceProvider> serviceProviders;
   final List<EventTrip> eventTrips;
   final Venue venue;
+  final Offer? offer;
   final List<Amenity> amenities;
   final Organizer? organizer;
   final List<CategoryEvent> categoriesEvents;
@@ -42,6 +44,7 @@ class EventDetailsModel {
     required this.capacity,
     required this.organizerId,
     this.organizer,
+    this.offer,
     required this.categoriesEvents,
     required this.classes,
     required this.title,
@@ -108,6 +111,7 @@ class EventDetailsModel {
       organizer: json['organizer'] != null
           ? Organizer.fromJson(json['organizer'])
           : null,
+      offer: json['offer'] != null ? Offer.fromJson(json['offer']) : null,
       categoriesEvents: json['categories_events'] != null
           ? List<CategoryEvent>.from(
               json['categories_events'].map((x) => CategoryEvent.fromJson(x)))
