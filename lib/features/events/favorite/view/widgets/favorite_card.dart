@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/toggle_icon.dart';
@@ -228,15 +229,44 @@ class FavoriteCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              favoriteEventModel.title,
-              style: customTextStyle.headlineSmall.override(
-                fontFamily: breeSerif,
-                color: customColors.info,
-                fontWeight: FontWeight.w600,
-                useGoogleFonts: true,
-              ),
-            ),
+            favoriteEventModel.title.length > 20
+                ? SizedBox(
+                    width: screenWidth * 0.5,
+                    height: screenHeight * 0.04,
+                    child: Marquee(
+                      text: favoriteEventModel.title,
+                      scrollAxis: Axis.horizontal,
+                      blankSpace: 20.0,
+                      velocity: 70.0,
+                      pauseAfterRound: const Duration(seconds: 3),
+                      style: customTextStyle.headlineSmall.override(
+                        fontFamily: breeSerif,
+                        color: customColors.info,
+                        fontWeight: FontWeight.w600,
+                        useGoogleFonts: true,
+                      ),
+                    ),
+                  )
+                : Text(
+                    favoriteEventModel.title,
+                    style: customTextStyle.headlineSmall.override(
+                      fontFamily: breeSerif,
+                      color: customColors.info,
+                      fontWeight: FontWeight.w600,
+                      useGoogleFonts: true,
+                    ),
+                  )
+            // Text(
+            //   favoriteEventModel.title,
+            //   style: customTextStyle.headlineSmall.override(
+            //     fontFamily: breeSerif,
+            //     color: customColors.info,
+            //     fontWeight: FontWeight.w600,
+            //     useGoogleFonts: true,
+            //   ),
+            // ),,
+
+            ,
             Container(
               width: 80,
               height: 24,
