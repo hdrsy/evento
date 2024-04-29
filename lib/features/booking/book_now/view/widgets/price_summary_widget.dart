@@ -92,30 +92,6 @@ class PriceSummaryWidget extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                         ).tr(),
-                        IconWithContainer(
-                          borderRadius: 30,
-                          backgroundColor: customColors.secondaryBackground,
-                          buttonSize: 36,
-                          icon: Icons.info_outlined,
-                          iconColor: customColors.grayIcon,
-                          onTap: () async {
-                            // await showModalBottomSheet(
-                            //   isScrollControlled: true,
-                            //   backgroundColor: Colors.transparent,
-                            //   barrierColor: Color(0xB3000000),
-                            //   context: context,
-                            //   builder: (context) {
-                            //     return Padding(
-                            //       padding: MediaQuery.viewInsetsOf(context),
-                            //       child: Container(
-                            //         height: 270,
-                            //         child: TotalWidget(),
-                            //       ),
-                            //     );
-                            //   },
-                            // ).then((value) => safeSetState(() {}));
-                          },
-                        ),
                       ],
                     ),
                     Text(
