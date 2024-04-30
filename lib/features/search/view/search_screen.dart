@@ -1,5 +1,4 @@
 import 'package:evento/core/shared/widgets/empty_data/empty_data_widget.dart';
-import 'package:evento/core/shared/widgets/guest/guest_popup.dart';
 
 import '../../../core/responsive/responsive.dart';
 import '../../../core/shared/widgets/text_fields/search_filed_with_filtering.dart';

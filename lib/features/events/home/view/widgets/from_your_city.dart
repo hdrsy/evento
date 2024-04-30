@@ -101,8 +101,6 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': eventModel.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(
@@ -117,7 +115,7 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
         ),
         child: Stack(
           children: [
-            buildEventImage(eventModel.images[0]),
+            buildEventImage(eventModel),
             buildFavoriteIcon(
                 eventModel.isFollowedByAuthUser, modelId, eventModel.id),
             buildEventText(
@@ -132,13 +130,51 @@ Widget buildEventCard(EventModel eventModel, int modelId) {
 }
 
 // Function to build the image section of the card
-Widget buildEventImage(String imageUrl) {
-  return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: getImageNetworkforCahing(
-          url: "/storage/$imageUrl",
-          width: double.infinity,
-          height: double.infinity));
+Widget buildEventImage(EventModel eventModel) {
+  return Stack(
+    children: [
+      ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: getImageNetworkforCahing(
+              url: "/storage/${eventModel.images[0]}",
+              width: double.infinity,
+              height: double.infinity)),
+      eventModel.offer == null
+          ? SizedBox()
+          : Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: customColors.primary,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Align(
+                      alignment: const AlignmentDirectional(0, 0),
+                      child: Text(
+                        "Offer",
+                        textAlign: TextAlign.center,
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.info,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                      ).tr(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    ],
+  );
 }
 
 // Function to build the favorite icon

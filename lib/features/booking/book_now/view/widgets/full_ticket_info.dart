@@ -177,6 +177,14 @@ class FullTicketInfo extends StatelessWidget {
                                     color: customColors.primaryText),
                                 backgroundColor: customColors.primaryBackground,
                               );
+                            } else if (bookNowController.isErrorInCoupons) {
+                              SnackbarManager.showSnackbar(
+                                tr("Copuns empty"),
+                                tr("Something wrong when fetching your copuns."),
+                                icon: Icon(Icons.code_outlined,
+                                    color: customColors.primaryText),
+                                backgroundColor: customColors.primaryBackground,
+                              );
                             }
                             bookNowController.ticketList[index]
                                         .dropDownValueController!.value ==
@@ -187,15 +195,23 @@ class FullTicketInfo extends StatelessWidget {
                                         .dropDownValueController!.value!,
                                     index);
                           },
-                          child: Icon(
-                            bookNowController.ticketList[index]
-                                        .dropDownValueController!.value ==
-                                    null
-                                ? Icons.keyboard_arrow_down_rounded
-                                : Icons.cancel_outlined,
-                            color: customColors.secondaryText,
-                            size: 24,
-                          ),
+                          child: bookNowController.isLoadingCoupons.value
+                              ? SizedBox(
+                                  width: 15,
+                                  height: 15,
+                                  child: CircularProgressIndicator(
+                                    color: customColors.secondaryText,
+                                  ),
+                                )
+                              : Icon(
+                                  bookNowController.ticketList[index]
+                                              .dropDownValueController!.value ==
+                                          null
+                                      ? Icons.keyboard_arrow_down_rounded
+                                      : Icons.cancel_outlined,
+                                  color: customColors.secondaryText,
+                                  size: 24,
+                                ),
                         ),
                         fillColor: customColors.secondaryBackground,
                         elevation: 2,

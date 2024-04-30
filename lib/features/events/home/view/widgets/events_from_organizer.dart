@@ -103,8 +103,6 @@ class EventsFromOrganizer extends StatelessWidget {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': eventModel.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(
@@ -122,8 +120,7 @@ class EventsFromOrganizer extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildImageSection(
-                  eventModel.images[0], formatPrice(eventModel.ticketPrice)),
+              buildImageSection(eventModel),
               buildEventDetails(
                   eventModel.title,
                   DateFormatter.formatDate(eventModel.startDate),
@@ -138,15 +135,50 @@ class EventsFromOrganizer extends StatelessWidget {
   }
 
 // Function to build the image section of the card
-  Widget buildImageSection(String imagePath, String price) {
+  Widget buildImageSection(EventModel eventModel) {
     return Expanded(
       child: SizedBox(
         width: double.infinity,
         height: 340,
         child: Stack(
           children: [
-            buildImage(imagePath),
-            buildPriceTag(price),
+            buildImage(eventModel.images[0]),
+            buildPriceTag(formatPrice(eventModel.ticketPrice)),
+            eventModel.offer == null
+            
+                ? SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: customColors.primary,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Align(
+                            alignment: const AlignmentDirectional(0, 0),
+                            child: Text(
+                              "Offer",
+                              textAlign: TextAlign.center,
+                              style: customTextStyle.bodyMedium.override(
+                                fontFamily: 'Nunito',
+                                color: customColors.info,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                useGoogleFonts: false,
+                              ),
+                            ).tr(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             // buildSoundToggleButton(),
           ],
         ),

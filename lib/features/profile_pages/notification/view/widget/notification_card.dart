@@ -54,8 +54,6 @@ class NotificationCard extends StatelessWidget {
             Get.toNamed('/eventDetailes', parameters: {
               'id': extractNumberAfterLastSpace(notificationModel.title)
                   .toString(),
-              'isOffer': false.toString(),
-              'offerPercent': 0.toString(),
             });
           }
         } else {
@@ -76,8 +74,6 @@ class NotificationCard extends StatelessWidget {
 
             Get.toNamed('/eventDetailes', parameters: {
               'id': eventId.toString(),
-              'isOffer': false.toString(),
-              'offerPercent': 0.toString(),
             });
           }
         }

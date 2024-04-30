@@ -28,6 +28,7 @@ class ReelsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print("ffffffffffffffffff ${model.event.}");
     return SizedBox(
       width: screenWidth,
       // height: MediaQuery.of(context).size.height,
@@ -82,7 +83,7 @@ class ReelsWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                 child: Row(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     userPhotoAndName(model: model),
                     model.organizer != null
@@ -187,8 +188,6 @@ Function()? onTapp(ReelModel model) {
     return () {
       Get.toNamed('/eventDetailes', parameters: {
         'id': model.event!.id.toString(),
-        'isOffer': false.toString(),
-        'offerPercent': 0.toString(),
       });
     };
   } else if (model.organizer != null) {

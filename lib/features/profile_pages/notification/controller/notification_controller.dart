@@ -5,7 +5,6 @@ import 'package:evento/core/shared/controllers/pagination_controller.dart';
 import 'package:evento/core/utils/error_handling/erroe_handling.dart';
 import 'package:evento/features/profile_pages/notification/model/notification_model.dart';
 import 'package:evento/main.dart';
-import 'package:get/get.dart';
 
 class NotificationController extends PaginationController<NotificationModel> {
   NotificationController()

@@ -64,6 +64,19 @@
     "event_category_fashion": "Fashion",
     "location_title": "Location",
     "location_placeholder": "Please select...",
+    
+      "Direction": "Direction",
+      "Something wrong when get direction": "Something wrong when getting direction",
+      "Nothing to show": "Nothing to show",
+      "Ticket Class": "Ticket Class",
+      "Original Price": "Original Price",
+      "Discounts": "Discounts",
+      "Event Discount": "Event Discount",
+      "Promo Code Discount": "Promo Code Discount",
+      "Price after Discount": "Price after Discount",
+      "Additional Services": "Additional Services"
+    ,
+    
     "ticket_price_range": "Ticket Price Range",
     "event_location_range_km": "Event Location Range (km)",
     "reset": "Reset",

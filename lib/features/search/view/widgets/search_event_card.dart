@@ -22,8 +22,6 @@ class SearchEventCard extends StatelessWidget {
 
         Get.toNamed('/eventDetailes', parameters: {
           'id': eventModel.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Row(

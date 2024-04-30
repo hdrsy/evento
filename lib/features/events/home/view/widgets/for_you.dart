@@ -102,8 +102,6 @@ Widget buildEventCard(EventModel eventModel, int modelIndex) {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': eventModel.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(
@@ -214,7 +212,41 @@ Widget buildEventImage(EventModel eventModel, int modelIndex) {
             ),
           ],
         ),
-      )
+      ),
+      eventModel.offer == null
+          ? SizedBox()
+          : Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: customColors.primary,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Align(
+                      alignment: const AlignmentDirectional(0, 0),
+                      child: Text(
+                        "Offer",
+                        textAlign: TextAlign.center,
+                        style: customTextStyle.bodyMedium.override(
+                          fontFamily: 'Nunito',
+                          color: customColors.info,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                      ).tr(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
     ],
   );
 }

@@ -27,8 +27,6 @@ class FavoriteCard extends StatelessWidget {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': eventWrapper.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(

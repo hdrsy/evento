@@ -12,7 +12,7 @@ class OfferEvent {
   List<String> images;
   int venueId;
   bool isFollowedByAuthUser;
-  Venue venue;
+  OfferVenue venue;
   Offer offer;
 
   OfferEvent({
@@ -41,29 +41,29 @@ class OfferEvent {
           : [],
       venueId: json['venue_id'] ?? 0,
       isFollowedByAuthUser: json['is_followed_by_auth_user'] ?? false,
-      venue: Venue.fromJson(json['venue'] ?? {}),
+      venue: OfferVenue.fromJson(json['venue'] ?? {}),
       offer: Offer.fromJson(json['offer'] ?? {}),
     );
   }
 }
 
-class Venue {
+class OfferVenue {
   int id;
   String governorate;
   double latitude;
   double longitude;
 
-  Venue({
+  OfferVenue({
     required this.id,
     required this.governorate,
     required this.latitude,
     required this.longitude,
   });
 
-  factory Venue.fromJson(Map<String, dynamic> oldJson) {
+  factory OfferVenue.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
 
-    return Venue(
+    return OfferVenue(
       id: json['id'] ?? 0,
       governorate: json['governorate'] ?? "UnKnown",
       latitude: json['latitude'].toDouble() ?? 0,

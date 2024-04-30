@@ -14,16 +14,21 @@ Widget followButton(int modelIndex) {
   return GetBuilder<ReelsController>(builder: (context) {
     return ButtonWidget(
       onPressed: () {
+        print(
+            "gggggggggg${reelsController.itemList[modelIndex].organizer!.id}");
+        print("gggggggggg${modelIndex}");
         reelsController.followOrUnFollowreelOrganizer(
             reelsController.itemList[modelIndex].organizer!.id, modelIndex);
       },
-      text: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
+      text: reelsController
+              .itemList[modelIndex].organizer!.isOrganizerFollowedByAuthUser
           ? tr("Following")
           : tr("Follow"),
       options: ButtonOptions(
         width: 85,
         height: 31,
-        color: reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
+        color: reelsController
+                .itemList[modelIndex].organizer!.isOrganizerFollowedByAuthUser
             ? AppColors.darkSecondaryBackground
             : AppColors.darkSecondaryBackground,
         textStyle: customTextStyle.titleSmall.override(
@@ -31,10 +36,10 @@ Widget followButton(int modelIndex) {
           fontSize: 14,
           fontWeight: FontWeight.normal,
           useGoogleFonts: true,
-          color:
-              reelsController.itemList[modelIndex].event!.isFollowedByAuthUser
-                  ? customColors.primary
-                  : customColors.info,
+          color: reelsController
+                  .itemList[modelIndex].organizer!.isOrganizerFollowedByAuthUser
+              ? customColors.primary
+              : customColors.info,
         ),
         padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
         iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),

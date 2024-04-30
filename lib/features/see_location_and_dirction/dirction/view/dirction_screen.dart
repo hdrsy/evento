@@ -49,13 +49,14 @@ class DirctionScreen extends StatelessWidget {
             height: screenHeight,
             child: GoogleMap(
               myLocationEnabled: true,
+              onMapCreated: (GoogleMapController controller) {
+                dirctionController.controller.complete(
+                    controller); // Completing the Completer with the controller
+              },
               compassEnabled: true,
               initialCameraPosition: dirctionController.googleMapsCenter,
               polylines: dirctionController.polylines,
               onCameraIdle: () => dirctionController.googleMapsCenter,
-              // onMapCreated: (dirctionController) {
-              //   dirctionController.controller.complete(controller);
-              // },
               markers: {
                 if (dirctionController.userMarker != null)
                   dirctionController.userMarker!,

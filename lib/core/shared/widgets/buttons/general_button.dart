@@ -47,7 +47,7 @@ class ButtonOptions {
 
 // ignore: must_be_immutable
 class ButtonWidget extends StatefulWidget {
-   ButtonWidget({
+  ButtonWidget({
     Key? key,
     required this.text,
     required this.onPressed,
@@ -55,17 +55,17 @@ class ButtonWidget extends StatefulWidget {
     this.iconData,
     required this.options,
     bool showLoadingIndicator = false,
-  }) : showLoadingIndicator = showLoadingIndicator.obs, // Initialize as observable
-     super(key: key);
+  })  : showLoadingIndicator =
+            showLoadingIndicator.obs, // Initialize as observable
+        super(key: key);
 
   final String text;
   final Widget? icon;
   final IconData? iconData;
   final Function()? onPressed;
   final ButtonOptions options;
-   
-final RxBool showLoadingIndicator;
 
+  final RxBool showLoadingIndicator;
 
   @override
   State<ButtonWidget> createState() => _FFButtonWidgetState();
@@ -90,12 +90,14 @@ class _FFButtonWidgetState extends State<ButtonWidget> {
               ),
             ),
           )
-        : Text(
-            widget.text,
-            style: widget.options.textStyle?.withoutColor(),
-            maxLines: maxLines,
-            overflow: TextOverflow.ellipsis,
-          );
+        : widget.text == ''
+            ? SizedBox()
+            : Text(
+                widget.text,
+                style: widget.options.textStyle?.withoutColor(),
+                maxLines: maxLines,
+                overflow: TextOverflow.ellipsis,
+              );
 
     final onPressed = widget.onPressed != null
         ? (widget.showLoadingIndicator.value

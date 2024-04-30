@@ -83,15 +83,11 @@ void notificationClickListener(Map<String, dynamic> data) {
       Get.context != null
           ? Get.toNamed('/eventDetailes', parameters: {
               'id': extractNumberAfterWord(normalizedTitle, "event").toString(),
-              'isOffer': false.toString(),
-              'offerPercent': 0.toString(),
             })
           : Future.delayed(Duration(seconds: 2), () {
               Get.toNamed('/eventDetailes', parameters: {
                 'id':
                     extractNumberAfterWord(normalizedTitle, "event").toString(),
-                'isOffer': false.toString(),
-                'offerPercent': 0.toString(),
               });
             });
     }

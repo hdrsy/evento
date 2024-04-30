@@ -1,4 +1,5 @@
 import 'package:evento/core/server/server_config.dart';
+import 'package:evento/core/shared/widgets/buttons/icon_with_container.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/features/events/event_detailes/view/widgets/main_image.dart';
 import 'package:evento/features/gallery/controller/gallery_controller.dart';
@@ -67,6 +68,26 @@ class _ShowInFullScreenState extends State<ShowInFullScreen> {
                     pageController: pageController,
                     dotColor: customColors.secondary,
                   )),
+              Align(
+                alignment: const AlignmentDirectional(-0.9, -0.9),
+                child: Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: const Color(0x3A000000),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: IconWithContainer(
+                    backgroundColor: Colors.transparent,
+                    buttonSize: 46,
+                    borderRadius: 10,
+                    icon: Icons.arrow_back_rounded,
+                    iconColor: customColors.info,
+                    onTap: () {
+                      Get.back();
+                    },
+                  ),
+                ),
+              ),
             ],
           ), // Replace with your image or video widget
         ),

@@ -16,6 +16,7 @@ class DateTimeController extends GetxController {
   late RxInt adultNumber;
   late RxInt childrenNumber;
   late DateTime date;
+  RxBool isSelectDate = false.obs;
   late RxList<File> media;
   late DateTime startTime;
   late DateTime endTime;
@@ -62,15 +63,6 @@ class DateTimeController extends GetxController {
   }
 
   void onPressedNext() {
-    DateTime now = DateTime.now();
-    DateTime today = DateTime(
-        now.year, now.month, now.day); // Today's date at midnight in local time
-
-    // Ensuring the 'date' is at midnight too, for a fair comparison
-    DateTime midnightSelectedDate = DateTime(date.year, date.month, date.day);
-
-    // Check if the selected date is before today (both dates at midnight)
-
     // Checking if the end time is after the start time
     isStartEndDateValid = endTime.isAfter(startTime);
 

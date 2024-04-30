@@ -92,8 +92,6 @@ class SeeAllOffersCard extends StatelessWidget {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': offerEvent.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(

@@ -110,8 +110,6 @@ void _handleLink(String? link) {
 
       // Now, extract the specific parameters
       final id = fakeUri.queryParameters['id'];
-      final isOffer = fakeUri.queryParameters['isOffer'];
-      final offerPercent = fakeUri.queryParameters['offerPercent'];
 
       if (id != null) {
         // Check if GetX is ready for navigation
@@ -120,16 +118,12 @@ void _handleLink(String? link) {
 
           Get.toNamed('/eventDetailes', parameters: {
             'id': id,
-            'isOffer': isOffer ?? 'false',
-            'offerPercent': offerPercent ?? '0'
           });
         } else {
           // Wait for GetX navigation to be ready
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Get.toNamed('/eventDetailes', parameters: {
               'id': id,
-              'isOffer': isOffer ?? 'false',
-              'offerPercent': offerPercent ?? '0'
             });
           });
         }

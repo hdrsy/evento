@@ -45,6 +45,19 @@
   "Workshops": "ورش عمل",
   "Art": "فن",
   "Food & Drink": "طعام وشراب",
+  
+    "Direction": "الاتجاه",
+    "Something wrong when get direction": "هناك خطأ عند الحصول على الاتجاه",
+    "Nothing to show": "لا يوجد شيء لعرضه",
+    "Ticket Class": "فئة التذكرة",
+    "Original Price": "السعر الأصلي",
+    "Discounts": "الخصومات",
+    "Event Discount": "خصم الفعالية",
+    "Promo Code Discount": "خصم رمز العرض",
+    "Price after Discount": "السعر بعد الخصم",
+    "Additional Services": "الخدمات الإضافية"
+  ,
+  
   "Fashion": "موضة",
   "Location": "موقع",
   "Please select...": "يرجى الاختيار...",

@@ -1,6 +1,7 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
 import 'package:evento/features/booking/resell/controller/resell_controller.dart';
@@ -14,10 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class TicketDetailesCardForMyBooking extends StatelessWidget {
-  const TicketDetailesCardForMyBooking(
+  TicketDetailesCardForMyBooking(
       {super.key, required this.ticketModel, required this.modelIndex});
   final UserBooking ticketModel;
   final int modelIndex;
+  final BookingDetailesForMyBookingController bookingDetailesController =
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -140,28 +143,76 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SinglePriceElement(
-                        title: ticketModel.classType,
-                        subTitle: ticketModel.classTicketPrice.toString(),
+                        title: "${tr("Ticket Class")}: ",
+                        subTitle: ticketModel.classType,
                       ),
+                      SinglePriceElement(
+                        title: "${tr("Original Price")}:",
+                        subTitle: formatPrice(ticketModel.event.classes
+                                .where((element) =>
+                                    element.id == ticketModel.classId)
+                                .first
+                                .ticketPrice) +
+                            " ${tr("sp")}",
+                      ),
+                      ticketModel.promoCode == null && ticketModel.offer == null
+                          ? SizedBox()
+                          : SinglePriceElement(
+                              title: "${tr("Discounts")}:",
+                              subTitle: "",
+                            ),
+                      ticketModel.offer == null
+                          ? SizedBox()
+                          : SinglePriceElement(
+                              title:
+                                  "${tr("Event Discount")} (${ticketModel.offer!.percent}%):",
+                              subTitle: formatPrice(bookingDetailesController
+                                      .calclateofferDiscountForClass(
+                                          ticketModel.offer!,
+                                          ticketModel.event.classes
+                                              .where((element) =>
+                                                  element.id ==
+                                                  ticketModel.classId)
+                                              .first
+                                              .ticketPrice)) +
+                                  " ${tr("sp")}"),
+                      ticketModel.promoCode == null
+                          ? SizedBox()
+                          : SinglePriceElement(
+                              title:
+                                  "${tr("Promo Code Discount")} (${ticketModel.promoCode!.discount}%):",
+                              subTitle: formatPrice(bookingDetailesController
+                                      .calculateDiscountForTicket(
+                                          ticketModel.promoCode!, modelIndex)) +
+                                  " ${tr("sp")}"),
+                      ticketModel.promoCode == null && ticketModel.offer == null
+                          ? SizedBox()
+                          : SinglePriceElement(
+                              title: "${tr("Price after Discount")}:",
+                              subTitle: formatPrice(bookingDetailesController
+                                      .calclatepiceaftediscount(modelIndex)) +
+                                  " ${tr("sp")}",
+                            ),
+                      ticketModel.amenities.isEmpty
+                          ? SizedBox()
+                          : SinglePriceElement(
+                              title: "${tr("Additional Services")}:",
+                              subTitle: "",
+                            ),
                       ...List.generate(
                           ticketModel.amenities.length,
                           (index) => SinglePriceElement(
                                 title: ticketModel.amenities[index].title,
-                                subTitle: ticketModel.event.amenities
-                                    .where((element) =>
-                                        element.id ==
-                                        ticketModel.amenities[index].id)
-                                    .first
-                                    .pivot
-                                    .price
-                                    .toString(),
+                                subTitle: formatPrice(ticketModel
+                                        .event.amenities
+                                        .where((element) =>
+                                            element.id ==
+                                            ticketModel.amenities[index].id)
+                                        .first
+                                        .pivot
+                                        .price!) +
+                                    " ${tr("sp")}",
                               )),
-                      ticketModel.promoCode != null
-                          ? SinglePriceElement(
-                              title: ticketModel.promoCode!.title,
-                              subTitle: "${ticketModel.promoCode!.discount} %",
-                            )
-                          : SizedBox()
                     ].divide(const SizedBox(height: 8)),
                   ),
                 ),
@@ -171,9 +222,8 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                 ),
                 SinglePriceElement(
                   title: "Total Price",
-                  subTitle: Get.find<BookingDetailesForMyBookingController>()
-                      .updateTotalPrice(modelIndex)
-                      .toString(),
+                  subTitle: formatPrice(ticketModel.classTicketPrice) +
+                      " ${tr("sp")}",
                 ),
                 SizedBox(
                   height: 5,

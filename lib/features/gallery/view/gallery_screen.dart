@@ -1,5 +1,4 @@
 import 'package:evento/core/server/server_config.dart';
-import 'package:evento/features/gallery/view/show_on_fullscreen.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../core/shared/widgets/images/network_image.dart';

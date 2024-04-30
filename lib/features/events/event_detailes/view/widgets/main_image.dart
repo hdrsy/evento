@@ -1,7 +1,6 @@
 import 'package:evento/core/server/server_config.dart';
 import 'package:evento/core/shared/widgets/video/cards_video_widget.dart';
 import 'package:evento/features/gallery/controller/gallery_controller.dart';
-import 'package:evento/features/gallery/view/show_on_fullscreen.dart';
 
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';

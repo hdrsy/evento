@@ -1,5 +1,6 @@
 import 'package:evento/features/booking/book_now/model/promo_code_model.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
+import 'package:evento/features/events/home/model/offer_model.dart';
 
 class UserBooking {
   final int id;
@@ -20,6 +21,7 @@ class UserBooking {
   final String status;
   final UserEvent event;
   final PromoCode? promoCode;
+  final Offer? offer;
 
   UserBooking({
     required this.id,
@@ -40,6 +42,7 @@ class UserBooking {
     required this.status,
     required this.event,
     this.promoCode,
+    this.offer,
   });
 
   factory UserBooking.fromJson(Map<String, dynamic> json) {
@@ -67,6 +70,7 @@ class UserBooking {
       promoCode: json['promo_code'] != null
           ? PromoCode.fromJson(json['promo_code'])
           : null,
+      offer: json['offer'] != null ? Offer.fromJson(json['offer']) : null,
     );
   }
 }
@@ -75,16 +79,19 @@ class UserEvent {
   final int id;
   final int organizerId;
   final String title;
+  final List<Class> classes;
   final String description;
   final Organizer? organizer;
   final Venue venue;
   final List<Amenity> amenities;
+
   UserEvent({
     required this.id,
     required this.organizerId,
     required this.title,
     required this.amenities,
     required this.organizer,
+    required this.classes,
     required this.venue,
     required this.description,
   });
@@ -98,6 +105,7 @@ class UserEvent {
           ? List<Amenity>.from(
               json['amenities'].map((x) => Amenity.fromJson(x)))
           : [],
+      classes: List<Class>.from(json['classes'].map((x) => Class.fromJson(x))),
       description: json['description'],
       organizer: json['organizer'] != null
           ? Organizer.fromJson(json['organizer'])

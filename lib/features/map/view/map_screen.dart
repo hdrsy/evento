@@ -44,72 +44,80 @@ class MapScreen extends StatelessWidget {
                 child: EventsList()),
             Align(
               alignment: const AlignmentDirectional(0.96, 0.34),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                child: ButtonWidget(
-                  onPressed: () async {
-                    Get.back();
-                  },
-                  text: '',
-                  icon: const Icon(
-                    Icons.list,
-                    size: 30,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 20,
                   ),
-                  options: ButtonOptions(
-                    height: 40,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: customColors.primary,
-                    textStyle: customTextStyle.titleSmall.override(
-                      fontFamily: 'Nunito',
-                      color: Colors.white,
-                      useGoogleFonts: true,
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                    child: ButtonWidget(
+                      onPressed: () async {
+                        Get.back();
+                      },
+                      text: '',
+                      icon: const Icon(
+                        Icons.list,
+                        size: 30,
+                      ),
+                      options: ButtonOptions(
+                        height: 40,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: Colors.white,
+                          useGoogleFonts: true,
+                        ),
+                        elevation: 3,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
-                    elevation: 3,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                    child: ButtonWidget(
+                      onPressed: () async {
+                        mapController.moveCamiraPosition();
+                      },
+                      text: '',
+                      icon: const Icon(
+                        Icons.location_searching_sharp,
+                        size: 30,
+                      ),
+                      options: ButtonOptions(
+                        height: 40,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: customColors.primary,
+                        textStyle: customTextStyle.titleSmall.override(
+                          fontFamily: 'Nunito',
+                          color: Colors.white,
+                          useGoogleFonts: true,
+                        ),
+                        elevation: 3,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-            Align(
-              alignment: const AlignmentDirectional(0.96, 0.20),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                child: ButtonWidget(
-                  onPressed: () async {
-                    mapController.moveCamiraPosition();
-                  },
-                  text: '',
-                  icon: const Icon(
-                    Icons.location_searching_sharp,
-                    size: 30,
-                  ),
-                  options: ButtonOptions(
-                    height: 40,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: customColors.primary,
-                    textStyle: customTextStyle.titleSmall.override(
-                      fontFamily: 'Nunito',
-                      color: Colors.white,
-                      useGoogleFonts: true,
-                    ),
-                    elevation: 3,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            )
           ],
         ));
   }

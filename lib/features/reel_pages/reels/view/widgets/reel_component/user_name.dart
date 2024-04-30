@@ -7,11 +7,11 @@ import '../../../../../../main.dart';
 import 'package:flutter/material.dart';
 
 Widget userName(String userName) {
-  return SizedBox(
-    width: screenWidth * 0.40,
-    height: screenHeight * 0.03,
-    child: userName.length > 30
-        ? Marquee(
+  return userName.length > 30
+      ? SizedBox(
+          width: screenWidth * 0.40,
+          height: screenHeight * 0.03,
+          child: Marquee(
             text: userName,
             scrollAxis: Axis.horizontal,
             blankSpace: 20.0,
@@ -22,14 +22,14 @@ Widget userName(String userName) {
                 color: AppColors.darkPrimaryText,
                 useGoogleFonts: true,
                 fontSize: 16),
-          )
-        : Text(
-            userName,
-            style: customTextStyle.bodyLarge.override(
-                fontFamily: 'Nunito',
-                color: AppColors.darkPrimaryText,
-                useGoogleFonts: true,
-                fontSize: 16),
           ),
-  );
+        )
+      : Text(
+          userName,
+          style: customTextStyle.bodyLarge.override(
+              fontFamily: 'Nunito',
+              color: AppColors.darkPrimaryText,
+              useGoogleFonts: true,
+              fontSize: 16),
+        );
 }

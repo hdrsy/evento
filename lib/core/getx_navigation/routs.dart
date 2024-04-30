@@ -3,6 +3,7 @@ import 'package:evento/features/booking/booking_detailes/controller/binding/book
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/controller/binding/booking_detailes_binding.dart';
 import 'package:evento/features/booking/my_booking/controller/binding/my_booking_binding.dart';
 import 'package:evento/features/booking/my_booking/view/my_booking_screen.dart';
+import 'package:evento/features/booking/show_single_ticket/view/show_single_ticket_screen.dart';
 import 'package:evento/features/events/customize_event/date_time/controller/binding/date_time_binding.dart';
 import 'package:evento/features/events/customize_event/date_time/view/date_time_screen.dart';
 import 'package:evento/features/events/customize_event/review/controller/binding/event_review_binding.dart';
@@ -289,6 +290,9 @@ appRoutes() => [
       GetPage(name: '/SeeLocation', page: () => SeeLocation()),
       GetPage(name: '/GoingScreen', page: () => GoingScreen()),
       GetPage(name: '/DirctionScreen', page: () => DirctionScreen()),
+      GetPage(
+          name: '/ShowSingleTicketScreen',
+          page: () => ShowSingleTicketScreen()),
       GetPage(
           name: '/OrganizerFollowersScreen',
           page: () => OrganizerFollowersScreen()),

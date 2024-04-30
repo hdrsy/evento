@@ -1,4 +1,3 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evento/core/shared/widgets/images/network_image.dart';
 import 'package:evento/core/utils/helper/date_formatter.dart';

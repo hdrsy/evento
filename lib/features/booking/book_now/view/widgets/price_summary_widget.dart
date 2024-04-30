@@ -3,7 +3,6 @@ import 'package:evento/core/shared/widgets/error_messages/error_messages.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
 
 import '../../../../../core/responsive/responsive.dart';
-import '../../../../../core/shared/widgets/buttons/icon_with_container.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
 import '../../controller/book_now_controller.dart';
 import '../../../../../main.dart';
@@ -28,13 +27,13 @@ class PriceSummaryWidget extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 15),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "${tr("Ticket")} ${index + 1}",
@@ -47,26 +46,69 @@ class PriceSummaryWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              bookNowController.ticketList[index].selectedClass == null
-                  ? SizedBox.shrink()
+              Text(
+                "Payment Summary",
+                style: customTextStyle.headlineSmall.override(
+                  fontFamily: 'Lexend Deca',
+                  color: customColors.primary,
+                  fontSize: 18,
+                  useGoogleFonts: true,
+                  fontWeight: FontWeight.normal,
+                ),
+              ).tr(),
+              ////// classes section
+              priceElement("${tr("Ticket Class")}: ",
+                  bookNowController.ticketList[index].selectedClass!.code),
+              priceElement(
+                  "${tr("Original Price")}:",
+                  formatPrice(bookNowController
+                          .ticketList[index].selectedClass!.ticketPrice) +
+                      " ${tr("sp")}"),
+
+              //// Discounts and promo code section
+              bookNowController.ticketList[index].selectedPromoCode == null &&
+                      bookNowController.eventDetailsModel.offer == null
+                  ? SizedBox()
+                  : priceElement("${tr("Discounts")}:", "", isTitle: true),
+              bookNowController.eventDetailsModel.offer == null
+                  ? SizedBox()
                   : priceElement(
-                      bookNowController.ticketList[index].selectedClass!.code,
-                      formatPrice(bookNowController
-                          .ticketList[index].selectedClass!.ticketPrice)),
+                      "${tr("Event Discount")} (${bookNowController.eventDetailsModel.offer!.percent}%):",
+                      "-" +
+                          formatPrice(bookNowController
+                              .calclateofferDiscountForClass(index)) +
+                          " ${tr("sp")}"),
+              bookNowController.ticketList[index].selectedPromoCode == null
+                  ? SizedBox()
+                  : priceElement(
+                      "${tr("Promo Code Discount")} (${bookNowController.ticketList[index].selectedPromoCode!.discount}%):",
+                      "-" +
+                          formatPrice(
+                              bookNowController.ticketList[index].discount) +
+                          " ${tr("sp")}"),
+              bookNowController.ticketList[index].discount == 0 &&
+                      bookNowController.eventDetailsModel.offer == null
+                  ? SizedBox()
+                  : priceElement(
+                      "${tr("Price after Discount")}:",
+                      formatPrice(
+                          bookNowController.calclatePriceAfterDiscount(index))),
+
+              /////    Amenities section
+              bookNowController.ticketList[index].selectedAminiteds.isEmpty
+                  ? SizedBox()
+                  : priceElement("${tr("Additional Services")}:", "",
+                      isTitle: true),
               ...List.generate(
                   bookNowController.ticketList[index].selectedAminiteds.length,
                   (innerIndex) => priceElement(
                       bookNowController.ticketList[index]
-                          .selectedAminiteds[innerIndex].title,
+                              .selectedAminiteds[innerIndex].title +
+                          ":",
                       formatPrice(bookNowController.ticketList[index]
-                          .selectedAminiteds[innerIndex].pivot.price!))),
-              // priceElement("Taxes", bookNowController.ticketList[index].tax),
-              bookNowController.ticketList[index].discount == 0
-                  ? SizedBox()
-                  : priceElement(
-                      "Discount",
-                      formatPrice(
-                          bookNowController.ticketList[index].discount)),
+                              .selectedAminiteds[innerIndex].pivot.price!) +
+                          " ${tr("sp")}")),
+
               Divider(
                 thickness: 1,
                 indent: 12,
@@ -74,7 +116,7 @@ class PriceSummaryWidget extends StatelessWidget {
                 color: customColors.secondary,
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,45 +143,47 @@ class PriceSummaryWidget extends StatelessWidget {
                   ],
                 ),
               ),
-
               Obx(
                 () => Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                  child: ButtonWidget(
-                    showLoadingIndicator:
-                        bookNowController.ticketList[index].isLoading.value,
-                    onPressed: () async {
-                      bookNowController.ticketList[index].isPaidSuccfully.value
-                          ? null
-                          : bookNowController.onPressBookNow(index);
-                    },
-                    text: bookNowController
-                            .ticketList[index].isPaidSuccfully.value
-                        ? tr("Booking Confirmed")
-                        : tr("Confirm Booking"),
-                    options: ButtonOptions(
-                      width: 300,
-                      height: 40,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: bookNowController
+                  child: Center(
+                    child: ButtonWidget(
+                      showLoadingIndicator:
+                          bookNowController.ticketList[index].isLoading.value,
+                      onPressed: () async {
+                        bookNowController
+                                .ticketList[index].isPaidSuccfully.value
+                            ? null
+                            : bookNowController.onPressBookNow(index);
+                      },
+                      text: bookNowController
                               .ticketList[index].isPaidSuccfully.value
-                          ? customColors.success
-                          : customColors.primary,
-                      textStyle: customTextStyle.displaySmall.override(
-                        fontFamily: 'Lexend Deca',
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                          ? tr("Booking Confirmed")
+                          : tr("Confirm Booking"),
+                      options: ButtonOptions(
+                        width: 300,
+                        height: 40,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: bookNowController
+                                .ticketList[index].isPaidSuccfully.value
+                            ? customColors.success
+                            : customColors.primary,
+                        textStyle: customTextStyle.displaySmall.override(
+                          fontFamily: 'Lexend Deca',
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        elevation: 0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      elevation: 0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),
@@ -155,9 +199,9 @@ class PriceSummaryWidget extends StatelessWidget {
     });
   }
 
-  Padding priceElement(String title, price) {
+  Padding priceElement(String title, price, {bool isTitle = false}) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 24, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,12 +211,12 @@ class PriceSummaryWidget extends StatelessWidget {
             style: customTextStyle.bodySmall.override(
                 fontFamily: 'Lexend Deca',
                 color: const Color(0xFF8B97A2),
-                fontSize: 14,
+                fontSize: isTitle ? 16 : 14,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: true),
           ).tr(),
           Text(
-            "$price ${tr("sp")}",
+            "$price",
             style: customTextStyle.bodyLarge.override(
               fontFamily: 'Nunito',
               fontWeight: FontWeight.bold,

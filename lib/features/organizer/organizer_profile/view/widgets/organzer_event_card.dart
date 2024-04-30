@@ -22,8 +22,6 @@ class OrganizerEventCard extends StatelessWidget {
       onTap: () async {
         Get.toNamed('/eventDetailes', parameters: {
           'id': organizerProfileEvent.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Row(

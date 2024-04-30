@@ -7,7 +7,6 @@ import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
-import 'package:evento/features/events/home/model/offer_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
 import '../../../../core/server/helper_api.dart';
@@ -32,8 +31,6 @@ class EventDetailesController extends GetxController {
   RxString distance = "0 km".obs;
   late RxList<String> errorMessage;
   late RxList<EventModel> relatedEvents;
-  bool isOffer = false;
-  int offerPrecent = 0;
   CacheService cacheService = CacheService('eventDetailes');
   late String cacheKey;
   late RxBool isSomeThingError;
@@ -47,8 +44,6 @@ class EventDetailesController extends GetxController {
     isLoading = false.obs;
     isSomeThingError = false.obs;
     eventId = int.parse(Get.parameters['id'] ?? "0");
-    isOffer = bool.parse(Get.parameters['isOffer'] ?? "false");
-    offerPrecent = int.parse(Get.parameters['offerPrecent'] ?? "0");
     cacheKey = "eventDetailes$eventId";
     print("sssssssssssssss ${Get.parameters}");
     _connectivityService.isConnected.listen((isConnected) {
@@ -81,8 +76,8 @@ class EventDetailesController extends GetxController {
     isLoading.value = true;
     Either<ErrorResponse, Map<String, dynamic>> response;
     isGuset = await prefService.isContainKey("token") ? false : true;
-    print("ssssssssssss $isGuset");
     String token = await prefService.readString("token");
+    print("ssssssssssss $token");
     try {
       if (await checkInternet()) {
         log("from cache");

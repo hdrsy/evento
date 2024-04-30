@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:evento/features/booking/book_now/model/promo_code_model.dart';
-import 'package:evento/features/events/home/model/offer_model.dart';
 import 'package:evento/features/friends/freinds/model/freinds_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/helper_api.dart';
@@ -15,9 +14,9 @@ import 'package:get/get.dart';
 
 class BookNowController extends GetxController {
   late EventDetailsModel eventDetailsModel;
-  Offer? offer;
   late RxBool isLoading;
   late RxBool isLoadingCoupons;
+  late bool isErrorInCoupons;
   late RxList<String> errorMessage;
   late RxList<FreindsModel> myFreinds;
   late RxList<TicketModel> ticketList;
@@ -25,19 +24,19 @@ class BookNowController extends GetxController {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
   ScrollController scrollController = ScrollController();
   @override
-  void onInit() {
+  void onInit() async {
     EventDetailesController eventDetailesController = Get.find();
     eventDetailsModel = eventDetailesController.eventDetailsModel;
     ticketList = <TicketModel>[TicketModel(ticketIndex: 0)].obs;
     ticketList[0].selectedClass = eventDetailsModel.classes[0];
-
     updateTotalPrice(0);
     myFreinds = <FreindsModel>[].obs;
     isLoadingCoupons = false.obs;
-    getMyCoupons();
+    isErrorInCoupons = false;
     userCopuns = [];
     isLoading = false.obs;
     errorMessage = <String>[].obs;
+    await getMyCoupons();
     getMyFreinds();
     super.onInit();
   }
@@ -48,10 +47,23 @@ class BookNowController extends GetxController {
     updateTotalPrice(ticketList.length - 1);
   }
 
-  int calclateNewClassAfterOffer(int index) {
+  int calclateofferDiscountForClass(int index) {
     int offerPercent = eventDetailsModel.offer!.percent;
-    return ticketList[index].selectedClass!.ticketPrice -
-        (ticketList[index].selectedClass!.ticketPrice * offerPercent ~/ 100);
+    return (ticketList[index].selectedClass!.ticketPrice * offerPercent ~/ 100);
+  }
+
+  int calclatePriceAfterDiscount(int index) {
+    int priceAfterDiscount = 0;
+    if (ticketList[index].selectedClass != null) {
+      priceAfterDiscount = ticketList[index].selectedClass!.ticketPrice;
+    }
+    if (eventDetailsModel.offer != null) {
+      priceAfterDiscount = ticketList[index].selectedClass!.ticketPrice -
+          calclateofferDiscountForClass(index);
+    }
+
+    priceAfterDiscount -= ticketList[index].discount;
+    return priceAfterDiscount;
   }
 
   updateTotalPrice(int ticketIndex) {
@@ -64,7 +76,8 @@ class BookNowController extends GetxController {
       totalClassPrice = ticketList[ticketIndex].selectedClass!.ticketPrice;
     }
     if (eventDetailsModel.offer != null) {
-      totalClassPrice = calclateNewClassAfterOffer(ticketIndex);
+      totalClassPrice = ticketList[ticketIndex].selectedClass!.ticketPrice -
+          calclateofferDiscountForClass(ticketIndex);
     }
     for (var i = 0; i < ticketList[ticketIndex].selectedAminiteds.length; i++) {
       for (var element in eventDetailsModel.amenities) {
@@ -73,7 +86,9 @@ class BookNowController extends GetxController {
         }
       }
     }
-    discount = ticketList[ticketIndex].discount;
+    // discount = ticketList[ticketIndex].discount;
+    discount = calculateDiscountForTicket(
+        ticketIndex, totalAminityPrice + totalClassPrice);
     // tax = getTaxForTicket(ticketIndex);
     total = (totalAminityPrice + totalClassPrice + tax) - discount;
     ticketList[ticketIndex].totalPrice = total;
@@ -105,18 +120,17 @@ class BookNowController extends GetxController {
     update();
   }
 
-  int calculateDiscountForTicket(int ticketIndex) {
+  int calculateDiscountForTicket(int ticketIndex, int price) {
     if (ticketList[ticketIndex].selectedPromoCode != null) {
       int codeDiscount = (ticketList[ticketIndex].selectedPromoCode!.discount);
       int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
-      int newTotal =
-          ((ticketList[ticketIndex].totalPrice * codeDiscount) / 100).round();
-      if (ticketList[ticketIndex].totalPrice - newTotal > codeLimit) {
+
+      int newTotal = ((price * codeDiscount) / 100).round();
+      if (price - newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
         return codeLimit;
       } else {
-        ticketList[ticketIndex].discount =
-            ticketList[ticketIndex].totalPrice - newTotal;
+        ticketList[ticketIndex].discount = newTotal;
         return newTotal;
       }
     } else {
@@ -148,7 +162,6 @@ class BookNowController extends GetxController {
       /// get copun object
       if (userCopuns[i].code == couponCode) {
         ticketList[ticketId].selectedPromoCode = userCopuns[i];
-        ticketList[ticketId].discount = calculateDiscountForTicket(ticketId);
         ticketList[ticketId].dropDownValueController!.value = couponCode;
         break;
       }
@@ -275,6 +288,9 @@ class BookNowController extends GetxController {
         'last_name': booking.lastName.text,
         'age': int.tryParse(booking.age.text) ?? 0,
         'phone_number': booking.phoneNumber.text,
+        "offer_id": eventDetailsModel.offer != null
+            ? eventDetailsModel.offer!.id
+            : null,
         "promo_code_id": booking.selectedPromoCode!.id,
         "class_ticket_price": booking.selectedClass!.ticketPrice,
         'options':
@@ -287,6 +303,9 @@ class BookNowController extends GetxController {
         'last_name': booking.lastName.text,
         'age': int.tryParse(booking.age.text) ?? 0,
         'phone_number': booking.phoneNumber.text,
+        "offer_id": eventDetailsModel.offer != null
+            ? eventDetailsModel.offer!.id
+            : null,
         'options':
             booking.selectedAminiteds.map((a) => a.id.toString()).toList(),
       };
@@ -304,23 +323,29 @@ class BookNowController extends GetxController {
   }
 
   getMyCoupons() async {
-    // isLoadingCoupons.value = true;
-    Either<ErrorResponse, Map<String, dynamic>> response;
-    String token = await prefService.readString("token");
-    response = await ApiHelper.makeRequest(
-        targetRout: "${ServerConstApis.myCoupons}/${eventDetailsModel.id}",
-        method: "GEt",
-        token: token);
-    dynamic handlingResponse = response.fold((l) => l, (r) => r);
-    if (handlingResponse is ErrorResponse) {
-    } else {
-      List<dynamic> interestsJson = handlingResponse['promoCode'];
+    isLoadingCoupons.value = true;
+    try {
+      Either<ErrorResponse, Map<String, dynamic>> response;
+      String token = await prefService.readString("token");
+      response = await ApiHelper.makeRequest(
+          targetRout: "${ServerConstApis.myCoupons}/${eventDetailsModel.id}",
+          method: "GEt",
+          token: token);
+      dynamic handlingResponse = response.fold((l) => l, (r) => r);
+      if (handlingResponse is ErrorResponse) {
+        isLoadingCoupons.value = false;
+        isErrorInCoupons = true;
+      } else {
+        List<dynamic> interestsJson = handlingResponse['promoCode'];
 
-      userCopuns = interestsJson
-          .map((jsonItem) => PromoCode.fromJson(jsonItem))
-          .toList();
+        userCopuns = interestsJson
+            .map((jsonItem) => PromoCode.fromJson(jsonItem))
+            .toList();
+        isLoadingCoupons.value = false;
+      }
+    } catch (e) {
+      isLoadingCoupons.value = false;
     }
-    isLoadingCoupons.value = false;
   }
 
   getMyFreinds() async {

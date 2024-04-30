@@ -221,6 +221,7 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: widget.dateTimeController.date,
+      currentDay: widget.dateTimeController.date,
       headerStyle: HeaderStyle(
         titleTextStyle: customTextStyle.bodyMedium
             .copyWith(color: customColors.primaryText),
@@ -228,7 +229,8 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
             .copyWith(color: customColors.primaryText),
         formatButtonVisible: false,
       ),
-      selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+      selectedDayPredicate: (day) =>
+          isSameDay(widget.dateTimeController.date, day),
       onDaySelected: (selectedDay, focusedDay) {
         if (selectedDay.isBefore(DateTime.now())) {
           Get.snackbar(
@@ -239,9 +241,11 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
               colorText: customColors.primaryText);
         } else {
           widget.dateTimeController.date = selectedDay;
+          widget.dateTimeController.isSelectDate.value = true;
+          print("dddddddddddddd${widget.dateTimeController.date}");
           setState(() {
-            this.selectedDay = selectedDay;
-            this.focusedDay = focusedDay; // update focusedDay as well if needed
+            // this.selectedDay = selectedDay;
+            // this.focusedDay = focusedDay; // update focusedDay as well if needed
           });
         }
       },
@@ -252,7 +256,9 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
               .circle, // Commonly a circle, but you can use other shapes
         ),
         selectedDecoration: BoxDecoration(
-          color: customColors.primary, // Replace with your color
+          color: !widget.dateTimeController.isSelectDate.value
+              ? customColors.secondaryText
+              : customColors.primary, // Replace with your color
           shape: BoxShape
               .circle, // Commonly a circle, but you can use other shapes
         ),

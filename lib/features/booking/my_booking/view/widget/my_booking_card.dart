@@ -34,8 +34,6 @@ class MyBookingCard extends StatelessWidget {
       onTap: () {
         Get.toNamed('/eventDetailes', parameters: {
           'id': model.id.toString(),
-          'isOffer': false.toString(),
-          'offerPercent': 0.toString(),
         });
       },
       child: Container(
