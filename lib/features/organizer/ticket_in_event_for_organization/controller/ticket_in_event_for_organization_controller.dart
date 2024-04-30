@@ -11,91 +11,91 @@ import 'package:get/get.dart';
 class TicketsInEventForOrganizerController extends GetxController {
   BookingResponseForOrganizer bookingResponse =
       BookingResponseForOrganizer(booking: {});
-  late OrganizationProfileEvent organizationProfileEvent;
+  // late OrganizationProfileEvent organizationProfileEvent;
   late int eventId;
-  BookingResponse generatedTicketModel = BookingResponse(upcomingBookings: []);
+  // BookingResponse generatedTicketModel = BookingResponse(upcomingBookings: []);
   late Event eventDetailsModel;
 
   late RxBool isLoading;
   RxBool isError = false.obs;
   @override
   void onInit() {
-    eventId = Get.arguments[0];
-    organizationProfileEvent = Get.arguments[1];
+    eventId = Get.arguments;
+    // organizationProfileEvent = Get.arguments[1];
     isLoading = false.obs;
     getOrganizerFollowers();
     super.onInit();
   }
 
-  createTicketModelsFromEventBookings(List<BookingO> bookings) {
-    generatedTicketModel.upcomingBookings = [];
+  // createTicketModelsFromEventBookings(List<BookingO> bookings) {
+  //   generatedTicketModel.upcomingBookings = [];
 
-    for (var i = 0; i < bookings.length; i++) {
-      generatedTicketModel.upcomingBookings.add(Booking(
-          age: bookings[i].age,
-          amenities: [],
-          classType: "",
-          event: Event(
-              capacity: 0,
-              description: "",
-              organizerId: 0,
-              id: eventId,
-              ticketPrice: 0,
-              type: "",
-              title: organizationProfileEvent.title,
-              startDate: organizationProfileEvent.startDate,
-              endDate: DateTime.now(),
-              venueId: organizationProfileEvent.venueId,
-              images: [],
-              //  / isFollowedByAuthUser: false,
-              venue: Venue(
-                  capacity: 0,
-                  contactNumber: "0",
-                  description: "",
-                  latitude: 0,
-                  longitude: 0,
-                  name: "",
-                  profile: "",
-                  governorate: "Damascus",
-                  id: 1,
-                  locationDescription: "")),
-          eventId: 0,
-          eventTitle: "",
-          firstName: bookings[i].firstName.toString(),
-          lastName: bookings[i].lastName.toString(),
-          id: 0,
-          invoiceId: 0,
-          status: "paid",
-          userId: 0,
-          phoneNumber: bookings[i].phoneNumber.toString(),
-          userPhoneNumber: bookings[i].phoneNumber.toString()));
-    }
-    eventDetailsModel = Event(
-        capacity: 0,
-        description: "",
-        organizerId: 0,
-        id: eventId,
-        ticketPrice: 0,
-        type: "",
-        title: organizationProfileEvent.title,
-        startDate: organizationProfileEvent.startDate,
-        endDate: DateTime.now(),
-        venueId: organizationProfileEvent.venueId,
-        images: [],
-        //  / isFollowedByAuthUser: false,
-        venue: Venue(
-            capacity: 0,
-            contactNumber: "0",
-            description: "",
-            latitude: 0,
-            longitude: 0,
-            name: "",
-            profile: "",
-            governorate: "Damascus",
-            id: 1,
-            locationDescription: ""));
-    return generatedTicketModel;
-  }
+  //   for (var i = 0; i < bookings.length; i++) {
+  //     generatedTicketModel.upcomingBookings.add(Booking(
+  //         age: bookings[i].age,
+  //         amenities: [],
+  //         classType: "",
+  //         event: Event(
+  //             capacity: 0,
+  //             description: "",
+  //             organizerId: 0,
+  //             id: eventId,
+  //             ticketPrice: 0,
+  //             type: "",
+  //             title: organizationProfileEvent.title,
+  //             startDate: organizationProfileEvent.startDate,
+  //             endDate: DateTime.now(),
+  //             venueId: organizationProfileEvent.venueId,
+  //             images: [],
+  //             //  / isFollowedByAuthUser: false,
+  //             venue: Venue(
+  //                 capacity: 0,
+  //                 contactNumber: "0",
+  //                 description: "",
+  //                 latitude: 0,
+  //                 longitude: 0,
+  //                 name: "",
+  //                 profile: "",
+  //                 governorate: "Damascus",
+  //                 id: 1,
+  //                 locationDescription: "")),
+  //         eventId: 0,
+  //         eventTitle: "",
+  //         firstName: bookings[i].firstName.toString(),
+  //         lastName: bookings[i].lastName.toString(),
+  //         id: 0,
+  //         invoiceId: 0,
+  //         status: "paid",
+  //         userId: 0,
+  //         phoneNumber: bookings[i].phoneNumber.toString(),
+  //         userPhoneNumber: bookings[i].phoneNumber.toString()));
+  //   }
+  //   eventDetailsModel = Event(
+  //       capacity: 0,
+  //       description: "",
+  //       organizerId: 0,
+  //       id: eventId,
+  //       ticketPrice: 0,
+  //       type: "",
+  //       title: organizationProfileEvent.title,
+  //       startDate: organizationProfileEvent.startDate,
+  //       endDate: DateTime.now(),
+  //       venueId: organizationProfileEvent.venueId,
+  //       images: [],
+  //       //  / isFollowedByAuthUser: false,
+  //       venue: Venue(
+  //           capacity: 0,
+  //           contactNumber: "0",
+  //           description: "",
+  //           latitude: 0,
+  //           longitude: 0,
+  //           name: "",
+  //           profile: "",
+  //           governorate: "Damascus",
+  //           id: 1,
+  //           locationDescription: ""));
+  //   return generatedTicketModel;
+  // }
 
   getOrganizerFollowers() async {
     try {

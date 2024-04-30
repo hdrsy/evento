@@ -13,6 +13,7 @@ class MyEventsForOrganizerController
   MyEventsForOrganizerController()
       : super(fetchDataCallback: _fetchData, cacheKey: "OrganizationEvent");
   RxBool isSearchActive = false.obs;
+
   TextEditingController searchField = TextEditingController();
   RxList<OrganizationEvent> searchResultSearch = <OrganizationEvent>[].obs;
   void onPressSearch(String query) {
@@ -52,7 +53,7 @@ class MyEventsForOrganizerController
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizationEvent.fromJson(jsonItem))
         .toList());
-
+    print("jjjjjjj $lastPageId");
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }

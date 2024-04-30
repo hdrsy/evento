@@ -71,7 +71,7 @@ class MapController extends GetxController {
         update();
       }
       searchResultSearch.clear();
-      searchResultSearch.addAll(filteredResults);
+      _updateSearchResults(filteredResults);
     }
     update();
   }

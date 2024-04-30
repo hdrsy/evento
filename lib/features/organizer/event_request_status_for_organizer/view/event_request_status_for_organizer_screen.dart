@@ -174,8 +174,7 @@ class EventRequestStatusForOrganizerScreen extends StatelessWidget {
       String status, int capacity, int bookingsCount, OrganizationEvent model) {
     return GestureDetector(
       onTap: () {
-        // Get.toNamed('/TicketsInEventForOrganizerScreen',
-        //     arguments: [model.id, model]);
+        Get.toNamed('/TicketsInEventForOrganizerScreen', arguments: model.id);
       },
       child: Container(
         width: 370,

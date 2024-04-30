@@ -47,6 +47,8 @@ void notificationClickListener(Map<String, dynamic> data) {
   // Handle notification click
   // Normalize title for comparison
   // print("notification click :$data");
+  isThereNotification.value = false;
+
   String normalizedTitle = data['navigate'] != null
       ? "navigate " + data['navigate']
       : data['title']?.trim().toLowerCase() ?? '';

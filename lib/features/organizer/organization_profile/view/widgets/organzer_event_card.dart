@@ -24,7 +24,7 @@ class OrganizationEventCard extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         Get.toNamed('/TicketsInEventForOrganizerScreen',
-            arguments: [organizerProfileEvent.id, organizerProfileEvent]);
+            arguments: organizerProfileEvent.id);
       },
       child: Row(
         mainAxisSize: MainAxisSize.max,

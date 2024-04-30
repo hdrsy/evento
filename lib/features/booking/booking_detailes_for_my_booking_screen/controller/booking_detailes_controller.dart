@@ -107,8 +107,6 @@ class BookingDetailesForMyBookingController extends GetxController {
   int calculateDiscountForTicket(PromoCode promoCode, int ticketIndex) {
     int totalAminityPrice = 0;
     int totalClassPrice = 0;
-    int discount = 0;
-    int tax = 0;
     int total = 0;
 
     totalClassPrice = userBookings[ticketIndex]
