@@ -1,3 +1,4 @@
+import 'package:evento/core/server/helper_api.dart';
 import 'package:evento/features/booking/book_now/model/promo_code_model.dart';
 import 'package:evento/features/events/event_detailes/model/event_detailes_model.dart';
 import 'package:evento/features/events/home/model/offer_model.dart';
@@ -96,7 +97,9 @@ class UserEvent {
     required this.description,
   });
 
-  factory UserEvent.fromJson(Map<String, dynamic> json) {
+  factory UserEvent.fromJson(Map<String, dynamic> oldJson) {
+    Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
+
     return UserEvent(
       id: json['id'],
       organizerId: json['organizer_id'],

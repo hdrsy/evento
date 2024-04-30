@@ -60,8 +60,8 @@ class EventInfoCard2 extends StatelessWidget {
                   ),
                   SingleItemData(
                     title: tr("Event Location"),
-                    subTitle: bookingDetailesController
-                        .userBookings[0].event.venue.governorate,
+                    subTitle: tr(bookingDetailesController
+                        .userBookings[0].event.venue.governorate),
                     // subTitle: "عىنىخصى",
                   ),
                   SingleItemData(
