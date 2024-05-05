@@ -68,6 +68,7 @@ class ServerConstApis {
   static String myCancelledBookings = '$baseAPI/api/my-cancelled-bookings';
   static String myBooking = '$baseAPI/api/my_booking';
   static String getUserBooking = '$baseAPI/api/organizer/getUserBooking';
+  static String getUserTicket = '$baseAPI/api/booking';
   static String cancellBooking = '$baseAPI/api/booking/cancel';
   static String reSellTicket = '$baseAPI/api/booking/resell_ticket';
 

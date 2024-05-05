@@ -60,15 +60,6 @@ class BookingDetailesForMyBookingScreen extends StatelessWidget {
                           padding: padding(16, 24, 0, 24),
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Date Of Event",
-                                    style: customTextStyle.bodyMedium,
-                                  ).tr(),
-                                ],
-                              ),
                               const SizedBox(
                                 height: 6,
                               ),

@@ -129,6 +129,36 @@ void _handleLink(String? link) {
         }
       }
     }
+  } else if (link != null && link.contains('/#/ShowSingleTicketScreen')) {
+    final uri = Uri.parse(link);
+    final fragments = uri.fragment?.split('?'); // Splitting the fragment by '?'
+
+    // Assuming the format is '/eventDetailes?id=XX&isOffer=XX&offerPercent=XX'
+    if (fragments != null && fragments.length > 1) {
+      final fragmentQuery = fragments[1];
+      final fakeUri = Uri.parse('dummy://dummy?$fragmentQuery');
+
+      // Now, extract the specific parameters
+      final id = fakeUri.queryParameters['id'];
+
+      if (id != null) {
+        // Check if GetX is ready for navigation
+        if (Get.context != null) {
+          // Navigating to the Event Details screen with the extracted parameters
+
+          Get.toNamed('/ShowSingleTicketScreen', parameters: {
+            'id': id,
+          });
+        } else {
+          // Wait for GetX navigation to be ready
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Get.toNamed('/ShowSingleTicketScreen', parameters: {
+              'id': id,
+            });
+          });
+        }
+      }
+    }
   }
 }
 

@@ -125,8 +125,8 @@ class BookNowController extends GetxController {
       int codeDiscount = (ticketList[ticketIndex].selectedPromoCode!.discount);
       int codeLimit = (ticketList[ticketIndex].selectedPromoCode!.limit);
 
-      int newTotal = ((price * codeDiscount) / 100).round();
-      if (price - newTotal > codeLimit) {
+      int newTotal = (price * (codeDiscount) / 100).round();
+      if (newTotal > codeLimit) {
         ticketList[ticketIndex].discount = codeLimit;
         return codeLimit;
       } else {
@@ -233,6 +233,7 @@ class BookNowController extends GetxController {
   }
 
   void onPressBookNow(int ticketId) async {
+    // try {
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
@@ -273,9 +274,13 @@ class BookNowController extends GetxController {
               totalAmount,
               appTaxes + mtnTaxes
             ]);
+        ticketList[ticketId].isLoading.value = false;
       }
-      ticketList[ticketId].isLoading.value = false;
     }
+    // } catch (e) {
+    //   ticketList[ticketId].isLoading.value = false;
+    //   ticketList[ticketId].errorMessage.value = ["somethingWrong"];
+    // }
   }
 
   Map<String, dynamic> createBookingJson(TicketModel booking) {

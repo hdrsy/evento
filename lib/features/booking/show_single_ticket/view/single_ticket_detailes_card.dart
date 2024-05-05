@@ -1,13 +1,12 @@
-// import 'package:barcode_widget/barcode_widget.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:evento/core/responsive/responsive.dart';
 import 'package:evento/core/shared/widgets/bottom_sheets/show_bottom_sheet.dart';
 import 'package:evento/core/utils/helper/number_formatter.dart';
-import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
 import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
 import 'package:evento/features/booking/resell/controller/resell_controller.dart';
 import 'package:evento/features/booking/resell/view/resell_screen.dart';
+import 'package:evento/features/booking/show_single_ticket/controller/show_single_ticket_controller.dart';
 import 'package:get/get.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import '../../../../../core/utils/helper/flutter_flow_util.dart';
 import '../../../../../core/utils/theme/app_fonts_from_google.dart';
 import '../../../../../core/utils/theme/text_theme.dart';
@@ -15,13 +14,12 @@ import '../../../../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class TicketDetailesCardForMyBooking extends StatelessWidget {
-  TicketDetailesCardForMyBooking(
+class SingleTicketDetailesCardForMyBooking extends StatelessWidget {
+  SingleTicketDetailesCardForMyBooking(
       {super.key, required this.ticketModel, required this.modelIndex});
   final UserBooking ticketModel;
   final int modelIndex;
-  final BookingDetailesForMyBookingController bookingDetailesController =
-      Get.find();
+  final ShowSingleTicketController bookingDetailesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,36 +29,7 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(-1, -1),
-                child: Text(
-                  "${tr("Ticket")} ${modelIndex + 1}",
-                  style: customTextStyle.headlineMedium.override(
-                      color: customColors.primary,
-                      fontFamily: secondaryFontFamily,
-                      useGoogleFonts: true),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  final ReSellController reSellController =
-                      Get.put(ReSellController());
-                  reSellController.selectedTicket.value = ticketModel.id;
-                  await showButtonSheet(
-                      context: context,
-                      widget: ReSellTicketPage(),
-                      height: screenHeight * 0.9);
-                },
-                child: Text(
-                  "ReSell Ticket",
-                  style: customTextStyle.bodySmall.override(
-                      color: customColors.primary,
-                      fontFamily: secondaryFontFamily,
-                      useGoogleFonts: true),
-                ).tr(),
-              ),
-            ],
+            children: [],
           ),
         ),
         Padding(
@@ -88,12 +57,19 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                   alignment: const AlignmentDirectional(0, -1),
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                    child: QrImageView(
+                    child: BarcodeWidget(
                       data:
                           'https://evento.sy/#/ShowSingleTicketScreen?id=${ticketModel.id}',
-                      version: QrVersions.auto,
-                      backgroundColor: customColors.secondaryBackground,
-                      size: 200,
+                      barcode: Barcode.qrCode(),
+                      width: 200,
+                      height: 200,
+                      color: customColors.primaryText,
+                      backgroundColor: Colors.transparent,
+                      errorBuilder: (_context, _error) => const SizedBox(
+                        width: 200,
+                        height: 200,
+                      ),
+                      drawText: false,
                     ),
                   ),
                 ),

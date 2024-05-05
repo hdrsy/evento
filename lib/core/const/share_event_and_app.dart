@@ -16,3 +16,10 @@ shareReel(int reelIndex) async {
 
   await Share.share(shareContent);
 }
+
+shareTicket(int ticketId) async {
+  final String url = "https://evento.sy/#/ShowSingleTicketScreen?id=$ticketId";
+  final String shareContent = url;
+
+  await Share.share(shareContent);
+}
