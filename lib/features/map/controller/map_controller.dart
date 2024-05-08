@@ -179,6 +179,7 @@ class MapController extends GetxController {
 
     currentPosition = LatLng(searchResultSearch[carouselIndex].venue.latitude,
         searchResultSearch[carouselIndex].venue.longitude);
+
     googleMapsCenter = currentPosition;
     myMarker.clear(); // Update marker
     myMarker.add(FlutterFlowMarker(
@@ -194,6 +195,7 @@ class MapController extends GetxController {
         ));
       },
     ));
+    // print("mmmmmmmmmmmmmmmmmmmmm current marker ${myMarker[0].location.la}");
 
     // Update camera position
     googleMapsController.future.then((controller) {

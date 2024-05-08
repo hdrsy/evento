@@ -1,9 +1,14 @@
-import '../../../features/booking/book_now/model/ticket_model.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evento/core/utils/helper/number_formatter.dart';
+import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/controller/booking_detailes_controller.dart';
+import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
+import 'package:get/get.dart';
+
 import '../../../main.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-pw.Widget buildTicketCard(TicketModel ticketModel, int modelIndex) {
+pw.Widget buildTicketCard(UserBooking ticketModel, int modelIndex) {
   return pw.Column(
     crossAxisAlignment: pw.CrossAxisAlignment.start,
     children: [
@@ -20,7 +25,7 @@ pw.Widget buildTicketCard(TicketModel ticketModel, int modelIndex) {
               ),
             ),
             child: pw.Column(mainAxisSize: pw.MainAxisSize.max, children: [
-              buildQrCodeSection(),
+              buildQrCodeSection(ticketModel.id),
               pw.Align(
                 alignment: pw.Alignment.centerLeft,
                 child: pw.Padding(
@@ -42,76 +47,35 @@ pw.Widget buildTicketCard(TicketModel ticketModel, int modelIndex) {
                 color: PdfColors.grey, // Replace with your custom color
               ),
               buildPaymentSummaryTitle(),
-              buildPaymentSummary(),
-              pw.Divider(
-                thickness: 1, // Set the thickness of the divider
-                color: PdfColors.grey, // Replace with your custom color
-              ),
-              buildPaymentConfirmationTitle(),
-              buildPaymentDetails("card", "sss", "paid")
+              buildPaymentSummary(ticketModel, modelIndex),
             ])),
       )
     ],
   );
 }
 
-pw.Widget buildPaymentDetails(
-    String paymentMethod, String orderId, String status) {
-  final textStyle = pw.TextStyle(
-    fontSize: 14, // Example font size
-    fontWeight: pw.FontWeight.normal,
-    // Set color if needed
-  );
-
-  return pw.Padding(
-    padding: const pw.EdgeInsets.all(10),
-    child: pw.Row(
-      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-      children: [
-        pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            pw.Text("Payment Methods", style: textStyle),
-            pw.SizedBox(height: 8),
-            pw.Text("Order ID", style: textStyle),
-            pw.SizedBox(height: 8),
-            pw.Text("Status", style: textStyle),
-          ],
-        ),
-        pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.end,
-          children: [
-            pw.Text(paymentMethod, style: textStyle),
-            pw.SizedBox(height: 8),
-            pw.Text(orderId, style: textStyle),
-            pw.SizedBox(height: 8),
-            // Buttons are not supported in PDF like in Flutter. Use Text or another representation.
-            pw.Text(status, style: textStyle),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-pw.Widget buildPaymentConfirmationTitle() {
-  return pw.Align(
-    alignment: pw.Alignment.centerLeft,
-    child: pw.Padding(
-      padding: const pw.EdgeInsets.fromLTRB(8, 0, 0, 0),
-      child: pw.Text(
-        "Payment Confirmation",
+pw.Widget singlePriceElement(String title, String subTitle) {
+  return pw.Row(
+    mainAxisSize: pw.MainAxisSize.max,
+    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+    children: [
+      pw.Text(
+        title,
         style: pw.TextStyle(
-          fontSize: 14, // Adjust the font size as needed
-          fontWeight: pw.FontWeight.bold,
-          // Add color if necessary
+          fontSize: 14,
         ),
       ),
-    ),
+      pw.Text(
+        subTitle,
+        style: pw.TextStyle(
+          fontSize: 14,
+        ),
+      ),
+    ],
   );
 }
 
-pw.Widget buildPaymentSummary() {
+pw.Widget buildPaymentSummary(UserBooking ticketModel, int modelIndex) {
   final labelStyle = pw.TextStyle(
     fontSize: 14,
     fontWeight: pw.FontWeight.normal,
@@ -123,28 +87,87 @@ pw.Widget buildPaymentSummary() {
     fontWeight: pw.FontWeight.bold,
     // Set color if needed
   );
-
+  final BookingDetailesForMyBookingController bookingDetailesController =
+      Get.find();
   return pw.Padding(
     padding: const pw.EdgeInsets.all(10),
     child: pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Row(
-          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-          children: [
-            pw.Text("Coupon code", style: labelStyle),
-            pw.Text("EventoR7", style: valueStyle),
-          ],
-        ),
+        singlePriceElement("Ticket Class", ticketModel.classType),
         // ... Add other Rows here ...
-        pw.Divider(thickness: 1),
-        pw.Row(
-          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-          children: [
-            pw.Text("Total", style: labelStyle),
-            pw.Text("120,000 sp", style: valueStyle),
-          ],
+        singlePriceElement(
+          "${tr("Original Price")}:",
+          formatPrice(ticketModel.event.classes
+                  .where((element) => element.id == ticketModel.classId)
+                  .first
+                  .ticketPrice) +
+              " ${tr("sp")}",
         ),
+        ticketModel.promoCode == null && ticketModel.offer == null
+            ? pw.SizedBox()
+            : singlePriceElement(
+                "${tr("Discounts")}:",
+                "",
+              ),
+        ticketModel.offer == null
+            ? pw.SizedBox()
+            : singlePriceElement(
+                "${tr("Event Discount")} (${ticketModel.offer!.percent}%):",
+                formatPrice(bookingDetailesController
+                        .calclateofferDiscountForClass(
+                            ticketModel.offer!,
+                            ticketModel.event.classes
+                                .where((element) =>
+                                    element.id == ticketModel.classId)
+                                .first
+                                .ticketPrice)) +
+                    " ${tr("sp")}"),
+        ticketModel.promoCode == null
+            ? pw.SizedBox()
+            : singlePriceElement(
+                "${tr("Promo Code Discount")} (${ticketModel.promoCode!.discount}%):",
+                formatPrice(
+                        bookingDetailesController.calculateDiscountForTicket(
+                            ticketModel.promoCode!, modelIndex)) +
+                    " ${tr("sp")}"),
+        ticketModel.promoCode == null && ticketModel.offer == null
+            ? pw.SizedBox()
+            : singlePriceElement(
+                "${tr("Price after Discount")}:",
+                formatPrice(bookingDetailesController
+                        .calclatepiceaftediscount(modelIndex)) +
+                    " ${tr("sp")}",
+              ),
+        ticketModel.amenities.isEmpty
+            ? pw.SizedBox()
+            : singlePriceElement(
+                "${tr("Additional Services")}:",
+                "",
+              ),
+        ...List.generate(
+            ticketModel.amenities.length,
+            (index) => singlePriceElement(
+                  ticketModel.amenities[index].title,
+                  formatPrice(ticketModel.event.amenities
+                          .where((element) =>
+                              element.id == ticketModel.amenities[index].id)
+                          .first
+                          .pivot
+                          .price!) +
+                      " ${tr("sp")}",
+                )),
+        pw.Divider(
+          thickness: 1,
+          color: PdfColors.grey, // Replace with your custom color
+        ),
+        singlePriceElement(
+          "Total Price",
+          formatPrice(ticketModel.classTicketPrice) + " ${tr("sp")}",
+        ),
+        pw.SizedBox(
+          height: 5,
+        )
       ],
     ),
   );
@@ -187,14 +210,14 @@ pw.Widget buildTicketHeader(int modelIndex) {
   );
 }
 
-pw.Widget buildQrCodeSection() {
+pw.Widget buildQrCodeSection(int id) {
   return pw.Align(
     alignment: pw.Alignment.center,
     child: pw.Padding(
       padding: const pw.EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: pw.BarcodeWidget(
         barcode: pw.Barcode.qrCode(),
-        data: 'Barcode',
+        data: 'https://evento.sy/#/ShowSingleTicketScreen?id=${id}',
         width: 200,
         height: 200,
         color: PdfColors.black, // Adjust the color as needed
@@ -206,7 +229,7 @@ pw.Widget buildQrCodeSection() {
   );
 }
 
-pw.Widget buildAttendeeInformation(TicketModel ticketModel) {
+pw.Widget buildAttendeeInformation(UserBooking ticketModel) {
   final textStyle = pw.TextStyle(
     fontSize: 12, // Example font size
     fontWeight: pw.FontWeight.normal,
@@ -230,13 +253,12 @@ pw.Widget buildAttendeeInformation(TicketModel ticketModel) {
         pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.end,
           children: [
-            pw.Text(
-                "${ticketModel.fisrtName.text} ${ticketModel.lastName.text}",
+            pw.Text("${ticketModel.firstName} ${ticketModel.lastName}",
                 style: textStyle),
             pw.SizedBox(height: 8),
-            pw.Text(ticketModel.age.text, style: textStyle),
+            pw.Text(ticketModel.age.toString(), style: textStyle),
             pw.SizedBox(height: 8),
-            pw.Text(ticketModel.phoneNumber.text, style: textStyle),
+            pw.Text(ticketModel.phoneNumber, style: textStyle),
           ],
         ),
       ],

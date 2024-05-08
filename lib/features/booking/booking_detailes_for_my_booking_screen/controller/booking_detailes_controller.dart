@@ -168,7 +168,6 @@ class BookingDetailesForMyBookingController extends GetxController {
   }
 
   void openPdf() async {
-    createTicketPDF(createTicketModelsFromEventBookings(userBookings),
-        userBookings[0].event.title);
+    createTicketPDF(userBookings, userBookings[0].event.title);
   }
 }

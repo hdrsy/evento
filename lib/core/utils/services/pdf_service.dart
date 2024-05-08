@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:evento/features/booking/booking_detailes_for_my_booking_screen/model/booking_detailes_for_my_booking_model.dart';
+
 import 'ticket_pdf_layout.dart';
 import '../../../features/booking/book_now/model/ticket_model.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,7 +21,7 @@ Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
 }
 
 Future<void> createTicketPDF(
-    List<TicketModel> tickets, String eventTitle) async {
+    List<UserBooking> tickets, String eventTitle) async {
   final pdf = pw.Document();
 
   for (int i = 0; i < tickets.length; i++) {
