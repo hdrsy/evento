@@ -23,7 +23,6 @@ filter(Map<String, dynamic> data, {String? url}) async {
       token: token);
   // Handling the response. 'fold' is used to handle both Left (error) and Right (success) cases.
   dynamic handlingResponse = response.fold((l) => l, (r) => r);
-  // print("ssssssssssssssss $handlingResponse");
   // Check if the handlingResponse is an error.
   if (handlingResponse is ErrorResponse) {
     // If it's an error, extract the error messages.

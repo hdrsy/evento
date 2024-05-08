@@ -242,7 +242,6 @@ class _MyCalendarWidgetState extends State<MyCalendarWidget> {
         } else {
           widget.dateTimeController.date = selectedDay;
           widget.dateTimeController.isSelectDate.value = true;
-          print("dddddddddddddd${widget.dateTimeController.date}");
           setState(() {
             // this.selectedDay = selectedDay;
             // this.focusedDay = focusedDay; // update focusedDay as well if needed

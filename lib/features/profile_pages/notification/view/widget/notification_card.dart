@@ -38,7 +38,6 @@ class NotificationCard extends StatelessWidget {
       onTap: () {
         notificationModel.type = 1;
         Get.find<NotificationController>().update();
-        print("ddddddddddddddddddddd ${notificationModel.title}");
         if (notificationModel.title.contains("navigate")) {
           String targetRout = extractWordAfterNavigate(notificationModel.title);
           if (targetRout.toLowerCase() == "organizer") {

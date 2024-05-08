@@ -13,7 +13,6 @@ class PromoCode {
   });
 
   factory PromoCode.fromJson(Map<String, dynamic> json) {
-    print("prprpp :$json");
     return PromoCode(
       id: json['id'],
       title: json['title'],

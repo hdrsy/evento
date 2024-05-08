@@ -192,8 +192,7 @@ class _MyAppState extends State<MyApp> {
       }
     }, onError: (err) {
       // Handle errors (e.g., if the app link was not formatted correctly)
-      print('Failed to handle incoming app link: $err');
-    });
+     });
   }
 
   @override

@@ -14,9 +14,6 @@ Widget followButton(int modelIndex) {
   return GetBuilder<ReelsController>(builder: (context) {
     return ButtonWidget(
       onPressed: () {
-        print(
-            "gggggggggg${reelsController.itemList[modelIndex].organizer!.id}");
-        print("gggggggggg${modelIndex}");
         reelsController.followOrUnFollowreelOrganizer(
             reelsController.itemList[modelIndex].organizer!.id, modelIndex);
       },

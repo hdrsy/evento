@@ -53,7 +53,6 @@ class MyEventsForOrganizerController
     itemList.addAll(categoryListJson
         .map((jsonItem) => OrganizationEvent.fromJson(jsonItem))
         .toList());
-    print("jjjjjjj $lastPageId");
     if (pageId == lastPageId) {
       hasMoreData.value = false;
     }

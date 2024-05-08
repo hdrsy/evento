@@ -52,7 +52,6 @@ void notificationClickListener(Map<String, dynamic> data) {
   String normalizedTitle = data['navigate'] != null
       ? "navigate " + data['navigate']
       : data['title']?.trim().toLowerCase() ?? '';
-  print("sssssssssssssssssss $data");
   String routName = '';
   String body = '';
   if (normalizedTitle.contains("navigate")) {
@@ -78,10 +77,7 @@ void notificationClickListener(Map<String, dynamic> data) {
                   arguments: extractNumberAfterWord(normalizedTitle, "venue"));
             });
     } else if (targetRout.toLowerCase() == "event") {
-      print(
-          "sssssssssssssssssss ${int.tryParse(normalizedTitle[normalizedTitle.length - 1]).toString()} ");
       int j = extractNumberAfterWord(normalizedTitle, "event");
-      print("sssssssssss ${j}");
       Get.context != null
           ? Get.toNamed('/eventDetailes', parameters: {
               'id': extractNumberAfterWord(normalizedTitle, "event").toString(),

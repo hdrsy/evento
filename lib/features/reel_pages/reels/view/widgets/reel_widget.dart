@@ -28,7 +28,6 @@ class ReelsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("ffffffffffffffffff ${model.event.}");
     return SizedBox(
       width: screenWidth,
       // height: MediaQuery.of(context).size.height,

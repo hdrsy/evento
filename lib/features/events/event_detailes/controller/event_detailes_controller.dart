@@ -45,7 +45,6 @@ class EventDetailesController extends GetxController {
     isSomeThingError = false.obs;
     eventId = int.parse(Get.parameters['id'] ?? "0");
     cacheKey = "eventDetailes$eventId";
-    print("sssssssssssssss ${Get.parameters}");
     _connectivityService.isConnected.listen((isConnected) {
       if (isConnected) {
         getEventDetailesModel();
@@ -77,7 +76,6 @@ class EventDetailesController extends GetxController {
     Either<ErrorResponse, Map<String, dynamic>> response;
     isGuset = await prefService.isContainKey("token") ? false : true;
     String token = await prefService.readString("token");
-    print("ssssssssssss $token");
     try {
       if (await checkInternet()) {
         log("from cache");
@@ -125,7 +123,6 @@ class EventDetailesController extends GetxController {
 
   whenGetDataSuccess(handlingResponse) {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
-    print("sssssssssssssssssss $handlingResponse");
     isSameUser = isGuset
         ? true
         : eventDetailsModel.organizer != null

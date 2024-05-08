@@ -23,7 +23,6 @@ class SearchModel {
       required this.images});
   factory SearchModel.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("vvvvvvvvvvvvvvvvvvv ${json}");
     return SearchModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? '',

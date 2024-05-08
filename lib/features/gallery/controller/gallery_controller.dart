@@ -21,7 +21,6 @@ class GalleryController extends GetxController {
     } else {
       videos = [];
     }
-    print("ssssssssssss $videos");
     mixedGalleryItems = _mixImagesAndVideos(images, videos);
 
     super.onInit();

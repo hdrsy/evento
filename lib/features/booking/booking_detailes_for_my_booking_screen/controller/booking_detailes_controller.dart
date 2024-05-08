@@ -47,8 +47,6 @@ class BookingDetailesForMyBookingController extends GetxController {
       update();
       Either<ErrorResponse, Map<String, dynamic>> response;
       String token = await prefService.readString("token");
-      print("token $eventId");
-      print("token $userId");
       response = await ApiHelper.makeRequest(
           targetRout: ServerConstApis.getUserBooking,
           method: "post",

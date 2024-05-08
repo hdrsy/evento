@@ -381,7 +381,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                           data['distance'] = _valueSlider;
                           data['latitude'] = userLocation.latitude;
                           data['longitude'] = userLocation.longitude;
-                          print(data);
                           if (data.isNotEmpty) {
                             await widget.onApplyFilters(data);
                           }

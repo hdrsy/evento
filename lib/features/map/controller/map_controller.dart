@@ -34,7 +34,6 @@ class MapController extends GetxController {
   void onInit() async {
     super.onInit();
     customIcon = await getCustomMarker();
-    print("ssssssssssss ${customIcon}");
     _fetchData(""); // Fetch initial data with empty query
     searchField.addListener(_onSearchChanged);
 
@@ -63,7 +62,6 @@ class MapController extends GetxController {
     if (eventModels is List<dynamic>) {
       List<SearchModel> filteredResults = eventModels.map((jsonItem) {
         // Ensure jsonItem is a Map<String, dynamic> before converting
-        print("eventdata :$jsonItem");
         return SearchModel.fromJson(jsonItem);
       }).toList();
       if (searchResultSearch.isEmpty) {
@@ -112,7 +110,6 @@ class MapController extends GetxController {
 
   void _updateSearchResults(List<SearchModel> results) {
     searchResultSearch.assignAll(results);
-    print(results.isEmpty);
     results.isEmpty ? myMarker.clear() : updateMarkerAndPosition(0);
 
     getSuggestModels();
@@ -195,15 +192,12 @@ class MapController extends GetxController {
         ));
       },
     ));
-    // print("mmmmmmmmmmmmmmmmmmmmm current marker ${myMarker[0].location.la}");
-
+    
     // Update camera position
     googleMapsController.future.then((controller) {
       controller.animateCamera(CameraUpdate.newLatLng(currentPosition));
     });
 
-    print("ssssssssssss ${myMarker.first.location}");
-    print("ssssssssssss ${myMarker.first.markerId}");
     update(); // Call update to refresh the UI if needed
   }
 

@@ -26,7 +26,6 @@ class EventModel {
 
   factory EventModel.fromJson(Map<String, dynamic> oldJson) {
     Map<String, dynamic> json = removeDuplicateKeysAr(oldJson);
-    print("fgfggf ${json['offer']}");
     return EventModel(
         id: json['id'] ?? 0,
         title: json['title'] ?? "UnKnown",
