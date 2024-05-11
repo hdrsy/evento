@@ -111,7 +111,7 @@ class RequestStatusScreen extends StatelessWidget {
                                 myRequestModel
                                     .serviceProviders[index].categoryTitle,
                                 "${myRequestModel.serviceProviders[index].firstName} ${myRequestModel.serviceProviders[index].lastName}",
-                                Icons.dry_cleaning_outlined))
+                                ""))
                       ].divide(const SizedBox(height: 10)),
                     ),
                     Divider(
@@ -273,7 +273,7 @@ class RequestStatusScreen extends StatelessWidget {
     );
   }
 
-  Row singleRowInfo(String title, String subTitle, IconData icon) {
+  Row singleRowInfo(String title, String subTitle, var icon) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -282,11 +282,18 @@ class RequestStatusScreen extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Icon(
-              icon,
-              color: customColors.secondaryText,
-              size: 24,
-            ),
+            icon is IconData
+                ? Icon(
+                    icon,
+                    color: customColors.secondaryText,
+                    size: 24,
+                  )
+                : Image.asset(
+                    'assets/images/businessman .png',
+                    width: 24,
+                    height: 24,
+                    color: customColors.secondaryText,
+                  ),
             Text(
               title,
               style: customTextStyle.bodyMedium.override(

@@ -217,7 +217,8 @@ class TicketDetailesCardForMyBooking extends StatelessWidget {
                 ),
                 SinglePriceElement(
                   title: "Total Price",
-                  subTitle: formatPrice(ticketModel.classTicketPrice) +
+                  subTitle: formatPrice(bookingDetailesController
+                          .updateTotalPrice(modelIndex)) +
                       " ${tr("sp")}",
                 ),
                 SizedBox(

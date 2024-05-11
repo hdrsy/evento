@@ -129,7 +129,7 @@ class BookingDetailesForMyBookingController extends GetxController {
     int codeDiscount = (promoCode.discount);
     int codeLimit = (promoCode.limit);
     int newTotal = ((total * codeDiscount) / 100).round();
-    if (total - newTotal > codeLimit) {
+    if (newTotal > codeLimit) {
       return codeLimit;
     } else {
       return newTotal;
@@ -142,6 +142,54 @@ class BookingDetailesForMyBookingController extends GetxController {
   }
 
   updateTotalPrice(int ticketIndex) {
+    int totalAminityPrice = 0;
+    int totalClassPrice = 0;
+    int discount = 0;
+    int tax = 0;
+    int total = 0;
+    if (userBookings[ticketIndex]
+            .event
+            .classes
+            .where((element) => element.id == userBookings[ticketIndex].classId)
+            .first
+            .ticketPrice !=
+        null) {
+      totalClassPrice = userBookings[ticketIndex]
+          .event
+          .classes
+          .where((element) => element.id == userBookings[ticketIndex].classId)
+          .first
+          .ticketPrice;
+    }
+    if (userBookings[ticketIndex].offer != null) {
+      totalClassPrice -= calclateofferDiscountForClass(
+          userBookings[ticketIndex].offer!, totalClassPrice);
+    }
+
+    for (var i = 0; i < userBookings[ticketIndex].amenities.length; i++) {
+      totalAminityPrice += userBookings[ticketIndex]
+          .event
+          .amenities
+          .where((element) =>
+              element.id == userBookings[ticketIndex].amenities[i].id)
+          .first
+          .pivot
+          .price!;
+      // for (var element in userBookings[ticketIndex].amenities) {
+      //   if (element.id == ticketList[ticketIndex].selectedAminiteds[i].id) {}
+      // }
+    }
+    if (userBookings[ticketIndex].promoCode != null) {
+      // discount = ticketList[ticketIndex].discount;
+      discount = calculateDiscountForTicket(
+          userBookings[ticketIndex].promoCode!, ticketIndex);
+    }
+    // tax = getTaxForTicket(ticketIndex);
+    total = (totalAminityPrice + totalClassPrice + tax) - discount;
+    return total;
+  }
+
+  updateTotalPrice2(int ticketIndex) {
     int total = 0;
     total = userBookings[ticketIndex].classTicketPrice;
 

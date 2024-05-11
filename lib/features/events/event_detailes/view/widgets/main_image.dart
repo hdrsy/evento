@@ -40,7 +40,10 @@ class MainImage extends StatelessWidget {
                         //     ],
                         //     tag: "image$index")); // Ensure unique tag for Hero
                         Get.toNamed('/ShowInFullScreen', arguments: [
-                          [GalleryItem(url: imgUrl[index], isVideo: false)],
+                          List.generate(
+                              imgUrl.length,
+                              (index) => GalleryItem(
+                                  url: imgUrl[index], isVideo: false)),
                           index.toString(),
                           index
                         ]);

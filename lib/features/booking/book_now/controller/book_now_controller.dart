@@ -261,6 +261,7 @@ class BookNowController extends GetxController {
             handlingResponse.getErrorMessages();
         update();
       } else {
+        print("ttttttttttttt $handlingResponse");
         int totalAmount = handlingResponse["event_price_with_discount"];
         int appTaxes = handlingResponse["app_taxes"];
         int mtnTaxes = handlingResponse["mtn_taxes"];
