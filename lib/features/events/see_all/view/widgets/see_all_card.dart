@@ -206,7 +206,7 @@ class SeeAllCard extends StatelessWidget {
               height: 210.h)),
       Container(
         width: double.infinity,
-        height: 200.h,
+        height: 210.h,
         decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(

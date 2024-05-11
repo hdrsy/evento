@@ -75,7 +75,8 @@ class EventCard extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        right: 10.w,
+                        left: Get.locale == Locale("en") ? 10.w : null,
+                        right: Get.locale == Locale("en") ? null : 10.w,
                         bottom: 10.w,
                         child: Container(
                           width: 100.w,

@@ -19,7 +19,7 @@ class LocationPickerScreen extends StatefulWidget {
 }
 
 class _LocationPickerScreenState extends State<LocationPickerScreen> {
-  final LocationService _locationService = LocationService();
+  // final LocationService _locationService = LocationService();
   late GoogleMapController _mapController;
   LatLng? _selectedLocation;
   Set<Marker> _markers = {};
@@ -32,7 +32,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
 
   _getUserLocation() async {
     try {
-      Position currentLocation = await _locationService.getCurrentLocation();
+      Position currentLocation = await LocationService.getCurrentLocation();
 
       _moveCameraTo(
           LatLng(currentLocation.latitude, currentLocation.longitude));

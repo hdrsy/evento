@@ -102,8 +102,8 @@ Widget _buildItemContainer(BuildContext context, String localizationKey,
           localizationKey == "Female"
               ? 'assets/images/Group_17613_(1).png'
               : 'assets/images/character-1_(1).png',
-          width: scaleWidth(150),
-          height: scaleHeight(200),
+          width: scaleWidth(140),
+          height: scaleHeight(190),
           fit: BoxFit.cover,
           alignment: const Alignment(0.00, -1.00),
         ).animateOnPageLoad(animationsMap[

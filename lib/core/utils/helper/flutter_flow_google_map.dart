@@ -117,6 +117,7 @@ class _FlutterFlowGoogleMapState extends State<FlutterFlowGoogleMap> {
           myLocationEnabled: widget.showLocation,
           compassEnabled: widget.showCompass,
           mapToolbarEnabled: widget.showMapToolbar,
+          myLocationButtonEnabled: false,
           trafficEnabled: widget.showTraffic,
           markers: widget.markers
               .map(

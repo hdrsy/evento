@@ -6,6 +6,7 @@ import 'package:evento/core/utils/services/cache_service.dart';
 import 'package:evento/core/utils/services/check_internet.dart';
 import 'package:evento/core/utils/services/connectivity_service.dart';
 import 'package:evento/core/utils/services/snackbar_manager.dart';
+import 'package:evento/features/events/home/controller/event_state_manager.dart';
 import 'package:evento/features/events/home/model/event_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/server/follow_unfollow_event_api.dart';
@@ -66,7 +67,7 @@ class EventDetailesController extends GetxController {
     });
 
     await getEventDetailesModel();
-    await calculateDistance();
+    calculateDistance();
 
     super.onInit();
   }
@@ -125,15 +126,23 @@ class EventDetailesController extends GetxController {
     eventDetailsModel = EventDetailsModel.fromJson(handlingResponse['event']);
     isSameUser = isGuset
         ? true
-        : eventDetailsModel.organizer != null
-            ? user!.id == eventDetailsModel.organizer!.mobileUserId
-            : false;
+        : eventDetailsModel.organizer != null &&
+            user != null &&
+            user!.id == eventDetailsModel.organizer!.mobileUserId;
+
     relatedEvents.value = List<EventModel>.from(
         handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
+    var ll = List<EventModel>.from(
+        handlingResponse['relatedEvents'].map((x) => EventModel.fromJson(x)));
+    for (int i = 0; i < ll.length; i++) {
+      eventStateManager.addOrUpdateEvent(ll[i]);
+    }
   }
 
+  EventStateManager eventStateManager = Get.find();
   followOrUnFollowEvent(int eventId, int modelIndex) async {
     late String isDoneSuccefully;
+
     if (relatedEvents[modelIndex].isFollowedByAuthUser) {
       isDoneSuccefully = await followUnFollowEvent(
           "${ServerConstApis.unFollowEvent}/$eventId");
@@ -141,15 +150,19 @@ class EventDetailesController extends GetxController {
       isDoneSuccefully =
           await followUnFollowEvent("${ServerConstApis.followEvent}/$eventId");
     }
+
+    print("dddddddddddddddd ${isDoneSuccefully}");
     if (isDoneSuccefully == "followed successfully") {
       relatedEvents[modelIndex].isFollowedByAuthUser = true;
+
+      eventStateManager.toggleFavorite(eventId);
       update();
     } else if (isDoneSuccefully == "removed successfully") {
       relatedEvents[modelIndex].isFollowedByAuthUser = false;
+      eventStateManager.toggleFavorite(eventId);
 
       update();
     }
-    log(relatedEvents[modelIndex].isFollowedByAuthUser.toString());
   }
 
   void createAndAddReminderEvents() async {
@@ -230,9 +243,8 @@ class EventDetailesController extends GetxController {
   }
 
   calculateDistance() async {
-    LocationService locationService = LocationService();
     try {
-      distance.value = await locationService.calculateDistance(
+      distance.value = await LocationService.calculateDistance(
           eventDetailsModel.venue.latitude, eventDetailsModel.venue.longitude);
     } catch (e) {
       distance.value = "0 km";

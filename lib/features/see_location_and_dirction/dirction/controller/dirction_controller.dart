@@ -94,7 +94,7 @@ class DirctionController extends GetxController {
     // locationService.startTracking();
 
     // Listen to location updates
-    Position p = await locationService.getCurrentLocation();
+    Position p = await LocationService.getCurrentLocation();
 
     // Update user location marker
     updateUserLocationMarker(p.latitude, p.longitude);
@@ -105,7 +105,7 @@ class DirctionController extends GetxController {
 
   void drawRoute() async {
     try {
-      var currentLocation = await locationService.getCurrentLocation();
+      var currentLocation = await LocationService.getCurrentLocation();
       LatLng startLocation =
           LatLng(currentLocation.latitude, currentLocation.longitude);
       LatLng destinationLocation = LatLng(latitude, longitude);

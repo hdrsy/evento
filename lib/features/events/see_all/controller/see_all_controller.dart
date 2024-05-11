@@ -151,10 +151,10 @@ class SeeAllController extends GetxController {
   }
 
   calculateDistance() async {
-    LocationService locationService = LocationService();
+    // LocationService locationService = LocationService();
     for (var i = 0; i < itemList.length; i++) {
       if (itemList[i].venue != null) {
-        distances[i] = (await locationService.calculateDistance(
+        distances[i] = (await LocationService.calculateDistance(
                 itemList[i].venue!.lang, itemList[i].venue!.long))
             .obs;
       }

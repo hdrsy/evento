@@ -329,13 +329,6 @@ class FeaturedWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    // const String message = "Check out this event in Evento";
-                    // final String url =
-                    //     "http://94.141.219.13:8003/#/eventDetailes/$eventId"; // Replace with your event link
-                    // final String shareContent =
-                    //     "$message\n\nFor more details, visit: $url";
-
-                    // await Share.share(shareContent);
                     await shareApp(eventId);
                   },
                   child: Icon(

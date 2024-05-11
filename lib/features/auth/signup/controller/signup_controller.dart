@@ -50,12 +50,12 @@ class SignupController extends GetxController {
           });
 
       dynamic handlingResponse = response.fold((l) => l, (r) => r);
-
       if (handlingResponse is ErrorResponse) {
         errorMessage.value = handlingResponse.getErrorMessages();
         for (var i = 0; i < errorMessage.length; i++) {
           if (errorMessage[i] == "please complete your data") {
-            Get.toNamed('/steps', arguments: [1, phone.text]);
+            Get.toNamed('/steps',
+                arguments: [1, phone.text], preventDuplicates: false);
           }
         }
       } else {

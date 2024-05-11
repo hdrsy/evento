@@ -52,7 +52,7 @@ class MapScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                     child: ButtonWidget(
                       onPressed: () async {
                         Get.back();
@@ -67,7 +67,7 @@ class MapScreen extends StatelessWidget {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                         color: customColors.primary,
                         textStyle: customTextStyle.titleSmall.override(
                           fontFamily: 'Nunito',
@@ -99,7 +99,7 @@ class MapScreen extends StatelessWidget {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                         color: customColors.primary,
                         textStyle: customTextStyle.titleSmall.override(
                           fontFamily: 'Nunito',

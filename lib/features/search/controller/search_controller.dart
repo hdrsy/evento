@@ -37,7 +37,7 @@ class SearchPageController extends GetxController {
   }
 
   getuserlocation() async {
-    userLocation = await locationService.getCurrentLocation();
+    userLocation = await LocationService.getCurrentLocation();
   }
 
   void _onSearchChanged() {

@@ -300,6 +300,7 @@ class FeaturedListController extends PaginationController<EventModel> {
     for (int i = 0; i < ll.length; i++) {
       eventStateManager.addOrUpdateEvent(ll[i]);
     }
+
     itemList.addAll(categoryListJson
         .map((jsonItem) => EventModel.fromJson(jsonItem))
         .toList());
@@ -331,7 +332,6 @@ class FeaturedListController extends PaginationController<EventModel> {
 
       update();
     }
-    log(itemList[modelIndex].isFollowedByAuthUser.toString());
   }
 }
 

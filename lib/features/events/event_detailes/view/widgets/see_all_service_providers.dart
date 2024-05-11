@@ -15,7 +15,7 @@ class SeeAllServiceProviders extends StatelessWidget {
         backgroundColor: customColors.secondaryBackground,
         appBar: AppBar(
           backgroundColor: customColors.secondaryBackground,
-          title: Text(tr("My Freinds"),
+          title: Text(tr("Service Providers"),
               style: customTextStyle.bodyMedium
                   .copyWith(color: customColors.primary, fontSize: 20)),
           centerTitle: true,
@@ -55,43 +55,50 @@ class AllServiceProviderCard extends StatelessWidget {
   final int modelId;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 1),
-        child: Container(
-          width: 100,
-          decoration: BoxDecoration(
-            color: customColors.secondaryBackground,
-          ),
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: freindsModel.profile.length > 6
-                      ? getImageNetwork(
-                          url: "/storage/${freindsModel.profile}",
-                          width: 90,
-                          height: 90)
-                      : Image.asset(
-                          'assets/images/${freindsModel.profile}.png',
-                          width: 90,
-                          height: 90,
-                        ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                    child: Text(
-                      freindsModel.name,
-                      style: customTextStyle.bodyLarge,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed('/ServiceAccordingDetailesForUserScreen',
+            arguments: freindsModel.id);
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 1),
+          child: Container(
+            width: 100,
+            decoration: BoxDecoration(
+              color: customColors.secondaryBackground,
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: freindsModel.profile.length > 6
+                        ? getImageNetwork(
+                            url: "/storage/${freindsModel.profile}",
+                            width: 90,
+                            height: 90)
+                        : Image.asset(
+                            'assets/images/${freindsModel.profile}.png',
+                            width: 90,
+                            height: 90,
+                          ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                      child: Text(
+                        freindsModel.name,
+                        style: customTextStyle.bodyLarge,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
